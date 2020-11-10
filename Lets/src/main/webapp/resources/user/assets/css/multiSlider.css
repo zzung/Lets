@@ -1,0 +1,114 @@
+#exampleSlider-popular,
+#exampleSlider-new,
+#exampleSlider-discount {
+  position: relative;
+}
+@media (max-width: 767px) {
+  #exampleSlider-popular,
+  #exampleSlider-new,
+  #exampleSlider-discount {
+    border-color: transparent;
+  }
+}
+#exampleSlider-popular .MS-content,
+#exampleSlider-new .MS-content,
+#exampleSlider-discount .MS-content {
+  margin: 0 5%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+@media (max-width: 767px) {
+  #exampleSlider-popular .MS-content,
+  #exampleSlider-new .MS-content,
+  #exampleSlider-discount .MS-content {
+    margin: 0;
+  }
+}
+#exampleSlider-popular .MS-content .item,
+#exampleSlider-new .MS-content .item,
+#exampleSlider-discount .MS-content .item {
+  display: inline-block;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  vertical-align: top;
+  width: 33.333%;
+  padding: 0 10px;
+  white-space: normal;
+}
+@media (max-width: 1200px) {
+  #exampleSlider-popular .MS-content .item,
+  #exampleSlider-new .MS-content .item,
+  #exampleSlider-discount .MS-content .item {
+    width: 25%;
+  }
+}
+@media (max-width: 992px) {
+  #exampleSlider-popular .MS-content .item,
+  #exampleSlider-new .MS-content .item,
+  #exampleSlider-discount .MS-content .item {
+    width: 33.3333%;
+  }
+}
+@media (max-width: 767px) {
+  #exampleSlider-popular .MS-content .item,
+  #exampleSlider-new .MS-content .item,
+  #exampleSlider-discount .MS-content .item {
+    width: 50%;
+  }
+}
+#exampleSlider .MS-content .item p {
+  font-size: 30px;
+  text-align: center;
+  line-height: 1;
+  vertical-align: middle;
+  margin: 0;
+  padding: 10px 0;
+}
+#exampleSlider-popular .MS-controls button,
+#exampleSlider-new .MS-controls button,
+#exampleSlider-discount .MS-controls button {
+  position: absolute;
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  outline: 0;
+  top: 200px;
+  color: black;
+}
+@media (max-width: 767px) {
+  #exampleSlider-popular .MS-controls button,
+  #exampleSlider-new .MS-controls button,
+  #exampleSlider-discount .MS-controls button {
+    display: none;
+  }
+}
+#exampleSlider-popular .MS-controls button:hover,
+#exampleSlider-new .MS-controls button:hover,
+#exampleSlider-discount .MS-controls button:hover {
+  cursor: pointer;
+}
+#exampleSlider-popular .MS-controls .MS-left,
+#exampleSlider-new .MS-controls .MS-left,
+#exampleSlider-discount .MS-controls .MS-left {
+  left: -10px;
+}
+@media (max-width: 992px) {
+  #exampleSlider-popular .MS-controls .MS-left,
+  #exampleSlider-new .MS-controls .MS-left,
+  #exampleSlider-discount .MS-controls .MS-left {
+    left: -2px;
+  }
+}
+#exampleSlider-popular .MS-controls .MS-right,
+#exampleSlider-new .MS-controls .MS-right,
+#exampleSlider-discount .MS-controls .MS-right {
+  right: 5px;
+}
+@media (max-width: 992px) {
+  #exampleSlider-popular .MS-controls .MS-right,
+  #exampleSlider-new .MS-controls .MS-right,
+  #exampleSlider-discount .MS-controls .MS-right {
+    right: -2px;
+  }
+}

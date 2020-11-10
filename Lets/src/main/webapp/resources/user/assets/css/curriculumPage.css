@@ -1,0 +1,276 @@
+.curriculum-header {
+  min-height: 455px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .curriculum-header {
+    min-height: 350px;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .curriculum-header {
+    min-height: 260px;
+  }
+}
+@media (max-width: 575px) {
+  .curriculum-header {
+    min-height: 260px;
+  }
+}
+.curriculum-area {
+  margin-top: -1px;
+}
+.curriculum-area .hero__caption {
+  overflow: hidden;
+}
+.curriculum-area .hero__caption span {
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 500;
+  margin-bottom: 39px;
+  color: #2d3092;
+  margin-bottom: 44px;
+  display: inline-block;
+}
+@media (max-width: 575px) {
+  .curriculum-area .hero__caption span {
+    margin-bottom: 30px;
+    font-size: 16px;
+  }
+}
+.curriculum-area .hero__caption h1 {
+  font-size: 65px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  line-height: 1.2;
+  margin-bottom: 51px;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .curriculum-area .hero__caption h1 {
+    font-size: 51px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .curriculum-area .hero__caption h1 {
+    font-size: 50px;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .curriculum-area .hero__caption h1 {
+    font-size: 35px;
+    line-height: 1.3;
+  }
+}
+@media (max-width: 575px) {
+  .curriculum-area .hero__caption h1 {
+    font-size: 27px;
+    line-height: 1.3;
+  }
+}
+.curriculum-area .hero__caption p {
+  margin-bottom: 30px;
+  padding-right: 257px;
+  color: #212025;
+  overflow: hidden;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .curriculum-area .hero__caption p {
+    padding-right: 0px;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .curriculum-area .hero__caption p {
+    padding-right: 0px;
+  }
+}
+@media (max-width: 575px) {
+  .curriculum-area .hero__caption p {
+    padding-right: 0px;
+  }
+}
+.curriculum-area .hero-man {
+  position: relative;
+  right: -292px;
+  bottom: -23px;
+}
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  .curriculum-area .hero-man {
+    right: -50px;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .curriculum-area .hero-man {
+    right: -212px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .curriculum-area .hero-man {
+    right: -281px;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .curriculum-area .hero-man {
+    display: none;
+  }
+}
+@media (max-width: 575px) {
+  .curriculum-area .hero-man {
+    display: none;
+  }
+}
+.curriculum-area .hero-cap h2 {
+  font-size: 60px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #fff;
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .curriculum-area .hero-cap h2 {
+    font-size: 50px;
+  }
+}
+@media (max-width: 575px) {
+  .curriculum-area .hero-cap h2 {
+    font-size: 35px;
+  }
+}
+.popular-course .slider-course {
+  -webkit-transition: all 0.4s ease-out 0s;
+  -moz-transition: all 0.4s ease-out 0s;
+  -ms-transition: all 0.4s ease-out 0s;
+  -o-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+}
+.popular-course .slider-course .course-img {
+  overflow: hidden;
+}
+.popular-course .slider-course .course-img img {
+  width: 350px;
+  height: 300px;
+  transform: scale(1.05);
+  -webkit-transition: all 0.4s ease-out 0s;
+  -moz-transition: all 0.4s ease-out 0s;
+  -ms-transition: all 0.4s ease-out 0s;
+  -o-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+}
+.popular-course .slider-course:hover .course-img img {
+  transform: scale(1);
+}
+.popular-course .slider-course .course-caption {
+  padding: 39px 40px 20px 40px;
+  border: 1px solid #e4e7ff;
+  border-top: 0;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .popular-course .slider-course .course-caption {
+    padding: 39px 30px 20px 30px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .popular-course .slider-course .course-caption {
+    padding: 39px 30px 20px 30px;
+  }
+}
+@media (max-width: 575px) {
+  .popular-course .slider-course .course-caption {
+    padding: 22px 22px 20px 20px;
+  }
+}
+.popular-course .slider-course .course-caption .course-cap-top h4 a {
+  color: #250051;
+  font-size: 30px;
+  line-height: 1.1;
+  margin-bottom: 37px;
+  display: block;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .popular-course .slider-course .course-caption .course-cap-top h4 a {
+    font-size: 27px;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .popular-course .slider-course .course-caption .course-cap-top h4 a {
+    font-size: 25px;
+  }
+}
+@media (max-width: 575px) {
+  .popular-course .slider-course .course-caption .course-cap-top h4 a {
+    font-size: 14px;
+  }
+}
+.popular-course .slider-course .course-caption .course-cap-top h4 a:hover {
+  color: #2d3092;
+}
+.popular-course .slider-course .course-caption .course-cap-mid .course-ratting {
+  margin-bottom: 14px;
+}
+.popular-course
+  .slider-course
+  .course-caption
+  .course-cap-mid
+  .course-ratting
+  i {
+  color: #fbba42;
+  display: inline-block;
+  font-size: 12px;
+}
+.popular-course .slider-course .course-caption .course-cap-mid ul li {
+  color: #b2b2b2;
+  font-size: 14px;
+}
+.popular-course .slider-course .course-caption .course-cap-mid ul li a {
+  color: #2d3092;
+  font-size: 14px;
+}
+.popular-course .slider-course .course-caption .course-cap-bottom {
+  padding-top: 14px;
+  border-top: 1px solid #f9f9f9;
+}
+.popular-course .slider-course .course-caption .course-cap-bottom ul li {
+  display: inline-block;
+  margin-right: 14px;
+  color: #b2b2b2;
+}
+.popular-course .slider-course .course-caption .course-cap-bottom ul li i {
+  margin-right: 10px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+.popular-course .slider-course .course-caption .course-cap-bottom span {
+  color: #b2b2b2;
+  font-size: 14px;
+}
+.popular-course .slider-course .course-caption .course-cap-bottom span img {
+  margin-right: 5px;
+}
+.section-padding-slider {
+  padding-top: 100px;
+  padding-bottom: 30px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .section-padding-slider {
+    padding-top: 150px;
+    padding-bottom: 140px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .section-padding-slider {
+    padding-top: 100px;
+    padding-bottom: 70px;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .section-padding-slider {
+    padding-top: 65px;
+    padding-bottom: 70px;
+  }
+}
+@media (max-width: 575px) {
+  .section-padding-slider {
+    padding-top: 65px;
+    padding-bottom: 70px;
+  }
+}

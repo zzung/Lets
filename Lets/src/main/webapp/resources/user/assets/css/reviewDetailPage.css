@@ -1,0 +1,373 @@
+.review-padding {
+  padding-top: 70px;
+  padding-bottom: 120px;
+}
+.single-post-area .blog_details {
+  box-shadow: none;
+  padding: 0;
+}
+.single-post-area .social-links {
+  padding-top: 10px;
+}
+.single-post-area .social-links li {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.single-post-area .social-links li a {
+  color: #cccccc;
+  padding: 7px;
+  font-size: 14px;
+  transition: all 0.2s linear;
+}
+.single-post-area .blog_details {
+  padding-top: 26px;
+}
+.single-post-area .blog_details p {
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+.single-post-area .quote-wrapper {
+  background: rgba(130, 139, 178, 0.1);
+  padding: 15px;
+  line-height: 1.733;
+  color: #888888;
+  font-style: italic;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+@media (min-width: 768px) {
+  .single-post-area .quote-wrapper {
+    padding: 30px;
+  }
+}
+.single-post-area .quotes {
+  background: #fff;
+  padding: 15px 15px 15px 20px;
+  border-left: 2px solid;
+}
+@media (min-width: 768px) {
+  .single-post-area .quotes {
+    padding: 25px 25px 25px 30px;
+  }
+}
+.single-post-area .arrow {
+  position: absolute;
+}
+.single-post-area .arrow .lnr {
+  font-size: 20px;
+  font-weight: 600;
+}
+.single-post-area .thumb .overlay-bg {
+  background: rgba(0, 0, 0, 0.8);
+}
+.single-post-area .navigation-top {
+  padding-top: 15px;
+  border-top: 1px solid #f0e9ff;
+}
+.single-post-area .navigation-top p {
+  margin-bottom: 0;
+}
+.single-post-area .navigation-top .like-info {
+  font-size: 14px;
+}
+.single-post-area .navigation-top .like-info i,
+.single-post-area .navigation-top .like-info span {
+  font-size: 16px;
+  margin-right: 5px;
+}
+.single-post-area .navigation-top .comment-count {
+  font-size: 14px;
+}
+.single-post-area .navigation-top .comment-count i,
+.single-post-area .navigation-top .comment-count span {
+  font-size: 16px;
+  margin-right: 5px;
+}
+.single-post-area .navigation-top .social-icons li {
+  display: inline-block;
+  margin-right: 15px;
+}
+.single-post-area .navigation-top .social-icons li:last-child {
+  margin: 0;
+}
+.single-post-area .navigation-top .social-icons li i,
+.single-post-area .navigation-top .social-icons li span {
+  font-size: 14px;
+  color: #999999;
+}
+.single-post-area .blog-author {
+  padding: 40px 30px;
+  background: #fbf9ff;
+  margin-top: 50px;
+}
+@media (max-width: 600px) {
+  .single-post-area .blog-author {
+    padding: 20px 8px;
+  }
+}
+.single-post-area .blog-author img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+@media (max-width: 600px) {
+  .single-post-area .blog-author img {
+    margin-right: 15px;
+    width: 45px;
+    height: 45px;
+  }
+}
+.single-post-area .blog-author a {
+  display: inline-block;
+}
+.single-post-area .blog-author a:hover {
+  color: #2d3092;
+}
+.single-post-area .blog-author p {
+  margin-bottom: 0;
+  font-size: 15px;
+}
+.single-post-area .blog-author h4 {
+  font-size: 16px;
+}
+.single-post-area .navigation-area {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 30px;
+  margin-top: 55px;
+}
+.single-post-area .navigation-area p {
+  margin-bottom: 0px;
+}
+.single-post-area .navigation-area h4 {
+  font-size: 18px;
+  line-height: 25px;
+}
+.single-post-area .navigation-area .nav-left {
+  text-align: left;
+}
+.single-post-area .navigation-area .nav-left .thumb {
+  margin-right: 20px;
+  background: #000;
+}
+.single-post-area .navigation-area .nav-left .thumb img {
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+.single-post-area .navigation-area .nav-left .lnr {
+  margin-left: 20px;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+.single-post-area .navigation-area .nav-left:hover .lnr {
+  opacity: 1;
+}
+.single-post-area .navigation-area .nav-left:hover .thumb img {
+  opacity: 0.5;
+}
+@media (max-width: 767px) {
+  .single-post-area .navigation-area .nav-left {
+    margin-bottom: 30px;
+  }
+}
+.single-post-area .navigation-area .nav-right {
+  text-align: right;
+}
+.single-post-area .navigation-area .nav-right .thumb {
+  margin-left: 20px;
+  background: #000;
+}
+.single-post-area .navigation-area .nav-right .thumb img {
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+.single-post-area .navigation-area .nav-right .lnr {
+  margin-right: 20px;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+.single-post-area .navigation-area .nav-right:hover .lnr {
+  opacity: 1;
+}
+.single-post-area .navigation-area .nav-right:hover .thumb img {
+  opacity: 0.5;
+}
+@media (max-width: 991px) {
+  .single-post-area .sidebar-widgets {
+    padding-bottom: 0px;
+  }
+}
+.review-area {
+  background: transparent;
+  border-top: 1px solid #eee;
+  padding: 45px 0;
+  margin-top: 50px;
+}
+@media (max-width: 414px) {
+  .review-area {
+    padding: 50px 8px;
+  }
+}
+.review-area tr a {
+  margin-bottom: 35px;
+}
+.review-area tr h2 {
+  margin-bottom: 35px;
+  font-size: 28px;
+}
+.review-area h4 {
+  margin-bottom: 35px;
+  font-size: 18px;
+}
+.review-area h5 {
+  font-size: 16px;
+  margin-bottom: 0px;
+}
+.review-area .comment-list {
+  padding-bottom: 48px;
+}
+.review-area .comment-list:last-child {
+  padding-bottom: 0px;
+}
+.review-area .comment-list.left-padding {
+  padding-left: 25px;
+}
+@media (max-width: 413px) {
+  .review-area .comment-list .single-comment h5 {
+    font-size: 12px;
+  }
+  .review-area .comment-list .single-comment .date {
+    font-size: 11px;
+  }
+  .review-area .comment-list .single-comment .comment {
+    font-size: 10px;
+  }
+}
+.review-area .thumb {
+  margin-right: 20px;
+}
+.review-area .thumb img {
+  width: 70px;
+  border-radius: 50%;
+}
+.review-area .date {
+  font-size: 12px;
+  color: #999999;
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+.review-area .comment {
+  margin-bottom: 10px;
+  color: #777777;
+  font-size: 15px;
+}
+.review-area .btn-reply {
+  background-color: transparent;
+  color: #888888;
+  padding: 2px 2px;
+  font-size: 12px;
+  font-weight: 400;
+  display: block;
+}
+.review-area .communityBtn {
+  display: table-cell;
+  width: 30px;
+  text-align: center;
+}
+
+.review-area span {
+  color: #10285d;
+}
+.review-area {
+  background: transparent;
+  border-bottom: 1px solid #eee;
+  padding: 45px 0;
+  margin-top: 30px;
+}
+.review-ratting i {
+  color: #fbba42;
+  display: inline-block;
+}
+.review-header > div {
+  float: left;
+}
+#review-count {
+  width: 50%;
+}
+#review-writeBtn {
+  width: 50%;
+}
+
+.review-textarea {
+  display: block;
+  width: 100%;
+  line-height: 40px;
+  border: none;
+  outline: none;
+  background: #f9f9ff;
+  padding: 0 20px;
+  height: 100px;
+  resize: none;
+  margin-top: 5px;
+}
+.review-textarea:focus {
+  outline: none;
+}
+.genric-btn1.extrasmall {
+  line-height: 25px;
+}
+.genric-btn1 {
+  display: inline-block;
+  outline: none;
+  line-height: 40px;
+  padding: 0 10px;
+  font-size: 0.8em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+.genric-btn1:focus {
+  outline: none;
+}
+.genric-btn1.primary-border {
+  color: #1f2b7b;
+  border: 1px solid #1f2b7b;
+  background: #fff;
+}
+.genric-btn.primary-border:hover {
+  color: #fff;
+  background: #1f2b7b;
+  border: 1px solid transparent;
+}
+#review-writeRatting i {
+  color: #fbba42;
+  display: inline-block;
+}
+.review-writeArea > div {
+  float: left;
+}
+#review-writeRatting {
+  width: 50%;
+}
+#submitReview {
+  width: 50%;
+}

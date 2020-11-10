@@ -1,0 +1,16 @@
+.list-area {
+  text-align: center;
+}
+.list-area th {
+  background: rgb(224, 224, 224);
+  color: black;
+  text-align: center;
+}
+.list-area td {
+  border-bottom: 1px solid #ddd;
+}
+.modal .modal-body .modalTitle {
+  font-size: small;
+  color: grey;
+  font-style: italic;
+}
