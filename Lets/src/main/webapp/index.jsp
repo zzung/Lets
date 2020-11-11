@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:forward page="WEB-INF/views/user/class/reviewDetail.jsp" />
+	<jsp:forward page="WEB-INF/views/mainPage.jsp" />
 </body>
 </html>

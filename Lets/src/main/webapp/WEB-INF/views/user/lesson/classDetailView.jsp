@@ -12,6 +12,40 @@
 <body>
 
 	<jsp:include page="../common/navBar.jsp" />
+	
+	<script>
+		//기타 사유 클릭시 보여질 모달 창 
+        $(function(){
+           $('#report-etc').on('change', function(){
+               if($(this).is(':checked')){
+                   $('#etcReportModal').modal();
+               }
+           }); 
+       });
+
+		// 기타 사유 작성후 신고 모달 화면에서 작성한 글 보이게끔 
+       function getReason(){
+        var reason = $("#reportReasonArea").val();
+
+        $("#report-etc").val(reason);
+        $("#reportReason").text(reason);
+       }
+		
+		//FAQ slideUp / Down
+       $(function() {
+			$(".blog-author .media-body .faqQuestion").click(function() {
+				var $p = $(this).next();
+				if ($p.css("display") == "none") {
+					$(this).siblings("p").slideUp();
+					$p.slideDown();
+				} else {
+					$p.slideUp();
+				}
+			});
+		})
+		
+   </script>
+   <!-- end of 신고하기  -->
 	<main>
 	      <!--================Blog Area =================-->
 	      <section class="blog_area single-post-area section-padding">
@@ -107,18 +141,19 @@
 	                        <div class="media-body">
 	                              <h4>요가킹 홍길룡</h4>
 	                           <p>품고 맺어, 돋고, 품에 말이다. 유소년에게서 그들에게 곳이 피어나는 가지에 
-	                              청춘에서만 것이다. 청춘의 얼마나 싹이 밝은 칼이다. 유소년에게서 그러므로 물방아 
-	                              열락의 싹이 실로 힘있다. 하는 들어 이 공자는 이상의 설레는 따뜻한 피다.
-	                              시들어 이상을 있는 운다. 사람은 피가 방황하였으며, 얼음과 생의 밝은 같지 오직 
-	                              사막이다. 사랑의 인생을 얼음에 피에 싹이 풀이 이상, 관현악이며, 말이다. 보배를 
-	                              이상 곳으로 뿐이다. 이상 영락과 가치를 안고, 쓸쓸하랴? 방지하는 석가는 가지에 
-	                              얼마나 이상 무엇을 있으랴? 공자는 때까지 피어나는 운다.
-	                              열락의 너의 천지는 싸인 남는 돋고, 실현에 속에서 사막이다. 
-	                              우리는 인생에 청춘의 것이다. 뭇 내는 노년에게서 보이는 설레는 용기가 그것은 
-	                              얼마나 약동하다. 구하지 얼음이 오직 청춘을 별과 목숨을 말이다. 
-	                              광야에서 희망의 동산에는 그들을 것은 때문이다. 
-	                              수 하였으며, 날카로우나 작고 긴지라 속잎나고, 별과 아름다우냐? 
-	                              찬미를 같이, 그것을 희망의 새 뿐이다.</p>
+					                              청춘에서만 것이다. 청춘의 얼마나 싹이 밝은 칼이다. 유소년에게서 그러므로 물방아 
+					                              열락의 싹이 실로 힘있다. 하는 들어 이 공자는 이상의 설레는 따뜻한 피다.
+					                              시들어 이상을 있는 운다. 사람은 피가 방황하였으며, 얼음과 생의 밝은 같지 오직 
+					                              사막이다. 사랑의 인생을 얼음에 피에 싹이 풀이 이상, 관현악이며, 말이다. 보배를 
+					                              이상 곳으로 뿐이다. 이상 영락과 가치를 안고, 쓸쓸하랴? 방지하는 석가는 가지에 
+					                              얼마나 이상 무엇을 있으랴? 공자는 때까지 피어나는 운다.
+					                              열락의 너의 천지는 싸인 남는 돋고, 실현에 속에서 사막이다. 
+					                              우리는 인생에 청춘의 것이다. 뭇 내는 노년에게서 보이는 설레는 용기가 그것은 
+					                              얼마나 약동하다. 구하지 얼음이 오직 청춘을 별과 목숨을 말이다. 
+					                              광야에서 희망의 동산에는 그들을 것은 때문이다. 
+					                              수 하였으며, 날카로우나 작고 긴지라 속잎나고, 별과 아름다우냐? 
+					                              찬미를 같이, 그것을 희망의 새 뿐이다.
+					           </p>
 	                        </div>
 	                     </div>
 	                  </div>
@@ -197,8 +232,8 @@
 	                                    <div class="reply-btn">
 	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">답장</a></div>
 	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">수정</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">삭제</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">신고</a></div>
+	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
+											<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">신고</a></div>
 	                                    </div>
 	                                 </div>
 	                              </div>
@@ -224,8 +259,8 @@
 	                                    <div class="reply-btn">
 	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">답장</a></div>
 	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">수정</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">삭제</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">신고</a></div>
+	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
+                                           <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">신고</a></div>
 	                                    </div>
 	                                 </div>
 	                              </div>
@@ -251,8 +286,8 @@
 	                                    <div class="reply-btn">
 	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">답장</a></div>
 	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">수정</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">삭제</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">신고</a></div>
+	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
+                                  		   <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">신고</a></div>
 	                                    </div>
 	                                 </div>
 	                              </div>
@@ -261,8 +296,117 @@
 	                     </div>
 	                  </div>
 	                  <!--? end 리뷰 area-->
-	
-	                  <!--?FAQ-->
+						<!--댓글 신고 모달-->
+						<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-content">
+										<!-- Modal body -->
+										<div class="modal-body" align="center">
+											<table>
+												<tr>
+													<td style="background: gray;" id="reportWriter"></td>
+												</tr>
+												<tr>
+													<td style="background: gray;" id="reportContentTitle">제목
+														:</td>
+												</tr>
+												<tr>
+												<tr>
+													<td style="border-bottom: 1px solid grey; padding: 5px;">
+														<br> 
+														<label for="report-ad" style="width: 90%;">광고</label>
+														<input type="radio" name="reportType" id="report-ad" value="부적절한 게시물"> 
+														<label for="report-ad"></label>
+													</td>
+												</tr>
+												<tr>
+													<td style="border-bottom: 1px solid grey; padding: 5px;">
+														<label for="report-insult" style="width: 90%;">욕설</label>
+														<input type="radio" name="reportType" id="report-insult" value="음란 또는 청소년에게 부적합한 내용"> 
+														<label for="report-insult"></label>
+													</td>
+												</tr>
+												<tr>
+													<td style="border-bottom: 1px solid grey; padding: 5px;">
+														<label for="report-obscence" style="width: 90%;">음란 또는 청소년에게 부적합한 내용</label> 
+														<input type="radio" name="reportType" id="report-obscence" value="음란 또는 청소년에게 부적합한 내용">
+														<label for="report-obscence"></label>
+													</td>
+												</tr>
+
+												<tr>
+													<td style="border-bottom: 1px solid grey; padding: 5px;">
+														<label for="report-etc" style="width: 90%;">기타</label> 
+														<input type="radio" name="reportType" id="report-etc" value="">
+														<label for="report-etc"></label>
+														<div id="reportReason"></div>
+													</td>
+												</tr>
+												<tr>
+													<th style="padding: 5px;">신고하기전에 잠깐?</th>
+												</tr>
+												<tr>
+													<td>
+														<div style="color: gray;">게시물로 인해 개인(단체)이 명예훼손 피해를
+															입었거나 저작권을 침해 당한 경우에는 게시중단 서비스를 통해 신고해 주시기 바랍니다.</div>
+													</td>
+												</tr>
+											</table>
+											<br> <input id="reportReplyNo" type="hidden" name="no" value=""> 
+											<input id="reportedMemNo" type="hidden" name="no" value="">
+											<button type="button" class="genric-btn primary small" data-dismiss="modal">취소</button>
+											<button type="submit" class="genric-btn primary small" data-dismiss="modal" onclick="reportRequest()">신고하기</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--end of reportModal-->
+						<!-- 댓글 신고 기타 사유 작성 모달 -->
+						<div class="modal fade" id="etcReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-content">
+										<!-- Modal body -->
+										<div class="modal-body" align="center">
+
+											<table>
+												<tr>
+													<td style="border-bottom: 1px solid grey; padding: 5px;">기타사유</td>
+												</tr>
+												<tr>
+													<td><textarea id="reportReasonArea" cols="50" rows="4" style="resize: none;"></textarea></td>
+												</tr>
+											</table>
+
+											<button type="button" class="genric-btn primary-border small" data-dismiss="modal">취소</button>
+											<button type="button" class="genric-btn primary-border small" data-dismiss="modal" onclick="getReason();">확인</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--댓글 글 삭제-->
+						<form action="">
+							<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-content" align="center">
+											<!-- Modal body -->
+											<div class="modal-body">
+												<p>삭제 하시겠습니까?</p>
+												<button type="button" class="genric-btn primary small" data-dismiss="modal">취소</button>
+												<button type="button" class="genric-btn primary small">삭제</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- end of 댓글 삭제 -->
+						<!--?FAQ-->
 	                  <div class="blog-author">
 	                     <div><h2>FAQ</h2></div>  
 	                     <br>
@@ -280,22 +424,7 @@
 	                        </div>
 	                     </div>
 	                  </div>
-	
-	                  <script>
-	                     $(function(){
-	                        $(".blog-author .media-body .faqQuestion").click(function(){
-	                           var $p = $(this).next();
-	             
-	                           if($p.css("display") == "none"){
-	                              $(this).siblings("p").slideUp();
-	                              $p.slideDown();
-	                           } else {
-	                              $p.slideUp();
-	                           }
-	                        });
-	                     })
-	                  </script>
-	                  <!--end of FAQ-->
+					<!--end of FAQ-->
 	               </div>
 	               <!--?right-side-blog-->
 	               <!--? payment-->

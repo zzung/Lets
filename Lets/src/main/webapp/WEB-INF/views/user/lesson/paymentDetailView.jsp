@@ -108,13 +108,12 @@
 								<br>
 								<br>
 								<div>
-									<buttom type="submit" class="gen-btn primary-border custom">결제하기</buttom>
+									<button type="submit" class="gen-btn primary-border custom">결제하기</button>
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
-			</div>
 			</div>
 		</section>
 		<!--================ Blog Area end =================-->
