@@ -101,7 +101,7 @@
                                     <div class="reply-btn">
                                         <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="reply();">답장</a></div>
                                        <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="editReply();">수정</a></div>
-                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="deleteReply();">삭제</a></div>
+                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
                                        <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">신고</a></div>
                                     </div>
                                  </div>
@@ -135,7 +135,7 @@
                                     <div class="reply-btn">
                                         <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="reply();">답장</a></div>
                                        <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="editReply();">수정</a></div>
-                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="deleteReply();">삭제</a></div>
+                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
                                        <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">신고</a></div>
                                     </div>
                                  </div>
@@ -169,7 +169,7 @@
                                     <div class="reply-btn">
                                      <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="reply();">답장</a></div>
                                        <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="editReply();">수정</a></div>
-                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="deleteReply();">삭제</a></div>
+                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
                                        <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">신고</a></div>
                                     </div>
                                  </div>
@@ -264,14 +264,32 @@
                         </tr>
                     </table>
 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="getReason();">확인</button>
+                    <button type="button" class="genric-btn primary-border small" data-dismiss="modal">취소</button>
+                    <button type="button" class="genric-btn primary-border small" data-dismiss="modal" onclick="getReason();">확인</button>
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!--후기 글 삭제-->
+<form action="">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-content" align="center">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <p>삭제 하시겠습니까?</p>
+                    <button type="button" class="genric-btn primary small" data-dismiss="modal">취소</button>
+                    <button type="button" class="genric-btn primary small" >삭제</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
    </main>
    
    <jsp:include page="../common/footer.jsp" />
