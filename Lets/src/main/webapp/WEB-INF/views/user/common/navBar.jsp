@@ -94,10 +94,10 @@
 							<div class="main-menu d-none d-lg-block">
 								<nav>
 									<ul id="navigation">
-										<li><a href="index.html">키즈</a></li>
-										<li><a href="about.html">머니</a></li>
-										<li><a href="courses.html">커리어</a></li>
-										<li><a href="courses.html">취미</a></li>
+										<li><a href="kids.le">키즈</a></li>
+										<li><a href="money.le">머니</a></li>
+										<li><a href="career.le">커리어</a></li>
+										<li><a href="hobby.le">취미</a></li>
 										<li><a href="blog.html">고객센터</a>
 											<ul class="submenu">
 												<li><a href="blog.html">1:1문의</a></li>
