@@ -9,7 +9,7 @@
 </head>
 <body>
 	<!--메뉴바 넣을 자리-->
-    <jsp:include page="../common/navBar.jsp" />
+    <jsp:include page="../user/common/navBar.jsp" />
     
     <br><br>
     <div class="tutorMain" >
@@ -116,6 +116,6 @@
     </script>
 
     <!-- 푸터바 넣을 자리-->
-	<jsp:include page="../common/footer.jsp" />
+	<jsp:include page="../user/common/footer.jsp" />
 </body>
 </html>
