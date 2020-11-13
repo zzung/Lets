@@ -49,41 +49,8 @@
 					$p.slideUp();
 				}
 			});
-		})
-		
-		//카카오 공유 스크립트 
-		Kakao.init('5e8cc8871721dbc11a35361c7cb406be')
-	    Kakao.Link.createDefaultButton({
-	        container: '#kakao-link-btn',
-	        objectType : 'feed',
-	        content : {
-	            title : $('meta[property="og:title"]').attr('content'),
-	            description : $('meta[property="og:description"]').attr('content'),
-	            imageUrl : $('meta[property="og:image"]').attr('content'),
-	            link : {
-	                mobileWebUrl : 'http://localhost:8888/ee',
-	                webUrl : 'http://localhost:8888/ee',
-	            },
-	        },
-	        social : {
-	            likeCount : 200,
-	            commentCount : 45,
-	            sharedCount : 25,
-	        },
-	        buttons : [{
-	                title : '웹으로 보기',
-	                link : {
-	                    mobileWebUrl : 'http://localhost:8888/ee',
-	                    webUrl : 'http://localhost:8888/ee',
-	                    },
-	                }, ],
-	    });
-		
-		//하트 색 변화 액션
-		document.querySelector('.like-button').addEventListener('click', e => {
-            e.currentTarget.classList.toggle('liked');
-         });
-   </script>
+		});
+	</script>
    <!-- end of 신고하기  -->
 	<main>
 	      <!--================Blog Area =================-->
@@ -506,8 +473,7 @@
 	            </div>
 	         </div>
 	      </section>
-
-	<!-- 카톡 공유하기 스크립트 -->
+	      	<!-- 카톡 공유하기 스크립트 -->
 	<script>
 		Kakao.init('5e8cc8871721dbc11a35361c7cb406be')
 	    Kakao.Link.createDefaultButton({
@@ -535,9 +501,7 @@
 	                    },
 	                }, ],
 	    });
-	</script>
-	
-	<script>
+
         document.querySelector('.like-button').addEventListener('click', e => {
             e.currentTarget.classList.toggle('liked');
           });
