@@ -663,7 +663,6 @@
             </div>
         </div>
     </div>
-    <!-- new class End -->
     </main>
 	
 	<!-- 풋터 -->

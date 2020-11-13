@@ -1869,32 +1869,84 @@ hr {
 }
 
 50
+
+
 %
 {
 -webkit-transform
+
+
 :
-translateY(
+
+
+translateY
+(
+
+
 -10px
-);
+
+
+)
+;
+
+
 transform
+
+
 :
-translateY(
+
+
+translateY
+(
+
+
 -10px
-);
+
+
+)
+;
+
+
 }
 100
+
+
 %
 {
 -webkit-transform
+
+
 :
-translateY(
+
+
+translateY
+(
+
+
 -20px
-);
+
+
+)
+;
+
+
 transform
+
+
 :
-translateY(
+
+
+translateY
+(
+
+
 -20px
-);
+
+
+)
+;
+
+
 }
 }
 .heartbeat {
@@ -2019,27 +2071,77 @@ to {
 }
 
 100
+
+
 %
 {
 -webkit-transform
+
+
 :
-rotate(
+
+
+rotate
+(
+
+
 360deg
-);
+
+
+)
+;
+
+
 transform
+
+
 :
-rotate(
+
+
+rotate
+(
+
+
 360deg
-);
+
+
+)
+;
+
+
 -webkit-transition
+
+
 :
-0.6s;
+
+
+0
+.6s
+;
+
+
 -o-transition
+
+
 :
-0.6s;
+
+
+0
+.6s
+;
+
+
 transition
+
+
 :
-0.6s;
+
+
+0
+.6s
+;
+
+
 }
 }
 @
@@ -2052,27 +2154,77 @@ keyframes zoom { 0% {
 }
 
 100
+
+
 %
 {
 -webkit-transform
+
+
 :
-rotate(
+
+
+rotate
+(
+
+
 360deg
-);
+
+
+)
+;
+
+
 transform
+
+
 :
-rotate(
+
+
+rotate
+(
+
+
 360deg
-);
+
+
+)
+;
+
+
 -webkit-transition
+
+
 :
-0.6s;
+
+
+0
+.6s
+;
+
+
 -o-transition
+
+
 :
-0.6s;
+
+
+0
+.6s
+;
+
+
 transition
+
+
 :
-0.6s;
+
+
+0
+.6s
+;
+
+
 }
 }
 .section-padding2 {
@@ -3866,13 +4018,13 @@ transition
 }
 
 @
--webkit-keyframes pulse {to { box-shadow:00045pxrgba(255, 255, 255, 0);
+-webkit-keyframes pulse {to { box-shadow:00045pxrgba (255, 255, 255, 0);
 	
 }
 
 }
 @
-keyframes pulse {to { box-shadow:00045pxrgba(255, 255, 255, 0);
+keyframes pulse {to { box-shadow:00045pxrgba (255, 255, 255, 0);
 	
 }
 
@@ -4108,24 +4260,56 @@ keyframes aaa { 0% {
 }
 
 50
+
+
 %
 {
 left
+
+
 :
-10%;
+
+
+10
+%;
+
+
 top
+
+
 :
--30%;
+
+
+-30
+%;
+
+
 }
 100
+
+
 %
 {
 top
+
+
 :
--10%;
+
+
+-10
+%;
+
+
 left
+
+
 :
--10%;
+
+
+-10
+%;
+
+
 }
 }
 .hero-caption span {
@@ -5058,12 +5242,12 @@ left
 
 .blog_right_sidebar .post_category_widget tr>.discount-like {
 	width: 50%;
-	padding-top: 40px;
+	padding-top: 10px;
 }
 
 .blog_right_sidebar .post_category_widget tr>.discount-share {
 	width: 50%;
-	padding-top: 35px;
+	padding-top: 25px;
 }
 
 .blog_right_sidebar .post_category_widget tr .discount-pay {
@@ -7175,4 +7359,42 @@ input[type=radio]+label {
 
 input[type=radio]:checked+label {
 	background-image: url("../img/comment/checkedImage.JPG");
+}
+
+.like-button {
+	display: inline-block;
+	position: relative;
+	font-size: 32px;
+	cursor: pointer;
+}
+
+.like-button::before {
+	font-size: 52px;
+	color: rgb(179, 157, 157);
+	content: "♥";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.like-button::after {
+	font-size: 52px;
+	color: #ff3252;
+	content: "♥";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%) scale(0);
+	transform: translate(-50%, -50%) scale(0);
+	-webkit-transition: -webkit-transform 0.2s;
+	transition: -webkit-transform 0.2s;
+	transition: transform 0.2s;
+	transition: transform 0.2s, -webkit-transform 0.2s;
+}
+
+.like-button.liked::after {
+	-webkit-transform: translate(-50%, -50%) scale(1.1);
+	transform: translate(-50%, -50%) scale(1.1);
 }
