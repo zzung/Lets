@@ -26,4 +26,8 @@ public class ClassController {
 		return "user/lesson/hobbyCurriculumListView";
 	}	
 	
+	@RequestMapping("preview.le")
+	public String previewLesson() {
+		return "user/lesson/previewLesson";
+	}
 }
