@@ -9,9 +9,9 @@
 </head>
 <body>
 	<!-- aside_nav -->
-	<jsp:forward page="WEB-INF/views/admin/adminNav.jsp"/>
+	<jsp:forward page="WEB-INF/views/admin/memberManagementView.jsp"/>
 	
 	<!-- contents -->
-	<jsp:forward page="WEB-INF/views/mainPage.jsp" />
+	<%-- <jsp:forward page="WEB-INF/views/mainPage.jsp" /> --%>
 </body>
 </html>
