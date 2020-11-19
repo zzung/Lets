@@ -40,5 +40,10 @@ public class AdminController {
 	public String reportManagement(){
 		return "admin/reportManagementView";
 	}
+	
+	@RequestMapping("noticeManagement.ad")
+	public String noticeManagement(){
+		return "admin/noticeManagementView";
+	}
 
 }

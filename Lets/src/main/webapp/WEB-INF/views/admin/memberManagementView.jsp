@@ -40,7 +40,7 @@
 							<th width="110px">회원 상세조회</th>
 						</tr>
 						<tr>
-							<td>1</td>
+							<td height="40px">1</td>
 							<td>회원</th>
 							<td>고길동이</td>
 							<td>닉네임1</td>
@@ -51,7 +51,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>2</td>
+							<td height="40px">2</td>
 							<td>튜터</th>
 							<td>김튜터</td>
 							<td>닉네임2</td>

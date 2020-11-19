@@ -13,14 +13,15 @@
 		<div class="main-content">
 			<section id="reportManagement">
 				<div class="content-header">
-					<h1>신고 관리</h1>
+					<h1>공지사항 관리</h1>
 				</div>
 				
 				<div class="welcome" align="center" style="width:800px;">
 					<!-- 검색 div start -->
 					<div>
-						<div style="width:200px; float:left;">
-							<!-- 분류 버튼 추가 자리 -->
+						<div style="width:200px; float:left; text-align:left;">
+							<button type="button" data-toggle="modal"
+									data-target="#writeNotice1" class="btn btn-default">공지 작성</button>
 						</div>
 						<div align="right">
 							<form action="">
@@ -36,33 +37,32 @@
 					</div>
 					<!-- 검색 div end -->
 					<br>
+					
 					<table class="list-area">
 						<tr>
 							<th width="50px" height="40px">번호</th>
-							<th width="140px">신고자</th>
-							<th width="140px">신고대상</th>
-							<th width="90px">신고사유</th>
-							<th width="220px">댓글 내용(상세조회) </th>
-							<th width="120px">신고일</th>
-							<th width="90px">처리상태</th>
+							<th width="90px">중요공지</th>
+							<th width="90px">분류</th>
+							<th width="500px">공지제목</th>
+							<th width="120px">작성일</th>
+							<th width="120px">삭제여부</th>
 						</tr>
 						<tr>
 							<td height="40px">1</td>
-							<td>닉네임1</td>
-							<td>사용자</td>
-							<td>욕설음란</td>
+							<td>Y</td>
+							<td>회원</td>
 							<td>
-								<a href="#" data-toggle="modal" data-target="#reportContent1">
-								이 아기 멍멍아
-								</a>
+							
+							[서비스 개편 사항] 메인페이지에서 새로 생긴 클래스를 확인할 수 있습니다.
+							
 							</td>
-							<td>2020-11-19</td>
-							<td>미처리</td>
+							<td>2020-10-30</td>
+							<td>N</td>
 						</tr>
 					</table>
 					
 					<!-- Modal Start -->
-					<div class="modal" id="reportContent1">
+					<div class="modal" id="writeNotice1">
 						<div class="modal-dialog">
 
 							<!-- Modal content -->

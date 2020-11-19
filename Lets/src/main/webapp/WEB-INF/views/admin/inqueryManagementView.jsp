@@ -49,7 +49,7 @@
 							<th width="90px">삭제여부</th>
 						</tr>
 						<tr>
-							<td>1</td>
+							<td height="40px">1</td>
 							<td>닉네임1</td>
 							<td>사용자</td>
 							<td>
@@ -62,7 +62,7 @@
 							<td>N</td>
 						</tr>
 						<tr>
-							<td>2</td>
+							<td height="40px">2</td>
 							<td>닉네임2</td>
 							<td>튜터</td>
 							<td>
@@ -75,7 +75,7 @@
 							<td>N</td>
 						</tr>
 						<tr>
-							<td>3</td>
+							<td height="40px">3</td>
 							<td>닉네임3</td>
 							<td>클래스</td>
 							<td>
@@ -88,7 +88,7 @@
 							<td>N</td>
 						</tr>
 						<tr>
-							<td>4</td>
+							<td height="40px">4</td>
 							<td>닉네임4</td>
 							<td>기타</td>
 							<td>
@@ -123,7 +123,7 @@
 											<td style="border-bottom:solid 1px;"><span style="margin-right:20px;">닉네임1</span><span>2020-09-29</span></td>
 										</tr>
 										<tr>
-											<td style="border-bottom:solid 1px;">
+											<td>
 											다양한 카테고리에 다양한 클래스가 있었으면 좋겠어요~
 											뜨개질 같은거나 만드는거 배워보고 싶어요
 											
@@ -137,8 +137,17 @@
 											뜨개질 같은거나 만드는거 배워보고 싶어요
 											</td>
 										</tr>
+										<tr>
+											<td style="border-bottom:solid 1px;">
+												<div>
+													<br>
+													첨부파일:
+												</div>
+											</td>
+										</tr>
 									</table>
 									<br>
+									
 									<!-- 문의내용 끝 -->
 									
 									<!-- 답변입력 시작 -->

@@ -43,7 +43,7 @@
 							<th width="110px">블랙해제</th>
 						</tr>
 						<tr>
-							<td>1</td>
+							<td height="40px">1</td>
 							<td>닉네임1</td>
 							<td>user01@naver.com</td>
 							<td>12</td>
@@ -51,7 +51,7 @@
 									class="btn btn-default">해제</button></td>
 						</tr>
 						<tr>
-							<td>2</td>
+							<td height="40px">2</td>
 							<td>닉네임2</td>
 							<td>tutor02@naver.com</td>
 							<td>5</td>
@@ -60,7 +60,7 @@
 						</tr>
 					</table>
 
-					<!-- 결제취소 확인 alert ** 컬럼별로 번호 매겨서야 한다(payCondition 변경하기 위해) -->
+					<!-- 확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
 					<script>
 						function cancelBlacklist() {
 							var num = 1;
@@ -75,10 +75,10 @@
 
 							var blacklistCondition = document
 									.getElementById("blacklistCondition" + num)
-							payCondition.innerHTML = "<p>" + str + "</p>"
+							blacklistCondition.innerHTML = "<p>" + str + "</p>"
 						}
 					</script>
-					<!-- end of 결제취소 -->
+					<!-- 확인 끝 -->
 
 
 
