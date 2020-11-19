@@ -6,6 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 	
+	@RequestMapping("memberManagement.ad")
+	public String memberManagement(){
+		return "admin/memberManagementView";
+	}
+	
+	@RequestMapping("tutorManagement.ad")
+	public String tutorManagement(){
+		return "admin/tutorManagementView";
+	}
+	
+	
 	@RequestMapping("classManagement.ad")
 	public String classManagement(){
 		return "admin/classManagementView";

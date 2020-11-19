@@ -33,8 +33,8 @@
 </div>
 <nav class="left-nav">
 	<ul>
-		<li class="current"><a href="#memberManagement">회원관리</a></li>
-		<li><a href="#tutorManagement">튜터관리</a></li>
+		<li class="current"><a href="memberManagement.ad">회원관리</a></li>
+		<li><a href="tutorManagement.ad">튜터관리</a></li>
 		<li><a href="classManagement.ad">클래스관리</a></li>
 		<li><a href="classPayment.ad">클래스 결제관리</a></li>
 		<li><a href="saleManagement.ad">할인 상품 관리</a></li>
