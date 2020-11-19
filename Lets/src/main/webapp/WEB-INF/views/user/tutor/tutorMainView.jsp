@@ -17,7 +17,7 @@
 </head>
 <body>
 	<!--메뉴바 넣을 자리-->
-    <jsp:include page="../user/common/navBar.jsp" />
+    <jsp:include page="../common/navBar.jsp" />
     
     <br><br>
     <div class="tutorMain" >
@@ -66,44 +66,14 @@
             <br><br><br><br>
             <p style="font-size: 25px;font-weight: bold;">레츠 튜터 FAQ</p><br><br>
             <div id="tutorFaqList" style="width: 700px;margin-left: 25%;height: 40px;text-align: left;height: auto;">
+            <!-- TutorFaq for 문 -->
+            
+            <c:forEach var="tm" items="${list }">
                 <hr id="hrBorder">
-                <div class="tutorFaq">튜터 등록은 무료인가요?&nbsp;&nbsp;<img src="resources/user/images/tutorFaq.jpg" id="faqClick" alt=""></div>
-                <p class="tutorFaqCon" style="display: none;text-align: left;">
-			         <br>          
-			                    튜터 등록은 무료입니다. <br>
-			                    수강생과 매칭이 되기 전까지는 수수료가 전혀 발생하지 않습니다!<br>  
-			                    레츠 수수료는 다 회차일 경우 첫 1시간 수업료, 원데이일 경우 전체 수업료의 20% 입니다.
-                </p>
-                <hr id="hrBorder">
-                <div class="tutorFaq">어떤 클래스를 등록할 수 있나요?&nbsp;&nbsp;<img src="resources/user/images/tutorFaq.jpg" id="faqClick" alt=""></div>
-                <p class="tutorFaqCon" style="display: none;text-align: left;">
-			         <br>          
-			                    본인이 공유하고 싶은 클래스를 등록해 주시면 됩니다. <br>
-			                    자신의 재능을 레츠에서 마음껏 펼쳐보세요!<br>
-			                    관리자의 승인이 떨어진다면 클래스가 등록됩니다^^
-			    </p>
-                <hr id="hrBorder">
-                <div class="tutorFaq">클래스 등록을 위해서는 어떤것이 필요한가요 ?&nbsp;&nbsp;<img src="resources/user/images/tutorFaq.jpg" id="faqClick" alt=""></div>
-                <p class="tutorFaqCon" style="display: none;text-align: left;">
-                <br>
-			                    클래스 등록을 위해서 본인 소개와 클래스 주제, 클래스 세부주제가 필요합니다.<br>
-			                    온라인 강의일 때는 동영상 주소를 같이 첨부해 주시기 바랍니다.
-                </p>
-                <hr id="hrBorder">
-                <div class="tutorFaq">클래스 가격은 어떻게 정해야 하나요 ?&nbsp;&nbsp;<img src="resources/user/images/tutorFaq.jpg" id="faqClick" alt=""></div>
-                <p class="tutorFaqCon" style="display: none;text-align: left;">
-                <br>
-				         관리자와 상의 한 후 결정하게 됩니다.<br>
-				         수수료 20%를 포함한 가격으로 클래스 가격이 매겨집니다.
-                </p>
-                <hr id="hrBorder">
-                <div class="tutorFaq" >준비물은 직접 보내는 방식인가요?&nbsp;&nbsp;<img src="resources/user/images/tutorFaq.jpg" id="faqClick" alt=""></div>
-                <p class="tutorFaqCon" style="display: none;text-align: left;">
-                <br>
-			                    그렇습니다!<br>
-			                    튜터님이 필요하다고 생각하는 준비물을 직접 선택하고 보내실 수 있습니다.<br>
-			                    클래스가 시작되기 전에 미리 준비해 두세요!
-                </p>
+                <div class="tutorFaq">${tm.faqTitle }&nbsp;&nbsp;<img src="resources/user/images/tutorFaq.jpg" id="faqClick" alt=""></div>
+                <p class="tutorFaqCon" style="display: none;text-align: left;"><br>${tm.faqContent} </p>
+            </c:forEach>
+            
                 <hr id="hrBorder">
             </div>
             <br><br><br><br><br>
@@ -124,6 +94,6 @@
     </script>
 
     <!-- 푸터바 넣을 자리-->
-	<jsp:include page="../user/common/footer.jsp" />
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

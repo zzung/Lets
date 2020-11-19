@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="faqMapper">
+
+<resultMap id="faqResultSet" type="Faq">
+	<id column="faq_no" property="faqNo" />
+	<result column="faq_category" property="faqCategory" />
+	<result column="faq_status" property="faqStatus" />
+	<result column="enroll_date" property="enrollDate" />
+	<result column="faq_type" property="faqType"/>
+	<result column="faq_title" property="faqTitle"/>
+	<result column="faq_content" property="faqContent"/>
+</resultMap>
+
+<select id="selectTutorFaqList" resultMap="faqResultSet">
+	select
+	       faq_no
+	     , faq_title
+	     , faq_content
+	  from faq
+	 where faq_type = 'TUTOR'
+	   and faq_status = '공개'
+</select>
+
+
+</mapper>

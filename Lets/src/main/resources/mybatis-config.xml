@@ -7,9 +7,11 @@
 	
 	<typeAliases>
 		<typeAlias type="com.kh.ee.user.review.model.vo.Review" alias="Review" />
+		<typeAlias type="com.kh.ee.user.faq.model.vo.Faq" alias="Faq"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mappers/reply-mapper.xml" />
+		<mapper resource="/mappers/faq-mapper.xml"/>
 	</mappers>
 </configuration>
