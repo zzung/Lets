@@ -9,4 +9,7 @@
 </head>
 <body>
 	<jsp:forward page="WEB-INF/views/admin/adminNav.jsp"/>
+=======
+	 <jsp:forward page="WEB-INF/views/mainPage.jsp" />
+</body>
 </html>
