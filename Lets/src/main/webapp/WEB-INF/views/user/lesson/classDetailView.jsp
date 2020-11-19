@@ -8,7 +8,7 @@
 <meta property="og:title" content="Lets Experience is Everything" />
 <meta prpoerty="og:type" content="website" />
 <meta property="og:description" content="요기서 배워 배우라고!!" />
-<meta property="og:image" content="http://localhost:8888/resources/user/assets/img/logo/logo.png" />
+<meta property="og:image" content="http://localhost:8888/ee/resources/user/assets/img/logo/logo.png" />
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
@@ -359,7 +359,8 @@
 													</td>
 												</tr>
 											</table>
-											<br> <input id="reportReplyNo" type="hidden" name="no" value=""> 
+											<br> 
+											<input id="reportReplyNo" type="hidden" name="no" value=""> 
 											<input id="reportedMemNo" type="hidden" name="no" value="">
 											<button type="button" class="genric-btn primary small" data-dismiss="modal">취소</button>
 											<button type="submit" class="genric-btn primary small" data-dismiss="modal" onclick="reportRequest()">신고하기</button>
@@ -461,7 +462,7 @@
 	                           </tr>
 	                           <tr>
 	                              <td colspan="4" align="center">
-	                                 <button class="genric-btn primary discount-pay">수강하기</button>
+	                                 <button class="genric-btn primary discount-pay" href="payClass.le">수강하기</button>
 	                              </td>
 	                           </tr>
 	                        </table>

@@ -30,4 +30,10 @@ public class ClassController {
 	public String previewLesson() {
 		return "user/lesson/previewLesson";
 	}
+	
+	@RequestMapping("payClass.le")
+	public String paymentDetail() {
+		return"user/lesson/paymentDetailView";
+	}
+
 }
