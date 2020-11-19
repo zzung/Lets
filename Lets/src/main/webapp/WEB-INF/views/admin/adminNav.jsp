@@ -37,13 +37,12 @@
 	<nav class="left-nav">
 		<ul>
 			<li class="current"><a href="memberManagement.ad">회원관리</a></li>
-			<li><a href="tutorManagement.ad">튜터관리</a></li>
 			<li><a href="classManagement.ad">클래스관리</a></li>
 			<li><a href="classPayment.ad">클래스 결제관리</a></li>
 			<li><a href="saleManagement.ad">할인 상품 관리</a></li>
-			<li><a href="#blackListManagement">블랙리스트관리</a></li>
-			<li><a href="#reply">1:1 문의</a></li>
-			<li><a href="#reportManagement">신고관리</a></li>
+			<li><a href="blacklistManagement.ad">블랙리스트관리</a></li>
+			<li><a href="inqueryManagement.ad">1:1 문의</a></li>
+			<li><a href="reportManagement.ad">신고관리</a></li>
 			<li><a href="#announcement">공지사항</a></li>
 			<li><a href="faqManagement">FAQ</a></li>
 		</ul>

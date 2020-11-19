@@ -11,12 +11,6 @@ public class AdminController {
 		return "admin/memberManagementView";
 	}
 	
-	@RequestMapping("tutorManagement.ad")
-	public String tutorManagement(){
-		return "admin/tutorManagementView";
-	}
-	
-	
 	@RequestMapping("classManagement.ad")
 	public String classManagement(){
 		return "admin/classManagementView";
@@ -30,6 +24,21 @@ public class AdminController {
 	@RequestMapping("saleManagement.ad")
 	public String saleManagement(){
 		return "admin/discountManagementView"; 
+	}
+	
+	@RequestMapping("blacklistManagement.ad")
+	public String blacklistManagement(){
+		return "admin/blacklistManagementView";
+	}
+	
+	@RequestMapping("inqueryManagement.ad")
+	public String inqueryManagement(){
+		return "admin/inqueryManagementView";
+	}
+	
+	@RequestMapping("reportManagement.ad")
+	public String reportManagement(){
+		return "admin/reportManagementView";
 	}
 
 }
