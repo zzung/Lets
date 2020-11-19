@@ -6,7 +6,7 @@
 <head>
 <meta property="og:url" content="http://localhost:8888/ee/" />
 <meta property="og:title" content="Lets Experience is Everything" />
-<meta prpoerty="og:type" content="website" />
+<meta property="og:type" content="website" />
 <meta property="og:description" content="요기서 배워 배우라고!!" />
 <meta property="og:image" content="http://localhost:8888/ee/resources/user/assets/img/logo/logo.png" />
 <meta charset="UTF-8">
@@ -167,7 +167,7 @@
 	                  <!--?리뷰 area-->
 	                  <div class="comments-area">
 	                     <div class="text-right">
-	                        <a><i class="fas fa-plus"> 더보기</i></a>
+	                        <a href="showMore.rev"><i class="fas fa-plus"> 더보기</i></a>
 	                     </div>
 	                     <div class="container">
 	                        <h4>리뷰 2</h4>

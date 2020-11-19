@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reviewMapper">
+
+<resultMap id="reviewResultSet" type="Review">
+	<id column="review_no" property="reviewNo" />
+	<result column="lesson_no" property="lessonNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="start" property="star" />
+	<result column="review_content" property="reviewContent"/>
+	<result column="enroll_date" property="enrollDate"/>
+	<result column="modify_date" property="modifiyDate"/>
+	<result column="status" property="status"/> 
+</resultMap>
+
+<select id="showMoreReview" resultMap="reviewResultSet">
+	select 
+	       r.star
+	     , r.review_content
+	     , r.enroll_date
+	     , m.nickname
+	     , m.mem_pic
+	  from review r
+	  join member m on(r.mem_no=m.mem_no)
+	 where lesson_no = 1 
+	   and r.status = 'Y'
+	 order
+	    by review_no desc
+</select>
+
+<update id="deleteReview" parameterType="_int">
+	update
+        review
+   set
+        status='N'
+      , modify_date = SYSDATE
+ where  review_no = #{reviewNo}
+</update>
+</mapper>

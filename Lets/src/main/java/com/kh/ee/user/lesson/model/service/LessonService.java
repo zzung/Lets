@@ -1,6 +1,6 @@
 package com.kh.ee.user.lesson.model.service;
 
-public interface ClassService {
+public interface LessonService {
 	
 	//삭제하기
 	

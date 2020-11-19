@@ -66,44 +66,50 @@
 			                <td>recipe@gmail.com</td>
 			                <td id="approvalStatus1">거부</td>
 			                <td><button onclick="approvalClass();" id="approval" class="btn btn-default">승인</button>&nbsp;&nbsp;
-			                    <button onclick="rejectClass();" id="reject" class="btn btn-default">거부</button></td>
+			                    <button data-toggle="modal" data-target="#settingSales" id="reject" class="btn btn-default">거부</button></td>
 			            </tr>
 			        </table>
 		        <!--?승인여부 선택-->
-		        <script>
-		           function approvalClass(){
-		               var accept = confirm("클래스 생성을 승인 하시겠습니까?");
-		               var str = " ";
-		               var num = 1; 
-		            
-		               if(accept){
-		                    str = "승인";
-		                    document.getElementById("approval").disabled = true;
-		               }else{
-		                   return;
-		               }
-		
-		               document.getElementById("approvalStatus"+num).innerHTML = "<p>"+str+"</p>";
-		            
-		           }
-		
-		           function rejectClass(){
-		               var reject = confirm("클래스 생성을 거부 하시겠습니까??")
-		               var str = " ";
-		               var num = 1; 
-		
-		               if(reject){
-		                   str = "거부";
-		                   document.getElementById("reject").disabled = true;
-		                   document.getElementById("approval").disabled = false;
-		               } else {
-		                   return;
-		               }
-		               document.getElementById("approvalStatus"+num).innerHTML = "<p>"+str+"</p>";
-		           }
-		
-		
-		        </script>
+		        <!-- ?승인 거부 클릭시 보여질 모달 -->
+					<div class="modal" id="settingSales">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content" align="center" style="width: 450px;">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">거부 사유</h4>
+								</div>
+								<div class="modal-body">
+									<textarea id="reportReasonArea" cols="45" rows="4"
+										style="resize: none;"></textarea>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal" onclick="sendRejectReason();">적용</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--Modal End-->
+					<script>
+						function approvalClass() {
+							var accept = confirm("클래스 생성을 승인 하시겠습니까?");
+							var str = " ";
+							var num = 1;
+
+							if (accept) {
+								str = "승인";
+								document.getElementById("approval").disabled = true;
+							} else {
+								return;
+							}
+
+							document.getElementById("approvalStatus" + num).innerHTML = "<p>"
+									+ str + "</p>";
+
+						}
+
+					</script>
 		        <!--end of 승인여부-->
 		        <br><br>
 		        <div class="container" align="center">              

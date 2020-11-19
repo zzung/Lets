@@ -15,7 +15,6 @@ END;
 /
 ---------------------------------------
 DROP TABLE "MEMBER" CASCADE CONSTRAINTS;
-DROP TABLE "CLASS" CASCADE CONSTRAINTS;
 DROP TABLE "LESSON" CASCADE CONSTRAINTS;
 DROP TABLE "INQUIRY" CASCADE CONSTRAINTS;
 DROP TABLE "LIKE" CASCADE CONSTRAINTS;
@@ -99,7 +98,7 @@ CREATE TABLE "LESSON" (
 	"LESSON_TARGET"	VARCHAR2(500)		NOT NULL,
 	"LIKE_COUNT"	NUMBER	DEFAULT 0	NULL,
 	"LESSON_STATUS"	VARCHAR2(70)	DEFAULT '보류'	NOT NULL,
-	"STATUS_HOLD"	NUMBER		NOT NULL,
+	"STATUS_HOLD"	NUMBER		NULL,
 	"H_REASON"	VARCHAR2(500)		NULL,
 	"R_REASON"	VARCHAR2(500)		NULL,
 	"PRICE"	VARCHAR2(100)		NOT NULL,
@@ -449,8 +448,7 @@ CREATE TABLE "REPLY" (
 	"REPLY_LEVEL"	NUMBER		NOT NULL,
 	"TOTAL_NO"	NUMBER		NOT NULL,
 	"REP_COUNT"	NUMBER	DEFAULT 0	NULL,
-	"STATUS"	VARCHAR2(1)	DEFAULT 'Y'	NOT NULL,
-	"LESSON_NO"	NUMBER		NOT NULL,
+	"STATUS"		VARCHAR2(1)	DEFAULT 'Y'	NOT NULL,
 	CONSTRAINT "PK_REPLY" PRIMARY KEY("REPLY_NO")
 );
 
@@ -475,8 +473,6 @@ COMMENT ON COLUMN "REPLY"."TOTAL_NO" IS '클래스번호 또는 후기번호';
 COMMENT ON COLUMN "REPLY"."REP_COUNT" IS '누적 신고수';
 
 COMMENT ON COLUMN "REPLY"."STATUS" IS '댓글 상태';
-
-COMMENT ON COLUMN "REPLY"."LESSON_NO" IS '클래스 번호';
 
 CREATE SEQUENCE SEQ_REP_NO NOCACHE;	--REPLY
 
@@ -645,12 +641,6 @@ FOREIGN KEY ("REPLY_NO2")
 REFERENCES "REPLY" ("REPLY_NO")
 ON DELETE CASCADE;
 
-ALTER TABLE "REPLY" 
-ADD CONSTRAINT "FK_LESSON_TO_REPLY_1" 
-FOREIGN KEY ("LESSON_NO")
-REFERENCES "LESSON" ("LESSON_NO")
-ON DELETE CASCADE;
-
 ALTER TABLE "MEM_VIDEO" 
 ADD CONSTRAINT "FK_VIDEO_TO_MEM_VIDEO_1" 
 FOREIGN KEY ("VIDEO_NO")
@@ -700,4 +690,56 @@ insert
    , 'M'
    , '서울시 강남'
    , '010-4309-0984'
+  );
+
+insert  
+  into member
+  (
+     mem_no
+   , mem_id
+   , mem_pwd
+   , mem_name
+   , nickname
+   , birthday
+   , gender
+   , address
+   , phone
+  )
+  values
+  (
+     seq_mno.nextval
+   , 'user01'
+   , 'pass01'
+   , '홍길동'
+   , 'mrHong'
+   , '1990-07-22'
+   , 'M'
+   , '서울시 노원'
+   , '010-4456-0984'
+  );
+
+insert  
+  into member
+  (
+     mem_no
+   , mem_id
+   , mem_pwd
+   , mem_name
+   , nickname
+   , birthday
+   , gender
+   , address
+   , phone
+  )
+  values
+  (
+     seq_mno.nextval
+   , 'user02'
+   , 'pass02'
+   , '홍길순'
+   , 'msHong'
+   , '1994-07-22'
+   , 'F'
+   , '서울시 동대문'
+   , '010-5432-9808'
   );

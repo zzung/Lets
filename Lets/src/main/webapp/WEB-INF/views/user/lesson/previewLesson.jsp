@@ -3,11 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta property="og:url" content="http://localhost:8888/ee/" />
-<meta property="og:title" content="Lets Experience is Everything" />
-<meta prpoerty="og:type" content="website" />
-<meta property="og:description" content="요기서 배워 배우라고!!" />
-<meta property="og:image" content="http://localhost:8888/resources/user/assets/img/logo/logo.png" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/user/assets/css/detailClassStyle.css">

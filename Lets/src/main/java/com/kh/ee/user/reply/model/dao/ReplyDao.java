@@ -1,9 +1,9 @@
-package com.kh.ee.user.lesson.model.dao;
+package com.kh.ee.user.reply.model.dao;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ClassDao {
+public class ReplyDao {
 
 	//삭제하기
 }

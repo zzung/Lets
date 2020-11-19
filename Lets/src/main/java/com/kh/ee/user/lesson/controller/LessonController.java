@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ClassController {
+public class LessonController {
 
 	@RequestMapping("kids.le")
 	public String kidsCurriculum() {
@@ -35,5 +35,5 @@ public class ClassController {
 	public String paymentDetail() {
 		return"user/lesson/paymentDetailView";
 	}
-
+	
 }

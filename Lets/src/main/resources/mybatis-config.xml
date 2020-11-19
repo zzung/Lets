@@ -6,8 +6,10 @@
 	</settings>
 	
 	<typeAliases>
+		<typeAlias type="com.kh.ee.user.review.model.vo.Review" alias="Review" />
 	</typeAliases>
 	
 	<mappers>
+		<mapper resource="/mappers/reply-mapper.xml" />
 	</mappers>
 </configuration>

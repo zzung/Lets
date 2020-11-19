@@ -55,105 +55,40 @@
                     </div>
                     <!--end of 리뷰 작성하기-->
                     <br><br><br>
-                     <div class="comment-list">
-                        <div class="single-comment justify-content-between d-flex">
-                           <div class="user justify-content-between d-flex">
-                              <div class="thumb">
-                                 <img src="resources/user/assets/img/comment/cat1.jpg" alt="">
-                              </div>
-                              <div class="desc">
-                                 <p class="comment">
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                 </p>
-                                 <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                       <span>Emilly Blunt</span>
-                                       <p class="date">December 4, 2017 at 3:12 pm </p>
-                                    </div>
-                                    <div class="review-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="reply-btn">
-                                        <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="reply();">답장</a></div>
-                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="editReply();">수정</a></div>
-                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="comment-list">
-                        <div class="single-comment justify-content-between d-flex">
-                           <div class="user justify-content-between d-flex">
-                              <div class="thumb">
-                                 <img src="resources/user/assets/img/comment/comment_2.png" alt="">
-                              </div>
-                              <div class="desc">
-                                 <p class="comment">
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                 </p>
-                                 <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                       <span>Emilly Blunt</span>
-                                       <p class="date">December 4, 2017 at 3:12 pm </p>
-                                    </div>
-                                    <div class="review-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="reply-btn">
-                                        <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="reply();">답장</a></div>
-                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="editReply();">수정</a></div>
-                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="comment-list">
-                        <div class="single-comment justify-content-between d-flex">
-                           <div class="user justify-content-between d-flex">
-                              <div class="thumb">
-                                 <img src="resources/user/assets/img/comment/comment_3.png" alt="">
-                              </div>
-                              <div class="desc">
-                                 <p class="comment">
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                 </p>
-                                 <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                       <span>Emilly Blunt</span>
-                                       <p class="date">December 4, 2017 at 3:12 pm </p>
-                                    </div>
-                                    <div class="review-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="reply-btn">
-                                     <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="reply();">답장</a></div>
-                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="editReply();">수정</a></div>
-                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+	                     <div class="comment-list">
+	                        <div class="single-comment justify-content-between d-flex">
+	                           <div class="user justify-content-between d-flex">
+                    			<c:forEach var="review" items="${list }"> 
+	                              <div class="thumb">
+	                                 <img src="${review.memPic }" alt="">
+	                              </div>
+	                              <div class="desc">
+	                                 <p class="comment">
+	                                    ${review.reviewContent }
+	                                 </p>	
+	                                 <div class="d-flex justify-content-between">
+	                                    <div class="d-flex align-items-center">
+	                                       <span>${review.nickName }</span>
+	                                       <p class="date">${review.enrollDate } </p>
+	                                    </div>
+	                                    <div class="review-ratting">
+	                                        <i class="fas fa-star"></i>
+	                                        <i class="fas fa-star"></i>
+	                                        <i class="fas fa-star"></i>
+	                                        <i class="fas fa-star"></i>
+	                                        <i class="fas fa-star"></i>
+	                                    </div>
+	                                    <div class="reply-btn">
+	                                        <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="reply();">답장</a></div>
+	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" onclick="editReply();">수정</a></div>
+	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
+	                                    </div>
+	                                 </div>
+	                              </div>
+                     			</c:forEach>
+	                           </div>
+	                        </div>
+	                     </div>
                   </div>
                   <!--? end 리뷰 area-->
             </div>
@@ -161,7 +96,7 @@
       </section>
       <!--================ Blog Area end =================-->
 	<!--후기 글 삭제-->
-	<form action="">
+	<form action="deleteReview.rev">
 	        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	    <div class="modal-dialog modal-dialog-centered" role="document">
 	        <div class="modal-content">
@@ -170,7 +105,7 @@
 	                <div class="modal-body">
 	                    <p>삭제 하시겠습니까?</p>
 	                    <button type="button" class="genric-btn primary small" data-dismiss="modal">취소</button>
-	                    <button type="button" class="genric-btn primary small" >삭제</button>
+	                    <button type="button" class="genric-btn primary small">삭제</button>
 	                </div>
 	            </div>
 	        </div>
