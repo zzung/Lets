@@ -1,5 +1,8 @@
-package com.kh.ee.user.tutor.model.dao;
+package com.kh.ee.user.member.model.dao;
 
-public class TutorDao {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class MemberDao {
 
 }
