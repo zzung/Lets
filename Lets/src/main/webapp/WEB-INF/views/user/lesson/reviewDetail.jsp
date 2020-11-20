@@ -34,41 +34,51 @@
                     <!-- 조건문 줘야함  수강하지 않을경우 -->
                     <script>
                         function writeReview(){
-                            alert('수강 후 리뷰 작성 가능합니다.');
-                        }
+                           	if($("#writeReviewArea").css("display") == "none"){
+                           		//조건문 필요 >> 회원이 이 강의를 수강시 가능.
+                           		$("#writeReviewArea").show();
+                           	}else{
+                           		$("#writeReviewArea").hide(); 
+          
+                           	}
+                       	}
+                   
                     </script>
                     <!--?리뷰 작성하기 클릭시 보여지게 할 창-->
                     <br><br>
-                    <div class="mt-10">
-                        <textarea class="review-textarea" placeholder="Message" onfocus="this.placeholder = ''"
-                        onblur="this.placeholder = 'Message'" required></textarea>
-                    </div>
-                    <div class="review-writeArea">
-                        <div id="review-writeRatting">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div id="submitReview" align="right"><button class="genric-btn1 primary-border extrasmall">등록</button></div>
+                    <div id="writeReviewArea" style="display:none">
+	                    <div class="mt-10">
+	                        <textarea class="review-textarea" placeholder="Message" onfocus="this.placeholder = ''"
+	                        onblur="this.placeholder = 'Message'" required></textarea>
+	                    </div>
+	                    <div class="review-writeArea">
+	                        <div id="review-writeRatting">
+	                            <i class="fas fa-star"></i>
+	                            <i class="fas fa-star"></i>
+	                            <i class="fas fa-star"></i>
+	                            <i class="fas fa-star"></i>
+	                            <i class="fas fa-star"></i>
+	                        </div>
+	                        <div id="submitReview" align="right"><button class="genric-btn1 primary-border extrasmall">등록</button></div>
+	                    </div>
                     </div>
                     <!--end of 리뷰 작성하기-->
                     <br><br><br>
+                    <c:forEach var="review" items="${list }"> 
 	                     <div class="comment-list">
 	                        <div class="single-comment justify-content-between d-flex">
 	                           <div class="user justify-content-between d-flex">
-                    			<c:forEach var="review" items="${list }"> 
 	                              <div class="thumb">
+	                              	 <!-- memPic 넣어줘야 함. -->
 	                                 <img src="resources/user/assets/img/comment/cat1.jpg" alt="">
 	                              </div>
 	                              <div class="desc">
 	                                 <p class="comment">
 	                                    ${review.reviewContent }
 	                                 </p>	
-	                                 <div class="d-flex justify-content-between">
+	                                 <div class="d-flex justify-content-between" style="width:600px;">
 	                                    <div class="d-flex align-items-center">
-	                                       <span>${review.nickName }</span>
+	                                       <span>${review.nickname }</span>
 	                                       <p class="date">${review.enrollDate } </p>
 	                                    </div>
 	                                    <div class="review-ratting">
@@ -85,10 +95,10 @@
 	                                    </div>
 	                                 </div>
 	                              </div>
-                     			</c:forEach>
 	                           </div>
 	                        </div>
 	                     </div>
+                     </c:forEach>
                   </div>
                   <!--? end 리뷰 area-->
             </div>

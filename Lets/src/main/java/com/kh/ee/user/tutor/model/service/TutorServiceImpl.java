@@ -1,6 +1,5 @@
 package com.kh.ee.user.tutor.model.service;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +19,4 @@ public class TutorServiceImpl implements TutorService{
 	public int insertTutorInfo(Tutor t) {
 		return tutorDao.insertTutorInfo(sqlSession, t);
 	}
-
 }

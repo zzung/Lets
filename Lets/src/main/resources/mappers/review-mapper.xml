@@ -11,7 +11,10 @@
 	<result column="enroll_date" property="enrollDate"/>
 	<result column="modify_date" property="modifiyDate"/>
 	<result column="status" property="status"/> 
+	<result column="nickname" property="nickname"/> 
+	<result column="mem_pic" property="memPic"/> 
 </resultMap>
+
 
 <select id="showMoreReview" parameterType="_int" resultMap="reviewResultSet">
 	select 
@@ -21,8 +24,9 @@
 	     , m.nickname
 	     , m.mem_pic
 	  from review r
-	  join member m on(r.mem_no=m.mem_no)
-	 where lesson_no = #{lessonNo} 
+	  join member m 
+	    on(r.mem_no=m.mem_no)
+	 where r.lesson_no = #{lessonNo} 
 	   and r.status = 'Y'
 	 order
 	    by review_no desc

@@ -2,6 +2,8 @@ package com.kh.ee.user.review.model.vo;
 
 import java.sql.Date;
 
+import com.kh.ee.user.member.model.vo.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +25,8 @@ public class Review {
 	private Date enrollDate;
 	private Date modifyDate;
 	private String status; 
+	
+	private String nickname;
+	private String memPic; 
 	
 }

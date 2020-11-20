@@ -11,7 +11,7 @@ import com.kh.ee.user.review.model.vo.Review;
 public class ReviewDao {
 
 	public ArrayList<Review> showMoreReview(int lessonNo, SqlSessionTemplate ss) {
-		
+		//System.out.println("lessonNo:" + lessonNo);
 		return (ArrayList)ss.selectList("reviewMapper.showMoreReview", lessonNo);
 	}
 
