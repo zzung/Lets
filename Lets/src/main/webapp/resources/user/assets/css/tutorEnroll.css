@@ -1,424 +1,57 @@
 @import url("https://fonts.googleapis.com/css?family=Josefin+Sans:400,500,600,700|Roboto:400,500,700|Sen:400,700,800&display=swap");
 
-.tutorEnroll{
+.tutorEnrollForm{
     margin: 5%;
 }
-/* 버튼 */
-.genric-btn.primary {
-    color: #fff;
-    background: #1f2b7b;
-    border: 1px solid transparent;
-  }
-  .genric-btn.primary:hover {
-    color: #1f2b7b;
-    border: 1px solid #1f2b7b;
+.tutorEnroll-list{
+	margin:2%
+}
+.tutorEnroll-list li {
+    position: relative;
+    padding-left: 20px;
+    line-height: 1.9em !important;
+    margin:5px;
+}
+.tutorEnroll-list li:before {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border: 2px solid #1f2b7b;
     background: #fff;
-  }
-  .genric-btn.primary-border {
-    color: #1f2b7b;
-    border: 1px solid #1f2b7b;
-    background: #fff;
-  }
-  .genric-btn.primary-border:hover {
-    color: #fff;
-    background: #1f2b7b;
-    border: 1px solid transparent;
-  }
+    top: 12px;
+    left: 0;
+    border-radius: 50%;
+}
+
+.tutor-textarea {
+    display: block;
+    width: 900px;
+    line-height: 50px;
+    border: none;
+    outline: none;
+    background: #f9f9ff;
+    padding: 0 20px;
+    height: 200px;
+    resize: none;
+}
+
 .genric-btn.radius {
     text-decoration: none;
     border-radius: 3px;
 }
 
 .genric-btn {    
-display: inline-block;
-outline: none;
-line-height: 40px;
-padding: 0 20px;
-font-size: .9em;
-text-align: center;
-text-decoration: none;
-font-weight: 600;
-cursor: pointer;
-}
-
-.plus_btn{
-    border: 0;
-    background-color: rgb(189, 189, 247);
-    height: 35px;
-}
-.plus_btn img{
-    width: 25px;
-}
-#commentForm{
-  width: 90%;
-}
-.row{
-  float: left;
-}
-.curriculum_ex{
-  background-color: #f9f9ff;
-  width: 900px;
-  font-size: 13px;
-}
-
-.class_list{
-    margin: auto;
-    margin-top: 2%;
-    margin-right: 5%;
-    margin-bottom: 5%;
-    width: 100%;
-    height: 70%;
-    border: solid 1px red;
-}
-
-.form-group{
-    margin: auto;
-    margin-bottom: 10px;
-}
-.class_vidio{
-    margin: auto;
-    margin-top: 100px;
-}
-
-.typography h1,
-.typography h2,
-.typography h3,
-.typography h4,
-.typography h5,
-.typography h6 {
-  color: #828bb2;
-}
-
-.mb-30 {
-margin-bottom: 20px;
-margin-left: 20px;
-}
-h1, h2, h3, h4, h5, h6 {
-font-family: "Sen",sans-serif;
-color: #030431;
-margin-top: 0px;
-font-weight: 500;
-line-height: 1.2;
-margin: auto;
-}
-.h3, h3 {
-font-size: 1.75rem;
-}
-.mb-20 {
-    margin-bottom: 20px;
-}
-.h4, h4 {
-    font-size: 1.5rem;
-}
-.h5, h5 {
-    font-size: 1.25rem;
-}
-/* Tip */
-ul {
-margin: 0px;
-padding: 0px;
-display: block;
-list-style-type: disc;
-margin-block-start: 1em;
-margin-block-end: 1em;
-margin-inline-start: 0px;
-margin-inline-end: 0px;
-padding-inline-start: 40px;
-}
-li {
-list-style: none;
-display: list-item;
-}
-.unordered-list li {
-position: relative;
-padding-left: 30px;
-line-height: 1.82em !important;
-}
-.unordered-list li:before {
-content: "";
-position: absolute;
-width: 5px;
-height: 5px;
-border: 2px solid #1f2b7b;
-background: #fff;
-top: 12px;
-left: 0;
-border-radius: 50%;
-}
-
-/* textarea */
-textarea {
-overflow: auto;
-resize: vertical;
-margin-left:2% ;
-font-family: inherit;
-}
-/* 튜터소개(등록) */
-.blog-author {
-padding: 30px 30px;
-background: #fbf9ff;
-margin-top: 50px;
-margin: 0 0 1rem;
-display: block;
-margin-block-start: 1em;
-margin-block-end: 1em;
-margin-inline-start: 40px;
-margin-inline-end: 40px;
-width: 900px;
-}
-.media {
-display: -ms-flexbox;
-display: flex;
--ms-flex-align: start;
-align-items: flex-start;
-}
-.blog-author img {
-width: 100px;
-height: 100px;
-border-radius: 50%;
-margin-right: 30px;
-}   
-.media-body {
-flex: 1;
+    display: inline-block;
+    outline: none;
+    line-height: 40px;
+    padding: 0 20px;
+    font-size: .9em;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
 }
 .top-hr{
-border: solid #1f2b7b;
-}
-.content-hr{
-
-}
-
-.tutor{
-margin: 2%;
-}
-
-.confirm-radio {
-width: 16px;
-height: 16px;
-border-radius: 8px;
-background: #f9f9ff;
-position: relative;
-cursor: pointer;
-}
-
-/* 라디오버튼 */
-.confirm-radio {
-width: 16px;
-height: 16px;
-border-radius: 8px;
-background: #f9f9ff;
-position: relative;
-cursor: pointer;
-}
-.confirm-radio input {
-position: absolute;
-left: 0;
-top: 0;
-right: 0;
-bottom: 0;
-width: 100%;
-height: 100%;
-opacity: 0;
-}
-.confirm-radio input:checked+label {
-background: url(../img/elements/success-radio.png) no-repeat center center/cover;
-border: none;
-}
-input[type=checkbox], input[type=radio] {
-box-sizing: border-box;
-padding: 0;
-}
-
-/* 튜터소개작성창 */
-.single-textarea {
-    display: block;
-    width: 900px;
-    line-height: 40px;
-    border: none;
-    outline: none;
-    background: #f9f9ff;
-    padding: 0 20px;
-    height: 100px;
-    resize: none;
-    margin: 0;
-}
-
-.class1-form{
-    width: 800px;
-    margin: 50px;
-}
-
-.classNum{
-    width: 110px;
-}
-
-.classCon{
-    font-size: small;
-    height: 50px;
-}
-
-th{
-    font-size: 17px;
-}
-
- input[type="radio"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip:rect(0,0,0,0);
-  border: 0;
-}
- input[type="radio"] + label {
-  display: inline-block;
-  position: relative;
-  padding-left: 30px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-input[type="radio"] + label:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: -4px;
-  width: 21px;
-  height: 21px;
-  text-align: center;
-  background: #fafafa;
-  border: 1px solid #cacece;
-  border-radius: 100%;
-  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -10px 10px -12px rgba(0,0,0,0.05);
-}
-
-input[type="radio"]:checked + label:after {
-  content: '';
-  position: absolute;
-  background: #1f2b7b;
-  border-radius: 100%;
-  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
-}
-
-/* radio size */
-input[type="radio"] + label:before {
-top: 4px;
-width: 17px;
-height: 17px;
-}
-input[type="radio"]:checked + label:after {
-left: 3.5px;
-top: 7px;
-width: 11px;
-height: 11px;
-}
-/* 카테고리 */
-.default-select {
-    height: 40px;
-  }
-  .default-select .nice-select {
-    border: none;
-    border-radius: 0px;
-    height: 40px;
-    background: #f9f9ff;
-    padding-left: 20px;
-    padding-right: 40px;
-  }
-  .default-select .nice-select .list {
-    margin-top: 0;
-    border: none;
-    border-radius: 0px;
-    box-shadow: none;
-    width: 100%;
-    padding: 10px 0 10px 0px;
-  }
-  .default-select .nice-select .list .option {
-    font-weight: 300;
-    -webkit-transition: all 0.3s ease 0s;
-    -moz-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
-    line-height: 28px;
-    min-height: 28px;
-    font-size: 12px;
-    padding-left: 20px;
-  }
-  .default-select .nice-select .list .option.selected {
-    color: #1f2b7b;
-    background: transparent;
-  }
-  .default-select .nice-select .list .option:hover {
-    color: #1f2b7b;
-    background: transparent;
-  }
-  .default-select .current {
-    margin-right: 50px;
-    font-weight: 300;
-  }
-  .default-select .nice-select::after {
-    right: 20px;
-  }
-
-  .classNum {
-    width: 100px;
-    height: 30px;
-    font-size: 14px;
-    line-height: 40px;
-    border: none;
-    outline: none;
-    background: #f9f9ff;
-  }
-  .classNum:focus {
-    outline: none;
-  }
-
-.classTitle{
-    width: 800px;
-    line-height: 40px;
-    border: none;
-    outline: none;
-    background: #f9f9ff; 
-}  
-
-.section-top-border {
-    padding: 50px 0;
-    border-top: 1px dotted #eee;
-}
-/* 커리큘럼, faq 등록텍스트 */
-  .comment-form .form-control::placeholder {
-    color: #777777;
-  }
-  .form-contact .form-control {
-  border: 1px solid #e5e6e9;
-  height: 45px;
-  padding-left: 18px;
-  font-size: 13px;
-  background: transparent;
-}
-.form-contact .form-control:focus {
-  outline: 0;
-  box-shadow: none;
-}
-.form-contact .form-control::placeholder {
-  font-weight: 300;
-  color: #999999;
-}
-.generic-blockquote {
-    padding: 30px 50px 30px 30px;
-    background: #f9f9ff;
-    border-left: 2px solid #1f2b7b;
-    width: 850px;
-  }
-
-  #enroll_cul{
-    margin: 0 auto;
-    clear: both;
-  }
-.mt-10{
-  margin: 1%;
-}
-.curriculum_detail{
-  margin: 2%;
+	border: solid #1f2b7b;
 }

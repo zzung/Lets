@@ -28,4 +28,9 @@ public class TutorController {
 	public String myClass() {
 		return "user/tutor/myClassView";
 	}
+	
+	@RequestMapping("tutorEnroll.te")
+	public String insertFormTutor() {
+		return "user/tutor/tutorEnrollForm";
+	}
 }
