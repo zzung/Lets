@@ -69,8 +69,8 @@
 								<!--사이값-->
 								<div class="header-info-right">
 									<ul>
-										<li><a href="#"><i class="ti-user"></i>로그인</a></li>
-										<li><a href="#"><i class="ti-lock"></i>회원가입</a></li>
+										<li><a href="login.me"><i class="ti-user"></i>로그인</a></li>
+										<li><a href="join.me"><i class="ti-lock"></i>회원가입</a></li>
 									</ul>
 								</div>
 							</div>

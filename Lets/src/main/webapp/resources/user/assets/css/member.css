@@ -1,0 +1,518 @@
+@charset "UTF-8";
+/* register-Page */
+.register-wrapper{
+    width: 50%;
+    margin-left: 500px;
+}
+.register-title{ font-size: 30px; font-weight: bolder;}
+.register-list{ font-size: 18px; font-weight: bolder; margin-bottom: 5px;}
+.email-block1{ display: inline-block; vertical-align: middle;}
+.email-block1 input{  display: inline-block; font-size: 15px; width: 180px; height: 38px; vertical-align: middle;}
+.email-block2{ display: inline-block; vertical-align: middle;}
+.email-block2 select{ display: inline-block; vertical-align: middle;}
+#email-block3{  display: inline-block; margin-left: 30px; vertical-align: middle;}
+.email-check{ font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px;}
+.email-checkNum input{ font-size: 15px; width: 330px; height: 38px;}
+.pwd-block1 input{ font-size: 15px; width: 330px; height: 38px; }
+.pwd-check1{ font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px;}
+.pwd-block2 input{ font-size: 15px; width: 330px; height: 38px; }
+.pwd-check2{ font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px; }
+.email-block2 input{display: inline-block; font-size: 15px; height: 38px; vertical-align: middle; width: 100px;}
+.email-number-check{font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px;}
+
+.name-block input{ font-size: 15px; width: 330px; height: 38px; }
+.nickname-block input{ font-size: 15px; width: 330px; height: 38px; }
+.birth-block input{ font-size: 15px; width: 330px; height: 38px; }
+.phone-block input{ font-size: 15px; width: 330px; height: 38px; }
+.address-block1 { display: inline-block;}
+.address-block1 input{ font-size: 15px; width: 180px; height: 38px; display: inline-block; margin-right: 8px; }
+.address-btn { display: inline-block;}
+.address-block2, .address-block3, .address-block4 input{ font-size: 15px; width: 330px; height: 38px; margin-top: 10px; }
+.nickname-check { font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px;}
+.birth-check { font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px;}
+.address-check { font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px;}
+.phone-check { font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px;}
+.gender-block { vertical-align: middle;}
+.gender-block input {vertical-align: middle;}
+input[type='radio'] {
+    -webkit-appearance:none;
+    width:16px;
+    height:16px;
+    border:1px solid darkgray;
+     border-radius:50%;
+    outline:none;
+    background:white;
+  }
+  input[type='radio']:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 20% auto;  
+    border-radius:50%;  
+  }
+  input[type='radio']:checked:before {
+  	background:rgb(46, 48, 146);
+  }
+.register-btn div{width: 330px; height: 45px; margin-top: 15px; font-size: 18px; font-weight: bolder;}
+.register-info { font-size: 12px; font-weight: normal; color: gray; margin-left: 40px;}
+
+/* login-Page */
+.wrapper{width: 100%;}
+.login-content{width: 100%; margin-top: 50px;}
+.login-content1{
+    width: 22%;
+    float: left;
+    margin-left: 200px;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.login-top{
+    width: 50%;
+    font-size: 30px;
+    font-weight: bolder;
+}
+.login-content1 a{color: black; font-size: 12px; margin-top: -30px;}
+.login-content1 input{
+    width: 300px;
+    height:40px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.login-content2{width: 55%; float: left;}
+.login-content2 img{width: 100%; float: left;}
+.login-bottom{width: 40%;}
+.login-bottom div{width: 300px; margin-bottom: 15px;}
+.login-bottom2{font-size: 12px; font-weight: normal; margin-left: -30px;}
+.login-join a{font-size: 14px; font-weight: bold; color: rgb(46, 48, 146);}
+
+/* find_Id_Pwd 1 */
+.find-wrapper{
+  width: 50%;
+  margin-left: 300px;
+}
+.findId-title{ font-size: 28px; font-weight: bolder;margin-left: 80px;}
+.findId-content1{
+   font-size: 13px; 
+   margin-left: 80px; 
+   color: gray;
+   margin-bottom: 10px;
+  }
+.findId-content2{ 
+  margin-left: 70px; 
+  width: 100%;
+  height: 180px;
+  border: 1px solid black;
+}
+.findId-content2 input{width: 250px;}
+.findId-content2 table th{width: 90px;}
+.findId-content2 table { 
+  border-collapse: separate;
+   border-spacing: 0 20px;
+   margin-left: 200px;
+   margin-top: 30px;
+}
+.findId-btn div{ margin-left: 380px; }
+
+/* find_Id_Pwd 2 */
+.findId-content3 table th{width:180px;}
+.findId-content3 table { 
+  border-collapse: separate;
+   border-spacing: 0 20px;
+   margin-left: 220px;
+   margin-top: 60px;
+}
+.findId-content3{ 
+  margin-left: 70px; 
+  width: 100%;
+  height: 180px;
+  border: 1px solid black;
+}
+.findId-content3 td{ font-size: 13px;}
+.findId-btn2{margin-left: 300px;}
+
+/* find_Pwd 1 */
+.findPwd-title{ font-size: 28px; font-weight: bolder;margin-left: 80px;}
+.findPwd-info{font-size: 13px; font-weight: bolder; float: right; margin-right: -60px;}
+.findPwd-content1{
+   font-size: 13px; 
+   margin-left: 80px; 
+   color: gray;
+   margin-bottom: 10px;
+  }
+.findPwd-content2{ 
+  margin-left: 70px; 
+  width: 100%;
+  height: 180px;
+  border: 1px solid black;
+}
+.findPwd-content2 table th{width:100px;}
+.findPwd-content2 input{width: 250px; height: 33px;}
+.findPwd-content2 table { 
+   margin-left: 200px;
+   margin-top: 80px;
+}
+.findPwd-content2{ 
+  margin-left: 70px; 
+  width: 100%;
+  height: 180px;
+  border: 1px solid black;
+}
+.findPwd-content2 td{ font-size: 13px;}
+.findPwd-btn1 div{ margin-left: 400px; }
+
+/* find_Pwd 2 */
+.findPwd-info2{ margin-left: 80px; margin-bottom: 5px;  font-size: 16px; font-weight: bolder;}
+.findPwd-content3{ 
+  margin-left: 70px; 
+  width: 100%;
+  height: 200px;
+  border: 1px solid black;
+}
+.findPwd-content3 table { 
+  border-collapse: separate;
+   border-spacing: 0 20px;
+   margin-left: 150px;
+   margin-top: 30px;
+}
+.findPwd-content3 table th{width:140px;} /* input박스와의 간격*/
+.findPwd-content3 table input{height: 37px;}
+.findPwd-info3{ 
+  font-size: 13px; 
+  margin-left: 80px; 
+  color: gray;
+  margin-top: 10px;
+}
+.findPwd-btn2 div{ margin-left: 400px; }
+
+/* find_Pwd 3 */
+.findPwd-content4{ 
+  margin-left: 70px; 
+  width: 100%;
+  height: 200px;
+  border: 1px solid black;
+}
+.findPwd-content4 table { 
+  border-collapse: separate;
+   border-spacing: 0 20px;
+   margin-left: 200px;
+   margin-top: 65px;
+}
+.findPwd-content4 table th{width:160px;}
+.findPwd-content4 table input{height: 37px;}
+
+/* myPage */
+.wrapper{width: 100%; margin-top: 40px;}
+.myPage-menubar{
+  width: 20%;
+  height: 800px;
+  margin-left: 150px;
+  /* border: 1px solid black; */
+  float: left;
+}
+.myPage-menu1{
+  height: 300px;
+  border: 1px solid black;
+  margin-bottom: 70px;
+}
+.myPage-menu2{
+  height: 430px;
+  border: 1px solid black;
+}
+.myPage-content{
+  width: 50%;
+  height: 100%;
+  float: left;
+  margin-left: 80px;
+}
+.my-cont-title{
+  height: 40px;
+  font-size: 25px;
+  font-weight: bolder;
+  float: left;
+}
+
+.user-pic img{
+  margin-top: 15px;
+  margin-left: 85px;
+  border-radius: 70%;
+
+}
+.user-nickname{
+  font-size: 18px; 
+  font-weight: bolder; 
+  text-align: center;
+  margin-top: 10px;
+}
+.user-info-update a{
+  color: gray;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-left: 115px;
+  cursor: pointer;
+}
+.user-info-update a:hover{color: rgb(46, 48, 146);}
+.menu-list{margin-left: 35px; margin-top: 10px; width: 100%;}
+.menu-list img{
+  width: 50px;
+  height: 50px;
+  border-radius: 70%;
+  cursor: pointer;
+  margin-right: 35px;
+}
+.menu-list-info{
+  font-size: 12px;
+  margin-left: 42px;
+  float: left;
+  margin-top: 7px;
+}
+.menu-list-info div{float: left;}
+.my-cont-1{
+  font-size: 14px;
+   font-weight: bolder;
+   text-align: center;
+   border: 1px solid black;
+   height: 300px;
+}
+
+/* myPage info update Modal */
+.mbody-1-img img{
+  margin-left: 170px;
+  border: 4px solid rgb(46, 48, 146);
+  cursor: pointer;
+  border-radius: 70px;
+  -moz-border-radius: 70px;
+  -khtml-border-radius: 70px;
+  -webkit-border-radius: 70px;
+  width: 130px;
+  height: 130px;
+  background-color:gray;
+}
+.mbody-1{ margin-bottom: 30px; margin-top: 20px;}
+.mbody-2{margin-left: 110px; display: block;}
+.update-list-title{
+  font-size: 15px;
+  font-weight: bolder;
+  margin-top: 8px;
+}
+.update-name-block, .update-pwd-block,
+.update-pwdCheck-block, .update-nickName-block,
+.update-birth-block, .update-address-block1,
+.update-address-block2, .update-address-block3,
+.update-address-block4, .update-phone-block{
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.m-title{font-size: 18px; font-weight: bolder;}
+.update-name-block, .update-pwd-block,
+.update-pwdCheck-block, .update-nickName-block,
+.update-birth-block,
+.update-address-block2, .update-address-block3, 
+.update-address-block4, .update-phone-block input{
+  height: 35px;
+  width: 240px;
+  font-size: 13px;
+}
+.update-address-block2{margin-top: -13px;}
+.update-pwd-check, .update-pwdCheck-check, 
+.update-nickName-check, .update-birth-check,
+.update-address-check, .update-phone-check{
+  margin-bottom: -10px;
+  margin-top: -16px;
+  font-size: 12px;
+  color:  rgb(46, 48, 146);
+}
+.mfoot{margin-right: 120px;}
+.update-address-block1 input{
+   width: 100px;
+   height: 38px; 
+   font-size: 13px;
+   float: left;
+   margin-right: 10px;
+  }
+.update-address-btn{float: left;}
+
+/* myPage_delivery */
+.my-cont-subTitle{
+  margin-left: 20px;
+  font-size: 14px;
+  color: gray;
+  float: left;
+  line-height: 40px;
+}
+.my-cont-title2{
+  width: 20%;
+  height: 40px;
+  font-size: 25px;
+  font-weight: bolder;
+  float: left;
+}
+.my-cont-3{
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+  padding: 60px;
+}
+.delivery-list{
+  border: 1px solid black;
+  width: 100%;
+  height: 200px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+.d-lecture-thumbnail{
+  width: 25%;
+  float: left;
+  height: 100%;
+}
+.d-lecture-thumbnail img{text-align: center;}
+.d-lecture-info{
+  width: 45%;
+  float: left;
+  height: 100%;
+  margin-left: 20px;
+  padding-top: 5px;
+}
+.d-delivery-status{
+  width: 20%;
+  float: left;
+  margin-left: 30px;
+  height: 100%;
+}
+.d-payment-date{
+  height: 20%;
+  font-size: 13px;
+  color: gray;
+}
+.d-lecture-title{
+  height: 60%;
+  font-size: 14px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+.d-lecture-end-date{
+  height: 20%;
+  font-size: 13px;
+  color: rgb(46, 48, 146);
+  font-weight: bolder;
+}
+.d-lecture-status{
+  font-size: 18px;
+  font-weight: bolder;
+  height: 70%;
+  text-align: center;
+  padding-top: 50px;
+  color: rgb(46, 48, 146);
+}
+.d-lecture-btn button{
+  height: 30%;
+  margin-left: 10px;
+}
+.delivery-list:hover{
+  cursor: pointer;
+  background-color:whitesmoke;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+/* myPage_delivery_detailView */
+.my-cont3-detail1{
+  float: left;
+  width: 100%;
+}
+.my-cont3-detail1-title{
+  float: left;
+  width: 85%;
+  font-size: 18px;
+  font-weight: bold;
+}
+.my-cont3-detail1-title2{
+  float: left;
+  width: 15%;
+  font-size: 18px;
+  font-weight: bolder;
+  color: rgb(46, 48, 146);
+}
+.my-cont3-detail2{
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+}
+.my-cont3-detail2-title{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.my-cont3-detail2-cont1{
+  width: 25%;
+  float: left;
+  color: gray;
+  font-weight: bold;
+  font-size: 14px;
+}
+.my-cont3-detail2-cont2{
+  float: left;
+  width: 75%;
+  line-height: 30px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.my-cont3-detail2-cont1{
+  line-height: 30px;
+  color: gray;
+  font-weight: bold;
+  font-size: 14px;
+}
+.my-cont3-detail3{width: 100%;}
+.my-cont3-detail3-cont1{
+  float: left;
+  width: 25%;
+  color: gray;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 30px;
+}
+.my-cont3-detail3-cont2{
+  float: left;
+  width: 70%;
+  text-align: right;
+  font-size: 14px;
+  line-height: 30px;
+}
+
+/* myPage_wishList */
+.my-wishList-content{
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow:auto;
+}
+.my-wishList-cont1{
+  width: 30%;
+  height: 300px;
+  border: 2px solid whitesmoke;
+  float: left;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+.my-wishList-cont1:hover{
+  cursor: pointer;
+  background-color:whitesmoke;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+.my-wishList-img{
+  margin-bottom: 15px;
+  width: 100%;
+}
+.my-wishList-title{
+  font-size: 13px;
+  font-weight: bolder;
+  margin-bottom: 15px;
+  height: 30%;
+}
+.my-wishList-field{
+  height: 40%;
+}
+.my-wishList-likeCount{height: 10%;}
