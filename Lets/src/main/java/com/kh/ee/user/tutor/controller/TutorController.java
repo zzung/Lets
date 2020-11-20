@@ -11,7 +11,7 @@ import com.kh.ee.user.faq.model.service.FaqService;
 import com.kh.ee.user.faq.model.vo.Faq;
 
 @Controller
-public class TutorMainController {
+public class TutorController {
 	@Autowired
 	private FaqService faqService;
 	
