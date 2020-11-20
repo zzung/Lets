@@ -57,6 +57,8 @@
 	      <section class="blog_area single-post-area section-padding">
 	         <div class="container">
 	            <div class="row">
+                 	<!-- value 나중에 수정해야 함. -->
+                 	<input type="hidden" name="lessonNo" value="1">
 	               <div class="col-lg-8 posts-list">
 	                  <div class="single-post">
 	                     <div class="feature-img">
@@ -167,7 +169,7 @@
 	                  <!--?리뷰 area-->
 	                  <div class="comments-area">
 	                     <div class="text-right">
-	                        <a href="showMore.rev"><i class="fas fa-plus"> 더보기</i></a>
+	                        <i class="fas fa-plus" id="showMore"> 더보기</i>
 	                     </div>
 	                     <div class="container">
 	                        <h4>리뷰 2</h4>
@@ -216,6 +218,13 @@
 	                     </div>
 	                  </div>
 	                  <!--? end 리뷰 area-->
+	                  <script>
+	                  	$(function(){
+	                  		$("#showMore").click(function(){
+	                  			location.href="showMore.rev?lessonNo=1";
+	                  		})
+	                  	})
+	                  </script>
 	                  <!--?댓글area-->
 	                  <div class="comments-area">
 	                     <h4>커뮤니티 3</h4>

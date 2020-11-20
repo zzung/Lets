@@ -13,7 +13,7 @@
 	<result column="status" property="status"/> 
 </resultMap>
 
-<select id="showMoreReview" resultMap="reviewResultSet">
+<select id="showMoreReview" parameterType="_int" resultMap="reviewResultSet">
 	select 
 	       r.star
 	     , r.review_content
@@ -22,7 +22,7 @@
 	     , m.mem_pic
 	  from review r
 	  join member m on(r.mem_no=m.mem_no)
-	 where lesson_no = 1 
+	 where lesson_no = #{lessonNo} 
 	   and r.status = 'Y'
 	 order
 	    by review_no desc

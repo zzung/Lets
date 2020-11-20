@@ -60,7 +60,7 @@
 	                           <div class="user justify-content-between d-flex">
                     			<c:forEach var="review" items="${list }"> 
 	                              <div class="thumb">
-	                                 <img src="${review.memPic }" alt="">
+	                                 <img src="resources/user/assets/img/comment/cat1.jpg" alt="">
 	                              </div>
 	                              <div class="desc">
 	                                 <p class="comment">

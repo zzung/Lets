@@ -21,9 +21,9 @@ public class ReviewServiceImpl implements ReviewService{
 	private ReviewDao revDao;
 
 	@Override
-	public ArrayList<Review> showMoreReview() {
+	public ArrayList<Review> showMoreReview(int lessonNo) {
 	
-		return revDao.showMoreReview(ss);
+		return revDao.showMoreReview(lessonNo,ss);
 	}
 
 	@Override

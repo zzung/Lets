@@ -10,9 +10,9 @@ import com.kh.ee.user.review.model.vo.Review;
 @Repository
 public class ReviewDao {
 
-	public ArrayList<Review> showMoreReview(SqlSessionTemplate ss) {
+	public ArrayList<Review> showMoreReview(int lessonNo, SqlSessionTemplate ss) {
 		
-		return (ArrayList)ss.selectList("reviewMapper.showMoreReview");
+		return (ArrayList)ss.selectList("reviewMapper.showMoreReview", lessonNo);
 	}
 
 	public int deleteReview(int reviewNo, SqlSessionTemplate ss) {

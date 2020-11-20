@@ -20,8 +20,8 @@ public class ReviewController {
 	
 	//후기 더보기 플러스 버튼 클릭시 적용
 	@RequestMapping("showMore.rev")
-	public String showMoreReview(HttpSession session, Model model) {
-		ArrayList<Review> list = revService.showMoreReview(); 
+	public String showMoreReview(int lessonNo, HttpSession session, Model model) {
+		ArrayList<Review> list = revService.showMoreReview(lessonNo); 
 		
 		model.addAttribute("list",list);
 		
