@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ee.user.faq.model.service.FaqService;
 import com.kh.ee.user.faq.model.vo.Faq;
+import com.kh.ee.user.lesson.model.service.LessonService;
+import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.tutor.model.service.TutorService;
 import com.kh.ee.user.tutor.model.vo.Tutor;
 
@@ -19,6 +21,8 @@ import com.kh.ee.user.tutor.model.vo.Tutor;
 public class TutorController {
 	@Autowired
 	private FaqService faqService;
+	@Autowired
+	private LessonService lessonService;
 	
 	@Autowired
 	private TutorService tutorService;
@@ -32,8 +36,21 @@ public class TutorController {
 		return "user/tutor/tutorMainView";
 	}
 	
-	@RequestMapping("myClass.tm")
-	public String myClass() {
+	@RequestMapping("tutorMyLesson.tm")
+	public String tutorMyLesson(Lesson l, Model model) {
+		
+		ArrayList<Lesson> aLlist = lessonService.selectApproveLessonList(l);
+		/*
+		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList(l);
+		ArrayList<Lesson> pLlist = lessonService.selectPrepareList(l);
+		*/
+		
+		model.addAttribute("aLlist", aLlist);
+		System.out.println(aLlist);
+		//model.addAttribute("sLlist", sLlist);
+		//model.addAttribute("pLlist", pLlist);
+		
+		
 		return "user/tutor/myClassView";
 	}
 	
@@ -56,6 +73,5 @@ public class TutorController {
 		}
 		
 	}
-	
-	
+
 }

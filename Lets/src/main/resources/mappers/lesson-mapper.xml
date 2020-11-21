@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lessonMapper">
+	
+<resultMap id="lessonResultSet" type="Lesson">
+	<id column="lesson_no" property="lessonNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="lesson_form" property="lessonForm" />
+	<result column="lesson_type" property="lessonType" />
+	<result column="lesson_group" property="lessonGroup" />
+	<result column="lesson_category" property="lessonCategory" />
+	<result column="lesson_title" property="lessonTitle" />
+	<result column="lesson_cover_img" property="lessonCoverImg" />
+	<result column="lesson_instr" property="lessonInstr" jdbcType="CLOB" javaType="java.lang.String" />
+	<result column="lesson_cont_no" property="lessonContNo" />
+	<result column="lesson_prepare" property="lessonPrepare" />
+	<result column="lesson_target" property="lessonTarget" />
+	<result column="like_count" property="likeCount" />
+	<result column="lesson_status" property="lessonStatus" />
+	<result column="status_hold" property="statusHold" />
+	<result column="h_reason" property="hReason" />
+	<result column="r_reason" property="rReason" />
+	<result column="price" property="price" />
+	<result column="time" property="time" />
+	<result column="total_count" property="totalCount" />
+	<result column="period" property="period" />
+	<result column="disc_status" property="discStatus" />
+	<result column="discount_period" property="discountPeriod" />
+	<result column="discount" property="discount" />
+	<result column="pay_total" property="payTotal" />
+	<result column="status" property="status" />
+</resultMap>
+
+<select id="selectApproveLessonList" resultMap="lessonResultSet" >
+	select
+	       lesson_no
+	     , lesson_title
+	     , lesson_type
+	  from lesson
+	 where status='Y'
+</select>
+
+
+	
+</mapper>

@@ -6,5 +6,5 @@ import com.kh.ee.user.faq.model.vo.Faq;
 
 public interface FaqService {
 
-	public ArrayList<Faq> selectTutorFaqList(Faq f);
+	ArrayList<Faq> selectTutorFaqList(Faq f);
 }
