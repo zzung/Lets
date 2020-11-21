@@ -44,7 +44,7 @@
 			<li><a href="inqueryManagement.ad">1:1 문의</a></li>
 			<li><a href="reportManagement.ad">신고관리</a></li>
 			<li><a href="noticeManagement.ad">공지사항</a></li>
-			<li><a href="faqManagement">FAQ</a></li>
+			<li><a href="faqManagement.ad">FAQ</a></li>
 		</ul>
 	</nav>
 	</aside>

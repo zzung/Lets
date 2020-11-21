@@ -46,4 +46,10 @@ public class AdminController {
 		return "admin/noticeManagementView";
 	}
 
+	@RequestMapping("faqManagement.ad")
+	public String faqManagement(){
+		return "admin/faqManagementView";
+	}
+	
+	
 }
