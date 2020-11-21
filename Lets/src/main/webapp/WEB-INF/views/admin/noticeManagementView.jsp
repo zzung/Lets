@@ -51,114 +51,195 @@
 							<td>Y</td>
 							<td>회원</td>
 							<td>
-							
-							[서비스 개편 사항] 메인페이지에서 새로 생긴 클래스를 확인할 수 있습니다.
-							
+								<a href="#" data-toggle="modal" data-target="#detailNotice">
+								[서비스 개편 사항] 메인페이지에서 새로 생긴 클래스를 확인할 수 있습니다.
+								</a>
 							</td>
 							<td>2020-10-30</td>
 							<td>N</td>
 						</tr>
 					</table>
 					
-					<!-- Modal Start -->
+					
+<!------------------------------------------------------ 공지 작성 모달&스크립트 ------------------------------------------------------>
+
+					<!-- 공지 작성 Modal Start -->
 					<div class="modal" id="writeNotice">
 						<div class="modal-dialog">
 
 							<!-- Modal content -->
-							<div class="modal-content" align="center" style="width: 700px; ">
+							<div class="modal-content" align="center" style="width: 900px; ">
 								<div class="modal-header" >
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<h3 class="modal-title" style="text-align:center">공지사항 등록</h3>
 								</div>
 								
-								<div class="modal-body" align="center" style="width:600px;">
+								<div class="modal-body" align="center" style="width:800px;">
 									<!-- 공지 등록 form start -->
 									<form action="">
-										<table>
-											<tr>
-												<td>
-													<select name="condition" style="width:100px; height: 30px; margin-right:10px;">
-														<option>회원</option>
-														<option>튜터</option>
-													</select>
-												</td>
-												<td>
-													<input type="text" style="width:400px;">
-												</td>
-											</tr>
-											<tr>
-												<td colspan="2" align="left">
-													<input type="checkbox">중요 공지 등록
-												</td>
-												
-											</tr>
-											
-											<tr>
-												<td colspan="2" align="center">
-													<textarea style="resize:none; width:510px; height:400px;"></textarea>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<button onclick="prev();" id="blacklistApplyBtn"
-													class="btn btn-default">이전</button>
-												</td>
-												<td>
-													<button onclick="noticeEnroll();" id="deleteReplyBtn"
-													class="btn btn-default">등록</button>
-												</td>
-											</tr>
-										</table>
-										
+										<div style="height:36px;">
+											<select name="condition" style="width:100px; height:30px;">
+												<option>회원</option>
+												<option>튜터</option>
+											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="text" style="width:640px;" placeholder="제목을 입력하세요.">
+										</div>
+										<div align="left" style="width:800px; height:30px;">
+											<input type="checkbox" name="status" id="importantNotice" value="R">
+											<label for="importantNotice">중요 공지 등록</label>
+										</div>
+										<div>
+											<textarea style="resize:none; width:770px; height:500px;" placeholder="내용을 입력하세요."></textarea>
+										</div>
+										<br>
+										<div align="left" style="width:800px; height:40px;">
+											<span>첨부파일 :</span>
+											<span><input type="text"></span>
+											<button onclick="noticeApply();" id=""
+													class="btn btn-default">파일찾기</button>
+										</div>
+										<br>
+										<div>
+											<span>
+												<button onclick="noticeApply();" id="noticeApplyBtn"
+												class="btn btn-default">등록</button>
+											</span>
+										</div>
 									</form>
-									
-									
+								</div>	
+							</div>
+						</div>
+					</div>
+					<!-- 공지 작성 Modal End -->
+					
+					<!-- 공지사항 등록 확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
+					<script>
+						function noticeApply() {
+							var num = 1;
+							var result = confirm("공지사항을 등록 하시겠습니까??");
+
+							if (result) {
+								var str = "등록"
+								document.getElementById("noticeApplyBtn").disabled = true;
+							} else {
+								return;
+							}
+
+							var noticeCondition = document
+									.getElementById("noticeCondition" + num)
+							blacklistCondition.innerHTML = "<p>" + str + "</p>"
+						}
+					</script>
+					<!-- 공지사항 등록 확인 끝 -->
+					
+					
+<!------------------------------------------------------ 공지 등록 ------------------------------------------------------>
+					
+					
+					
+					<!-- 공지 내용 Modal Start -->
+					<div class="modal" id="detailNotice">
+						<div class="modal-dialog">
+
+							<!-- Modal content -->
+							<div class="modal-content" align="center" style="width: 900px; ">
+								<div class="modal-header" >
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h3 class="modal-title" style="text-align:center">공지사항 수정</h3>
+								</div>
+								
+								<div class="modal-body" align="center" style="width:800px;">
+									<!--  form start -->
+									<form action="">
+										<div style="height:36px;">
+											<select name="condition" style="width:100px; height:30px;">
+												<option>회원</option>
+												<option>튜터</option>
+											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="text" style="width:640px;" placeholder="제목을 입력하세요.">
+										</div>
+										<div align="left" style="width:800px; height:30px;">
+											<input type="checkbox" name="status" id="importantNotice" value="R">
+											<label for="importantNotice">중요 공지 등록</label>
+										</div>
+										<div>
+											<textarea style="resize:none; width:770px; height:500px;" placeholder="내용을 입력하세요."></textarea>
+										</div>
+										<br>
+										<div align="left" style="width:800px; height:40px;">
+											<span>첨부파일 :</span>
+											<span><input type="text"></span>
+											<button onclick="noticeApply();" id=""
+													class="btn btn-default">파일찾기</button>
+										</div>
+										<br>
+										<div>
+											<span>
+												<button onclick="noticeModify();" id="noticeModifyBtn"
+												class="btn btn-default">수정</button>
+											</span>
+										</div>
+									</form>
 									
 								</div>	
 							</div>
 						</div>
 					</div>
-					<!--Modal End-->
+					<!-- 공지 내용 Modal End -->
 					
-					<!-- 블랙등록 확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
-					<script>
-						function applyBlacklist() {
-							var num = 1;
-							var result = confirm("블랙상태로 등록 하시겠습니까??");
-
-							if (result) {
-								var str = "등록"
-								document.getElementById("blacklistApplyBtn").disabled = true;
-							} else {
-								return;
-							}
-
-							var blacklistCondition = document
-									.getElementById("blacklistCondition" + num)
-							blacklistCondition.innerHTML = "<p>" + str + "</p>"
-						}
-					</script>
-					<!-- 블랙등록 확인 끝 -->
 					
-					<!--  확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
-					<script>
-						function deleteReply() {
-							var num = 1;
-							var result = confirm("신고 댓글을 삭제하시겠습니까??");
+					<!-- 공지 수정 Modal Start -->
+					<div class="modal" id="ModifyNotice">
+						<div class="modal-dialog">
 
-							if (result) {
-								var str = "삭제"
-								document.getElementById("deleteReply").disabled = true;
-							} else {
-								return;
-							}
-
-							var replyCondition = document
-									.getElementById("replyCondition" + num)
-							replyCondition.innerHTML = "<p>" + str + "</p>"
-						}
-					</script>
-					<!-- 확인 끝 -->
+							<!-- Modal content -->
+							<div class="modal-content" align="center" style="width: 900px; ">
+								<div class="modal-header" >
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h3 class="modal-title" style="text-align:center">공지사항 수정</h3>
+								</div>
+								<div class="modal-body" align="center" style="width:800px;">
+									<form action="">
+										<div style="height:36px;">
+											<select name="condition" style="width:100px; height:30px;">
+												<option>회원</option>
+												<option>튜터</option>
+											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="text" style="width:640px;" placeholder="제목을 입력하세요.">
+										</div>
+										<div align="left" style="width:800px; height:30px;">
+											<input type="checkbox" name="status" id="importantNotice" value="R">
+											<label for="importantNotice">중요 공지 등록</label>
+										</div>
+										<div>
+											<textarea style="resize:none; width:770px; height:500px;" placeholder="내용을 입력하세요."></textarea>
+										</div>
+										<br>
+										<div align="left" style="width:800px; height:40px;">
+											<span>첨부파일 :</span>
+											<span><input type="text"></span>
+											<button onclick="noticeApply();" id=""
+													class="btn btn-default">파일찾기</button>
+										</div>
+										<br>
+										<div>
+											<span>
+												<button onclick="noticeModify();" id="noticeModifyBtn"
+												class="btn btn-default">수정</button>
+											</span>
+										</div>
+									</form>
+								</div>	
+							</div>
+						</div>
+					</div>
+					<!-- 공지 수정 Modal End -->
+					
+					
+					
+					
+					
+					
 					
 					
 					<div class="" align="center">
