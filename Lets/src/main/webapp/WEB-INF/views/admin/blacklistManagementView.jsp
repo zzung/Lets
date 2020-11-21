@@ -22,7 +22,7 @@
 				</div>
 				
 				<!-- 중단 ( 컨텐츠 ) -->
-				<div class="welcome" align="center" style="width:800px;">
+				<div class="welcome" align="center" style="width:1030px;">
 					<div align="right">
 						<form action="">
 							<select name="condition" style="height: 30px;">
@@ -34,7 +34,7 @@
 						</form>
 					</div>
 					<br>
-					<table class="list-area">
+					<table class="list-area" style="width:1030px;">
 						<tr>
 							<th width="50px" height="40px">번호</th>
 							<th width="150px">닉네임</th>

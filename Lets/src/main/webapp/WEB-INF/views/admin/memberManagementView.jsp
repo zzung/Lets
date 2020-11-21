@@ -16,7 +16,7 @@
 					<h1>회원 관리</h1>
 				</div>
 				
-				<div class="welcome" align="center" style="width:800px;">
+				<div class="welcome" align="center" style="width:1030px;">
 					<div align="right">
 						<form action="">
 							<select name="condition" style="height: 30px;">
@@ -29,7 +29,7 @@
 						</form>
 					</div>
 					<br>
-					<table class="list-area">
+					<table class="list-area" style="width:1030px;">
 						<tr>
 							<th width="50px" height="40px">번호</th>
 							<th width="80px">회원 분류</th>

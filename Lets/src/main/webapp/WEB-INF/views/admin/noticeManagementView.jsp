@@ -16,19 +16,18 @@
 					<h1>공지사항 관리</h1>
 				</div>
 				
-				<div class="welcome" align="center" style="width:800px;">
+				<div class="welcome" align="center" style="width:1030px;">
 					<!-- 검색 div start -->
 					<div>
 						<div style="width:200px; float:left; text-align:left;">
 							<button type="button" data-toggle="modal"
-									data-target="#writeNotice1" class="btn btn-default">공지 작성</button>
+									data-target="#writeNotice" class="btn btn-default">공지 작성</button>
 						</div>
 						<div align="right">
 							<form action="">
 								<select name="condition" style="height: 30px;">
-									<option value="writer">이름</option>
-									<option value="title">닉네임</option>
-									<option value="content">이메일</option>
+									<option value="title">제목</option>
+									<option value="type">분류</option>
 								</select>
 								<input type="text" name="keyword">
 								<button type="submit" class="btn btn-default">검색</button>
@@ -38,7 +37,7 @@
 					<!-- 검색 div end -->
 					<br>
 					
-					<table class="list-area">
+					<table class="list-area" style="width:1030px;">
 						<tr>
 							<th width="50px" height="40px">번호</th>
 							<th width="90px">중요공지</th>
@@ -62,56 +61,58 @@
 					</table>
 					
 					<!-- Modal Start -->
-					<div class="modal" id="writeNotice1">
+					<div class="modal" id="writeNotice">
 						<div class="modal-dialog">
 
 							<!-- Modal content -->
-							<div class="modal-content" align="left" style="width: 600px; ">
+							<div class="modal-content" align="center" style="width: 700px; ">
 								<div class="modal-header" >
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h3 class="modal-title" style="text-align:center">신고내역 상세조회</h3>
+									<h3 class="modal-title" style="text-align:center">공지사항 등록</h3>
 								</div>
-								<div class="modal-body" align="center">
-									
-									<table class="list-area" width=500px;>
-										<tr>
-											<th>작성자</th>
-											<th>신고횟수</th>
-										</tr>
-										<tr>
-											<td>닉네임1</td>
-											<td>5</td>
-										</tr>
-									</table>
-									<br>
-									
-									<div align="center" style="width:500px">
-										<div style="text-align:left">작성일:2020-09-30</div>
-										<div style="width:500px; height: 80px; border:solid 1px; text-align:left;">
-										이 아기 멍멍아
-										</div>
-									</div>
-									<hr>
-									
-									<table class="list-area" width=500px;>
-										<tr>
-											<th>신고자</th>
-											<th>신고일</th>
-											<th>신고사유</th>
+								
+								<div class="modal-body" align="center" style="width:600px;">
+									<!-- 공지 등록 form start -->
+									<form action="">
+										<table>
+											<tr>
+												<td>
+													<select name="condition" style="width:100px; height: 30px; margin-right:10px;">
+														<option>회원</option>
+														<option>튜터</option>
+													</select>
+												</td>
+												<td>
+													<input type="text" style="width:400px;">
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2" align="left">
+													<input type="checkbox">중요 공지 등록
+												</td>
+												
+											</tr>
 											
-										</tr>
-										<tr>
-											<td>닉네임07</td>
-											<td>2020-10-02</td>
-											<td>욕설</td>
-										</tr>
-									</table>
-									<br>
+											<tr>
+												<td colspan="2" align="center">
+													<textarea style="resize:none; width:510px; height:400px;"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<button onclick="prev();" id="blacklistApplyBtn"
+													class="btn btn-default">이전</button>
+												</td>
+												<td>
+													<button onclick="noticeEnroll();" id="deleteReplyBtn"
+													class="btn btn-default">등록</button>
+												</td>
+											</tr>
+										</table>
+										
+									</form>
 									
-									<button onclick="applyBlacklist();" id="blacklistApplyBtn"
-									class="btn btn-default">블랙등록</button>
-									<button onclick="deleteReply();" id="deleteReplyBtn"
-									class="btn btn-default">댓글 삭제</button>
+									
 									
 								</div>	
 							</div>

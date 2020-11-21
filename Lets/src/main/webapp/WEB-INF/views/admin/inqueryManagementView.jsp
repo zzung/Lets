@@ -16,7 +16,7 @@
 					<h1>1:1 문의</h1>
 				</div>
 				
-				<div class="welcome" align="center" style="width:800px;">
+				<div class="welcome" align="center" style="width:1030px;">
 					<!-- 검색 div start -->
 					<div>
 						<div style="width:200px; float:left;">
@@ -36,7 +36,7 @@
 					</div>
 					<!-- 검색 div end -->
 					<br>
-					<table class="list-area">
+					<table class="list-area" style="width:1030px;">
 						<tr>
 							<th width="50px" height="40px">번호</th>
 							<th width="150px">닉네임</th>
