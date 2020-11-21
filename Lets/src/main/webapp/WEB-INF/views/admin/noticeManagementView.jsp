@@ -61,7 +61,7 @@
 					</table>
 					
 					
-<!------------------------------------------------------ 공지 작성 모달&스크립트 ------------------------------------------------------>
+<!------------------------------------------------------ 공지 작성 모달&스크립트 시작 ------------------------------------------------------>
 
 					<!-- 공지 작성 Modal Start -->
 					<div class="modal" id="writeNotice">
@@ -95,11 +95,15 @@
 										<div align="left" style="width:800px; height:40px;">
 											<span>첨부파일 :</span>
 											<span><input type="text"></span>
-											<button onclick="noticeApply();" id=""
+											<button onclick="findFile();" id=""
 													class="btn btn-default">파일찾기</button>
 										</div>
 										<br>
 										<div>
+											<span>
+												<button onclick="noticeReset();" id="noticeResetBtn"
+												class="btn btn-default">이전</button>
+											</span>
 											<span>
 												<button onclick="noticeApply();" id="noticeApplyBtn"
 												class="btn btn-default">등록</button>
@@ -132,11 +136,33 @@
 					</script>
 					<!-- 공지사항 등록 확인 끝 -->
 					
+					<!-- 공지사항 리셋 확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
+					<script>
+						function noticeReset() {
+							var num = 1;
+							var result = confirm("공지사항을 리셋 하시겠습니까??");
+
+							if (result) {
+								var str = "리셋"
+								document.getElementById("noticeResetBtn").disabled = true;
+							} else {
+								return;
+							}
+
+							var noticeCondition = document
+									.getElementById("noticeCondition" + num)
+							blacklistCondition.innerHTML = "<p>" + str + "</p>"
+						}
+					</script>
+					<!-- 공지사항 리셋 확인 끝 -->
 					
-<!------------------------------------------------------ 공지 등록 ------------------------------------------------------>
+					
+<!------------------------------------------------------ 공지 작성 모달&스크립트 끝 ------------------------------------------------------>
 					
 					
 					
+					
+<!------------------------------------------------------ 공지 내용 모달&스크립트 시작 ------------------------------------------------------>
 					<!-- 공지 내용 Modal Start -->
 					<div class="modal" id="detailNotice">
 						<div class="modal-dialog">
@@ -175,6 +201,10 @@
 										<br>
 										<div>
 											<span>
+												<button onclick="noticeApply();" id="noticeApplyBtn"
+												class="btn btn-default">이전</button>
+											</span>
+											<span>
 												<button onclick="noticeModify();" id="noticeModifyBtn"
 												class="btn btn-default">수정</button>
 											</span>
@@ -186,7 +216,12 @@
 						</div>
 					</div>
 					<!-- 공지 내용 Modal End -->
+<!------------------------------------------------------ 공지 내용 모달&스크립트 종료 ------------------------------------------------------>
 					
+					
+					
+					
+<!------------------------------------------------------ 공지 수정 모달&스크립트 시작 ------------------------------------------------------>					
 					
 					<!-- 공지 수정 Modal Start -->
 					<div class="modal" id="ModifyNotice">
@@ -234,6 +269,7 @@
 						</div>
 					</div>
 					<!-- 공지 수정 Modal End -->
+<!------------------------------------------------------ 공지 내용 모달&스크립트 종료 ------------------------------------------------------>
 					
 					
 					
