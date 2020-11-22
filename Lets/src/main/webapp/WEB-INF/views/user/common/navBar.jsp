@@ -68,10 +68,31 @@
 								</div>
 								<!--사이값-->
 								<div class="header-info-right">
-									<ul>
-										<li><a href="login.me"><i class="ti-user"></i>로그인</a></li>
-										<li><a href="join.me"><i class="ti-lock"></i>회원가입</a></li>
-									</ul>
+									<c:choose>
+			                              <c:when test="${empty loginUser}">
+			                                 <ul>
+			                                    <li><a href="login.me"><i class="ti-user"></i>로그인</a></li>
+			                                    <li><a href="join.me"><i class="ti-lock"></i>회원가입</a></li>
+			                                 </ul>
+			                              </c:when>
+			                              <c:otherwise>
+			                                      <ul>    
+			                                          <li><a href="#">튜터 센터</a></li>
+			                                          <li><a href="#">내 클래스</a></li>
+			                                          <li>
+			                                              <div class="after-login-dropdown">
+			                                                  <img src="resources/user/assets/img/member/man.png" width="35px" height="35px">
+			                                                  <ul class="after-login-dropdown-content">
+			                                                      <li><a href="#">마이페이지</a></li>
+			                                                      <li style="margin-top: -10px;"><a href="#">로그아웃</a></li>
+			                                                  </ul>
+			                                              </div>
+			                                          </li>
+			                                          <li style="color: #2d3092; font-weight: bolder; margin-left: 10px;">유저1 님</li>
+			                                      </ul>
+			                              </c:otherwise>
+		                           </c:choose>
+
 								</div>
 							</div>
 						</div>
