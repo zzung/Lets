@@ -6,9 +6,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SupportController {
 
-	@RequestMapping("support.su")
-	public String supportList() {
-		return "user/support/supportListView";
+	@RequestMapping("supportNotice.su")
+	public String supportNotice() {
+		return "user/support/supportNotice";
 	}
+	
+	@RequestMapping("supportNoticeDetail.su")
+	public String supportNoticeDetail() {
+		return "user/support/supportNoticeDetail";
+	}
+	
+	@RequestMapping("supportFaq.su")
+	public String supportFaq() {
+		return "user/support/supportFaq";
+	}
+	
+	@RequestMapping("supportFaqDetail.su")
+	public String supportFaqDetail() {
+		return "user/support/supportFaqDetail";
+	}
+	
+	
+	@RequestMapping("supportInq.su")
+	public String supportInq() {
+		return "user/support/supportInq";
+	}
+	
+	@RequestMapping("supportInqDetail.su")
+	public String supportInqDetail() {
+		return "user/support/supportInqDetail";
+	}
+	
+	@RequestMapping("supportInqWrite.su")
+	public String supportInqWrite() {
+		return "user/support/supportInqWrite";
+	}
+	
+	@RequestMapping("supportInqUpdate.su")
+	public String supportInqUpdate() {
+		return "user/support/supportInqUpdate";
+	}
+	
 	
 }

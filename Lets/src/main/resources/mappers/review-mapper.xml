@@ -6,7 +6,7 @@
 	<id column="review_no" property="reviewNo" />
 	<result column="lesson_no" property="lessonNo" />
 	<result column="mem_no" property="memNo" />
-	<result column="start" property="star" />
+	<result column="star" property="star" />
 	<result column="review_content" property="reviewContent"/>
 	<result column="enroll_date" property="enrollDate"/>
 	<result column="modify_date" property="modifiyDate"/>
@@ -16,9 +16,10 @@
 </resultMap>
 
 
-<select id="showMoreReview" parameterType="_int" resultMap="reviewResultSet">
+<select id="selectReviewList" parameterType="_int" resultMap="reviewResultSet">
 	select 
-	       r.star
+		   r.review_no
+	     , r.star
 	     , r.review_content
 	     , r.enroll_date
 	     , m.nickname
@@ -34,10 +35,30 @@
 
 <update id="deleteReview" parameterType="_int">
 	update
-        review
-   set
-        status='N'
-      , modify_date = SYSDATE
- where  review_no = #{reviewNo}
+	        review
+	   set
+	        status='N'
+	      , modify_date = SYSDATE
+	 where review_no = #{reviewNo}
 </update>
+
+<insert id="insertReview" parameterType="Review">
+	insert
+	  into review
+	    (
+	       review_no
+	     , lesson_no
+	     , mem_no
+	     , star
+	     , review_content
+	    )
+	    values
+	    (
+	      seq_rev_no.nextval
+	    , #{lessonNo}
+	    , #{memNo}
+	    , #{star}
+	    , #{reviewContent}
+	    )
+</insert>
 </mapper>
