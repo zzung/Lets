@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>신고 관리</title>
 </head>
 <body>
 	<jsp:include page="adminNav.jsp" />

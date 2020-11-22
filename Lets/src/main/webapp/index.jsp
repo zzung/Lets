@@ -8,10 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:forward page="WEB-INF/views/mainPage.jsp" />
+	<!-- main -->
+	<jsp:forward page="WEB-INF/views/mainPage.jsp"/>
 	
-	<!-- aside_nav -->
-	<!--<jsp:forward page="WEB-INF/views/admin/memberManagementView.jsp"/>-->
+	<!-- admin -->
+	<jsp:forward page="WEB-INF/views/admin/memberManagementView.jsp"/>
+	
 	
 </body>
 </html>

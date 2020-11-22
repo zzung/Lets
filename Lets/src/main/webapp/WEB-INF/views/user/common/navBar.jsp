@@ -80,7 +80,7 @@
 				<div class="header-bottom header-sticky">
 					<!-- Logo -->
 					<div class="logo d-none d-lg-block">
-						<a href="mainPage.html"><img src="resources/user/assets/img/logo/logo.png"
+						<a href="kids.le"><img src="resources/user/assets/img/logo/logo.png"
 							alt="" style="width: 215px; height: 70px"></a>
 					</div>
 					<div class="container">

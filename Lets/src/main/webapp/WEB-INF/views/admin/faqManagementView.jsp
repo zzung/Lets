@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>FAQ 관리</title>
 </head>
 <body>
 	<jsp:include page="adminNav.jsp" />
@@ -13,7 +13,7 @@
 		<div class="main-content">
 			<section id="reportManagement">
 				<div class="content-header">
-					<h1>공지사항 관리</h1>
+					<h1>FAQ 관리</h1>
 				</div>
 				
 				<div class="welcome" align="center" style="width:1030px;">
@@ -21,13 +21,14 @@
 					<div>
 						<div style="width:200px; float:left; text-align:left;">
 							<button type="button" data-toggle="modal"
-									data-target="#writeNotice" class="btn btn-default">공지 작성</button>
+									data-target="#writeFaq" class="btn btn-default">FAQ 작성</button>
 						</div>
 						<div align="right">
 							<form action="">
 								<select name="condition" style="height: 30px;">
 									<option value="title">제목</option>
 									<option value="type">분류</option>
+									<option value="type">유형</option>
 								</select>
 								<input type="text" name="keyword">
 								<button type="submit" class="btn btn-default">검색</button>
@@ -40,21 +41,89 @@
 					<table class="list-area" style="width:1030px;">
 						<tr>
 							<th width="50px" height="40px">번호</th>
-							<th width="90px">중요공지</th>
 							<th width="90px">분류</th>
-							<th width="500px">공지제목</th>
+							<th width="90px">유형</th>
+							<th width="500px">제목</th>
 							<th width="120px">작성일</th>
 							<th width="120px">삭제여부</th>
 						</tr>
 						<tr>
 							<td height="40px">1</td>
-							<td>Y</td>
 							<td>회원</td>
-							<td><!-- 작성된 공지 페이지로 이동 / 공지내용에서 관리자 일시 수정 버튼 클릭 생성 후 수정 가능 -->
-								<a href="작성된 공지 페이지로 이동">
-								[서비스 개편 사항] 메인페이지에서 새로 생긴 클래스를 확인할 수 있습니다.
-								</a>
-							</td>
+							<td>회원</td>
+							<td>회원가입을 하면 할수 있는 것들은 무엇인가요?</td>
+							<td>2020-10-30</td>
+							<td>N</td>
+						</tr>
+						<tr>
+							<td height="40px">2</td>
+							<td>회원</td>
+							<td>클래스</td>
+							<td>회원은 클래스를 어떻게 신청하나요?</td>
+							<td>2020-10-30</td>
+							<td>N</td>
+						</tr>
+						<tr>
+							<td height="40px">3</td>
+							<td>회원</td>
+							<td>결제</td>
+							<td>클래스 결제 방법이 어떻게 되나요?</td>
+							<td>2020-10-30</td>
+							<td>N</td>
+						</tr>
+						<tr>
+							<td height="40px">4</td>
+							<td>회원</td>
+							<td>시스템</td>
+							<td>자기소개작성은 어떻게 하나요?</td>
+							<td>2020-10-30</td>
+							<td>N</td>
+						</tr>
+						<tr>
+							<td height="40px">5</td>
+							<td>회원</td>
+							<td>기타</td>
+							<td>배송확인은 어디서 하나요?</td>
+							<td>2020-10-30</td>
+							<td>N</td>
+						</tr>
+						<tr>
+							<td height="40px">6</td>
+							<td>튜터</td>
+							<td>회원</td>
+							<td>클래스를 수강중인 회원은 어디서 확인하나요?</td>
+							<td>2020-10-30</td>
+							<td>N</td>
+						</tr>
+						<tr>
+							<td height="40px">7</td>
+							<td>튜터</td>
+							<td>클래스</td>
+							<td>클래스 생성은 어떻게 하나요?</td>
+							<td>2020-10-30</td>
+							<td>N</td>
+						</tr>
+						<tr>
+							<td height="40px">8</td>
+							<td>튜터</td>
+							<td>결제</td>
+							<td>결제취소 회원은 어떻게 처리하나요?</td>
+							<td>2020-10-30</td>
+							<td>N</td>
+						</tr>
+						<tr>
+							<td height="40px">9</td>
+							<td>튜터</td>
+							<td>시스템</td>
+							<td>정산은 진행 하나요?</td>
+							<td>2020-10-30</td>
+							<td>N</td>
+						</tr>
+						<tr>
+							<td height="40px">5</td>
+							<td>튜터</td>
+							<td>기타</td>
+							<td>관리자님과 상담하려면 어떻게 하나요?</td>
 							<td>2020-10-30</td>
 							<td>N</td>
 						</tr>
@@ -64,14 +133,14 @@
 <!------------------------------------------------------ 공지 작성 모달&스크립트 시작 ------------------------------------------------------>
 
 					<!-- 공지 작성 Modal Start -->
-					<div class="modal" id="writeNotice">
+					<div class="modal" id="writeFaq">
 						<div class="modal-dialog">
 
 							<!-- Modal content -->
 							<div class="modal-content" align="center" style="width: 900px; ">
 								<div class="modal-header" >
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h3 class="modal-title" style="text-align:center">공지사항 등록</h3>
+									<h3 class="modal-title" style="text-align:center">FAQ 작성</h3>
 								</div>
 								
 								<div class="modal-body" align="center" style="width:800px;">
@@ -85,18 +154,15 @@
 											<input type="text" style="width:640px;" placeholder="제목을 입력하세요.">
 										</div>
 										<div align="left" style="width:800px; height:30px;">
-											<input type="checkbox" name="status" id="importantNotice" value="R">
-											<label for="importantNotice">중요 공지 등록</label>
+											<span>유형 : </span>
+											<label for="member"><input type="radio" name="faqCategory" id="member" value="">회원</label>&nbsp;&nbsp;&nbsp;
+											<label for="tutor"><input type="radio" name="faqCategory" id="tutor" value="">튜터</label>&nbsp;&nbsp;&nbsp;
+											<label for="lesson"><input type="radio" name="faqCategory" id="lesson" value="">클래스</label>&nbsp;&nbsp;&nbsp;
+											<label for="pay"><input type="radio" name="faqCategory" id="pay" value="">결제</label>&nbsp;&nbsp;&nbsp;
+											<label for="etc"><input type="radio" name="faqCategory" id="etc" value="">기타</label>
 										</div>
 										<div>
 											<textarea style="resize:none; width:770px; height:500px;" placeholder="내용을 입력하세요."></textarea>
-										</div>
-										<br>
-										<div align="left" style="width:800px; height:40px;">
-											<span>첨부파일 :</span>
-											<span><input type="text"></span>
-											<button onclick="findFile();" id=""
-													class="btn btn-default">파일찾기</button>
 										</div>
 										<br>
 										<div>

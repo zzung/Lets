@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>블랙리스트 관리</title>
 </head>
 <body>
 	<!-- 사이드메뉴바 -->
