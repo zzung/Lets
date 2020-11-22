@@ -98,11 +98,11 @@
 										<li><a href="money.le">머니</a></li>
 										<li><a href="career.le">커리어</a></li>
 										<li><a href="hobby.le">취미</a></li>
-										<li><a style="padding:0px 0px 40px;" href="support.su">고객센터</a>
+										<li><a style="padding:0px 0px 40px;" href="supportNotice.su">고객센터</a>
 											<ul class="submenu">
-												<li><a href="support.su">1:1문의</a></li>
-												<li><a href="support.su">FAQ</a></li>
-												<li><a href="support.su">공지사항</a></li>
+												<li><a href="supportNotice.su">공지사항</a></li>
+												<li><a href="supportFaq.su">FAQ</a></li>
+												<li><a href="supportInq.su">문의사항</a></li>
 											</ul></li>
 									</ul>
 								</nav>
