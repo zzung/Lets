@@ -21,15 +21,15 @@ public class ReviewServiceImpl implements ReviewService{
 	private ReviewDao revDao;
 
 	@Override
-	public ArrayList<Review> showMoreReview(int lessonNo) {
+	public ArrayList<Review> selectReviewList(int lessonNo) {
 	
-		return revDao.showMoreReview(lessonNo,ss);
+		return revDao.selectReviewList(lessonNo,ss);
 	}
 
 	@Override
 	public int insertReview(Review r) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return revDao.insertReview(r,ss);
 	}
 
 	@Override

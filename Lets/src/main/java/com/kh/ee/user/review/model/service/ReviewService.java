@@ -7,7 +7,7 @@ import com.kh.ee.user.review.model.vo.Review;
 public interface ReviewService {
 	
 	//후기 전체 리스트 가져오기
-	ArrayList<Review> showMoreReview(int lessonNo);
+	ArrayList<Review> selectReviewList(int lessonNo);
 	
 	//후기 작성하기
 	int insertReview(Review r);
