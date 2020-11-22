@@ -35,12 +35,6 @@
 		<!-- 고객센터 내용 div -->
 		<div style="width:1000px;">
 			<div> 
-			
-			
-				<a href="supportInqUpdate.su">
-					
-				</a>
-			
 				<div style="margin-bottom:10px;">
 					<button type="button" data-toggle="modal" data-target="#updateInq"
 					class="genric-btn primary-border radius">수정</button>
@@ -105,39 +99,11 @@
 										</div>
 									</form>
 									
-									
-									
 								</div>	
 							</div>
 						</div>
 					</div>
 					<!-- 공지 작성 Modal End -->
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
 						
 					
 					<button onclick="inqDelete();" id="inqDeleteBtn" 
@@ -164,8 +130,6 @@
 					<!-- 문의 삭제 확인 끝 -->
 					
 					
-					
-					
 				</div>
 				
 				<div style="padding:10px; border:solid 1px;">
@@ -173,8 +137,8 @@
 					<div>공개</div>
 					<div>[클래스] 더욱 다양한 클래스가 있었으면 좋겠어요.</div>
 					<div>
-						<span style="width:150px;float:left;">튜터01</span>
-						<span style="width:150px;">2020-11-22</span>
+						<span style="width:100px; float:left;">2020-11-22</span>
+						<span style="width:150px;">튜터01</span>
 					</div>
 					<hr>
 					<div style="margin:-10px 0px;"><span>첨부파일 : </span></div>
