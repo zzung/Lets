@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.ee.user.review.model.service.ReviewService;
 import com.kh.ee.user.review.model.vo.Review;
 
@@ -20,20 +22,40 @@ public class ReviewController {
 	
 	//후기 더보기 플러스 버튼 클릭시 적용
 	@RequestMapping("showMore.rev")
-	public String showMoreReview(int lessonNo, HttpSession session, Model model) {
-		ArrayList<Review> list = revService.showMoreReview(lessonNo); 
-		
-		model.addAttribute("list",list);
-		
+	public String showMore() {
 		return "user/lesson/reviewDetail";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="showMoreReview.rev", produces="application/json; charset=utf-8")
+	public String selectReviewList(int lessonNo) {
+		ArrayList<Review> list = revService.selectReviewList(lessonNo); 
+				
+		return new Gson().toJson(list); 
+	}
+	
+	@ResponseBody
 	@RequestMapping("deleteReview.rev")
 	public String deleteReview(int reviewNo) {
 		int result = revService.deleteReview(reviewNo);
 		
-		return "redirect:showMore.rev";
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail"; 
+		}
 	}
-
+	
+	@ResponseBody
+	@RequestMapping("insertReview.rev")
+	public String insertReview(Review r) {
+		int result = revService.insertReview(r);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 
 }
