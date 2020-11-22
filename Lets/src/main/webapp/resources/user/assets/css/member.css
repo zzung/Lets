@@ -54,7 +54,7 @@ input[type='radio'] {
   input[type='radio']:checked:before {
   	background:rgb(46, 48, 146);
   }
-.register-btn div{width: 330px; height: 45px; margin-top: 15px; font-size: 18px; font-weight: bolder;}
+.register-btn input{width: 330px; height: 50px; margin-top: 15px; font-size: 18px; font-weight: bolder;}
 .register-info { font-size: 12px; font-weight: normal; color: gray; margin-left: 40px;}
 
 /* login-Page */

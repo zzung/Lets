@@ -70,8 +70,8 @@
 									<c:choose>
 			                              <c:when test="${empty loginUser}">
 			                                 <ul>
-			                                    <li><a href="login.me"><i class="ti-user"></i>로그인</a></li>
-			                                    <li><a href="join.me"><i class="ti-lock"></i>회원가입</a></li>
+			                                    <li><a href="loginForm.me"><i class="ti-user"></i>로그인</a></li>
+			                                    <li><a href="enrollForm.me"><i class="ti-lock"></i>회원가입</a></li>
 			                                 </ul>
 			                              </c:when>
 			                              <c:otherwise>

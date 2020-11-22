@@ -18,110 +18,113 @@
         <div class="register-wrapper">
             <div class="register-title">회원가입</div><br>
             
-            <div class="register-email">
-                <div class="register-list">아이디</div>
-                <div class="email-block1">
-                    <input type="text" class="form-control" id="userEmail1" name="userEmail1" placeholder="이메일을 입력해주세요" required>
-                    &nbsp;@&nbsp;
-                </div>
-                <div class="email-block2">
-                    <input type="text" class="form-control" id="userEmail2" name="userEmail2" style="width: 130px;">
-
-                    <select id="" class="email-select" name="">
-                        <option value="">선택 하기</option>
-                        <option value="naver.com">naver.com</option>
-                        <option value="google.com">google.com</option>
-                        <option value="daum.net">daum.net</option>
-                        <option value="hanmail.net">hanmail.net</option>
-                        <option value="nate.com">nate.com</option>
-                        <option value="emailSelect">직접 입력</option>
-                    </select>
-                </div>
-                <div id="email-block3" class="genric-btn primary radius">인증받기</div>
-                <!-- ajax 적용할것 : 아이디 중복체크 알림 -->
-                <div class="email-check">이미 존재하는 이메일 입니다.</div>
-                <div class="email-checkNum">
-                    <input type="number" class="form-control" id="" name="" placeholder="인증번호를 입력해주세요" required >
-                </div>
-                <div class="email-number-check">인증번호가 일치하지 않습니다.</div>
-            </div>
-
-            <br>
-            <div class="register-pwd">
-                <div class="register-list">비밀번호</div>
-                <div class="pwd-block1">
-                    <input type="password" class="form-control" id="userPwd" name="userPwd" minlength="10" placeholder="비밀번호를 입력해주세요" required >
-                </div>
-                <div class="pwd-check1"></div>
-                <br>
-                <div class="register-list">비밀번호 확인</div>
-                <div class="pwd-block2">
-                    <input type="password" class="form-control" id="userPwdCheck" name="userPwdCheck" placeholder="비밀번호를 입력해주세요" required > 
-                </div>
-                <div class="pwd-check2"></div>
-            </div>
-            
-            <br>
-            <div class="register-list">이름</div>
-            <div class="name-block">
-                <input type="text" class="form-control" id="" name="" maxlength="8" placeholder="이름을 입력해주세요" required>
-            </div>
-
-            <br>
-            <div class="register-list">닉네임</div>
-            <div class="nickname-block">
-                <input type="text" class="form-control" id="" name="" placeholder="닉네임을 입력해주세요" required>
-            </div>
-            <!-- ajax 적용할것 : 닉네임 중복체크 -->
-            <div class="nickname-check">이미 사용중인 닉네임입니다. </div>
-
-            <br>
-            <div class="register-list">생년월일</div>
-            <div class="birth-block">
-                <input type="number" class="form-control" id="userBirth" name="userBirth" maxlength="6" placeholder="ex) 990101" required>
-            </div>
-            <div class="birth-check"></div>
-
-            <br>
-            <div class="register-list">성별</div>
-            <div class="gender-block">
-                <input type="radio" id="" name="gender" value="F" style="width: 20px; height: 20px;">&nbsp;&nbsp;여자
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" id="" name="gender" value="M" style="width: 20px; height: 20px;">&nbsp;&nbsp;남자
-            </div>
-
-            <br>
-            <div class="register-list">주소</div>
-            <div class="address-block1">
-                <input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" readonly>
-            </div>
-            <div id="address-btn" class="genric-btn primary radius" onclick="findPostcode();">우편번호 찾기</div>
-            <div class="address-block2">
-                <input type="text" class="form-control" id="sample6_address" placeholder="도로명 주소" readonly>
-            </div>
-            <div class="address-block3">
-                <input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세 주소 입력">
-            </div>
-            <div class="address-block4">
-                <input type="text" class="form-control" id="sample6_extraAddress" placeholder="참고 항목">
-            </div>
-            <div class="address-check"></div>
-
-            <br>
-            <div class="register-list">휴대전화</div>
-            <div class="phone-block">
-                <input type="number" class="form-control" id="userPhone" name="userPhone" maxlength="11" placeholder="'-'빼고 입력해주세요" required>
-            </div>
-            <div class="phone-check"></div>
-
-            <br>
-            <div class="register-info">
-                	회원 가입시 이용약관 개인정보수집 및 이용, <br> 개인정보 제공에 동의하는 것으로 간주합니다.<br><br>
-            </div>
-
-            <div class="register-btn">
-                <div class="genric-btn primary radius" onclick="location.href='';">회원가입 하기</div><br>
-            </div>
+            <form action="insert.me" method="POST">
+	            <div class="register-email">
+	                <div class="register-list">아이디</div>
+	                <div class="email-block1">
+	                    <input type="text" class="form-control" id="userEmail1" name="userEmail1" placeholder="이메일을 입력해주세요" required>
+	                    &nbsp;@&nbsp;
+	                </div>
+	                <div class="email-block2">
+	                    <input type="text" class="form-control" id="userEmail2" name="userEmail2" style="width: 130px;">
+	
+	                    <select id="userEmail-domain" class="email-select">
+	                        <option value="">선택 하기</option>
+	                        <option value="naver.com">naver.com</option>
+	                        <option value="google.com">google.com</option>
+	                        <option value="daum.net">daum.net</option>
+	                        <option value="hanmail.net">hanmail.net</option>
+	                        <option value="nate.com">nate.com</option>
+	                        <option value="emailSelect">직접 입력</option>
+	                    </select>
+	                </div>
+	                <div id="email-block3" class="genric-btn primary radius">인증받기</div>
+	                <!-- ajax 적용할것 : 아이디 중복체크 알림 -->
+	                <div class="email-check">이미 존재하는 이메일 입니다.</div>
+	                <div class="email-checkNum">
+	                    <input type="number" class="form-control" id="" name="" placeholder="인증번호를 입력해주세요" required >
+	                </div>
+	                <div class="email-number-check">인증번호가 일치하지 않습니다.</div>
+	            </div>
+	
+	            <br>
+	            <div class="register-pwd">
+	                <div class="register-list">비밀번호</div>
+	                <div class="pwd-block1">
+	                    <input type="password" class="form-control" id="userPwd" name="userPwd" minlength="10" placeholder="비밀번호를 입력해주세요" required >
+	                </div>
+	                <div class="pwd-check1"></div>
+	                <br>
+	                <div class="register-list">비밀번호 확인</div>
+	                <div class="pwd-block2">
+	                    <input type="password" class="form-control" id="userPwdCheck" name="userPwdCheck" placeholder="비밀번호를 입력해주세요" required > 
+	                </div>
+	                <div class="pwd-check2"></div>
+	            </div>
+	            
+	            <br>
+	            <div class="register-list">이름</div>
+	            <div class="name-block">
+	                <input type="text" class="form-control" id="" name="" maxlength="8" placeholder="이름을 입력해주세요" required>
+	            </div>
+	
+	            <br>
+	            <div class="register-list">닉네임</div>
+	            <div class="nickname-block">
+	                <input type="text" class="form-control" id="" name="" placeholder="닉네임을 입력해주세요" required>
+	            </div>
+	            <!-- ajax 적용할것 : 닉네임 중복체크 -->
+	            <div class="nickname-check">이미 사용중인 닉네임입니다. </div>
+	
+	            <br>
+	            <div class="register-list">생년월일</div>
+	            <div class="birth-block">
+	                <input type="number" class="form-control" id="userBirth" name="userBirth" maxlength="6" placeholder="ex) 990101" required>
+	            </div>
+	            <div class="birth-check"></div>
+	
+	            <br>
+	            <div class="register-list">성별</div>
+	            <div class="gender-block">
+	                <input type="radio" id="" name="gender" value="F" style="width: 20px; height: 20px;">&nbsp;&nbsp;여자
+	                &nbsp;&nbsp;&nbsp;&nbsp;
+	                <input type="radio" id="" name="gender" value="M" style="width: 20px; height: 20px;">&nbsp;&nbsp;남자
+	            </div>
+	
+	            <br>
+	            <div class="register-list">주소</div>
+	            <div class="address-block1">
+	                <input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호" readonly>
+	            </div>
+	            <div id="address-btn" class="genric-btn primary radius" onclick="findPostcode();">우편번호 찾기</div>
+	            <div class="address-block2">
+	                <input type="text" class="form-control" id="sample6_address" placeholder="도로명 주소" readonly>
+	            </div>
+	            <div class="address-block3">
+	                <input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세 주소 입력">
+	            </div>
+	            <div class="address-block4">
+	                <input type="text" class="form-control" id="sample6_extraAddress" placeholder="참고 항목">
+	            </div>
+	            <div class="address-check"></div>
+	
+	            <br>
+	            <div class="register-list">휴대전화</div>
+	            <div class="phone-block">
+	                <input type="number" class="form-control" id="userPhone" name="userPhone" maxlength="11" placeholder="'-'빼고 입력해주세요" required>
+	            </div>
+	            <div class="phone-check"></div>
+	
+	            <br>
+	            <div class="register-info">
+	                	회원 가입시 이용약관 개인정보수집 및 이용, <br> 개인정보 제공에 동의하는 것으로 간주합니다.<br><br>
+	            </div>
+	
+	            <div class="register-btn">
+	                <input type="submit" class="genric-btn primary radius" value="회원가입 하기">
+	            </div>
+	            <br>
+            </form>
         </div>
 
     </main>

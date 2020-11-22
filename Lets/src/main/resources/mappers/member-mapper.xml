@@ -19,6 +19,54 @@
 	<result column="status" property="status"/>
 </resultMap>
 
+<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+	select
+	          mem_id
+	        , mem_pwd
+	        , mem_name
+	        , nickname
+	        , birthday
+	        , gender
+	        , address
+	        , phone
+	        , mem_pic
+	        , enroll_date
+	        , status
+	     from member
+	    where status='Y'
+	      and mem_id=${memId};
+</select>
 
+<insert id="insertMember" parameterType="Member">
+	insert
+		  into member
+		  (
+		     mem_no
+		   , mem_id
+		   , mem_pwd
+		   , mem_name
+		   , nickname
+		   , birthday
+		   , gender
+		   , address
+		   , phone
+		   , mem_pic
+		   , enroll_date
+		  )
+		  values
+		  (
+		     SEQ_MNO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , sysdate  
+		  );
+</insert>
 
 </mapper>
