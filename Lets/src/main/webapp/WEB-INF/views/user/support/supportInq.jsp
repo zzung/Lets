@@ -70,7 +70,6 @@ margin-top: 80px;
 		<div align="left">
 			<a href="supportNotice.su">
 				<span style="margin:20px;">공지사항</span></a>
-				
 			<a href="supportFaq.su">
 			<span style="margin:20px;">FAQ</span></a>
 			<a href="supportInq.su">
@@ -79,11 +78,71 @@ margin-top: 80px;
 		</div>
 		
 		<!-- 고객센터 내용 div -->
-		<div style="width:1240px;">
+		<div style="width:1000px;">
 			<div>
-				<a href="supportFaqWrite.su">
-					<div><button class="genric-btn primary-border radius" style="width:1240px">- 1:1 문의 작성 하기 - </button></div>
-				</a>
+				<div><button type="button" data-toggle="modal" data-target="#writeInq" 
+				class="genric-btn primary-border radius" style="width:1000px">- 1:1 문의 작성 하기 - </button></div>
+					
+				<!-- 문의 작성 Modal Start -->
+				<div class="modal" id="writeInq">
+					<div class="modal-dialog">
+						<!-- Modal content -->
+						<div class="modal-content" align="center" style="width: 800px; ">
+							<div>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<br>
+								<h3 class="" style="text-align:center">1:1 문의 작성하기</h3>
+							</div>
+							<hr>
+							<div class="modal-body" style="padding:0px 50px;">
+							
+								<form action="">
+									<div align="left">
+										<div>
+											<label><input type="radio" name="typeStatus" checked>&nbsp;&nbsp;공개</label>
+											<label><input type="radio" name="typeStatus">&nbsp;&nbsp;비공개</label>
+										</div>
+										<div style="height:60px;">
+											<div>문의 유형</div>
+											<div>
+												<select>
+													<option>사용자</option>
+													<option>튜터</option>
+													<option>클래스</option>
+													<option>기타</option>
+												</select>
+											</div>
+										</div>
+										<br>										
+										<div>
+											<div>문의 제목</div>
+											<input type="text" style="width:700px;" value="" placeholder="제목을 입력하세요.">
+										</div>
+										<br>
+										<div>
+											<div>문의 내용</div>
+											<div>
+												<textarea style="width:700px; height:200px; resize:none;" placeholder="내용을 입력하세요."></textarea>
+											</div>
+											<div>
+												<div><input type="file"></div>
+											</div>
+										</div>
+										<br>
+										<div align="center">
+											<button type="reset" class="genric-btn primary-border radius">초기화</button>
+											&nbsp;&nbsp;&nbsp;
+											<button type="submit" class="genric-btn primary-border radius">문의하기</button>
+										</div>
+										<br>
+									</div>
+								</form>
+							</div>	
+						</div>
+					</div>
+				</div>
+				<!-- 문의 작성 Modal End -->
+				
 				<br>
 				<a href="supportInqDetail.su">
 					<div style="border:solid 1px; padding:10px;">

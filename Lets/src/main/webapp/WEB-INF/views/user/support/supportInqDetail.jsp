@@ -25,7 +25,6 @@
 		<div align="left">
 			<a href="supportNotice.su">
 				<span style="margin:20px;">공지사항</span></a>
-				
 			<a href="supportFaq.su">
 			<span style="margin:20px;">FAQ</span></a>
 			<a href="supportInq.su">
@@ -43,8 +42,103 @@
 				</a>
 			
 				<div style="margin-bottom:10px;">
-					<a href="supportInqUpdate.su">
-						<button class="genric-btn primary-border radius">수정</button></a>
+					<button type="button" data-toggle="modal" data-target="#updateInq"
+					class="genric-btn primary-border radius">수정</button>
+						
+						<!-- 공지 작성 Modal Start -->
+					<div class="modal" id="updateInq">
+						<div class="modal-dialog">
+
+							<!-- Modal content -->
+							<div class="modal-content" align="center" style="width: 800px; ">
+								<div>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<br>
+									<h3 class="" style="text-align:center">문의내용 수정</h3>
+								</div>
+								<hr>
+								<div class="modal-body" style="padding:0px 50px;">
+								
+								
+									
+									<form action="">
+										<div align="left">
+											<div>
+												<label><input type="radio" name="typeStatus" checked>&nbsp;&nbsp;공개</label>
+												<label><input type="radio" name="typeStatus">&nbsp;&nbsp;비공개</label>
+											</div>
+											<div style="height:60px;">
+												<div>문의 유형</div>
+												<div>
+													<select>
+														<option>사용자</option>
+														<option>튜터</option>
+														<option>클래스</option>
+														<option>기타</option>
+													</select>
+												</div>
+											</div>
+											<br>										
+											<div>
+												<div>문의 제목</div>
+												<input type="text" style="width:700px;" value="더욱 다양한 클래스가 있었으면 좋겠어요.">
+											</div>
+											<br>
+											<div>
+												<div>문의 내용</div>
+												<div>
+													<textarea style="width:700px; height:200px; resize:none;">다양한 카테고리에 다양한 클래스가 있었으면 좋겠어요~
+뜨개질 같은거나 만드는거 배워보고 싶어요~
+													</textarea>
+												</div>
+												<div>
+													<div><input type="file"></div>
+												</div>
+											</div>
+											<br>
+											<div align="center">
+												<button type="button" class="genric-btn primary-border radius" data-dismiss="modal">닫기</button>
+												&nbsp;&nbsp;&nbsp;
+												<button class="genric-btn primary-border radius" type="submit">수정하기</button>
+											</div>
+											<br>
+										</div>
+									</form>
+									
+									
+									
+								</div>	
+							</div>
+						</div>
+					</div>
+					<!-- 공지 작성 Modal End -->
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 					
 					<button onclick="inqDelete();" id="inqDeleteBtn" 
 					class="genric-btn primary-border radius">삭제</button>

@@ -70,7 +70,6 @@ margin-top: 80px;
 		<div align="left">
 			<a href="supportNotice.su">
 				<span style="margin:20px;">공지사항</span></a>
-				
 			<a href="supportFaq.su">
 			<span style="margin:20px;">FAQ</span></a>
 			<a href="supportInq.su">

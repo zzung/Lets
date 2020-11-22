@@ -70,7 +70,6 @@ margin-top: 80px;
 		<div align="left">
 			<a href="supportNotice.su">
 				<span style="margin:20px;">공지사항</span></a>
-				
 			<a href="supportFaq.su">
 			<span style="margin:20px;">FAQ</span></a>
 			<a href="supportInq.su">
@@ -79,10 +78,10 @@ margin-top: 80px;
 		</div>
 		
 		<!-- 고객센터 내용 div -->
-		<div style="width:1240px;">
+		<div style="width:1000px;">
 			<div>
 				<a href="supportNoticeDetail.su">
-					<div style=" padding:10px; border:solid 1px;">
+					<div style="padding:10px; border:solid 1px;">
 						<!-- 공지 대상 -->
 						<div><h5>* 튜터</h5></div>
 						<div>[서비스 개편 사항] 메인페이지에서 새로 생긴 클래스를 확인할 수 있습니다!</div>

@@ -66,14 +66,17 @@
 	<div style="padding:30px 100px;">
 		<!-- 고객센터 상단 탭 -->
 		<div align="left">
-			<span style="margin:20px;">공지사항</span>
-			<span style="margin:20px;">FAQ</span>
-			<span style="margin:20px;">문의사항</span>
+			<a href="supportNotice.su">
+				<span style="margin:20px;">공지사항</span></a>
+			<a href="supportFaq.su">
+			<span style="margin:20px;">FAQ</span></a>
+			<a href="supportInq.su">
+			<span style="margin:20px;">문의사항</span></a>
 			<hr>
 		</div>
 		
 		<!-- 고객센터 내용 div -->
-		<div style="width:1240px;">
+		<div style="width:1000px;">
 			<div> 
 				<div style="padding:10px;">
 					<!-- 공지 대상 -->

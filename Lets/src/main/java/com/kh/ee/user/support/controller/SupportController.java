@@ -37,15 +37,5 @@ public class SupportController {
 		return "user/support/supportInqDetail";
 	}
 	
-	@RequestMapping("supportInqWrite.su")
-	public String supportInqWrite() {
-		return "user/support/supportInqWrite";
-	}
-	
-	@RequestMapping("supportInqUpdate.su")
-	public String supportInqUpdate() {
-		return "user/support/supportInqUpdate";
-	}
-	
 	
 }
