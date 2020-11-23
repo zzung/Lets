@@ -39,7 +39,7 @@
 	                        <option value="emailWrite">직접 입력</option>
 	                    </select>
 	                </div>
-	                <div id="email-block3" class="genric-btn primary radius" onclick="checkId();">인증하기</div>
+	                <div id="email-block3" class="genric-btn primary radius" onclick="checkId();">중복 확인</div>
 	                <!-- ajax 적용할것 : 아이디 중복체크 알림 -->
 	                <div class="email-check"></div>
 	            </div>

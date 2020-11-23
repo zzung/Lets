@@ -56,8 +56,6 @@ public class MemberController {
 	public String insertMember(Member m, HttpSession session, Model model) {
 		
 		String encPwd = bpe.encode(m.getMemPwd());
-		System.out.println("암호화 후(암호문) : "+encPwd);
-		
 		m.setMemPwd(encPwd);
 		
 		int result = mService.insertMember(m);
@@ -66,7 +64,7 @@ public class MemberController {
 			session.setAttribute("alertMsg", "회원가입 성공 !");
 			return "redirect:/";
 		}else {
-			model.addAttribute("errorMsg", "회원가입에 실패했습니다. ");
+			model.addAttribute("errorMsg", "회원가입에 실패했습니다.");
 			return "user/common/errorPage";
 		}
 	}
