@@ -5,20 +5,14 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.notice.model.vo.Notice;
 
 @Repository
 public class NoticeDao {
 
-	public ArrayList<Lesson> selectApproveLessonList(SqlSessionTemplate ss, Lesson l) {
-		return (ArrayList)ss.selectList("lessonMapper.selectApproveLessonList", l);
+	public ArrayList<Notice> selectNoticeList(SqlSessionTemplate ss, Notice n) {
+		return (ArrayList)ss.selectList("noticeMapper.selectNoticeList", n);
 	}
 	
-	public ArrayList<Lesson> selectApproveStatusList(SqlSessionTemplate ss, Lesson l) {
-		return (ArrayList)ss.selectList("lessonMapper.selectApproveStatusList", l);
-	}
-	
-	public ArrayList<Lesson> selectPrepareList(SqlSessionTemplate ss, Lesson l) {
-		return (ArrayList)ss.selectList("lessonMapper.selectPrepareList", l);
-	}
+
 }

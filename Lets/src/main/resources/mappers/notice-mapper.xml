@@ -3,19 +3,67 @@
 <mapper namespace="noticeMapper">
 	
 <resultMap id="noticeResultSet" type="Notice">
-	<id column="lesson_no" property="lessonNo" />
-	<result column="mem_no" property="memNo" />
-	<result column="lesson_form" property="lessonForm" />
+	<id column="notice_no" property="noticeNo" />
+	<result column="notice_type" property="noticeType" />
+	<result column="notice_title" property="noticeTitle" />
+	<result column="notice_content" property="noticeContent" />
+	<result column="enroll_date" property="enrollDate" />
+	<result column="modify_date" property="modifyDate" />
+	<result column="status" property="status" />
 </resultMap>
 
-<select id="selectApproveLessonList" resultMap="lessonResultSet" >
+<select id="selectNoticeList" resultMap="noticeResultSet" >
 	select
-	       lesson_no
-	     , lesson_title
-	     , lesson_type
-	  from lesson
-	 where status='Y'
+	       notice_no
+	     , notice_type
+	     , notice_title
+	     , notice_content
+	     , enroll_date
+	     , modify_date
+	     , status
+	  from notice
+	 where status='Y' or status='R'
 </select>
+
+<insert id="insertNotice" parameterType="Notice">
+		insert
+		  into notice
+		  (
+		     notice_no
+		   , notice_type
+		   , notice_title
+		   , notice_content
+		   , enroll_date
+		   , status
+		  )
+		  values
+		  (
+		     notice_no.nextval
+		   , #{noticeType}
+		   , #{noticeTitle}
+		   , #{noticeContent}
+		   , #{enrollDate}
+		   , #{status}
+		  )
+	</insert>
+	
+	<update id="updateNotice" parameterType="Notice">
+		update 
+		       notice
+		   set notice_type = #{noticeType}
+		     , notice_title = #{noticeTitle}
+		     , notice_content = #{noticeContent}
+		     , enroll_date = #{enrollDate}
+		     , status = #{status}
+		 where notice_no = #{noticeNo}
+	</update>
+	
+	<update id="deleteNotice" parameterType="_int">
+		update
+		       board
+		   set status='N'
+		 where notice_no = #{noticeNo}
+	</update>
 
 
 	

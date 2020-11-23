@@ -20,19 +20,9 @@ public class NoticeServiceImpl implements NoticeService{
 	private NoticeDao nDao;
 
 	@Override
-	public ArrayList<Notice> selectApproveLessonList(Notice n) {
-		return nDao.selectApproveLessonList(ss, n);
+	public ArrayList<Notice> selectNoticeList(Notice n) {
+		return nDao.selectNoticeList(ss, n);
 	}
 
-	@Override
-	public ArrayList<Notice> selectApproveStatusList(Notice n) {
-		return nDao.selectApproveStatusList(ss, n);
-	}
-
-	@Override
-	public ArrayList<Notice> selectPrepareList(Notice n) {
-		return nDao.selectPrepareList(ss, n);
-	}
-	
 	
 }
