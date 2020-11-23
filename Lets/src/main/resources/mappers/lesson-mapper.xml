@@ -18,8 +18,8 @@
 	<result column="like_count" property="likeCount" />
 	<result column="lesson_status" property="lessonStatus" />
 	<result column="status_hold" property="statusHold" />
-	<result column="h_reason" property="hReason" />
-	<result column="r_reason" property="rReason" />
+	<result column="h_reason" property="holdReason" />
+	<result column="r_reason" property="refuseReason" />
 	<result column="price" property="price" />
 	<result column="time" property="time" />
 	<result column="total_count" property="totalCount" />
@@ -29,17 +29,35 @@
 	<result column="discount" property="discount" />
 	<result column="pay_total" property="payTotal" />
 	<result column="status" property="status" />
+	<result column="approve_date" property="approveDate" />
 </resultMap>
 
 <select id="selectApproveLessonList" resultMap="lessonResultSet" >
 	select
 	       lesson_no
 	     , lesson_title
+	     , approve_date
 	     , lesson_type
 	  from lesson
 	 where status='Y'
+	 order
+	    by approve_date desc
 </select>
 
+<select id="selectApproveStatusList" resultMap="lessonResultSet" >
+	select
+	       lesson_no
+	     , lesson_title
+	     , approve_date
+	     , lesson_type
+         , h_reason
+         , r_reason
+         , lesson_status
+	  from lesson
+	 where status='Y'
+	 order
+	    by approve_date desc
+</select>
 
 	
 </mapper>

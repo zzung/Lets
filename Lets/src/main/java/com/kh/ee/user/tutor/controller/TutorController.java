@@ -40,14 +40,14 @@ public class TutorController {
 	public String tutorMyLesson(Lesson l, Model model) {
 		
 		ArrayList<Lesson> aLlist = lessonService.selectApproveLessonList(l);
-		/*
 		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList(l);
-		ArrayList<Lesson> pLlist = lessonService.selectPrepareList(l);
-		*/
+		
+		//ArrayList<Lesson> pLlist = lessonService.selectPrepareList(l);
+		
 		
 		model.addAttribute("aLlist", aLlist);
-		System.out.println(aLlist);
-		//model.addAttribute("sLlist", sLlist);
+		model.addAttribute("sLlist", sLlist);
+		System.out.println(sLlist);
 		//model.addAttribute("pLlist", pLlist);
 		
 		

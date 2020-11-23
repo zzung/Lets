@@ -1,5 +1,7 @@
 package com.kh.ee.user.lesson.model.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +31,8 @@ public class Lesson {
 	private int likeCount;
 	private String lessonStatus;
 	private int statusHold;
-	private String hReason;
-	private String rReason;
+	private String holdReason;
+	private String refuseReason;
 	private String price;
 	private String time;
 	private String totalCount;
@@ -40,6 +42,7 @@ public class Lesson {
 	private String discount;
 	private String payTotal;
 	private String status;
+	private Date approveDate;
 	
 	
 }
