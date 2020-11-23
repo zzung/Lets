@@ -34,7 +34,7 @@
 	        , status
 	     from member
 	    where status='Y'
-	      and mem_id=${memId};
+	      and mem_id like #{memId}
 </select>
 
 <insert id="insertMember" parameterType="Member">
@@ -51,22 +51,34 @@
 		   , address
 		   , phone
 		   , mem_pic
-		   , enroll_date
 		  )
 		  values
 		  (
 		     SEQ_MNO.NEXTVAL
-		   , ?
-		   , ?
-		   , ?
-		   , ?
-		   , ?
-		   , ?
-		   , ?
-		   , ?
-		   , ?
-		   , sysdate  
-		  );
+		   , #{memId}
+		   , #{memPwd}
+		   , #{memName}
+		   , #{nickname}
+		   , #{birthday}
+		   , #{gender}
+		   , #{address}
+		   , #{phone}
+		   , #{memPic}
+		  )
 </insert>
+
+<select id="idCheck" parameterType="String" resultType="_int">
+	select
+	       count(*)
+	  from member
+	 where mem_id like #{memId}
+</select>
+
+<select id="nicknameCheck" parameterType="String" resultType="_int">
+	select
+	       count(*)
+	  from member
+	 where nickname like #{nickname}
+</select>
 
 </mapper>

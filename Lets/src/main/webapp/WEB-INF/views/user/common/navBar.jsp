@@ -27,6 +27,13 @@
 </head>
 
 <body>
+	<c:if test="${ !empty alertMsg }">
+		<script>
+			alert("${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session" />
+	</c:if>
+	
 	<!--? Preloader Start -->
 	<div id="preloader-active">
 		<div
@@ -83,7 +90,7 @@
 			                                                  <img src="resources/user/assets/img/member/man.png" width="35px" height="35px">
 			                                                  <ul class="after-login-dropdown-content">
 			                                                      <li><a href="#">마이페이지</a></li>
-			                                                      <li style="margin-top: -10px;"><a href="#">로그아웃</a></li>
+			                                                      <li style="margin-top: -10px;"><a href="logout.me">로그아웃</a></li>
 			                                                  </ul>
 			                                              </div>
 			                                          </li>

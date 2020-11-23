@@ -18,7 +18,7 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	private BCryptPasswordEncoder bpe;
 	
 	
 	@RequestMapping("loginForm.me")
@@ -31,13 +31,13 @@ public class MemberController {
 		
 		Member loginUser = mService.loginMember(m);
 		
-		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {
+		if(loginUser != null && bpe.matches(m.getMemPwd(), loginUser.getMemPwd())) {
 			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("alertMsg", "로그인 성공 !");
 			return "redirect:/";
-			
 		}else {
-			model.addAttribute("errorMsg","로그인 실패 !");
-			return "common/errorPage";
+			model.addAttribute("errorMsg","로그인에 실패했습니다. 다시 시도해주세요.");
+			return "user/common/errorPage";
 		}
 	}
 	
@@ -55,9 +55,7 @@ public class MemberController {
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, HttpSession session, Model model) {
 		
-		System.out.println("암호화 전 : "+m.getMemPwd());
-		
-		String encPwd = bcryptPasswordEncoder.encode(m.getMemPic());
+		String encPwd = bpe.encode(m.getMemPwd());
 		System.out.println("암호화 후(암호문) : "+encPwd);
 		
 		m.setMemPwd(encPwd);
@@ -68,18 +66,33 @@ public class MemberController {
 			session.setAttribute("alertMsg", "회원가입 성공 !");
 			return "redirect:/";
 		}else {
-			model.addAttribute("errorMsg", "회원가입 실패 ");
-			return "common/errorPage";
+			model.addAttribute("errorMsg", "회원가입에 실패했습니다. ");
+			return "user/common/errorPage";
 		}
 	}
 	
-	@ResponseBody()
+	@ResponseBody
 	@RequestMapping("idCheck.me")
-	public String idCheck() {
-		return "";
+	public String idCheck(String memId) {
+		
+		int result = mService.idCheck(memId);
+		if(result > 0) {
+			return "fail";
+		}else {
+			return "success";
+		}
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping("nicknameCheck.me")
+	public String nicknameCheck(String nickname) {
+		int result = mService.nicknameCheck(nickname);
+		if(result > 0) {
+			return "fail";
+		}else {
+			return "success";
+		}
+	}
 	
 	
 	
