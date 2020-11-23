@@ -38,13 +38,6 @@
 						</div>
 					</div>
 				</div>
-				<script>
-					$(function(){
-						$(".course-img").click(function(){
-							location.href="courseDetailView.le?lessonNo="+$(this).children().eq(0).val();
-						});
-					});
-				</script>
 				<!--?slider-->
 				<div class="exampleRow">
 					<div class="col-xs-12">
@@ -176,6 +169,13 @@
 			</div>
 		</div>
 		<!-- money Popular Course slider End -->
+		<script>
+			$(function(){
+				$(".slider-course").click(function(){
+					location.href="courseDetailView.le?lessonNo="+$(this).children("input[name=lessonNo]").val(); 
+				});
+			});
+		</script>
 		<!--? 머니 인기 코스  -->
 		<div class="popular-course section-padding-slider">
 			<div class="container">

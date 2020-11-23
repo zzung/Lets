@@ -167,34 +167,42 @@
 	                  </div>
 	                  <!--end of 튜터 소개 -->
 	                  <!--?리뷰 area-->
-	                  <c:forEach var="review" items=${list }>
 		                  <div class="comments-area">
 		                     <div class="text-right">
 		                        <i class="fas fa-plus" id="showMore"> 더보기</i>
 		                     </div>
 		                     <div class="container">
-		                        <h4>리뷰 2</h4>
+		                        <h4>리뷰 </h4>
 		                      </div>
-		                     <div class="comment-list">
-		                        <div class="single-comment justify-content-between d-flex">
-		                           <div class="user justify-content-between d-flex">
-		                              <div class="thumb">
-		                                 <img src="resources/user/assets/img/comment/cat1.jpg" alt="">
-		                              </div>
-		                              <div class="desc">
-		                                 <p class="comment">review.reviewContent</p>
-		                                 <div class="d-flex justify-content-between">
-		                                    <div class="d-flex align-items-center">
-		                                       <span>review.nickname</span>
-		                                       <p class="date">review.enrollDate </p>
-		                                    </div>
-		                                 </div>
-		                              </div>
-		                           </div>
-		                        </div>
-		                     </div>
+	                  		<c:forEach var="review" items="${list }">
+			                     <div class="comment-list">
+			                        <div class="single-comment justify-content-between d-flex">
+			                           <div class="user justify-content-between d-flex">
+			                              <div class="thumb">
+			                                 <img src="resources/user/assets/img/comment/cat1.jpg" alt="">
+			                              </div>
+			                              <div class="desc">
+			                                 <p class="comment">${review.reviewContent}</p>
+			                                 <div class="d-flex justify-content-between" style="width:670px;">
+			                                    <div class="d-flex align-items-center">
+			                                       <span>${review.nickname}</span>
+			                                       <p class="date">${review.enrollDate} </p>
+			                                    </div>
+			                                    <div class="review-ratting">
+			                                    	<c:forEach var="s" begin="1" end="${review.star }">
+			                                        <i class="fas fa-star" style="color:#fbba42"></i> 
+			                                        </c:forEach>
+			                                        <c:forEach var="j" begin="${review.star}" end="4">
+			                                        <i class="fas fa-star" style="color:#e6e6e6"></i>
+			                                        </c:forEach>
+			                                    </div>
+			                                 </div>
+			                              </div>
+			                           </div>
+			                        </div>
+			                     </div>
+	                  		</c:forEach>
 		                  </div>
-	                  </c:forEach>
 	                  <!--? end 리뷰 area-->
 	                  <script>
 	                  	$(function(){
@@ -405,18 +413,14 @@
 	                     <div><h2>FAQ</h2></div>  
 	                     <br>
 	                     <div class="media align-items-center">
-	                        <div class="media-body">
-	                           <div class="faqQuestion">Q. 자바 할 수 있을까요??</div>
-	                           <p class="faqAnswer">A. 누구나 다 할 수 있습니다... WHAT!?!!?!</p>
-	                           <br>
-	                           <div class="faqQuestion">Q. 자바스프링 할 수 있을까요??</div>
-	                           <p class="faqAnswer">A. 나는 모르겠다 모르겠다 모르곘다</p>
-	                           <br>
-	                           <div class="faqQuestion">Q. DB 할 수 있을까요??</div>
-	                           <p class="faqAnswer">A. 너가 잘해야지 멍충아  후아아어리ㅏㅁㄴㅇㄹ WHAT!?!!?!</p>
-	                           
-	                        </div>
-	                     </div>
+								<div class="media-body">
+									<c:forEach var="faq" items="${faqList }">
+										<div class="faqQuestion">Q. ${faq.faqQuestion }</div>
+										<p class="faqAnswer">A. ${faq.faqAnswer }</p>
+										<br>
+									</c:forEach>
+								</div>
+							</div>
 	                  </div>
 					<!--end of FAQ-->
 	               </div>

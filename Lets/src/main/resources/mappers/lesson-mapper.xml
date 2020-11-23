@@ -32,6 +32,25 @@
 	<result column="approve_date" property="approveDate" />
 </resultMap>
 
+<resultMap id="reviewResultSet" type="Review">
+	<id column="review_no" property="reviewNo" />
+	<result column="lesson_no" property="lessonNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="star" property="star" />
+	<result column="review_content" property="reviewContent"/>
+	<result column="enroll_date" property="enrollDate"/>
+	<result column="modify_date" property="modifiyDate"/>
+	<result column="status" property="status"/> 
+	<result column="nickname" property="nickname"/> 
+	<result column="mem_pic" property="memPic"/> 
+</resultMap>
+
+<resultMap id="lessonFaqResultSet" type="LessonFaq">
+	<result column="lesson_no" property="lessonNo"/>
+	<result column="faq_question" property="faqQuestion" />
+	<result column="faq_answer" property="faqAnswer" />
+</resultMap>
+
 <select id="selectApproveLessonList" resultMap="lessonResultSet" >
 	select
 	       lesson_no
@@ -57,6 +76,34 @@
 	 where status='Y'
 	 order
 	    by approve_date desc
+</select>
+
+<select id="selectReview" parameterType="_int" resultMap="reviewResultSet">
+	<![CDATA[select * 
+			   from 
+					(
+					select 
+						   r.review_no
+					     , r.star
+					     , r.review_content
+					     , r.enroll_date
+					     , m.nickname
+					     , m.mem_pic
+					  from review r
+					  join member m 
+					    on(r.mem_no=m.mem_no)
+					 where r.lesson_no = #{lessonNo} 
+					   and r.status = 'Y'
+					 order
+					    by r.enroll_date desc
+					    )
+			  where rownum < 6]]> 
+</select>
+
+<select id="selectLessonFaqList" parameterType="_int" resultMap="lessonFaqResultSet">
+	select *
+	  from lesson_faq
+	 where lesson_no = #{lessonNo}
 </select>
 
 </mapper>

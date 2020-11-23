@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.ee.user.lesson.model.service.LessonService;
-import com.kh.ee.user.review.model.service.ReviewService;
+import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.review.model.vo.Review;
 
 @Controller
@@ -18,7 +18,6 @@ public class LessonController {
 	
 	@Autowired
 	private LessonService lService;
-	private ReviewService revService; 
 
 	@RequestMapping("kids.le")
 	public String kidsCurriculum() {
@@ -53,12 +52,14 @@ public class LessonController {
 	//상세페이지에서 보여질 후기 부분 부터 작성.(학천)
 	@RequestMapping("courseDetailView.le")
 	public String courseDetailView(int lessonNo, HttpSession session, Model model) {
-		ArrayList<Review> list = revService.selectReview(lessonNo); 
-		System.out.println("lessonNo:" + lessonNo);
+		ArrayList<Review> list = lService.selectReview(lessonNo); 
+		ArrayList<LessonFaq> faqList = lService.selectLessonFaqList(lessonNo); 
 		
-		model.addAttribute("list", list); 		
+		model.addAttribute("list", list); 
+		model.addAttribute("faqList",faqList);
 		return "user/lesson/classDetailView"; 
 	}
+	
 
 		
 	

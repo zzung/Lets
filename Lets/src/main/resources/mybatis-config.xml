@@ -10,6 +10,7 @@
 		<typeAlias type="com.kh.ee.user.faq.model.vo.Faq" alias="Faq"/>
 		<typeAlias type="com.kh.ee.user.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.ee.user.lesson.model.vo.Lesson" alias="Lesson" />
+		<typeAlias type="com.kh.ee.user.lesson.model.vo.LessonFaq" alias="LessonFaq" /> 
 	</typeAliases>
 	
 	<mappers>

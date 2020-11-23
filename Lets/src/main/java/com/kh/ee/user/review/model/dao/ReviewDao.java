@@ -15,11 +15,6 @@ public class ReviewDao {
 		//System.out.println("lessonNo:" + lessonNo);
 		return (ArrayList)ss.selectList("reviewMapper.selectReviewList", lessonNo);
 	}
-	
-	//상세페이지에서 보여질 후기 리스트 
-	public ArrayList<Review> selectReview(int lessonNo, SqlSessionTemplate ss) {
-		return (ArrayList)ss.selectList("reviewMapper.selectReview",lessonNo);
-	}
 
 	public int deleteReview(int reviewNo, SqlSessionTemplate ss) {
 		

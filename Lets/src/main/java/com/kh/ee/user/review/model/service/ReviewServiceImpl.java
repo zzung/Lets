@@ -61,10 +61,5 @@ public class ReviewServiceImpl implements ReviewService{
 		return 0;
 	}
 	
-	//상세페이지에서 보여질 후기 들 
-	@Override
-	public ArrayList<Review> selectReview(int lessonNo) {
-		return revDao.selectReview(lessonNo, ss);
-	}
 
 }

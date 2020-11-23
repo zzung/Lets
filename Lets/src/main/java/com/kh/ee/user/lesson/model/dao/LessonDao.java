@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.review.model.vo.Review;
 
 @Repository
@@ -23,4 +24,12 @@ public class LessonDao {
 		return (ArrayList)ss.selectList("lessonMapper.selectPrepareList", l);
 	}
 	
+	//상세페이지에서 보여질 후기 리스트 
+	public ArrayList<Review> selectReview(int lessonNo, SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectReview",lessonNo);
+	}
+
+	public ArrayList<LessonFaq> selectLessonFaqList(int lessonNo, SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectLessonFaqList",lessonNo);
+	}
 }
