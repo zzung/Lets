@@ -33,6 +33,28 @@
 	    by review_no desc
 </select>
 
+<select id="selectReview" parameterType="_int" resultMap="reviewResultSet">
+	<![CDATA[select * 
+			   from 
+					(
+					select 
+						   r.review_no
+					     , r.star
+					     , r.review_content
+					     , r.enroll_date
+					     , m.nickname
+					     , m.mem_pic
+					  from review r
+					  join member m 
+					    on(r.mem_no=m.mem_no)
+					 where r.lesson_no = #{lessonNo} 
+					   and r.status = 'Y'
+					 order
+					    by dbms_random.random
+					    )
+			  where rownum < 5]]> 
+</select>
+
 <update id="deleteReview" parameterType="_int">
 	update
 	        review
@@ -61,4 +83,14 @@
 	    , #{reviewContent}
 	    )
 </insert>
+
+<update id="updateReview" parameterType="Review">
+	update
+	        review
+	   set
+	        review_content = #{reviewContent}
+	      , modify_date = SYSDATE
+	      , star = #{star}
+	 where review_no = #{reviewNo}
+</update>
 </mapper>

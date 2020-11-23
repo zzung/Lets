@@ -38,12 +38,20 @@
 						</div>
 					</div>
 				</div>
+				<script>
+					$(function(){
+						$(".course-img").click(function(){
+							location.href="courseDetailView.le?lessonNo="+$(this).children().eq(0).val();
+						});
+					});
+				</script>
 				<!--?slider-->
 				<div class="exampleRow">
 					<div class="col-xs-12">
 						<div id="exampleSlider-popular">
 							<div class="MS-content">
 								<div class="slider-course mb-40 item">
+									<input type="hidden" name="lessonNo" value="1">
 									<div class="course-img">
 										<img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
 									</div>

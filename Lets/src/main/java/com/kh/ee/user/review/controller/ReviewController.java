@@ -57,5 +57,17 @@ public class ReviewController {
 			return "fail";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping("updateReview.rev")
+	public String updateReview(Review r) {
+		int result = revService.updateReview(r);
+		
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 
 }

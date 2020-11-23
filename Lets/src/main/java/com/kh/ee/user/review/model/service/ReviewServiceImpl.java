@@ -40,8 +40,7 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public int updateReview(Review r) {
-		// TODO Auto-generated method stub
-		return 0;
+		return revDao.updateReview(r, ss);
 	}
 
 	@Override
@@ -60,6 +59,12 @@ public class ReviewServiceImpl implements ReviewService{
 	public int replyDeleteReview() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	//상세페이지에서 보여질 후기 들 
+	@Override
+	public ArrayList<Review> selectReview(int lessonNo) {
+		return revDao.selectReview(lessonNo, ss);
 	}
 
 }

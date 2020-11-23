@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ee.user.lesson.model.dao.LessonDao;
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.review.model.vo.Review;
 
 
 
@@ -34,6 +35,5 @@ public class LessonServiceImpl implements LessonService{
 	public ArrayList<Lesson> selectPrepareList(Lesson l) {
 		return lDao.selectPrepareList(ss, l);
 	}
-	
 	
 }

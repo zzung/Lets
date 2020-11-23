@@ -9,10 +9,16 @@ import com.kh.ee.user.review.model.vo.Review;
 
 @Repository
 public class ReviewDao {
-
+	
+	//후기 더보기에서 보여질 전체 후기 리스트 
 	public ArrayList<Review> selectReviewList(int lessonNo, SqlSessionTemplate ss) {
 		//System.out.println("lessonNo:" + lessonNo);
 		return (ArrayList)ss.selectList("reviewMapper.selectReviewList", lessonNo);
+	}
+	
+	//상세페이지에서 보여질 후기 리스트 
+	public ArrayList<Review> selectReview(int lessonNo, SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("reviewMapper.selectReview",lessonNo);
 	}
 
 	public int deleteReview(int reviewNo, SqlSessionTemplate ss) {
@@ -24,5 +30,11 @@ public class ReviewDao {
 
 		return ss.insert("reviewMapper.insertReview",r);
 	}
+
+	public int updateReview(Review r, SqlSessionTemplate ss) {
+		return ss.selectOne("reviewMapper.updateReview", r);
+		
+	}
+
 
 }

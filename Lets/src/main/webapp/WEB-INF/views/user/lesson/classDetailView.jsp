@@ -167,56 +167,34 @@
 	                  </div>
 	                  <!--end of 튜터 소개 -->
 	                  <!--?리뷰 area-->
-	                  <div class="comments-area">
-	                     <div class="text-right">
-	                        <i class="fas fa-plus" id="showMore"> 더보기</i>
-	                     </div>
-	                     <div class="container">
-	                        <h4>리뷰 2</h4>
-	                      </div>
-	                     <div class="comment-list">
-	                        <div class="single-comment justify-content-between d-flex">
-	                           <div class="user justify-content-between d-flex">
-	                              <div class="thumb">
-	                                 <img src="resources/user/assets/img/comment/cat1.jpg" alt="">
-	                              </div>
-	                              <div class="desc">
-	                                 <p class="comment">
-	                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-	                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-	                                 </p>
-	                                 <div class="d-flex justify-content-between">
-	                                    <div class="d-flex align-items-center">
-	                                       <span>Emilly Blunt</span>
-	                                       <p class="date">December 4, 2017 at 3:12 pm </p>
-	                                    </div>
-	                                 </div>
-	                              </div>
-	                           </div>
-	                        </div>
-	                     </div>
-	                     <div class="comment-list">
-	                        <div class="single-comment justify-content-between d-flex">
-	                           <div class="user justify-content-between d-flex">
-	                              <div class="thumb">
-	                                 <img src="resources/user/assets/img/comment/comment_2.png" alt="">
-	                              </div>
-	                              <div class="desc">
-	                                 <p class="comment">
-	                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-	                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-	                                 </p>
-	                                 <div class="d-flex justify-content-between">
-	                                    <div class="d-flex align-items-center">
-	                                       <span>Emilly Blunt</span>
-	                                       <p class="date">December 4, 2017 at 3:12 pm </p>
-	                                    </div>
-	                                 </div>
-	                              </div>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
+	                  <c:forEach var="review" items=${list }>
+		                  <div class="comments-area">
+		                     <div class="text-right">
+		                        <i class="fas fa-plus" id="showMore"> 더보기</i>
+		                     </div>
+		                     <div class="container">
+		                        <h4>리뷰 2</h4>
+		                      </div>
+		                     <div class="comment-list">
+		                        <div class="single-comment justify-content-between d-flex">
+		                           <div class="user justify-content-between d-flex">
+		                              <div class="thumb">
+		                                 <img src="resources/user/assets/img/comment/cat1.jpg" alt="">
+		                              </div>
+		                              <div class="desc">
+		                                 <p class="comment">review.reviewContent</p>
+		                                 <div class="d-flex justify-content-between">
+		                                    <div class="d-flex align-items-center">
+		                                       <span>review.nickname</span>
+		                                       <p class="date">review.enrollDate </p>
+		                                    </div>
+		                                 </div>
+		                              </div>
+		                           </div>
+		                        </div>
+		                     </div>
+		                  </div>
+	                  </c:forEach>
 	                  <!--? end 리뷰 area-->
 	                  <script>
 	                  	$(function(){

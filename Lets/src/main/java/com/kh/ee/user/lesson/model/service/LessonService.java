@@ -3,6 +3,7 @@ package com.kh.ee.user.lesson.model.service;
 import java.util.ArrayList;
 
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.review.model.vo.Review;
 
 public interface LessonService {
 	
@@ -11,6 +12,7 @@ public interface LessonService {
 	ArrayList<Lesson> selectApproveStatusList(Lesson l);
 	
 	ArrayList<Lesson> selectPrepareList(Lesson l);
+	
 	
 
 }
