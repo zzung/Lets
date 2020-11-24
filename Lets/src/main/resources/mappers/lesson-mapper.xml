@@ -51,6 +51,14 @@
 	<result column="faq_answer" property="faqAnswer" />
 </resultMap>
 
+<resultMap id="tutorResultSet" type="Tutor">
+	<result column="mem_no" property="memNo" />
+	<result column="tutor_pic" property="tutorPic" />
+	<result column="tutor_info" property="tutorInfo"/>
+	<result column="modify_date" property="modifyDate" />
+	<result column="status" property="status" />
+</resultMap>
+
 <select id="selectApproveLessonList" resultMap="lessonResultSet" >
 	select
 	       lesson_no
@@ -104,6 +112,20 @@
 	select *
 	  from lesson_faq
 	 where lesson_no = #{lessonNo}
+</select>
+
+<select id="selectTutorInfo" parameterType="_int" resultMap="tutorResultSet">
+	select
+	       t.mem_no
+	     , t.tutor_pic
+	     , t.tutor_info
+	     , t.status
+	     , m.nickname
+	  from tutor t
+	  join member m on (t.mem_no=m.mem_no)
+	  join lesson l on (t.mem_no=l.mem_no)
+	 where t.status='Y'
+	   and l.lesson_no = #{lessonNo}
 </select>
 
 </mapper>

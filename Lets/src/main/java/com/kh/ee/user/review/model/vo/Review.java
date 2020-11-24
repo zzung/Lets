@@ -26,6 +26,7 @@ public class Review {
 	private Date modifyDate;
 	private String status; 
 	
+	//조인 필요해서 해둠(학천)
 	private String nickname;
 	private String memPic; 
 	

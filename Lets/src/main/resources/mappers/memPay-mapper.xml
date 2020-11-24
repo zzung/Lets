@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memPayMapper">
+
+<resultMap type="MemPay" id="memPayResultSet">
+	<id column="mem_pay_no" property="memPayNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="lesson_no" property="lessonNo" />
+	<result column="type" property="type" />
+	<result column="repayment" property="repayment" />
+	<result column="payment_date" property="paymentDate" />
+	<result column="cancel_date" property="cancelDate" />
+	<result column="status" property="status" />
+	<result column="del_name" property="delName" />
+	<result column="del_no" property="delNo" />
+	<result column="del_status" property="delStatus" />
+	<collection property="Lesson" resultMap="lessonResultSet"/>
+	<collection property="Member" resultMap="memberResultSet"/>
+</resultMap>
+
+<resultMap id="lessonResultSet" type="Lesson">
+	<id column="lesson_no" property="lessonNo" />
+	<result column="lesson_title" property="lessonTitle" />
+</resultMap>
+
+<resultMap id="memberResultSet" type="Member">
+	<id column="mem_no" property="memNo" />
+	<result column="mem_Id" property="memId"/>
+</resultMap>
+
+<select id="selectPrepareList" resultMap="memPayResultSet">
+	select
+	       mp.lesson_no
+	     , m.mem_id
+	     , l.lesson_title
+	     , mp.payment_date
+	     , mp.del_status
+	     , mp.status
+	  from mem_pay mp
+	  join lesson l on(l.lesson_no = mp.lesson_no)
+	  join member m on(m.mem_no = mp.mem_no)
+	 where l.status = 'Y'
+</select>
+
+
+</mapper>

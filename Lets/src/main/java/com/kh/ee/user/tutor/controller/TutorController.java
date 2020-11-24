@@ -14,6 +14,8 @@ import com.kh.ee.user.faq.model.service.FaqService;
 import com.kh.ee.user.faq.model.vo.Faq;
 import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.memPay.model.service.MemPayService;
+import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.tutor.model.service.TutorService;
 import com.kh.ee.user.tutor.model.vo.Tutor;
 
@@ -23,6 +25,8 @@ public class TutorController {
 	private FaqService faqService;
 	@Autowired
 	private LessonService lessonService;
+	@Autowired
+	private MemPayService memPayService;
 	
 	@Autowired
 	private TutorService tutorService;
@@ -42,14 +46,8 @@ public class TutorController {
 		ArrayList<Lesson> aLlist = lessonService.selectApproveLessonList(l);
 		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList(l);
 		
-		//ArrayList<Lesson> pLlist = lessonService.selectPrepareList(l);
-		
-		
 		model.addAttribute("aLlist", aLlist);
 		model.addAttribute("sLlist", sLlist);
-		System.out.println(sLlist);
-		//model.addAttribute("pLlist", pLlist);
-		
 		
 		return "user/tutor/myClassView";
 	}
@@ -72,6 +70,15 @@ public class TutorController {
 			return "redirect:tutorEnroll.te";
 		}
 		
+	}
+	
+	@RequestMapping("memPrepare.tm")
+	public String memPrepare( MemPay mp, Model model) {
+		ArrayList<MemPay> mpList = memPayService.selectPrepareList(mp);
+		model.addAttribute("mpList", mpList);
+		System.out.println(mpList);
+		
+		return "user/tutor/myClassView";
 	}
 
 }

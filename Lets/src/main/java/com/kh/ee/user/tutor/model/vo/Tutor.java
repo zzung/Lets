@@ -21,4 +21,7 @@ public class Tutor {
 	private Date modifyDate;
 	private String status;
 	
+	// 조인 필요해서 해 둠(학천)
+	private String nickname; 
+	
 }

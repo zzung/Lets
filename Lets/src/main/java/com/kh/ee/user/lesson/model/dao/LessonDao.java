@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.review.model.vo.Review;
+import com.kh.ee.user.tutor.model.vo.Tutor;
 
 @Repository
 public class LessonDao {
@@ -31,5 +32,9 @@ public class LessonDao {
 
 	public ArrayList<LessonFaq> selectLessonFaqList(int lessonNo, SqlSessionTemplate ss) {
 		return (ArrayList)ss.selectList("lessonMapper.selectLessonFaqList",lessonNo);
+	}
+
+	public Tutor selectTutorInfo(int lessonNo, SqlSessionTemplate ss) {
+		return ss.selectOne("lessonMapper.selectTutorInfo",lessonNo);
 	}
 }

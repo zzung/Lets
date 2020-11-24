@@ -27,7 +27,7 @@ public class ReviewDao {
 	}
 
 	public int updateReview(Review r, SqlSessionTemplate ss) {
-		return ss.selectOne("reviewMapper.updateReview", r);
+		return ss.update("reviewMapper.updateReview", r);
 		
 	}
 
