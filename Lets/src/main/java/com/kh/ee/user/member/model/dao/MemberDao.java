@@ -24,4 +24,8 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.nicknameCheck", nickname);
 	}
 
+	public Member findId(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.findId", m);
+	}
+
 }

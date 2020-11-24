@@ -89,12 +89,12 @@
 			                                              <div class="after-login-dropdown">
 			                                                  <img src="resources/user/assets/img/member/man.png" width="35px" height="35px">
 			                                                  <ul class="after-login-dropdown-content">
-			                                                      <li><a href="#">마이페이지</a></li>
+			                                                      <li><a href="myPage.me">마이페이지</a></li>
 			                                                      <li style="margin-top: -10px;"><a href="logout.me">로그아웃</a></li>
 			                                                  </ul>
 			                                              </div>
 			                                          </li>
-			                                          <li style="color: #2d3092; font-weight: bolder; margin-left: 10px;">유저1 님</li>
+			                                          <li style="color: #2d3092; font-weight: bolder; margin-left: 10px;">${loginUser.nickname} 님</li>
 			                                      </ul>
 			                              </c:otherwise>
 		                           </c:choose>

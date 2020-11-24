@@ -23,11 +23,11 @@
 	                    <br>
 	                    <div>이메일</div>
 	                    <div><input type="text" placeholder="이메일을 입력해주세요" id="memId" name="memId" class="form-control" required></div>
-	                    <div><a href="">아이디를 잊으셨나요?</a></div>
+	                    <div><a href="findId.me">아이디를 잊으셨나요?</a></div>
 	                    <br>
 	                    <div>비밀번호</div>
 	                    <div><input type="password" placeholder="비밀번호를 입력해주세요" id="memPwd" name="memPwd" class="form-control" required></div>
-	                    <div><a href="">비밀번호를 잊으셨나요?</a></div>
+	                    <div><a href="findPwdForm.me">비밀번호를 잊으셨나요?</a></div>
 	                    <div class="login-join"><a href="enrollForm.me">회원가입 하기</a></div>
 	                    <br><br>
 	                    <div class="login-bottom">

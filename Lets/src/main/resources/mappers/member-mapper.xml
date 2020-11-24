@@ -81,4 +81,13 @@
 	 where nickname like #{nickname}
 </select>
 
+<select id="findId" parameterType="Member" resultMap="memberResultSet">
+	select
+	       mem_id
+	     , enroll_date
+	  from member
+	 where birthday like #{birthday}
+	   and mem_name like #{memName}
+</select>
+
 </mapper>

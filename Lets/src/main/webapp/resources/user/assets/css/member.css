@@ -112,7 +112,7 @@ input[type='radio'] {
    margin-left: 200px;
    margin-top: 30px;
 }
-.findId-btn div{ margin-left: 380px; }
+.findId-btn input{ margin-left: 380px; }
 
 /* find_Id_Pwd 2 */
 .findId-content3 table th{width:180px;}
@@ -130,6 +130,19 @@ input[type='radio'] {
 }
 .findId-content3 td{ font-size: 13px;}
 .findId-btn2{margin-left: 300px;}
+.findId-content4 {
+  margin-left: 70px;
+  width: 100%;
+  height: 180px;
+  border: 1px solid black;
+}
+.findId-content4 table {
+  border-collapse: separate;
+  border-spacing: 0 20px;
+  margin-left: 270px;
+  margin-top: 60px;
+}
+
 
 /* find_Pwd 1 */
 .findPwd-title{ font-size: 28px; font-weight: bolder;margin-left: 80px;}
@@ -252,7 +265,7 @@ input[type='radio'] {
   margin-left: 115px;
   cursor: pointer;
 }
-.user-info-update a:hover{color: rgb(46, 48, 146);}
+.user-info-update a:hover{color: rgb(46, 48, 146)!important; font-weight: bolder;}
 .menu-list{margin-left: 35px; margin-top: 10px; width: 100%;}
 .menu-list img{
   width: 50px;
@@ -275,6 +288,99 @@ input[type='radio'] {
    border: 1px solid black;
    height: 300px;
 }
+.myPage-menu2 img {
+  width: 80%;
+  display: block;
+  margin: auto;
+  margin-top: 40px;
+}
+.myPage-menu2 > #discount-time {
+  text-align: center;
+  border: 1px solid #2d3092;
+  background: #2d3092;
+  color: white;
+  font-size: 14px;
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+}
+.myPage-menu2 > .discount-info {
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+}
+.myPage-menu2 .discount-category {
+  float: left;
+  width: 50%;
+  text-align: center;
+  color: #2d3092;
+}
+.myPage-menu2 .discount-title {
+  margin: auto;
+  margin-top: 15px;
+  width: 80%;
+  color: #2d3092;
+  text-align: center;
+  font-weight: bold;
+}
+.my-cont-2 .class-type {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+}
+.my-cont-2 .online-list {
+  border: 1px solid #eee;
+  width: 90%;
+  padding: 3px;
+  margin: auto;
+  height: 160px;
+  margin-bottom: 10px;
+}
+.my-cont-2 img {
+  width: 200px;
+  height: 150px;
+  padding: 5px;
+}
+.my-cont-2 .online-list .online-thumbnail {
+  float: left;
+  text-align: center;
+}
+.my-cont-2 .online-list p {
+  font-size: 14px;
+  text-align: left;
+  line-height: 10px;
+}
+.my-cont-2 button {
+  margin-top: 50px;
+}
+
+.my-cont-2 .nav_tabs > .nav_link:focus,
+.my-cont-2 .nav_tabs > .nav_link:hover {
+  color: black;
+}
+
+.my-cont-2 .nav_tabs .nav_item.show .nav_link,
+.my-cont-2 .nav_tabs .nav_link.active {
+  color: black;
+  background-color: transparent;
+  border: transparent;
+}
+
+.my-cont-2 .nav_tabs .nav_item {
+  display: block;
+  color: #2d3092;
+  font-size: 22px;
+  font-weight: bold;
+}
+.my-cont-2 .nav_tabs .nav_link {
+  border: 0;
+  padding: 0;
+  margin: 5px 120px;
+  margin-bottom: 31px;
+  position: relative;
+  background: none;
+}
+
 
 /* myPage info update Modal */
 .mbody-1-img img{

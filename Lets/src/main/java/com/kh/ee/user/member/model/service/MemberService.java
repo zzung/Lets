@@ -8,5 +8,6 @@ public interface MemberService {
 	int insertMember(Member m);
 	int idCheck(String memId);
 	int nicknameCheck(String nickname);
+	Member findId(Member m);
 
 }

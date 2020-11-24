@@ -92,6 +92,71 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping("myPage.me")
+	public String myPage() {
+		return "user/member/myPage";
+	}
 	
+	@RequestMapping("findId.me")
+	public String findId() {
+		return "user/member/findIdForm";
+	}
+	
+	@RequestMapping("findIdResult.me")
+	public String findId(Member m, Model model) {
+		
+		Member mem = mService.findId(m);
+		if(mem != null) {
+			model.addAttribute("mem", mem);
+		}else {
+			model.addAttribute("errorMsg","일치하는 회원 정보가 없습니다.");
+		}
+		return "user/member/findIdResult";
+	}
+	
+	@RequestMapping("findPwdForm.me")
+	public String findPwd() {
+		return "user/member/findPwdForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping("findPwdFirst.me")
+	public String findPwdFirst(String memId) {
+		
+		int result = mService.idCheck(memId);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@RequestMapping("findPwdSecond.me")
+	public String findPwdSecond(HttpSession session) {
+		
+		int sendRandNum = (int)(Math.random()*900000)+100000;
+		System.out.println(sendRandNum);
+		session.setAttribute("sendRandNum", sendRandNum);
+		
+		return "user/member/findPwdSecond";
+	}
+	
+	@ResponseBody
+	@RequestMapping("compChecknum.me")
+	public String compareCheckNumber(int checkNumber, HttpSession session) {
+		
+		int sendRandNum = (int)session.getAttribute("sendRandNum");
+		if(checkNumber==sendRandNum) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@RequestMapping("changePwd.me")
+	public String changePwd() {
+		// 인증메일 받은 이메일 가져오기
+		return "";
+	}
 	
 }

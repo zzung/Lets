@@ -32,6 +32,10 @@ public class MemberServiceImpl implements MemberService{
 	public int nicknameCheck(String nickname) {
 		return mDao.nicknameCheck(sqlSession, nickname);
 	}
+	@Override
+	public Member findId(Member m) {
+		return mDao.findId(sqlSession, m);
+	}
 	
 	
 }
