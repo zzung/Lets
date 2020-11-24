@@ -53,7 +53,7 @@ cursor: pointer;
 #commentForm{
   width: 90%;
 }
-.row{
+.lesson-row{
   float: left;
   width: 50%;
 }
@@ -322,10 +322,10 @@ width: 11px;
 height: 11px;
 }
 /* 카테고리 */
-.default-select {
+.lesson-select {
     height: 40px;
   }
-  .default-select .nice-select {
+  .lesson-select .nice-select {
     border: none;
     border-radius: 0px;
     height: 40px;
@@ -333,7 +333,7 @@ height: 11px;
     padding-left: 20px;
     padding-right: 40px;
   }
-  .default-select .nice-select .list {
+  .lesson-select .nice-select .list {
     margin-top: 0;
     border: none;
     border-radius: 0px;
@@ -341,7 +341,7 @@ height: 11px;
     width: 100%;
     padding: 10px 0 10px 0px;
   }
-  .default-select .nice-select .list .option {
+  .lesson-select .nice-select .list .option {
     font-weight: 300;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
@@ -352,19 +352,19 @@ height: 11px;
     font-size: 12px;
     padding-left: 20px;
   }
-  .default-select .nice-select .list .option.selected {
+  .lesson-select .nice-select .list .option.selected {
     color: #1f2b7b;
     background: transparent;
   }
-  .default-select .nice-select .list .option:hover {
+  .lesson-select .nice-select .list .option:hover {
     color: #1f2b7b;
     background: transparent;
   }
-  .default-select .current {
+  .lesson-select .current {
     margin-right: 50px;
     font-weight: 300;
   }
-  .default-select .nice-select::after {
+  .lesson-select .nice-select::after {
     right: 20px;
   }
 

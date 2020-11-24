@@ -90,7 +90,7 @@
              <tr>
                  <th>수업 카테고리</th>
                  <td colspan="2">
-                     <div class="default-select" id="default-select">
+                     <div class="lesson-select" id="lesson-select">
                          <select style="display: none;">
                              <option value=" 1">수업 카테고리를 선택해주세요.</option>
                              <option value="1">키즈</option>
@@ -98,15 +98,6 @@
                              <option value="1">커리어</option>
                              <option value="1">취미</option>
                          </select>
-                        <div class="nice-select" tabindex="0">
-                            <span class="current">수업 카테고리를 선택해주세요.</span>
-                            <ul class="list">
-                                <li data-value=" 1" class="option selected focus">키즈</li>
-                                <li data-value="1" class="option">머니</li>
-                                <li data-value="1" class="option">커리어</li>
-                                <li data-value="1" class="option">취미</li>
-                            </ul>
-                        </div>
                      </div>
                  </td>
              </tr>
@@ -123,7 +114,7 @@
             </ul>
         </div>
 
-        <div class="row">
+        <div class="lesson-row">
             <div class="col-sm-6">
                <div class="form-group">
                    <!-- 첫 화면일 때 -->
@@ -179,7 +170,7 @@
             
          </div>
          <br><br>
-         <div class="row">
+         <div class="lesson-row">
              <div class="typography">
                  <h4>1. 커리큘럼 주제 1</h4>
                  <h5>1) 커리큘럼 세부 리스트 1</h5>

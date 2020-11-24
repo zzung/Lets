@@ -20,7 +20,7 @@
             
             <h5><b>튜터 소개</b></h5>
             <div style="background-color: #f9f9ff; width: 900px; font-size: 13px;">
-                <ul class="tutorEnroll-list">
+                <ul class="unordered-list">
                     <font style="font-size:large;"><b>Tip</b></font>
                     <li>튜터님의 재능에 관한 경력 및 이력을 작성해 주세요. </li>
                     <li>튜터님이 재능을 얻기 위해 겪었던 경험에 대해 작성해 주세요.</li>
