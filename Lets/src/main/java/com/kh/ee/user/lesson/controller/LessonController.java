@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.review.model.vo.Review;
+import com.kh.ee.user.tutor.model.vo.Tutor;
 
 @Controller
 public class LessonController {
@@ -54,9 +55,11 @@ public class LessonController {
 	public String courseDetailView(int lessonNo, HttpSession session, Model model) {
 		ArrayList<Review> list = lService.selectReview(lessonNo); 
 		ArrayList<LessonFaq> faqList = lService.selectLessonFaqList(lessonNo); 
+		Tutor t = lService.selectTutorInfo(lessonNo); 
 		
 		model.addAttribute("list", list); 
 		model.addAttribute("faqList",faqList);
+		model.addAttribute("t", t);
 		return "user/lesson/classDetailView"; 
 	}
 	

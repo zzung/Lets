@@ -9,6 +9,8 @@
 <meta property="og:type" content="website" />
 <meta property="og:description" content="요기서 배워 배우라고!!" />
 <meta property="og:image" content="http://localhost:8888/ee/resources/user/assets/img/logo/logo.png" />
+<meta property="og:image:width" content="200"  />
+<meta property="og:image:height" content="100"  />
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
@@ -145,23 +147,10 @@
 	                     <div><h2>튜터 소개</h2></div>  
 	                     <br>
 	                     <div class="media align-items-center">
-	                        <img src="resources/user/assets/img/blog/author.png" alt="">
+	                        <img src="${t.tutorPic }" alt="">
 	                        <div class="media-body">
-	                              <h4>요가킹 홍길룡</h4>
-	                           <p>품고 맺어, 돋고, 품에 말이다. 유소년에게서 그들에게 곳이 피어나는 가지에 
-					                              청춘에서만 것이다. 청춘의 얼마나 싹이 밝은 칼이다. 유소년에게서 그러므로 물방아 
-					                              열락의 싹이 실로 힘있다. 하는 들어 이 공자는 이상의 설레는 따뜻한 피다.
-					                              시들어 이상을 있는 운다. 사람은 피가 방황하였으며, 얼음과 생의 밝은 같지 오직 
-					                              사막이다. 사랑의 인생을 얼음에 피에 싹이 풀이 이상, 관현악이며, 말이다. 보배를 
-					                              이상 곳으로 뿐이다. 이상 영락과 가치를 안고, 쓸쓸하랴? 방지하는 석가는 가지에 
-					                              얼마나 이상 무엇을 있으랴? 공자는 때까지 피어나는 운다.
-					                              열락의 너의 천지는 싸인 남는 돋고, 실현에 속에서 사막이다. 
-					                              우리는 인생에 청춘의 것이다. 뭇 내는 노년에게서 보이는 설레는 용기가 그것은 
-					                              얼마나 약동하다. 구하지 얼음이 오직 청춘을 별과 목숨을 말이다. 
-					                              광야에서 희망의 동산에는 그들을 것은 때문이다. 
-					                              수 하였으며, 날카로우나 작고 긴지라 속잎나고, 별과 아름다우냐? 
-					                              찬미를 같이, 그것을 희망의 새 뿐이다.
-					           </p>
+	                              <h4>${t.nickname }</h4>
+	                           <p>${t.tutorInfo }</p>
 	                        </div>
 	                     </div>
 	                  </div>
@@ -474,7 +463,8 @@
 	        content : {
 	            title : $('meta[property="og:title"]').attr('content'),
 	            description : $('meta[property="og:description"]').attr('content'),
-	            imageUrl : $('meta[property="og:image"]').attr('content'),
+	            imageUrl : "http://localhost:8888/ee/resources/user/assets/img/logo/logo.png",
+	          
 	            link : {
 	                mobileWebUrl : 'http://localhost:8888/ee',
 	                webUrl : 'http://localhost:8888/ee',

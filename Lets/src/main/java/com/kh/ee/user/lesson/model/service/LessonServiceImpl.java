@@ -10,6 +10,7 @@ import com.kh.ee.user.lesson.model.dao.LessonDao;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.review.model.vo.Review;
+import com.kh.ee.user.tutor.model.vo.Tutor;
 
 
 
@@ -47,6 +48,11 @@ public class LessonServiceImpl implements LessonService{
 	@Override
 	public ArrayList<LessonFaq> selectLessonFaqList(int lessonNo) {
 		return lDao.selectLessonFaqList(lessonNo, ss);
+	}
+
+	@Override
+	public Tutor selectTutorInfo(int lessonNo) {
+		return lDao.selectTutorInfo(lessonNo, ss);
 	}
 	
 	

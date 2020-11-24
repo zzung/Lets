@@ -80,7 +80,7 @@
    		$(function(){
    			selectReviewList(); 
    			
-   			setInterval(selectReviewList, 1000);
+   			//setInterval(selectReviewList, 1000);
    		});
    		
    		//후기 작성 ajax
@@ -98,7 +98,8 @@
    					
    					if(result == "success"){
    						$("#reviewContent").val("");
-   						$("input:radio[name=star]:checked").val("");
+   						$("#writeReviewArea").hide(); 
+   						$("input:radio[name=star]:checked").attr("checked",false);
    						selectReviewList();
    					}
    				},
@@ -148,9 +149,9 @@
                         	}
                         result += "</div>"
                         result += "<div class='reply-btn'>"
-                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply();'>" + '답장' + "</a></div>"
-                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReview();'>" + '수정' + "</a></div>"
-                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteModal'>" + '삭제' + "</a></div>"
+                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
+                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewSet(this)' data-no='"+list[i].reviewNo +"'>" + '수정' + "</a></div>"
+                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteModal' data-no='"+ list[i].reviewNo +"' onclick='deleteReviewSet(this)'>" + '삭제' + "</a></div>"
                         result += "</div>"        
                         result += "</div>"
                         result += "</div>"
@@ -166,6 +167,43 @@
    				}
    			});
    		}
+      </script>
+      
+      <script>
+      	function deleteReviewSet(e){
+      		$("#deleteReply").val($(e).data("no"));
+      	}
+      	
+      	function updateReviewSet(e){
+			var revNo = $(e).data("no"); 
+			var revContent = $(e).parents().siblings("#reviewCommentArea").text();
+			var editForm = "";
+			
+			editForm += '<input type="hidden" id="changedReviewNo" value="'+ revNo +'">'
+			editForm += "<div class='mt-10'>"
+            editForm += "<textarea class='review-textarea' id='changedReviewContent' required>" + revContent + "</textarea>"
+            editForm += "</div>"
+            editForm += "<div class='review-writeArea'>"
+            editForm += "<div class='rate' id='review-writeRatting'>"
+            editForm += "<input type='radio' id='star5' name='changeStar' value='5' />"
+            editForm += "<label for='star5'>"+'5 stars'+"</label>"
+            editForm += "<input type='radio' id='star4' name='changeStar' value='4' />"
+            editForm += '<label for="star4">'+ "4 stars" +'</label>'
+            editForm += '<input type="radio" id="star3" name="changeStar" value="3" />'
+            editForm += '<label for="star3">'+ "3 stars" +'</label>'
+            editForm += '<input type="radio" id="star2" name="changeStar" value="2" />'
+            editForm += '<label for="star2">'+ "2 stars" +'</label>'
+            editForm += '<input type="radio" id="star1" name="changeStar" value="1" />'
+            editForm += '<label for="star1">'+ "1 stars" +'</label>'
+            editForm += '</div>'
+            editForm += '<div id="submitReview" align="right">'
+            editForm += '<button class="genric-btn1 primary-border extrasmall" onclick="updateReview();">'+ "등록" + '</button>'
+            editForm += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelUpdateReview();">'+ "취소" + '</button>'
+            editForm += '</div>'
+            editForm += '</div>'
+            
+            $(e).parents(".comment-list ").html(editForm);
+      	}
       </script>
 	<!--후기 글 삭제-->
 
@@ -189,18 +227,20 @@
 	<script>
 		//후기 삭제 ajax
 		function deleteReply(){
-			var $revNo = $(".comment-list input[name=reviewNo]");
 			
 			$.ajax({
 				url:"deleteReview.rev",
 				data:{
-					reviewNo:$revNo.val()
+					reviewNo:$("#deleteReply").val()
 				},
 				type:'post',
 				success:function(result){
 					if(result == 'success'){
 						alert("후기 삭제되었습니다.");
 						$("#closeModal").click();
+						location.reload(); 
+						
+						
 					} else {
 						alert("삭제 실패했습니다.");
 					}
@@ -210,56 +250,38 @@
 				}
 			});
 		}
-		
+
+		function cancelUpdateReview(){
+			history.back(); 
+		}
 		//후기 수정 ajax
 		function updateReview(){
-			var revNo = $(".comment-list input[name=reviewNo]").val();
-			var revComment = $("#reviewCommentArea").val();
-			var editForm = "";
+			var changedRevNo = $("#changedReviewNo").val();
+			var changedReviewContent = $("#changedReviewContent").val();
 			
-			alert(revComment); 
+			alert(changedRevNo);
 			
-			editForm += '<input type="hidden" name=reviwNo value='+ revNo +'>'
-			editForm += "<div class='mt-10'>"
-            editForm += "<textarea class='review-textarea' id='reviewContent' required>	</textarea>"
-            editForm += "</div>"
-            editForm += "<div class='review-writeArea'>"
-            editForm += "<div class='rate' id='review-writeRatting'>"
-            editForm += "<input type='radio' id='star5' name='star' value='5' />"
-            editForm += "<label for='star5'>"+'5 stars'+"</label>"
-            editForm += "<input type='radio' id='star4' name='star' value='4' />"
-            editForm += '<label for="star4">'+ "4 stars" +'</label>'
-            editForm += '<input type="radio" id="star3" name="star" value="3" />'
-            editForm += '<label for="star3">'+ "3 stars" +'</label>'
-            editForm += '<input type="radio" id="star2" name="star" value="2" />'
-            editForm += '<label for="star2">'+ "2 stars" +'</label>'
-            editForm += '<input type="radio" id="star1" name="star" value="1" />'
-            editForm += '<label for="star1">'+ "1 stars" +'</label>'
-            editForm += '</div>'
-            editForm += '<div id="submitReview" align="right"><button class="genric-btn1 primary-border extrasmall" onclick="addReview();">'+ "등록" + '</button></div>'
-            editForm += '</div>'
-			
-           	$.ajax({
-   				url: "updateReview.rev",
+   			$.ajax({
+   				url:"updateReview.rev",
    				data:{
-   					reviewNo: revNo,
-   					reviewContent: revComment
+   					reviewNo:changedRevNo,
+   					reviewContent:changedReviewContent,
+   					star:$("input:radio[name=changeStar]:checked").val()	
    				},
-   				type:'post',
    				success:function(result){
    					
-   					if(result>0){
-	   					$(".comment-list .comment").replaceWith(editForm);					
-   					} else{
-   						alert("수정 가져오기 실패");
+   					if(result == "success"){
+   						$("#reviewContent").val("");
+   						$("input:radio[name=star]:checked").val("");
+   						selectReviewList();
    					}
    				},
-   				error:function(){
-   					console.log("후기 수정 ajax 넷트 실패")
+   				error:function(request,error){
+   					alert("fail");
+   					//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
    				}
    			});
-			
-		}
+   		}
 	</script>
    </main>
    <jsp:include page="../common/footer.jsp" />
