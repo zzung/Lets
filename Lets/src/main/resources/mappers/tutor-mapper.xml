@@ -3,11 +3,11 @@
 <mapper namespace="tutorMapper">
 
 	<resultMap type="Tutor" id="tutorResultSet">
-		<result column="MEM_NO" property="memNo"/>
-		<result column="TUTOR_PIC" property="tutorPic"/>
-		<result column="TUTOR_INFO" property="tutorInfo"/>
-		<result column="MODIFY_DATE" property="modifyDate"/>
-		<result column="STATUS" property="status"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="tutor_pic" property="tutorPic"/>
+		<result column="tutor_info" property="tutorInfo"/>
+		<result column="modify_date" property="modifyDate"/>
+		<result column="status" property="status"/>
 	</resultMap>
 
 </mapper>

@@ -60,7 +60,10 @@ public class LessonController {
 		return "user/lesson/classDetailView"; 
 	}
 	
-
+	@RequestMapping("enroll.le")
+	public String enrollLesson() {
+		return "user/lesson/lessonEnrollForm";
+	}
 		
 	
 }
