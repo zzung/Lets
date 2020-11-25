@@ -7,8 +7,221 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- css -->
-<link rel="stylesheet" href="resources/user/assets/css/curriculum.css">
 <link rel="stylesheet" href="resources/user/assets/css/style.css">
+<style>
+div{
+    box-sizing: border-box;
+}
+.main{
+    padding: 20px;
+    padding-bottom: 80px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.main>div{
+    padding: 10px;
+}
+.main>span{
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.main>hr{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.main textarea{
+	outline: 1px solid lightgray;
+}
+.main button{
+	color: white;
+	background-color: rgb(46, 48, 146);
+ 	border: none;
+ 	border-radius: 5px;
+ 	font-size: 15px;
+}
+#main_qna_box{
+    width: 70%;
+    margin-top: 50px;
+    margin-left: 15%;
+}
+#main_qna_box>h1{
+    color: rgb(46, 48, 146);
+    font-size: 35px;
+}
+#detail_qna_box{
+    border: 1px solid gray;
+    padding: 20px;
+}
+.question{
+    width: 100%;
+    height: 80px;
+}
+.question>div{
+    float: left;
+    height: 100%;
+}
+.user_img{
+    width: 15%;
+    text-align: center;
+}
+.blank{width: 5%;}
+.question_box{
+    width: 80%;
+    position: relative;
+}
+.question_box>p{
+    font-size: 15px;
+    font-weight: 500;
+}
+.question_box span{
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 0;
+}
+.enter{
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
+}
+.answer{
+    display: none;
+    margin-left: 20%;
+    width: 80%;
+    position: relative;
+}
+.answer>button{
+    position: absolute;
+}
+.answer_div{
+    padding: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+    border: none;
+    height: 100%;
+    resize: none;
+    width: 70%;
+}
+.div_close{
+	width: 50px;
+    bottom: 10px;
+    right: 10px;
+}
+.send{
+	width: 50px;
+    bottom: 10px;
+    right: 65px;
+}
+#reply_box{
+    height: 80px;
+    width: 100%;
+}
+#reply_box>div{
+    float: left;
+    height: 100%;
+}
+#question_area{
+    padding: 10px;
+    box-sizing: border-box;
+    width: 80%;
+    height: 100%;
+    border: none;
+    resize: none;
+}
+#question_send{
+    box-sizing: border-box;
+    position: absolute;
+    width: 60px;
+    right: 10px;
+    bottom: 0;
+}
+.margin_box{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.tutor{
+    border-radius: 10px;
+    background-color: lightgray;
+}
+
+.button:hover{
+	cursor: pointer;
+	filter: brightness(80%);
+}
+.curriculumn{
+	padding-left: 10%;
+	padding-right: 10%;
+	height: 300px;
+	background-color: rgb(46, 48, 146);
+}
+.curriculumn>div{
+    float: left;
+    height: 100%;
+}
+#curri_img{width: 30%;}
+#curri_img>img{
+    padding: 10%;
+    box-sizing: border-box;
+}
+#curri_info{
+    width: 50%;
+    color: white;
+}
+#curri_info>h1{
+    margin-top: 40px; 
+    margin-bottom: 40px;
+}
+#info{
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.star{
+    color: rgb(241,196,15);
+    margin-right: 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
+#curri_info>p{
+    font-size: 15px;
+    font-weight: 600;
+}
+#curri_bar{
+    height: 30px;
+    width: 80%;
+    background-color: gray;
+}
+#curri_status{
+    float: left;
+    height: 100%;
+    width: 22.2%;
+    background-color: white;
+}
+#curri_btn{
+    width: 20%;
+}
+#curri_btn>button{
+    width: 80%;
+    height: 50px;
+    background-color: white;
+    border: none;
+    color: rgb(46, 48, 146);
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 200px;
+    border-radius: 5px;
+}
+.black{
+	color: black;
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+.white{
+	color: white;	
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+</style>
 </head>
 <body>
 
@@ -73,7 +286,7 @@
     
                         <div class="question_box">
         
-                            <p class="">실습 파일 어디 있나요?</p>
+                            <p class="black">실습 파일 어디 있나요?</p>
         
                             <span>user 2020/11/12 17:57</span>
     
@@ -98,7 +311,7 @@
     
                         <button onclick="send(1);" class="button send">답변</button>
                         
-                        <button onclick="closeForm(1);" class="button close">닫기</button>
+                        <button onclick="closeForm(1);" class="button div_close">닫기</button>
     
                     </div>
 
@@ -143,7 +356,7 @@
     
                         <button onclick="send(2);" class="button send">답변</button>
                         
-                        <button onclick="closeForm(2);" class="button close">닫기</button>
+                        <button onclick="closeForm(2);" class="button div_close">닫기</button>
     
                     </div>
 

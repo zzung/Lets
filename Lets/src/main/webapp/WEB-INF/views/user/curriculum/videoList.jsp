@@ -50,7 +50,7 @@
 
             <img src="resources/user/assets/img/curriculum/plus.png" alt="show" height="100%">
 
-            <span>1강) 1강입니다.</span>
+            <span>영상 소개</span>
 
         </div>
 
@@ -58,7 +58,7 @@
 
             <img src="resources/user/assets/img/curriculum/play.png" alt="play" height="100%">
 
-            <span>기초 학습</span>
+            <span>영상 제목</span>
 
         </div>
 
@@ -66,7 +66,7 @@
 
             <img src="resources/user/assets/img/curriculum/plus.png" alt="show" height="100%">
 
-            <span>2강) 2강입니다.</span>
+            <span>영상 소개</span>
 
         </div>
 
@@ -74,7 +74,7 @@
 
             <img src="resources/user/assets/img/curriculum/play.png" alt="play" height="100%">
 
-            <span>심화 학습</span>
+            <span>영상 제목</span>
 
         </div>
 

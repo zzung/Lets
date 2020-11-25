@@ -27,7 +27,7 @@
             <span class="star">★</span>
             <span class="star">☆</span>
 
-            <br><br><br>
+            <br><br>
 
             <p class="white">진도율 : 2강/9강 (22.2%)</p>
 

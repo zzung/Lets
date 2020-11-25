@@ -64,8 +64,12 @@ div{box-sizing: border-box;	}
     font-size: 16px;
     font-weight: bold;
     margin-top: 200px;
+    border-radius: 5px;
 }
-.button:hover{cursor: pointer;}
+.button:hover{
+	cursor: pointer;
+	filter: brightness(80%);	
+}
 .black{color: black;}
 .white{color: white;}
 
@@ -204,112 +208,7 @@ div{box-sizing: border-box;	}
     font-weight: bold;
     color: black;
 }
-
 .clicked{color: rgb(46, 48, 146);}
-
-/* detailQNA.jsp */
-
-#main_qna_box{
-    width: 70%;
-    margin-top: 50px;
-    margin-left: 15%;
-}
-#main_qna_box>h1{
-    color: rgb(46, 48, 146);
-    font-size: 35px;
-}
-#detail_qna_box{
-    border: 1px solid gray;
-    padding: 20px;
-}
-.question{
-    width: 100%;
-    height: 80px;
-}
-.question>div{
-    float: left;
-    height: 100%;
-}
-.user_img{
-    width: 15%;
-    text-align: center;
-}
-.blank{width: 5%;}
-.question_box{
-    width: 80%;
-    position: relative;
-}
-.question_box>p{
-    font-size: 15px;
-    font-weight: 500;
-}
-.question_box span{
-    font-size: 13px;
-    font-weight: 500;
-    margin-right: 0;
-}
-.enter{
-    position: absolute;
-    right: 20px;
-    bottom: 5px;
-}
-.answer{
-    display: none;
-    margin-left: 20%;
-    width: 80%;
-    border: 1px solid gray;
-    position: relative;
-}
-.answer>button{
-    position: absolute;
-}
-.answer_div{
-    padding: 10px;
-    margin-top: 0;
-    border: none;
-    height: 100%;
-    resize: none;
-    width: 70%;
-}
-.close{
-    bottom: 5px;
-    right: 10px;
-}
-.send{
-    bottom: 5px;
-    right: 55px;
-}
-#reply_box{
-    height: 80px;
-    width: 100%;
-}
-#reply_box>div{
-    float: left;
-    height: 100%;
-}
-#question_area{
-    padding: 10px;
-    box-sizing: border-box;
-    width: 80%;
-    height: 100%;
-    border: none;
-    resize: none;
-}
-#question_send{
-    box-sizing: border-box;
-    position: absolute;
-    width: 60px;
-    right: 10px;
-    bottom: 0;
-}
-.margin_box{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.tutor{
-    border-radius: 10px;
-    background-color: lightgray;
-}
 
 /* lessonInfo.jsp */
 
@@ -339,4 +238,43 @@ div{box-sizing: border-box;	}
     font-size: 30px;
     margin-left: 5%;
 }
-.imgPop:hover{cursor: pointer;}
+.imgPop:hover{
+	cursor: pointer;
+	filter: brightness(80%);	
+}
+
+/* detailVideo.jsp */
+#detail_video_box{
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 80px;
+}
+#detail_video_box>h1, #detail_video_box>h3{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.iframe_box{
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+}
+.iframe_box>iframe{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+#video_button_box{
+    margin-top: 100px;
+}
+.video_button{
+    color: white;
+    background-color: rgb(46, 48, 146);
+ 	border: none;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+}
+.video_button:hover{
+    cursor: pointer;
+    filter: brightness(80%);
+}

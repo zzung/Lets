@@ -73,9 +73,9 @@ public class CurriculumController {
 		return "user/curriculum/videoList";
 	}
 	
-//	@RequestMapping("")
-//	public String detailVideo(MemVideo mv) {
-//		return "";
-//	}
+	@RequestMapping("detailVideo.cr")
+	public String detailVideo(MemVideo mv) {
+		return "user/curriculum/detailVideo";
+	}
 	
 }
