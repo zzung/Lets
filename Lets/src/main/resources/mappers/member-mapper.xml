@@ -9,7 +9,10 @@
 	<result column="nickname" property="nickname" />
 	<result column="birthday" property="birthday"/>
 	<result column="gender" property="gender"/>
-	<result column="address" property="address"/>
+	<result column="postcode" property="postcode"/>
+	<result column="post_address" property="postAddress"/>
+	<result column="detail_address" property="detailAddress"/>
+	<result column="extra_address" property="extraAddress"/>
 	<result column="phone" property="phone"/>
 	<result column="mem_pic" property="memPic"/>
 	<result column="enroll_date" property="enrollDate"/>
@@ -126,6 +129,30 @@
 	   set mem_pwd=#{memPwd}
 	 where mem_id=#{memId}
 </update>
+
+<update id="updateMember" parameterType="Member">
+	update 
+	       member
+	   set mem_pwd=#{memPwd},
+	       nickname=#{nickname},
+	       birthday=#{birthday},
+	       postcode=#{postcode},
+	       post_address=#{postAddress},
+	       detail_address=#{detailAddress},
+	       extra_address=#{extraAddress},
+	       phone=#{phone},
+	       modify_date=sysdate
+	 where mem_id=#{memId}
+</update>
+
+<update id="deleteMember" parameterType="String">
+	update
+	       member
+	   set status='N'
+	 where mem_id=#{memId}
+</update>
+
+
 
 
 </mapper>

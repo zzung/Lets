@@ -23,7 +23,7 @@
                 </div>
                 
                 <!-- Modal body -->
-                <form action="updateMember.me" method="POST" enctype="multipart/form-data">
+                <form action="update.me" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="mbody-1">
                             <div class="mbody-1-img">
@@ -46,10 +46,12 @@
                             </div>
                         </div>
 
+						<input type="hidden" id="memId" name="memId" value="${loginUser.memId}">
+
                         <div class="mbody-2">
                             <div class="update-list-title">이름</div>
                             <div class="update-name-block">
-                                <input type="text" class="form-control" id="memName" name="memName" value="${loginUser.memName}" readonly disabled><br>
+                                <input type="text" class="form-control" id="memName" name="memName" value="${loginUser.memName}" readonly><br>
                             </div>
 	
                             <div class="update-list-title">새로운 비밀번호</div>
@@ -59,7 +61,7 @@
                             <div class="update-pwd-check"></div>
                             
                             <br>
-                            <div class="update-list-title">비밀번호 확인</div>
+                            <div class="update-list-title">새로운 비밀번호 확인</div>
                             <div class="update-pwdCheck-block">
                                 <input type="password" class="form-control" id="memPwdCheck" name="memPwdCheck" minlength="8">
                             </div>
@@ -83,17 +85,17 @@
                             <br>
                             <div class="update-list-title">주소</div>
                             <div class="update-address-block1">
-                                <input type="text" class="form-control" id="postcode" value="${loginUser.postcode}" readonly>
+                                <input type="text" class="form-control" id="postcode" name="postcode" value="${loginUser.postcode}" readonly>
                                 <div id="update-address-btn" class="genric-btn info radius" onclick="findPostcode();" style="width: 130px; font-size: 10px;">우편번호 찾기</div>
                             </div>
                             <div class="update-address-block2">
-                                <input type="text" class="form-control" id="postAddress" value="${loginUser.postAddress}" placeholder="도로명 주소" style="margin-top: 10px; font-size: 12px;" readonly>
+                                <input type="text" class="form-control" id="postAddress" name="postAddress" value="${loginUser.postAddress}" placeholder="도로명 주소" style="margin-top: 10px; font-size: 12px;" readonly>
                             </div>
                             <div class="update-address-block3">
-                                <input type="text" class="form-control" id="detailAddress" value="${loginUser.detailAddress}" placeholder="상세 주소" style="margin-top: -10px;">
+                                <input type="text" class="form-control" id="detailAddress" name="detailAddress" value="${loginUser.detailAddress}" placeholder="상세 주소" style="margin-top: -10px;">
                             </div>
                             <div class="update-address-block4">
-                                <input type="text" class="form-control" id="extraAddress" value="${loginUser.extraAddress}" placeholder="참고 항목" style="margin-top: -10px;">
+                                <input type="text" class="form-control" id="extraAddress" name="extraAddress" value="${loginUser.extraAddress}" placeholder="참고 항목" style="margin-top: -10px;">
                             </div>
                             <div class="update-address-check"></div>
                             
@@ -271,18 +273,11 @@
                     }
                 }).open();
             }
-            
-            function addressValue(){
-    			var postcode = $(".address-block1 input[name=postcode]").val();
-    			var postAddress = $(".address-block2 input[name=postAddress]").val();
-    			var detailAddress = $(".address-block3 input[name=detailAddress]").val();
-    			$("#address").val(address);
-           }
         </script>
 		<!-- 회원 정보 수정 Modal 끝 -->
 
         <!-- 회원 탈퇴 클릭시 보여질 Modal -->
-        <form action="" method="POST">
+        <form action="delete.me" method="POST">
             <div class="modal" id="delete-member-Modal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -309,8 +304,8 @@
 	                
 	                <!-- Modal footer -->
 	                <div class="modal-footer" style="margin-right: 100px;"> 
-	                    <input type="reset" class="genric-btn primary radius" data-dismiss="modal" onclick="location.href='';" value="취소하기">
-	                    <input type="submit" class="genric-btn danger radius" onclick="deleteMember2();" value="계정 삭제하기">
+	                    <input type="reset" class="genric-btn primary radius" data-dismiss="modal" value="취소하기">
+	                    <input type="submit" class="genric-btn danger radius" value="계정 삭제하기">
 	                </div>
                 
                 </div>
@@ -318,20 +313,6 @@
             </div>
         </form>
 
-        <script>
-            // 입력한 비밀번호가 일치하는지 확인후 탈퇴 진행
-            function deleteMember2(){
-                // if($('#memPwd').val()==){
-                    if(true){
-                        alert('탈퇴 성공했습니다. ');
-                        // 홈으로 이동
-                    }else{
-
-                    }
-                // }
-                
-            }
-        </script>
         <!-- 회원 탈퇴 Modal 끝-->
 </body>
 </html>

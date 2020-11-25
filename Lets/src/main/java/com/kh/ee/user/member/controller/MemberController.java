@@ -36,7 +36,7 @@ public class MemberController {
 			session.setAttribute("alertMsg", "로그인 성공 !");
 			return "redirect:/";
 		}else {
-			model.addAttribute("errorMsg","로그인에 실패했습니다. 다시 시도해주세요.");
+			model.addAttribute("errorMsg","로그인에 실패했습니다. 확인 후 다시 시도해주세요.");
 			return "user/common/errorPage";
 		}
 	}
@@ -174,20 +174,50 @@ public class MemberController {
 			return "redirect:loginForm.me";
 		}else {
 			model.addAttribute("errorMsg", "비밀번호 재설정에 실패했습니다. 다시 시도해주세요.");
-			return "common/errorPage";
+			return "user/common/errorPage";
 		}
 	}
 	
-	/*
-	@RequestMapping("updateMember.me")
+	@RequestMapping("update.me")
 	public String updateMember(Member m, HttpSession session, Model model) {
 		
 		String encPwd = bpe.encode(m.getMemPwd());
 		m.setMemPwd(encPwd);
 		
+		int result = mService.updateMember(m);
+		if(result > 0) {
+			session.setAttribute("loginUser", mService.loginMember(m));
+			session.setAttribute("alertMsg", "회원 정보 수정 완료 !");
+			return "redirect:myPage.me";
+		}else {
+			model.addAttribute("errorMsg", "회원 정보 수정에 실패했습니다. 다시 시도해주세요.");
+			return "user/common/errorPage";
+		}
 		
 	}
-	*/
+	
+	@RequestMapping("delete.me")
+	public String deleteMember(String memPwd, HttpSession session, Model model) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		if(bpe.matches(memPwd, loginUser.getMemPwd())){
+			
+			int result = mService.deleteMember(loginUser.getMemId());
+			if(result > 0) {
+				session.removeAttribute("loginUser");
+				session.setAttribute("alertMsg", "성공적으로 탈퇴 완료 ! Bye !");
+				return "redirect:/";
+			}else {
+				model.addAttribute("errorMsg","회원 탈퇴에 실패했습니다. 다시 시도해주세요.");
+				return "user/common/errorPage";
+			}
+		}else {
+			session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+			return "redirect:myPage.me";
+		}
+	}
+	
 	
 	
 }

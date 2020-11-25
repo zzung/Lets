@@ -36,4 +36,12 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updatePwd", m);
 	}
 
+	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMember", m);
+	}
+
+	public int deleteMember(SqlSessionTemplate sqlSession, String memId) {
+		return sqlSession.update("memberMapper.deleteMember", memId);
+	}
+
 }

@@ -250,7 +250,6 @@
             }
             
         });
-        /*
         $('.phone-block input').focusout(function(){
             if($('#phone').val()!=""){
                 if(!checkPhone.test($('#phone').val())){
@@ -260,8 +259,6 @@
                 }
             }
         });
-        */
-        
     </script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
@@ -297,7 +294,6 @@
     
                     document.getElementById('postcode').value = data.zonecode;
                     document.getElementById("postAddress").value = addr;
-                    // 커서를 상세주소 필드로 이동
                     document.getElementById("detailAddress").focus();
                 }
             }).open();
