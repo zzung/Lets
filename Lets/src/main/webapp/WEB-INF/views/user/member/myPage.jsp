@@ -12,7 +12,8 @@
 </head>
 <body>
 	<jsp:include page="../common/navBar.jsp" />
-
+	<jsp:include page="memberModal.jsp" />
+	
 	<!-- 마이 페이지-->
     <main>
         <br><br>

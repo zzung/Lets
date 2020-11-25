@@ -22,7 +22,10 @@ public class Member {
 	private String nickname;
 	private String birthday;
 	private String gender;
-	private String address;
+	private String postcode;
+	private String postAddress;
+	private String detailAddress;
+	private String extraAddress;
 	private String phone;
 	private String memPic;
 	private Date enrollDate;

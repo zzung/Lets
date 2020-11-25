@@ -27,7 +27,10 @@
 	        , nickname
 	        , birthday
 	        , gender
-	        , address
+	        , postcode
+		    , post_address
+		    , detail_address
+		    , extra_address 
 	        , phone
 	        , mem_pic
 	        , enroll_date
@@ -48,7 +51,10 @@
 		   , nickname
 		   , birthday
 		   , gender
-		   , address
+		   , postcode
+		   , post_address
+		   , detail_address
+		   , extra_address
 		   , phone
 		   , mem_pic
 		  )
@@ -61,7 +67,10 @@
 		   , #{nickname}
 		   , #{birthday}
 		   , #{gender}
-		   , #{address}
+		   , #{postcode}
+		   , #{postAddress}
+		   , #{detailAddress}
+		   , #{extraAddress}
 		   , #{phone}
 		   , #{memPic}
 		  )
@@ -89,5 +98,34 @@
 	 where birthday like #{birthday}
 	   and mem_name like #{memName}
 </select>
+
+<select id="selectMember" parameterType="String" resultMap="memberResultSet">
+	select
+	          mem_id
+	        , mem_pwd
+	        , mem_name
+	        , nickname
+	        , birthday
+	        , gender
+	        , postcode
+		    , post_address
+		    , detail_address
+		    , extra_address
+	        , phone
+	        , mem_pic
+	        , enroll_date
+	        , status
+	     from member
+	    where status='Y'
+	      and mem_id like #{memId}
+</select>
+
+<update id="updatePwd" parameterType="Member">
+	update
+	       member
+	   set mem_pwd=#{memPwd}
+	 where mem_id=#{memId}
+</update>
+
 
 </mapper>

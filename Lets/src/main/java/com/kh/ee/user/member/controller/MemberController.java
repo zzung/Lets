@@ -30,7 +30,7 @@ public class MemberController {
 	public String loginMember(Member m, HttpSession session, Model model) {
 		
 		Member loginUser = mService.loginMember(m);
-		
+
 		if(loginUser != null && bpe.matches(m.getMemPwd(), loginUser.getMemPwd())) {
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "로그인 성공 !");
@@ -42,7 +42,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("logout.me")
-	public String logoutMember(HttpSession session) {
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
@@ -61,8 +61,8 @@ public class MemberController {
 		int result = mService.insertMember(m);
 		
 		if(result > 0) {
-			session.setAttribute("alertMsg", "회원가입 성공 !");
-			return "redirect:/";
+			session.setAttribute("alertMsg", "회원가입 성공 ! 로그인 페이지로 이동합니다.");
+			return "redirect:/loginForm.me";
 		}else {
 			model.addAttribute("errorMsg", "회원가입에 실패했습니다.");
 			return "user/common/errorPage";
@@ -153,10 +153,41 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping("changePwd.me")
-	public String changePwd() {
-		// 인증메일 받은 이메일 가져오기
-		return "";
+	@RequestMapping("findPwdThird.me")
+	public String findPwdThird(String memId, HttpSession session) {
+
+		Member m = mService.selectMember(memId);
+		session.setAttribute("m", m);
+		
+		return "user/member/findPwdThird";
 	}
+	
+	@RequestMapping("updatePwd.me")
+	public String updatePwd(Member m, HttpSession session, Model model) {
+		
+		String encPwd = bpe.encode(m.getMemPwd());
+		m.setMemPwd(encPwd);
+		
+		int result = mService.updatePwd(m);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "비밀번호 수정 성공 ! 로그인 페이지로 이동합니다.");
+			return "redirect:loginForm.me";
+		}else {
+			model.addAttribute("errorMsg", "비밀번호 재설정에 실패했습니다. 다시 시도해주세요.");
+			return "common/errorPage";
+		}
+	}
+	
+	/*
+	@RequestMapping("updateMember.me")
+	public String updateMember(Member m, HttpSession session, Model model) {
+		
+		String encPwd = bpe.encode(m.getMemPwd());
+		m.setMemPwd(encPwd);
+		
+		
+	}
+	*/
+	
 	
 }

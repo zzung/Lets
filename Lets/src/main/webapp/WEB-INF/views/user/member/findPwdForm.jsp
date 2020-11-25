@@ -16,7 +16,7 @@
 	<main>
 	    <br><br>
 	    <div class="find-wrapper">
-	        <div class="findPwd-title">비밀번호 찾기 01</div><br>
+	        <div class="findPwd-title">비밀번호 찾기 01</div><br><br>
 	        <div class="findPwd-info">01 아이디 입력&nbsp;&nbsp;>&nbsp;&nbsp;02 본인 확인&nbsp;&nbsp;>&nbsp;&nbsp;03 비밀번호 재설정</div>        <div class="findPwd-content1">
 	            	비밀번호를 찾고자 하는 아이디를 입력해주세요.
 	        </div>

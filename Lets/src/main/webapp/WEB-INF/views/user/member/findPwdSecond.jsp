@@ -51,6 +51,7 @@
 	<main>
 		    <br><br>
 		    <div class="find-wrapper">
+		    	<form id="findPwdSecond" action="" method="post">
 		        <div class="findPwd-title">비밀번호 찾기 02</div><br>
 		        <div class="findPwd-info2">회원 정보에 등록한 이메일로 인증</div>
 		        <div class="findPwd-content1">
@@ -58,6 +59,7 @@
 		        </div>
 		        <div class="findPwd-info">01 아이디 입력&nbsp;&nbsp;>&nbsp;&nbsp;02 본인 확인&nbsp;&nbsp;>&nbsp;&nbsp;03 비밀번호 재설정</div><br>
 		        <div class="findPwd-content3">
+		            
 		            <table>
 		                <tr>
 		                    <th>이메일</th>
@@ -73,41 +75,49 @@
 		            </table>
 		        </div>
 		        
-		        <!-- findPwdSecond.me에서 session에 저장한 값 -->
                	<input type="hidden" id="sendRandNum" name="sendRandNum" value="${sendRandNum}">
                	
 		        <div class="findPwd-info3">인증번호가 오지 않나요?
-		            <span class="tt-text">스팸 메세지로 등록되어 있는 것은 아닌지 <br>확인해주세요. <br>스팸 메세지로 등록되어 있지 않다면,<br>다시 한 번 '인증번호 받기'를 눌러주세요.</span>
+		            <span class="tt-text">스팸 메세지로 등록되어 있는 것은 아닌지 <br>확인해주세요. <br>스팸 메세지로 등록되어 있지 않다면,<br> 새로고침 후 다시 한 번 '인증번호 받기'를<br> 눌러주세요.</span>
 		        </div>
 		        <div class="findPwd-btn2">
 		            <div class="genric-btn primary radius" onclick="compareCheckNumber();" style="float: left; margin-right: 30px;">인증하기</div>
 		        </div>
-		        <br><br>
-		
+		        <br><br><br><br>
+				</form>
+				
 		       <script>
 		       		// 이메일로 인증번호 전송
 		            function sendCheckNumber(){
-		                alert('인증번호가 발송되었습니다.');
-		                console.log($('#sendRandNum').val());
+		       			if(!$('#memId').val()){
+		       				alert('이메일을 입력해주세요 !');
+		       			}else{
+			                alert('인증번호가 발송되었습니다.');
+			                //console.log($('#sendRandNum').val());
+		       			}
 		            };
 		
 	                // 인증번호가 일치하는지 확인
 		            function compareCheckNumber(){
-						$.ajax({
-							url:"compChecknum.me",
-							data:{checkNumber: $('#checkNumber').val()},
-							success:function(result){
-								if(result=='success'){
-									alert('성공적으로 인증되었습니다.');
-									location.href="changePwd.me";
-								}else{
-									alert('인증번호가 일치하지 않습니다.');
+	                	if((!$('#memId').val()) && (!$('#checkNumber').val())){
+	                		alert('인증번호를 입력해주세요 !');
+	                	}else{
+	                		$.ajax({
+								url:"compChecknum.me",
+								data:{checkNumber: $('#checkNumber').val()},
+								success:function(result){
+									if(result=='success'){
+										alert('성공적으로 인증되었습니다.');
+										$("#findPwdSecond").attr("action", "findPwdThird.me").submit();
+									}else{
+										alert('인증번호가 일치하지 않습니다.');
+									}
+								},
+								error:function(){
+									console.log('비밀번호찾기 step2 ajax오류');
 								}
-							},
-							error:function(){
-								console.log('비밀번호찾기 step2 ajax오류');
-							}
-						})
+							})
+	                	}
 		            }
 	           </script> 
 		

@@ -197,6 +197,7 @@ input[type='radio'] {
   margin-top: 10px;
 }
 .findPwd-btn2 div{ margin-left: 400px; }
+.findPwd-btn2 input{ margin-left: 400px; }
 
 /* find_Pwd 3 */
 .findPwd-content4{ 
@@ -622,3 +623,8 @@ input[type='radio'] {
   height: 40%;
 }
 .my-wishList-likeCount{height: 10%;}
+#checkPwdMessage{
+  font-size: 13px;
+  color: rgb(46, 48, 146);
+  font-weight: bolder;
+}

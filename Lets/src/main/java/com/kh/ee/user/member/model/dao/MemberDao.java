@@ -28,4 +28,12 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.findId", m);
 	}
 
+	public Member selectMember(SqlSessionTemplate sqlSession, String memId) {
+		return sqlSession.selectOne("memberMapper.selectMember", memId);
+	}
+
+	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
+
 }

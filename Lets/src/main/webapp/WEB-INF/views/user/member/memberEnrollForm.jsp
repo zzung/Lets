@@ -307,7 +307,7 @@
 			var postcode = $(".address-block1 input[name=postcode]").val();
 			var postAddress = $(".address-block2 input[name=postAddress]").val();
 			var detailAddress = $(".address-block3 input[name=detailAddress]").val();
-			var address = postcode+postAddress+detailAddress;
+			var address = postcode+","+postAddress+","+detailAddress;
 			$("#address").val(address);
 			console.log(address);
        }
