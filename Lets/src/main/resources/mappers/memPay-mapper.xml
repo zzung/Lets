@@ -14,20 +14,19 @@
 	<result column="del_name" property="delName" />
 	<result column="del_no" property="delNo" />
 	<result column="del_status" property="delStatus" />
-	<association property="Lesson" column="lesson_title" javaType="Lesson" resultMap="lessonResultSet"/>
-	<association property="Member" column="mem_id" javaType="Member" resultMap="memberResultSet"/>
+	<collection property="Lesson" resultMap="lessonResultSet"/>
+	<collection property="Member" resultMap="memberResultSet"/>
 </resultMap>
 
-<resultMap type="Lesson" id="lessonResultSet">
+<resultMap id="lessonResultSet" type="Lesson">
 	<id column="lesson_no" property="lessonNo" />
 	<result column="lesson_title" property="lessonTitle" />
 </resultMap>
 
-<resultMap type="Member" id="memberResultSet">
+<resultMap id="memberResultSet" type="Member">
 	<id column="mem_no" property="memNo" />
-	<result column="mem_id" property="memId" />
+	<result column="mem_Id" property="memId"/>
 </resultMap>
-
 
 <select id="selectPrepareList" resultMap="memPayResultSet">
 	select
