@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+/* tutorNoticeList.jsp */
+
+div{
+    box-sizing: border-box;
+}    
+#list_box{
+    padding: 20px;
+}
+#list_box>h1{
+    color: rgb(46, 48, 146);
+    margin-left: 20px;
+}
+#notice_table>thead>tr{
+    background-color: lightgray;
+}
+#notice_table{
+    width: 70%;
+    margin-left: 17%;
+    text-align: center;
+    font-size: 15px;
+}
+#notice_table tr{
+    height: 50px;
+}
+.paging_btn{
+	background-color: rgb(46, 48, 146);
+	border: none;
+	border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+}
+.paging_btn:hover,#title:hover{cursor: pointer;}
+.red{
+    color: white;
+    background-color: red;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* tutorDetailNotice.jsp */
+
+#detail_box{
+    padding: 20px;
+}
+#detail_box>h1{
+    color: rgb(46, 48, 146);
+    margin-left: 20px;
+}
+#red{
+    position: absolute;
+    left: 40px;
+    background-color: red;
+    color: white;
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 5px;
+}
+#notice_date{
+    position: absolute;
+    right: 40px;
+    font-size: 15px;
+    margin-top: 5px;
+}
+#detail_table{
+    width: 60%;
+    margin-left: 20%;
+    text-align: center;
+    font-size: 15px;
+    position: relative;
+    border-bottom: 2px solid lightgray;
+}
+#detail_table>thead>tr{
+    background-color: lightgray;
+    height: 80px;
+    font-size: 23px;
+}
+#detail_table>tbody td{
+    height: 500px;
+    font-size: 17px;
+    padding: 20px;
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+#list_btn{
+	background-color: rgb(46, 48, 146);
+	border: none;
+    width: 100px;
+    height: 35px;
+    margin-left: 70%;
+    border-radius: 5px;
+}
+#list_btn:hover{cursor: pointer;}
