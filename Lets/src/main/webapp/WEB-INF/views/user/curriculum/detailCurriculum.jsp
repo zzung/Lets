@@ -6,90 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	.main{
-	    padding: 20px;
-	    margin-left: 20%;
-	    margin-right: 20%;
-	}
-	.main hr{
-	    margin-top: 20px;
-	    margin-bottom: 20px;
-	}
-	.main div{
-	    padding: 10px;
-	}
-	.main span{
-	    font-size: 22px;
-	    font-weight: bold;
-	    margin-right: 20px;
-	}
-	
-	#top_box{
-	    height: 220px;
-	    margin-bottom: 50px;
-	    padding: 0;
-	}
-	#top_box>div{float: left;}
-	#qna_box{
-	    padding: 20px;
-	    width: 60%;
-	    height: 220px;
-	    border: 1px solid gray;
-	}
-	#qna_box>div{
-	    margin-top: 20px;
-	    height: 60px;
-	}
-	#info_box{
-	    padding: 20px;
-	    width: 30%;
-	    height: 220px;
-	    border: 1px solid gray;
-	}
-	
-	#question, #answer{
-	    padding: 0;
-	}
-	.img_box{
-	    height: 100%;
-	    width: 70px;
-	    float:left
-	}
-	#qna_box p{
-	    float: left;
-	    margin-left: 20px;
-	    font-size: 17px;
-	    font-weight: 600;
-	}
-	#info_box>h1{
-	    font-size: 40px;
-	    color: rgb(46, 48, 146);
-	    margin-top: 40px;
-	    text-align: center;
-	}
-	#curri{
-	    border: 1px solid gray;
-	    padding: 20px;
-	    padding-bottom: 100px;
-	}
-	.btn:hover{cursor: pointer;}
-	.title{
-	    font-size: 18px;
-	    color: gray;
-	    margin-left: 20px;
-	}
-	.content{
-	    font-size: 15px;
-	    margin-left: 50px;
-	    margin-right: 50px;
-	    margin-bottom: 0;
-	}
-	#curri>hr{
-	    margin-left: 20px;
-	    margin-right: 20px;
-	}
-</style>
+<link rel="stylesheet" href="resources/user/assets/css/style.css">
+<link rel="stylesheet" href="resources/user/assets/css/curriculum.css">
 </head>
 <body>
 <!-- header -->
@@ -100,11 +18,11 @@
 
     <div class="main">
 
-        <span class="btn">
+        <span class="button">
            	 클래스 소개
         </span>
 
-        <span class="btn">
+        <span class="button">
             FAQ
         </span>
 
@@ -115,15 +33,15 @@
             <!-- Q&A 창 -->
             <div id="qna_box">
                 
-                <span class="btn">Q&A</span>
+                <span class="button">Q&A</span>
 
                 <div id="question">
 
                     <div class="img_box">
-                        <img src="icon/user.png" alt="user" height="100%">
+                        <img src="resources/user/assets/img/curriculum/user.png" alt="user" height="100%">
                     </div>
 
-                    <p>
+                    <p class="black">
                         실습 파일은 어떻게 받죠?
                     </p>
 
@@ -132,10 +50,10 @@
                 <div id="answer">
 
                     <div class="img_box">
-                        <img src="icon/user.png" alt="tutor" height="100%">
+                        <img src="resources/user/assets/img/curriculum/user.png" alt="tutor" height="100%">
                     </div>
 
-                    <p>
+                    <p class="black">
                         메일을 남겨주시면 보내드립니다
                     </p>
 
@@ -193,5 +111,6 @@
 
 <!-- footer -->
 <jsp:include page="../common/footer.jsp" />
+
 </body>
 </html>

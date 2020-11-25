@@ -1,0 +1,342 @@
+@charset "UTF-8";
+
+/* curriStatusBar.jsp */
+
+div{box-sizing: border-box;	}
+.curriculumn{
+    padding-left: 10%;
+    padding-right: 10%;
+    height: 300px;
+    background-color: rgb(46, 48, 146);
+}
+.curriculumn>div{
+    float: left;
+    height: 100%;
+}
+#curri_img{width: 30%;}
+#curri_img>img{
+    padding: 10%;
+    box-sizing: border-box;
+}
+#curri_info{
+    width: 50%;
+    color: white;
+}
+#curri_info>h1{
+    margin-top: 40px; 
+    margin-bottom: 40px;
+}
+#info{
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.star{
+    color: rgb(241,196,15);
+    margin-right: 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
+#curri_info>p{
+    font-size: 15px;
+    font-weight: 600;
+}
+#curri_bar{
+    height: 30px;
+    width: 80%;
+    background-color: gray;
+}
+#curri_status{
+    float: left;
+    height: 100%;
+    width: 22.2%;
+    background-color: white;
+}
+#curri_btn{
+    width: 20%;
+}
+#curri_btn>button{
+    width: 80%;
+    height: 50px;
+    background-color: white;
+    border: none;
+    color: rgb(46, 48, 146);
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 200px;
+}
+.button:hover{cursor: pointer;}
+.black{color: black;}
+.white{color: white;}
+
+/* detailCurriculum.jsp */
+
+.main{
+    padding: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.main hr{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.main div{
+    padding: 10px;
+}
+.main span{
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+#top_box{
+    height: 220px;
+    margin-bottom: 50px;
+    padding: 0;
+}
+#top_box>div{float: left;}
+#qna_box{
+    padding: 20px;
+    width: 60%;
+    height: 220px;
+    border: 1px solid gray;
+}
+#qna_box>div{
+    margin-top: 20px;
+    height: 60px;
+}
+#info_box{
+    padding: 20px;
+    width: 30%;
+    height: 220px;
+    border: 1px solid gray;
+}
+#question, #answer{
+    padding: 0;
+}
+.img_box{
+    height: 100%;
+    width: 70px;
+    float:left
+}
+#qna_box p{
+    float: left;
+    margin-left: 20px;
+    font-size: 17px;
+    font-weight: 600;
+}
+#info_box>h1{
+    font-size: 40px;
+    color: rgb(46, 48, 146);
+    margin-top: 40px;
+    text-align: center;
+}
+#curri{
+    border: 1px solid gray;
+    padding: 20px;
+    padding-bottom: 100px;
+}
+.title{
+    font-size: 18px;
+    color: gray;
+    margin-left: 20px;
+}
+.content{
+    font-size: 15px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 0;
+    color: black;
+}
+#curri>hr{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* videoList.jsp */
+
+#video_box{
+    padding-bottom: 100px;
+    border: 1px solid gray;
+}
+#btn_box{
+    position: absolute;
+    right: 25%;
+}
+#btn_box>span{
+    font-size: 18px;
+}
+#blank{margin-top: 80px;}
+#point{color: rgb(46, 48, 146);}
+.show, .video{
+    margin-left: 8%;
+    width: 80%;
+    height: 50px;
+}
+.show{
+    margin-top: 20px;
+    background-color: lightgray;
+}
+.video{
+    display: none;
+}
+.show>span, .video>span{
+    margin-left: 20px;
+    vertical-align: top;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* detailFAQ.jsp */
+
+#title{
+    font-size: 30px;
+}
+#FAQ_box{
+    width: 50%;
+    margin-top: 50px;
+    margin-left: 25%;
+    border: 1px solid gray;
+    padding: 20px;
+}
+.head{
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}
+
+.clicked{color: rgb(46, 48, 146);}
+
+/* detailQNA.jsp */
+
+#main_qna_box{
+    width: 70%;
+    margin-top: 50px;
+    margin-left: 15%;
+}
+#main_qna_box>h1{
+    color: rgb(46, 48, 146);
+    font-size: 35px;
+}
+#detail_qna_box{
+    border: 1px solid gray;
+    padding: 20px;
+}
+.question{
+    width: 100%;
+    height: 80px;
+}
+.question>div{
+    float: left;
+    height: 100%;
+}
+.user_img{
+    width: 15%;
+    text-align: center;
+}
+.blank{width: 5%;}
+.question_box{
+    width: 80%;
+    position: relative;
+}
+.question_box>p{
+    font-size: 15px;
+    font-weight: 500;
+}
+.question_box span{
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 0;
+}
+.enter{
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
+}
+.answer{
+    display: none;
+    margin-left: 20%;
+    width: 80%;
+    border: 1px solid gray;
+    position: relative;
+}
+.answer>button{
+    position: absolute;
+}
+.answer_div{
+    padding: 10px;
+    margin-top: 0;
+    border: none;
+    height: 100%;
+    resize: none;
+    width: 70%;
+}
+.close{
+    bottom: 5px;
+    right: 10px;
+}
+.send{
+    bottom: 5px;
+    right: 55px;
+}
+#reply_box{
+    height: 80px;
+    width: 100%;
+}
+#reply_box>div{
+    float: left;
+    height: 100%;
+}
+#question_area{
+    padding: 10px;
+    box-sizing: border-box;
+    width: 80%;
+    height: 100%;
+    border: none;
+    resize: none;
+}
+#question_send{
+    box-sizing: border-box;
+    position: absolute;
+    width: 60px;
+    right: 10px;
+    bottom: 0;
+}
+.margin_box{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.tutor{
+    border-radius: 10px;
+    background-color: lightgray;
+}
+
+/* lessonInfo.jsp */
+
+#lesson_box{
+    width: 55%;
+    margin-top: 50px;
+    margin-left: 22.5%;
+    border: 1px solid gray;
+}
+#lesson_box>img{
+    margin-right: 10px;
+}
+#lesson_box>.hold{
+    font-size: 17px;
+    vertical-align: 13px;
+    margin-right: 50px;
+}
+#lesson_box>.textarea{
+    width: 90%;
+    margin-left: 5%;
+    font-size: 15px;
+    word-break: break-all;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+#lesson_title{
+    font-size: 30px;
+    margin-left: 5%;
+}
+.imgPop:hover{cursor: pointer;}
