@@ -10,6 +10,60 @@
 	<link rel="stylesheet" href="resources/user/assets/css/tutorEnroll.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+     <script>
+         var chkIdx = 0;
+         $(document).ready (function () {                
+            $('#curriculumBtn').click (function () {   
+	           	console.log( $(".category_1").length)
+	            chkIdx ++;
+	            var html = '';
+	            html += '<div class="curriculumInput">';
+	            html += '<table style="width: 500px">';
+	            html += '<tr><td width=40px><h5 class="category_1">' + ($(".category_1").length + 1) + '.</h5></td>';
+	            html += '<td><input class="form-control" name="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>';
+	            html += '<td><button class="plus_btn categorydelete" type="button" id="categorydelete">-</button></td></tr>';
+	            html += '<tr><td><h6 class="category_2">1)</h6></td>';
+	            html += '<td><input class="form-control" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td></tr>';
+ 	            html += '<tr><td><h6 class="category_2">2)</h6></td>';
+	            html += '<td><input class="form-control" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
+	            html += '<td><button class="plus_btn deailadd" type="button">+</button></td></tr></table><br></div>';
+	             $('#parah').append (html); 
+	             
+	             $('.categorydelete').click (function (){
+	            	 $(this).parents().eq(4).remove()
+	            	 	var length = $(".category_1").length
+	            	 	for(i=0; i<length; i++){
+	            	 		$(".category_1").eq(i).text((i+1)+".")
+	            	 	}
+	 	        });
+	             
+	            $('.deailadd').click (function(){
+	            	
+	            	var detailHtml = '';
+	            	detailHtml += '<tr><td><h6 class="category_2">2)</h6></td>';
+	            	detailHtml += '<td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
+	            	detailHtml += '<td><button class="plus_btn deailadd" type="button">+</button><button class="plus_btn deailDel" type="button">-</button></td></tr>';
+	            	
+	            	$(this).parents().eq(2).append(detailHtml);
+	            	
+	            	var length = $(this).parents().eq(2).children().length;
+	            	$(this).parents().eq(2).children().eq(length-1).children().eq(0).html('<h6 class="category_2">'+(length-1) + ")"+'</h6>');
+	            	$(this).remove();
+	            	
+		            $('.deailDel').click (function(){
+		            	debugger
+		            	$(this).parents().eq(1).remove()
+		            })	
+	            });
+	            
+            });
+            $('.deailadd').click (function(){
+            	debugger
+            });
+	        
+	        
+      	});      	
+      </script>
 <body>
     <jsp:include page="../common/navBar.jsp" />
     
@@ -18,7 +72,7 @@
     <div class="class1-form">
      
         <h5><b>클래스 제목</b></h5>
-        <input type="text" name="" placeholder="클래스 제목을 입력해주세요 (공백 포함 50자 이내)" onfocus="this.placeholder = ''" onblur="this.placeholder = '클래스 제목을 입력해주세요 (공백 포함 50자 이내)'" required="" class="classTitle">
+        <input type="text" name="" placeholder="클래스 제목을 입력해주세요 (공백 포함 50자 이내)" onfocus="this.placeholder = ''" onblur="this.placeholder = '클래스 제목을 입력해주세요 (공백 포함 50자 이내)'" class="classTitle" required>
         <br><br><br><br>
 
         <h5><b>클래스 커버 이미지</b></h5>
@@ -34,7 +88,7 @@
                 </li>
             </ul>
         </div>
-        <input type="file" id="upfile" class="form-control-file border" style="width:400px;" name=""><br><br><br>
+        <input type="file" id="upfile" class="form-control-file border" style="width:400px;" name=""  required><br><br><br>
         <div>
             <h5><b>수업 대상</b></h5>
             <div style="background-color: #f9f9ff; width: 900px; font-size: 13px;">
@@ -122,18 +176,18 @@
                         <div class="curriculumInput">
                             <table style="width: 500px;">
                                 <tr>
-                                    <td width=40px><h5>2.</h5></td>
+                                    <td width=40px><h5 class="category_1">1.</h5></td>
                                     <td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>
-                                    <td><button class="plus_btn" type="button" class="btnRemove">-</button></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                    <td><h6>1)</h6></td>
+                                    <td><h6 class="category_2">1)</h6></td>
                                     <td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
                                 </tr>
                                 <tr>
-                                    <td><h6>2)</h6></td>
+                                    <td><h6 class="category_2">2)</h6></td>
                                     <td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
-                                    <td><button class="plus_btn" type="button">+</button></td>
+                                    <td><button class="plus_btn deailadd" type="button">+</button></td>
                                 </tr>
                         </table><br>
                         </div>
@@ -142,30 +196,7 @@
 
                 <br><button href="#" type="button" class="genric-btn primary-border radius" id="curriculumBtn">리스트 추가</button><br><br><br><br>
 
-            <script>
-                var chkIdx = 0;
-                     $(document).ready (function () {                
-                        $('#curriculumBtn').click (function () {                                        
-                    chkIdx ++;
-                    var html = '';
-                    html += '<table style="width: 500px">';
-                    html += '<tr><td width=40px><h5>2.</h5></td>';
-                    html += '<td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>';
-                    html += '<td><button class="plus_btn" type="button">-</button></td></tr>';
-                    html += '<tr><td><h6>1)</h6></td>';
-                    html += '<td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td></tr>';
-                    html += '<tr><td><h6>2)</h6></td>';
-                    html += '<td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
-                    html += '<td><button class="plus_btn" type="button">+</button></td></tr></table><br>';
-                         $('#parah').append (html);                             
-                        });                                            
-                        $('#btnRemove').on('click', function () { 
-                           $(this).prev().remove (); 
-                           $(this).next ().remove (); 
-                           $(this).remove (); 
-                        });
-                     });  
-                     </script>
+
             </div>
             
          </div>
@@ -197,7 +228,7 @@
 
                 <br><br>
                <div>
-                   <h5><b>1. 커리큘럼 주제 1</b></h5>
+                   <h5>1. 커리큘럼 주제 1</h5>
                    <div class="curriculum_detail">
                        <h6>1) 커리큘럼 세부 리스트 1</h6>
                        <div class="mt-10">
@@ -214,7 +245,7 @@
                    </div>
                    <hr>
 
-                   <h5><b>2. 커리큘럼 주제 2</b></h5>
+                   <h5>2. 커리큘럼 주제 2</h5>
                    <div class="curriculum_detail">
                        <h6>1) 커리큘럼 세부 리스트 1</h6>
                        <div class="mt-10">
@@ -230,7 +261,7 @@
                        </div>
                    </div>
                    <hr>
-                   <h5><b>3. 커리큘럼 주제 3</b></h5>
+                   <h5>3. 커리큘럼 주제 3</h5>
                    <div class="curriculum_detail">
                        <h6>1) 커리큘럼 세부 리스트 1</h6>
                        <div class="mt-10">
