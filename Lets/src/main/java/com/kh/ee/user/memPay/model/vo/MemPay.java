@@ -2,6 +2,9 @@ package com.kh.ee.user.memPay.model.vo;
 
 import java.sql.Date;
 
+import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.member.model.vo.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +29,8 @@ public class MemPay {
 	private String delName;
 	private String delNo;
 	private String delStatus;
+	
+	private String lessonTitle;
 	private String memId;
 	
 

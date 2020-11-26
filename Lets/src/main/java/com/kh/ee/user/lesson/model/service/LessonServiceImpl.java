@@ -24,18 +24,13 @@ public class LessonServiceImpl implements LessonService{
 	private LessonDao lDao;
 
 	@Override
-	public ArrayList<Lesson> selectApproveLessonList(Lesson l) {
-		return lDao.selectApproveLessonList(ss, l);
+	public ArrayList<Lesson> selectApproveLessonList() {
+		return lDao.selectApproveLessonList(ss);
 	}
 
 	@Override
-	public ArrayList<Lesson> selectApproveStatusList(Lesson l) {
-		return lDao.selectApproveStatusList(ss, l);
-	}
-
-	@Override
-	public ArrayList<Lesson> selectPrepareList(Lesson l) {
-		return lDao.selectPrepareList(ss, l);
+	public ArrayList<Lesson> selectApproveStatusList() {
+		return lDao.selectApproveStatusList(ss);
 	}
 
 	//상세페이지에서 보여질 후기 들 (학천)

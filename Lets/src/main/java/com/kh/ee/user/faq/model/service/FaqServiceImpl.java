@@ -19,8 +19,8 @@ public class FaqServiceImpl implements FaqService {
 	private FaqDao faqDao;
 	
 	@Override
-	public ArrayList<Faq> selectTutorFaqList(Faq f) {
-		return faqDao.selectTutorFaqList(ss, f);
+	public ArrayList<Faq> selectTutorFaqList() {
+		return faqDao.selectTutorFaqList(ss);
 	}
 
 }

@@ -14,18 +14,8 @@
 	<result column="del_name" property="delName" />
 	<result column="del_no" property="delNo" />
 	<result column="del_status" property="delStatus" />
-	<collection property="Lesson" resultMap="lessonResultSet"/>
-	<collection property="Member" resultMap="memberResultSet"/>
-</resultMap>
-
-<resultMap id="lessonResultSet" type="Lesson">
-	<id column="lesson_no" property="lessonNo" />
 	<result column="lesson_title" property="lessonTitle" />
-</resultMap>
-
-<resultMap id="memberResultSet" type="Member">
-	<id column="mem_no" property="memNo" />
-	<result column="mem_Id" property="memId"/>
+	<result column="mem_id" property="memId" />
 </resultMap>
 
 <select id="selectPrepareList" resultMap="memPayResultSet">
@@ -38,9 +28,8 @@
 	     , mp.status
 	  from mem_pay mp
 	  join lesson l on(l.lesson_no = mp.lesson_no)
-	  join member m on(m.mem_no = mp.mem_no)
+	  left join member m on(m.mem_no = mp.mem_no)
 	 where l.status = 'Y'
 </select>
-
 
 </mapper>

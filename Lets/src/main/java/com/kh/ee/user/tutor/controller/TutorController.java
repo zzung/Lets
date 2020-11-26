@@ -32,22 +32,25 @@ public class TutorController {
 	private TutorService tutorService;
 	
 	@RequestMapping("tutorMain.tm")
-	public String tutorMain(Faq f, Model model) {
+	public String tutorMain(Model model) {
 		
-		ArrayList<Faq> list = faqService.selectTutorFaqList(f);
+		ArrayList<Faq> list = faqService.selectTutorFaqList();
 		
 		model.addAttribute("list",list);
 		return "user/tutor/tutorMainView";
 	}
 	
 	@RequestMapping("tutorMyLesson.tm")
-	public String tutorMyLesson(Lesson l, Model model) {
+	public String tutorMyLesson(Model model) {
 		
-		ArrayList<Lesson> aLlist = lessonService.selectApproveLessonList(l);
-		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList(l);
+		ArrayList<Lesson> aLlist = lessonService.selectApproveLessonList();
+		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList();
+		ArrayList mpList = memPayService.selectPrepareList();
 		
+		System.out.println(mpList);
 		model.addAttribute("aLlist", aLlist);
 		model.addAttribute("sLlist", sLlist);
+		model.addAttribute("mpList", mpList);
 		
 		return "user/tutor/myClassView";
 	}
@@ -72,13 +75,9 @@ public class TutorController {
 		
 	}
 	
-	@RequestMapping("memPrepare.tm")
-	public String memPrepare( MemPay mp, Model model) {
-		ArrayList<MemPay> mpList = memPayService.selectPrepareList(mp);
-		model.addAttribute("mpList", mpList);
-		System.out.println(mpList);
-		
-		return "user/tutor/myClassView";
-	}
+//	@RequestMapping("deleteLesson.tl")
+//	public String deleteLesson(int lno, Model model, HttpSession session) {
+//		System.out.println(lno);
+//	}
 
 }
