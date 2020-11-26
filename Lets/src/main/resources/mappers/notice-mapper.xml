@@ -65,6 +65,27 @@
 		 where notice_no = #{noticeNo}
 	</update>
 
+	<select id="tutorSelectNoticeListCount" parameterType="Notice" resultType="_int">
+		select
+			   count(*)
+		  from notice
+		 where status='Y'
+		   and notice_type=#{noticeType}
+	</select>
 
+	<select id="tutorSelectNoticeListCount" parameterType="Notice" resultType="_int">
+		select
+			   count(*)
+		  from notice
+		 where status='Y'
+		   and notice_type=#{noticeType}
+	</select>
 	
+	<slect id="tutorSelectNoticeList" parameterType="Notice" resultMap="noticeResultSet">
+	
+	</slect>
+	
+	<select id="tutorDetailNotice" parameterType="Notice" resultMap="noticeResultSet">
+	
+	</select>
 </mapper>

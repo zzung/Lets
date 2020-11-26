@@ -83,7 +83,16 @@
 			                              </c:when>
 			                              <c:otherwise>
 			                                      <ul>    
-			                                          <li><a href="#">튜터 센터</a></li>
+			                                          <li>
+			                                          	  <div class="after-login-dropdown">
+			                                                  <a href="#">튜터 센터</a>
+			                                                  <ul class="after-login-dropdown-content-tutor">
+			                                                      <li><a href="#">튜터 등록</a></li>
+			                                                      <li style="margin-top: -10px;"><a href="tutorNotice.no?noticeType=tutor">튜터 공지사항</a></li>
+			                                                      <li style="margin-top: -10px;"><a href="#">새로운 수업</a></li>
+			                                                  </ul>
+			                                              </div>
+			                                          </li>
 			                                          <li><a href="#">내 클래스</a></li>
 			                                          <li>
 			                                              <div class="after-login-dropdown">
