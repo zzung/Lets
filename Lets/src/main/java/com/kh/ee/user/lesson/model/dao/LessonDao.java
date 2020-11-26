@@ -13,12 +13,16 @@ import com.kh.ee.user.tutor.model.vo.Tutor;
 @Repository
 public class LessonDao {
 
-	public ArrayList<Lesson> selectApproveLessonList(SqlSessionTemplate ss) {
-		return (ArrayList)ss.selectList("lessonMapper.selectApproveLessonList");
+	public ArrayList<Lesson> selectApproveLessonList(SqlSessionTemplate ss, Lesson l) {
+		return (ArrayList)ss.selectList("lessonMapper.selectApproveLessonList", l);
 	}
 	
-	public ArrayList<Lesson> selectApproveStatusList(SqlSessionTemplate ss) {
-		return (ArrayList)ss.selectList("lessonMapper.selectApproveStatusList");
+	public ArrayList<Lesson> selectApproveStatusList(SqlSessionTemplate ss, Lesson l) {
+		return (ArrayList)ss.selectList("lessonMapper.selectApproveStatusList", l);
+	}
+	
+	public ArrayList<Lesson> selectPrepareList(SqlSessionTemplate ss, Lesson l) {
+		return (ArrayList)ss.selectList("lessonMapper.selectPrepareList", l);
 	}
 	
 	//상세페이지에서 보여질 후기 리스트 

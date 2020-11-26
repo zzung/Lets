@@ -12,7 +12,6 @@
 		<typeAlias type="com.kh.ee.user.lesson.model.vo.Lesson" alias="Lesson" />
 		<typeAlias type="com.kh.ee.user.lesson.model.vo.LessonFaq" alias="LessonFaq" /> 
 		<typeAlias type="com.kh.ee.user.tutor.model.vo.Tutor" alias="Tutor" /> 
-		<typeAlias type="com.kh.ee.user.memPay.model.vo.MemPay" alias="MemPay"/>
 	</typeAliases>
 	
 	<mappers>
@@ -20,6 +19,5 @@
 		<mapper resource="/mappers/faq-mapper.xml"/>
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/lesson-mapper.xml"/>
-		<mapper resource="/mappers/memPay-mapper.xml"/>
 	</mappers>
 </configuration>
