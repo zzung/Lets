@@ -12,6 +12,36 @@
 </head>
      <script>
          var chkIdx = 0;
+         var detailAddFunction = function(){
+         	
+         	var detailHtml = '';
+         	detailHtml += '<tr><td><h6 class="category_2">2)</h6></td>';
+         	detailHtml += '<td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
+         	detailHtml += '<td><button class="plus_btn deailadd" type="button">+</button><button class="plus_btn deailDel" type="button">-</button></td></tr>';
+         	
+         	$(this).parents().eq(2).append(detailHtml);
+         	
+         	var length = $(this).parents().eq(2).children().length;
+         	$(this).parents().eq(2).children().eq(length-1).children().eq(0).html('<h6 class="category_2">'+(length-1) + ")"+'</h6>');
+         	$(this).remove();
+         	
+            $('.deailDel').click (function(){
+            	var tbody = $(this).parents().eq(2)
+            	var length = tbody.children().length - 1
+            	if ($(this).prev().length != 0) {
+            		tbody.children().eq(length-1).children().eq(2).prepend('<button class="plus_btn deailadd" type="button">+</button>')
+            		$('.deailadd').click(detailAddFunction);
+               	} 
+            	$(this).parents().eq(1).remove()
+            	for(i=0; i<length; i++){
+            		tbody.find(".category_2").eq(i).text((i+1)+")")
+        	 	}
+            })
+
+            $('.deailadd').click(detailAddFunction);
+         }
+
+         
          $(document).ready (function () {                
             $('#curriculumBtn').click (function () {   
 	           	console.log( $(".category_1").length)
@@ -37,29 +67,10 @@
 	            	 	}
 	 	        });
 	             
-	            $('.deailadd').click (function(){
-	            	
-	            	var detailHtml = '';
-	            	detailHtml += '<tr><td><h6 class="category_2">2)</h6></td>';
-	            	detailHtml += '<td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
-	            	detailHtml += '<td><button class="plus_btn deailadd" type="button">+</button><button class="plus_btn deailDel" type="button">-</button></td></tr>';
-	            	
-	            	$(this).parents().eq(2).append(detailHtml);
-	            	
-	            	var length = $(this).parents().eq(2).children().length;
-	            	$(this).parents().eq(2).children().eq(length-1).children().eq(0).html('<h6 class="category_2">'+(length-1) + ")"+'</h6>');
-	            	$(this).remove();
-	            	
-		            $('.deailDel').click (function(){
-		            	debugger
-		            	$(this).parents().eq(1).remove()
-		            })	
-	            });
+	            $('.deailadd').click(detailAddFunction);
 	            
             });
-            $('.deailadd').click (function(){
-            	debugger
-            });
+            $('.deailadd').click(detailAddFunction)
 	        
 	        
       	});      	
