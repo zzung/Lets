@@ -22,12 +22,18 @@ public class Review {
 	private int memNo;
 	private int star;
 	private String reviewContent;
-	private Date enrollDate;
-	private Date modifyDate;
+	private Date reviewEnrollDate;
+	private Date reviewModifyDate;
 	private String status; 
 	
 	//조인 필요해서 해둠(학천)
 	private String nickname;
 	private String memPic; 
 	
+	private int replyNo;
+	private String replyContent;
+	private int replyLevel; 
+	private Date replyEnrollDate; 
+	private int totalNo;
+	private String replyType;
 }

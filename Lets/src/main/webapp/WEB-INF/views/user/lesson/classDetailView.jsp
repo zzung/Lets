@@ -175,7 +175,7 @@
 			                                 <div class="d-flex justify-content-between" style="width:670px;">
 			                                    <div class="d-flex align-items-center">
 			                                       <span>${review.nickname}</span>
-			                                       <p class="date">${review.enrollDate} </p>
+			                                       <p class="date">${review.reviewEnrollDate} </p>
 			                                    </div>
 			                                    <div class="review-ratting">
 			                                    	<c:forEach var="s" begin="1" end="${review.star }">

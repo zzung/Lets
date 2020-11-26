@@ -3,7 +3,7 @@ package com.kh.ee.user.curriculum.model.service;
 import java.util.ArrayList;
 
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
-import com.kh.ee.user.curriculum.model.vo.LessonFAQ;
+import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.curriculum.model.vo.MemVideo;
 import com.kh.ee.user.curriculum.model.vo.QnA;
 import com.kh.ee.user.curriculum.model.vo.Video;
@@ -15,7 +15,7 @@ public interface CurriculumService {
 	QnA selectQnA(Lesson l);
 	ArrayList<Curriculum> selectCurriculum(Lesson l);
 	Lesson detailLessonInfo(Lesson l);
-	ArrayList<LessonFAQ> detailFAQ(Lesson l);
+	ArrayList<LessonFaq> detailFAQ(Lesson l);
 	ArrayList<QnA> detailQnA(Lesson l);
 	int insertQuestion(QnA q);
 	int updateQuestion(QnA q);
