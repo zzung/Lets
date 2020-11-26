@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Lets</title>
 <link rel="stylesheet" href="resources/user/assets/css/member.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
@@ -82,106 +82,38 @@
                 <div class="my-cont-subTitle">총 0개</div>
                 <br><br>
                 <div class="my-cont">
-
-                    <!-- 없을 경우
-                    <div class="my-cont-1">
-                        <br><br><br><br><br><br><br>
-                        	좋아요한 클래스가 없어요.
-                    </div>
-                    -->
-
-                    <!-- 좋아요 클래스 목록 띄우기-->
-                    <div class="my-cont-3">
-                        <div class="my-wishList-content">
-                            <div class="my-wishList-field">
-                                <div class="my-wishList-cont1">
-                                    <img class="my-wishList-img" src="" width="100%" height="150px">
-                                    <div class="my-wishList-title">커피빵이 몽글몽글, 커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피 브루잉이 만드는 완벽한 일상</div>
-                                    <div class="my-wishList-likeCount">
-                                        <ul style="float: right;"><li>♥ 52</li></ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="my-wishList-field">
-                                <div class="my-wishList-cont1">
-                                    <img class="my-wishList-img" src="" width="100%" height="150px">
-                                    <div class="my-wishList-title">커피빵이 몽글몽글, 브루잉이 만드는 완벽한 일상</div>
-                                    <div class="my-wishList-likeCount">
-                                        <ul style="float: right;"><li>♥ 52</li></ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="my-wishList-field">
-                                <div class="my-wishList-cont1">
-                                    <img class="my-wishList-img" src="" width="100%" height="150px">
-                                    <div class="my-wishList-title">커피빵이 몽글몽글,  브루잉이 만드는 완벽한 일상</div>
-                                    <div class="my-wishList-likeCount">
-                                        <ul style="float: right;"><li>♥ 52</li></ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="my-wishList-field">
-                                <div class="my-wishList-cont1">
-                                    <img class="my-wishList-img" src="" width="100%" height="150px">
-                                    <div class="my-wishList-title">커피빵이 몽글몽글, 커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피 브루잉이 만드는 완벽한 일상</div>
-                                    <div class="my-wishList-likeCount">
-                                        <ul style="float: right;"><li>♥ 52</li></ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="my-wishList-field">
-                                <div class="my-wishList-cont1">
-                                    <img class="my-wishList-img" src="" width="100%" height="150px">
-                                    <div class="my-wishList-title">커피빵이 몽글몽글, 커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피 브루잉이 만드는 완벽한 일상</div>
-                                    <div class="my-wishList-likeCount">
-                                        <ul style="float: right;"><li>♥ 52</li></ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="my-wishList-field">
-                                <div class="my-wishList-cont1">
-                                    <img class="my-wishList-img" src="" width="100%" height="150px">
-                                    <div class="my-wishList-title">커피빵이 몽글몽글, 커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피 브루잉이 만드는 완벽한 일상</div>
-                                    <div class="my-wishList-likeCount">
-                                        <ul style="float: right;"><li>♥ 52</li></ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="my-wishList-field">
-                                <div class="my-wishList-cont1">
-                                    <img class="my-wishList-img" src="" width="100%" height="150px">
-                                    <div class="my-wishList-title">커피빵이 몽글몽글, 커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피 브루잉이 만드는 완벽한 일상</div>
-                                    <div class="my-wishList-likeCount">
-                                        <ul style="float: right;"><li>♥ 52</li></ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="my-wishList-field">
-                                <div class="my-wishList-cont1">
-                                    <img class="my-wishList-img" src="" width="100%" height="150px">
-                                    <div class="my-wishList-title">커피빵이 몽글몽글, 커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피빵이 몽글몽글커피 브루잉이 만드는 완벽한 일상</div>
-                                    <div class="my-wishList-likeCount">
-                                        <ul style="float: right;"><li>♥ 52</li></ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <br><br>
-	                    <div style="clear:both;"></div>
-                	</div>
+					<c:choose>
+						<c:when test="${empty myWishList}">
+		                    <div class="my-cont-1">
+		                        <br><br><br><br><br><br><br>
+		                       	좋아요한 클래스가 없어요.
+		                    </div>
+						</c:when>
+						<c:otherwise>
+		                    <div class="my-cont-3">
+		                        <div class="my-wishList-content">
+		                        	<c:forEach var="myWish" items="${myWishList}">
+			                            <div class="my-wishList-field">
+			                                <div class="my-wishList-cont1">
+			                                    <img class="my-wishList-img" src="${myWish.lessonCoverImg}" width="100%" height="150px">
+			                                    <div class="my-wishList-title">${myWish.lessonTitle}</div>
+			                                    <div class="my-wishList-likeCount">
+			                                        <ul style="float: right;"><li>♥ ${myWish.likeCount}</li></ul>
+			                                    </div>
+			                                </div>
+			                            </div>
+		                        	</c:forEach>
+		                        </div>
+		                        <br><br>
+			                    <div style="clear:both;"></div>
+		                	</div>
+						</c:otherwise>				
+					</c:choose>
 	           </div>
+			</div>
+			<div style="clear:both;"></div>
 		</div>
-		<div style="clear:both;"></div>
-	</div>
-	<br><br><br>
+		<br><br><br>
 	</main>
 	<jsp:include page="../common/footer.jsp" />
 </body>
