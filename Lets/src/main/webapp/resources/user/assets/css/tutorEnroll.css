@@ -236,6 +236,7 @@ box-sizing: border-box;
 padding: 0;
 }
 
+
 /* 튜터소개작성창 */
 .single-textarea {
     display: block;
@@ -247,7 +248,17 @@ padding: 0;
     padding: 0 20px;
     height: 100px;
     resize: none;
-    margin: 0;
+}
+.tutor-textarea{
+    display: block;
+    width: 900px;
+    line-height: 40px;
+    border: none;
+    outline: none;
+    background: #f9f9ff;
+    height: 400px;
+    resize: none;
+    margin : -5%;
 }
 
 .class1-form{

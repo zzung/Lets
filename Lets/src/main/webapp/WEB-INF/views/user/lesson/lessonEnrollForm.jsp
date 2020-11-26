@@ -17,7 +17,7 @@
          	var detailHtml = '';
          	detailHtml += '<tr><td><h6 class="category_2">2)</h6></td>';
          	detailHtml += '<td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
-         	detailHtml += '<td><button class="plus_btn deailadd" type="button">+</button><button class="plus_btn deailDel" type="button">-</button></td></tr>';
+         	detailHtml += '<td><button class="plus_btn detailadd" type="button">+</button><button class="plus_btn detailDel" type="button">-</button></td></tr>';
          	
          	$(this).parents().eq(2).append(detailHtml);
          	
@@ -25,12 +25,12 @@
          	$(this).parents().eq(2).children().eq(length-1).children().eq(0).html('<h6 class="category_2">'+(length-1) + ")"+'</h6>');
          	$(this).remove();
          	
-            $('.deailDel').click (function(){
+            $('.detailDel').click (function(){
             	var tbody = $(this).parents().eq(2)
             	var length = tbody.children().length - 1
             	if ($(this).prev().length != 0) {
-            		tbody.children().eq(length-1).children().eq(2).prepend('<button class="plus_btn deailadd" type="button">+</button>')
-            		$('.deailadd').click(detailAddFunction);
+            		tbody.children().eq(length-1).children().eq(2).prepend('<button class="plus_btn detailadd" type="button">+</button>')
+            		$('.detailadd').click(detailAddFunction);
                	} 
             	$(this).parents().eq(1).remove()
             	for(i=0; i<length; i++){
@@ -38,7 +38,7 @@
         	 	}
             })
 
-            $('.deailadd').click(detailAddFunction);
+            $('.detailadd').click(detailAddFunction);
          }
 
          
@@ -56,7 +56,7 @@
 	            html += '<td><input class="form-control" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td></tr>';
  	            html += '<tr><td><h6 class="category_2">2)</h6></td>';
 	            html += '<td><input class="form-control" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
-	            html += '<td><button class="plus_btn deailadd" type="button">+</button></td></tr></table><br></div>';
+	            html += '<td><button class="plus_btn detailadd" type="button">+</button></td></tr></table><br></div>';
 	             $('#parah').append (html); 
 	             
 	             $('.categorydelete').click (function (){
@@ -67,10 +67,10 @@
 	            	 	}
 	 	        });
 	             
-	            $('.deailadd').click(detailAddFunction);
+	            $('.detailadd').click(detailAddFunction);
 	            
             });
-            $('.deailadd').click(detailAddFunction)
+            $('.detailadd').click(detailAddFunction)
 	        
 	        
       	});      	
@@ -198,14 +198,14 @@
                                 <tr>
                                     <td><h6 class="category_2">2)</h6></td>
                                     <td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
-                                    <td><button class="plus_btn deailadd" type="button">+</button></td>
+                                    <td><button class="plus_btn detailadd" type="button">+</button></td>
                                 </tr>
                         </table><br>
                         </div>
                     </div>
                 </div>
 
-                <br><button href="#" type="button" class="genric-btn primary-border radius" id="curriculumBtn">리스트 추가</button><br><br><br><br>
+                <br><button href="#" type="button" class="genric-btn primary-border radius" id="curriculumBtn">주제 추가</button><br><br><br><br>
 
 
             </div>
