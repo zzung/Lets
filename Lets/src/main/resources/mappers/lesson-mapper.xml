@@ -59,14 +59,13 @@
 	<result column="status" property="status" />
 </resultMap>
 
-<select id="selectApproveLessonList" resultMap="lessonResultSet" >
+<select id="selectApproveLessonList" resultMap="lessonResultSet">
 	select
 	       lesson_no
 	     , lesson_title
 	     , approve_date
 	     , lesson_type
 	  from lesson
-	 where status='Y'
 	 order
 	    by approve_date desc
 </select>
@@ -127,5 +126,12 @@
 	 where t.status='Y'
 	   and l.lesson_no = #{lessonNo}
 </select>
+
+<update id="deleteLesson" parameterType="_int">
+	 update
+	        lesson
+	    set status='N'
+	  where lesson_no = #{lno}
+</update>
 
 </mapper>

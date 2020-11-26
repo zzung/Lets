@@ -19,4 +19,7 @@ public class TutorServiceImpl implements TutorService{
 	public int insertTutorInfo(Tutor t) {
 		return tutorDao.insertTutorInfo(sqlSession, t);
 	}
+
+	
+	
 }

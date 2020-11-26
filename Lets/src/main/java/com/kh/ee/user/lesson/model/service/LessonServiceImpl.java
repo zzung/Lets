@@ -50,5 +50,9 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.selectTutorInfo(lessonNo, ss);
 	}
 	
+	@Override
+	public int deleteLesson(int lno) {
+		return lDao.deleteLesson(ss, lno);
+	}
 	
 }
