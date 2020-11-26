@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<!-- 
+	지성: 제이쿼리 이용할 수 있는 스크립트 추가, 버튼 클릭 시 커리큘럼 페이지로 연결하는 작업
+-->   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- jQuery 이용 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="resources/user/assets/css/style.css">
 <link rel="stylesheet" href="resources/user/assets/css/member.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -119,7 +124,7 @@
                                         </div>
                                     </div>
                                     <div class="online-thumbnail" style="width:16.7%;">
-                                        <button class="genric-btn primary-border">play</button>
+                                        <button class="genric-btn primary-border" onclick="postCurri();">play</button>
                                     </div>
                                 </div>
                                 <div class="online-list">
@@ -164,6 +169,17 @@
                     
 				</div>
 			</div>
+			
+			<!-- 커리큘럼 페이지 연결 스크립트 -->
+			<form action="" method="post" id="postCurriForm">
+				<input type="hidden" name="lessonNo" value="${ l.lessonNo }">
+			</form>
+			
+			<script>
+				function postCurri(){
+					$("#postCurriForm").attr("action", "detailCurri.cr").submit();
+				}
+			</script>
 			
             <div style="clear:both"></div>
             <br><br><br><br><br>

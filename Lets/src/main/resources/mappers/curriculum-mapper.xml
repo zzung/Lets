@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="curriculumMapper">
+
+	<!-- resultMap -->
+ 	<resultMap type="Curriculum" id="curriculumResultSet">
+ 		<id column="curriculum_no" property="curriculumNo" />
+ 		<result column="curriculum_cont" property="curriculumCont" />
+ 		<result column="lesson_no" property="lessonNo" />
+ 		<result column="ref_cur_no" property="refCurNo" />
+ 		<result column="cur_level" property="curLevel" />
+ 	</resultMap>
+ 	
+ 	<resultMap type="LessonFAQ" id="lessonFAQResultSet">
+ 		<id column="lesson_no" property="lessonNo" />
+ 		<result column="faq_question" property="faqQuestion" />
+ 		<result column="faq_answer" property="faqAnswer" />
+ 	</resultMap>
+ 	
+ 	<resultMap type="MemVideo" id="memVideoResultSet">
+ 		<id column="video_no" property="videoNo" />
+ 		<result column="mem_no" property="memNo" />
+ 		<result column="status" property="status" />
+ 	</resultMap>
+ 	
+ 	<resultMap type="QnA" id="qnaResultSet">
+ 		<id column="qa_no" property="qnaNo" />
+ 		<result column="mem_no" property="memNo" />
+ 		<result column="lesson_no" property="lessonNo" />
+ 		<result column="question" property="question" />
+ 		<result column="answer" property="answer" />
+ 		<result column="q_enroll_date" property="qEnrollDate" />
+ 		<result column="a_enroll_date" property="aEnrollDate" />
+ 		<result column="q_status" property="qStatus" />
+ 		<result column="a_status" property="aStatus" />
+ 	</resultMap>
+ 	
+ 	<resultMap type="Video" id="videoResultSet">
+ 		<id column="video_no" property="videoNo" />
+ 		<result column="lesson_no" property="lessonNo" />
+ 		<result column="video_url" property="videoUrl" />
+ 		<result column="video_cont" property="videoCount" />
+ 	</resultMap>
+ 	
+ 	<!-- sql문 -->
+</mapper>

@@ -13,6 +13,10 @@
 		<typeAlias type="com.kh.ee.user.lesson.model.vo.LessonFaq" alias="LessonFaq" /> 
 		<typeAlias type="com.kh.ee.user.tutor.model.vo.Tutor" alias="Tutor" /> 
 		<typeAlias type="com.kh.ee.user.memPay.model.vo.MemPay" alias="MemPay"/>
+		<typeAlias type="com.kh.ee.user.curriculum.model.vo.Curriculum" alias="Curriculum" />
+		<typeAlias type="com.kh.ee.user.curriculum.model.vo.MemVideo" alias="MemVideo" />
+		<typeAlias type="com.kh.ee.user.curriculum.model.vo.QnA" alias="QnA" />
+		<typeAlias type="com.kh.ee.user.curriculum.model.vo.Video" alias="Video" />
 	</typeAliases>
 	
 	<mappers>
@@ -21,5 +25,6 @@
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/lesson-mapper.xml"/>
 		<mapper resource="/mappers/memPay-mapper.xml"/>
+		<mapper resource="/mappers/curriculum-mapper.xml"/>
 	</mappers>
 </configuration>

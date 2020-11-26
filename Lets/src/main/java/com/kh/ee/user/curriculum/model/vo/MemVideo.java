@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 public class MemVideo {
 
-	private int videoNo;
-	private int memNo;
-	private String status;
+	private int videoNo;		// 비디오 번호
+	private int memNo;			// 회원 번호
+	private String status;		// 영상 시청 여부
 	
 }

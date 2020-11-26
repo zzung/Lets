@@ -11,6 +11,7 @@ import com.kh.ee.user.curriculum.model.service.CurriculumService;
 import com.kh.ee.user.curriculum.model.vo.MemVideo;
 import com.kh.ee.user.curriculum.model.vo.QnA;
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.member.model.vo.Member;
 
 @Controller
 public class CurriculumController {
@@ -20,6 +21,12 @@ public class CurriculumController {
 	
 	@RequestMapping("detailCurri.cr")
 	public String detailCurriculum(Lesson l, HttpSession session, Model model) {
+		
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+		int lessonNo = l.getLessonNo();
+		
+		// lesson 객체, curriculum arrayList, qna 객체, mem_video arrayList, review 평균 별점 계산해서 가져오기
+				
 		return "user/curriculum/detailCurriculum";
 	}
 	
