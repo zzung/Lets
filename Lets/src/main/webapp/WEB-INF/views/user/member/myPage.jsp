@@ -75,11 +75,11 @@
             <script>
 				function myPageIndex(num){
 					if(num==1){
-						location.href="";
+						location.href="myPage.me";
 					}else if(num==2){
-						location.href="";
+						location.href="myWishList.me";
 					}else if(num==3){
-						location.href="";
+						location.href="myDelivery.me";
 					}
 				}
 			</script>

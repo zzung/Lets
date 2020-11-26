@@ -218,6 +218,19 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping("myWishList.me")
+	public String myWishList(HttpSession session, Model model) {
+		
+		return "user/member/myWishList";
+	}
+	
+	@RequestMapping("myDeliveryList.me")
+	public String myDeliveryList(HttpSession session, Model model) {
+		
+		return "user/member/myDeliveryList";
+	}
+	
+	
 	
 	
 }
