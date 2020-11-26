@@ -8,11 +8,27 @@
 	<result column="mem_no" property="memNo" />
 	<result column="star" property="star" />
 	<result column="review_content" property="reviewContent"/>
-	<result column="enroll_date" property="enrollDate"/>
-	<result column="modify_date" property="modifiyDate"/>
+	<result column="enroll_date" property="reviewEnrollDate"/>
+	<result column="modify_date" property="reviewModifiyDate"/>
 	<result column="status" property="status"/> 
 	<result column="nickname" property="nickname"/> 
 	<result column="mem_pic" property="memPic"/> 
+	<result column="reply_no" property="replyNo"/>
+	<result column="reply_content" property="replyContent"/>
+	<result column="reply_level" property="replyLevel"/>
+	<result column="replyDate" property="replyEnrollDate" />
+	<result column="total_no" property="totalNo"/>
+	<result column="reply_type" property="replyType"/>
+</resultMap>
+
+<resultMap id="replyResultSet" type="Reply">
+	<id column="reply_no" property="replyNo" />
+	<result column="reply_content" property="replyContent"/>
+	<result column="reply_level" property="replyLevel"/>
+	<result column="replyDate" property="replyEnrollDate" />
+	<result column="modify_Date" property="replyModifyDate" />
+	<result column="total_no" property="totalNo"/>
+	<result column="reply_type" property="replyType"/>
 </resultMap>
 
 
@@ -27,20 +43,30 @@
 	  from review r
 	  join member m 
 	    on(r.mem_no=m.mem_no)
-	 where r.lesson_no = #{lessonNo} 
+	 where r.lesson_no = 1
 	   and r.status = 'Y'
 	 order
 	    by review_no desc
 </select>
 
-<update id="deleteReview" parameterType="_int">
-	update
-	        review
-	   set
-	        status='N'
-	      , modify_date = SYSDATE
+<select id="selectReplyReviewList" parameterType="_int" resultMap="reviewResultSet">
+	select
+	       r.review_no
+	     , rp.reply_no
+	     , rp.reply_content
+	     , rp.enroll_date as replyDate
+	     , rp.reply_level
+	     , rp.total_no
+	     , m.mem_pic
+	     , m.nickname
+	  from review r
+	  join reply rp on(reply_type='후기' and r.review_no=rp.total_no)
+	  join member m on (rp.mem_no = m.mem_no)
 	 where review_no = #{reviewNo}
-</update>
+	  order 
+	     by review_no desc, rp.reply_level asc
+</select>
+
 
 <insert id="insertReview" parameterType="Review">
 	insert
@@ -62,6 +88,29 @@
 	    )
 </insert>
 
+
+<insert id="insertReplyReview" parameterType="Review">
+	insert
+	  into reply
+	    (
+	       reply_no
+	     , mem_no
+	     , reply_content
+	     , reply_type
+	     , reply_level
+	     , total_no
+	    )
+	 values
+	   (
+	      seq_rep_no.nextval
+	    , #{memNo}
+	    , #{replyContent}
+	    , '후기'
+	    , 1
+	    , #{totalNo}
+	   )
+</insert>
+
 <update id="updateReview" parameterType="Review">
 	update
 	        review
@@ -71,4 +120,34 @@
 	      , star = #{star}
 	 where review_no = #{reviewNo}
 </update>
+
+<update id="updateReviewReply" parameterType="Review">
+	update 
+	       reply
+	   set 
+	       reply_content = #{replyContent}
+	     , modify_date = SYSDATE
+	 where reply_no = #{replyNo}
+	   and reply_type = '후기'
+</update>
+
+<update id="deleteReview" parameterType="_int">
+	update
+	        review
+	   set
+	        status='N'
+	      , modify_date = SYSDATE
+	 where review_no = #{reviewNo}
+</update>
+
+<update id="deleteReviewReply" parameterType="_int">
+	update
+	        reply
+	   set
+	        status='N'
+	      , modify_date = SYSDATE
+	 where total_no = #{reviewNo}
+	   and reply_type = '후기'
+</update>
+
 </mapper>

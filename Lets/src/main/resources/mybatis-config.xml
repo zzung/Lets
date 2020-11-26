@@ -11,12 +11,14 @@
 		<typeAlias type="com.kh.ee.user.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.ee.user.lesson.model.vo.Lesson" alias="Lesson" />
 		<typeAlias type="com.kh.ee.user.lesson.model.vo.LessonFaq" alias="LessonFaq" /> 
+		<typeAlias type="com.kh.ee.user.lesson.model.vo.WishList" alias="WishList" /> 
 		<typeAlias type="com.kh.ee.user.tutor.model.vo.Tutor" alias="Tutor" /> 
 		<typeAlias type="com.kh.ee.user.memPay.model.vo.MemPay" alias="MemPay"/>
 		<typeAlias type="com.kh.ee.user.curriculum.model.vo.Curriculum" alias="Curriculum" />
 		<typeAlias type="com.kh.ee.user.curriculum.model.vo.MemVideo" alias="MemVideo" />
 		<typeAlias type="com.kh.ee.user.curriculum.model.vo.QnA" alias="QnA" />
 		<typeAlias type="com.kh.ee.user.curriculum.model.vo.Video" alias="Video" />
+		<typeAlias type="com.kh.ee.user.reply.model.vo.Reply" alias="Reply" />
 	</typeAliases>
 	
 	<mappers>

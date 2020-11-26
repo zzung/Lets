@@ -18,8 +18,8 @@ public class Reply {
 	private int replyNo;
 	private int memNo;
 	private String replyContent;
-	private Date enrollDate;
-	private Date modifyDate;
+	private Date replyEnrollDate;
+	private Date replyModifyDate;
 	private String status;
 	private int replyNo2;
 	private String replyType;

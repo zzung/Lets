@@ -38,8 +38,8 @@
 	<result column="mem_no" property="memNo" />
 	<result column="star" property="star" />
 	<result column="review_content" property="reviewContent"/>
-	<result column="enroll_date" property="enrollDate"/>
-	<result column="modify_date" property="modifiyDate"/>
+	<result column="enroll_date" property="reviewEnrollDate"/>
+	<result column="modify_date" property="reviewModifyDate"/>
 	<result column="status" property="status"/> 
 	<result column="nickname" property="nickname"/> 
 	<result column="mem_pic" property="memPic"/> 

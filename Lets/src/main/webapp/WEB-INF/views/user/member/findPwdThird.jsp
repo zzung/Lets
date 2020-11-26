@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Lets</title>
 <link rel="stylesheet" href="resources/user/assets/css/style.css">
 <link rel="stylesheet" href="resources/user/assets/css/member.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

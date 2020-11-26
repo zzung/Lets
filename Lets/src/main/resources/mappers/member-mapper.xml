@@ -3,7 +3,8 @@
 <mapper namespace="memberMapper">
 
 <resultMap id="memberResultSet" type="Member">
-	<id column="mem_id" property="memId" />
+	<id column="mem_no" property="memNo" />
+	<result column="mem_id" property="memId" />
 	<result column="mem_pwd" property="memPwd" />
 	<result column="mem_name" property="memName" />
 	<result column="nickname" property="nickname" />
@@ -22,9 +23,33 @@
 	<result column="status" property="status"/>
 </resultMap>
 
+<resultMap id="wishListResultSet" type="WishList">
+	<result column="class_no" property="classNo" />
+	<result column="mem_no" property="memNo" />
+</resultMap>
+
+<resultMap id="lessonResultSet" type="Lesson">
+	<id column="lesson_no" property="lessonNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="lesson_form" property="lessonForm" />
+	<result column="lesson_type" property="lessonType" />
+	<result column="lesson_category" property="lessonCategory" />
+	<result column="lesson_title" property="lessonTitle" />
+	<result column="lesson_cover_img" property="lessonCoverImg" />
+	<result column="like_count" property="likeCount" />
+	<result column="total_count" property="totalCount" />
+	<result column="period" property="period" />
+	<result column="disc_status" property="discStatus" />
+	<result column="discount_period" property="discountPeriod" />
+	<result column="discount" property="discount" />
+	<result column="pay_total" property="payTotal" />
+	<result column="status" property="status" />
+</resultMap>
+
 <select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 	select
-	          mem_id
+			  mem_no
+	        , mem_id
 	        , mem_pwd
 	        , mem_name
 	        , nickname
@@ -152,7 +177,20 @@
 	 where mem_id=#{memId}
 </update>
 
+<select id="myWishList" parameterType="_int" resultMap="lessonResultSet">
+	select *
+	  from lesson l
+	  join wishlist w 
+	    on l.lesson_no=w.lesson_no
+	 where w.mem_no=#{memNo}
+	 order by l.lesson_no desc
+</select>
 
+<select id="myWishListCount" parameterType="_int" resultType="_int">
+	select count(*)
+	  from wishlist
+	 where mem_no=#{memNo}
+</select>
 
 
 </mapper>

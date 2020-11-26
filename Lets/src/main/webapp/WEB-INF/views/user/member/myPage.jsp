@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Lets</title>
 <!-- jQuery 이용 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="resources/user/assets/css/style.css">
@@ -75,11 +75,11 @@
             <script>
 				function myPageIndex(num){
 					if(num==1){
-						location.href="";
+						location.href="myPage.me";
 					}else if(num==2){
-						location.href="";
+						location.href="myWishList.me";
 					}else if(num==3){
-						location.href="";
+						location.href="myDelivery.me";
 					}
 				}
 			</script>

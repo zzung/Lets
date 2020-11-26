@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.review.model.dao.ReviewDao;
 import com.kh.ee.user.review.model.vo.Review;
 
@@ -25,6 +26,12 @@ public class ReviewServiceImpl implements ReviewService{
 	
 		return revDao.selectReviewList(lessonNo,ss);
 	}
+	
+	@Override
+	public ArrayList<Reply> selectReplyReviewList(int reviewNo) {
+	
+		return revDao.selectReplyReviewList(reviewNo, ss);
+	}
 
 	@Override
 	public int insertReview(Review r) {
@@ -33,9 +40,9 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int replyReview(Review r) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertReplyReview(Review r) {
+
+		return revDao.insertReplyReview(r,ss);
 	}
 
 	@Override
@@ -44,22 +51,25 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
+	public int updateReviewReply(Review r) {
+		return revDao.updateReviewReply(r, ss);
+	}
+	
+	@Override
 	public int deleteReview(int reviewNo) {
 		
 		return revDao.deleteReview(reviewNo, ss);
 	}
 
-	@Override
-	public int replyUpdateReview(Review r) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
-	public int replyDeleteReview() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteReviewReply(int reviewNo) {
+		return revDao.deleteReviewReply(reviewNo,ss);
 	}
+
+
+
+
 	
 
 }

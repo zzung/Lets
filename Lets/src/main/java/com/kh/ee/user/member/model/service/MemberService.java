@@ -1,5 +1,8 @@
 package com.kh.ee.user.member.model.service;
 
+import java.util.ArrayList;
+
+import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.member.model.vo.Member;
 
 public interface MemberService {
@@ -13,5 +16,7 @@ public interface MemberService {
 	int updatePwd(Member m);
 	int updateMember(Member m);
 	int deleteMember(String memId);
+	ArrayList<Lesson> myWishList(int memNo);
+	int myWishListCount(int memNo);
 
 }

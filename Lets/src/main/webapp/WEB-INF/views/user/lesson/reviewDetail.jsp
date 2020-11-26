@@ -77,8 +77,14 @@
       </section>
       <!--================ Blog Area end =================-->
       <script>
+      
+      var editForm = ""; 
+      var result = ""; 
+      var replyResult = "";
+      
    		$(function(){
    			selectReviewList(); 
+   			selectReviewReplyList(); 
    			
    			//setInterval(selectReviewList, 1000);
    		});
@@ -123,11 +129,11 @@
    				success:function(list){
    					$("#reviewCount").text(list.length);
    					
-   					var result ="";
+   					result ="";
    					
    					for(var i in list){
    						result += "<div class='comment-list'>" 
-   						result += "<input type='hidden' name='reviewNo' value=" + list[i].reviewNo + ">"
+   						result += "<input type='hidden' class='rReply' name='reviewNo' value='" + list[i].reviewNo + "'>"
                         result += "<div class='single-comment justify-content-between d-flex'>"
                         result += "<div class='user justify-content-between d-flex'>"
                         result += "<div class='thumb'>"
@@ -138,7 +144,7 @@
                         result += "<div class='d-flex justify-content-between' style='width:670px;'>"
                         result += "<div class='d-flex align-items-center'>"
                         result += "<span>" + list[i].nickname + "</span>"
-                        result += "<p class='date'>" + list[i].enrollDate + "</p>"
+                        result += "<p class='date'>" + list[i].reviewEnrollDate + "</p>"
                         result += "</div>"
                         result += "<div class='review-ratting'>"  
 	                        for(var s=0; s<list[i].star; s++){
@@ -149,17 +155,21 @@
                         	}
                         result += "</div>"
                         result += "<div class='reply-btn'>"
-                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
-                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewSet(this)' data-no='"+list[i].reviewNo +"'>" + '수정' + "</a></div>"
+                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='replyReviewSet(this)' data-no='"+ list[i].reviewNo +"'>" + '답장' + "</a></div>"
+                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewSet(this)' data-no='"+ list[i].reviewNo +"'>" + '수정' + "</a></div>"
                         result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteModal' data-no='"+ list[i].reviewNo +"' onclick='deleteReviewSet(this)'>" + '삭제' + "</a></div>"
                         result += "</div>"        
                         result += "</div>"
                         result += "</div>"
                         result += "</div>"
                         result += "</div>"
-                        result += "</div>"
+                        result += "<div class='reviewReplyArea'></div>"
+                        result += "</div>" 
+                        
    					}
+   					
    					$(".review-area>#reviewListArea").html(result);
+   					selectReviewReplyList();
    
    				},
    				error:function(){
@@ -167,17 +177,109 @@
    				}
    			});
    		}
-      </script>
-      
-      <script>
-      	function deleteReviewSet(e){
-      		$("#deleteReply").val($(e).data("no"));
-      	}
-      	
+   		
+   		// 후기 댓글 작성하기 
+   		function addReplyReviewSet(e){
+   			var revNo = $(e).data("no");
+   			
+   			$.ajax({
+   				url:"insertReplyReview.rev",
+   				data:{
+   					memNo:2,
+   					reviewNo:revNo,
+   					replyContent:$("#reviewReplyContent").val(),
+   					replyType : '후기',
+   					replyLevel : 1,
+   					totalNo:revNo				
+   				},
+   				type:'post',
+   				success:function(result){
+   					
+   					if(result == "success"){
+   						$("#reviewReplyContent").val(""); 
+   						selectReviewReplyList();
+   					}
+   				},
+   				error:function(){
+   					console.log("reply 작성 ajax 실패")
+   				}
+   			})
+   			
+   		}
+   		
+   		//후기 댓글 불러오기 
+   		function selectReviewReplyList(){
+   			var revNo = 1
+   			
+   			$.ajax({
+                url:"replyReviewList.rev",
+                data:{
+                   reviewNo:revNo
+                },
+                success:function(list){
+                    replyResult ="";
+                   
+                   for(var i in list){
+                      
+                	   	replyResult += "<div class='comment-list reReply'>" 
+                		replyResult += "<input type='hidden' name='reviewChangedNo' value=" + list[i].reviewNo + ">"
+                		replyResult += "<input type='hidden' name='replyNo' value=" + list[i].replyNo + ">"
+                		replyResult += "<input type='hidden' name='totalNo' value=" + list[i].totalNo + ">"
+                		replyResult += "<div class='single-comment justify-content-between d-flex'>"
+                		replyResult += "<div class='user justify-content-between d-flex'>"
+                		replyResult += "<div class='thumb1'>"
+                		replyResult += "<img src='resources/user/assets/img/detailClassPage/replyArrow.png'>"
+                		replyResult += "</div>"
+                		replyResult += "<div class='desc1'>"
+                		replyResult += "<p class='comment' id='replyCommentArea'>" + list[i].replyContent + "</p>"   
+                		replyResult += "<div class='d-flex justify-content-between' style='width:670px;'>"
+                		replyResult += "<div class='d-flex align-items-center'>"
+                		replyResult += "<span>" + list[i].nickname + "</span>"
+                		replyResult += "<p class='date'>" + list[i].replyEnrollDate + "</p>"
+                		replyResult += "</div>"
+                		replyResult += "<div class='reply-btn'>"
+                		replyResult += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
+                		replyResult += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewReplySet(this)' data-no='" + list[i].replyNo + "'>" + '수정' + "</a></div>"
+                		replyResult += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reviewNo + "' onclick='deleteReviewReplySet(this)'>" + '삭제' + "</a></div>"
+                		replyResult += "</div>"        
+                		replyResult += "</div>"
+                		replyResult += "</div>"
+                		replyResult += "</div>"
+                		replyResult += "</div>"
+                		replyResult += "</div>"
+                         
+                   }
+                   $(".reply-btn").parents(".comment-list").find(".reviewReplyArea").html(replyResult);   
+                   
+                },
+                error:function(){
+                   console.log("대댓글 ajax load 실패");
+                }
+   		});
+   		}
+   		
+   		function replyReviewSet(e){
+   			var revNo = $(e).data("no");
+   			
+   			var replyArea = "" 
+			
+   			replyArea += '<input type="hidden" name="reviewReplyNo" value="'+ revNo +'">'
+            replyArea += '<div class="mt-10">'
+            replyArea += '<textarea class="review-textarea" placeholder="후기 작성해주세요" onfocus="this.placeholder = " onblur="this.placeholder = 후기 작성해주세요" id="reviewReplyContent" required></textarea>'
+        	replyArea += '</div>'
+            replyArea += '<div align="right">'
+        	replyArea += '<button class="genric-btn1 primary-border extrasmall" onclick="addReplyReviewSet(this);" data-no="'+revNo+'" ">'+"등록"+'</button>'
+            replyArea += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelReplyReview();">'+ "취소" + '</button>'
+            replyArea += '</div>'
+        	
+        	$(e).parents(".comment-list").find(".reviewReplyArea").html(replyArea);
+        	
+   			}
+   			
       	function updateReviewSet(e){
 			var revNo = $(e).data("no"); 
 			var revContent = $(e).parents().siblings("#reviewCommentArea").text();
-			var editForm = "";
+			editForm = "";
 			
 			editForm += '<input type="hidden" id="changedReviewNo" value="'+ revNo +'">'
 			editForm += "<div class='mt-10'>"
@@ -198,15 +300,163 @@
             editForm += '</div>'
             editForm += '<div id="submitReview" align="right">'
             editForm += '<button class="genric-btn1 primary-border extrasmall" onclick="updateReview();">'+ "등록" + '</button>'
-            editForm += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelUpdateReview();">'+ "취소" + '</button>'
+            editForm += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelUpdateReview(this);">'+ "취소" + '</button>'
             editForm += '</div>'
             editForm += '</div>'
             
             $(e).parents(".comment-list ").html(editForm);
       	}
-      </script>
-	<!--후기 글 삭제-->
+      	
+      //후기 수정 ajax
+		function updateReview(){
+			var changedRevNo = $("#changedReviewNo").val();
+			var changedReviewContent = $("#changedReviewContent").val();
+			
+   			$.ajax({
+   				url:"updateReview.rev",
+   				data:{
+   					reviewNo:changedRevNo,
+   					reviewContent:changedReviewContent,
+   					star:$("input:radio[name=changeStar]:checked").val()	
+   				},
+   				success:function(result){
+   					
+   					if(result == "success"){
+   						$("#reviewContent").val("");
+   						$("input:radio[name=star]:checked").val("");
+   						selectReviewList();
+   						selectReplyReviewList(); 
+   					}
+   				},
+   				error:function(request,error){
+   					alert("fail");
+   					//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+   				}
+   			});
+   		}
+      	
+      	function updateReviewReplySet(e){
+			var repNo = $(e).data("no"); 
+			var repContent = $(e).parents().siblings("#replyCommentArea").text();
+			var repEditForm = "";
+			
+			repEditForm += '<input type="hidden" id="changedReplyNo" value="'+ repNo +'">'
+			repEditForm += '<div class="mt-10">'
+            repEditForm += "<textarea class='review-textarea' id='changedReplyContent' required>" + repContent + "</textarea>"
+            repEditForm += '</div>'
+            repEditForm += '<div align="right">'
+            repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="updateReviewReply();">'+ "등록" + '</button>'
+    		repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelUpdateReview(this);">'+ "취소" + '</button>'
+    		repEditForm += '</div>'
 
+            
+            $(e).parents(".comment-list>.reviewReplyArea ").html(repEditForm);
+      	}
+      	
+      	//후기 댓글 수정하기
+      	function updateReviewReply(){
+      		var changedReplyNo = $("#changedReplyNo").val();
+      		var changedReplyContent = $("#changedReplyContent").text();
+      		
+      		alert(changedReplyNo);
+      		
+      		$.ajax({
+      			url:"updateReviewReply.rev",
+      			data:{
+      				replyNo:changedReplyNo,
+      				replyContent:changedReplyContent
+      			},
+      			type:'post',
+      			success:function(result){
+      				
+      				if(result = "success"){
+      					selectReviewList();
+   						selectReplyReviewList(); 
+      				}
+      			},
+      			error:function(){
+      				console.log("후기 댓글 수정하기 ajax 실패")
+      			}
+      		});
+      	}
+    	
+      	// 후기 수정 취소 
+		function cancelUpdateReview(e){
+			 $(e).parents("#reviewListArea").html(result); 
+			 selectReviewList();
+			 selectReplyReviewList();
+		}
+		
+      	//후기 삭제 모달로 no 보내기
+	  	function deleteReviewSet(e){
+	  		$("#deleteReply").val($(e).data("no"));
+	  	}
+	  	
+		//후기 삭제 ajax
+		function deleteReply(){
+
+			$.ajax({
+				url:"deleteReview.rev",
+				data:{
+					reviewNo:$("#deleteReply").val()
+				},
+				type:'post',
+				success:function(result){
+					if(result == 'success'){
+						alert("후기 삭제되었습니다.");
+						$("#closeModal").click();
+						selectReviewList(); 
+						
+						
+					} else {
+						alert("삭제 실패했습니다.");
+					}
+				},
+				error:function(){
+					console.log("ajax 댓글 삭제 처리 실패")
+				}
+			});
+		}
+		
+		//모달로 
+		function deleteReviewReplySet(e){
+			$("#deleteReviewReply").val($(e).data("no"));
+			var number = $(e).data("no"); 
+			alert(number);
+		}
+		
+		// 모달에서 삭제 누르면 실행
+		function deleteReviewReply(){
+			
+			$.ajax({
+				url:"deleteReviewReply.rev",
+				data:{
+					reviewNo:$("#deleteReviewReply").val()
+				},
+				type:'post',
+				success:function(result){
+					
+					if(result == "success"){
+						alert("댓글 삭제되었습니다.");
+						$("#closeModal").click();
+						selectReviewList();
+						
+					} else{
+						
+						alert("댓글 삭제 실패했습니다.")
+					}
+				},
+				error:function(){
+					console.log("후기 댓글 삭제 ajax 실패")
+				}
+			});
+		}
+	
+
+	</script>
+
+	
+	<!-- 후기 글 삭제 모달  -->
 	   <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	    <div class="modal-dialog modal-dialog-centered" role="document">
 	        <div class="modal-content">
@@ -222,67 +472,25 @@
 	        </div>
 	    </div>
 	</div>
+	
+	<!-- 후기 댓글 삭제 모달  -->
+	<div class="modal fade" id="deleteReplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	    <div class="modal-dialog modal-dialog-centered" role="document">
+	        <div class="modal-content">
+	            <div class="modal-content" align="center">
+	                <!-- Modal body -->
+	                <div class="modal-body">
+	                    <p>삭제 하시겠습니까?</p>
+	                    <input type="hidden" id="deleteReviewReply" value="">
+	                    <button type="button" class="genric-btn primary small" data-dismiss="modal" id="closeModal">취소</button>
+	                    <button type="button" class="genric-btn primary small" onclick="deleteReviewReply();">삭제</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 
 	
-	<script>
-		//후기 삭제 ajax
-		function deleteReply(){
-			
-			$.ajax({
-				url:"deleteReview.rev",
-				data:{
-					reviewNo:$("#deleteReply").val()
-				},
-				type:'post',
-				success:function(result){
-					if(result == 'success'){
-						alert("후기 삭제되었습니다.");
-						$("#closeModal").click();
-						location.reload(); 
-						
-						
-					} else {
-						alert("삭제 실패했습니다.");
-					}
-				},
-				error:function(){
-					console.log("ajax 댓글 삭제 처리 실패")
-				}
-			});
-		}
-
-		function cancelUpdateReview(){
-			history.back(); 
-		}
-		//후기 수정 ajax
-		function updateReview(){
-			var changedRevNo = $("#changedReviewNo").val();
-			var changedReviewContent = $("#changedReviewContent").val();
-			
-			alert(changedRevNo);
-			
-   			$.ajax({
-   				url:"updateReview.rev",
-   				data:{
-   					reviewNo:changedRevNo,
-   					reviewContent:changedReviewContent,
-   					star:$("input:radio[name=changeStar]:checked").val()	
-   				},
-   				success:function(result){
-   					
-   					if(result == "success"){
-   						$("#reviewContent").val("");
-   						$("input:radio[name=star]:checked").val("");
-   						selectReviewList();
-   					}
-   				},
-   				error:function(request,error){
-   					alert("fail");
-   					//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-   				}
-   			});
-   		}
-	</script>
    </main>
    <jsp:include page="../common/footer.jsp" />
 </body>

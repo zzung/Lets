@@ -1,9 +1,12 @@
 package com.kh.ee.user.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.member.model.dao.MemberDao;
 import com.kh.ee.user.member.model.vo.Member;
 
@@ -51,6 +54,14 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int deleteMember(String memId) {
 		return mDao.deleteMember(sqlSession, memId);
+	}
+	@Override
+	public ArrayList<Lesson> myWishList(int memNo) {
+		return mDao.myWishList(sqlSession, memNo);
+	}
+	@Override
+	public int myWishListCount(int memNo) {
+		return mDao.myWishListCount(sqlSession, memNo);
 	}
 	
 	

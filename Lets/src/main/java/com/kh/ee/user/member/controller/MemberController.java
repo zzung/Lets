@@ -1,5 +1,7 @@
 package com.kh.ee.user.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.member.model.service.MemberService;
 import com.kh.ee.user.member.model.vo.Member;
 
@@ -217,6 +220,25 @@ public class MemberController {
 			return "redirect:myPage.me";
 		}
 	}
+	
+	@RequestMapping("myWishList.me")
+	public String myWishList(HttpSession session) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		ArrayList<Lesson> myWishList = mService.myWishList(loginUser.getMemNo());
+		int myWishListCount = mService.myWishListCount(loginUser.getMemNo());
+		session.setAttribute("myWishList", myWishList);
+		session.setAttribute("myWishListCount", myWishListCount);
+		
+		return "user/member/myWishList";
+	}
+	
+	@RequestMapping("myDeliveryList.me")
+	public String myDeliveryList(HttpSession session, Model model) {
+		
+		return "user/member/myDeliveryList";
+	}
+	
 	
 	
 	

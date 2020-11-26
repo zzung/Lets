@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ee.user.curriculum.model.dao.CurriculumDao;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
-import com.kh.ee.user.curriculum.model.vo.LessonFAQ;
 import com.kh.ee.user.curriculum.model.vo.MemVideo;
 import com.kh.ee.user.curriculum.model.vo.QnA;
 import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.lesson.model.vo.LessonFaq;
 
 @Service
 public class CurriculumServiceImpl implements CurriculumService{
@@ -43,7 +43,7 @@ public class CurriculumServiceImpl implements CurriculumService{
 		return null;
 	}
 	@Override
-	public ArrayList<LessonFAQ> detailFAQ(Lesson l) {
+	public ArrayList<LessonFaq> detailFAQ(Lesson l) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.review.model.service.ReviewService;
 import com.kh.ee.user.review.model.vo.Review;
 
@@ -32,23 +33,31 @@ public class ReviewController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("deleteReview.rev")
-	public String deleteReview(int reviewNo) {
-		int result = revService.deleteReview(reviewNo);
+	@RequestMapping(value="replyReviewList.rev", produces="application/json; charset=utf-8")
+	public String selectReplyReviewList(int reviewNo) {
+		ArrayList<Reply> list = revService.selectReplyReviewList(reviewNo);
 		
-		System.out.println(reviewNo);
-		
-		if(result>0) {
-			return "success";
-		} else {
-			return "fail"; 
-		}
+		return new Gson().toJson(list);
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping("insertReview.rev")
 	public String insertReview(Review r) {
 		int result = revService.insertReview(r);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("insertReplyReview.rev")
+		public String insertReplyReview(Review r){
+		
+		int result = revService.insertReplyReview(r);
 		
 		if(result>0) {
 			return "success";
@@ -68,5 +77,41 @@ public class ReviewController {
 			return "fail";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping("updateReviewReply.rev")
+	public String updateReviewReply(Review r) {
+		int result = revService.updateReviewReply(r);
+		
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 
+	@ResponseBody
+	@RequestMapping("deleteReview.rev")
+	public String deleteReview(int reviewNo) {
+		int result = revService.deleteReview(reviewNo);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail"; 
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("deleteReviewReply.rev")
+	public String deleteReviewReply(int reviewNo) {
+		int result = revService.deleteReviewReply(reviewNo);
+		
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
 }
