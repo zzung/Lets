@@ -79,7 +79,7 @@
 
            <div class="myPage-content">
                 <div class="my-cont-title2">좋아요 목록</div>
-                <div class="my-cont-subTitle">총 0개</div>
+                <div class="my-cont-subTitle">총 ${myWishListCount}개</div>
                 <br><br>
                 <div class="my-cont">
 					<c:choose>

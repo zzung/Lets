@@ -226,7 +226,9 @@ public class MemberController {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		ArrayList<Lesson> myWishList = mService.myWishList(loginUser.getMemNo());
+		int myWishListCount = mService.myWishListCount(loginUser.getMemNo());
 		session.setAttribute("myWishList", myWishList);
+		session.setAttribute("myWishListCount", myWishListCount);
 		
 		return "user/member/myWishList";
 	}

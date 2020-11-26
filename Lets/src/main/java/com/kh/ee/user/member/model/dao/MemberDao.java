@@ -51,4 +51,8 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.myWishList", memNo);
 	}
 
+	public int myWishListCount(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("memberMapper.myWishListCount", memNo);
+	}
+
 }

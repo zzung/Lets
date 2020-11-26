@@ -59,6 +59,10 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<Lesson> myWishList(int memNo) {
 		return mDao.myWishList(sqlSession, memNo);
 	}
+	@Override
+	public int myWishListCount(int memNo) {
+		return mDao.myWishListCount(sqlSession, memNo);
+	}
 	
 	
 }

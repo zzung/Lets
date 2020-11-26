@@ -17,5 +17,6 @@ public interface MemberService {
 	int updateMember(Member m);
 	int deleteMember(String memId);
 	ArrayList<Lesson> myWishList(int memNo);
+	int myWishListCount(int memNo);
 
 }

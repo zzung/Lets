@@ -597,7 +597,7 @@ input[type='radio'] {
 }
 .my-wishList-cont1{
   width: 30%;
-  height: 300px;
+  height: 250px;
   border: 2px solid whitesmoke;
   float: left;
   margin: 10px;
@@ -610,19 +610,19 @@ input[type='radio'] {
   transition-duration: 0.4s;
 }
 .my-wishList-img{
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   width: 100%;
 }
 .my-wishList-title{
   font-size: 13px;
   font-weight: bolder;
   margin-bottom: 15px;
-  height: 30%;
+  height: 15%;
 }
 .my-wishList-field{
   height: 40%;
 }
-.my-wishList-likeCount{height: 10%;}
+.my-wishList-likeCount{height: 5%;}
 #checkPwdMessage{
   font-size: 13px;
   color: rgb(46, 48, 146);

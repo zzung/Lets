@@ -186,6 +186,11 @@
 	 order by l.lesson_no desc
 </select>
 
+<select id="myWishListCount" parameterType="_int" resultType="_int">
+	select count(*)
+	  from wishlist
+	 where mem_no=#{memNo}
+</select>
 
 
 </mapper>
