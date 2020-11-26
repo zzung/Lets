@@ -17,5 +17,6 @@ public interface LessonService {
 	ArrayList<Review> selectReview(int lessonNo); 
 	ArrayList<LessonFaq> selectLessonFaqList(int lessonNo); 
 	Tutor selectTutorInfo(int lessonNo); 
-
+	
+	int deleteLesson(int lno);
 }

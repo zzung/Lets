@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ee.user.faq.model.service.FaqService;
@@ -41,13 +42,12 @@ public class TutorController {
 	}
 	
 	@RequestMapping("tutorMyLesson.tm")
-	public String tutorMyLesson(Model model) {
+	public String tutorMyLesson(int memNo, Model model) {
 		
 		ArrayList<Lesson> aLlist = lessonService.selectApproveLessonList();
 		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList();
-		ArrayList mpList = memPayService.selectPrepareList();
+		ArrayList<MemPay> mpList = memPayService.selectPrepareList();
 		
-		System.out.println(mpList);
 		model.addAttribute("aLlist", aLlist);
 		model.addAttribute("sLlist", sLlist);
 		model.addAttribute("mpList", mpList);
@@ -74,10 +74,16 @@ public class TutorController {
 		}
 		
 	}
-	
-//	@RequestMapping("deleteLesson.tl")
-//	public String deleteLesson(int lno, Model model, HttpSession session) {
-//		System.out.println(lno);
-//	}
+	@ResponseBody
+	@RequestMapping("deleteLesson.tl")
+	public String deleteLesson(int lno) {
+		int result = lessonService.deleteLesson(lno);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 
 }

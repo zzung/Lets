@@ -33,4 +33,9 @@ public class LessonDao {
 	public Tutor selectTutorInfo(int lessonNo, SqlSessionTemplate ss) {
 		return ss.selectOne("lessonMapper.selectTutorInfo",lessonNo);
 	}
+	
+	public int deleteLesson(SqlSessionTemplate ss, int lno) {
+		return ss.update("lessonMapper.deleteLesson", lno);
+	}
+
 }

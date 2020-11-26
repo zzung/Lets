@@ -10,4 +10,5 @@
 		<result column="status" property="status"/>
 	</resultMap>
 
+
 </mapper>
