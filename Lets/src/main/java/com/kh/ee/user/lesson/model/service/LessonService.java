@@ -9,11 +9,9 @@ import com.kh.ee.user.tutor.model.vo.Tutor;
 
 public interface LessonService {
 	
-	ArrayList<Lesson> selectApproveLessonList(Lesson l);
+	ArrayList<Lesson> selectApproveLessonList();
 	
-	ArrayList<Lesson> selectApproveStatusList(Lesson l);
-	
-	ArrayList<Lesson> selectPrepareList(Lesson l);
+	ArrayList<Lesson> selectApproveStatusList();
 	
 	// 상세페이지에 뿌려줄 내용들 (학천)
 	ArrayList<Review> selectReview(int lessonNo); 
