@@ -198,94 +198,114 @@
 	                  		$("#showMore").click(function(){
 	                  			location.href="showMore.rev?lessonNo=1";
 	                  		})
-	                  	})
+	                  		
+	                  		selectReplyList(); 
+	                  	});
+	                  	
+	                  	function selectReplyList(){
+	                  		$.ajax({
+	                  			url:"selectReplyList.le",
+	                  			data:{
+	                  				lessonNo:1
+	                  			},
+	                  			success:function(list){
+	                  				
+	                  				$("#replyCount").text(list.length);
+	                  				
+	                  				var result ="";
+	                  				
+	                  				for(var i in list){
+	                  					result += '<div class="comment-list">'
+	        	                        result += '<div class="single-comment justify-content-between d-flex">'
+	     	                            result += '<div class="user justify-content-between d-flex">'
+	     	                            result += '<div class="thumb">'
+	     	                            result += '<img src="resources/user/assets/img/comment/cat1.jpg" alt="">'
+	     	                            result += '</div>'
+	     	                            result += '<div class="desc">'
+	     	                            result += '<p class="comment">'+list[i].replyContent+'</p>'
+	     	                            result += '<div class="d-flex justify-content-between" style="width:670px;">'
+	     	                            result += '<div class="d-flex align-items-center">'
+	     	                            result += '<span>'+list[i].nickname+'</span>'
+	     	                            result += '<p class="date">'+list[i].replyEnrollDate+'</p>'
+	     	                            result += '</div>'
+	     	                            result += '<div class="reply-btn">'
+	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase">'+ "답장" +'</a></div>'
+	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase">수정</a></div>'
+	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">'+"삭제"+'</a></div>'
+	     								result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">'+"신고"+'</a></div>'
+	     	                            result += '</div>'
+	     	                            result += '</div>'
+	     	                            result += '</div>'
+	     	                            result += '</div>'
+	     	                         	result += '</div>'
+	     	                            result += '</div>'
+	                  				}
+	                  				$(".comments-area > .replyArea").html(result); 
+	                  			},
+	                  			error:function(){
+	                  				console.log("댓글 list ajax fail")
+	                  			}
+	                  		});
+	                  	}
+	                  	
 	                  </script>
 	                  <!--?댓글area-->
-	                  <div class="comments-area">
-	                     <h4>커뮤니티 3</h4>
-	                     <div class="comment-list">
-	                        <div class="single-comment justify-content-between d-flex">
-	                           <div class="user justify-content-between d-flex">
-	                              <div class="thumb">
-	                                 <img src="resources/user/assets/img/comment/cat1.jpg" alt="">
-	                              </div>
-	                              <div class="desc">
-	                                 <p class="comment">
-	                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-	                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-	                                 </p>
-	                                 <div class="d-flex justify-content-between">
-	                                    <div class="d-flex align-items-center">
-	                                       <span>Emilly Blunt</span>
-	                                       <p class="date">December 4, 2017 at 3:12 pm </p>
-	                                    </div>
-	                                    <div class="reply-btn">
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">답장</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">수정</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
-											<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">신고</a></div>
-	                                    </div>
-	                                 </div>
-	                              </div>
-	                           </div>
-	                        </div>
-	                     </div>
-	                     <div class="comment-list">
-	                        <div class="single-comment justify-content-between d-flex">
-	                           <div class="user justify-content-between d-flex">
-	                              <div class="thumb">
-	                                 <img src="resources/user/assets/img/comment/comment_2.png" alt="">
-	                              </div>
-	                              <div class="desc">
-	                                 <p class="comment">
-	                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-	                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-	                                 </p>
-	                                 <div class="d-flex justify-content-between">
-	                                    <div class="d-flex align-items-center">
-	                                       <span>Emilly Blunt</span>
-	                                       <p class="date">December 4, 2017 at 3:12 pm </p>
-	                                    </div>
-	                                    <div class="reply-btn">
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">답장</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">수정</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
-                                           <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">신고</a></div>
-	                                    </div>
-	                                 </div>
-	                              </div>
-	                           </div>
-	                        </div>
-	                     </div>
-	                     <div class="comment-list">
-	                        <div class="single-comment justify-content-between d-flex">
-	                           <div class="user justify-content-between d-flex">
-	                              <div class="thumb">
-	                                 <img src="resources/user/assets/img/comment/comment_3.png" alt="">
-	                              </div>
-	                              <div class="desc">
-	                                 <p class="comment">
-	                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-	                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-	                                 </p>
-	                                 <div class="d-flex justify-content-between">
-	                                    <div class="d-flex align-items-center">
-	                                       <span>Emilly Blunt</span>
-	                                       <p class="date">December 4, 2017 at 3:12 pm </p>
-	                                    </div>
-	                                    <div class="reply-btn">
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">답장</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase">수정</a></div>
-	                                       <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">삭제</a></div>
-                                  		   <div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">신고</a></div>
-	                                    </div>
-	                                 </div>
-	                              </div>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
-	                  <!--? end 리뷰 area-->
+						<div class="comments-area">
+							<div>
+								<h4>커뮤니티 (<span id="replyCount"></span>)</h4>
+							</div>
+							<div id="review-writeBtn" align="right">
+								<button type="button" class="genric-btn primary-border" onclick="writeReview();">글작성</button>
+							</div>
+							
+							<div id="writeReviewArea" style="display:none">
+								<div class="mt-10">
+									<textarea class='review-textarea' id='communityContent' required></textarea>
+								</div>
+								<div align="right">
+									<button class="genric-btn1 primary-border extrasmall" onclick="addCommunity();">등록</button>
+								</div>
+							</div>
+							<div class="replyArea"></div>
+							<div class="pagination">
+
+					<script>
+	                        function writeReview(){
+	                           	if($("#writeReviewArea").css("display") == "none"){
+	                           		//조건문 필요 >> 회원이 이 강의를 수강시 가능.
+	                           		$("#writeReviewArea").show();
+	                           	}else{
+	                           		$("#writeReviewArea").hide(); 
+	          
+	                           	}
+	                       	}                 
+                   	 </script>
+
+
+								<c:choose>
+									<c:when test="${pi.currentPage eq 1 }">
+										<a href="#">&laquo;</a>
+									</c:when>
+									<c:otherwise>
+										<a href="selectReplyList.le?currentPage=${pi.currentPage-1 }">&laquo;</a>
+									</c:otherwise>
+								</c:choose>
+
+								<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+									<a href="selectReplyList.le?currentPage=${p}">${p }</a>
+								</c:forEach>
+
+								<c:choose>
+									<c:when test="${pi.currentPage eq pi.maxPge }">
+										<a href="#">&raquo;</a>
+									</c:when>
+									<c:otherwise>
+										<a href="selectReplyList.le?currentPage=${pi.currentPage+1 }">&raquo;</a>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div>
+						<!--? end 리뷰 area-->
 						<!--댓글 신고 모달-->
 						<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered" role="document">

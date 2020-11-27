@@ -2,8 +2,10 @@ package com.kh.ee.user.lesson.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.review.model.vo.Review;
 import com.kh.ee.user.tutor.model.vo.Tutor;
 
@@ -17,6 +19,11 @@ public interface LessonService {
 	ArrayList<Review> selectReview(int lessonNo); 
 	ArrayList<LessonFaq> selectLessonFaqList(int lessonNo); 
 	Tutor selectTutorInfo(int lessonNo); 
+	ArrayList<Reply> selectReply(PageInfo pi, int lessonNo); 
+
 	
 	int deleteLesson(int lno);
+
+	int selectListCount();
+
 }

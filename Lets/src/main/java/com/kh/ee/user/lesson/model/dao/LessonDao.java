@@ -2,11 +2,14 @@ package com.kh.ee.user.lesson.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.review.model.vo.Review;
 import com.kh.ee.user.tutor.model.vo.Tutor;
 
@@ -36,6 +39,21 @@ public class LessonDao {
 	
 	public int deleteLesson(SqlSessionTemplate ss, int lno) {
 		return ss.update("lessonMapper.deleteLesson", lno);
+	}
+
+
+	public int selectListCount(SqlSessionTemplate ss) {
+		return ss.selectOne("lessonMapper.selectListCount");
+	}
+
+	public ArrayList<Reply> selectReply(PageInfo pi, int lessonNo, SqlSessionTemplate ss) {
+		
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit(); 
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		return (ArrayList)ss.selectList("lessonMapper.selectReply", lessonNo, rowBounds);
 	}
 
 }

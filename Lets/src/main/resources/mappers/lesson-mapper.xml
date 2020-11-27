@@ -59,7 +59,18 @@
 	<result column="status" property="status" />
 </resultMap>
 
-<select id="selectApproveLessonList" resultMap="lessonResultSet">
+<resultMap id="replyResultSet" type="Reply">
+	<id column="reply_no" property="replyNo" />
+	<result column="reply_content" property="replyContent"/>
+	<result column="reply_level" property="replyLevel"/>
+	<result column="replyDate" property="replyEnrollDate" />
+	<result column="modify_Date" property="replyModifyDate" />
+	<result column="total_no" property="totalNo"/>
+	<result column="reply_type" property="replyType"/>
+	<result column="nickname" property="nickname" />
+</resultMap>
+
+<select id="selectApproveLessonList" resultMap="lessonResultSet" >
 	select
 	       lesson_no
 	     , lesson_title
@@ -133,5 +144,29 @@
 	    set status='N'
 	  where lesson_no = #{lno}
 </update>
+
+<select id="selectListCount" resultType="_int">
+	select
+	       count(*)
+	  from reply
+	 where reply_type = '클래스'
+	   and reply_level = 1
+	   and status = 'Y'
+</select>
+
+<select id="selectReply" resultMap="replyResultSet">
+	select
+	       r.reply_no
+	     , r.mem_no
+	     , r.reply_content
+	     , r.enroll_date
+	     , r.reply_level
+	     , m.nickname
+	     , m.mem_pic
+	  from reply r
+	  join member m on(r.mem_no = m.mem_no)
+	 where reply_type = '클래스'
+	   and total_no = #{lessonNo}
+</select>
 
 </mapper>

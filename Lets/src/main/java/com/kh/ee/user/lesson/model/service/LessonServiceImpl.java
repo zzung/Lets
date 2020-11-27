@@ -6,9 +6,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.dao.LessonDao;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.review.model.vo.Review;
 import com.kh.ee.user.tutor.model.vo.Tutor;
 
@@ -44,15 +46,29 @@ public class LessonServiceImpl implements LessonService{
 	public ArrayList<LessonFaq> selectLessonFaqList(int lessonNo) {
 		return lDao.selectLessonFaqList(lessonNo, ss);
 	}
+	
+	@Override
+	public int selectListCount() {
+		return lDao.selectListCount(ss);
+	}
+	
+	@Override
+	public ArrayList<Reply> selectReply(PageInfo pi, int lessonNo) {
+		
+		return lDao.selectReply(pi,lessonNo,ss);
+	}
 
 	@Override
 	public Tutor selectTutorInfo(int lessonNo) {
 		return lDao.selectTutorInfo(lessonNo, ss);
 	}
-	
+
 	@Override
 	public int deleteLesson(int lno) {
 		return lDao.deleteLesson(ss, lno);
 	}
+
+
+
 	
 }

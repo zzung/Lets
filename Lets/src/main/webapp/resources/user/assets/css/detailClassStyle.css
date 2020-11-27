@@ -7401,3 +7401,67 @@ input[type=radio]:checked+label {
 .comments-Area #showMore{
 	cursor:pointer; 
 }
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.review-textarea {
+	display: block;
+	width: 100%;
+	line-height: 40px;
+	border: none;
+	outline: none;
+	background: #f9f9ff;
+	padding: 0 20px;
+	height: 100px;
+	resize: none;
+	margin-top: 5px;
+}
+
+.review-textarea:focus {
+	outline: none;
+}
+
+.genric-btn1.extrasmall {
+	line-height: 25px;
+}
+
+.genric-btn1 {
+	display: inline-block;
+	outline: none;
+	line-height: 40px;
+	padding: 0 10px;
+	font-size: 0.8em;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 500;
+	cursor: pointer;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+
+.genric-btn1:focus {
+	outline: none;
+}
+
+.genric-btn1.primary-border {
+	color: #1f2b7b;
+	border: 1px solid #1f2b7b;
+	background: #fff;
+}
+
+.genric-btn1.primary-border:hover {
+	color: #fff;
+	background: #1f2b7b;
+	border: 1px solid transparent;
+}

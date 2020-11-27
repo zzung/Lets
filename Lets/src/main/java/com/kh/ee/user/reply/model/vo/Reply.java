@@ -26,4 +26,7 @@ public class Reply {
 	private int replyLevel;
 	private int totalNo;
 	private int repCount; 
+	
+	//닉네임 뿌려주기 위해 필드 값 가져옴(학천)
+	private String nickname; 
 }
