@@ -70,12 +70,13 @@ public class LessonController {
 	@ResponseBody
 	@RequestMapping(value="selectReplyList.le", produces="application/json; charset=utf-8")
 	public String selectReplyList(@RequestParam(value="currentPage", defaultValue="1")int currentPage, int lessonNo, Model model) {
-		
-		
+
 		int listCount = lService.selectListCount(); 
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		ArrayList<Reply> list = lService.selectReply(pi,lessonNo); 
+		
+		System.out.println("현재페이지: " + pi.getCurrentPage());
 		
 		model.addAttribute("pi",pi); 
 		return new Gson().toJson(list);

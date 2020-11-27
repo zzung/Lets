@@ -2,28 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reviewMapper">
 
-<!-- 상세페이지에 보여줄 resultMap(학천) -->
-<!-- 
-<resultMap id="reviewResultSet" type="Review">
-	<id column="review_no" property="reviewNo" />
-	<result column="lesson_no" property="lessonNo" />
-	<result column="mem_no" property="memNo" />
-	<result column="star" property="star" />
-	<result column="review_content" property="reviewContent"/>
-	<result column="enroll_date" property="reviewEnrollDate"/>
-	<result column="modify_date" property="reviewModifiyDate"/>
-	<result column="status" property="status"/> 
-	<result column="nickname" property="nickname"/> 
-	<result column="mem_pic" property="memPic"/> 
-	<result column="reply_no" property="replyNo"/>
-	<result column="reply_content" property="replyContent"/>
-	<result column="reply_level" property="replyLevel"/>
-	<result column="replyDate" property="replyEnrollDate" />
-	<result column="total_no" property="totalNo"/>
-	<result column="reply_type" property="replyType"/>
-</resultMap>
--->
-
  <!-- 후기 상세페이지에 뿌릴 것(학천) -->
 <resultMap id="review" type="Review">
 	<id column="review_no" property="reviewNo" />
@@ -46,25 +24,6 @@
 	<result column="reply_type" property="replyType"/>
 	<result column="total_no" property="totalNo" />
 </resultMap>
-
-<!-- 
-<select id="selectReviewList" parameterType="_int" resultMap="reviewResultSet">
-	select 
-		   r.review_no
-	     , r.star
-	     , r.review_content
-	     , r.enroll_date
-	     , m.nickname
-	     , m.mem_pic
-	  from review r
-	  join member m 
-	    on(r.mem_no=m.mem_no)
-	 where r.lesson_no = #{lessonNo}
-	   and r.status = 'Y'
-	 order
-	    by review_no desc
-</select>
- -->
   
  <select id="selectReviewList" parameterType="_int" resultMap="review">
  	select 

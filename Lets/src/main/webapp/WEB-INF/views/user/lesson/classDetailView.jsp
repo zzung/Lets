@@ -248,6 +248,16 @@
 	                  		});
 	                  	}
 	                  	
+	                  	//커뮤니티 작성하기 버튼 누르면 실행 될 스크립트
+                        function writeReview(){
+                           	if($("#writeReviewArea").css("display") == "none"){
+                           		//조건문 필요 >> 회원이 이 강의를 수강시 가능.
+                           		$("#writeReviewArea").show();
+                           	}else{
+                           		$("#writeReviewArea").hide(); 
+          
+                           	}
+                       	}  
 	                  </script>
 	                  <!--?댓글area-->
 						<div class="comments-area">
@@ -266,28 +276,16 @@
 									<button class="genric-btn1 primary-border extrasmall" onclick="addCommunity();">등록</button>
 								</div>
 							</div>
+							<br>
 							<div class="replyArea"></div>
 							<div class="pagination">
 
-					<script>
-	                        function writeReview(){
-	                           	if($("#writeReviewArea").css("display") == "none"){
-	                           		//조건문 필요 >> 회원이 이 강의를 수강시 가능.
-	                           		$("#writeReviewArea").show();
-	                           	}else{
-	                           		$("#writeReviewArea").hide(); 
-	          
-	                           	}
-	                       	}                 
-                   	 </script>
-
-
 								<c:choose>
 									<c:when test="${pi.currentPage eq 1 }">
-										<a href="#">&laquo;</a>
+										<a href="#" style="display:none">&laquo;</a>
 									</c:when>
 									<c:otherwise>
-										<a href="selectReplyList.le?currentPage=${pi.currentPage-1 }">&laquo;</a>
+										<a href="selectReplyList.le?currentPage=${pi.currentPage-1 }" style="display:none">&laquo;</a>
 									</c:otherwise>
 								</c:choose>
 
