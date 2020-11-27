@@ -67,10 +67,10 @@
                      $('#prepareBtn').click (function () {
                          var prepareHtml = '';
                          prepareHtml += '<tr><td><input class="form-control" name="" id="" type="text" placeholder="준비물을 입력해 주세요"></td>';
-                         prepareHtml += '<td><button class="plus_btn prepareAdd" type="button">-</button></td></tr>';
+                         prepareHtml += '<td><button class="plus_btn prepareDel" type="button">-</button></td></tr>';
                          $('#prepareTable > tbody:last').append(prepareHtml);
                          
-	                     $('.prepareAdd').click (function(){
+	                     $('.prepareDel').click (function(){
 	                    	 $(this).parents().eq(1).remove()                   	 
 	                     });
                      }); 
@@ -86,33 +86,38 @@
                        <li>레츠 회원들이 자주 궁금해하시는 부분이나 참고하면 좋을만한 질문과 답변을 작성해주세요.</li>
                    </ul>
                </div>
-               <table>
-                   <tr>
-                       <th>Q.</th>
-                       <td width=600px><input class="form-control" name="" id="" type="text" placeholder="자주하는 질문을 입력해주세요"></td>
-                       <td><button class="plus_btn" type="button">+</button></td>
-                   </tr>
-                   <tr>
-                       <th>A.</th>
-                       <td><input class="form-control" name="" id="" type="text" placeholder="답변을 작성해주세요"></td>
-                   </tr>
-               </table>
-               <table>
-                   <tr>
-                       <th>Q.</th>
-                       <td width=600px><input class="form-control" name="" id="" type="text" placeholder="자주하는 질문을 입력해주세요"></td>
-                       <td><button class="plus_btn" type="button">-</button></td>
-                   </tr>
-                   <tr>
-                       <th>A.</th>
-                       <td><input class="form-control" name="" id="" type="text" placeholder="답변을 작성해주세요"></td>
-                   </tr>
-               </table>
+               <div id="lessonFaq">
+	               <table>
+	                   <tr>
+	                       <th>Q.</th>
+	                       <td width=600px><input class="form-control" name="" id="" type="text" placeholder="자주하는 질문을 입력해주세요"></td>
+	                       <td></td>
+	                   </tr>
+	                   <tr>
+	                       <th>A.</th>
+	                       <td><input class="form-control" name="" id="" type="text" placeholder="답변을 작성해주세요"></td>
+	                   </tr>
+	               </table>
+               </div>
                <br><button href="#" type="button" class="genric-btn primary-border radius" id="faqBtn">질문 추가</button><br><br>
                
+               <script>
+               		$('#faqBtn').click (function () {
+               			var faqHtml = '';
+               			faqHtml += '<table><tr><th>Q.</th><td width=600px><input class="form-control" name="" id="" type="text" placeholder="자주하는 질문을 입력해주세요"></td>';
+               			faqHtml += '<td><button class="plus_btn faqDel" type="button">-</button></td></tr>';
+               			faqHtml += '<tr><th>A.</th><td><input class="form-control" name="" id="" type="text" placeholder="답변을 작성해주세요"></td></tr></table>';
+               			$('#lessonFaq').append(faqHtml);
+               			
+               			$('.faqDel').click (function(){
+               				$(this).parents().eq(3).remove();
+               			});
+               			
+               		});
+               </script>
                
           	</div>
-          	
+          	<br><br>
             <div>
                 <h5><b>가격 / 시간</b></h5><br>
                 <table>
@@ -157,6 +162,56 @@
                     </tr>
                 </table>
             </div>
+            <br><br><br>
+            <div>
+                <h5><b>진행 기간 / 횟수</b></h5><br>
+                <table>
+                    <tr>
+                        <th colspan="2">총 수업 횟수</th>
+                    </tr>
+                    <tr>
+                        <td width="240"><input class="form-control" name="" id="" type="number" placeholder="한 주당 진행할 횟수 입력"></td>
+                        <th>번</th>
+                    </tr>
+                </table><br>
+                <table>
+                    <tr>
+                        <th colspan="2">총 진행 기간</th>
+                    </tr>
+                    <tr>
+                        <td width="240"><input class="form-control" name="" id="" type="number" placeholder="총 진행 기간 주단위로 입력"></td>
+                        <th>주</th>
+                    </tr>
+                </table>
+            </div>
+            <br><br><br>
+            <div>
+                <h5><b>총 수업 가격</b></h5><br>
+                <div style="background-color: #f9f9ff; width: 600px; font-size: 20px; padding: 20px;">
+                    12,000원 X 1시간 X 6번 <br>
+                    <hr>
+                    <table align="right" style="width: 200px;">
+                        <tr>
+                            <th>원수업료</th>
+                            <th>72,000</th>
+                            <th>원</th>
+                        </tr>
+                        <tr>
+                            <th>연결 수수료</th>
+                            <th>14,400</th>
+                            <th>원</th>
+                        </tr>
+                    </table><br><br><br>
+
+                    <table align="right" style="color: red; width: 200px;">
+                        <tr>
+                            <th>총 수업료</th>
+                            <th>57,600</th>
+                            <th>원</th>
+                        </tr>
+                    </table><br>
+                </div>
+            </div>
             
           	<div class="section-top-border"  align="center">
 		        <h3 class="mb-30"><b>잠깐!</b></h3>
@@ -172,7 +227,7 @@
         
     </form>
     
-     <div align="center"><button type="submit" class="genric-btn primary radius">최종 승인 요청하기</button></div><br>
+     <div align="center"><button type="submit" class="genric-btn primary radius">최종 승인 요청하기</button></div><br><br>
      
  <jsp:include page="../common/footer.jsp" />
 </body>
