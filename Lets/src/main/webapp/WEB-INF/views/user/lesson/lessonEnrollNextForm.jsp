@@ -9,12 +9,13 @@
 <link rel="stylesheet" href="resources/user/assets/css/style.css">
 <link rel="stylesheet" href="resources/user/assets/css/tutorEnroll.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
 </head>
 <body>
     <jsp:include page="../common/navBar.jsp" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
         <form action="">
         <br><h3 class="mb-30">클래스 등록</h3>
         <hr class="top-hr">
@@ -30,8 +31,8 @@
                     <li>다른 수업에서는 얻을 수 없는 튜터님 만의 장점에 대해 설명해 주세요. </li>
                 </ul>
             </div>
-            <div id="summernote" name="" required></div>
-            <script>
+            <textarea id="summernote" name=""></textarea>
+            <!-- <script>
                 $(document).ready(function() {
                       $('#summernote').summernote({
                           width : 900,
@@ -39,7 +40,7 @@
                           focus : true
                       });
                     });
-            </script>
+            </script> -->
             <br><br>
 
             <div>
@@ -52,29 +53,28 @@
                     </ul>
                 </div>
 
-                <table>
-                    <tr>
-                        <td width=400px><input class="form-control" name="" id="" type="text" placeholder="준비물을 입력해 주세요"></td>
-                    </tr>
-                    <tr>
-                        <td width=400px><input class="form-control" name="" id="" type="text" placeholder="준비물을 입력해 주세요"></td>
-                        <td><button class="plus_btn prepareAdd" type="button">-</button></td>
-                    </tr>
+                <table id="prepareTable">
+                	<tbody>
+	                    <tr>
+	                        <td width=400px><input class="form-control" name="" id="" type="text" placeholder="준비물을 입력해 주세요"></td>
+	                    </tr>
+                    </tbody>
                 </table>
 
                 <br><button href="#" type="button" class="genric-btn primary-border radius" id="prepareBtn">준비물 추가</button>
 
-                <!-- <script>                
-                        $('#prepareBtn').click (function () {
-
-                            var prepareHtml = '';
-
-                            prepareHtml += '<tr><td width=400px><input class="form-control" name="" id="" type="text" placeholder="준비물을 입력해 주세요"></td>';
-                            prepareHtml += '<td><button class="plus_btn" type="button">-</button></td></tr>';
-
-
-                        )}; 
-                </script> -->
+                <script>  
+                     $('#prepareBtn').click (function () {
+                         var prepareHtml = '';
+                         prepareHtml += '<tr><td><input class="form-control" name="" id="" type="text" placeholder="준비물을 입력해 주세요"></td>';
+                         prepareHtml += '<td><button class="plus_btn prepareAdd" type="button">-</button></td></tr>';
+                         $('#prepareTable > tbody:last').append(prepareHtml);
+                         
+	                     $('.prepareAdd').click (function(){
+	                    	 $(this).parents().eq(1).remove()                   	 
+	                     });
+                     }); 
+                </script>
            </div>
 
            <br><br>
@@ -108,8 +108,68 @@
                        <td><input class="form-control" name="" id="" type="text" placeholder="답변을 작성해주세요"></td>
                    </tr>
                </table>
-           </div>
+               <br><button href="#" type="button" class="genric-btn primary-border radius" id="faqBtn">질문 추가</button><br><br>
+               
+               
+          	</div>
+          	
+            <div>
+                <h5><b>가격 / 시간</b></h5><br>
+                <table>
+                    <tr>
+                        <th colspan="2">시간당 가격</th>
+                    </tr>
+                    <tr>
+                        <td width="240"><input class="form-control" name="" id="" type="number" placeholder="시간당 가격을 입력하세요"></td>
+                        <th>원</th>
+                    </tr>
+                </table><br>
+            </div>
+            
+            <div>
+                <table>
+                    <tr>
+                        <th colspan="2">1회당 수업 시간</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="default-select" id="default-select">
+                                <select style="display: none;">
+                                    <option value="1">1회당 수업시간을 선택하세요</option>
+                                    <option value="1">1시간</option>
+                                    <option value="1">2시간</option>
+                                    <option value="1">3시간</option>
+                                    <option value="1">4시간</option>
+                                    <option value="1">5시간</option>
+                                </select>
+                                <div class="nice-select" tabindex="0">
+                                    <span class="current">1회당 수업시간을 선택하세요</span>
+                                    <ul class="list">
+                                        <li data-value=" 1" class="option selected focus">1시간</li>
+                                        <li data-value="1" class="option">2시간</li>
+                                        <li data-value="1" class="option">3시간</li>
+                                        <li data-value="1" class="option">4시간</li>
+                                        <li data-value="1" class="option">5시간</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+          	<div class="section-top-border"  align="center">
+		        <h3 class="mb-30"><b>잠깐!</b></h3>
+		        <blockquote class="generic-blockquote" align="left">
+		            <b>레츠의 수수료 정책은 어떻게 되나요?</b> <br><br>
+			            레츠 연결 수수료는 다회차 수업의 경우 첫 1시간 수업료, 원데이클래스의 경우 <u>전체 수업료의 20%</u> 입니다.<br>
+			            이는 레츠 운영비와 수업홍보비로 활용합니다.<br><br>
+			            첫 수업 후 수강생이 생각했던 수업과 맞지 않아 추후 수업 진행 취소하는 경우, 튜터님께 1시간 수업료를 환급해드립니다. <br>
+		            (수업 신청 전, 수업이 어떤 방식으로 진행되는지 알 수 있도록 수업소개 페이지에 수업 전 반드시 알아야 할   내용을 충분히 설명해주세요.) <br>
+		        </blockquote>
+    		</div>
         </div>
+        
     </form>
     
      <div align="center"><button type="submit" class="genric-btn primary radius">최종 승인 요청하기</button></div><br>
