@@ -1,8 +1,9 @@
 package com.kh.ee.user.review.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
-import com.kh.ee.user.member.model.vo.Member;
+import com.kh.ee.user.reply.model.vo.Reply;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,10 +31,14 @@ public class Review {
 	private String nickname;
 	private String memPic; 
 	
+	/*
 	private int replyNo;
 	private String replyContent;
 	private int replyLevel; 
 	private Date replyEnrollDate; 
 	private int totalNo;
 	private String replyType;
+	*/
+	private ArrayList<Reply> replyList;
+	
 }

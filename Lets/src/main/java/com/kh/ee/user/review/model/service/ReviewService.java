@@ -9,7 +9,7 @@ public interface ReviewService {
 	
 	//후기 전체 리스트 가져오기
 	ArrayList<Review> selectReviewList(int lessonNo);
-	ArrayList<Reply> selectReplyReviewList(int reviewNo); 
+	//ArrayList<Reply> selectReplyReviewList(int reviewNo); 
 	
 	//후기 작성하기
 	int insertReview(Review r);

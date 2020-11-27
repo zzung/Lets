@@ -16,10 +16,11 @@ public class ReviewDao {
 		return (ArrayList)ss.selectList("reviewMapper.selectReviewList", lessonNo);
 	}
 	
+	/*
 	public ArrayList<Reply> selectReplyReviewList(int reviewNo, SqlSessionTemplate ss) {
 		System.out.println("revNo:" + reviewNo);
 		return (ArrayList)ss.selectList("reviewMapper.selectReplyReviewList",reviewNo);
-	}
+	}*/
 
 
 	public int insertReview(Review r, SqlSessionTemplate ss) {

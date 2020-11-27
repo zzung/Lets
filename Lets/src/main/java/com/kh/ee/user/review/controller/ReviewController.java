@@ -32,6 +32,7 @@ public class ReviewController {
 		return new Gson().toJson(list); 
 	}
 	
+	/*
 	@ResponseBody
 	@RequestMapping(value="replyReviewList.rev", produces="application/json; charset=utf-8")
 	public String selectReplyReviewList(int reviewNo) {
@@ -39,7 +40,7 @@ public class ReviewController {
 		
 		return new Gson().toJson(list);
 	}
-	
+	*/
 	
 	@ResponseBody
 	@RequestMapping("insertReview.rev")

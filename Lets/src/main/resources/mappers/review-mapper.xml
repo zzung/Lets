@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reviewMapper">
 
+<!-- 상세페이지에 보여줄 resultMap(학천) -->
+<!-- 
 <resultMap id="reviewResultSet" type="Review">
 	<id column="review_no" property="reviewNo" />
 	<result column="lesson_no" property="lessonNo" />
@@ -20,18 +22,29 @@
 	<result column="total_no" property="totalNo"/>
 	<result column="reply_type" property="replyType"/>
 </resultMap>
+-->
 
-<resultMap id="replyResultSet" type="Reply">
+ <!-- 후기 상세페이지에 뿌릴 것(학천) -->
+<resultMap id="review" type="Review">
+	<id column="review_no" property="reviewNo" />
+	<result column="lesson_no" property="lessonNo" />
+	<result column="star" property="star" />
+	<result column="review_content" property="reviewContent"/>
+	<result column="enroll_date" property="reviewEnrollDate"/>
+	<result column="re_nickname" property="nickname"/> 
+	<result column="mem_pic" property="memPic"/> 
+	<collection javaType="java.util.ArrayList" resultMap="reply" property="replyList"/>
+</resultMap>
+ 
+<!-- 후기 상세페이지 뿌릴 것(학천) -->
+<resultMap id="reply" type="Reply">
 	<id column="reply_no" property="replyNo" />
 	<result column="reply_content" property="replyContent"/>
-	<result column="reply_level" property="replyLevel"/>
-	<result column="replyDate" property="replyEnrollDate" />
-	<result column="modify_Date" property="replyModifyDate" />
-	<result column="total_no" property="totalNo"/>
-	<result column="reply_type" property="replyType"/>
+	<result column="rp_enrolldate" property="replyEnrollDate" />
+	<result column="rp_nickname" property="nickname"/>
 </resultMap>
 
-
+<!-- 
 <select id="selectReviewList" parameterType="_int" resultMap="reviewResultSet">
 	select 
 		   r.review_no
@@ -48,24 +61,29 @@
 	 order
 	    by review_no desc
 </select>
-
-<select id="selectReplyReviewList" parameterType="_int" resultMap="reviewResultSet">
-	select
-	       r.review_no
-	     , rp.reply_no
-	     , rp.reply_content
-	     , rp.enroll_date as replyDate
-	     , rp.reply_level
-	     , rp.total_no
-	     , m.mem_pic
-	     , m.nickname
-	  from review r
-	  join reply rp on(reply_type='후기' and r.review_no=rp.total_no)
-	  join member m on (rp.mem_no = m.mem_no)
-	 where review_no = #{reviewNo}
-	  order 
-	     by review_no desc, rp.reply_level asc
-</select>
+ -->
+  
+ <select id="selectReviewList" parameterType="_int" resultMap="review">
+ 	select 
+ 	        re.review_no
+ 	      , re.lesson_no
+ 	      , rem.nickname re_nickname
+ 	      , rem.mem_pic
+ 	      , re.star
+ 	      , re.review_content
+ 	      , re.enroll_Date re_enrolldate
+ 	      , rp.reply_no
+ 	      , rpm.nickname rp_nickname
+ 	      , rp.reply_content
+ 	      , rp.enroll_date rp_enrolldate
+	  from review re
+	  join member rem on(re.mem_no = rem.mem_no)
+ left join reply rp on (re.review_no=rp.total_no and reply_type='후기')
+ left join member rpm on (rp.mem_no=rpm.mem_no)
+	 where lesson_no=1
+	 order 
+	    by review_no asc, reply_no desc
+ </select>
 
 
 <insert id="insertReview" parameterType="Review">
