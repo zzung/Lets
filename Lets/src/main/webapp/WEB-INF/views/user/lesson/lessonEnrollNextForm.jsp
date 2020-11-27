@@ -225,9 +225,9 @@
     		</div>
         </div>
         
+     <div align="center"><button type="submit" class="genric-btn primary radius">최종 승인 요청하기</button></div><br><br>
     </form>
     
-     <div align="center"><button type="submit" class="genric-btn primary radius">최종 승인 요청하기</button></div><br><br>
      
  <jsp:include page="../common/footer.jsp" />
 </body>

@@ -290,8 +290,8 @@
                </div>
            </div>
            <br><br>
-     </div>
      <div align="center"><button type="submit" class="genric-btn primary radius">저장 후 다음단계(1/2)</button></div><br>
+     </div>
    </form>
    
   <jsp:include page="../common/footer.jsp" />
