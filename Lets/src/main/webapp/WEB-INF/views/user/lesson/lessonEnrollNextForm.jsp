@@ -30,6 +30,7 @@
                     <li>다른 수업에서는 얻을 수 없는 튜터님 만의 장점에 대해 설명해 주세요. </li>
                 </ul>
             </div>
+            <div id="summernote" name="" required></div>
             <script>
                 $(document).ready(function() {
                       $('#summernote').summernote({
@@ -39,7 +40,6 @@
                       });
                     });
             </script>
-            <div id="summernote" name="" required style="width: 1000px;"></div>
             <br><br>
 
             <div>

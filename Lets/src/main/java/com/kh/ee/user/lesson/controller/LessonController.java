@@ -86,5 +86,8 @@ public class LessonController {
 		return "user/lesson/lessonEnrollForm";
 	}
 		
-	
+	@RequestMapping("enrollNext.le")
+	public String enrollNextLesson() {
+		return "user/lesson/lessonEnrollNextForm";
+	}
 }
