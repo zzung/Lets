@@ -10,6 +10,7 @@
 	<result column="enroll_date" property="enrollDate" />
 	<result column="modify_date" property="modifyDate" />
 	<result column="status" property="status" />
+	<result column="count" property="count" />
 </resultMap>
 
 <select id="selectNoticeList" resultMap="noticeResultSet" >
@@ -74,10 +75,25 @@
 	</select>
 
 	<select id="tutorSelectNoticeList" parameterType="Notice" resultMap="noticeResultSet">
-	
+		select
+		       notice_no
+		     , notice_title
+		     , enroll_date
+		     , count
+		     , status
+		  from notice
+		 where notice_type=#{noticeType}
+		   and status!='N'
 	</select>
 	
 	<select id="tutorDetailNotice" parameterType="Notice" resultMap="noticeResultSet">
-	
+		select
+			   notice_no
+			 , notice_title
+			 , notice_content
+			 , enroll_date
+			 , status
+		  from notice
+		 where notice_no=#{notice_no}
 	</select>
 </mapper>

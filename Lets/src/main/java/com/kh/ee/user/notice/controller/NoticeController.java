@@ -24,17 +24,23 @@ public class NoticeController {
 		
 		int listCount = nService.tutorSelectNoticeListCount(n);
 		
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 8, 4);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Notice> noticeList = nService.tutorSelectNoticeList(n, pi);
 		
 		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("pi", pi);
 		
 		return "user/notice/tutorNoticeList";
 	}
 	
 	@RequestMapping("tutorDetailNotice.no")
 	public String tutorDetailNotice(Notice n, Model model) {
+		
+		Notice notice = nService.tutorDetailNotice(n);
+		
+		model.addAttribute("notice", notice);
+		
 		return "user/notice/tutorDetailNotice";
 	}
 }

@@ -88,7 +88,7 @@
 			                                                  <a href="#">튜터 센터</a>
 			                                                  <ul class="after-login-dropdown-content-tutor">
 			                                                      <li><a href="#">튜터 등록</a></li>
-			                                                      <li style="margin-top: -10px;"><a href="tutorNotice.no?noticeType=tutor">튜터 공지사항</a></li>
+			                                                      <li style="margin-top: -10px;"><a href="tutorNotice.no?noticeType=TUTOR">튜터 공지사항</a></li>
 			                                                      <li style="margin-top: -10px;"><a href="#">새로운 수업</a></li>
 			                                                  </ul>
 			                                              </div>

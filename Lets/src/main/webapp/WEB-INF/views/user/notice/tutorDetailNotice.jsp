@@ -30,11 +30,17 @@
 
             <tr>
                 <th>
-                    <span id="red">중요</span>
+                	<c:choose>
+                		<c:when test="${ notice.noticeType == 'R' }">
+                    		<span id="red">중요</span>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<span id="black">${ notice.noticeNo }</span>
+                    	</c:otherwise>
+					</c:choose>
+                    ${ notice.noticeTitle }
 
-                    9월 공지사항입니다.
-
-                    <span id="notice_date">2020.09.01</span>
+                    <span id="notice_date">${ notice.enrollDate }</span>
                 </th>
             </tr>
 
@@ -44,7 +50,7 @@
 
             <tr>
                 <td>
-                    그것을 우리의 풍부하게 풍부하게 그리하였는가? 이 무엇을 바이며, 청춘의 부패를 현저하게 듣는다. 무엇이 때까지 피고, 예수는 싹이 더운지라 말이다. 위하여 안고, 기관과 있다. 길을 작고 수 칼이다. 미인을 희망의 그것은 보내는 원대하고, 이것을 이것이다. 꽃이 피가 기쁘며, 그들의 그들의 내려온 소금이라 철환하였는가? 능히 우리의 내려온 사막이다. 위하여, 하여도 무엇을 것은 이 그들은 같지 생의 것이다.
+                    ${notice.noticeContent }
                 </td>
             </tr>
             

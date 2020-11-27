@@ -61,6 +61,12 @@ div{
     padding: 5px;
     border-radius: 5px;
 }
+#black{
+    position: absolute;
+    left: 40px;
+    color: black;
+    font-size: 15px;
+}
 #notice_date{
     position: absolute;
     right: 40px;

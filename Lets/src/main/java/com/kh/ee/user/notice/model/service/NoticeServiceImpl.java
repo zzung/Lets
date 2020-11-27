@@ -40,5 +40,4 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDao.tutorDetailNotice(ss, n);
 	}
 
-	
 }
