@@ -39,9 +39,12 @@
 <!-- 후기 상세페이지 뿌릴 것(학천) -->
 <resultMap id="reply" type="Reply">
 	<id column="reply_no" property="replyNo" />
+	<result column="mem_no" property="memNo"/>
 	<result column="reply_content" property="replyContent"/>
 	<result column="rp_enrolldate" property="replyEnrollDate" />
 	<result column="rp_nickname" property="nickname"/>
+	<result column="reply_type" property="replyType"/>
+	<result column="total_no" property="totalNo" />
 </resultMap>
 
 <!-- 
@@ -78,7 +81,7 @@
  	      , rp.enroll_date rp_enrolldate
 	  from review re
 	  join member rem on(re.mem_no = rem.mem_no)
- left join reply rp on (re.review_no=rp.total_no and reply_type='후기')
+ left join reply rp on (re.review_no=rp.total_no and reply_type='후기' and rp.status='Y')
  left join member rpm on (rp.mem_no=rpm.mem_no)
 	 where lesson_no=1
 	 order 
@@ -107,7 +110,7 @@
 </insert>
 
 
-<insert id="insertReplyReview" parameterType="Review">
+<insert id="insertReplyReview" parameterType="Reply">
 	insert
 	  into reply
 	    (
@@ -139,7 +142,7 @@
 	 where review_no = #{reviewNo}
 </update>
 
-<update id="updateReviewReply" parameterType="Review">
+<update id="updateReviewReply" parameterType="Reply">
 	update 
 	       reply
 	   set 

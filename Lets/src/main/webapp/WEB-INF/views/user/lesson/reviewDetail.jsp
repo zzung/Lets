@@ -84,7 +84,6 @@
       
    		$(function(){
    			selectReviewList(); 
-   			//selectReviewReplyList(); 
    			
    			//setInterval(selectReviewList, 1000);
    		});
@@ -129,7 +128,6 @@
    				success:function(list){
    					$("#reviewCount").text(list.length);
 
-   					console.log(list); 
    					result ="";
    					
    					
@@ -138,23 +136,23 @@
    						result += "<input type='hidden' class='rReply' name='reviewNo' value='" + list[i].reviewNo + "'>"
                         result += "<div class='single-comment justify-content-between d-flex'>"
                         result += "<div class='user justify-content-between d-flex'>"
-                        result += "<div class='thumb'>"
-                        result += "<img src='resources/user/assets/img/comment/cat1.jpg'>"
-                        result += "</div>"
-                        result += "<div class='desc'>"
-                        result += "<p class='comment' id='reviewCommentArea'>" + list[i].reviewContent + "</p>"	
-                        result += "<div class='d-flex justify-content-between' style='width:670px;'>"
-                        result += "<div class='d-flex align-items-center'>"
-                        result += "<span>" + list[i].nickname + "</span>"
-                        result += "<p class='date'>" + list[i].reviewEnrollDate + "</p>"
-                        result += "</div>"
+                       	result += "<div class='thumb'>"
+                       	result += "<img src='resources/user/assets/img/comment/cat1.jpg'>"
+                       	result += "</div>"
+                       	result += "<div class='desc'>"
+                       	result += "<p class='comment' id='reviewCommentArea'>" + list[i].reviewContent + "</p>"	
+                       	result += "<div class='d-flex justify-content-between' style='width:670px;'>"
+                       	result += "<div class='d-flex align-items-center'>"
+                       	result += "<span>" + list[i].nickname + "</span>"
+                       	result += "<p class='date'>" + list[i].reviewEnrollDate + "</p>"
+                       	result += "</div>"
                         result += "<div class='review-ratting'>"  
-	                        for(var s=0; s<list[i].star; s++){
-	                        	result += "<i class='fas fa-star'></i>"	
-	                        }
-                        	for(var j=list[i].star; j<5; j++){
-                        		result += "<i class='fas fa-star' style='color:#e6e6e6'></i>"	
-                        	}
+		                        for(var s=0; s<list[i].star; s++){
+		                        	result += "<i class='fas fa-star'></i>"	
+		                        }
+	                        	for(var j=list[i].star; j<5; j++){
+	                        		result += "<i class='fas fa-star' style='color:#e6e6e6'></i>"	
+	                        	}
                         result += "</div>"
                         result += "<div class='reply-btn'>"
                         result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='replyReviewSet(this)' data-no='"+ list[i].reviewNo +"'>" + '답장' + "</a></div>"
@@ -165,9 +163,10 @@
                         result += "</div>"
                         result += "</div>"
                         result += "</div>"
-                        result += "<div class='reviewReplyArea'>"
+                        result += "<div class='reviewReplyArea'></div>"
+                       	result += "</div>"
                  			if(list[i].replyList.length != 0){
-                 				
+                 				for(var r=0; r<list[i].replyList.length; r++ ){
                         result += "<div class='comment-list reReply'>" 
                    		result += "<div class='single-comment justify-content-between d-flex'>"
                    		result += "<div class='user justify-content-between d-flex'>"
@@ -175,15 +174,15 @@
                    		result += "<img src='resources/user/assets/img/detailClassPage/replyArrow.png'>"
                    		result += "</div>"
                    		result += "<div class='desc1'>"
-                   		result += "<p class='comment' id='replyCommentArea'>" + list[i].replyList.replyContent + "</p>"   
+                   		result += "<p class='comment' id='replyCommentArea'>" + list[i].replyList[r].replyContent + "</p>"   
                    		result += "<div class='d-flex justify-content-between' style='width:670px;'>"
                    		result += "<div class='d-flex align-items-center'>"
-                   		result += "<span>" + list[i].replyList.nickname + "</span>"
-                   		result += "<p class='date'>" + list[i].replyList.replyEnrollDate + "</p>"
+                   		result += "<span>" + list[i].replyList[r].nickname + "</span>"
+                   		result += "<p class='date'>" + list[i].replyList[r].replyEnrollDate + "</p>"
                    		result += "</div>"
                    		result += "<div class='reply-btn'>"
                    		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
-                   		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewReplySet(this)' data-no='" + list[i].replyNo + "'>" + '수정' + "</a></div>"
+                   		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewReplySet(this)' data-no='" + list[i].replyList[r].replyNo + "'>" + '수정' + "</a></div>"
                    		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reviewNo + "' onclick='deleteReviewReplySet(this)'>" + '삭제' + "</a></div>"
                    		result += "</div>"        
                    		result += "</div>"
@@ -191,10 +190,9 @@
                    		result += "</div>"
                    		result += "</div>"
                    		result += "</div>"
-                        result += "</div>"
-
+                 				}
                  			}
-                        result += "</div>" 
+                   
                  		
    					}
    					
@@ -226,7 +224,7 @@
    					
    					if(result == "success"){
    						$("#reviewReplyContent").val(""); 
-   						selectReviewReplyList();
+   						selectReviewList();
    					}
    				},
    				error:function(){
@@ -236,61 +234,6 @@
    			
    		}
    		
-   		//후기 댓글 불러오기 
-   		/*
-   		function selectReviewReplyList(){
-   			var revNo = 1
-   			
-   			$.ajax({
-                url:"replyReviewList.rev",
-                data:{
-                   reviewNo:revNo
-                },
-                success:function(list){
-                    replyResult ="";
-                   console.log(list);
-                    
-                   for(var i in list){
-                      
-                	   	replyResult += "<div class='comment-list reReply'>" 
-                		replyResult += "<input type='hidden' name='reviewChangedNo' value=" + list[i].reviewNo + ">"
-                		replyResult += "<input type='hidden' name='replyNo' value=" + list[i].replyNo + ">"
-                		replyResult += "<input type='hidden' name='totalNo' value=" + list[i].totalNo + ">"
-                		replyResult += "<div class='single-comment justify-content-between d-flex'>"
-                		replyResult += "<div class='user justify-content-between d-flex'>"
-                		replyResult += "<div class='thumb1'>"
-                		replyResult += "<img src='resources/user/assets/img/detailClassPage/replyArrow.png'>"
-                		replyResult += "</div>"
-                		replyResult += "<div class='desc1'>"
-                		replyResult += "<p class='comment' id='replyCommentArea'>" + list[i].replyContent + "</p>"   
-                		replyResult += "<div class='d-flex justify-content-between' style='width:670px;'>"
-                		replyResult += "<div class='d-flex align-items-center'>"
-                		replyResult += "<span>" + list[i].nickname + "</span>"
-                		replyResult += "<p class='date'>" + list[i].replyEnrollDate + "</p>"
-                		replyResult += "</div>"
-                		replyResult += "<div class='reply-btn'>"
-                		replyResult += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
-                		replyResult += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewReplySet(this)' data-no='" + list[i].replyNo + "'>" + '수정' + "</a></div>"
-                		replyResult += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reviewNo + "' onclick='deleteReviewReplySet(this)'>" + '삭제' + "</a></div>"
-                		replyResult += "</div>"        
-                		replyResult += "</div>"
-                		replyResult += "</div>"
-                		replyResult += "</div>"
-                		replyResult += "</div>"
-                		replyResult += "</div>"
-                         
-                   }
-                   $(".reply-btn").parents(".comment-list").find(".reviewReplyArea").html(replyResult);   
-                   
-                   
-                   
-                },
-                error:function(){
-                   console.log("대댓글 ajax load 실패");
-                }
-   		});
-   		}
-   		*/
    		
    		function replyReviewSet(e){
    			var revNo = $(e).data("no");
@@ -305,9 +248,10 @@
         	replyArea += '<button class="genric-btn1 primary-border extrasmall" onclick="addReplyReviewSet(this);" data-no="'+revNo+'" ">'+"등록"+'</button>'
             replyArea += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelReplyReview();">'+ "취소" + '</button>'
             replyArea += '</div>'
+            replyArea += '<br><br>'
         	
-        	$(e).parents(".comment-list").find(".reviewReplyArea").html(replyArea);
-        	
+        	$(e).parents(".comment-list").children(".reviewReplyArea").html(replyArea);
+       
    			}
    			
       	function updateReviewSet(e){
@@ -337,6 +281,7 @@
             editForm += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelUpdateReview(this);">'+ "취소" + '</button>'
             editForm += '</div>'
             editForm += '</div>'
+            editForm += '<br><br>'
             
             $(e).parents(".comment-list ").html(editForm);
       	}
@@ -359,7 +304,6 @@
    						$("#reviewContent").val("");
    						$("input:radio[name=star]:checked").val("");
    						selectReviewList();
-   						selectReplyReviewList(); 
    					}
    				},
    				error:function(request,error){
@@ -374,9 +318,11 @@
 			var repContent = $(e).parents().siblings("#replyCommentArea").text();
 			var repEditForm = "";
 			
-			repEditForm += '<input type="hidden" id="changedReplyNo" value="'+ repNo +'">'
+			console.log(repNo); 
+			
+			repEditForm += '<input type="hidden" id="changedRepNo" value="'+ repNo +'">'
 			repEditForm += '<div class="mt-10">'
-            repEditForm += "<textarea class='review-textarea' id='changedReplyContent' required>" + repContent + "</textarea>"
+            repEditForm += "<textarea class='review-textarea' id='repContent' required>" + repContent + "</textarea>"
             repEditForm += '</div>'
             repEditForm += '<div align="right">'
             repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="updateReviewReply();">'+ "등록" + '</button>'
@@ -384,28 +330,28 @@
     		repEditForm += '</div>'
 
             
-            $(e).parents(".comment-list>.reviewReplyArea ").html(repEditForm);
+            $(e).parents(".comment-list").html(repEditForm);
       	}
       	
       	//후기 댓글 수정하기
       	function updateReviewReply(){
-      		var changedReplyNo = $("#changedReplyNo").val();
-      		var changedReplyContent = $("#changedReplyContent").text();
+      		var changedRepNo = $("#changedRepNo").val();
+      		var repContent = $("#repContent").val();
       		
-      		alert(changedReplyNo);
+      		console.log(changedRepNo);
+      		console.log(repContent); 
       		
       		$.ajax({
       			url:"updateReviewReply.rev",
       			data:{
-      				replyNo:changedReplyNo,
-      				replyContent:changedReplyContent
+      				replyNo:changedRepNo,
+      				replyContent:repContent
       			},
       			type:'post',
       			success:function(result){
       				
       				if(result = "success"){
       					selectReviewList();
-   						selectReplyReviewList(); 
       				}
       			},
       			error:function(){
@@ -418,7 +364,6 @@
 		function cancelUpdateReview(e){
 			 $(e).parents("#reviewListArea").html(result); 
 			 selectReviewList();
-			 selectReplyReviewList();
 		}
 		
       	//후기 삭제 모달로 no 보내기
@@ -456,7 +401,6 @@
 		function deleteReviewReplySet(e){
 			$("#deleteReviewReply").val($(e).data("no"));
 			var number = $(e).data("no"); 
-			alert(number);
 		}
 		
 		// 모달에서 삭제 누르면 실행
@@ -472,7 +416,7 @@
 					
 					if(result == "success"){
 						alert("댓글 삭제되었습니다.");
-						$("#closeModal").click();
+						$("#closeReplyModal").click();
 						selectReviewList();
 						
 					} else{
@@ -516,7 +460,7 @@
 	                <div class="modal-body">
 	                    <p>삭제 하시겠습니까?</p>
 	                    <input type="hidden" id="deleteReviewReply" value="">
-	                    <button type="button" class="genric-btn primary small" data-dismiss="modal" id="closeModal">취소</button>
+	                    <button type="button" class="genric-btn primary small" data-dismiss="modal" id="closeReplyModal">취소</button>
 	                    <button type="button" class="genric-btn primary small" onclick="deleteReviewReply();">삭제</button>
 	                </div>
 	            </div>

@@ -491,13 +491,16 @@
 
 .desc1 {
 	background: #eee;
-	margin-top: 20px;
+	margin-top: -20px;
 	padding: 0 20px;
 }
 
 .review-area .thumb1 img{
     width:50px;
     padding:0 15px;
-    margin-top:20px;
+    margin-top:10px;
     margin-right:10px;
+}
+.desc{
+	margin-bottom:30px;
 }

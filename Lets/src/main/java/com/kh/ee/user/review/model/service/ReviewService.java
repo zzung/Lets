@@ -15,13 +15,13 @@ public interface ReviewService {
 	int insertReview(Review r);
 	
 	//후기 답장하기
-	int insertReplyReview(Review r); 
+	int insertReplyReview(Reply re); 
 	
 	//후기 수정하기
 	int updateReview(Review r); 
 	
 	//후기 댓글 수정하기
-	int updateReviewReply(Review r); 
+	int updateReviewReply(Reply re); 
 	
 	//후기 삭제하기
 	int deleteReview(int reviewNo);

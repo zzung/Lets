@@ -56,9 +56,9 @@ public class ReviewController {
 	
 	@ResponseBody
 	@RequestMapping("insertReplyReview.rev")
-		public String insertReplyReview(Review r){
+		public String insertReplyReview(Reply re){
 		
-		int result = revService.insertReplyReview(r);
+		int result = revService.insertReplyReview(re);
 		
 		if(result>0) {
 			return "success";
@@ -81,8 +81,8 @@ public class ReviewController {
 	
 	@ResponseBody
 	@RequestMapping("updateReviewReply.rev")
-	public String updateReviewReply(Review r) {
-		int result = revService.updateReviewReply(r);
+	public String updateReviewReply(Reply re) {
+		int result = revService.updateReviewReply(re);
 		
 		if(result>0) {
 			return "success";

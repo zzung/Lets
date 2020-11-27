@@ -27,12 +27,6 @@ public class ReviewServiceImpl implements ReviewService{
 		return revDao.selectReviewList(lessonNo,ss);
 	}
 	
-	/*
-	@Override
-	public ArrayList<Reply> selectReplyReviewList(int reviewNo) {
-	
-		return revDao.selectReplyReviewList(reviewNo, ss);
-	}*/
 
 	@Override
 	public int insertReview(Review r) {
@@ -41,9 +35,9 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int insertReplyReview(Review r) {
+	public int insertReplyReview(Reply re) {
 
-		return revDao.insertReplyReview(r,ss);
+		return revDao.insertReplyReview(re,ss);
 	}
 
 	@Override
@@ -52,8 +46,8 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int updateReviewReply(Review r) {
-		return revDao.updateReviewReply(r, ss);
+	public int updateReviewReply(Reply re) {
+		return revDao.updateReviewReply(re, ss);
 	}
 	
 	@Override

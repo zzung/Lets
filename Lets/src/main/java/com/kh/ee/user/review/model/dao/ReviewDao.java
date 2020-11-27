@@ -28,17 +28,17 @@ public class ReviewDao {
 		return ss.insert("reviewMapper.insertReview",r);
 	}
 	
-	public int insertReplyReview(Review r, SqlSessionTemplate ss) {
+	public int insertReplyReview(Reply re, SqlSessionTemplate ss) {
 		
-		return ss.insert("reviewMapper.insertReplyReview",r);
+		return ss.insert("reviewMapper.insertReplyReview",re);
 	}
 
 	public int updateReview(Review r, SqlSessionTemplate ss) {
 		return ss.update("reviewMapper.updateReview", r);
 	}
 
-	public int updateReviewReply(Review r, SqlSessionTemplate ss) {
-		return ss.update("reviewMapper.updateReviewReply",r);
+	public int updateReviewReply(Reply re, SqlSessionTemplate ss) {
+		return ss.update("reviewMapper.updateReviewReply",re);
 	}
 	
 
