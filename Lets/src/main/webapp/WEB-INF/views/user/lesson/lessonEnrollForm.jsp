@@ -188,7 +188,7 @@
                             <table style="width: 500px;">
                                 <tr>
                                     <td width=40px><h5 class="category_1">1.</h5></td>
-                                    <td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>
+                                    <td><input class="form-control" name="" id="firstTitle" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -214,6 +214,7 @@
          <br><br>
          <div class="lesson-row">
              <div class="typography">
+             	<p id="inputTitle"></p>
                  <h4>1. 커리큘럼 주제 1</h4>
                  <h5>1) 커리큘럼 세부 리스트 1</h5>
                  <h5>2) 커리큘럼 세부 리스트 2</h5>
@@ -227,6 +228,16 @@
                  <h5>2) 커리큘럼 세부 리스트 2</h5>
              </div>
          </div>
+         
+         <script>
+         	$('#firstTitle').focus(function(){
+         		$('#firstTitle').val("");
+         	});
+         	
+         	$("")
+         		$('#inputTitle').text(value);
+         	});
+         </script>
 
          <div id="enroll_cul">
             <h5><b>클래스 영상 등록</b></h5>

@@ -9,13 +9,13 @@
 <link rel="stylesheet" href="resources/user/assets/css/style.css">
 <link rel="stylesheet" href="resources/user/assets/css/tutorEnroll.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
     <jsp:include page="../common/navBar.jsp" />
-    <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
         <form action="">
         <br><h3 class="mb-30">클래스 등록</h3>
         <hr class="top-hr">
@@ -32,7 +32,7 @@
                 </ul>
             </div>
             <textarea id="summernote" name=""></textarea>
-            <!-- <script>
+            <script>
                 $(document).ready(function() {
                       $('#summernote').summernote({
                           width : 900,
@@ -40,7 +40,7 @@
                           focus : true
                       });
                     });
-            </script> -->
+            </script>
             <br><br>
 
             <div>
