@@ -37,10 +37,23 @@ public class NoticeController {
 	@RequestMapping("tutorDetailNotice.no")
 	public String tutorDetailNotice(Notice n, Model model) {
 		
-		Notice notice = nService.tutorDetailNotice(n);
+		// 조회수 증가
+		int result = nService.increaseCount(n);
 		
-		model.addAttribute("notice", notice);
-		
-		return "user/notice/tutorDetailNotice";
+		if(result > 0) {
+			
+			Notice notice = nService.tutorDetailNotice(n);
+			
+			model.addAttribute("notice", notice);
+			
+			return "user/notice/tutorDetailNotice";
+			
+		} else {
+			
+			model.addAttribute("errorMsg", "해당하는 공지사항이 없습니다. 다시 확인해주세요.");
+			
+			return "user/common/errorPage";
+			
+		}
 	}
 }

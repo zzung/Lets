@@ -96,4 +96,11 @@
 		  from notice
 		 where notice_no=#{notice_no}
 	</select>
+	
+	<update id="increaseCount" parameterType="Notice">
+		update Notice
+		   set count = count+1
+		 where notice_no = #{noticeNo}
+		   and status='Y'
+	</update>
 </mapper>

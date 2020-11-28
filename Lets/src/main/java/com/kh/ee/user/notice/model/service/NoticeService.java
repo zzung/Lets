@@ -15,5 +15,8 @@ public interface NoticeService {
 	
 	// 튜터 공지사항 상세보기 서비스
 	Notice tutorDetailNotice(Notice n);
+	
+	// 공지사항 조회 수 증가 서비스
+	int increaseCount(Notice n);
 
 }

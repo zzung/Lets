@@ -40,4 +40,9 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDao.tutorDetailNotice(ss, n);
 	}
 
+	@Override
+	public int increaseCount(Notice n) {
+		return nDao.increaseCount(ss, n);
+	}
+
 }

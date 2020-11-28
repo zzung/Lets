@@ -33,4 +33,8 @@ public class NoticeDao {
 	public Notice tutorDetailNotice(SqlSessionTemplate ss, Notice n) {
 		return ss.selectOne("noticeMapper.tutorDetailNotice", n);
 	}
+	
+	public int increaseCount(SqlSessionTemplate ss, Notice n) {
+		return ss.update("noticeMapper.increaseCount", n);
+	}
 }
