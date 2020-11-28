@@ -24,7 +24,7 @@ public class NoticeController {
 		
 		int listCount = nService.tutorSelectNoticeListCount(n);
 		
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 5, 10);
 		
 		ArrayList<Notice> noticeList = nService.tutorSelectNoticeList(n, pi);
 		

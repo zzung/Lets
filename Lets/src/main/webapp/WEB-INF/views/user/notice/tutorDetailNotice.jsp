@@ -31,7 +31,7 @@
             <tr>
                 <th>
                 	<c:choose>
-                		<c:when test="${ notice.noticeType == 'R' }">
+                		<c:when test="${ notice.status == 'R' }">
                     		<span id="red">중요</span>
                     	</c:when>
                     	<c:otherwise>

@@ -22,5 +22,6 @@ public class Notice {
 	private Date enrollDate;
 	private Date modifyDate;
 	private String status;
+	private int count;
 	
 }

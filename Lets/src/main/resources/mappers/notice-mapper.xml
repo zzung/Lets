@@ -70,7 +70,7 @@
 		select
 			   count(*)
 		  from notice
-		 where status='Y'
+		 where status!='N'
 		   and notice_type=#{noticeType}
 	</select>
 
@@ -94,13 +94,13 @@
 			 , enroll_date
 			 , status
 		  from notice
-		 where notice_no=#{notice_no}
+		 where notice_no=#{noticeNo}
 	</select>
 	
 	<update id="increaseCount" parameterType="Notice">
 		update Notice
 		   set count = count+1
 		 where notice_no = #{noticeNo}
-		   and status='Y'
+		   and status!='N'
 	</update>
 </mapper>

@@ -64,8 +64,8 @@ div{
 #black{
     position: absolute;
     left: 40px;
-    color: black;
     font-size: 15px;
+    margin-top: 5px;
 }
 #notice_date{
     position: absolute;

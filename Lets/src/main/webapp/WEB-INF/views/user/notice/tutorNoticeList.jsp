@@ -41,16 +41,16 @@
 
         </thead>
         <tbody>
-        	<c:forEach var="n" items="${ noticeList }" varStatus="status">
+        	<c:forEach var="n" items="${ noticeList }">
         		<c:choose>
-        			<c:when test="${ noticeType='R' }">
+        			<c:when test="${ n.status=='R' }">
 			            <tr>
 			                <td><span class="red">중요</span></td>
 			                <td id="title">${ n.noticeTitle }</td>
 			                <td>관리자</td>
 			                <td>${ n.enrollDate }</td>
 			                <td>${ n.count }</td>
-			                <td><input type="hidden" value="${n.noticeNo }"></td>
+			                <td><input type="hidden" value="${ n.noticeNo }"></td>
 			            </tr>
 		            </c:when>
 		           	<c:otherwise>
@@ -104,7 +104,7 @@
 		$(function() {
 			
 			$("#notice_table tbody tr").click(function() {
-				location.href="tutorDetailNotice.no?noticeNo=" + $(this).children().eq(5).text();
+				location.href="tutorDetailNotice.no?noticeNo=" + $(this).children().eq(5).children().val();
 			});
 			
 		})
@@ -112,7 +112,7 @@
 		function pageButton(i){
 			var currentPage = i;
 			
-			location.href="tutorNotice.no?currentPage=" + currentPage;
+			location.href="tutorNotice.no?noticeType=TUTOR&currentPage=" + currentPage;
 		}
 	</script>
 
