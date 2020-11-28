@@ -167,6 +167,22 @@
 	  join member m on(r.mem_no = m.mem_no)
 	 where reply_type = '클래스'
 	   and total_no = #{lessonNo}
+	   and reply_level = 1 
+</select>
+
+<select id="selectReReplyList" resultMap="replyResultSet">
+	select
+	       r.reply_no
+	     , r.mem_no
+	     , r.reply_content
+	     , r.enroll_date
+	     , r.reply_level
+	     , m.nickname
+	  from reply r
+	  join member m on(r.mem_no = m.mem_no)
+	 where reply_type = '클래스'
+	   and total_no = #{lessonNo}
+	   and reply_level = 2 
 </select>
 
 </mapper>

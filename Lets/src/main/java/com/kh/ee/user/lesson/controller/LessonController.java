@@ -6,12 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.kh.ee.common.model.vo.PageInfo;
-import com.kh.ee.user.common.template.Pagination;
 import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.reply.model.vo.Reply;
@@ -60,28 +57,33 @@ public class LessonController {
 		ArrayList<Review> list = lService.selectReview(lessonNo); 
 		ArrayList<LessonFaq> faqList = lService.selectLessonFaqList(lessonNo); 
 		Tutor t = lService.selectTutorInfo(lessonNo); 
+		int listCount = lService.selectListCount(); 
 				
 		model.addAttribute("list", list); 
 		model.addAttribute("faqList",faqList);
 		model.addAttribute("t", t);
+		model.addAttribute("listCount",listCount);
 		return "user/lesson/classDetailView"; 
 	}
 	
+
 	@ResponseBody
 	@RequestMapping(value="selectReplyList.le", produces="application/json; charset=utf-8")
-	public String selectReplyList(@RequestParam(value="currentPage", defaultValue="1")int currentPage, int lessonNo, Model model) {
+	public String selectReplyList(int lessonNo) {
+		ArrayList<Reply> list = lService.selectReply(lessonNo); 
 
-		int listCount = lService.selectListCount(); 
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
-		ArrayList<Reply> list = lService.selectReply(pi,lessonNo); 
-		
-		System.out.println("현재페이지: " + pi.getCurrentPage());
-		
-		model.addAttribute("pi",pi); 
 		return new Gson().toJson(list);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="reReplyList.le", produces="application/json; charset=utf-8")
+	public String selectReReplyList(int lessonNo) {
+		ArrayList<Reply> reList = lService.selectReReplyList(lessonNo); 
+		
+		return new Gson().toJson(reList); 
+	}
+
+
 	@RequestMapping("enroll.le")
 	public String enrollLesson() {
 		return "user/lesson/lessonEnrollForm";

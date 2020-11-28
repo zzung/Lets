@@ -46,14 +46,15 @@ public class LessonDao {
 		return ss.selectOne("lessonMapper.selectListCount");
 	}
 
-	public ArrayList<Reply> selectReply(PageInfo pi, int lessonNo, SqlSessionTemplate ss) {
+	
+	public ArrayList<Reply> selectReply(int lessonNo, SqlSessionTemplate ss) {
 		
-		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
-		int limit = pi.getBoardLimit(); 
-		
-		RowBounds rowBounds = new RowBounds(offset,limit);
-		
-		return (ArrayList)ss.selectList("lessonMapper.selectReply", lessonNo, rowBounds);
+		return (ArrayList)ss.selectList("lessonMapper.selectReply", lessonNo);
+	}
+
+	public ArrayList<Reply> selectReReplyList(int lessonNo, SqlSessionTemplate ss) {
+
+		return (ArrayList)ss.selectList("lessonMapper.selectReReplyList",lessonNo);
 	}
 
 }

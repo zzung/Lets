@@ -52,12 +52,19 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.selectListCount(ss);
 	}
 	
+	//ajax(학천)
 	@Override
-	public ArrayList<Reply> selectReply(PageInfo pi, int lessonNo) {
+	public ArrayList<Reply> selectReply(int lessonNo) {
 		
-		return lDao.selectReply(pi,lessonNo,ss);
+		return lDao.selectReply(lessonNo,ss);
 	}
+	//ajax(학천)
+	@Override
+	public ArrayList<Reply> selectReReplyList(int lessonNo) {
 
+		return lDao.selectReReplyList(lessonNo, ss);
+	}
+	
 	@Override
 	public Tutor selectTutorInfo(int lessonNo) {
 		return lDao.selectTutorInfo(lessonNo, ss);
@@ -67,6 +74,9 @@ public class LessonServiceImpl implements LessonService{
 	public int deleteLesson(int lno) {
 		return lDao.deleteLesson(ss, lno);
 	}
+
+
+
 
 
 

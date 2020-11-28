@@ -193,15 +193,20 @@
 	                  		</c:forEach>
 		                  </div>
 	                  <!--? end 리뷰 area-->
+
 	                  <script>
+	                  
+	                 //후기 더보기 클리시 실행
 	                  	$(function(){
 	                  		$("#showMore").click(function(){
 	                  			location.href="showMore.rev?lessonNo=1";
 	                  		})
 	                  		
+	                  		//페이지 실행되자마자 커뮤니티 실행시키기 위해 
 	                  		selectReplyList(); 
+	                  		
 	                  	});
-	                  	
+	             		//상세페이지 커뮤니티 ajax로 리스트 불러오기
 	                  	function selectReplyList(){
 	                  		$.ajax({
 	                  			url:"selectReplyList.le",
@@ -209,13 +214,13 @@
 	                  				lessonNo:1
 	                  			},
 	                  			success:function(list){
-	                  				
 	                  				$("#replyCount").text(list.length);
 	                  				
 	                  				var result ="";
-	                  				
+           				
 	                  				for(var i in list){
 	                  					result += '<div class="comment-list">'
+	                  					result += "<input type='hidden' name='reviewNo' value='1'>"
 	        	                        result += '<div class="single-comment justify-content-between d-flex">'
 	     	                            result += '<div class="user justify-content-between d-flex">'
 	     	                            result += '<div class="thumb">'
@@ -237,8 +242,10 @@
 	     	                            result += '</div>'
 	     	                            result += '</div>'
 	     	                            result += '</div>'
-	     	                         	result += '</div>'
 	     	                            result += '</div>'
+	     	                            result += '</div>'
+	     	                            result += "<div class='reviewReplyArea'></div>"
+
 	                  				}
 	                  				$(".comments-area > .replyArea").html(result); 
 	                  			},
@@ -247,7 +254,50 @@
 	                  			}
 	                  		});
 	                  	}
-	                  	
+	             		
+	             		function selectReReplyList(){
+	             			$.ajax({
+	             				url:"reReplyList.le",
+	             				data:{
+	             					lessonNo:1
+	             				},
+	             				success:function(reList){
+	             					console.log(reList); 
+	             					var result = "";
+	             					
+	             					for(var r in reList){
+		             					result += "<div class='comment-list reReply'>" 
+	                              		result += "<div class='single-comment justify-content-between d-flex'>"
+	                              		result += "<div class='user justify-content-between d-flex'>"
+	                              		result += "<div class='thumb1'>"
+	                              		result += "<img src='resources/user/assets/img/detailClassPage/replyArrow.png'>"
+	                              		result += "</div>"
+	                              		result += "<div class='desc1'>"
+	                              		result += "<p class='comment' id='replyCommentArea'>" + reList[r].replyContent + "</p>"   
+	                              		result += "<div class='d-flex justify-content-between' style='width:670px;'>"
+	                              		result += "<div class='d-flex align-items-center'>"
+	                              		result += "<span>" + reList[r].nickname + "</span>"
+	                              		result += "<p class='date'>" + reList[r].replyEnrollDate + "</p>"
+	                              		result += "</div>"
+	                              		result += "<div class='reply-btn'>"
+	                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
+	                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewReplySet(this)' data-no='" + list[i].replyNo + "'>" + '수정' + "</a></div>"
+	                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reviewNo + "' onclick='deleteReviewReplySet(this)'>" + '삭제' + "</a></div>"
+	                              		result += "</div>"        
+	                              		result += "</div>"
+	                              		result += "</div>"
+	                              		result += "</div>"
+	                              		result += "</div>"
+	                              		result += "</div>"
+	             					}
+	             					$(".comments-area > .replyArea").siblings(".reviewReplyArea").html(result);
+	             				},
+	             				error:function(){
+	             					console.log("댓글 ajax 실패")
+	             				}
+	             			});
+	             		}
+
 	                  	//커뮤니티 작성하기 버튼 누르면 실행 될 스크립트
                         function writeReview(){
                            	if($("#writeReviewArea").css("display") == "none"){
@@ -258,6 +308,7 @@
           
                            	}
                        	}  
+	                  	
 	                  </script>
 	                  <!--?댓글area-->
 						<div class="comments-area">
@@ -278,32 +329,13 @@
 							</div>
 							<br>
 							<div class="replyArea"></div>
-							<div class="pagination">
-
-								<c:choose>
-									<c:when test="${pi.currentPage eq 1 }">
-										<a href="#" style="display:none">&laquo;</a>
-									</c:when>
-									<c:otherwise>
-										<a href="selectReplyList.le?currentPage=${pi.currentPage-1 }" style="display:none">&laquo;</a>
-									</c:otherwise>
-								</c:choose>
-
-								<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-									<a href="selectReplyList.le?currentPage=${p}">${p }</a>
-								</c:forEach>
-
-								<c:choose>
-									<c:when test="${pi.currentPage eq pi.maxPge }">
-										<a href="#">&raquo;</a>
-									</c:when>
-									<c:otherwise>
-										<a href="selectReplyList.le?currentPage=${pi.currentPage+1 }">&raquo;</a>
-									</c:otherwise>
-								</c:choose>
-							</div>
+							<br>
+							<div class="text-right">
+		                        <i class="fas fa-plus" id="moreReply"> 더보기</i>
+		                     </div>
 						</div>
 						<!--? end 리뷰 area-->
+						
 						<!--댓글 신고 모달-->
 						<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered" role="document">
