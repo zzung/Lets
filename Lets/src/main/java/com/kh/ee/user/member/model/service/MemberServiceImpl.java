@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.dao.MemberDao;
 import com.kh.ee.user.member.model.vo.Member;
 
@@ -62,6 +63,26 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int myWishListCount(int memNo) {
 		return mDao.myWishListCount(sqlSession, memNo);
+	}
+	@Override
+	public ArrayList<MemPay> myDeliveryList(int memNo) {
+		return mDao.myDeliveryList(sqlSession, memNo);
+	}
+	@Override
+	public int myDlistCount(int memNo) {
+		return mDao.myDlistCount(sqlSession, memNo);
+	}
+	@Override
+	public MemPay myDetailDelivery(int memPayNo) {
+		return mDao.myDetailDelivery(sqlSession, memPayNo);
+	}
+	@Override
+	public int myUpdateDelivery(int memPayNo) {
+		return mDao.myUpdateDelivery(sqlSession, memPayNo);
+	}
+	@Override
+	public int myCancelDelivery(int memPayNo) {
+		return mDao.myCancelDelivery(sqlSession, memPayNo);
 	}
 	
 	

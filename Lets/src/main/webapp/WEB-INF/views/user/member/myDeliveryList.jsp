@@ -76,104 +76,80 @@
 		  </script>
           <div class="myPage-content">
           <div class="my-cont-title2">주문 및 배송</div>
-          <div class="my-cont-subTitle">총 0개</div>
+          <div class="my-cont-subTitle">총 ${myDlistCount}개</div>
           <br><br>
           <div class="my-cont">
-
-              <!-- 없을 경우
-              <div class="my-cont-1">
-                  	아직 구매하신 클래스가 없어요.
-              </div>
-              -->
-
-              <!-- 배송중인 클래스 목록 띄우기-->
-              <div class="my-cont-3">
-                  <form action="" method="post">
-                      <div class="delivery-list">
-                          <div class="d-lecture-thumbnail">
-                              <img src="" width="100%" height="100%" >
-                          </div>
-                          <div class="d-lecture-info">
-                              <div class="d-payment-date">2020.10.02</div>
-                              <div class="d-lecture-title">실로 그리는 컬러 콜라주, 태피스트리 도형 위빙 만들기</div>
-                              <div class="d-lecture-end-date">2021.04.23 수강만료</div>
-                          </div>
-                          <div class="d-delivery-status">
-                              <div class="d-lecture-status">배송중</div>
-                              <div class="d-lecture-btn">
-                              <%-- 
-                                  <c:choose>
-                                      <c:when test="${배송상태 eq '배송전'}">
-                                          <button type="button" onclick="cancelPayment();" class="genric-btn primary small radius" style="font-size: 4px;">결제취소</button>
-                                      </c:when>
-                                      <c:when test="${배송상태 eq '배송후'}">
-                                          <button type="button" onclick="confirmDelivery();" class="genric-btn primary small radius" style="font-size: 4px;">배송확정</button>
-                                      </c:when>
-                                      <c:otherwise> </c:otherwise>
-                                  </c:choose>
-                               --%> 
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="delivery-list">
-                          <div class="d-lecture-thumbnail">
-                              <img src="" width="100%" height="100%" >
-                          </div>
-                          <div class="d-lecture-info">
-                              <div class="d-payment-date">2020.10.02</div>
-                              <div class="d-lecture-title">실로 그리는 컬러 콜라주, 태피스트리 도형 위빙 만들기</div>
-                              <div class="d-lecture-end-date">2021.04.23 수강만료</div>
-                          </div>
-                          <div class="d-delivery-status">
-                              <div class="d-lecture-status" id="" name="">배송완료</div>
-                              <div class="d-lecture-btn">
-                                  <!-- <button type="button" class="genric-btn primary small radius" style="font-size: 4px;">배송확정</button> -->
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="delivery-list">
-                          <div class="d-lecture-thumbnail">
-                              <img src="" width="100%" height="100%" >
-                          </div>
-                          <div class="d-lecture-info">
-                              <div class="d-payment-date">2020.10.02</div>
-                              <div class="d-lecture-title">실로 그리는 컬러 콜라주, 태피스트리 도형 위빙 만들기</div>
-                              <div class="d-lecture-end-date">2021.04.23 수강만료</div>
-                          </div>
-                          <div class="d-delivery-status">
-                              <div class="d-lecture-status">배송전</div>
-                              <div class="d-lecture-btn">
-                                  <!-- <button type="button" onclick="cancelPayment();" class="genric-btn primary small radius" style="font-size: 4px;">결제취소</button> -->
-                              </div>
-                          </div>
-                      </div>
-                  </form>
-              </div>
-
+			<c:choose>
+				<c:when test="${empty myDlist}">
+					<div class="my-cont-1">
+	                  	아직 구매하신 클래스가 없어요.
+	              	</div>
+				</c:when>
+				<c:otherwise>
+	              <div class="my-cont-3">
+	                  <form action="" method="post" id="myDelivery">
+	                  	  <c:forEach var="d" items="${myDlist}" varStatus="status">
+		                      <div class="delivery-list" onclick="myDeliveryDetail();">
+		                  	  <input type="hidden" id="memPayNo${staus.index}" name="memPayNo${staus.index}" value="${myDlist[status.index].memPayNo}">
+		                          <div class="d-lecture-thumbnail">
+		                              <img src="${d.lessonCoverImg}" width="100%" height="100%" >
+		                          </div>
+		                          <div class="d-lecture-info">
+		                              <div class="d-payment-date">${d.paymentDate}</div>
+		                              <div class="d-lecture-title">${d.lessonTitle}</div>
+		                              <div class="d-lecture-end-date">2021.04.23 수강만료</div>
+		                          </div>
+		                          <div class="d-delivery-status">
+		                          	  <c:if test="${d.status eq '결제 취소'}">
+			                              <div class="d-lecture-status">결제 취소완료</div>
+		                          	  </c:if>
+		                          	  <c:if test="${d.status ne '결제 취소'}">
+			                              <div class="d-lecture-status">${d.delStatus}</div>
+		                          	  </c:if>
+		                              <div class="d-lecture-btn">
+		                                  <c:choose>
+		                                      <c:when test="${(d.delStatus eq '배송전')&&(d.status ne '결제 취소')}">
+		                                          <button type="button"id="cancelPayment" class="genric-btn primary small radius" onclick="event.stopPropagation();" style="font-size: 4px;">결제취소</button>
+		                                      </c:when>
+		                                      <c:when test="${(d.delStatus eq '배송완료')&&(d.status ne '결제 취소')}">
+		                                          <button type="button" id="confirmDelivery" class="genric-btn primary small radius" onclick="event.stopPropagation();" style="font-size: 4px;">배송확정</button>
+		                                      </c:when>
+		                                      <c:when test="${d.delStatus eq '배송확정'}"> </c:when>
+		                                  </c:choose>
+		                              </div>
+		                          </div>
+		                      </div>
+	                  	  </c:forEach>
+	                  </form>
+	               </div>
+				</c:otherwise>
+			</c:choose>
           </div>
+	
       </div>
 
       <script>
-          function cancelPayment(){
-              if(confirm('결제를 취소하시겠습니까?') == true){
-                  $("form").attr("action","");
-                  alert('결제가 취소되었습니다.');
-              }else{
-                  return;
-              }
-          }
+      	  function myDeliveryDetail(){
+      		  $("#myDelivery").attr("action","myDetailDel.me").submit();
+      		  console.log($('#memPayNo').val());
+      	  }
 
-          function confirmDelivery(){
-              if(confirm('정말로 배송 확정하시겠습니까?') == true){
-                  $("form").attr("action","");
-                  alert('배송 확정 처리 되었습니다.');
-              }else{
-                  return;
-              }
-          }
-
+      	  $('#cancelPayment').click(function(){
+	       	  if(confirm('클래스 결제를 취소하시겠습니까?')){
+	              $("#myDelivery").attr("action","myCancelDel.me").submit();
+	          }else{
+	              return false;
+	          }
+      	  });
+      	  
+      	  $('#confirmDelivery').click(function(){
+	    	  if(confirm('클래스 배송 확정하시겠습니까?')){
+	              $("#myDelivery").attr("action","myUpdateDel.me").submit();
+	          }else{
+	              return false;
+	          }
+      	  })
+      	  
       </script>
 
       <div style="clear:both"></div>

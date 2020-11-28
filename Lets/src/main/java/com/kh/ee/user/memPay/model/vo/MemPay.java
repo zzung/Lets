@@ -32,6 +32,17 @@ public class MemPay {
 	
 	private String lessonTitle;
 	private String memId;
+	private String lessonCoverImg;
+	private String lessonPrepare;
+	private String payTotal;		// 클래스 금액
+	private String discountPrice; 	// 할인 금액
+	private String totalAmount;		// 클래스 금액-할인 금액
+	private String memName;
+	private String postcode;
+	private String postAddress;
+	private String detailAddress;
+	private String extraAddress;
+	private String phone;
 	
 
 }

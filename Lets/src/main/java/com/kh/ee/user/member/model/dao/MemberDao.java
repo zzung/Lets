@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
 
 @Repository
@@ -53,6 +54,26 @@ public class MemberDao {
 
 	public int myWishListCount(SqlSessionTemplate sqlSession, int memNo) {
 		return sqlSession.selectOne("memberMapper.myWishListCount", memNo);
+	}
+
+	public ArrayList<MemPay> myDeliveryList(SqlSessionTemplate sqlSession, int memNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.myDeliveryList", memNo);
+	}
+
+	public int myDlistCount(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("memberMapper.myDlistCount", memNo);
+	}
+
+	public MemPay myDetailDelivery(SqlSessionTemplate sqlSession, int memPayNo) {
+		return sqlSession.selectOne("memberMapper.myDetailDelivery", memPayNo);
+	}
+
+	public int myUpdateDelivery(SqlSessionTemplate sqlSession, int memPayNo) {
+		return sqlSession.update("memberMapper.myUpdateDelivery", memPayNo);
+	}
+
+	public int myCancelDelivery(SqlSessionTemplate sqlSession, int memPayNo) {
+		return sqlSession.update("memberMapper.myCancelDelivery", memPayNo);
 	}
 
 }

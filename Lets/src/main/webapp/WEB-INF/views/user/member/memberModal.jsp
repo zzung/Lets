@@ -42,7 +42,7 @@
                             	</c:choose>
                                 <img id="setting_img-icon" src="resources/user/assets/img/member/settings.png">
                                 <input type="file" id="changeMemPic" name="changeMemPic" style="display:none;">
-                                <input type="hidden" id="target_url" name="target_url">
+                                <input type="hidden" id="memPic" name="memPic">
                             </div>
                         </div>
 
@@ -51,51 +51,50 @@
                         <div class="mbody-2">
                             <div class="update-list-title">이름</div>
                             <div class="update-name-block">
-                                <input type="text" class="form-control" id="memName" name="memName" value="${loginUser.memName}" readonly><br>
+                                <input type="text" class="form-control" id="memName" name="memName" style="font-size: 13px;" value="${loginUser.memName}"  readonly><br>
                             </div>
 	
                             <div class="update-list-title">새로운 비밀번호</div>
                             <div class="update-pwd-block">
-                                <input type="password" class="form-control" id="memPwd" name="memPwd" style="font-size: 12px;" minlength="8" placeholder="영문,특수문자,숫자 포함 8자리 이상">
+                                <input type="password" class="form-control" id="memPwd" name="memPwd" style="font-size: 13px;" minlength="8" placeholder="영문,특수문자,숫자 포함 8자리 이상">
                             </div>
                             <div class="update-pwd-check"></div>
                             
                             <br>
                             <div class="update-list-title">새로운 비밀번호 확인</div>
                             <div class="update-pwdCheck-block">
-                                <input type="password" class="form-control" id="memPwdCheck" name="memPwdCheck" minlength="8">
+                                <input type="password" class="form-control" id="memPwdCheck" name="memPwdCheck" minlength="8" style="font-size: 13px;" placeholder="비밀번호를 한번 더 입력해주세요">
                             </div>
                             <div class="update-pwdCheck-check"></div>
                             
                             <br>
                             <div class="update-list-title">닉네임</div>
                             <div class="update-nickName-block">
-                                <input type="text" class="form-control" id="nickname" name="nickname" value="${loginUser.nickname}">
+                                <input type="text" class="form-control" id="nickname" name="nickname" style="font-size: 13px;" value="${loginUser.nickname}">
                             </div>
-                            <!--ajax로 확인-->
                             <div class="update-nickName-check"></div>
 
                             <br>
                             <div class="update-list-title">생년월일</div>
                             <div class="update-birth-block">
-                                <input type="text" class="form-control" id="birthday" name="birthday" value="${loginUser.birthday}">
+                                <input type="text" class="form-control" id="birthday" name="birthday" style="font-size: 13px;" value="${loginUser.birthday}">
                             </div>
                             <div class="update-birth-check"></div>
 
                             <br>
                             <div class="update-list-title">주소</div>
                             <div class="update-address-block1">
-                                <input type="text" class="form-control" id="postcode" name="postcode" value="${loginUser.postcode}" readonly>
+                                <input type="text" class="form-control" id="postcode" name="postcode" value="${loginUser.postcode}" style="font-size: 13px;" readonly>
                                 <div id="update-address-btn" class="genric-btn info radius" onclick="findPostcode();" style="width: 130px; font-size: 10px;">우편번호 찾기</div>
                             </div>
                             <div class="update-address-block2">
-                                <input type="text" class="form-control" id="postAddress" name="postAddress" value="${loginUser.postAddress}" placeholder="도로명 주소" style="margin-top: 10px; font-size: 12px;" readonly>
+                                <input type="text" class="form-control" id="postAddress" name="postAddress" value="${loginUser.postAddress}" placeholder="도로명 주소" style="margin-top: 10px; font-size: 13px;" readonly>
                             </div>
                             <div class="update-address-block3">
-                                <input type="text" class="form-control" id="detailAddress" name="detailAddress" value="${loginUser.detailAddress}" placeholder="상세 주소" style="margin-top: -10px;">
+                                <input type="text" class="form-control" id="detailAddress" name="detailAddress" value="${loginUser.detailAddress}" placeholder="상세 주소" style="margin-top: -10px; font-size: 13px;">
                             </div>
                             <div class="update-address-block4">
-                                <input type="text" class="form-control" id="extraAddress" name="extraAddress" value="${loginUser.extraAddress}" placeholder="참고 항목" style="margin-top: -10px;">
+                                <input type="text" class="form-control" id="extraAddress" name="extraAddress" value="${loginUser.extraAddress}" placeholder="참고 항목" style="margin-top: -10px; font-size: 13px;">
                             </div>
                             <div class="update-address-check"></div>
                             
@@ -211,7 +210,7 @@
                     setImageFromFile(this, '#target_img');
                     console.log($('#changeMemPic').val()); // 올릴 파일명 찍힘
                 });
-                $('#target_img').attr("src", $('#changeMemPic').val());
+                $('#memPic').attr("src", $('#changeMemPic').val());
                 // console.log("변경된 src :"+$('#target_img').attr("src"));   // 적용안됨
                 e.preventDefault();
             });   
@@ -298,7 +297,7 @@
 	                    </div>
 	                    <br>
 	                    <div>
-	                        <input type="password" class="form-control" id="memPwd" name="memPwd" required placeholder="비밀번호를 입력해주세요" style="margin-left: 130px; width: 200px; height: 35px; font-size: 14px;">                        
+	                        <input type="password" class="form-control" id="memPwdDelCheck" name="memPwdDelCheck" required placeholder="비밀번호를 입력해주세요" style="margin-left: 130px; width: 200px; height: 35px; font-size: 14px;">                        
 	                    </div>
 	                </div>
 	                

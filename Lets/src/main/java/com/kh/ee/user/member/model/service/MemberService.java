@@ -3,6 +3,7 @@ package com.kh.ee.user.member.model.service;
 import java.util.ArrayList;
 
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
 
 public interface MemberService {
@@ -18,5 +19,10 @@ public interface MemberService {
 	int deleteMember(String memId);
 	ArrayList<Lesson> myWishList(int memNo);
 	int myWishListCount(int memNo);
+	ArrayList<MemPay> myDeliveryList(int memNo);
+	int myDlistCount(int memNo);
+	MemPay myDetailDelivery(int memPayNo);
+	int myUpdateDelivery(int memPayNo);
+	int myCancelDelivery(int memPayNo);
 
 }

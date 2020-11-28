@@ -531,7 +531,7 @@ input[type='radio'] {
 .my-cont3-detail1-title{
   float: left;
   width: 85%;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
 .my-cont3-detail1-title2{
@@ -547,6 +547,18 @@ input[type='radio'] {
   margin-bottom: 20px;
 }
 .my-cont3-detail2-title{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.my-cont3-detail2-title2{
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  margin-top: -10px;
+  color: rgb(46, 48, 146);
+}
+.my-cont3-detail2-pay-status{
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 15px;

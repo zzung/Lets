@@ -46,6 +46,33 @@
 	<result column="status" property="status" />
 </resultMap>
 
+<resultMap type="MemPay" id="memPayResultSet">
+	<id column="mem_pay_no" property="memPayNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="lesson_no" property="lessonNo" />
+	<result column="type" property="type" />
+	<result column="repayment" property="repayment" />
+	<result column="payment_date" property="paymentDate" />
+	<result column="cancel_date" property="cancelDate" />
+	<result column="status" property="status" />
+	<result column="del_name" property="delName" />
+	<result column="del_no" property="delNo" />
+	<result column="del_status" property="delStatus" />
+	<result column="lesson_title" property="lessonTitle" />
+	<result column="mem_id" property="memId" />
+	<result column="lesson_cover_img" property="lessonCoverImg" />
+	<result column="lesson_prepare" property="lessonPrepare" />
+	<result column="pay_total" property="payTotal" />
+	<result column="discount_price" property="discountPrice" />
+	<result column="total_amount" property="totalAmount" />
+	<result column="mem_name" property="memName" />
+	<result column="postcode" property="postcode" />
+	<result column="post_address" property="postAddress" />
+	<result column="detail_address" property="detailAddress" />
+	<result column="extra_address" property="extraAddress" />
+	<result column="phone" property="phone" />
+</resultMap>
+
 <select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 	select
 			  mem_no
@@ -191,6 +218,77 @@
 	  from wishlist
 	 where mem_no=#{memNo}
 </select>
+
+<select id="myDeliveryList" parameterType="_int" resultMap="memPayResultSet">
+	select
+	       mem_pay_no
+	     , mp.mem_no
+	     , mp.lesson_no
+	     , l.lesson_title
+	     , l.lesson_cover_img
+	     , type
+	     , repayment
+	     , payment_date
+	     , cancel_date
+	     , mp.status
+	     , del_name
+	     , del_no
+	     , del_status
+	  from mem_pay mp
+	  join lesson l
+	    on mp.lesson_no=l.lesson_no
+	 where mp.mem_no=#{memNo}
+	 order by mem_pay_no desc
+</select>
+
+<select id="myDlistCount" parameterType="_int" resultType="_int">
+	select count(*)
+	  from mem_pay
+	 where mem_no=#{memNo}
+</select>
+
+<select id="myDetailDelivery" parameterType="_int" resultMap="memPayResultSet">
+	select
+	       mem_pay_no
+	     , lesson_title
+	     , lesson_prepare
+	     , pay_total
+	     , pay_total*nvl(discount,0)/100 discount_price
+	     , pay_total-pay_total*nvl(discount,0)/100 total_amount
+	     , mem_name
+	     , postcode
+	     , post_address
+	     , detail_address
+	     , extra_address
+	     , phone
+	     , type
+	     , repayment
+	     , payment_date
+	     , cancel_date
+	     , mp.status
+	     , del_name
+	     , del_no
+	     , del_status
+	  from mem_pay mp
+	  join lesson l
+	    on mp.lesson_no=l.lesson_no
+	  join member m
+	    on mp.mem_no=m.mem_no
+	 where mem_pay_no=#{memPayNo}
+</select>
+
+<update id="myUpdateDelivery" parameterType="_int">
+	update mem_pay
+	   set del_status='배송확정'
+	 where mem_pay_no=#{memPayNo}
+</update>
+
+<update id="myCancelDelivery" parameterType="_int">
+	update mem_pay
+	   set status='결제 취소',
+	       cancel_date=sysdate
+	 where mem_pay_no=#{memPayNo}
+</update>
 
 
 </mapper>

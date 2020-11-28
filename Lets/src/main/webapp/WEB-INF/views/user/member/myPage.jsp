@@ -79,7 +79,7 @@
 					}else if(num==2){
 						location.href="myWishList.me";
 					}else if(num==3){
-						location.href="myDelivery.me";
+						location.href="myDeliveryList.me";
 					}
 				}
 			</script>

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.service.MemberService;
 import com.kh.ee.user.member.model.vo.Member;
 
@@ -182,15 +184,27 @@ public class MemberController {
 	}
 	
 	@RequestMapping("update.me")
-	public String updateMember(Member m, HttpSession session, Model model) {
+	public String updateMember(Member m, MultipartFile memPic, HttpSession session, Model model) {
 		
 		String encPwd = bpe.encode(m.getMemPwd());
 		m.setMemPwd(encPwd);
+		
+		if(!memPic.getOriginalFilename().equals("")){
+			
+			String changeName = saveFileManager(upfile, session);
+			
+			if(changeName != null) {
+				b.setOriginName(upfile.getOriginalFilename());
+				b.setChangeName("resources/uploadFiles/" + changeName);
+			}
+		}
+		
 		
 		int result = mService.updateMember(m);
 		if(result > 0) {
 			session.setAttribute("loginUser", mService.loginMember(m));
 			session.setAttribute("alertMsg", "회원 정보 수정 완료 !");
+			System.out.println(m);
 			return "redirect:myPage.me";
 		}else {
 			model.addAttribute("errorMsg", "회원 정보 수정에 실패했습니다. 다시 시도해주세요.");
@@ -200,11 +214,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping("delete.me")
-	public String deleteMember(String memPwd, HttpSession session, Model model) {
+	public String deleteMember(String memPwdDelCheck, HttpSession session, Model model) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		if(bpe.matches(memPwd, loginUser.getMemPwd())){
+		if(bpe.matches(memPwdDelCheck, loginUser.getMemPwd())){
 			
 			int result = mService.deleteMember(loginUser.getMemId());
 			if(result > 0) {
@@ -234,11 +248,51 @@ public class MemberController {
 	}
 	
 	@RequestMapping("myDeliveryList.me")
-	public String myDeliveryList(HttpSession session, Model model) {
+	public String myDeliveryList(HttpSession session) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		ArrayList<MemPay> myDlist = mService.myDeliveryList(loginUser.getMemNo());
+		int myDlistCount = mService.myDlistCount(loginUser.getMemNo());
+		session.setAttribute("myDlist", myDlist);
+		session.setAttribute("myDlistCount", myDlistCount);
 		
 		return "user/member/myDeliveryList";
 	}
 	
+	@RequestMapping("myDetailDel.me")
+	public String myDetailDelivery(int memPayNo, HttpSession session) {
+		
+		MemPay mp = mService.myDetailDelivery(memPayNo);
+		session.setAttribute("mp", mp);
+		System.out.println(mp);
+		return "user/member/myDetailViewDelivery";
+	}
+	
+	@RequestMapping("myUpdateDel.me")
+	public String myUpdateDelivery(int memPayNo, HttpSession session, Model model) {
+		
+		int result = mService.myUpdateDelivery(memPayNo);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "배송 확정 처리 되었습니다.");
+			return "redirect:myDeliveryList.me";
+		}else {
+			model.addAttribute("errorMsg", "배송 확정 처리에 실패했습니다.");
+			return "user/common/errorPage";
+		}
+	}
+	
+	@RequestMapping("myCancelDel.me")
+	public String myCancelDelivery(int memPayNo, HttpSession session, Model model) {
+		
+		int result = mService.myCancelDelivery(memPayNo);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "결제 취소 처리 되었습니다.");
+			return "redirect:myDeliveryList.me";
+		}else {
+			model.addAttribute("errorMsg","결제 취소 처리에 오류가 생겼습니다. 관리자에게 문의하세요.");
+			return "user/common/errorPage";
+		}
+	}
 	
 	
 	
