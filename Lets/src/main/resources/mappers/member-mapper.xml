@@ -193,6 +193,7 @@
 	       detail_address=#{detailAddress},
 	       extra_address=#{extraAddress},
 	       phone=#{phone},
+	       mem_pic=#{memPic},
 	       modify_date=sysdate
 	 where mem_id=#{memId}
 </update>

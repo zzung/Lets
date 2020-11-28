@@ -1,5 +1,7 @@
 package com.kh.ee.user.member.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -184,21 +186,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping("update.me")
-	public String updateMember(Member m, MultipartFile memPic, HttpSession session, Model model) {
+	public String updateMember(Member m, MultipartFile changeMemPic, HttpSession session, Model model) throws IOException {
 		
 		String encPwd = bpe.encode(m.getMemPwd());
 		m.setMemPwd(encPwd);
 		
-		if(!memPic.getOriginalFilename().equals("")){
+		if(!changeMemPic.getOriginalFilename().equals("")){
 			
-			String changeName = saveFileManager(upfile, session);
+			String fileName = saveFileManager(changeMemPic, session);
 			
-			if(changeName != null) {
-				b.setOriginName(upfile.getOriginalFilename());
-				b.setChangeName("resources/uploadFiles/" + changeName);
+			if(fileName != null) {
+				m.setMemPic("resources/user/assets/img/member/" + fileName);
 			}
 		}
-		
 		
 		int result = mService.updateMember(m);
 		if(result > 0) {
@@ -212,7 +212,22 @@ public class MemberController {
 		}
 		
 	}
-	
+
+	public String saveFileManager(MultipartFile upfile, HttpSession session) {
+
+		String originName = upfile.getOriginalFilename();
+		String savePath = session.getServletContext().getRealPath("/resources/user/assets/img/member/");
+		
+		try {
+			upfile.transferTo(new File(savePath + originName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return originName;
+	}
+			
 	@RequestMapping("delete.me")
 	public String deleteMember(String memPwdDelCheck, HttpSession session, Model model) {
 		

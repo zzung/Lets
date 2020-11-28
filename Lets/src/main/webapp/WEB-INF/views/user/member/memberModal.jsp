@@ -42,7 +42,6 @@
                             	</c:choose>
                                 <img id="setting_img-icon" src="resources/user/assets/img/member/settings.png">
                                 <input type="file" id="changeMemPic" name="changeMemPic" style="display:none;">
-                                <input type="hidden" id="memPic" name="memPic">
                             </div>
                         </div>
 
@@ -208,10 +207,8 @@
                 $('#changeMemPic').click();
                 $('#changeMemPic').change(function(){
                     setImageFromFile(this, '#target_img');
-                    console.log($('#changeMemPic').val()); // 올릴 파일명 찍힘
+                    console.log($('#changeMemPic').val()); // 올릴 파일의 경로+파일명 찍힘
                 });
-                $('#memPic').attr("src", $('#changeMemPic').val());
-                // console.log("변경된 src :"+$('#target_img').attr("src"));   // 적용안됨
                 e.preventDefault();
             });   
 

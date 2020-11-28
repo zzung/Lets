@@ -36,7 +36,7 @@
                     			</c:if>
                     		</c:when>
                     		<c:otherwise>
-                    			 <img src="" width="130px" height="130px">
+                    			 <img src="${loginUser.memPic}" width="130px" height="130px">
                     		</c:otherwise>
                     	</c:choose>
                     </div>
