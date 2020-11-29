@@ -58,4 +58,16 @@ public class LessonDao {
 		return ss.insert("lessonMapper.insertReply",r);
 	}
 
+	public int deleteReply(int replyNo, SqlSessionTemplate ss) {
+		return ss.update("lessonMapper.deleteReply",replyNo);
+	}
+
+	public int updateReply(Reply r, SqlSessionTemplate ss) {
+		return ss.update("lessonMapper.updateReply",r);
+	}
+
+	public int insertReReply(Reply r, SqlSessionTemplate ss) {
+		return ss.insert("lessonMapper.insertReReply",r);
+	}
+
 }

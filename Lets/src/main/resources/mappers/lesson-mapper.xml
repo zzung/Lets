@@ -166,7 +166,7 @@
 	   and status = 'Y'
 </select>
 
-<select id="selectReply" resultMap="replyResultSet">
+<select id="selectReply" parameterType="_int" resultMap="replyResultSet">
 	select 
 	       r.reply_no
 	     , m.nickname
@@ -179,8 +179,8 @@
 	     , re.reply_content reContent
 	     , re.enroll_date reEnrollDate
 	  from reply r
-	  join member m on (r.mem_no = m.mem_no)
- left join reply re on (r.reply_no = re.reply_no2)
+	  join member m on (r.mem_no = m.mem_no and r.status='Y' and r.reply_level =1)
+ left join reply re on (r.reply_no = re.reply_no2 and re.status='Y')
  left join member rm on (re.mem_no = rm.mem_no)
 	 where r.total_no = #{lessonNo}
 	   and r.reply_type='클래스'
@@ -212,4 +212,47 @@
 	   )
 </insert>
 
+<update id="deleteReply" parameterType="_int">
+	update
+	        reply
+	   set
+	        status='N'
+	      , modify_date = SYSDATE
+	 where reply_no = #{replyNo}
+	   and reply_type = '클래스'
+</update>
+
+<update id="updateReply" parameterType="Reply">
+	update 
+	       reply
+	   set 
+	       reply_content = #{replyContent}
+	     , modify_date = SYSDATE
+	 where reply_no = #{replyNo}
+	   and reply_type = '클래스'
+</update>
+
+<insert id="insertReReply" parameterType="Reply">
+	insert 
+	  into reply
+	    (
+	      reply_no
+	    , mem_no
+	    , reply_content
+	    , reply_no2
+	    , reply_type
+	    , reply_level
+	    , total_no
+	    )
+	 values
+	    (
+	      seq_rep_no.nextval
+	    , #{memNo}
+	    , #{replyContent}
+	    , #{replyNo}
+	    , '클래스'
+	    , 2
+	    , #{totalNo}
+	    )
+</insert> 
 </mapper>

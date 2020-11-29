@@ -87,6 +87,44 @@ public class LessonController {
 			return "fail"; 
 		}
 	}
+	
+	//커뮤니티 댓글 삭제(학천)
+	@ResponseBody
+	@RequestMapping("deleteReply.le")
+	public String deleteReply(int replyNo) {
+		int result = lService.deleteReply(replyNo);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail"; 
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateReply.le")
+	public String updateReply(Reply r) {
+		int result = lService.updateReply(r);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("reReply.le")
+	public String insertReReply(Reply r) {
+		int result = lService.insertReReply(r);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail"; 
+		}
+	}
+	
 
 	@RequestMapping("enroll.le")
 	public String enrollLesson() {

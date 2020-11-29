@@ -197,6 +197,7 @@
 	                  <script>
 	                  var repEditForm = ""; 
 	                  var result = ""; 
+	                  var replyArea = "";
 	                  
 	                 //후기 더보기 클리시 실행
 	                  	$(function(){
@@ -240,7 +241,6 @@
 	                  			},
 	                  			success:function(list){
 	                  				$("#replyCount").text(list.length);
-	                  				console.log(list); 
 	                  				
 	                  				result ="";
            							
@@ -260,9 +260,9 @@
 	     	                            result += '<p class="date">'+list[i].replyEnrollDate+'</p>'
 	     	                            result += '</div>'
 	     	                            result += '<div class="reply-btn">'
-	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase">'+ "답장" +'</a></div>'
+	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-no="'+list[i].replyNo+'" onclick="reReplySet(this); return false">'+ "답장" +'</a></div>'
 	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-no="'+list[i].replyNo+'" onclick="updateReplySet(this); return false">'+ "수정" + '</a></div>'
-	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">'+"삭제"+'</a></div>'
+	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal" data-no="'+list[i].replyNo+'" onclick="deleteReplySet(this)">'+"삭제"+'</a></div>'
 	     								result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">'+"신고"+'</a></div>'
 	     	                            result += '</div>'
 	     	                            result += '</div>'
@@ -315,21 +315,116 @@
 	             			
 	             			repEditForm = "";
 	             			
-	             			repEditForm += '<input type="hidden" id="changedRepNo" value="'+ replyNo +'">'
+	             			repEditForm += '<input type="hidden" id="updateReplyNo" value="'+ replyNo +'">'
 	            			repEditForm += '<div class="mt-10">'
 	                        repEditForm += "<textarea class='review-textarea' id='repContent' required>" + replyContent + "</textarea>"
 	                        repEditForm += '</div>'
 	                        repEditForm += '<div align="right">'
-	                        repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="updateReviewReply();">'+ "등록" + '</button>'
+	                        repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="updateReply();">'+ "등록" + '</button>'
 	                		repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelUpdateReview(this); return false">'+ "취소" + '</button>'
 	                		repEditForm += '</div>'
 	            			
 	                		$(e).parents(".comment-list").html(repEditForm); 
 	             		}
 	             		
+	             		function updateReply(){
+	             			var replyNo = $("#updateReplyNo").val()
+	             			var replyContent = $("#repContent").val(); 
+	             			
+	             			$.ajax({
+	             				url:"updateReply.le",
+	             				data:{
+	             					replyNo:replyNo,
+	             					replyContent:replyContent
+	             				},
+	             				success:function(result){
+	             					if(result == "success"){
+	             						selectReplyList(); 
+	             					}else{
+	             						alert("댓글 수정 실패 했습니다.")
+	             					}
+	             				},
+	             				error:function(){
+	             					console.log("댓글 수정 ajax fail")
+	             				}
+	             			})
+	             		}
+	             		
+	             		//수정 취소하기
 	             		function cancelUpdateReview(e){
 	             			$(e).parents(".replyArea").html(result);
 	             			selectReplyList(); 
+	             		}
+	             		
+	             		//모달로 reply_no 보내기 
+	             		function deleteReplySet(e){
+	             			$("#replyNo").val($(e).data("no"));
+	             		}
+	             		
+	             		//첫번쨰 글 삭제하기 요청(모달)
+	             		function deleteReply(){
+	             			$.ajax({
+	             				url:"deleteReply.le",
+	             				data:{
+	             					replyNo:$("#replyNo").val() 
+	             				},
+	             				success:function(result){
+	             					if(result == "success"){
+	             						$("#closeModal").click(); 
+	             						selectReplyList(); 
+	             					}
+	             				},
+	             				error:function(){
+	             					alert("댓글 삭제 실패하셨습니다.")
+	             				}
+	             				
+	             			});
+	             		}
+	             		
+	             		//커뮤니티 답장 누를시 보여질 창 
+	             		function reReplySet(e){
+	             			var replyNo = $(e).data("no");
+	             			
+	             			replyArea = "";
+	             			
+	             			replyArea += '<input type="hidden" id="reReplyNo" value="'+ replyNo +'">'
+	             			replyArea += '<div class="mt-10">'
+	             			replyArea += "<textarea class='review-textarea' id='reRepContent' required></textarea>"
+	             			replyArea += '</div>'
+	             			replyArea += '<div align="right">'
+         					replyArea += '<button class="genric-btn1 primary-border extrasmall" onclick="reReply();">'+ "등록" + '</button>'
+         					replyArea += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelUpdateReview(this); return false">'+ "취소" + '</button>'
+         					replyArea += '</div>'
+	             			
+	             			$(e).parents(".comment-list").children(".reviewReplyArea").html(replyArea);
+	             		}
+	             		
+	             		// 답장 장석하고 insert 할 ajax
+	             		function reReply(){
+	             			var replyNo2 = $("#reReplyNo").val();
+	             			var replyContent = $("#reRepContent").val(); 
+	             			
+	             			$.ajax({
+	             				url:"reReply.le",
+	             				data:{
+	             					replyNo:replyNo2,
+	             					// 회원번호 가져와야함 ${memNo}
+	             					memNo:2,
+	             					replyContent:replyContent,
+	             					//totalNo == lessonNo 수정해줘야함 ${lessonNo}
+	             					totalNo:1
+	             				},
+	             				success:function(result){
+	             					if(result == "success"){
+	             						selectReplyList(); 
+	             					}else{
+	             						alert("댓글 작성 실패")
+	             					}
+	             				},
+	             				error:function(){
+	             					console.log("댓글 작성 ajax fail")
+	             				}
+	             			}); 
 	             		}
 
 	                  	//커뮤니티 작성하기 버튼 누르면 실행 될 스크립트
@@ -468,8 +563,9 @@
 											<!-- Modal body -->
 											<div class="modal-body">
 												<p>삭제 하시겠습니까?</p>
-												<button type="button" class="genric-btn primary small" data-dismiss="modal">취소</button>
-												<button type="button" class="genric-btn primary small">삭제</button>
+												<input type="hidden" id="replyNo" value="">
+												<button type="button" class="genric-btn primary small" id="closeModal" data-dismiss="modal">취소</button>
+												<button type="button" class="genric-btn primary small" onclick="deleteReply();">삭제</button>
 											</div>
 										</div>
 									</div>

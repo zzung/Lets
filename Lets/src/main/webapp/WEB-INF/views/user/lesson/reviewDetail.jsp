@@ -396,7 +396,6 @@
 		//모달로 
 		function deleteReviewReplySet(e){
 			$("#deleteReviewReply").val($(e).data("no"));
-			var number = $(e).data("no"); 
 		}
 		
 		// 모달에서 삭제 누르면 실행

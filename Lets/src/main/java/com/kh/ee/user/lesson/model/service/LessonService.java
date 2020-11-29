@@ -22,11 +22,16 @@ public interface LessonService {
 	int selectListCount();
 	//ajax(학천)
 	ArrayList<Reply> selectReply(int lessonNo); 
-	//ajax(학천)
 	int insertReply(Reply r);
-
+	int deleteReply(int replyNo);
+	int updateReply(Reply r);
+	int insertReReply(Reply r);
+	//
 	
 	int deleteLesson(int lno);
+
+
+
 
 
 
