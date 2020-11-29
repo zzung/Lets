@@ -37,7 +37,8 @@ public class MemberController {
 	public String loginMember(Member m, HttpSession session, Model model) {
 		
 		Member loginUser = mService.loginMember(m);
-
+		String bpw = bpe.encode(m.getMemPwd());
+		System.out.println(bpe.matches("12341234", bpw));
 		if(loginUser != null && bpe.matches(m.getMemPwd(), loginUser.getMemPwd())) {
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "로그인 성공 !");
@@ -204,7 +205,6 @@ public class MemberController {
 		if(result > 0) {
 			session.setAttribute("loginUser", mService.loginMember(m));
 			session.setAttribute("alertMsg", "회원 정보 수정 완료 !");
-			System.out.println(m);
 			return "redirect:myPage.me";
 		}else {
 			model.addAttribute("errorMsg", "회원 정보 수정에 실패했습니다. 다시 시도해주세요.");

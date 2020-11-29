@@ -89,8 +89,8 @@
 	              <div class="my-cont-3">
 	                  <form action="" method="post" id="myDelivery">
 	                  	  <c:forEach var="d" items="${myDlist}" varStatus="status">
-		                      <div class="delivery-list" onclick="myDeliveryDetail();">
-		                  	  <input type="hidden" id="memPayNo${staus.index}" name="memPayNo${staus.index}" value="${myDlist[status.index].memPayNo}">
+		                      <div class="delivery-list" onclick="myDeliveryDetail(this);">
+		                  	  <input type="hidden" id="memPayNo" name="memPayNo" value="${myDlist[status.index].memPayNo}">
 		                          <div class="d-lecture-thumbnail">
 		                              <img src="${d.lessonCoverImg}" width="100%" height="100%" >
 		                          </div>
@@ -129,9 +129,9 @@
       </div>
 
       <script>
-      	  function myDeliveryDetail(){
+      	  function myDeliveryDetail(e){
+      		  $("#memPayNo").val(e.children[0].value);
       		  $("#myDelivery").attr("action","myDetailDel.me").submit();
-      		  console.log($('#memPayNo').val());
       	  }
 
       	  $('#cancelPayment').click(function(){
