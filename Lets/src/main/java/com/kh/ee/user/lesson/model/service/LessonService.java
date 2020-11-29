@@ -19,12 +19,15 @@ public interface LessonService {
 	ArrayList<Review> selectReview(int lessonNo); 
 	ArrayList<LessonFaq> selectLessonFaqList(int lessonNo); 
 	Tutor selectTutorInfo(int lessonNo); 
-	ArrayList<Reply> selectReply(int lessonNo); 
-	ArrayList<Reply> selectReReplyList(int lessonNo);
 	int selectListCount();
+	//ajax(학천)
+	ArrayList<Reply> selectReply(int lessonNo); 
+	//ajax(학천)
+	int insertReply(Reply r);
 
 	
 	int deleteLesson(int lno);
+
 
 
 

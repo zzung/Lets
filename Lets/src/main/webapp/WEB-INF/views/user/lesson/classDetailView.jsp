@@ -195,6 +195,8 @@
 	                  <!--? end 리뷰 area-->
 
 	                  <script>
+	                  var repEditForm = ""; 
+	                  var result = ""; 
 	                  
 	                 //후기 더보기 클리시 실행
 	                  	$(function(){
@@ -203,9 +205,32 @@
 	                  		})
 	                  		
 	                  		//페이지 실행되자마자 커뮤니티 실행시키기 위해 
-	                  		selectReplyList(); 
+	                  		selectReplyList();
 	                  		
 	                  	});
+	                 
+	                 	function addCommunity(){
+	                 		$.ajax({
+	                 			url:"insertReply.le",
+	                 			data:{
+	                 				//totalNo == lessonNo
+	                 				totalNo:1,
+	                 				memNo:2,
+	                 				replyContent:$("#communityContent").val()
+	                 			},
+	                 			success:function(result){
+	                 				if(result == "success"){
+	                 					$("#communityContent").val("");
+	                 					$("#writeReviewArea").hide(); 
+	                 					selectReplyList(); 
+	                 				}
+	                 			},
+	                 			error:function(){
+	                 				alert("댓글 작성 실패했습니다.");
+	                 			}
+	                 		});
+	                 		
+	                 	}
 	             		//상세페이지 커뮤니티 ajax로 리스트 불러오기
 	                  	function selectReplyList(){
 	                  		$.ajax({
@@ -215,12 +240,13 @@
 	                  			},
 	                  			success:function(list){
 	                  				$("#replyCount").text(list.length);
+	                  				console.log(list); 
 	                  				
-	                  				var result ="";
-           				
+	                  				result ="";
+           							
 	                  				for(var i in list){
 	                  					result += '<div class="comment-list">'
-	                  					result += "<input type='hidden' name='reviewNo' value='1'>"
+	                  					result += "<input type='hidden' name='replyNo' value='"+list[i].replyNo+"'>"
 	        	                        result += '<div class="single-comment justify-content-between d-flex">'
 	     	                            result += '<div class="user justify-content-between d-flex">'
 	     	                            result += '<div class="thumb">'
@@ -235,7 +261,7 @@
 	     	                            result += '</div>'
 	     	                            result += '<div class="reply-btn">'
 	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase">'+ "답장" +'</a></div>'
-	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase">수정</a></div>'
+	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-no="'+list[i].replyNo+'" onclick="updateReplySet(this); return false">'+ "수정" + '</a></div>'
 	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal">'+"삭제"+'</a></div>'
 	     								result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">'+"신고"+'</a></div>'
 	     	                            result += '</div>'
@@ -243,11 +269,39 @@
 	     	                            result += '</div>'
 	     	                            result += '</div>'
 	     	                            result += '</div>'
-	     	                            result += '</div>'
 	     	                            result += "<div class='reviewReplyArea'></div>"
-
+	     	                            result += '</div>'
+	     	                            
+	     	                            if(list[i].reList.length != 0){
+	     	                            	for(var r=0; r<list[i].reList.length; r++){
+			             					result += "<div class='comment-list reReply'>" 
+		                              		result += "<div class='single-comment justify-content-between d-flex'>"
+		                              		result += "<div class='user justify-content-between d-flex'>"
+		                              		result += "<div class='thumb1'>"
+		                              		result += "<img src='resources/user/assets/img/detailClassPage/replyArrow.png'>"
+		                              		result += "</div>"
+		                              		result += "<div class='desc1'>"
+		                              		result += "<p class='comment' id='replyCommentArea'>" + list[i].reList[r].replyContent + "</p>"   
+		                              		result += "<div class='d-flex justify-content-between' style='width:670px;'>"
+		                              		result += "<div class='d-flex align-items-center'>"
+		                              		result += "<span>" + list[i].reList[r].nickname + "</span>"
+		                              		result += "<p class='date'>" + list[i].reList[r].replyEnrollDate + "</p>"
+		                              		result += "</div>"
+		                              		result += "<div class='reply-btn'>"
+		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
+		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewReplySet(this)' data-no='" + list[i].reList[r].replyNo + "'>" + '수정' + "</a></div>"
+		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reList[r].reviewNo + "' onclick='deleteReviewReplySet(this)'>" + '삭제' + "</a></div>"
+		                              		result += "</div>"        
+		                              		result += "</div>"
+		                              		result += "</div>"
+		                              		result += "</div>"
+		                              		result += "</div>"
+		                              		result += "</div>"
+	     	                              	}
+	     	                            }
 	                  				}
 	                  				$(".comments-area > .replyArea").html(result); 
+	                  				
 	                  			},
 	                  			error:function(){
 	                  				console.log("댓글 list ajax fail")
@@ -255,47 +309,27 @@
 	                  		});
 	                  	}
 	             		
-	             		function selectReReplyList(){
-	             			$.ajax({
-	             				url:"reReplyList.le",
-	             				data:{
-	             					lessonNo:1
-	             				},
-	             				success:function(reList){
-	             					console.log(reList); 
-	             					var result = "";
-	             					
-	             					for(var r in reList){
-		             					result += "<div class='comment-list reReply'>" 
-	                              		result += "<div class='single-comment justify-content-between d-flex'>"
-	                              		result += "<div class='user justify-content-between d-flex'>"
-	                              		result += "<div class='thumb1'>"
-	                              		result += "<img src='resources/user/assets/img/detailClassPage/replyArrow.png'>"
-	                              		result += "</div>"
-	                              		result += "<div class='desc1'>"
-	                              		result += "<p class='comment' id='replyCommentArea'>" + reList[r].replyContent + "</p>"   
-	                              		result += "<div class='d-flex justify-content-between' style='width:670px;'>"
-	                              		result += "<div class='d-flex align-items-center'>"
-	                              		result += "<span>" + reList[r].nickname + "</span>"
-	                              		result += "<p class='date'>" + reList[r].replyEnrollDate + "</p>"
-	                              		result += "</div>"
-	                              		result += "<div class='reply-btn'>"
-	                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
-	                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewReplySet(this)' data-no='" + list[i].replyNo + "'>" + '수정' + "</a></div>"
-	                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reviewNo + "' onclick='deleteReviewReplySet(this)'>" + '삭제' + "</a></div>"
-	                              		result += "</div>"        
-	                              		result += "</div>"
-	                              		result += "</div>"
-	                              		result += "</div>"
-	                              		result += "</div>"
-	                              		result += "</div>"
-	             					}
-	             					$(".comments-area > .replyArea").siblings(".reviewReplyArea").html(result);
-	             				},
-	             				error:function(){
-	             					console.log("댓글 ajax 실패")
-	             				}
-	             			});
+	             		function updateReplySet(e){
+	             			var replyNo = $(e).data("no");
+	             			var replyContent = $(e).parents().siblings(".comment").text();
+	             			
+	             			repEditForm = "";
+	             			
+	             			repEditForm += '<input type="hidden" id="changedRepNo" value="'+ replyNo +'">'
+	            			repEditForm += '<div class="mt-10">'
+	                        repEditForm += "<textarea class='review-textarea' id='repContent' required>" + replyContent + "</textarea>"
+	                        repEditForm += '</div>'
+	                        repEditForm += '<div align="right">'
+	                        repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="updateReviewReply();">'+ "등록" + '</button>'
+	                		repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelUpdateReview(this); return false">'+ "취소" + '</button>'
+	                		repEditForm += '</div>'
+	            			
+	                		$(e).parents(".comment-list").html(repEditForm); 
+	             		}
+	             		
+	             		function cancelUpdateReview(e){
+	             			$(e).parents(".replyArea").html(result);
+	             			selectReplyList(); 
 	             		}
 
 	                  	//커뮤니티 작성하기 버튼 누르면 실행 될 스크립트
@@ -329,10 +363,6 @@
 							</div>
 							<br>
 							<div class="replyArea"></div>
-							<br>
-							<div class="text-right">
-		                        <i class="fas fa-plus" id="moreReply"> 더보기</i>
-		                     </div>
 						</div>
 						<!--? end 리뷰 area-->
 						

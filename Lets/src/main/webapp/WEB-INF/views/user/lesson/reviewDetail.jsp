@@ -127,7 +127,8 @@
    				},
    				success:function(list){
    					$("#reviewCount").text(list.length);
-
+					
+   					console.log(list);
    					result ="";
    					
    					
@@ -155,8 +156,8 @@
 	                        	}
                         result += "</div>"
                         result += "<div class='reply-btn'>"
-                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='replyReviewSet(this)' data-no='"+ list[i].reviewNo +"'>" + '답장' + "</a></div>"
-                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewSet(this)' data-no='"+ list[i].reviewNo +"'>" + '수정' + "</a></div>"
+                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='replyReviewSet(this); return false' data-no='"+ list[i].reviewNo +"'>" + '답장' + "</a></div>"
+                        result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewSet(this); return false' data-no='"+ list[i].reviewNo +"'>" + '수정' + "</a></div>"
                         result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteModal' data-no='"+ list[i].reviewNo +"' onclick='deleteReviewSet(this)'>" + '삭제' + "</a></div>"
                         result += "</div>"        
                         result += "</div>"
@@ -182,7 +183,7 @@
                    		result += "</div>"
                    		result += "<div class='reply-btn'>"
                    		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
-                   		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewReplySet(this)' data-no='" + list[i].replyList[r].replyNo + "'>" + '수정' + "</a></div>"
+                   		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewReplySet(this); return false' data-no='" + list[i].replyList[r].replyNo + "'>" + '수정' + "</a></div>"
                    		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reviewNo + "' onclick='deleteReviewReplySet(this)'>" + '삭제' + "</a></div>"
                    		result += "</div>"        
                    		result += "</div>"
@@ -318,8 +319,6 @@
 			var repContent = $(e).parents().siblings("#replyCommentArea").text();
 			var repEditForm = "";
 			
-			console.log(repNo); 
-			
 			repEditForm += '<input type="hidden" id="changedRepNo" value="'+ repNo +'">'
 			repEditForm += '<div class="mt-10">'
             repEditForm += "<textarea class='review-textarea' id='repContent' required>" + repContent + "</textarea>"
@@ -337,10 +336,7 @@
       	function updateReviewReply(){
       		var changedRepNo = $("#changedRepNo").val();
       		var repContent = $("#repContent").val();
-      		
-      		console.log(changedRepNo);
-      		console.log(repContent); 
-      		
+
       		$.ajax({
       			url:"updateReviewReply.rev",
       			data:{

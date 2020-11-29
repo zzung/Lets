@@ -66,7 +66,7 @@ public class LessonController {
 		return "user/lesson/classDetailView"; 
 	}
 	
-
+	//상세페이지 커뮤니니티(학천)
 	@ResponseBody
 	@RequestMapping(value="selectReplyList.le", produces="application/json; charset=utf-8")
 	public String selectReplyList(int lessonNo) {
@@ -75,14 +75,18 @@ public class LessonController {
 		return new Gson().toJson(list);
 	}
 	
+	//상세페이지 커뮤니니티(학천)
 	@ResponseBody
-	@RequestMapping(value="reReplyList.le", produces="application/json; charset=utf-8")
-	public String selectReReplyList(int lessonNo) {
-		ArrayList<Reply> reList = lService.selectReReplyList(lessonNo); 
+	@RequestMapping("insertReply.le")
+	public String insertReply(Reply r) {
+		int result = lService.insertReply(r);
 		
-		return new Gson().toJson(reList); 
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail"; 
+		}
 	}
-
 
 	@RequestMapping("enroll.le")
 	public String enrollLesson() {

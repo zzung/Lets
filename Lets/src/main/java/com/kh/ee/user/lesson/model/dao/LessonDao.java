@@ -24,11 +24,12 @@ public class LessonDao {
 		return (ArrayList)ss.selectList("lessonMapper.selectApproveStatusList");
 	}
 	
-	//상세페이지에서 보여질 후기 리스트 
+	//상세페이지에서 보여질 후기 리스트 (학천)
 	public ArrayList<Review> selectReview(int lessonNo, SqlSessionTemplate ss) {
 		return (ArrayList)ss.selectList("lessonMapper.selectReview",lessonNo);
 	}
-
+	
+	//상세페이지에서 보여질 FAQ (학천)
 	public ArrayList<LessonFaq> selectLessonFaqList(int lessonNo, SqlSessionTemplate ss) {
 		return (ArrayList)ss.selectList("lessonMapper.selectLessonFaqList",lessonNo);
 	}
@@ -41,20 +42,20 @@ public class LessonDao {
 		return ss.update("lessonMapper.deleteLesson", lno);
 	}
 
-
+	//상세페이지에서 보여질 커뮤니티 카운트(학천)
 	public int selectListCount(SqlSessionTemplate ss) {
 		return ss.selectOne("lessonMapper.selectListCount");
 	}
 
-	
+	//상세페이지에서 보여질 커뮤니티 리스트(학천)
 	public ArrayList<Reply> selectReply(int lessonNo, SqlSessionTemplate ss) {
 		
 		return (ArrayList)ss.selectList("lessonMapper.selectReply", lessonNo);
 	}
 
-	public ArrayList<Reply> selectReReplyList(int lessonNo, SqlSessionTemplate ss) {
-
-		return (ArrayList)ss.selectList("lessonMapper.selectReReplyList",lessonNo);
+	//상세페이지에서 보여질 커뮤니티 작성 (학천)
+	public int insertReply(Reply r, SqlSessionTemplate ss) {
+		return ss.insert("lessonMapper.insertReply",r);
 	}
 
 }

@@ -59,15 +59,27 @@
 	<result column="status" property="status" />
 </resultMap>
 
+<!-- 커뮤니티 댓글 가져올 resultMap(학천) -->
 <resultMap id="replyResultSet" type="Reply">
 	<id column="reply_no" property="replyNo" />
 	<result column="reply_content" property="replyContent"/>
 	<result column="reply_level" property="replyLevel"/>
 	<result column="replyDate" property="replyEnrollDate" />
-	<result column="modify_Date" property="replyModifyDate" />
+	<result column="modify_date" property="replyModifyDate" />
 	<result column="total_no" property="totalNo"/>
 	<result column="reply_type" property="replyType"/>
 	<result column="nickname" property="nickname" />
+	<result column="mem_pic" property="memPic" />
+	<collection javaType="java.util.ArrayList" resultMap="reReply" property="reList"/>
+</resultMap>
+
+<!--대댓글 가져오기 위한 resultMap (학천) -->
+<resultMap id="reReply" type="Reply">
+	<result column="reply_no2" property="replyNo2"/>
+	<result column="reContent" property="replyContent"/>
+	<result column="reEnrollDate" property="replyEnrollDate"/>
+	<result column="modify_date" property="replyModifyDate" />
+	<result column="replyNickname" property="nickname"/> 
 </resultMap>
 
 <select id="selectApproveLessonList" resultMap="lessonResultSet" >
@@ -155,34 +167,49 @@
 </select>
 
 <select id="selectReply" resultMap="replyResultSet">
-	select
+	select 
 	       r.reply_no
-	     , r.mem_no
-	     , r.reply_content
-	     , r.enroll_date
-	     , r.reply_level
 	     , m.nickname
 	     , m.mem_pic
+	     , r.reply_content 
+	     , r.enroll_date replyDate
+	     , re.reply_no2
+	     , rm.nickname replyNickname
+	     , rm.mem_pic
+	     , re.reply_content reContent
+	     , re.enroll_date reEnrollDate
 	  from reply r
-	  join member m on(r.mem_no = m.mem_no)
-	 where reply_type = '클래스'
-	   and total_no = #{lessonNo}
-	   and reply_level = 1 
+	  join member m on (r.mem_no = m.mem_no)
+ left join reply re on (r.reply_no = re.reply_no2)
+ left join member rm on (re.mem_no = rm.mem_no)
+	 where r.total_no = #{lessonNo}
+	   and r.reply_type='클래스'
+	 order 
+	    by r.reply_no desc, re.reply_no2 desc 
 </select>
 
-<select id="selectReReplyList" resultMap="replyResultSet">
-	select
-	       r.reply_no
-	     , r.mem_no
-	     , r.reply_content
-	     , r.enroll_date
-	     , r.reply_level
-	     , m.nickname
-	  from reply r
-	  join member m on(r.mem_no = m.mem_no)
-	 where reply_type = '클래스'
-	   and total_no = #{lessonNo}
-	   and reply_level = 2 
-</select>
+<insert id="insertReply" parameterType="Reply">
+	insert 
+	  into reply
+	   (
+	      reply_no
+	    , mem_no
+	    , reply_content
+	    , enroll_date
+	    , reply_type
+	    , reply_level
+	    , total_no
+	   )
+	   values
+	   (
+	     seq_rep_no.nextval
+	   , #{memNo}
+	   , #{replyContent}
+	   , SYSDATE
+	   , '클래스'
+	   , 1
+	   , #{totalNo}
+	   )
+</insert>
 
 </mapper>

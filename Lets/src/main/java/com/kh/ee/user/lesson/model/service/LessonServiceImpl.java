@@ -47,22 +47,22 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.selectLessonFaqList(lessonNo, ss);
 	}
 	
+	// 커뮤니티 총 갯수 (학천)
 	@Override
 	public int selectListCount() {
 		return lDao.selectListCount(ss);
 	}
 	
-	//ajax(학천)
+	//ajax 커뮤니트 list 불러오기 (학천)
 	@Override
 	public ArrayList<Reply> selectReply(int lessonNo) {
 		
 		return lDao.selectReply(lessonNo,ss);
 	}
-	//ajax(학천)
+	//ajax 커뮤니티 댓글 작성(학천)
 	@Override
-	public ArrayList<Reply> selectReReplyList(int lessonNo) {
-
-		return lDao.selectReReplyList(lessonNo, ss);
+	public int insertReply(Reply r) {
+		return lDao.insertReply(r, ss);
 	}
 	
 	@Override
@@ -74,6 +74,7 @@ public class LessonServiceImpl implements LessonService{
 	public int deleteLesson(int lno) {
 		return lDao.deleteLesson(ss, lno);
 	}
+
 
 
 

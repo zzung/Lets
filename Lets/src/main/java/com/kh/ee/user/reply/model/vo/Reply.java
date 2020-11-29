@@ -1,6 +1,7 @@
 package com.kh.ee.user.reply.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,4 +30,7 @@ public class Reply {
 	
 	//닉네임 뿌려주기 위해 필드 값 가져옴(학천)
 	private String nickname; 
+	private String mem_pic; 
+	
+	ArrayList<Reply> reList; 
 }
