@@ -19,6 +19,11 @@
          	detailHtml += '<td width=400px><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
          	detailHtml += '<td><button class="plus_btn detailadd" type="button">+</button><button class="plus_btn detailDel" type="button">-</button></td></tr>';
          	
+         	var curriculumhtml = '';
+         	curriculumhtml += '<h5>)</h5>';
+         	
+         	$('.curriculumS').eq($('.detailadd').index($(this))).append(curriculumhtml);
+         	
          	$(this).parents().eq(2).append(detailHtml);
          	
          	var length = $(this).parents().eq(2).children().length;
@@ -26,6 +31,9 @@
          	$(this).remove();
          	
             $('.detailDel').click (function(){
+            	//debugger
+            	var targetindex = $(this).parents().eq(2).children().index($(this).parents().eq(1))-1
+            	$('.curriculumS').eq($('.detailadd').index($(this).prev())).children().eq(targetindex).remove()
             	var tbody = $(this).parents().eq(2)
             	var length = tbody.children().length - 1
             	if ($(this).prev().length != 0) {
@@ -51,7 +59,7 @@
 	            html += '<table style="width: 500px">';
 	            html += '<tr><td width=40px><h5 class="category_1">' + ($(".category_1").length + 1) + '.</h5></td>';
 	            html += '<td width=400px><input class="form-control" name="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>';
-	            html += '<td><button class="plus_btn categorydelete" type="button" id="categorydelete">-</button></td></tr>';
+	            html += '<td><button class="plus_btn categorydelete" type="button" id="categorydelete" value="'+($(".category_1").length + 1)+'">-</button></td></tr>';
 	            html += '<tr><td><h6 class="category_2">1)</h6></td>';
 	            html += '<td><input class="form-control" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td></tr>';
  	            html += '<tr><td><h6 class="category_2">2)</h6></td>';
@@ -59,15 +67,25 @@
 	            html += '<td><button class="plus_btn detailadd" type="button">+</button></td></tr></table><br></div>';
 	             $('#parah').append (html); 
 	             
-	             $('.categorydelete').click (function (){
+	            var inputhtml = '';
+	            inputhtml += '<div class="curriculumD"><h4 class="inputTitle">'+($(".category_1").length)+'.</h4><div class="curriculumS"><h5>)</h5><h5>2)</h5></div><hr></div>';
+	            $('.curriculumP').append(inputhtml);
+                
+                
+                
+	             var categorydeleteindex=$('.categorydelete').length-1
+	             $('.categorydelete').eq(categorydeleteindex).click (function (){
+	            	 $('.curriculumD').eq($(this).attr('value')-1).remove()
 	            	 $(this).parents().eq(4).remove()
 	            	 	var length = $(".category_1").length
 	            	 	for(i=0; i<length; i++){
 	            	 		$(".category_1").eq(i).text((i+1)+".")
+	            	 		$(".categorydelete").eq(i).attr('value',(i+2))
+	            	 		$(".inputTitle").eq(i).text((i+1)+".")
 	            	 	}
 	 	        });
-	             
-	            $('.detailadd').click(detailAddFunction);
+	             var detailindex=$('.detailadd').length-1
+	            $('.detailadd').eq(detailindex).click(detailAddFunction);
 	            
             });
             $('.detailadd').click(detailAddFunction)
@@ -213,26 +231,24 @@
          </div>
          <br><br>
          <div class="lesson-row">
-             <div class="typography">
-             	<p id="inputTitle"></p>
-                 <h4>1. 커리큘럼 주제 1</h4>
-                 <h5>1) 커리큘럼 세부 리스트 1</h5>
-                 <h5>2) 커리큘럼 세부 리스트 2</h5>
-                 <hr>
-                 <h4>2. 커리큘럼 주제 2</h4>
-                 <h5>1) 커리큘럼 세부 리스트 1</h5>
-                 <h5>2) 커리큘럼 세부 리스트 2</h5>
-                 <hr>
-                 <h4>3. 커리큘럼 주제 3</h4>
-                 <h5>1) 커리큘럼 세부 리스트 1</h5>
-                 <h5>2) 커리큘럼 세부 리스트 2</h5>
+             <div class="typography curriculumP">
+             	<div class="curriculumD">
+	                 <h4 class="inputTitle"></h4>
+	                 <div class="curriculumS">
+	                 	<h5>1)</h5>
+	                 	<h5>2)</h5>
+	                 </div>
+	                 <hr>
+                 </div>
              </div>
          </div>
          
          <script>
-         $("input").keyup(function(){
-        	    $("p").text($(this).val());
+         $("#firstTitle").keyup(function(){
+        	    $(".inputTitle").text($(this).val());
         	    });
+         
+         
          </script>
 
          <div id="enroll_cul">
