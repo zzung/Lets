@@ -10,6 +10,7 @@ import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.reply.model.vo.Reply;
+import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
 import com.kh.ee.user.tutor.model.vo.Tutor;
 
@@ -79,5 +80,9 @@ public class LessonDao {
 
 	public int updateReReply(Reply r, SqlSessionTemplate ss) {
 		return ss.update("lessonMapper.updateReReply",r);
+	}
+
+	public int reportReply(Report rpt, SqlSessionTemplate ss) {
+		return ss.insert("lessonMapper.reportReply",rpt);
 	}
 }

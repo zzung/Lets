@@ -11,6 +11,7 @@ import com.kh.ee.user.lesson.model.dao.LessonDao;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.reply.model.vo.Reply;
+import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
 import com.kh.ee.user.tutor.model.vo.Tutor;
 
@@ -94,6 +95,12 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.updateReReply(r,ss);
 	}
 	
+	//ajax 커뮤니티 신고 
+	@Override
+	public int reportReply(Report rpt) {
+		return lDao.reportReply(rpt,ss);
+	}
+	
 	@Override
 	public Tutor selectTutorInfo(int lessonNo) {
 		return lDao.selectTutorInfo(lessonNo, ss);
@@ -103,6 +110,7 @@ public class LessonServiceImpl implements LessonService{
 	public int deleteLesson(int lno) {
 		return lDao.deleteLesson(ss, lno);
 	}
+
 
 
 

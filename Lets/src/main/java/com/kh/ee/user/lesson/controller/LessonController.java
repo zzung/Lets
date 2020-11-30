@@ -2,6 +2,8 @@ package com.kh.ee.user.lesson.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import com.google.gson.Gson;
 import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.reply.model.vo.Reply;
+import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
 import com.kh.ee.user.tutor.model.vo.Tutor;
 
@@ -53,7 +56,7 @@ public class LessonController {
 	
 	//상세페이지에서 보여질 후기 부분 부터 작성.(학천)
 	@RequestMapping("courseDetailView.le")
-	public String courseDetailView(int lessonNo, Model model) {
+	public String courseDetailView(int lessonNo, HttpSession session, Model model) {
 		ArrayList<Review> list = lService.selectReview(lessonNo); 
 		ArrayList<LessonFaq> faqList = lService.selectLessonFaqList(lessonNo); 
 		Tutor t = lService.selectTutorInfo(lessonNo); 
@@ -141,14 +144,23 @@ public class LessonController {
 	@RequestMapping("updateReReply.le")
 	public String updateReReply(Reply r) {
 		int result = lService.updateReReply(r);
-		System.out.println("replyNo:" + r.getReplyNo());
-		System.out.println("replyNo2:" + r.getReplyNo2());
-		System.out.println("replyContent:" + r.getReplyContent());
 		
 		if(result>0) {
 			return "success";
 		} else {
 			return "fail"; 
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("reportReply.le")
+	public String reportReply(Report rpt) {
+		int result = lService.reportReply(rpt);
+		
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
 		}
 	}
 	

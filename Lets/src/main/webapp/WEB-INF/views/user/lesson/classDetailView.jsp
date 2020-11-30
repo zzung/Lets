@@ -245,7 +245,8 @@
            							
 	                  				for(var i in list){
 	                  					result += '<div class="comment-list">'
-	                  					result += "<input type='hidden' name='replyNo' value='"+list[i].replyNo+"'>"
+	                  					result += "<input type='hidden' id='replyNo' value='"+list[i].replyNo+"'>"
+	                  					result += "<input type='hidden' id='memNo' value='"+list[i].memNo+"'>"
 	        	                        result += '<div class="single-comment justify-content-between d-flex">'
 	     	                            result += '<div class="user justify-content-between d-flex">'
 	     	                            result += '<div class="thumb">'
@@ -262,7 +263,7 @@
 	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-no="'+list[i].replyNo+'" onclick="reReplySet(this); return false">'+ "답장" +'</a></div>'
 	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-no="'+list[i].replyNo+'" onclick="updateReplySet(this); return false">'+ "수정" + '</a></div>'
 	     	                            result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#deleteModal" data-no="'+list[i].replyNo+'" onclick="deleteReplySet(this)">'+"삭제"+'</a></div>'
-	     								result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal">'+"신고"+'</a></div>'
+	     								result += '<div class="communityBtn"><a href="#" class="btn-reply text-uppercase" data-toggle="modal" data-target="#reportModal" data-no="'+list[i].replyNo+'" onclick="reportSet(this)">'+"신고"+'</a></div>'
 	     	                            result += '</div>'
 	     	                            result += '</div>'
 	     	                            result += '</div>'
@@ -498,6 +499,31 @@
 	             			})
 	             		}
 	             		
+	             		function reportSet(e){
+	             			$("#reportReplyNo").val($(e).data("no"));
+	             			$("#reportedMemNo").val($(e).parents().siblings("#memNo").val());
+	             		}
+	             		
+	             		function reportRequest(){
+	             			$.ajax({
+	             				url:"reportReply.le",
+	             				data:{
+	             					memNo:$("#reportedMemNo").val(),
+	             					replyNo:$("#reportReplyNo").val(),
+	             					reportType:$("input:radio[name=reportType]:checked").val()
+	             				},
+	             				success:function(result){
+	             					if(result == "success"){
+	             						alert("신고 성공했습니다.")
+	             					} else {
+	             						alert("신고 실패했습니다.")
+	             					}
+	             				},
+	             				error:function(){
+	             					console.log("신고 ajax 실패")
+	             				}
+	             			})
+	             		}
 	                  	//커뮤니티 작성하기 버튼 누르면 실행 될 스크립트
                         function writeReview(){
                            	if($("#writeReviewArea").css("display") == "none"){
@@ -593,7 +619,7 @@
 											<input id="reportReplyNo" type="hidden" name="no" value=""> 
 											<input id="reportedMemNo" type="hidden" name="no" value="">
 											<button type="button" class="genric-btn primary small" data-dismiss="modal">취소</button>
-											<button type="submit" class="genric-btn primary small" data-dismiss="modal" onclick="reportRequest()">신고하기</button>
+											<button type="submit" class="genric-btn primary small" data-dismiss="modal" onclick="reportRequest();">신고하기</button>
 										</div>
 									</div>
 								</div>

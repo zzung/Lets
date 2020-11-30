@@ -20,6 +20,7 @@
 		<typeAlias type="com.kh.ee.user.curriculum.model.vo.Video" alias="Video" />
 		<typeAlias type="com.kh.ee.user.reply.model.vo.Reply" alias="Reply" />
 		<typeAlias type="com.kh.ee.user.notice.model.vo.Notice" alias="notice" />
+		<typeAlias type="com.kh.ee.user.report.model.vo.Report" alias="Report" />
 	</typeAliases>
 	
 	<mappers>
