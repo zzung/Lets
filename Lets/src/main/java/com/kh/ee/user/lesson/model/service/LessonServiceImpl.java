@@ -36,6 +36,12 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.selectApproveStatusList(ss);
 	}
 
+	//상세페이지 lesson 테이블 select (학천)
+	@Override
+	public Lesson selectLessonList(int lessonNo) {
+		return lDao.selectLessonList(lessonNo, ss);
+	}
+
 	//상세페이지에서 보여질 후기 들 (학천)
 	@Override
 	public ArrayList<Review> selectReview(int lessonNo) {
@@ -109,6 +115,11 @@ public class LessonServiceImpl implements LessonService{
 	@Override
 	public int deleteLesson(int lno) {
 		return lDao.deleteLesson(ss, lno);
+	}
+
+	@Override
+	public int likeCount(int lessonNo) {
+		return lDao.likeCount(lessonNo,ss);
 	}
 
 

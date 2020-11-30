@@ -25,6 +25,11 @@ public class LessonDao {
 		return (ArrayList)ss.selectList("lessonMapper.selectApproveStatusList");
 	}
 	
+	//상세페이지 레슨 보여주기(학천)
+	public Lesson selectLessonList(int lessonNo, SqlSessionTemplate ss) {
+		return ss.selectOne("lessonMapper.selectLessonList",lessonNo);
+	}
+	
 	//상세페이지에서 보여질 후기 리스트 (학천)
 	public ArrayList<Review> selectReview(int lessonNo, SqlSessionTemplate ss) {
 		return (ArrayList)ss.selectList("lessonMapper.selectReview",lessonNo);
@@ -85,4 +90,10 @@ public class LessonDao {
 	public int reportReply(Report rpt, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.reportReply",rpt);
 	}
+
+	public int likeCount(int lessonNo, SqlSessionTemplate ss) {
+		return ss.update("lessonMapper.likeCount",lessonNo);
+	}
+
+
 }

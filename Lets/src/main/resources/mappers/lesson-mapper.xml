@@ -11,7 +11,7 @@
 	<result column="lesson_category" property="lessonCategory" />
 	<result column="lesson_title" property="lessonTitle" />
 	<result column="lesson_cover_img" property="lessonCoverImg" />
-	<result column="lesson_instr" property="lessonInstr" jdbcType="CLOB" javaType="java.lang.String" />
+	<result column="lesson_instr" property="lessonInstr" />
 	<result column="lesson_cont_no" property="lessonContNo" />
 	<result column="lesson_prepare" property="lessonPrepare" />
 	<result column="lesson_target" property="lessonTarget" />
@@ -109,6 +109,25 @@
 	 where status='Y'
 	 order
 	    by approve_date desc
+</select>
+
+<select id="selectLessonList" parameterType="_int" resultMap="lessonResultSet">
+	select
+	       lesson_no
+	     , mem_no
+	     , lesson_cover_img
+	     , lesson_title
+	     , lesson_instr
+	     , lesson_cont_no
+	     , price
+	     , time
+	     , period
+	     , discount
+	     , pay_total
+	     , discount_period
+	 from lesson
+	where lesson_no = #{lessonNo}
+	  and status = 'Y'
 </select>
 
 <select id="selectReview" parameterType="_int" resultMap="reviewResultSet">
@@ -299,4 +318,11 @@
 	      , #{reportType}
 	     )
 </insert>
+
+<update id="likeCount" parameterType="_int">
+	update
+       lesson
+   set like_count = like_count + 1
+ where lesson_no = #{lessonNo}
+</update>
 </mapper>
