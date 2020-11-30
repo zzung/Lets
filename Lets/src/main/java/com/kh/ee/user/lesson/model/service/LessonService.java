@@ -17,6 +17,7 @@ public interface LessonService {
 	ArrayList<Lesson> selectApproveStatusList();
 	
 	// 상세페이지에 뿌려줄 내용들 (학천)
+	Lesson selectLessonList(int lessonNo);
 	ArrayList<Review> selectReview(int lessonNo); 
 	ArrayList<LessonFaq> selectLessonFaqList(int lessonNo); 
 	Tutor selectTutorInfo(int lessonNo); 
@@ -30,9 +31,12 @@ public interface LessonService {
 	int deleteReReply(Reply r);
 	int updateReReply(Reply r);
 	int reportReply(Report rpt);
+	int likeCount(int lessonNo);
 	//
 	
 	int deleteLesson(int lno);
+
+
 
 
 

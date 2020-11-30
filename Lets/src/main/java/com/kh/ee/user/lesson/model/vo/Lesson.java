@@ -24,7 +24,7 @@ public class Lesson {
 	private String lessonCategory;
 	private String lessonTitle;
 	private String lessonCoverImg;
-	private CLOB lessonInstr;
+	private String lessonInstr;
 	private int lessonContNo;
 	private String lessonPrepare;
 	private String lessonTarget;

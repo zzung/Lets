@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kh.ee.user.lesson.model.service.LessonService;
+import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
@@ -57,6 +58,7 @@ public class LessonController {
 	//상세페이지에서 보여질 후기 부분 부터 작성.(학천)
 	@RequestMapping("courseDetailView.le")
 	public String courseDetailView(int lessonNo, HttpSession session, Model model) {
+		Lesson lesson = lService.selectLessonList(lessonNo); 
 		ArrayList<Review> list = lService.selectReview(lessonNo); 
 		ArrayList<LessonFaq> faqList = lService.selectLessonFaqList(lessonNo); 
 		Tutor t = lService.selectTutorInfo(lessonNo); 
@@ -66,6 +68,7 @@ public class LessonController {
 		model.addAttribute("faqList",faqList);
 		model.addAttribute("t", t);
 		model.addAttribute("listCount",listCount);
+		model.addAttribute("l",lesson); 
 		return "user/lesson/classDetailView"; 
 	}
 	
@@ -164,6 +167,17 @@ public class LessonController {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping("likeCount.le")
+	public String likeCount(int lessonNo) {
+		int result = lService.likeCount(lessonNo);
+		
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 
 	@RequestMapping("enroll.le")
 	public String enrollLesson() {

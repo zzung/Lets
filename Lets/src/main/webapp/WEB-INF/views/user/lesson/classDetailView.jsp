@@ -60,14 +60,14 @@
 	         <div class="container">
 	            <div class="row">
                  	<!-- value 나중에 수정해야 함. -->
-                 	<input type="hidden" name="lessonNo" value="1">
+                 	<input type="hidden" name="lessonNo" value="${l.lessonNo }">
 	               <div class="col-lg-8 posts-list">
 	                  <div class="single-post">
 	                     <div class="feature-img">
-	                        <img class="img-fluid" src="resources/user/assets/img/blog/single_blog_1.png" alt="">
+	                        <img class="img-fluid" src="${l.lessonCoverImg }" alt="">
 	                     </div>
 	                     <div class="blog_details">
-	                        <h2 style="color: #2d2d2d;">클래스 상세 페이지 상단 타이틀 이미지</h2>
+	                        <h2 style="color: #2d2d2d;">${l.lessonTitle }</h2>
 	                        <br><br>
 	                        <!-- 클래스 소개 -->
 	                        <div class="quote-wrapper">
@@ -77,9 +77,9 @@
 	                              <table>
 	                                 <tr>
 	                                    <td width="70px;"><img src="resources/user/assets/img/detailClassPage/calendar.png"></td>
-	                                    <td width="300px;"><h5>25주 수강 가능</h5></td>
+	                                    <td width="300px;"><h5>${l.period } 수강 가능</h5></td>
 	                                    <td width="70px;"><img src="resources/user/assets/img/detailClassPage/clipboard.png"></td>
-	                                    <td width="200px;"><h5>15개 컨텐츠</h5></td>
+	                                    <td width="200px;"><h5>${l.lessonContNo }개 컨텐츠</h5></td>
 	                                 </tr>
 	                              </table>
 	                              <br><br>
@@ -707,16 +707,16 @@
 	                  <div class="blog_right_sidebar">
 	                     <!--사용할것-->
 	                     <aside class="single_sidebar_widget post_category_widget">
-	                        <h4 class="widget_title" style="color: #2d2d2d;">클래스 제목</h4>
+	                        <h4 class="widget_title" style="color: #2d2d2d;">${l.lessonTitle}</h4>
 	                        <table>
 	                           <tr>
-	                              <td class="discount-suggestion" colspan="2"><b>15</b>개월할부시</td>
-	                              <td class="discount-percentage">10%</td>
-	                              <td class="discount-price">월 1,390,000원</td>
+	                              <td class="discount-suggestion" colspan="2"><b>${l.discountPeriod }</b>개월할부시</td>
+	                              <td class="discount-percentage">${l.discount}</td>
+	                              <td class="discount-price">월 ${l.payTotal }원</td>
 	                           </tr>
 	                           <tr>
 	                              <td class="discount-suggestion" colspan="2"><b>총금액</b></td>
-	                              <td class="discount-price" colspan="2">월 1,390,000원</td>
+	                              <td class="discount-price" colspan="2">월 ${l.payTotal }원</td>
 	                           </tr>
 	                           <tr> 
 	                              <td class="discount-like" colspan="2" align="center">
@@ -775,7 +775,32 @@
         document.querySelector('.like-button').addEventListener('click', e => {
             e.currentTarget.classList.toggle('liked');
           });
+        
+		 $(function(){
+		       $(".like-button").click(function(){
+		    	   if($(this).is('::after')){
+		    		   $.ajax({
+		    			  url:"likeCount.le",
+		    			  data:{
+		    				  lessonNo:${l.lessonNo}
+		    			  },
+		    			  success:function(result){
+		    				  if(result == "success"){
+		    					  console.log("like success")
+		    				  } else{
+		    					  console.log("like fail")
+		    				  }
+		    			  },
+		    			  error:function(){
+		    				  console.log("like ajax fail")
+		    			  }
+		    		   });
+		    	   } 
+		       }) 	
+		 })
+        
     </script>
+
 	</main>
 	      <!--================ Blog Area end =================-->
 	   <jsp:include page="../common/footer.jsp" />
