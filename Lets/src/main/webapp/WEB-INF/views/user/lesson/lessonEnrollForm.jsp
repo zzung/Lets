@@ -16,7 +16,7 @@
          	
          	var detailHtml = '';
          	detailHtml += '<tr><td><h6 class="category_2">2)</h6></td>';
-         	detailHtml += '<td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
+         	detailHtml += '<td width=400px><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
          	detailHtml += '<td><button class="plus_btn detailadd" type="button">+</button><button class="plus_btn detailDel" type="button">-</button></td></tr>';
          	
          	$(this).parents().eq(2).append(detailHtml);
@@ -50,7 +50,7 @@
 	            html += '<div class="curriculumInput">';
 	            html += '<table style="width: 500px">';
 	            html += '<tr><td width=40px><h5 class="category_1">' + ($(".category_1").length + 1) + '.</h5></td>';
-	            html += '<td><input class="form-control" name="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>';
+	            html += '<td width=400px><input class="form-control" name="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>';
 	            html += '<td><button class="plus_btn categorydelete" type="button" id="categorydelete">-</button></td></tr>';
 	            html += '<tr><td><h6 class="category_2">1)</h6></td>';
 	            html += '<td><input class="form-control" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td></tr>';
@@ -188,7 +188,7 @@
                             <table style="width: 500px;">
                                 <tr>
                                     <td width=40px><h5 class="category_1">1.</h5></td>
-                                    <td><input class="form-control" name="" id="firstTitle" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>
+                                    <td width=400px><input class="form-control" name="" id="firstTitle" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -230,13 +230,9 @@
          </div>
          
          <script>
-         	$('#firstTitle').focus(function(){
-         		$('#firstTitle').val("");
-         	});
-         	
-         	$("")
-         		$('#inputTitle').text(value);
-         	});
+         $("input").keyup(function(){
+        	    $("p").text($(this).val());
+        	    });
          </script>
 
          <div id="enroll_cul">
