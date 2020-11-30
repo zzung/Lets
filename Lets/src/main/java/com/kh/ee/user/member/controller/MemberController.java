@@ -27,11 +27,11 @@ import com.kh.ee.user.member.model.vo.Member;
 public class MemberController {
 	
 	@Autowired
+	private JavaMailSender mailSender;
+	@Autowired
 	private MemberService mService;
 	@Autowired
 	private BCryptPasswordEncoder bpe;
-	@Inject
-	private JavaMailSender mailSender;
 	
 	
 	@RequestMapping("loginForm.me")
