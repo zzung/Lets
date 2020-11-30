@@ -82,6 +82,7 @@
 			<c:choose>
 				<c:when test="${empty myDlist}">
 					<div class="my-cont-1">
+						<br><br><br><br><br><br><br>
 	                  	아직 구매하신 클래스가 없어요.
 	              	</div>
 				</c:when>

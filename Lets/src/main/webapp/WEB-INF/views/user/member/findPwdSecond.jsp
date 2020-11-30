@@ -65,7 +65,7 @@
 		                    <th>이메일</th>
 		                    <td><input type="text" class="form-control" id="memId" name="memId" required></td>
 		                    <td>
-		                        <div id="sendNumber" class="genric-btn primary radius" onclick="sendCheckNumber();" style="margin-left: 30px;">인증번호 받기</div>
+		                        <div id="sendNumber" class="genric-btn primary radius" onclick="sendEmailCheckNumber();" style="margin-left: 30px;">인증번호 받기</div>
 		                    </td>
 		                </tr>
 		                <tr>
@@ -75,7 +75,8 @@
 		            </table>
 		        </div>
 		        
-               	<input type="hidden" id="sendRandNum" name="sendRandNum" value="${sendRandNum}">
+               	<input type="hidden" id="firstStepId" name="firstStepId" value="${firstStepId}">
+               	<input type="hidden" id="randNum" name="randNum">
                	
 		        <div class="findPwd-info3">인증번호가 오지 않나요?
 		            <span class="tt-text">스팸 메세지로 등록되어 있는 것은 아닌지 <br>확인해주세요. <br>스팸 메세지로 등록되어 있지 않다면,<br> 새로고침 후 다시 한 번 '인증번호 받기'를<br> 눌러주세요.</span>
@@ -88,12 +89,33 @@
 				
 		       <script>
 		       		// 이메일로 인증번호 전송
-		            function sendCheckNumber(){
+		            function sendEmailCheckNumber(){
 		       			if(!$('#memId').val()){
 		       				alert('이메일을 입력해주세요 !');
 		       			}else{
-			                alert('인증번호가 발송되었습니다.');
-			                //console.log($('#sendRandNum').val());
+		       				var randNum = Math.floor((Math.random()*900000)+100000);
+		       				
+		       				if($('#memId').val()!=$("#firstStepId").val()){
+		       					alert('[비밀번호 찾기 01] 에서 입력했던 이메일을 입력해주세요 !');
+		       				}else{
+		       					$("#randNum").val(randNum);
+			       				$.ajax({
+									url:"sendEmailCheck.me",
+									data:{randNum: randNum,
+										  memId: $("#memId").val()	
+									},
+									success:function(result){
+										if(result=='success'){
+						       				alert('인증번호가 발송되었습니다.');
+										}else{
+											alert('인증번호 발송 Error ! 관리자에게 문의하세요.');
+										}
+									},
+									error:function(){
+										console.log('이메일 발송 ajax오류');
+									}
+								})
+		       				}
 		       			}
 		            };
 		
@@ -104,13 +126,15 @@
 	                	}else{
 	                		$.ajax({
 								url:"compChecknum.me",
-								data:{checkNumber: $('#checkNumber').val()},
+								data:{checkNumber: $('#checkNumber').val(),
+									  randNum: $('#randNum').val()	
+								},
 								success:function(result){
 									if(result=='success'){
 										alert('성공적으로 인증되었습니다.');
 										$("#findPwdSecond").attr("action", "findPwdThird.me").submit();
 									}else{
-										alert('인증번호가 일치하지 않습니다.');
+										alert('인증번호가 일치하지 않습니다. 인증번호를 다시 한번 입력해주세요.');
 									}
 								},
 								error:function(){

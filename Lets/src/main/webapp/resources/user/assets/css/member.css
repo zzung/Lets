@@ -19,7 +19,7 @@
 .pwd-check2{ font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px; }
 .email-block2 input{display: inline-block; font-size: 15px; height: 38px; vertical-align: middle; width: 100px;}
 .email-number-check{font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px;}
-
+.name-check{font-size: 14px; color: rgb(46, 48, 146); font-weight: bolder; margin-top: 10px; margin-bottom: 10px;}
 .name-block input{ font-size: 15px; width: 330px; height: 38px; }
 .nickname-block input{ font-size: 15px; width: 330px; height: 38px; }
 .birth-block input{ font-size: 15px; width: 330px; height: 38px; }

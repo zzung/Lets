@@ -32,7 +32,7 @@
 	                    <select id="emailSelect" class="emailSelect">
 	                        <option value="">선택 하기</option>
 	                        <option value="naver.com">naver.com</option>
-	                        <option value="google.com">google.com</option>
+	                        <option value="gmail.com">gmail.com</option>
 	                        <option value="daum.net">daum.net</option>
 	                        <option value="hanmail.net">hanmail.net</option>
 	                        <option value="nate.com">nate.com</option>
@@ -40,7 +40,6 @@
 	                    </select>
 	                </div>
 	                <div id="email-block3" class="genric-btn primary radius" onclick="checkId();">중복 확인</div>
-	                <!-- ajax 적용할것 : 아이디 중복체크 알림 -->
 	                <div class="email-check"></div>
 	            </div>
 	
@@ -62,15 +61,15 @@
 	            <br>
 	            <div class="register-list">이름</div>
 	            <div class="name-block">
-	                <input type="text" class="form-control" id="memName" name="memName" maxlength="8" placeholder="이름을 입력해주세요" required>
+	                <input type="text" class="form-control" id="memName" name="memName" maxlength="6" placeholder="이름을 입력해주세요" required>
 	            </div>
+	            <div class="name-check"></div>
 	
 	            <br>
 	            <div class="register-list">닉네임</div>
 	            <div class="nickname-block">
 	                <input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요" required>
 	            </div>
-	            <!-- ajax 적용할것 : 닉네임 중복체크 -->
 	            <div class="nickname-check"></div>
 	
 	            <br>
@@ -156,9 +155,6 @@
        		}
        		$("#memId").val(memId);
        		
-       		console.log('조합된 아이디 : '+$("#memId").val());
-    		console.log('inputDomain 값: '+inputDomain);
-       		
        		if((inputId!=="" && inputDomain!=="")||(inputId!=="" && selectDomain!=="")){
 	       		$.ajax({
 					url:"idCheck.me",
@@ -208,15 +204,25 @@
     		}
     	});
     	
+    	var checkName= RegExp('^[ㄱ-힣]+$');
         var checkPwd= RegExp('^[a-zA-Z0-9][a-zA-Z0-9!@#$%]{7,20}$');
         var checkBirth = RegExp('^[0-9]{2}(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$');
         var checkPhone = RegExp('^[0][1][0-9]\\d{3,4}\\d{4}$');
         var checkAddress3 = RegExp('^[가-힣a-zA-Z0-9][가-힣a-zA-Z0-9\s]');
 
+        $('.name-block input').focusout(function(){
+			if($('#memName').val() !=""){
+				if(!checkName.test($('#memName').val())){
+					$('.name-check').text("최대 6글자로 한글만 입력 가능합니다.");
+				}else{
+					$('.name-check').text("");
+				}
+			}        	
+        });
         $('.pwd-block1 input').focusout(function(){
             if($('#memPwd').val() != ""){
                 if(!checkPwd.test($('#memPwd').val())){
-                    $('.pwd-check1').text("특수문자 포함 최소 8자리 이상입력해주세요.");
+                    $('.pwd-check1').text("최소 8자리 이상 입력해주세요. (특수문자 가능)");
                 }else{
                     $('.pwd-check1').text("");
                 }

@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +29,8 @@ public class MemberController {
 	private MemberService mService;
 	@Autowired
 	private BCryptPasswordEncoder bpe;
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	
 	@RequestMapping("loginForm.me")
@@ -38,7 +43,6 @@ public class MemberController {
 		
 		Member loginUser = mService.loginMember(m);
 		String bpw = bpe.encode(m.getMemPwd());
-		System.out.println(bpe.matches("12341234", bpw));
 		if(loginUser != null && bpe.matches(m.getMemPwd(), loginUser.getMemPwd())) {
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "로그인 성공 !");
@@ -129,9 +133,10 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping("findPwdFirst.me")
-	public String findPwdFirst(String memId) {
+	public String findPwdFirst(String memId, HttpSession session) {
 		
 		int result = mService.idCheck(memId);
+		session.setAttribute("memId", memId);
 		if(result > 0) {
 			return "success";
 		}else {
@@ -142,19 +147,49 @@ public class MemberController {
 	@RequestMapping("findPwdSecond.me")
 	public String findPwdSecond(HttpSession session) {
 		
-		int sendRandNum = (int)(Math.random()*900000)+100000;
-		System.out.println(sendRandNum);
-		session.setAttribute("sendRandNum", sendRandNum);
-		
+		String firstStepId = (String)session.getAttribute("memId");
+		session.setAttribute("firstStepId", firstStepId);
 		return "user/member/findPwdSecond";
+	}
+	
+	// 인증번호 버튼 클릭시 이메일 전송 ajax
+	@ResponseBody
+	@RequestMapping("sendEmailCheck.me")
+	public String sendEmailCheck(int randNum, String memId, HttpSession session) {
+		
+		String fromMail = "letsEE1209@gmail.com";
+        String toMail = memId; 
+        String title = "Lets 인증 이메일 입니다.";
+        String content = System.getProperty("line.separator")+System.getProperty("line.separator")+
+                		"안녕하세요 회원님, 저희 Lets를 찾아주셔서 감사합니다. :)"+System.getProperty("line.separator")+
+                		System.getProperty("line.separator")+"인증번호는 " +randNum+ " 입니다. "+
+                		System.getProperty("line.separator")+System.getProperty("line.separator")+
+                		"받으신 인증번호를 Lets페이지에 입력해주세요.";
+        
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+            messageHelper.setFrom(fromMail);
+            messageHelper.setTo(toMail);
+            messageHelper.setSubject(title); 
+            messageHelper.setText(content);
+            
+            mailSender.send(message);
+            return "success";
+            	
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+        
 	}
 	
 	@ResponseBody
 	@RequestMapping("compChecknum.me")
-	public String compareCheckNumber(int checkNumber, HttpSession session) {
+	public String compareCheckNumber(int checkNumber, int randNum, HttpSession session) {
 		
-		int sendRandNum = (int)session.getAttribute("sendRandNum");
-		if(checkNumber==sendRandNum) {
+		if(checkNumber==randNum) {
 			return "success";
 		}else {
 			return "fail";
@@ -308,6 +343,8 @@ public class MemberController {
 			return "user/common/errorPage";
 		}
 	}
+	
+	
 	
 	
 	
