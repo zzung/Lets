@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
@@ -29,7 +30,7 @@ public class MemberController {
 	private MemberService mService;
 	@Autowired
 	private BCryptPasswordEncoder bpe;
-	@Autowired
+	@Inject
 	private JavaMailSender mailSender;
 	
 	
@@ -152,7 +153,6 @@ public class MemberController {
 		return "user/member/findPwdSecond";
 	}
 	
-	// 인증번호 버튼 클릭시 이메일 전송 ajax
 	@ResponseBody
 	@RequestMapping("sendEmailCheck.me")
 	public String sendEmailCheck(int randNum, String memId, HttpSession session) {
@@ -182,7 +182,6 @@ public class MemberController {
             e.printStackTrace();
             return "fail";
         }
-        
 	}
 	
 	@ResponseBody
@@ -245,7 +244,6 @@ public class MemberController {
 			model.addAttribute("errorMsg", "회원 정보 수정에 실패했습니다. 다시 시도해주세요.");
 			return "user/common/errorPage";
 		}
-		
 	}
 
 	public String saveFileManager(MultipartFile upfile, HttpSession session) {
@@ -343,9 +341,5 @@ public class MemberController {
 			return "user/common/errorPage";
 		}
 	}
-	
-	
-	
-	
 	
 }
