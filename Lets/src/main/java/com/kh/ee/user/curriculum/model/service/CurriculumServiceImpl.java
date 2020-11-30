@@ -24,18 +24,15 @@ public class CurriculumServiceImpl implements CurriculumService{
 	
 	@Override
 	public Lesson selectLesson(Lesson l) {
-		// TODO Auto-generated method stub
-		return null;
+		return curDao.selectLesson(sqlSession, l);
 	}
 	@Override
 	public QnA selectQnA(Lesson l) {
-		// TODO Auto-generated method stub
-		return null;
+		return curDao.selectQnA(sqlSession, l);
 	}
 	@Override
 	public ArrayList<Curriculum> selectCurriculum(Lesson l) {
-		// TODO Auto-generated method stub
-		return null;
+		return curDao.selectCurriculum(sqlSession, l);
 	}
 	@Override
 	public Lesson detailLessonInfo(Lesson l) {
@@ -96,6 +93,10 @@ public class CurriculumServiceImpl implements CurriculumService{
 	public int updateVideoStatus(MemVideo mv) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public int selectVideoCount(Lesson l) {
+		return curDao.selectVideoCount(sqlSession, l);
 	}
 	
 	

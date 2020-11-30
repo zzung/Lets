@@ -1,5 +1,7 @@
 package com.kh.ee.user.curriculum.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.ee.user.curriculum.model.service.CurriculumService;
+import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.MemVideo;
 import com.kh.ee.user.curriculum.model.vo.QnA;
 import com.kh.ee.user.lesson.model.vo.Lesson;
@@ -22,11 +25,24 @@ public class CurriculumController {
 	@RequestMapping("detailCurri.cr")
 	public String detailCurriculum(Lesson l, HttpSession session, Model model) {
 		
+		// 로그인한 회원의 회원 번호
 		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
-		int lessonNo = l.getLessonNo();
 		
 		// lesson 객체, curriculum arrayList, qna 객체, mem_video arrayList, review 평균 별점 계산해서 가져오기
-				
+		Lesson lesson = curService.selectLesson(l);
+		
+		
+		// 튜터의 회원 번호
+		int tutorNo = lesson.getMemNo();
+		l.setMemNo(tutorNo);
+		
+		ArrayList<Curriculum> curriList = curService.selectCurriculum(l);
+		
+		QnA qna = curService.selectQnA(l);
+		
+		l.setMemNo(memNo);
+		int videoCount = curService.selectVideoCount(l);
+		
 		return "user/curriculum/detailCurriculum";
 	}
 	

@@ -19,7 +19,7 @@
         <div id="curri_info">
             <h1>클래스 제목</h1>
 
-            <span id="info">클래스 평가 4.5/5</span>
+            <span id="info">클래스 평가 4.5</span>
 
             <span class="star">★</span>
             <span class="star">★</span>

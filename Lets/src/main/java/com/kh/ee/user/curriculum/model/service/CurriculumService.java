@@ -26,5 +26,5 @@ public interface CurriculumService {
 	ArrayList<Video> videoList(Video v);
 	Video detailVideo(Video v);
 	int updateVideoStatus(MemVideo mv);
-	
+	int selectVideoCount(Lesson l);
 }

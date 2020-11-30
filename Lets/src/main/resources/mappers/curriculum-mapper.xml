@@ -42,5 +42,72 @@
  		<result column="video_cont" property="videoCount" />
  	</resultMap>
  	
+ 	<resultMap type="Lesson" id="lessonResultSet">
+ 		<id column="lesson_no" property="lessonNo" />
+ 		<result column="mem_no" property="memNo" />
+ 		<result column="lesson_form" property="lessonForm" />
+ 		<result column="lesson_type" property="lessonType" />
+ 		<result column="lesson_group" property="lessonGroup" />
+ 		<result column="lesson_category" property="lessonCategory" />
+ 		<result column="lesson_title" property="lessonTitle" />
+ 		<result column="lesson_cover_img" property="lessonCoverImg" />
+ 		<result column="lesson_instr" property="lessonInstr" />
+ 		<result column="lesson_cont_no" property="lessonContNo" />
+ 		<result column="lesson_prepare" property="lessonPrepare" />
+ 		<result column="lesson_target" property="lessonTarget" />
+ 		<result column="like_count" property="likeCount" />
+ 		<result column="total_count" property="totalCount" />
+ 	</resultMap>
+ 	
  	<!-- sql문 -->
+ 	<!-- 레슨의 정보 가져오기 -->
+ 	<select id="selectLesson" resultMap="lessonResultSet" parameterType="Lesson">
+ 		select
+		       lesson_no
+		     , mem_no
+		     , lesson_form
+		     , lesson_type
+		     , lesson_group
+		     , lesson_category
+		     , lesson_title
+		     , lesson_cover_img
+		     , lesson_instr
+		     , lesson_cont_no
+		     , lesson_prepare
+		     , lesson_target
+		     , like_count
+		     , total_count
+		  from lesson
+		 where status = 'Y'
+  		   and lesson_no = #{lessonNo}
+ 	</select>
+ 	
+ 	<!-- curriculum들 가져오기 -->
+ 	<select id="selectCurriculum" resultMap="curriculumResultSet" parameterType="Lesson">
+ 		select
+ 			   curriculum_no
+ 			 , curriculum_cont
+ 			 , ref_cur_no
+ 			 , cur_level
+ 		  from curriculum
+ 		 where lesson_no = #{lessonNo}
+ 	</select>
+ 	
+ 	<select id="selectQnA" resultMap="qnaResultSet" parameterType="Lesson">
+ 		select
+ 			   qa_no
+ 			 , q.mem_no
+ 			 , lesson_no
+ 			 , question
+ 			 , answer
+ 			 , mem_pic
+ 			 , tutor_pic
+ 	 	  from qna q
+ 	 	  join member m using(mem_no)
+ 	 	  join tutor t using(mem_no)
+ 	 	 where lesson_no = #{lesson_no}
+ 	 	   and t.mem_no = #{mem_no}
+ 	 	 order
+ 	 	    by qa_no desc
+ 	</select>
 </mapper>

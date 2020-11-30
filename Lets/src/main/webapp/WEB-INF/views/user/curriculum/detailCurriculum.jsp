@@ -8,6 +8,14 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/user/assets/css/style.css">
 <link rel="stylesheet" href="resources/user/assets/css/curriculum.css">
+<style>
+#curri_status{
+    float: left;
+    height: 100%;
+    width: 22.2%;
+    background-color: white;
+}
+</style>
 </head>
 <body>
 <!-- header -->

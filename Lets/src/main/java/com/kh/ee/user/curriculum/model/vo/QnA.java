@@ -25,4 +25,7 @@ public class QnA {
 	private String qStatus;		// 질문 삭제 여부
 	private String aStatus;		// 답변 삭제 여부
 	
+	private String memPic;		// 질문자 사진
+	private String tutorPic; 	// 답변자 사진(튜터 사진)
+	
 }

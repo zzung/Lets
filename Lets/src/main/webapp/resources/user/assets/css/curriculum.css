@@ -46,12 +46,6 @@ div{box-sizing: border-box;	}
     width: 80%;
     background-color: gray;
 }
-#curri_status{
-    float: left;
-    height: 100%;
-    width: 22.2%;
-    background-color: white;
-}
 #curri_btn{
     width: 20%;
 }
