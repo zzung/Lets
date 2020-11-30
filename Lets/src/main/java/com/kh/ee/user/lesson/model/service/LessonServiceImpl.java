@@ -82,6 +82,18 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.insertReReply(r,ss);
 	}
 	
+	//ajax 커뮤니티 대댓글 삭제
+	@Override
+	public int deleteReReply(Reply r) {
+		return lDao.deleteReReply(r, ss);
+	}
+	
+	//ajax 커뮤니티 대댓글 수정
+	@Override
+	public int updateReReply(Reply r) {
+		return lDao.updateReReply(r,ss);
+	}
+	
 	@Override
 	public Tutor selectTutorInfo(int lessonNo) {
 		return lDao.selectTutorInfo(lessonNo, ss);
@@ -91,6 +103,8 @@ public class LessonServiceImpl implements LessonService{
 	public int deleteLesson(int lno) {
 		return lDao.deleteLesson(ss, lno);
 	}
+
+
 
 
 

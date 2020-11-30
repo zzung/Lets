@@ -26,9 +26,13 @@ public interface LessonService {
 	int deleteReply(int replyNo);
 	int updateReply(Reply r);
 	int insertReReply(Reply r);
+	int deleteReReply(Reply r);
+	int updateReReply(Reply r);
 	//
 	
 	int deleteLesson(int lno);
+
+
 
 
 

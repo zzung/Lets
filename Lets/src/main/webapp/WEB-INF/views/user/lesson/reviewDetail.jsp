@@ -127,8 +127,7 @@
    				},
    				success:function(list){
    					$("#reviewCount").text(list.length);
-					
-   					console.log(list);
+   					
    					result ="";
    					
    					

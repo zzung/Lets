@@ -125,6 +125,33 @@ public class LessonController {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping("deleteReReply.le")
+	public String deleteReReply(Reply r) {
+		int result = lService.deleteReReply(r);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateReReply.le")
+	public String updateReReply(Reply r) {
+		int result = lService.updateReReply(r);
+		System.out.println("replyNo:" + r.getReplyNo());
+		System.out.println("replyNo2:" + r.getReplyNo2());
+		System.out.println("replyContent:" + r.getReplyContent());
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail"; 
+		}
+	}
+	
 
 	@RequestMapping("enroll.le")
 	public String enrollLesson() {

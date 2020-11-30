@@ -62,6 +62,7 @@
 <!-- 커뮤니티 댓글 가져올 resultMap(학천) -->
 <resultMap id="replyResultSet" type="Reply">
 	<id column="reply_no" property="replyNo" />
+	<result column="reply_no2" property="replyNo2"/>
 	<result column="reply_content" property="replyContent"/>
 	<result column="reply_level" property="replyLevel"/>
 	<result column="replyDate" property="replyEnrollDate" />
@@ -75,6 +76,7 @@
 
 <!--대댓글 가져오기 위한 resultMap (학천) -->
 <resultMap id="reReply" type="Reply">
+	<result column="reReplyNo" property="replyNo" />
 	<result column="reply_no2" property="replyNo2"/>
 	<result column="reContent" property="replyContent"/>
 	<result column="reEnrollDate" property="replyEnrollDate"/>
@@ -173,9 +175,10 @@
 	     , m.mem_pic
 	     , r.reply_content 
 	     , r.enroll_date replyDate
-	     , re.reply_no2
 	     , rm.nickname replyNickname
 	     , rm.mem_pic
+	     , re.reply_no reReplyNo
+	     , re.reply_no2
 	     , re.reply_content reContent
 	     , re.enroll_date reEnrollDate
 	  from reply r
@@ -255,4 +258,27 @@
 	    , #{totalNo}
 	    )
 </insert> 
+
+<update id="deleteReReply" parameterType="Reply">
+	update
+	        reply
+	   set
+	        status='N'
+	      , modify_date = SYSDATE
+	 where reply_no2 = #{replyNo2}
+	   and reply_no = #{replyNo}
+	   and reply_type = '클래스'
+	   and reply_level = 2
+</update>
+
+<update id="updateReReply" parameterType="Reply">
+	update 
+       reply
+   set 
+       reply_content = #{replyContent}
+     , modify_date = SYSDATE
+ where reply_no = #{replyNo}
+   and reply_no2 = #{replyNo2}
+   and reply_type = '클래스'
+</update>
 </mapper>

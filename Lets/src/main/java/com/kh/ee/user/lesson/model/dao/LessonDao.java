@@ -34,14 +34,6 @@ public class LessonDao {
 		return (ArrayList)ss.selectList("lessonMapper.selectLessonFaqList",lessonNo);
 	}
 
-	public Tutor selectTutorInfo(int lessonNo, SqlSessionTemplate ss) {
-		return ss.selectOne("lessonMapper.selectTutorInfo",lessonNo);
-	}
-	
-	public int deleteLesson(SqlSessionTemplate ss, int lno) {
-		return ss.update("lessonMapper.deleteLesson", lno);
-	}
-
 	//상세페이지에서 보여질 커뮤니티 카운트(학천)
 	public int selectListCount(SqlSessionTemplate ss) {
 		return ss.selectOne("lessonMapper.selectListCount");
@@ -53,21 +45,39 @@ public class LessonDao {
 		return (ArrayList)ss.selectList("lessonMapper.selectReply", lessonNo);
 	}
 
-	//상세페이지에서 보여질 커뮤니티 작성 (학천)
+	// 커뮤니티 댓글 작성 (학천)
 	public int insertReply(Reply r, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.insertReply",r);
 	}
-
+	//커뮤니티 댓글 삭제 (학천)
 	public int deleteReply(int replyNo, SqlSessionTemplate ss) {
 		return ss.update("lessonMapper.deleteReply",replyNo);
 	}
-
+	
+	//커뮤니티 댓글 수정 (학천)
 	public int updateReply(Reply r, SqlSessionTemplate ss) {
 		return ss.update("lessonMapper.updateReply",r);
 	}
 
+	//커뮤니티 대댓글 등록 (학천)
 	public int insertReReply(Reply r, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.insertReReply",r);
 	}
+	
+	//커뮤니티 대댓글 삭제 (학천)
+	public int deleteReReply(Reply r, SqlSessionTemplate ss) {
+		return ss.update("lessonMapper.deleteReReply",r);
+	}
 
+	public Tutor selectTutorInfo(int lessonNo, SqlSessionTemplate ss) {
+		return ss.selectOne("lessonMapper.selectTutorInfo",lessonNo);
+	}
+	
+	public int deleteLesson(SqlSessionTemplate ss, int lno) {
+		return ss.update("lessonMapper.deleteLesson", lno);
+	}
+
+	public int updateReReply(Reply r, SqlSessionTemplate ss) {
+		return ss.update("lessonMapper.updateReReply",r);
+	}
 }

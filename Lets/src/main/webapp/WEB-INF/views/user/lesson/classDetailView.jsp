@@ -195,9 +195,7 @@
 	                  <!--? end 리뷰 area-->
 
 	                  <script>
-	                  var repEditForm = ""; 
-	                  var result = ""; 
-	                  var replyArea = "";
+	                  var result = "";
 	                  
 	                 //후기 더보기 클리시 실행
 	                  	$(function(){
@@ -242,6 +240,7 @@
 	                  			success:function(list){
 	                  				$("#replyCount").text(list.length);
 	                  				
+	                  				console.log(list);
 	                  				result ="";
            							
 	                  				for(var i in list){
@@ -275,6 +274,7 @@
 	     	                            if(list[i].reList.length != 0){
 	     	                            	for(var r=0; r<list[i].reList.length; r++){
 			             					result += "<div class='comment-list reReply'>" 
+			             					result += "<input type='hidden' id='reReplyNo' data-num='"+list[i].reList[r].replyNo+"'>"
 		                              		result += "<div class='single-comment justify-content-between d-flex'>"
 		                              		result += "<div class='user justify-content-between d-flex'>"
 		                              		result += "<div class='thumb1'>"
@@ -289,8 +289,8 @@
 		                              		result += "</div>"
 		                              		result += "<div class='reply-btn'>"
 		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
-		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReviewReplySet(this)' data-no='" + list[i].reList[r].replyNo + "'>" + '수정' + "</a></div>"
-		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reList[r].reviewNo + "' onclick='deleteReviewReplySet(this)'>" + '삭제' + "</a></div>"
+		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReReplySet(this); return false' data-no='" + list[i].reList[r].replyNo2 + "'>" + '수정' + "</a></div>"
+		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reList[r].replyNo2 + "' onclick='deleteReReplySet(this)'>" + '삭제' + "</a></div>"
 		                              		result += "</div>"        
 		                              		result += "</div>"
 		                              		result += "</div>"
@@ -313,7 +313,7 @@
 	             			var replyNo = $(e).data("no");
 	             			var replyContent = $(e).parents().siblings(".comment").text();
 	             			
-	             			repEditForm = "";
+	             			var repEditForm = "";
 	             			
 	             			repEditForm += '<input type="hidden" id="updateReplyNo" value="'+ replyNo +'">'
 	            			repEditForm += '<div class="mt-10">'
@@ -385,7 +385,7 @@
 	             		function reReplySet(e){
 	             			var replyNo = $(e).data("no");
 	             			
-	             			replyArea = "";
+	             			var replyArea = "";
 	             			
 	             			replyArea += '<input type="hidden" id="reReplyNo" value="'+ replyNo +'">'
 	             			replyArea += '<div class="mt-10">'
@@ -426,7 +426,78 @@
 	             				}
 	             			}); 
 	             		}
+	             		
+	             		//모달로 reply_no 보내기 
+	             		function deleteReReplySet(e){
+	             			$("#reReplyNo2").val($(e).data("no"));
+	             			$("#reReplyNo").val($(e).parents().siblings("#reReplyNo").data("num"));
 
+	             		}
+	             		
+	             		function deleteReReply(){
+	             			$.ajax({
+	             				url:"deleteReReply.le",
+	             				data:{
+	             					replyNo:$("#reReplyNo").val(),
+	             					replyNo2:$("#reReplyNo2").val()
+	             				},
+	             				success:function(result){
+	             					if(result == "success"){
+	             						$("#modalClose").click();
+	             						selectReplyList();
+	             					} else {
+	             						alert("댓글 삭제 실패했습니다.")
+	             					}
+	             					
+	             				},
+	             				error:function(){
+	             					console.log("대댓글 삭제 ajax fail")
+	             				}
+	             			});
+	             		}
+	             		
+	             		function updateReReplySet(e){
+	             			var replyNo = $(e).parents().siblings("#reReplyNo").data("num");
+	             			var replyNo2 = $(e).data("no");
+	             			var replyContent = $(e).parents().siblings("#replyCommentArea").text();
+	             			
+	             			var repEditForm = "";
+	             			
+	             			repEditForm += '<input type="hidden" id="updateReReplyNo2" value="'+replyNo2+'">'
+	             			repEditForm += '<input type="hidden" id="updateReReplyNo" value="'+ replyNo +'">'
+	            			repEditForm += '<div class="mt-10">'
+	                        repEditForm += "<textarea class='review-textarea' id='repContent' required>" + replyContent + "</textarea>"
+	                        repEditForm += '</div>'
+	                        repEditForm += '<div align="right">'
+	                        repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="updateReReply();">'+ "등록" + '</button>'
+	                		repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelUpdateReview(this); return false">'+ "취소" + '</button>'
+	                		repEditForm += '</div>'
+
+	             			$(e).parents(".comment-list").html(repEditForm); 
+	             		}
+
+	             		function updateReReply(){
+	
+	             			$.ajax({
+	             				url:"updateReReply.le",
+	             				data:{
+	             					replyNo:$("#updateReReplyNo").val(),
+	             					replyNo2:$("#updateReReplyNo2").val(),
+	             					replyContent:$("#repContent").val()
+	             				},
+	             				success:function(result){
+	             					if(result == "success"){
+	             						selectReplyList(); 
+	             					}else{
+	             						alert("댓글 수정 실패 했습니다.")
+	             					}
+	             				},
+	             				error:function(){
+	             					console.log("댓글 수정 ajax fail")
+	             				}
+	             			})
+	             		}
+	             		
 	                  	//커뮤니티 작성하기 버튼 누르면 실행 될 스크립트
                         function writeReview(){
                            	if($("#writeReviewArea").css("display") == "none"){
@@ -555,7 +626,6 @@
 						</div>
 
 						<!--댓글 글 삭제-->
-						<form action="">
 							<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog modal-dialog-centered" role="document">
 									<div class="modal-content">
@@ -571,7 +641,23 @@
 									</div>
 								</div>
 							</div>
-						</form>
+							
+							<div class="modal fade" id="deleteReplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-content" align="center">
+											<!-- Modal body -->
+											<div class="modal-body">
+												<p>삭제 하시겠습니까?</p>
+												<input type="hidden" id="reReplyNo" value="">
+												<input type="hidden" id="reReplyNo2" value="">
+												<button type="button" class="genric-btn primary small" id="modalClose" data-dismiss="modal">취소</button>
+												<button type="button" class="genric-btn primary small" onclick="deleteReReply();">삭제</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						<!-- end of 댓글 삭제 -->
 						<!--?FAQ-->
 	                  <div class="blog-author">
