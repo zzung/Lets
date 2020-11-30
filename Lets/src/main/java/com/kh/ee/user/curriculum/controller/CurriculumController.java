@@ -28,20 +28,31 @@ public class CurriculumController {
 		// 로그인한 회원의 회원 번호
 		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
 		
-		// lesson 객체, curriculum arrayList, qna 객체, mem_video arrayList, review 평균 별점 계산해서 가져오기
-		Lesson lesson = curService.selectLesson(l);
-		
+		Lesson selectLesson = curService.selectLesson(l);
 		
 		// 튜터의 회원 번호
-		int tutorNo = lesson.getMemNo();
+		int tutorNo = selectLesson.getMemNo();
+		
+		// 요청받은 레슨 객체 (레슨 번호 + 튜터 번호)
 		l.setMemNo(tutorNo);
 		
-		ArrayList<Curriculum> curriList = curService.selectCurriculum(l);
+		ArrayList<Curriculum> selectCurriList = curService.selectCurriculum(l);
 		
-		QnA qna = curService.selectQnA(l);
+		QnA selectQnA = curService.selectQnA(l);
 		
+		// 레슨 객체 (레슨 번호 + 회원 번호)
 		l.setMemNo(memNo);
+		
+		// 시청한 영상 수
 		int videoCount = curService.selectVideoCount(l);
+		
+		// 별점 가져오기
+		int avgStar = curService.selectAverageStar(l);
+		
+		model.addAttribute("lesson", selectLesson);
+		model.addAttribute("curriculumList", selectCurriList);
+		model.addAttribute("videoCount", videoCount);
+		model.addAttribute("avgStar", avgStar);
 		
 		return "user/curriculum/detailCurriculum";
 	}

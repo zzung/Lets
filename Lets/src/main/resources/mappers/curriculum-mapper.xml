@@ -105,9 +105,31 @@
  	 	  from qna q
  	 	  join member m using(mem_no)
  	 	  join tutor t using(mem_no)
- 	 	 where lesson_no = #{lesson_no}
- 	 	   and t.mem_no = #{mem_no}
+ 	 	 where lesson_no = #{lessonNo}
+ 	 	   and t.mem_no = #{memNo}
  	 	 order
  	 	    by qa_no desc
+ 	</select>
+ 	
+ 	<select id="selectVideoCount" resultType="_int" parameterType="Lesson">
+ 		select
+ 			   count(status)
+ 		  from mem_video
+ 		 where video_no in 
+ 		 	 (
+ 		 	   select 
+ 		 	   	      video_no 
+ 		 	   	 from video 
+ 		 	   	where lesson_no = #{lessonNo}
+ 		 	 )
+ 		    and status='Y'  
+ 	</select>
+ 	
+ 	<select id="selectAverageStar" resultType="_int" parameterType="Lesson">
+ 		select
+		       round((sum(star) / count(star)), 2) "avgStar"
+		  from review
+		 where lesson_no = #{lessonNo}
+		   and status = 'Y'
  	</select>
 </mapper>

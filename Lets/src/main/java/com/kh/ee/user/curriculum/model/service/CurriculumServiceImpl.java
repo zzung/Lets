@@ -98,6 +98,10 @@ public class CurriculumServiceImpl implements CurriculumService{
 	public int selectVideoCount(Lesson l) {
 		return curDao.selectVideoCount(sqlSession, l);
 	}
+	@Override
+	public int selectAverageStar(Lesson l) {
+		return curDao.selectAverageStar(sqlSession, l);
+	}
 	
 	
 }

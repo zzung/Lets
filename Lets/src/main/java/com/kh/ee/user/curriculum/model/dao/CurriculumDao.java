@@ -24,7 +24,11 @@ public class CurriculumDao {
 		return sqlSession.selectOne("curriculumMapper.selectQnA", l);
 	}
 	
-	public int selectVideoCount(SqlSessionTemplate sqlSession, lesson l) {
+	public int selectVideoCount(SqlSessionTemplate sqlSession, Lesson l) {
 		return sqlSession.selectOne("curriculumMapper.selectVideoCount", l);
+	}
+	
+	public int selectAverageStar(SqlSessionTemplate sqlSession, Lesson l) {
+		return sqlSession.selectOne("curriculumMapper.selectAverageStar", l);
 	}
 }
