@@ -8,32 +8,46 @@
 <title>Insert title here</title>
 <!-- jQuery 이용 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+	#curri_status{
+	    float: left;
+	    height: 100%;
+	    background-color: white;
+	}
+</style>
 </head>
 <body>
     <div class="curriculumn">
 
         <div id="curri_img">
-            <img src="resources/user/assets/img/curriculum/empty.png" id="curri_main_img" width="100%" height="100%" class="imgPop button">
+            <img src="${ lesson.lessonCoverImg }" id="curri_main_img" width="100%" height="100%" class="imgPop button">
         </div>
 
         <div id="curri_info">
-            <h1>클래스 제목</h1>
+            <h1>${ lesson.lessonTitle }</h1>
 
-            <span id="info">클래스 평가 4.5</span>
-
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">☆</span>
-
+            <span id="info">클래스 평가${ avgStar } </span>
+			
+			<c:forEach var="v" begin="1" end="5">
+				<c:choose>
+					<c:when test="${ v < avgStar }">
+						<span class="star">★</span>
+					</c:when>
+					<c:otherwise>
+			        	<span class="star">☆</span>			
+					</c:otherwise>
+				</c:choose>
+	        </c:forEach>			
+	        
             <br><br>
-
-            <p class="white">진도율 : 2강/9강 (22.2%)</p>
+			
+			<c:set var="videoStep" value="${ (videoCount + 0.0)/(lesson.lessonContNo + 0.0) }" />
+			
+            <p class="white">진도율 : ${ videoCount }강/${ lesson.lessonContNo }강 (${ videoStep }%)</p>
 
             <div id="curri_bar">
 
-                <div id="curri_status"></div>
+                <div id="curri_status" style="width: ${videoStep}%"></div>
 
             </div>
 
@@ -41,7 +55,7 @@
 
         <div id="curri_btn">
             
-            <button class="button">학습하기</button>
+            <button class="button" onclick="location.href='videoList.cr?lessonNo=${ lesson.lessonNo }';">학습하기</button>
 
         </div>
 

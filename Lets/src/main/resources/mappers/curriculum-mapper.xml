@@ -33,6 +33,8 @@
  		<result column="a_enroll_date" property="aEnrollDate" />
  		<result column="q_status" property="qStatus" />
  		<result column="a_status" property="aStatus" />
+ 		<result column="mem_pic" property="memPic" />
+ 		<result column="tutor_pic" property="tutorPic" />
  	</resultMap>
  	
  	<resultMap type="Video" id="videoResultSet">
@@ -91,6 +93,8 @@
  			 , cur_level
  		  from curriculum
  		 where lesson_no = #{lessonNo}
+ 		 order
+ 		    by curriculum_no asc
  	</select>
  	
  	<select id="selectQnA" resultMap="qnaResultSet" parameterType="Lesson">

@@ -50,6 +50,7 @@ public class CurriculumController {
 		int avgStar = curService.selectAverageStar(l);
 		
 		model.addAttribute("lesson", selectLesson);
+		model.addAttribute("qna", selectQnA);
 		model.addAttribute("curriculumList", selectCurriList);
 		model.addAttribute("videoCount", videoCount);
 		model.addAttribute("avgStar", avgStar);
