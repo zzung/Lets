@@ -23,12 +23,16 @@
 	<result column="out_date" property="outDate"/>
 	<result column="status" property="status"/>
 	<result column="lesson_title" property="lessonTitle" />
+	<result column="lesson_no" property="lessonNo"/>
+	<result column="discount" property="discount"/>
 </resultMap>
 
 <select id="selectDiscountList" resultMap="memberResultSet">
 	 select 
 	        l.lesson_title
 	      , m.mem_id
+	      , l.lesson_no
+	      , l.discount
 	  from member m
 	  join lesson l on(m.mem_no = l.mem_no)
 	  join tutor t on (m.mem_no = t.mem_no)
@@ -45,4 +49,58 @@
 	   and l.status='Y'
 </select>
 
+<update id="discountSet" parameterType="Lesson">
+	update
+	       lesson
+	   set lesson_no = #{lessonNo}
+	     , discount = #{discount}
+	     , disc_status = '적용'
+	 where lesson_no = #{lessonNo}
+	    
+</update>
+
+<select id="searchDiscountCount" parameterType="SearchCondition" resultType="_int">
+	select 
+	       count(*)
+	  from member m 
+	  join lesson l on (l.mem_no = m.mem_no)
+	  join tutor t on (m.mem_no = t.mem_no)
+	 where t.status ='Y'
+	   and l.status ='Y'
+	 <choose>
+	 	<when test="content != null">
+	 		and lesson_title like '%' || #{title} || '%'
+	 	</when>
+	 	<when test="writer != null">
+	 		and mem_id like '%' || #{writer} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and discount like '%' || #{percentage} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
+
+<select id="searchDiscountList" parameterType="SearchCondition" resultMap="memberResultSet">
+	 select 
+	        l.lesson_title
+	      , m.mem_id
+	      , l.lesson_no
+	      , l.discount
+	  from member m
+	  join lesson l on(m.mem_no = l.mem_no)
+	  join tutor t on (m.mem_no = t.mem_no)
+	 where t.status = 'Y'
+	   and l.status = 'Y'
+	 <choose>
+	 	<when test="content != null">
+	 		and lesson_title like '%' || #{title} || '%'
+	 	</when>
+	 	<when test="writer != null">
+	 		and mem_id like '%' || #{writer} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and discount like '%' || #{percentage} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
 </mapper>

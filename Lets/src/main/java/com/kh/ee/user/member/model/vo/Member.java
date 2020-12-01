@@ -36,4 +36,6 @@ public class Member {
 	
 	//학천 admin에서 사용
 	private String lessonTitle;
+	private int lessonNo;
+	private String discount;
 }
