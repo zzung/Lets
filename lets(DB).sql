@@ -17,11 +17,11 @@ END;
 DROP TABLE "MEMBER" CASCADE CONSTRAINTS;
 DROP TABLE "LESSON" CASCADE CONSTRAINTS;
 DROP TABLE "INQUIRY" CASCADE CONSTRAINTS;
-DROP TABLE "LIKE" CASCADE CONSTRAINTS;
+DROP TABLE "WISHLIST" CASCADE CONSTRAINTS;
 DROP TABLE "MEM_PAY" CASCADE CONSTRAINTS;
 DROP TABLE "QNA" CASCADE CONSTRAINTS;
 DROP TABLE "VIDEO" CASCADE CONSTRAINTS;
-DROP TABLE "CLASS_FAQ" CASCADE CONSTRAINTS;
+DROP TABLE "LESSON_FAQ" CASCADE CONSTRAINTS;
 DROP TABLE "TUTOR" CASCADE CONSTRAINTS;
 DROP TABLE "NOTICE" CASCADE CONSTRAINTS;
 DROP TABLE "SALARY" CASCADE CONSTRAINTS;
@@ -212,10 +212,10 @@ COMMENT ON COLUMN "INQUIRY"."RE_STATUS" IS '답변여부 ( 접수 / 완료 )';
 
 CREATE SEQUENCE SEQ_INQNO NOCACHE; 	--INQUIRY
 
-CREATE TABLE "LIKE" (
-	"LESSON_NO"	NUMBER		NOT NULL,
-	"MEM_NO"	NUMBER		NOT NULL,
-	CONSTRAINT "PK_LIKE" PRIMARY KEY("LESSON_NO","MEM_NO")
+CREATE TABLE "WISHLIST" (
+   "LESSON_NO"   NUMBER      NOT NULL,
+   "MEM_NO"   NUMBER      NOT NULL,
+   CONSTRAINT "PK_LIKE" PRIMARY KEY("LESSON_NO","MEM_NO")
 );
 
 COMMENT ON COLUMN "LIKE"."LESSON_NO" IS '클래스 번호';
@@ -310,17 +310,17 @@ COMMENT ON COLUMN "VIDEO"."VIDEO_CONT" IS '영상소개';
 
 CREATE SEQUENCE SEQ_VNO NOCACHE;	--VIDEO
 
-CREATE TABLE "CLASS_FAQ" (
+CREATE TABLE "LESSON_FAQ" (
 	"LESSON_NO"	NUMBER		NOT NULL,
 	"FAQ_QUESTION"	VARCHAR2(4000)		NOT NULL,
 	"FAQ_ANSWER"	VARCHAR2(4000)		NOT NULL
 );
 
-COMMENT ON COLUMN "CLASS_FAQ"."LESSON_NO" IS '클래스 번호';
+COMMENT ON COLUMN "LESSON_FAQ"."LESSON_NO" IS '클래스 번호';
 
-COMMENT ON COLUMN "CLASS_FAQ"."FAQ_QUESTION" IS '질문';
+COMMENT ON COLUMN "LESSON_FAQ"."FAQ_QUESTION" IS '질문';
 
-COMMENT ON COLUMN "CLASS_FAQ"."FAQ_ANSWER" IS '답변';
+COMMENT ON COLUMN "LESSON_FAQ"."FAQ_ANSWER" IS '답변';
 
 CREATE TABLE "TUTOR" (
 	"MEM_NO"	NUMBER		NOT NULL,
@@ -533,6 +533,8 @@ COMMENT ON COLUMN "FAQ"."FAQ_TITLE" IS 'FAQ 제목';
 
 COMMENT ON COLUMN "FAQ"."FAQ_CONTENT" IS 'FAQ 내용';
 
+CREATE SEQUENCE SEQ_FNO NOCACHE;
+
 ALTER TABLE "LESSON" 
 ADD CONSTRAINT "FK_TUTOR_TO_LESSON_1" 
 FOREIGN KEY ("MEM_NO")
@@ -587,8 +589,8 @@ FOREIGN KEY ("LESSON_NO")
 REFERENCES "LESSON" ("LESSON_NO")
 ON DELETE CASCADE;
 
-ALTER TABLE "CLASS_FAQ" 
-ADD CONSTRAINT "FK_LESSON_TO_CLASS_FAQ_1" 
+ALTER TABLE "LESSON_FAQ" 
+ADD CONSTRAINT "FK_LESSON_TO_LESSON_FAQ_1" 
 FOREIGN KEY ("LESSON_NO")
 REFERENCES "LESSON" ("LESSON_NO")
 ON DELETE CASCADE;
@@ -665,8 +667,10 @@ FOREIGN KEY ("REF_CUR_NO")
 REFERENCES "CURRICULUM" ("CURRICULUM_NO")
 ON DELETE CASCADE;
 
+ALTER TABLE lesson ADD (approve_date date);
+COMMENT ON COLUMN "LESSON"."APPROVE_DATE" IS '승인날짜';
 
-insert  
+insert
   into member
   (
      mem_no
@@ -676,23 +680,29 @@ insert
    , nickname
    , birthday
    , gender
-   , address
+   , postcode
+   , post_address
+   , detail_address
+   , extra_address
    , phone
   )
   values
   (
-     seq_mno.nextval
+     SEQ_MNO.NEXTVAL
    , 'admin'
-   , '1234'
+   , '$2a$10$0AaOcfnJpQ4cr9LZmj2Ec.V9TQQ0gweZ/mLE6C9h1sTDJ316ov6r2'
    , '관리자'
-   , 'admin'
-   , '1990-02-02'
+   , '관리자'
+   , '000101'
    , 'M'
-   , '서울시 강남'
-   , '010-4309-0984'
+   , '06267'
+   , '서울 강남구 강남대로 238-4'
+   , '레츠'
+   , '(강남)'
+   , '01011112222'
   );
 
-insert  
+insert
   into member
   (
      mem_no
@@ -702,23 +712,29 @@ insert
    , nickname
    , birthday
    , gender
-   , address
+   , postcode
+   , post_address
+   , detail_address
+   , extra_address
    , phone
   )
   values
   (
-     seq_mno.nextval
+     SEQ_MNO.NEXTVAL
+   , 'user01@naver.com'
+   , '$2a$10$sbHC8IrSO2ZHn3ebQnCsmeVr6EOVXOHnH4fVXHCuCgv16tlO/8B9i'
    , 'user01'
-   , 'pass01'
-   , '홍길동'
-   , 'mrHong'
-   , '1990-07-22'
-   , 'M'
-   , '서울시 노원'
-   , '010-4456-0984'
+   , '유저1'
+   , '900825'
+   , 'F'
+   , '08808'
+   , '서울 관악구 과천대로 855'
+   , '관악빌딩 3층'
+   , '(남현동)'
+   , '01044438273'
   );
 
-insert  
+insert
   into member
   (
      mem_no
@@ -728,18 +744,24 @@ insert
    , nickname
    , birthday
    , gender
-   , address
+   , postcode
+   , post_address
+   , detail_address
+   , extra_address
    , phone
   )
   values
   (
-     seq_mno.nextval
-   , 'user02'
-   , 'pass02'
-   , '홍길순'
-   , 'msHong'
-   , '1994-07-22'
-   , 'F'
-   , '서울시 동대문'
-   , '010-5432-9808'
+     SEQ_MNO.NEXTVAL
+   , 'user02@google.com'
+   , '$2a$10$Ottnmcbc8cbFPdZsNRshx.fZ7PYzSovF7tZP/.uLNPV.sbO8e14Tu'
+   , '김유저2'
+   , '김유저2'
+   , '950923'
+   , 'M'
+   , '10375'
+   , '경기 고양시 일산서구 강선로 137'
+   , '후곡마을 후곡아파트 3차'
+   , '(일산동)'
+   , '01089289383'
   );

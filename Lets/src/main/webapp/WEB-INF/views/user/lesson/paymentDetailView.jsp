@@ -26,8 +26,8 @@
 							<br>
 							<div class="media align-items-center">
 								<div class="media-body">
-									<h4 style="color: #2d2d2d;">"단 한번의 선택이 미래를"</h4>
-									<img src="resources/user/assets/img/post/post_1.png" alt="post">
+									<h4 style="color: #2d2d2d;">"${l.lessonTitle }"</h4>
+									<img src="${l.lessonCoverImg }" alt="post">
 								</div>
 							</div>
 							<form action="">
@@ -82,15 +82,15 @@
 										<table>
 											<tr>
 												<td class="sum-title">총 상품 금액</td>
-												<td class="sum-amount">195,000원</td>
+												<td class="sum-amount">${l.payTotal }원</td>
 											</tr>
 											<tr>
 												<td class="sum-title">할인 금액</td>
-												<td class="sum-amount">19,500원</td>
+												<td class="sum-amount">${l.discount }원</td>
 											</tr>
 											<tr id="total-amount">
 												<td>최종 가격</td>
-												<td class="sum-amount">175,500원</td>
+												<td class="sum-amount">${l.payTotal }원</td>
 											</tr>
 										</table>
 									</div>

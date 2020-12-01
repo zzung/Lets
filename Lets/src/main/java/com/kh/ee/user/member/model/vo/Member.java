@@ -33,4 +33,7 @@ public class Member {
 	private int reportCount;
 	private Date outDate;
 	private String status; 
+	
+	//학천 admin에서 사용
+	private String lessonTitle;
 }

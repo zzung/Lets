@@ -32,5 +32,6 @@
 		<mapper resource="/mappers/curriculum-mapper.xml"/>
 		<mapper resource="/mappers/notice-mapper.xml"/>
 		<mapper resource="/mappers/tutor-mapper.xml"/>
+		<mapper resource="/mappers/admin-mapper.xml"/>
 	</mappers>
 </configuration>

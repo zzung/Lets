@@ -7366,12 +7366,14 @@ input[type=radio]:checked+label {
 	position: relative;
 	font-size: 32px;
 	cursor: pointer;
+	border:transparent;
+	background:#fbf9ff;
 }
 
 .like-button::before {
 	font-size: 52px;
-	color: rgb(179, 157, 157);
-	content: "♥";
+	color: #ff3252;
+	content: "♡";
 	position: absolute;
 	left: 50%;
 	top: 50%;

@@ -53,28 +53,15 @@
 							<th width="150px;">클래스 할인율</th>
 							<th width="130px;">할인 설정</th>
 						</tr>
+						<c:forEach var="m" items="${m }">
 						<tr>
-							<td>3</td>
-							<td width="350px;">오늘은 내가 왕이다..어쩔래 길이가 얼마나 길지 모르니까 계속 적어 본다.</td>
-							<td>recipee@gmail.com</td>
+							<td>${m }</td>
+							<td width="350px;">${m.lessonTitle }</td>
+							<td>${m.memId }</td>
 							<td>할인 미적용</td>
 							<td><button class="btn btn-default">설정</button></td>
 						</tr>
-						<tr>
-							<td>3</td>
-							<td width="350px;">오늘은 내가 왕이다..어쩔래 길이가 얼마나 길지 모르니까 계속 적어 본다.</td>
-							<td>recipee@gmail.com</td>
-							<td>할인 미적용</td>
-							<td><button class="btn btn-default">설정</button></td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td width="350px;">오늘은 내가 왕이다..어쩔래 길이가 얼마나 길지 모르니까 계속 적어 본다.</td>
-							<td>recipee@gmail.com</td>
-							<td id="appliedDiscount1">할인 미적용</td>
-							<td><button type="button" data-toggle="modal"
-									data-target="#settingSales" class="btn btn-default">설정</button></td>
-						</tr>
+						</c:forEach>
 					</table>
 					<!--?Modal Start-->
 					<div class="modal" id="settingSales">
@@ -89,10 +76,10 @@
 								<div class="modal-body">
 									<select name="discounts" id="discounts"
 										style="width: 200px; height: 40px;">
-										<option value="10%">10%</option>
-										<option value="20%">20%</option>
-										<option value="30%">30%</option>
-										<option value="50%">50%</option>
+										<option value="0.1">10%</option>
+										<option value="0.2">20%</option>
+										<option value="0.3">30%</option>
+										<option value="0.5">50%</option>
 									</select>
 								</div>
 								<div class="modal-footer">
@@ -123,13 +110,27 @@
 					<!--end of 적용-->
 					<div class="container" align="center">
 						<ul class="pagination">
-							<li><a href="#">&lt;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
+						<c:choose>
+							<c:when test="${pi.currentPage eq 1 }">
+								<li class="disabled"><a href="">&lt;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="saleManagement.ad?currentPage=${pi.currentPage -1 }">&lt;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+							<li><a href="saleManagement.ad?currentPage=${p}">{p}</a></li>
+						</c:forEach>
+						
+						<c:choose>
+							<c:when test="${pi.currentPage eq pi.maxPage }">
+								<li class="disabled"><a href="#">&gt;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="saleManagement.ad?currentPage=${pi.currentPage +1 }">&lt;</a></li>
+							</c:otherwise>
+						</c:choose>	
 						</ul>
 					</div>
 				</div>
