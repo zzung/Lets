@@ -90,10 +90,11 @@ public class LessonDao {
 	public int reportReply(Report rpt, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.reportReply",rpt);
 	}
-
+	
+	/*
 	public int likeCount(int lessonNo, SqlSessionTemplate ss) {
 		return ss.update("lessonMapper.likeCount",lessonNo);
 	}
-
+	*/
 
 }

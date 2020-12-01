@@ -31,9 +31,15 @@
 	                    <div class="login-join"><a href="enrollForm.me">회원가입 하기</a></div>
 	                    <br><br>
 	                    <div class="login-bottom">
-	                        <input type="submit" class="genric-btn primary radius" value="로그인 하기"><br>
-	                        <input type="submit" class="genric-btn success radius" onclick="loginSubmit(2);" value="네이버로 시작하기"><br>
-	                        <input type="submit" class="genric-btn warning radius" onclick="loginSubmit(3);" value="카카오로 시작하기" style="color: black;">
+	                        <input type="submit" class="genric-btn primary radius" value="로그인 하기"><br><br>
+	                        <!-- 네이버 로그인 창으로 이동 -->
+							<div id="naver_id_login" style="text-align:center">
+								<a href="${naverUrl}"><img width="300" src="resources/user/assets/img/member/naver_login.jpg"/></a>
+							</div>
+							<!-- 카카오 로그인 창으로 이동 -->
+							<div id="kakao_id_login" style="text-align: center">
+								<a href="${kakao_url}"><img width="300" src="resources/user/assets/img/member/kakao_login.png" /></a>
+							</div>
 	                        <br>
 	                        <div style="font-size: 12px; font-weight: normal; text-align: center; margin-top: 15px;">
 	                              	최초 로그인 시 <br> 이용약관 개인정보수집 및 이용, 개인정보 제공에 <br>동의하는 것으로 간주합니다
@@ -42,20 +48,6 @@
 					</form>
                     <br><br><br><br><br>
                 </div>
-
-				<script>
-				/*
-					function loginSubmit(num){
-						if(num==1){
-							$('#loginForm').attr("action", "login.me").submit();
-						}else if(num==2){
-							
-						}else{
-							
-						}
-					}
-				*/
-				</script>
 
                 <div class="login-content2">
                     <img src="resources/user/assets/img/member/skateboard-1030929_1920.jpg" width="600px" height="650px">

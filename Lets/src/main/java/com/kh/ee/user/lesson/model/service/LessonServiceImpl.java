@@ -116,12 +116,13 @@ public class LessonServiceImpl implements LessonService{
 	public int deleteLesson(int lno) {
 		return lDao.deleteLesson(ss, lno);
 	}
-
+	
+	/*
 	@Override
 	public int likeCount(int lessonNo) {
 		return lDao.likeCount(lessonNo,ss);
 	}
-
+	*/
 
 
 

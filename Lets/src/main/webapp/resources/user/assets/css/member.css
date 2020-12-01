@@ -83,6 +83,7 @@ input[type='radio'] {
 .login-content2 img{width: 100%; float: left;}
 .login-bottom{width: 40%;}
 .login-bottom div{width: 300px; margin-bottom: 15px;}
+.login-bottom input{width: 300px; height: 45px; text-align: center; margin-bottom: -10px;}
 .login-bottom2{font-size: 12px; font-weight: normal; margin-left: -30px;}
 .login-join a{font-size: 14px; font-weight: bold; color: rgb(46, 48, 146);}
 

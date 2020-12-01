@@ -33,6 +33,8 @@
  		<result column="a_enroll_date" property="aEnrollDate" />
  		<result column="q_status" property="qStatus" />
  		<result column="a_status" property="aStatus" />
+ 		<result column="mem_pic" property="memPic" />
+ 		<result column="tutor_pic" property="tutorPic" />
  	</resultMap>
  	
  	<resultMap type="Video" id="videoResultSet">
@@ -57,6 +59,7 @@
  		<result column="lesson_target" property="lessonTarget" />
  		<result column="like_count" property="likeCount" />
  		<result column="total_count" property="totalCount" />
+ 		<result column="period" property="period" />
  	</resultMap>
  	
  	<!-- sql문 -->
@@ -77,6 +80,7 @@
 		     , lesson_target
 		     , like_count
 		     , total_count
+		     , period
 		  from lesson
 		 where status = 'Y'
   		   and lesson_no = #{lessonNo}
@@ -91,8 +95,11 @@
  			 , cur_level
  		  from curriculum
  		 where lesson_no = #{lessonNo}
+ 		 order
+ 		    by curriculum_no asc
  	</select>
  	
+ 	<!-- 일단 이거 문제 생길듯 sql문이 완벽하지 않아보임 -->
  	<select id="selectQnA" resultMap="qnaResultSet" parameterType="Lesson">
  		select
  			   qa_no
@@ -131,5 +138,24 @@
 		  from review
 		 where lesson_no = #{lessonNo}
 		   and status = 'Y'
+ 	</select>
+ 	
+ 	<select id="selectDetailFAQ" resultMap="lessonFAQResultSet" parameterType="Lesson">
+ 		select
+ 			   faq_question
+ 			 , faq_answer
+ 		  from lesson_faq
+ 		 where lesson_no = #{lessonNo}
+ 	</select>
+ 	 
+ 	<select id="selectDetailQnA" resultMap="qnaResultSet" parameterType="Lesson">
+ 		select
+ 			   qa_no
+ 			 , mem_no
+ 			 , question
+ 			 , answer
+ 		  from qna
+ 		 where lesson_no = #{lessonNo}
+ 		   and q_status = 'Y'
  	</select>
 </mapper>

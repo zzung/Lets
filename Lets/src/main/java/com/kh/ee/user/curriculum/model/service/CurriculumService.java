@@ -18,8 +18,6 @@ public interface CurriculumService {
 	// 커리큘럼 리스트 조회
 	ArrayList<Curriculum> selectCurriculum(Lesson l);
 	
-	Lesson detailLessonInfo(Lesson l);
-	
 	ArrayList<LessonFaq> detailFAQ(Lesson l);
 	// QnA 서비스
 	ArrayList<QnA> detailQnA(Lesson l);

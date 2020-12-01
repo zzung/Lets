@@ -16,16 +16,23 @@
          	
          	var detailHtml = '';
          	detailHtml += '<tr><td><h6 class="category_2">2)</h6></td>';
-         	detailHtml += '<td width=400px><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
+         	detailHtml += '<td width=400px><input class="form-control curriculumTextInput" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
          	detailHtml += '<td><button class="plus_btn detailadd" type="button">+</button><button class="plus_btn detailDel" type="button">-</button></td></tr>';
+
+         	var curriculumIndex = $('.curriculumS').eq($('.detailadd').index($(this))).children().length+1;
          	
          	var curriculumhtml = '';
-         	curriculumhtml += '<h5>)</h5>';
+         	curriculumhtml += '<h5><span class="curriculumNum">'+curriculumIndex +') </span><span class="curriculumText"></span></h5>';
          	
          	$('.curriculumS').eq($('.detailadd').index($(this))).append(curriculumhtml);
+
          	
          	$(this).parents().eq(2).append(detailHtml);
          	
+         	$('.curriculumInput').eq($('.detailadd').index($(this))).find('.curriculumTextInput').last().keyup(function(){
+	           	 var curriculumIndex = $(".curriculumTextInput").index($(this))
+	           	 $(".curriculumText").eq(curriculumIndex).text($(this).val())
+       	    });
          	var length = $(this).parents().eq(2).children().length;
          	$(this).parents().eq(2).children().eq(length-1).children().eq(0).html('<h6 class="category_2">'+(length-1) + ")"+'</h6>');
 
@@ -57,20 +64,30 @@
 	            html += '<div class="curriculumInput">';
 	            html += '<table style="width: 500px">';
 	            html += '<tr><td width=40px><h5 class="category_1">' + ($(".category_1").length + 1) + '.</h5></td>';
-	            html += '<td width=400px><input class="form-control" name="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>';
+	            html += '<td width=400px><input class="form-control titleInput" name="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>';
 	            html += '<td><button class="plus_btn categorydelete" type="button" id="categorydelete" value="'+($(".category_1").length + 1)+'">-</button></td></tr>';
 	            html += '<tr><td><h6 class="category_2">1)</h6></td>';
-	            html += '<td><input class="form-control" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td></tr>';
+	            html += '<td><input class="form-control curriculumTextInput" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td></tr>';
  	            html += '<tr><td><h6 class="category_2">2)</h6></td>';
-	            html += '<td><input class="form-control" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
+	            html += '<td><input class="form-control curriculumTextInput" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
 	            html += '<td><button class="plus_btn detailadd" type="button">+</button></td></tr></table><br></div>';
 	             $('#parah').append (html); 
 	             
 	            var inputhtml = '';
-	            inputhtml += '<div class="curriculumD"><h4 class="inputTitle">'+($(".category_1").length)+'.</h4><div class="curriculumS"><h5>)</h5><h5>2)</h5></div><hr></div>';
+	            inputhtml += '<div class="curriculumD"><h4 class="inputTitle"><span class="titleNum">'+($(".category_1").length)+'. </span><span class="titleText"></span></h4>';
+	            inputhtml += '<div class="curriculumS"><h5><span class="curriculumNum">1) </span><span class="curriculumText"></span></h5><h5><span class="curriculumNum">2) </span><span class="curriculumText"></span></h5></div><hr></div>';
 	            $('.curriculumP').append(inputhtml);
                 
-                
+	            $('.titleInput').last().keyup(function(){
+	           	 var titleIndex = $(".titleInput").index($(this))
+	        	 $(".titleText").eq(titleIndex).text($(this).val())
+        	    });
+	            
+	            $('.curriculumInput').last().find('.curriculumTextInput').keyup(function(){
+	           	 var curriculumIndex = $(".curriculumTextInput").index($(this))
+	           	 $(".curriculumText").eq(curriculumIndex).text($(this).val())
+           	    });
+	            
                 
 	             var categorydeleteindex=$('.categorydelete').length-1
 	             $('.categorydelete').eq(categorydeleteindex).click (function (){
@@ -80,7 +97,7 @@
 	            	 	for(i=0; i<length; i++){
 	            	 		$(".category_1").eq(i).text((i+1)+".")
 	            	 		$(".categorydelete").eq(i).attr('value',(i+2))
-	            	 		$(".inputTitle").eq(i).text((i+1)+".")
+	            	 		$(".inputTitle").eq(i).find('.titleNum').text((i+1)+". ")
 	            	 	}
 	 	        });
 	             var detailindex=$('.detailadd').length-1
@@ -205,16 +222,16 @@
                             <table style="width: 500px;">
                                 <tr>
                                     <td width=40px><h5 class="category_1">1.</h5></td>
-                                    <td width=400px><input class="form-control" name="" id="firstTitle" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>
+                                    <td width=400px><input class="form-control titleInput" name="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><h6 class="category_2">1)</h6></td>
-                                    <td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
+                                    <td><input class="form-control curriculumTextInput" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
                                 </tr>
                                 <tr>
                                     <td><h6 class="category_2">2)</h6></td>
-                                    <td><input class="form-control" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
+                                    <td><input class="form-control curriculumTextInput" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
                                     <td><button class="plus_btn detailadd" type="button">+</button></td>
                                 </tr>
                         </table><br>
@@ -232,10 +249,10 @@
          <div class="lesson-row">
              <div class="typography curriculumP">
              	<div class="curriculumD">
-	                 <h4 class="inputTitle"></h4>
+	                 <h4 class="inputTitle"><span class="titleNum">1. </span><span class="titleText"></span></h4>
 	                 <div class="curriculumS">
-	                 	<h5>1)</h5>
-	                 	<h5>2)</h5>
+	                 	<h5><span class="curriculumNum">1) </span><span class="curriculumText"></span></h5>
+	                 	<h5><span class="curriculumNum">2) </span><span class="curriculumText"></span></h5>
 	                 </div>
 	                 <hr>
                  </div>
@@ -243,8 +260,14 @@
          </div>
          
          <script>
-         $("#firstTitle").keyup(function(){
-        	    $(".inputTitle").text($(this).val());
+         $(".titleInput").keyup(function(){
+        	 var titleIndex = $(".titleInput").index($(this))
+        	 $(".titleText").eq(titleIndex).text($(this).val())
+        	    });
+         
+         $(".curriculumTextInput").keyup(function(){
+        	 var curriculumIndex = $(".curriculumTextInput").index($(this))
+        	 $(".curriculumText").eq(curriculumIndex).text($(this).val())
         	    });
          
          
@@ -312,7 +335,7 @@
                </div>
            </div>
            <br><br>
-     <div align="center"><button type="submit" class="genric-btn primary radius">저장 후 다음단계(1/2)</button></div><br>
+     <div align="center"><button href="enrollNext.le" class="genric-btn primary radius">저장 후 다음단계(1/2)</button></div><br>
      </div>
    </form>
    

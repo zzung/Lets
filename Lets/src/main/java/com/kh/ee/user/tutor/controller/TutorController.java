@@ -1,6 +1,10 @@
 package com.kh.ee.user.tutor.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +21,7 @@ import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.service.MemPayService;
 import com.kh.ee.user.memPay.model.vo.MemPay;
+import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.tutor.model.service.TutorService;
 import com.kh.ee.user.tutor.model.vo.Tutor;
 
@@ -61,9 +66,34 @@ public class TutorController {
 	}
 	
 	@RequestMapping("insert.tt")
-	public String insertTutor(Tutor t, HttpSession session, MultipartFile upfile) {
+	public String insertTutor(Tutor t, HttpSession session, MultipartFile upfile, Model model) {
 		
-		System.out.println(t);
+		
+		String originName = upfile.getOriginalFilename();
+		
+		String picSavePath = session.getServletContext().getRealPath("/resources/tutor/tutorPicFiles/");
+		
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int ranNum = (int)(Math.random()*90000+10000);
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = currentTime + ranNum + ext;
+		
+		try {
+			upfile.transferTo(new File(picSavePath + changeName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(changeName != null) {
+			t.setTutorPic("resources/tutor/tutorPicFiles/" + changeName);
+			
+		}
+		
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+		t.setMemNo(memNo);
 
 		int result = tutorService.insertTutorInfo(t);
 		
@@ -71,8 +101,8 @@ public class TutorController {
 			session.setAttribute("alertMsg", "성공적으로 튜터 등록되었습니다!");
 			return "redirect:tutorMain.tm";
 		}else {
-			session.setAttribute("alertMsg", "튜터 등록에 실패하였습니다!");
-			return "redirect:tutorEnroll.te";
+			model.addAttribute("errorMsg", "게시글 등록 실패");
+			return "common/errorPage";
 		}
 		
 	}
