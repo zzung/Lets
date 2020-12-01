@@ -31,5 +31,6 @@
 		<mapper resource="/mappers/memPay-mapper.xml"/>
 		<mapper resource="/mappers/curriculum-mapper.xml"/>
 		<mapper resource="/mappers/notice-mapper.xml"/>
+		<mapper resource="/mappers/tutor-mapper.xml"/>
 	</mappers>
 </configuration>

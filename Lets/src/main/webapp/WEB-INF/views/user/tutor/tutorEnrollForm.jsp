@@ -32,12 +32,13 @@
                     onfocus="this.placeholder = ''" onblur="this.placeholder = '튜터소개를 입력해주세요. (공백포함 1000자 이내)'"></textarea>
             </div><br>
 
-            <h5><b>프로필 이미지 첨부</b></h5><input type="file" id="upfile" class="form-control-file border" style="width:500px;" name="tutorFile"><br><br><br>
+            <h5><b>프로필 이미지 첨부</b></h5><input type="file" id="upfile" class="form-control-file border" style="width:500px;" name="upfile"><br><br><br>
             <div align="center">
                 <button type="submit" class="genric-btn primary radius">등록하기</button><br><br><br>
            </div>
           </div>
       </form>
-
+    
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

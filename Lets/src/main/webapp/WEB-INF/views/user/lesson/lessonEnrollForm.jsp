@@ -312,7 +312,7 @@
                </div>
            </div>
            <br><br>
-     <div align="center"><button type="submit" class="genric-btn primary radius">저장 후 다음단계(1/2)</button></div><br>
+     <div align="center"><button href="enrollNext.le" class="genric-btn primary radius">저장 후 다음단계(1/2)</button></div><br>
      </div>
    </form>
    

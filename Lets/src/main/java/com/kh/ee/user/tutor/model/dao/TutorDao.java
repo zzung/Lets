@@ -9,7 +9,7 @@ import com.kh.ee.user.tutor.model.vo.Tutor;
 public class TutorDao {
 
 	public int insertTutorInfo(SqlSessionTemplate sqlSession, Tutor t) {
-		return 0;
+		return sqlSession.insert("tutorMapper.insertTutorInfo", t);
 	}
 	
 	

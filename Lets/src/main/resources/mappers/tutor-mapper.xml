@@ -10,5 +10,20 @@
 		<result column="status" property="status"/>
 	</resultMap>
 
+	<insert id="insertTutorInfo" parameterType="Tutor">
+		insert
+		  into tutor
+		  (
+		  	mem_no
+		  , tutor_pic
+		  , tutor_info
+		  )
+		  values
+		  (
+		  	#{memNo}
+		  , #{tutorPic}
+		  , #{tutorInfo}
+		  )
+	</insert>
 
 </mapper>
