@@ -31,7 +31,7 @@ public interface LessonService {
 	int deleteReReply(Reply r);
 	int updateReReply(Reply r);
 	int reportReply(Report rpt);
-	int likeCount(int lessonNo);
+	//int likeCount(int lessonNo);
 	//
 	
 	int deleteLesson(int lno);

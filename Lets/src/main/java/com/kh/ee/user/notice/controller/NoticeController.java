@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.ee.common.model.vo.PageInfo;
-import com.kh.ee.common.template.pagination;
+import com.kh.ee.common.template.Pagination;
 import com.kh.ee.user.notice.model.service.NoticeService;
 import com.kh.ee.user.notice.model.vo.Notice;
 
@@ -24,7 +24,7 @@ public class NoticeController {
 		
 		int listCount = nService.tutorSelectNoticeListCount(n);
 		
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 5, 10);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
 		
 		ArrayList<Notice> noticeList = nService.tutorSelectNoticeList(n, pi);
 		

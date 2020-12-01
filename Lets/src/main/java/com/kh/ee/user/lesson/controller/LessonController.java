@@ -51,7 +51,10 @@ public class LessonController {
 	}
 	
 	@RequestMapping("payClass.le")
-	public String paymentDetail() {
+	public String selectLessonList(int lessonNo, Model model) {
+		Lesson lesson = lService.selectLessonList(lessonNo);
+		
+		model.addAttribute("l",lesson);
 		return"user/lesson/paymentDetailView";
 	}
 	
@@ -167,6 +170,7 @@ public class LessonController {
 		}
 	}
 	
+	/*
 	@ResponseBody
 	@RequestMapping("likeCount.le")
 	public String likeCount(int lessonNo) {
@@ -178,7 +182,8 @@ public class LessonController {
 			return "fail";
 		}
 	}
-
+	*/
+	
 	@RequestMapping("enroll.le")
 	public String enrollLesson() {
 		return "user/lesson/lessonEnrollForm";

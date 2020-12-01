@@ -240,7 +240,6 @@
 	                  			success:function(list){
 	                  				$("#replyCount").text(list.length);
 	                  				
-	                  				console.log(list);
 	                  				result ="";
            							
 	                  				for(var i in list){
@@ -720,7 +719,7 @@
 	                           </tr>
 	                           <tr> 
 	                              <td class="discount-like" colspan="2" align="center">
-	                                 <button class="like-button"></button>
+	                                 <button type="button" class="like-button" onclick="likeBtn();"></button>
 	                              </td>
 	                              <td class="discount-share" colspan="2" align="center">
 	                                <a href="javascript:;" id="kakao-link-btn"> 
@@ -730,11 +729,16 @@
 	                           </tr>
 	                           <tr>
 	                              <td colspan="4" align="center">
-	                                 <button class="genric-btn primary discount-pay" href="payClass.le">수강하기</button>
+	                                 <button class="genric-btn primary discount-pay" id="pay">수강하기</button>
 	                              </td>
 	                           </tr>
 	                        </table>
 	                     </aside>
+	                     <script>
+	                     	$("#pay").click(function(){
+	                     		location.href="payClass.le?lessonNo="+${l.lessonNo}
+	                     	})
+	                     </script>
 	                     <!--end of payment-->
 	                  </div>
 	               </div>
@@ -772,33 +776,10 @@
 	                }, ],
 	    });
 
-        document.querySelector('.like-button').addEventListener('click', e => {
+        	document.querySelector('.like-button').addEventListener('click', e => {
             e.currentTarget.classList.toggle('liked');
           });
-        
-		 $(function(){
-		       $(".like-button").click(function(){
-		    	   if($(this).is('::after')){
-		    		   $.ajax({
-		    			  url:"likeCount.le",
-		    			  data:{
-		    				  lessonNo:${l.lessonNo}
-		    			  },
-		    			  success:function(result){
-		    				  if(result == "success"){
-		    					  console.log("like success")
-		    				  } else{
-		    					  console.log("like fail")
-		    				  }
-		    			  },
-		    			  error:function(){
-		    				  console.log("like ajax fail")
-		    			  }
-		    		   });
-		    	   } 
-		       }) 	
-		 })
-        
+
     </script>
 
 	</main>

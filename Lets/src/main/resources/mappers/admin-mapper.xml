@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+
+
+<resultMap id="memberResultSet" type="Member">
+	<id column="mem_no" property="memNo" />
+	<result column="mem_id" property="memId" />
+	<result column="mem_pwd" property="memPwd" />
+	<result column="mem_name" property="memName" />
+	<result column="nickname" property="nickname" />
+	<result column="birthday" property="birthday"/>
+	<result column="gender" property="gender"/>
+	<result column="postcode" property="postcode"/>
+	<result column="post_address" property="postAddress"/>
+	<result column="detail_address" property="detailAddress"/>
+	<result column="extra_address" property="extraAddress"/>
+	<result column="phone" property="phone"/>
+	<result column="mem_pic" property="memPic"/>
+	<result column="enroll_date" property="enrollDate"/>
+	<result column="modify_date" property="modifyDate"/>
+	<result column="report_count" property="reportCount"/>
+	<result column="out_date" property="outDate"/>
+	<result column="status" property="status"/>
+	<result column="lesson_title" property="lessonTitle" />
+</resultMap>
+
+<select id="selectDiscountList" resultMap="memberResultSet">
+	 select 
+	        l.lesson_title
+	      , m.mem_id
+	  from member m
+	  join lesson l on(m.mem_no = l.mem_no)
+	  join tutor t on (m.mem_no = t.mem_no)
+	 where t.status = 'Y'
+	   and l.status = 'Y'
+</select>
+
+<select id="selectListCount" resultType="_int">
+	select 
+	       count(*)
+	  from tutor t
+	  join lesson l on (l.mem_no = t.mem_no)
+	 where t.status ='Y'
+	   and l.status='Y'
+</select>
+
+</mapper>
