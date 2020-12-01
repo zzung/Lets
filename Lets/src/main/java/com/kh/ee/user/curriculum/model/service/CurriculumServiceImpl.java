@@ -35,19 +35,12 @@ public class CurriculumServiceImpl implements CurriculumService{
 		return curDao.selectCurriculum(sqlSession, l);
 	}
 	@Override
-	public Lesson detailLessonInfo(Lesson l) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
 	public ArrayList<LessonFaq> detailFAQ(Lesson l) {
-		// TODO Auto-generated method stub
-		return null;
+		return curDao.selectDetailFAQ(sqlSession, l);
 	}
 	@Override
 	public ArrayList<QnA> detailQnA(Lesson l) {
-		// TODO Auto-generated method stub
-		return null;
+		return curDao.selectDetailQnA(sqlSession, l);
 	}
 	@Override
 	public int insertQuestion(QnA q) {

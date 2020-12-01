@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.QnA;
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.lesson.model.vo.LessonFaq;
 
 @Repository
 public class CurriculumDao {
@@ -30,5 +31,13 @@ public class CurriculumDao {
 	
 	public int selectAverageStar(SqlSessionTemplate sqlSession, Lesson l) {
 		return sqlSession.selectOne("curriculumMapper.selectAverageStar", l);
+	}
+	
+	public ArrayList<LessonFaq> selectDetailFAQ(SqlSessionTemplate sqlSession, Lesson l) {
+		return (ArrayList)sqlSession.selectList("curriculumMapper.selectDetailFAQ", l);
+	}
+	
+	public ArrayList<QnA> selectDetailQnA(SqlSessionTemplate sqlSession, Lesson l) {
+		return (ArrayList)sqlSession.selectList("curriculumMapper.selectDetailQnA", l);
 	}
 }

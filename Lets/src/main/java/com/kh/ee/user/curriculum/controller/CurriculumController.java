@@ -14,6 +14,7 @@ import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.MemVideo;
 import com.kh.ee.user.curriculum.model.vo.QnA;
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.member.model.vo.Member;
 
 @Controller
@@ -29,15 +30,14 @@ public class CurriculumController {
 		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
 		
 		Lesson selectLesson = curService.selectLesson(l);
+				
+		ArrayList<Curriculum> selectCurriList = curService.selectCurriculum(l);
 		
 		// 튜터의 회원 번호
 		int tutorNo = selectLesson.getMemNo();
 		
 		// 요청받은 레슨 객체 (레슨 번호 + 튜터 번호)
 		l.setMemNo(tutorNo);
-		
-		ArrayList<Curriculum> selectCurriList = curService.selectCurriculum(l);
-		
 		QnA selectQnA = curService.selectQnA(l);
 		
 		// 레슨 객체 (레슨 번호 + 회원 번호)
@@ -60,16 +60,31 @@ public class CurriculumController {
 	
 	@RequestMapping("lessonInfo.cr")
 	public String detailLessonInfo(Lesson l, Model model) {
+		
+		Lesson selectLesson = curService.selectLesson(l);
+		
+		model.addAttribute("lesson", selectLesson);
+		
 		return "user/curriculum/lessonInfo";
 	}
 	
 	@RequestMapping("detailFAQ.cr")
 	public String detailFaq(Lesson l, Model model) {
+		
+		ArrayList<LessonFaq> faqList = curService.detailFAQ(l);
+		
+		model.addAttribute("faqList", faqList);
+		
 		return "user/curriculum/detailFAQ";
 	}
 	
 	@RequestMapping("detailQNA.cr")
 	public String detailQna(Lesson l, Model model) {
+		
+		ArrayList<QnA> qnaList = curService.detailQnA(l);
+		
+		model.addAttribute("qnaList", qnaList);
+		
 		return "user/curriculum/detailQNA";
 	}
 

@@ -234,12 +234,12 @@ div{
 <!-- 본문 -->
 <div class="main">
 
-    <span class="button">
-        	클래스 소개
+    <span class="button" onclick="moving('lessonInfo.cr');">
+       	 클래스 소개
     </span>
-    
-    <span class="button">
-      		FAQ
+
+    <span class="button" onclick="moving('detailFAQ.cr');">
+        FAQ
     </span>
 
     <hr>
@@ -398,6 +398,10 @@ div{
     function closeForm(i) {
         $("#answer" + i).hide();
     }
+    
+    function moving(e){
+		location.href = e + "?lessonNo=" + ${ lesson.lessonNo };
+	}
 </script>
 
 <!-- footer -->
