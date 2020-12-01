@@ -18,8 +18,18 @@ public class MemPayServiceImpl implements MemPayService{
 	private MemPayDao memPayDao;
 	
 	@Override
-	public ArrayList<MemPay> selectPrepareList() {
-		return memPayDao.selectPrepareList(ss);
+	public ArrayList<MemPay> selectPrepareList(int memNo) {
+		return memPayDao.selectPrepareList(ss, memNo);
+	}
+
+	@Override
+	public int updateDelivery(MemPay mp) {
+		return memPayDao.updateDelivery(ss,mp);
+	}
+
+	@Override
+	public int selectListCount(int memNo) {
+		return memPayDao.selectListCount(ss, memNo);
 	}
 
 }

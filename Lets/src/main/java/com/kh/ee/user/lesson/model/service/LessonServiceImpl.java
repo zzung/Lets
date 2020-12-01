@@ -27,13 +27,13 @@ public class LessonServiceImpl implements LessonService{
 	private LessonDao lDao;
 
 	@Override
-	public ArrayList<Lesson> selectApproveLessonList() {
-		return lDao.selectApproveLessonList(ss);
+	public ArrayList<Lesson> selectApproveLessonList(int memNo) {
+		return lDao.selectApproveLessonList(ss, memNo);
 	}
 
 	@Override
-	public ArrayList<Lesson> selectApproveStatusList() {
-		return lDao.selectApproveStatusList(ss);
+	public ArrayList<Lesson> selectApproveStatusList(int memNo) {
+		return lDao.selectApproveStatusList(ss, memNo);
 	}
 
 	//상세페이지 lesson 테이블 select (학천)

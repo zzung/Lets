@@ -91,9 +91,13 @@
 	     , lesson_title
 	     , approve_date
 	     , lesson_type
+	     , status
 	  from lesson
+	  where mem_no = #{memNo}
+	    and lesson_status = '승인'
 	 order
 	    by approve_date desc
+	    
 </select>
 
 <select id="selectApproveStatusList" resultMap="lessonResultSet" >
@@ -106,7 +110,8 @@
          , r_reason
          , lesson_status
 	  from lesson
-	 where status='Y'
+	 where mem_no = #{memNo}
+	   and status='Y'
 	 order
 	    by approve_date desc
 </select>

@@ -17,12 +17,12 @@ import com.kh.ee.user.tutor.model.vo.Tutor;
 @Repository
 public class LessonDao {
 
-	public ArrayList<Lesson> selectApproveLessonList(SqlSessionTemplate ss) {
-		return (ArrayList)ss.selectList("lessonMapper.selectApproveLessonList");
+	public ArrayList<Lesson> selectApproveLessonList(SqlSessionTemplate ss, int memNo) {
+		return (ArrayList)ss.selectList("lessonMapper.selectApproveLessonList", memNo);
 	}
 	
-	public ArrayList<Lesson> selectApproveStatusList(SqlSessionTemplate ss) {
-		return (ArrayList)ss.selectList("lessonMapper.selectApproveStatusList");
+	public ArrayList<Lesson> selectApproveStatusList(SqlSessionTemplate ss, int memNo) {
+		return (ArrayList)ss.selectList("lessonMapper.selectApproveStatusList", memNo);
 	}
 	
 	//상세페이지 레슨 보여주기(학천)

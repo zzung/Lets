@@ -10,8 +10,16 @@ import com.kh.ee.user.memPay.model.vo.MemPay;
 @Repository
 public class MemPayDao {
 	
-	public ArrayList<MemPay> selectPrepareList(SqlSessionTemplate ss) {
-		return (ArrayList)ss.selectList("memPayMapper.selectPrepareList");
+	public ArrayList<MemPay> selectPrepareList(SqlSessionTemplate ss, int memNo) {
+		return (ArrayList)ss.selectList("memPayMapper.selectPrepareList", memNo);
+	}
+	
+	public int updateDelivery(SqlSessionTemplate ss, MemPay mp) {
+		return ss.update("memPayMapper.updateDelivery", mp);
+	}
+	
+	public int selectListCount(SqlSessionTemplate ss, int memNo) {
+		return ss.selectOne("memPayMapper.selectListCount", memNo);
 	}
 
 }

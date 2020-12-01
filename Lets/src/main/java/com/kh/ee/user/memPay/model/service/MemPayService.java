@@ -6,5 +6,7 @@ import com.kh.ee.user.memPay.model.vo.MemPay;
 
 public interface MemPayService {
 
-	ArrayList<MemPay> selectPrepareList();
+	ArrayList<MemPay> selectPrepareList(int memNo);
+	int updateDelivery(MemPay mp);
+	int selectListCount(int memNo);
 }

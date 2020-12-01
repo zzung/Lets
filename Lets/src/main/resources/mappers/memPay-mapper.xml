@@ -16,20 +16,43 @@
 	<result column="del_status" property="delStatus" />
 	<result column="lesson_title" property="lessonTitle" />
 	<result column="mem_id" property="memId" />
+	<result column="mem_name" property="memName" />
+	<result column="lesson_prepare" property="lessonPrepare" />
+	
 </resultMap>
 
 <select id="selectPrepareList" resultMap="memPayResultSet">
 	select
-	       mp.lesson_no
+	       mp.mem_pay_no
+	     , mp.lesson_no
 	     , m.mem_id
+	     , m.mem_name
 	     , l.lesson_title
 	     , mp.payment_date
 	     , mp.del_status
+	     , l.lesson_prepare
 	     , mp.status
+	     , l.mem_no
+	     , mp.del_name
+	     , mp.del_no
 	  from mem_pay mp
-	  join lesson l on(l.lesson_no = mp.lesson_no)
+	  left join lesson l on(l.lesson_no = mp.lesson_no)
 	  left join member m on(m.mem_no = mp.mem_no)
 	 where l.status = 'Y'
+	   and l.mem_no = #{memNo}
+	   
 </select>
 
+<update id="updateDelivery" parameterType="MemPay">
+	update
+	       mem_pay
+	   set del_name = #{delName},
+	       del_no = #{delNo},
+	       del_status = '배송중'
+	 where mem_pay_no = #{memPayNo}
+</update>
+
+<select id="selectListCount" resultMap="memPayResultSet">
+	
+</select>
 </mapper>
