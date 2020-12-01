@@ -28,9 +28,8 @@
          	
          	var length = $(this).parents().eq(2).children().length;
          	$(this).parents().eq(2).children().eq(length-1).children().eq(0).html('<h6 class="category_2">'+(length-1) + ")"+'</h6>');
-         	$(this).remove();
-         	
-            $('.detailDel').click (function(){
+
+         	$(this).parents().eq(1).next().find('.detailDel').click (function(){
             	//debugger
             	var targetindex = $(this).parents().eq(2).children().index($(this).parents().eq(1))-1
             	$('.curriculumS').eq($('.detailadd').index($(this).prev())).children().eq(targetindex).remove()
@@ -38,15 +37,15 @@
             	var length = tbody.children().length - 1
             	if ($(this).prev().length != 0) {
             		tbody.children().eq(length-1).children().eq(2).prepend('<button class="plus_btn detailadd" type="button">+</button>')
-            		$('.detailadd').click(detailAddFunction);
+            		$(this).parents().eq(1).prev().find('.detailadd').click(detailAddFunction);
                	} 
             	$(this).parents().eq(1).remove()
             	for(i=0; i<length; i++){
             		tbody.find(".category_2").eq(i).text((i+1)+")")
         	 	}
             })
-
-            $('.detailadd').click(detailAddFunction);
+            $(this).parents().eq(1).next().find('.detailadd').click(detailAddFunction);
+         	$(this).remove();
          }
 
          

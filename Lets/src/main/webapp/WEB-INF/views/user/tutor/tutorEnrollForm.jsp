@@ -13,7 +13,7 @@
 <body>
     <jsp:include page="../common/navBar.jsp" />
     
-    <form>
+    <form id="enrollForm" method="post" action="insert.tt" enctype="multipart/form-data">
         <br><h3 class="mb-30">튜터 등록</h3>
         <hr class="top-hr">
         <div class="tutorEnrollForm" style="margin: 5%">
@@ -28,17 +28,16 @@
             </div><br>
 
             <div class="tutorEnroll">
-                <textarea class="tutor-textarea" placeholder="튜터소개를 입력해주세요. (공백포함 1000자 이내)" required="" name=""
+                <textarea class="tutor-textarea" placeholder="튜터소개를 입력해주세요. (공백포함 1000자 이내)" required name="tutorInfo"
                     onfocus="this.placeholder = ''" onblur="this.placeholder = '튜터소개를 입력해주세요. (공백포함 1000자 이내)'"></textarea>
             </div><br>
 
-            <h5><b>프로필 이미지 첨부</b></h5><input type="file" id="upfile" class="form-control-file border" style="width:500px;" name=""><br><br><br>
+            <h5><b>프로필 이미지 첨부</b></h5><input type="file" id="upfile" class="form-control-file border" style="width:500px;" name="tutorFile"><br><br><br>
             <div align="center">
                 <button type="submit" class="genric-btn primary radius">등록하기</button><br><br><br>
            </div>
           </div>
       </form>
-    
-    <jsp:include page="../common/footer.jsp" />
+
 </body>
 </html>

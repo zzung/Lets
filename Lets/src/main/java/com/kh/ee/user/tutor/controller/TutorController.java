@@ -62,6 +62,8 @@ public class TutorController {
 	
 	@RequestMapping("insert.tt")
 	public String insertTutor(Tutor t, HttpSession session, MultipartFile upfile) {
+		
+		System.out.println(t);
 
 		int result = tutorService.insertTutorInfo(t);
 		
