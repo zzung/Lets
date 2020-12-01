@@ -28,6 +28,19 @@
 	<result column="disc_status" property="discStatus" />
 </resultMap>
 
+<resultMap id="lessonResultSet" type="Lesson">
+	<id column="lesson_no" property="lessonNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="lesson_category" property="lessonCategory" />
+	<result column="lesson_title" property="lessonTitle" />
+	<result column="lesson_status" property="lessonStatus" />
+	<result column="status_hold" property="statusHold" />
+	<result column="h_reason" property="holdReason" />
+	<result column="r_reason" property="refuseReason" />
+	<result column="price" property="price" />
+	<result column="mem_id" property="memId"/>
+</resultMap>
+
 <select id="selectDiscountList" resultMap="memberResultSet">
 	 select 
 	        l.lesson_title
@@ -152,4 +165,37 @@
 	   and l.status = 'Y'
 	   and disc_status = '적용'
 </select>
+
+<select id="classMgmtList" resultMap="lessonResultSet">
+	select
+	       l.lesson_title
+	     , l.lesson_no
+	     , l.lesson_category
+	     , m.mem_id
+	     , l.lesson_status
+	 from lesson l
+	 join member m on (l.mem_no = m.mem_no)
+	 join tutor t on (t.mem_no = l.mem_no)
+	where t.status = 'Y'
+	  and l.status = 'Y'
+	 order 
+	    by lesson_no desc
+</select>
+
+<update id="lessonApproval" parameterType="_int">
+	update
+	       lesson
+	   set lesson_status = '승인'
+	     , r_reason = null
+	 where lesson_no = #{lessonNo}
+</update>
+
+<update id="rejectApproval" parameterType="_int">
+	update 
+	       lesson
+	   set lesson_status = '거절'
+	     , r_reason = #{rReason}
+	     , status = 'N'
+	 where lesson_no = #{lessonNo}
+</update>
 </mapper>

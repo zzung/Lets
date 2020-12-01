@@ -44,5 +44,7 @@ public class Lesson {
 	private String status;
 	private Date approveDate;
 	
+	//관리자 필요(학천)
+	private String memId;
 	
 }

@@ -43,35 +43,21 @@
 			                <th width="100px;">승인상태</th>
 			                <th width="180px;">승인여부</th>
 			            </tr>
+			            <c:forEach var="l" items="${list }" varStatus="status">
 			            <tr>
-			                <td height="40px;">2</td>
-			                <td width="350px;">오늘은 내가 왕이다..어쩔래 길이가 얼마나 길지 모르니까 계속 적어 본다.</td>
-			                <td>머니</td>
-			                <td>recipechoice@gmail.com</td>
-			                <td>승인 검토중</td>
-			                <td><button class="btn btn-default">승인</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-default">거부</button></td>
+			                <td height="40px;">${status.count }</td>
+			                <td width="350px;">${l.lessonTitle }</td>
+			                <td>${l.lessonCategory }</td>
+			                <td>${l.memId }</td>
+			                <td id="approvalArea${l.lessonNo }">${l.lessonStatus }</td>
+			                <td><button class="btn btn-default" id="approval" data-no="${l.lessonNo}" onclick="approvalClass(this);">승인</button>&nbsp;&nbsp;&nbsp;
+			                <button class="btn btn-default" id="reject" data-toggle="modal" data-target="#rejectApproval" data-no="${l.lessonNo}" onclick="rejectApprovalSet(this)">거부</button></td>
 			            </tr>
-			            <tr>
-			                <td height="40px;">2</td>
-			                <td>오늘은 내가 여왕이다</td>
-			                <td>머니</td>
-			                <td>recipee@gmail.com</td>
-			                <td>승인</td>
-			                <td><button class="btn btn-default">승인</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-default">거부</button></td>
-			            </tr>
-			            <tr>
-			                <td height="40px;">2</td>
-			                <td>오늘은 내가 조커다</td>
-			                <td>머니</td>
-			                <td>recipe@gmail.com</td>
-			                <td id="approvalStatus1">거부</td>
-			                <td><button onclick="approvalClass();" id="approval" class="btn btn-default">승인</button>&nbsp;&nbsp;
-			                    <button data-toggle="modal" data-target="#settingSales" id="reject" class="btn btn-default">거부</button></td>
-			            </tr>
+			            </c:forEach>
 			        </table>
 		        <!--?승인여부 선택-->
 		        <!-- ?승인 거부 클릭시 보여질 모달 -->
-					<div class="modal" id="settingSales">
+					<div class="modal" id="rejectApproval">
 						<div class="modal-dialog">
 							<!-- Modal content-->
 							<div class="modal-content" align="center" style="width: 450px;">
@@ -80,10 +66,10 @@
 									<h4 class="modal-title">거부 사유</h4>
 								</div>
 								<div class="modal-body">
-									<textarea id="reportReasonArea" cols="45" rows="4"
-										style="resize: none;"></textarea>
+									<textarea id="reportReasonArea" cols="45" rows="4" style="resize: none;"></textarea>
 								</div>
 								<div class="modal-footer">
+									<input type="hidden" id="rejectNo" value="">
 									<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal" onclick="sendRejectReason();">적용</button>
 								</div>
@@ -92,37 +78,120 @@
 					</div>
 					<!--Modal End-->
 					<script>
-						function approvalClass() {
+						function approvalClass(e) {
 							var accept = confirm("클래스 생성을 승인 하시겠습니까?");
-							var str = " ";
-							var num = 1;
-
+							var lessonNo = $(e).data("no");
+							var str = "승인";
+							
+							console.log(lessonNo); 
+							
 							if (accept) {
-								str = "승인";
-								document.getElementById("approval").disabled = true;
+								$.ajax({
+									url:"lessonApproval.ad",
+									data:{
+										lessonNo:lessonNo
+									},
+									success:function(result){
+										if(result == "success" ){
+											alert("승인 완료되었습니다.")
+											$("#approvalArea"+lessonNo).text(str);
+											document.getElementById("approval").disabled = true;
+										} else {
+											aler("승인 실패했습니다.")
+										}
+									},
+									error:function(){
+										console.log("approval class ajax fail");
+									}
+								});
+
 							} else {
+								
 								return;
 							}
 
-							document.getElementById("approvalStatus" + num).innerHTML = "<p>"
-									+ str + "</p>";
-
 						}
-
+						
+						function rejectApprovalSet(e){
+							 $("#rejectNo").val($(e).data("no"));
+						}
+						
+						function sendRejectReason(){
+							var accept = confirm("거절 사유 작성 완료 하시겠습니까?")
+							var lessonNo = $("#rejectNo").val();
+							var rReason = $("#reportReasonArea").text();
+							var str = '거절'; 
+							
+							
+							if(accept){
+								$.ajax({
+									url:"rejectApproval.ad",
+									data:{
+										lessonNo:lessonNo,
+										rReason: rReason
+									},
+									success:function(result){
+										if(result == "success"){
+											alert("거절 완료되었습니다.");
+											$("#approvalArea"+lessonNo).text(str);
+											$("#reject").attr("disabled",true);
+											$("#approval").attr("disabled",false); 
+										}
+									},
+									error:function(){
+										console.log("reject approval ajax fail");
+									}
+								});
+								
+							}else{
+								return;
+							}
+						}
 					</script>
 		        <!--end of 승인여부-->
 		        <br><br>
-		        <div class="container" align="center">              
-		            <ul class="pagination">
-		              <li><a href="#">&lt;</a></li>
-		              <li><a href="#">1</a></li>
-		              <li><a href="#">2</a></li>
-		              <li><a href="#">3</a></li>
-		              <li><a href="#">4</a></li>
-		              <li><a href="#">5</a></li>
-		              <li><a href="#">&gt;</a></li>
-		            </ul>
-		          </div>
+		        <div class="container" align="center">
+						<ul class="pagination">
+						<c:choose>
+							<c:when test="${pi.currentPage eq 1 }">
+								<li class="disabled"><a href="">&lt;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="classManagement.ad?currentPage=${pi.currentPage -1 }">&lt;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+							<c:choose>
+								<c:when test="${pi.currentPage ne p }">
+									<c:choose>
+										<c:when test="${empty sc }">
+											<li><a href="classManagement.ad?currentPage=${p}">${p}</a></li>
+										</c:when>
+										<c:otherwise>
+											<c:url var="searchUrl" value="searchDiscount.ad">
+												<c:param name="currentPage" value="${p }"/>
+												<c:param name="condition" value="${condition }" />
+												<c:param name="keyword" value="${keyword }" />
+											</c:url>
+											
+											<li><a href="${searchUrl }">${p }</a></li>
+										</c:otherwise>
+									</c:choose>	
+								</c:when>
+							</c:choose>
+						</c:forEach>
+						
+						<c:choose>
+							<c:when test="${pi.currentPage eq pi.maxPage }">
+								<li class="disabled"><a href="#">&gt;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="classManagement.ad?currentPage=${pi.currentPage +1 }">&gt;</a></li>
+							</c:otherwise>
+						</c:choose>	
+						</ul>
+					</div>
 		    </div>
 	    </section>
     </div>

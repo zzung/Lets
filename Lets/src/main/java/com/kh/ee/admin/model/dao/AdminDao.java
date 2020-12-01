@@ -69,5 +69,27 @@ public class AdminDao {
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		return (ArrayList)ss.selectList("adminMapper.searchDiscountApplied",null,rowBounds);
 	}
+	
+	//클래스 관리 페이지 select 문(학천)
+	public int classMgmtCountList(SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.selectListCount");
+	}
+	public ArrayList<Lesson> classMgmtList(PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.classMgmtList",null,rowBounds);
+	}
+	
+	//클래스관리 승인 처리 ajax(학천)
+	public int lessonApproval(int lessonNo, SqlSessionTemplate ss) {
+		return ss.update("adminMapper.lessonApproval",lessonNo);
+	}
+	
+	//클래스관리 거절 처리 ajax(학천)
+	public int rejectApproval(int lessonNo, SqlSessionTemplate ss) {
+		return ss.update("adminMapper.rejectApproval",lessonNo);
+	}
 
 }

@@ -28,8 +28,40 @@ public class AdminController {
 	}
 	
 	@RequestMapping("classManagement.ad")
-	public String classManagement(){
+	public String classManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
+		int listCount = as.classMgmtCountList();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Lesson> list = as.classMgmtList(pi);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pi",pi); 
+		
 		return "admin/classManagementView";
+	}
+	
+	@ResponseBody
+	@RequestMapping("lessonApproval.ad")
+	public String lessonApproval(int lessonNo) {
+		int result = as.lessonApproval(lessonNo);
+		
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("rejectApproval.ad")
+	public String rejectApproval(int lessonNo) {
+		int result = as.rejectApproval(lessonNo);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	@RequestMapping("classPayment.ad")
@@ -50,30 +82,6 @@ public class AdminController {
 		return "admin/discountManagementView"; 
 	}
 	
-	@RequestMapping("blacklistManagement.ad")
-	public String blacklistManagement(){
-		return "admin/blacklistManagementView";
-	}
-	
-	@RequestMapping("inqueryManagement.ad")
-	public String inqueryManagement(){
-		return "admin/inqueryManagementView";
-	}
-	
-	@RequestMapping("reportManagement.ad")
-	public String reportManagement(){
-		return "admin/reportManagementView";
-	}
-	
-	@RequestMapping("noticeManagement.ad")
-	public String noticeManagement(){
-		return "admin/noticeManagementView";
-	}
-
-	@RequestMapping("faqManagement.ad")
-	public String faqManagement(){
-		return "admin/faqManagementView";
-	}
 	
 	@ResponseBody
 	@RequestMapping("discountSet.ad")
@@ -137,5 +145,30 @@ public class AdminController {
 		model.addAttribute("pi",pi);
 		
 		return "admin/discountManagementView";
+	}
+	
+	@RequestMapping("blacklistManagement.ad")
+	public String blacklistManagement(){
+		return "admin/blacklistManagementView";
+	}
+	
+	@RequestMapping("inqueryManagement.ad")
+	public String inqueryManagement(){
+		return "admin/inqueryManagementView";
+	}
+	
+	@RequestMapping("reportManagement.ad")
+	public String reportManagement(){
+		return "admin/reportManagementView";
+	}
+	
+	@RequestMapping("noticeManagement.ad")
+	public String noticeManagement(){
+		return "admin/noticeManagementView";
+	}
+
+	@RequestMapping("faqManagement.ad")
+	public String faqManagement(){
+		return "admin/faqManagementView";
 	}
 }

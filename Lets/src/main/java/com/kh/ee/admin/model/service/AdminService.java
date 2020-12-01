@@ -28,4 +28,14 @@ public interface AdminService {
 	int countDiscountApplied();
 	ArrayList<Member> searchDiscountApplied(PageInfo pi);
 
+	//클래스 관리 페이지 select 문(학천)
+	int classMgmtCountList();
+	ArrayList<Lesson> classMgmtList(PageInfo pi);
+
+	//클래스관리 승인 처리 ajax(학천)
+	int lessonApproval(int lessonNo);
+	
+	//클래스관리 거절 처리 ajax(학천)
+	int rejectApproval(int lessonNo);
+
 }

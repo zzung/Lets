@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>할인 상품 관리</title>
 </head>
+<!-- 할인 미적용/적용 클릭시 페이징 처리 해야함 그리고 페이징 boardlimit 10으로 늘려야함 (학천) -->
 <body>
 	<jsp:include page="adminNav.jsp" />
 	<div id="main-wrapper">

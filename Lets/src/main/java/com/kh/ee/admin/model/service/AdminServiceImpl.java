@@ -66,5 +66,27 @@ public class AdminServiceImpl implements AdminService{
 	public ArrayList<Member> searchDiscountApplied(PageInfo pi) {
 		return ad.countDiscountApplied(pi,ss);
 	}
+	
+	//클래스 관리 페이지 select 문(학천)
+	@Override
+	public int classMgmtCountList() {
+		return ad.classMgmtCountList(ss);
+	}
+	@Override
+	public ArrayList<Lesson> classMgmtList(PageInfo pi) {
+		return ad.classMgmtList(pi,ss);
+	}
+	
+	//클래스관리 승인 처리 ajax(학천)
+	@Override
+	public int lessonApproval(int lessonNo) {
+		return ad.lessonApproval(lessonNo,ss);
+	}
+	
+	//클래스관리 거절 처리 ajax(학천)
+	@Override
+	public int rejectApproval(int lessonNo) {
+		return ad.rejectApproval(lessonNo, ss);
+	}
 
 }
