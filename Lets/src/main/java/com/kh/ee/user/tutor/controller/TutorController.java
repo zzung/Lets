@@ -12,15 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.ee.common.model.vo.PageInfo;
+import com.kh.ee.common.template.Pagination;
 import com.kh.ee.user.faq.model.service.FaqService;
 import com.kh.ee.user.faq.model.vo.Faq;
 import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.service.MemPayService;
 import com.kh.ee.user.memPay.model.vo.MemPay;
+import com.kh.ee.user.member.model.service.MemberService;
 import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.tutor.model.service.TutorService;
 import com.kh.ee.user.tutor.model.vo.Tutor;
@@ -33,12 +37,14 @@ public class TutorController {
 	private LessonService lessonService;
 	@Autowired
 	private MemPayService memPayService;
+	@Autowired
+	private MemberService mService;
 	
 	@Autowired
 	private TutorService tutorService;
 	
 	@RequestMapping("tutorMain.tm")
-	public String tutorMain(Model model) {
+	public String tutorMain( Model model) {
 		
 		ArrayList<Faq> list = faqService.selectTutorFaqList();
 		
@@ -47,17 +53,26 @@ public class TutorController {
 	}
 	
 	@RequestMapping("tutorMyLesson.tm")
-	public String tutorMyLesson(int memNo, Model model) {
+	public String tutorMyLesson(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1")int currentPage) {
 		
-		ArrayList<Lesson> aLlist = lessonService.selectApproveLessonList();
-		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList();
-		ArrayList<MemPay> mpList = memPayService.selectPrepareList();
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		ArrayList<Lesson> aLlist = lessonService.selectApproveLessonList(loginUser.getMemNo());
+		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList(loginUser.getMemNo());
+		
+		int listCount = memPayService.selectListCount(loginUser.getMemNo());
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		ArrayList<MemPay> mpList = memPayService.selectPrepareList(loginUser.getMemNo(), currentPage);
+		
+		
 		
 		model.addAttribute("aLlist", aLlist);
 		model.addAttribute("sLlist", sLlist);
 		model.addAttribute("mpList", mpList);
 		
 		return "user/tutor/myClassView";
+		
+		
 	}
 	
 	@RequestMapping("tutorEnroll.te")
@@ -117,5 +132,14 @@ public class TutorController {
 			return "fail";
 		}
 	}
-
+	
+	@RequestMapping("delivery.tm")
+	public String updateDelivery(MemPay mp) {
+		System.out.println(mp);
+		int result = memPayService.updateDelivery(mp);
+		
+		return "redirect:tutorMyLesson.tm";
+	}
+	
+	
 }
