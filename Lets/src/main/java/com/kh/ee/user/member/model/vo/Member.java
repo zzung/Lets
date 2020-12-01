@@ -38,4 +38,5 @@ public class Member {
 	private String lessonTitle;
 	private int lessonNo;
 	private String discount;
+	private String discStatus; 
 }

@@ -18,12 +18,13 @@
 				</div>
 				<div class="welcome" align="center">
 					<div align="right" style="width: 1030px;">
-						<a class="btn btn-default" onclick="searchSubmit(1);">할인 미적용</a> <a
-							class="btn btn-default" onclick="searchSubmit(2);">할인 적용</a>
+						<a class="btn btn-default" onclick="searchSubmit(1);">할인 미적용</a> 
+						<a class="btn btn-default" onclick="searchSubmit(2);">할인 적용</a>
 
 						<form action="" method="post" id="searchSubmit">
-							<input type="hidden" name="" value="">
+							<input type="hidden" name="currentPage" value="1">
 						</form>
+						
 						<div id=searchArea>
 							<form action="searchDiscount.ad">
 								<input type="hidden" name="currentPage" value="1">
@@ -37,16 +38,15 @@
 							</form>
 						</div>
 					</div>
-					<script>
+					<script>  
 						function searchSubmit(num) {
 							if (num == 1) {
-								$("#searchSubmit").attr("action", "보낼페이지")
-										.submit();
+								$("#searchSubmit").attr("action", "discountUnApplied.ad").submit();
 							} else {
-								$("#searchSubmit").attr("action", "보낼페이지")
-										.submit();
+								$("#searchSubmit").attr("action", "discountApplied.ad").submit();
 							}
 						}
+		
 						
 						$(function(){
 							$("#searchArea option[value=${condition}]").attr("selected",true);
@@ -62,9 +62,9 @@
 							<th width="150px;">클래스 할인율</th>
 							<th width="130px;">할인 설정</th>
 						</tr>
-						<c:forEach var="m" items="${m }">
+						<c:forEach var="m" items="${m }" varStatus="status">
 						<tr>
-							<td>${m.lessonNo}</td>
+							<td>${status.count } </td>
 							<td width="350px;">${m.lessonTitle }</td>
 							<td>${m.memId }</td>
 							<c:choose>

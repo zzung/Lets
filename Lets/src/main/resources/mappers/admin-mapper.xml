@@ -25,6 +25,7 @@
 	<result column="lesson_title" property="lessonTitle" />
 	<result column="lesson_no" property="lessonNo"/>
 	<result column="discount" property="discount"/>
+	<result column="disc_status" property="discStatus" />
 </resultMap>
 
 <select id="selectDiscountList" resultMap="memberResultSet">
@@ -102,5 +103,53 @@
 	 		and discount like '%' || #{percentage} || '%'
 	 	</otherwise>
 	 </choose>
+</select>
+
+<select id="countDiscountUnApplied" resultType="_int">
+	select 
+	       count(*)
+	  from member m 
+	  join lesson l on (l.mem_no = m.mem_no)
+	  join tutor t on (m.mem_no = t.mem_no)
+	 where l.status ='Y'
+	   and disc_status = '미적용'
+</select>
+
+<select id="searchDiscountUnApplied" resultMap="memberResultSet">
+	 select 
+	        l.lesson_title
+	      , m.mem_id
+	      , l.lesson_no
+	      , l.disc_status
+	  from member m
+	  join lesson l on(m.mem_no = l.mem_no)
+	  join tutor t on (m.mem_no = t.mem_no)
+	 where t.status = 'Y'
+	   and l.status = 'Y'
+	   and disc_status = '미적용'
+</select>
+
+<select id="countDiscountApplied" resultType="_int">
+	select 
+	       count(*)
+	  from member m 
+	  join lesson l on (l.mem_no = m.mem_no)
+	  join tutor t on (m.mem_no = t.mem_no)
+	 where l.status ='Y'
+	   and disc_status = '적용'
+</select>
+
+<select id="searchDiscountApplied" resultMap="memberResultSet">
+	 select 
+	        l.lesson_title
+	      , m.mem_id
+	      , l.lesson_no
+	      , l.disc_status
+	  from member m
+	  join lesson l on(m.mem_no = l.mem_no)
+	  join tutor t on (m.mem_no = t.mem_no)
+	 where t.status = 'Y'
+	   and l.status = 'Y'
+	   and disc_status = '적용'
 </select>
 </mapper>

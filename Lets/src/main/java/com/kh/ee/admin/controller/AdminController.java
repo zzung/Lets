@@ -112,4 +112,30 @@ public class AdminController {
 		return "admin/discountManagementView";
 		
 	}
+	
+	@RequestMapping("discountUnApplied.ad")
+	public String searchDiscountUnApplied(int currentPage, Model model) {
+		int listCount = as.countDiscountUnApplied();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		ArrayList<Member> m = as.searchDiscountUnApplied(pi);
+
+		model.addAttribute("m",m);
+		model.addAttribute("pi",pi);
+		
+		return "admin/discountManagementView";
+	}
+	
+	@RequestMapping("discountApplied.ad")
+	public String searchDiscountApplied(int currentPage, Model model) {
+		int listCount = as.countDiscountApplied();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		ArrayList<Member> m = as.searchDiscountApplied(pi);
+
+		model.addAttribute("m",m);
+		model.addAttribute("pi",pi);
+		
+		return "admin/discountManagementView";
+	}
 }

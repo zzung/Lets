@@ -13,11 +13,11 @@ import com.kh.ee.user.member.model.vo.Member;
 
 @Repository
 public class AdminDao {
-
+	
+	//할인 품관리 총 list(학천)
 	public int selectListCount(SqlSessionTemplate ss) {
 		return ss.selectOne("adminMapper.selectListCount");
 	}
-
 	public ArrayList<Member> selectDiscountList(PageInfo pi, SqlSessionTemplate ss) {
 			
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
@@ -28,20 +28,46 @@ public class AdminDao {
 		return (ArrayList)ss.selectList("adminMapper.selectDiscountList",null,rowBounds);
 	}
 
+	//ajax(학천)할인율 셋팅
 	public int discountSet(Lesson l, SqlSessionTemplate ss) {
 		return ss.update("adminMapper.discountSet",l);
 	}
-
+	
+	//할인 품관리 총 list(학천)
 	public int searchDiscountCount(SearchCondition sc, SqlSessionTemplate ss) {
 		return ss.selectOne("adminMapper.searchDiscountCount",sc);
 	}
-
 	public ArrayList<Member> searchDiscountList(SearchCondition sc, PageInfo pi, SqlSessionTemplate ss) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit(); 
 		int limit = pi.getBoardLimit(); 
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)ss.selectList("adminMapper.searchDiscountList",sc,rowBounds);
+	}
+
+	//할인 미적용 카운트용(학천)
+	public int countDiscountUnApplied(SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.countDiscountUnApplied");
+	}
+	public ArrayList<Member> searchDiscountUnApplied(PageInfo pi, SqlSessionTemplate ss) {
+		
+		int offset = (pi.getCurrentPage() -1 ) * pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.searchDiscountUnApplied",null,rowBounds);
+	}
+	
+	//할인 적용 카운트 / 검색(학천)
+	public int countDiscountApplied(SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.countDiscountApplied");
+	}
+	public ArrayList<Member> countDiscountApplied(PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage() -1 ) * pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.searchDiscountApplied",null,rowBounds);
 	}
 
 }
