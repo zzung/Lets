@@ -27,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
-import com.kh.ee.user.member.loginAPI.KakaoLoginBO;
 import com.kh.ee.user.member.loginAPI.NaverLoginBO;
 import com.kh.ee.user.member.model.service.MemberService;
 import com.kh.ee.user.member.model.vo.Member;
@@ -36,7 +35,6 @@ import com.kh.ee.user.member.model.vo.Member;
 public class MemberController {
 	
 	private NaverLoginBO naverLoginBO;
-	private KakaoLoginBO kakaoLoginBO;
 	private String apiResult = null;
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
