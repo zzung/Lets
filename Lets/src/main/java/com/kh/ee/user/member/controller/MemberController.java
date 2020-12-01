@@ -8,6 +8,10 @@ import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.JsonNode;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -15,17 +19,29 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
+import com.kh.ee.user.member.loginAPI.KakaoLoginBO;
+import com.kh.ee.user.member.loginAPI.NaverLoginBO;
 import com.kh.ee.user.member.model.service.MemberService;
 import com.kh.ee.user.member.model.vo.Member;
 
 @Controller
 public class MemberController {
 	
+	private NaverLoginBO naverLoginBO;
+	private KakaoLoginBO kakaoLoginBO;
+	private String apiResult = null;
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+	this.naverLoginBO = naverLoginBO;
+	}
 	@Autowired
 	private JavaMailSender mailSender;
 	@Autowired
@@ -35,7 +51,12 @@ public class MemberController {
 	
 	
 	@RequestMapping("loginForm.me")
-	public String loginForm() {
+	public String loginForm(HttpSession session, Model model) {
+		
+		// 네이버아이디로 인증 URL 생성 
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		model.addAttribute("naverUrl", naverAuthUrl);
+
 		return "user/member/loginForm";
 	}
 	
@@ -54,6 +75,52 @@ public class MemberController {
 		}
 	}
 	
+	//네이버 로그인 성공시 callback호출 메소드
+	@RequestMapping(value = "naverlogin.me", method = { RequestMethod.GET, RequestMethod.POST })
+	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
+
+		OAuth2AccessToken oauthToken;
+		oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		//1. 로그인 사용자 정보를 읽어옴
+		apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
+		
+		//2. String형식인 apiResult를 json형태로 바꿈
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(apiResult);
+		JSONObject jsonObj = (JSONObject) obj;
+		
+		//3. 데이터 파싱
+		JSONObject response_obj = (JSONObject)jsonObj.get("response");
+		
+		Member m = new Member();	
+		m.setMemId((String)response_obj.get("email"));
+		m.setMemName((String) response_obj.get("name"));
+		m.setNickname((String)response_obj.get("nickname"));
+		m.setGender((String)response_obj.get("gender"));
+		
+		model.addAttribute("result", apiResult);
+		
+		if((mService.selectMember((String)response_obj.get("email")))!=null) {	// 해당 아이디의 회원이 이미 있을경우
+			Member loginUser = mService.loginMember(m);
+			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("alertMsg", "네이버 아이디로 로그인 성공 !\\n( ※ 참고 : 다른 네이버 아이디로의 로그인은 네이버에서 직접 로그아웃 한 후에 가능합니다. )");
+			return "redirect:/";
+			
+		}else { // 없으면 회원가입 처리 후 로그인
+			int result = mService.insertMember(m);
+			if(result > 0) {
+				Member loginUser = mService.loginMember(m);
+				session.setAttribute("loginUser", loginUser);
+				session.setAttribute("alertMsg", "네이버 아이디로 로그인 성공 !\\n( ※ 참고 : 다른 네이버 아이디로의 로그인은 네이버에서 직접 로그아웃 한 후에 가능합니다. )");
+				return "redirect:/";
+			}else {
+				model.addAttribute("errorMsg","네이버 아이디로 로그인 처리에 실패했습니다. 관리자에게 문의하세요.");
+				return "user/common/errorPage";
+			}
+		}
+	}
+	
+	
 	@RequestMapping("logout.me")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -68,9 +135,10 @@ public class MemberController {
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, HttpSession session, Model model) {
 		
-		String encPwd = bpe.encode(m.getMemPwd());
-		m.setMemPwd(encPwd);
-		
+		if(m.getMemPwd()!=null) {
+			String encPwd = bpe.encode(m.getMemPwd());
+			m.setMemPwd(encPwd);
+		}
 		int result = mService.insertMember(m);
 		
 		if(result > 0) {
@@ -164,7 +232,7 @@ public class MemberController {
                 		"안녕하세요 회원님, 저희 Lets를 찾아주셔서 감사합니다. :)"+System.getProperty("line.separator")+
                 		System.getProperty("line.separator")+"인증번호는 " +randNum+ " 입니다. "+
                 		System.getProperty("line.separator")+System.getProperty("line.separator")+
-                		"받으신 인증번호를 Lets페이지에 입력해주세요.";
+                		"받으신 인증번호를 Lets페이지에 입력해주세요."+System.getProperty("line.separator");
         
         try {
             MimeMessage message = mailSender.createMimeMessage();
@@ -223,18 +291,16 @@ public class MemberController {
 	@RequestMapping("update.me")
 	public String updateMember(Member m, MultipartFile changeMemPic, HttpSession session, Model model) throws IOException {
 		
-		String encPwd = bpe.encode(m.getMemPwd());
-		m.setMemPwd(encPwd);
-		
+		if(m.getMemPwd()!=null) {
+			String encPwd = bpe.encode(m.getMemPwd());
+			m.setMemPwd(encPwd);
+		}
 		if(!changeMemPic.getOriginalFilename().equals("")){
-			
 			String fileName = saveFileManager(changeMemPic, session);
-			
 			if(fileName != null) {
 				m.setMemPic("resources/user/assets/img/member/" + fileName);
 			}
 		}
-		
 		int result = mService.updateMember(m);
 		if(result > 0) {
 			session.setAttribute("loginUser", mService.loginMember(m));
@@ -324,7 +390,7 @@ public class MemberController {
 			session.setAttribute("alertMsg", "배송 확정 처리 되었습니다.");
 			return "redirect:myDeliveryList.me";
 		}else {
-			model.addAttribute("errorMsg", "배송 확정 처리에 실패했습니다.");
+			model.addAttribute("errorMsg", "배송 확정 처리에 실패했습니다. 관리자에게 문의하세요.");
 			return "user/common/errorPage";
 		}
 	}
