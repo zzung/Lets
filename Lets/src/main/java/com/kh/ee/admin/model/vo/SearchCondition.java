@@ -17,4 +17,5 @@ public class SearchCondition {
 	private String title;
 	private String content;
 	private String percentage;
+	private String approval;
 }

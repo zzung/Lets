@@ -88,8 +88,20 @@ public class AdminDao {
 	}
 	
 	//클래스관리 거절 처리 ajax(학천)
-	public int rejectApproval(int lessonNo, SqlSessionTemplate ss) {
-		return ss.update("adminMapper.rejectApproval",lessonNo);
+	public int rejectApproval(Lesson l, SqlSessionTemplate ss) {
+		return ss.update("adminMapper.rejectApproval",l);
+	}
+	
+	//클래스관리 검색시 나올 갯수/검색(학천)
+	public int searchClassMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.searchClassMgmtCount",sc);
+	}
+	public ArrayList<Lesson> searchClassMgmtList(SearchCondition sc, PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.searchClassMgmtList",sc,rowBounds);
 	}
 
 }

@@ -177,7 +177,6 @@
 	 join member m on (l.mem_no = m.mem_no)
 	 join tutor t on (t.mem_no = l.mem_no)
 	where t.status = 'Y'
-	  and l.status = 'Y'
 	 order 
 	    by lesson_no desc
 </select>
@@ -190,12 +189,55 @@
 	 where lesson_no = #{lessonNo}
 </update>
 
-<update id="rejectApproval" parameterType="_int">
+<update id="rejectApproval" parameterType="Lesson">
 	update 
 	       lesson
 	   set lesson_status = '거절'
-	     , r_reason = #{rReason}
+	     , r_reason = #{refuseReason}
 	     , status = 'N'
 	 where lesson_no = #{lessonNo}
 </update>
+
+<select id="searchClassMgmtCount" parameterType="SearchCondition" resultType="_int">
+	select 
+	       count(*)
+	  from lesson l 
+	  join member m on (l.mem_no = m.mem_no)
+	  join tutor t on (l.mem_no = t.mem_no)
+	 where t.status ='Y'
+	 <choose>
+	 	<when test="content != null">
+	 		and lesson_title like '%' || #{title} || '%'
+	 	</when>
+	 	<when test="writer != null">
+	 		and mem_id like '%' || #{writer} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and lesson_status like '%' || #{approval} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
+
+<select id="searchClassMgmtList" parameterType="SearchCondition" resultMap="lessonResultSet">
+	select 
+	        l.lesson_title
+	      , m.mem_id
+	      , l.lesson_no
+	      , l.lesson_status
+	  from lesson l
+	  join member m on(m.mem_no = l.mem_no)
+	  join tutor t on (m.mem_no = t.mem_no)
+	 where t.status = 'Y'
+	 <choose>
+	 	<when test="content != null">
+	 		and lesson_title like '%' || #{title} || '%'
+	 	</when>
+	 	<when test="writer != null">
+	 		and mem_id like '%' || #{writer} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and lesson_status like '%' || #{approval} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
 </mapper>

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>클래스 관리</title>
+<!-- 페이징 처리 수정 필요 데이터 많아지면 boardlmiit 10으로 바꾸기 (학천) -->
 </head>
 <body>
 	<jsp:include page="adminNav.jsp" />
@@ -16,23 +17,21 @@
 				<h1>클래스 관리</h1>
 			</div>
 				<div class="welcome" align="center">
-			        <div align="right" style="width:1030px;">
-			            <form action="">
-			                <tr>
-			                    <td>
-			                        <select name="condition" style="height:28px;">
-			                            <option value="writer">클래스 제목</option>
-			                            <option value="title">튜터ID</option>
-			                            <option value="content">승인상태</option>
-			                          </select>
-			                    </td>
-			                    <td>
-			                        <input type="text" name="keyword">
-			                    </td>
-			                    <td><button type="submit" class="btn btn-default">검색</button></td>
-			                </tr>
-			            </form>
-			        </div >
+			        <div class="searchArea" align="right" style="width:1030px;">
+						<form action="searchClassMgmt.ad">
+							<input type="hidden" name="currentPage" value="1"> 
+							<select name="condition" style="height: 30px;">
+								<option value="title">클래스 제목</option>
+								<option value="writer">튜터ID</option>
+								<option value="approval">승인상태</option>
+							</select>
+	                       	<input type="text" name="keyword" value="${keyword}">
+	                   		<button type="submit" class="btn btn-default">검색</button>
+						</form> 
+			        </div>
+			        <script>
+			        	$(".searchArea option[value=${condition}]").attr("selected",true); 
+			        </script>
 			        <br>
 			        <table class="list-area">
 			            <tr>
@@ -50,8 +49,18 @@
 			                <td>${l.lessonCategory }</td>
 			                <td>${l.memId }</td>
 			                <td id="approvalArea${l.lessonNo }">${l.lessonStatus }</td>
-			                <td><button class="btn btn-default" id="approval" data-no="${l.lessonNo}" onclick="approvalClass(this);">승인</button>&nbsp;&nbsp;&nbsp;
-			                <button class="btn btn-default" id="reject" data-toggle="modal" data-target="#rejectApproval" data-no="${l.lessonNo}" onclick="rejectApprovalSet(this)">거부</button></td>
+			                <td>
+			                <c:choose>
+			                	<c:when test="${l.lessonStatus eq '거절' }">
+			                		<button class="btn btn-default" id="approval${l.lessonNo }" data-no="${l.lessonNo}" onclick="approvalClass(this);">승인</button>&nbsp;&nbsp;&nbsp;
+			                		<button class="btn btn-default disabled" id="reject${l.lessonNo }">거부</button>
+			                	</c:when>
+			                	<c:otherwise>
+					                <button class="btn btn-default" id="approval${l.lessonNo }" data-no="${l.lessonNo}" onclick="approvalClass(this);">승인</button>&nbsp;&nbsp;&nbsp;
+					                <button class="btn btn-default" id="reject${l.lessonNo }" data-toggle="modal" data-target="#rejectApproval" data-no="${l.lessonNo}" onclick="rejectApprovalSet(this)">거부</button>
+			                	</c:otherwise>
+			                </c:choose>
+			                </td>
 			            </tr>
 			            </c:forEach>
 			        </table>
@@ -95,7 +104,9 @@
 										if(result == "success" ){
 											alert("승인 완료되었습니다.")
 											$("#approvalArea"+lessonNo).text(str);
-											document.getElementById("approval").disabled = true;
+											$("#approval"+lessonNo).attr("disabled",true); 
+											$("#reject"+lessonNo).attr("disabled",false);
+											
 										} else {
 											aler("승인 실패했습니다.")
 										}
@@ -119,23 +130,24 @@
 						function sendRejectReason(){
 							var accept = confirm("거절 사유 작성 완료 하시겠습니까?")
 							var lessonNo = $("#rejectNo").val();
-							var rReason = $("#reportReasonArea").text();
+							var rReason = $("#reportReasonArea").val();
 							var str = '거절'; 
 							
-							
+							console.log(rReason); 
 							if(accept){
 								$.ajax({
 									url:"rejectApproval.ad",
 									data:{
 										lessonNo:lessonNo,
-										rReason: rReason
+										refuseReason: rReason
 									},
 									success:function(result){
 										if(result == "success"){
 											alert("거절 완료되었습니다.");
+											$("#reportReasonArea").val("");
 											$("#approvalArea"+lessonNo).text(str);
-											$("#reject").attr("disabled",true);
-											$("#approval").attr("disabled",false); 
+											$("#reject"+lessonNo).attr("disabled",true);
+											$("#approval"+lessonNo).attr("disabled",false); 
 										}
 									},
 									error:function(){
@@ -169,7 +181,7 @@
 											<li><a href="classManagement.ad?currentPage=${p}">${p}</a></li>
 										</c:when>
 										<c:otherwise>
-											<c:url var="searchUrl" value="searchDiscount.ad">
+											<c:url var="searchUrl" value="searchClassMgmt.ad">
 												<c:param name="currentPage" value="${p }"/>
 												<c:param name="condition" value="${condition }" />
 												<c:param name="keyword" value="${keyword }" />
