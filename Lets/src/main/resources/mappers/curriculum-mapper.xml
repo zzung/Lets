@@ -35,6 +35,9 @@
  		<result column="a_status" property="aStatus" />
  		<result column="mem_pic" property="memPic" />
  		<result column="tutor_pic" property="tutorPic" />
+ 		<result column="tutor_no" property="tutorNo" />
+ 		<result column="mem_nick" property="memNick" />
+ 		<result column="tutor_nick" property="tutorNick" />
  	</resultMap>
  	
  	<resultMap type="Video" id="videoResultSet">
@@ -102,20 +105,22 @@
  	<!-- 일단 이거 문제 생길듯 sql문이 완벽하지 않아보임 -->
  	<select id="selectQnA" resultMap="qnaResultSet" parameterType="Lesson">
  		select
- 			   qa_no
- 			 , q.mem_no
- 			 , lesson_no
- 			 , question
- 			 , answer
- 			 , mem_pic
- 			 , tutor_pic
- 	 	  from qna q
- 	 	  join member m using(mem_no)
- 	 	  join tutor t using(mem_no)
- 	 	 where lesson_no = #{lessonNo}
- 	 	   and t.mem_no = #{memNo}
- 	 	 order
- 	 	    by qa_no desc
+		       q.qa_no
+		     , q.mem_no
+		     , t.mem_no "tutor_no"
+		     , q.lesson_no
+		     , question
+		     , answer
+		     , m.mem_pic
+		     , t.tutor_pic
+		  from qna q
+		  join member m using(mem_no)
+		  join lesson l using(lesson_no)
+		  join tutor t on(l.mem_no = t.mem_no)
+		 where q.lesson_no = #{lessonNo}
+		   and q_status = 'Y'
+		 order
+		    by qa_no desc;
  	</select>
  	
  	<select id="selectVideoCount" resultType="_int" parameterType="Lesson">
@@ -150,12 +155,24 @@
  	 
  	<select id="selectDetailQnA" resultMap="qnaResultSet" parameterType="Lesson">
  		select
- 			   qa_no
- 			 , mem_no
- 			 , question
- 			 , answer
- 		  from qna
- 		 where lesson_no = #{lessonNo}
- 		   and q_status = 'Y'
+		       q.qa_no
+		     , q.mem_no
+		     , t.mem_no "tutor_no"
+		     , q.lesson_no
+		     , question
+		     , answer
+		     , q_enroll_date
+		     , a_enroll_date
+		     , m.mem_pic
+		     , m.nickname "mem_nick"
+		     , t.tutor_pic
+		     , tm.nickname "tutor_nick"
+		  from qna q
+		  join member m using(mem_no)
+		  join lesson l using(lesson_no)
+		  join tutor t on(l.mem_no = t.mem_no)
+		  join member tm on(t.mem_no = tm.mem_no)
+		 where q.lesson_no = #{lessonNo}
+		   and q_status = 'Y'
  	</select>
 </mapper>
