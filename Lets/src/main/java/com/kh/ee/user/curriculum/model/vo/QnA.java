@@ -27,5 +27,7 @@ public class QnA {
 	
 	private String memPic;		// 질문자 사진
 	private String tutorPic; 	// 답변자 사진(튜터 사진)
-	
+	private int tutorNo;		// 튜터 번호
+	private int memNick;		// 회원 닉네임
+	private int tutorNick;		// 튜터 닉네임
 }

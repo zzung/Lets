@@ -253,7 +253,7 @@ div{
             <div id="reply_box">
 
                 <div class="user_img">
-                    <img src="resources/user/assets/img/curriculum/user.png" height="100%">
+                    <img src="${ loginUser.memPic }" height="100%">
                 </div>
 
                 <div class="blank"></div>
@@ -262,109 +262,132 @@ div{
 
                     <textarea id="question_area" cols="30" rows="10" placeholder="질문 내용을 입력해주세요."></textarea>
 
-                    <button class="button" onclick="send(1);" id="question_send">제출</button>
+                    <button class="button" onclick="send('question');">제출</button>
 
                 </div>
             </div>
 
             <hr>
 
-            <!-- 이게 한 세트 -->
-            <div>
-
-                <!-- 질문 박스 -->
-                <div class="margin_box">
-
-                    <!-- 질문 -->
-                    <div class="question">
-    
-                        <div class="user_img">
-                            <img src="resources/user/assets/img/curriculum/user.png" height="100%">
-                        </div>
-                        
-                        <div class="blank"></div>
-    
-                        <div class="question_box">
-        
-                            <p class="black">실습 파일 어디 있나요?</p>
-        
-                            <span>user 2020/11/12 17:57</span>
-    
-                            <div class="enter">
-    
-                                <span class="button" onclick="modify(1);">수정</span>
-                                /
-                                <span class="button" onclick="reply(1);">답변</span>
-                                /
-                                <span class="button" onclick="deleteReply(1);">삭제</span>
-    
-                            </div>
-        
-                        </div>
-    
-                    </div>
-    
-                    <!-- 답변(hide) -->
-                    <div class="answer" id="answer1">
-    
-                        <textarea class="answer_div" cols="20" rows="8" placeholder="답변 내용을 입력해주세요."></textarea>
-    
-                        <button onclick="send(1);" class="button send">답변</button>
-                        
-                        <button onclick="closeForm(1);" class="button div_close">닫기</button>
-    
-                    </div>
-
-                </div>
-
-                <!-- 질문 박스 -->
-                <div class="margin_box">
-
-                    <!-- 질문 -->
-                    <div class="question tutor">
-    
-                        <div class="user_img">
-                            <img src="resources/user/assets/img/curriculum/user.png" height="100%">
-                        </div>
-                        
-                        <div class="blank"></div>
-    
-                        <div class="question_box">
-        
-                            <p class="black">메일 남겨주시면 보내드립니다.</p>
-        
-                            <span>tutor 2020/11/12 17:57</span>
-    
-                            <div class="enter">
-    
-                                <span class="button" onclick="modify(2);">수정</span>
-                                /
-                                <span class="button" onclick="reply(2);">답변</span>
-                                /
-                                <span class="button" onclick="deleteReply(2);">삭제</span>
-    
-                            </div>
-        
-                        </div>
-    
-                    </div>
-    
-                    <!-- 답변 창 -->
-                    <div class="answer" id="answer2">
-    
-                        <textarea class="answer_div" cols="20" rows="8" placeholder="답변 내용을 입력해주세요."></textarea>
-    
-                        <button onclick="send(2);" class="button send">답변</button>
-                        
-                        <button onclick="closeForm(2);" class="button div_close">닫기</button>
-    
-                    </div>
-
-                </div>
-
-            </div>
+			<c:forEach var="qna" items="${ qnaList }" varStatus="status">
+			
+	            <!-- 이게 한 세트 -->
+	            <div>
+	            	
+	            	<input type="hidden" value="${ qna.qnaNo }" id="qna${ status.count }">
+	
+	                <!-- 질문 박스 -->
+	                <div class="margin_box">
+	
+	                    <!-- 질문 -->
+	                    <div class="question">
+	    
+	                        <div class="user_img">
+	                            <img src="${ qna.memPic }" height="100%">
+	                        </div>
+	                        
+	                        <div class="blank"></div>
+	    
+	                        <div class="question_box">
+	        
+	                            <p class="black"></p>
+	        
+	                            <span>${ qna.memNick } ${ qna.qEnrollDate }</span>
+	    
+	                            <div class="enter">
+	    
+	                                <span class="button" onclick="modify(${ status.count }${ status.index });">수정</span>
+	                                
+	                                <c:if test="${ loginUser.memNo == qna.tutorNo }">
+		                                /
+	                                	<span class="button" onclick="reply(${ status.count }${ status.index });">답변</span>
+	                                </c:if>
+	                                /
+	                                <span class="button" onclick="deleteReply(${ status.count }${ status.index });">삭제</span>
+	    
+	                            </div>
+	        
+	                        </div>
+	    
+	                    </div>
+	    
+	                    <!-- 답변(hide) -->
+	                    <div class="answer" id="answer${ status.count }${ status.index }">
+	    
+	                        <textarea class="answer_div" cols="20" rows="8" placeholder="답변 내용을 입력해주세요."></textarea>
+	    
+	                        <button onclick="send(${ status.count }${ status.index });" class="button send">답변</button>
+	                        
+	                        <button onclick="closeForm(${ status.count }${ status.index });" class="button div_close">닫기</button>
+	    
+	                    </div>
+	
+	                </div>
+	
+					<c:if test="${ qna.answer != null }">
+					
+		                <!-- 질문 박스 -->
+		                <div class="margin_box">
+		
+		                    <!-- 질문 -->
+		                    <div class="question tutor">
+		    
+		                        <div class="user_img">
+		                            <img src="${ qna.tutorPic }" height="100%">
+		                        </div>
+		                        
+		                        <div class="blank"></div>
+		    
+		                        <div class="question_box">
+		        
+		                            <p class="black">${ qna.answer }</p>
+		        
+		                            <span>${ qna.tutorNick } ${ qna.aEnrollDate }</span>
+		    
+		                            <div class="enter">
+		    
+		    							<c:if test="${ loginUser.memNo == qna.tutorNo }">
+			                                <span class="button" onclick="modify(${ status.count }${ status.index +1 });">수정</span>
+			                                /
+			                                <span class="button" onclick="deleteReply(${ status.count }${ status.index +1 });">삭제</span>
+		    							</c:if>
+		    							
+		                            </div>
+		        
+		                        </div>
+		    
+		                    </div>
+		    
+		                    <!-- 답변 창 -->
+		                    <div class="answer" id="answer${ status.count }${ status.index +1 }">
+		    
+		                        <textarea class="answer_div" cols="20" rows="8" placeholder="답변 내용을 입력해주세요."></textarea>
+		    
+		                        <button onclick="send(${ status.count }${ status.index +1 });" class="button send">답변</button>
+		                        
+		                        <button onclick="closeForm(${ status.count }${ status.index +1 });" class="button div_close">닫기</button>
+		    
+		                    </div>
+		
+		                </div>
+	                
+	                </c:if>
+	
+	            </div>
+	                
+            </c:forEach>
+            
+	        <!-- 제출 폼 -->
+	        <form action="" method="POST" id="qnaForm">
+	        	<input type="hidden" name="qnaNo" value="">
+	        	<input type="hidden" name="lessonNo" value="${ lesson.lessonNo }">
+	        	<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+	        	<input type="hidden" name="question" value="">
+	        	<input type="hidden" name="answer" value="">
+	        </form>
 
         </div>
+        
 
     </div>
 
@@ -399,9 +422,28 @@ div{
         $("#answer" + i).hide();
     }
     
-    function moving(e){
+    function moving(e) {
 		location.href = e + "?lessonNo=" + ${ lesson.lessonNo };
 	}
+    
+    function send(v) {
+    	
+    	if( v == 'question') {
+    		var text = $("#question_area").text();
+    		
+    		$("#qnaForm").children().eq(3).val(text);
+    		
+    		$("#qnaForm").attr("action", "insertQuestion.cr").submit();
+    	} else {
+    		var column = $("#answer" + v).children().eq(1).text();
+    		
+    		if(column == '답장') {
+    			$("#qnaForm").attr("action", "insert")
+    		} else {
+    			
+    		}
+    	}
+    }
 </script>
 
 <!-- footer -->

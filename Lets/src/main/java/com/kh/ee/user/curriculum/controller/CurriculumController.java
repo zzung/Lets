@@ -72,7 +72,9 @@ public class CurriculumController {
 	public String detailFaq(Lesson l, Model model) {
 		
 		ArrayList<LessonFaq> faqList = curService.detailFAQ(l);
+		Lesson selectLesson = curService.selectLesson(l);
 		
+		model.addAttribute("lesson", selectLesson);
 		model.addAttribute("faqList", faqList);
 		
 		return "user/curriculum/detailFAQ";
@@ -82,49 +84,61 @@ public class CurriculumController {
 	public String detailQna(Lesson l, Model model) {
 		
 		ArrayList<QnA> qnaList = curService.detailQnA(l);
+		Lesson selectLesson = curService.selectLesson(l);
 		
+		model.addAttribute("lesson", selectLesson);
 		model.addAttribute("qnaList", qnaList);
 		
 		return "user/curriculum/detailQNA";
 	}
 
-//	@RequestMapping("")
-//	public String insertQuestion(QnA q, HttpSession session) {
-//		return "";
-//	}
-//	
-//	@RequestMapping("")
-//	public String updateQuestion(QnA q, HttpSession session) {
-//		return "";
-//	}
-//	
-//	@RequestMapping("")
-//	public String deleteQuestion(QnA q) {
-//		return "";
-//	}
-//	
-//	@RequestMapping("")
-//	public String insertAnswer(QnA q) {
-//		return "";
-//	}
-//	
-//	@RequestMapping("")
-//	public String updateAnswer(QnA q) {
-//		return "";
-//	}
-//	
-//	@RequestMapping("")
-//	public String deleteAnswer(QnA q) {
-//		return "";
-//	}
+	@RequestMapping("insertQuestion.cr")
+	public String insertQuestion(QnA q, HttpSession session) {
+		return "";
+	}
+	
+	@RequestMapping("updateQuestion.cr")
+	public String updateQuestion(QnA q, HttpSession session) {
+		return "";
+	}
+	
+	@RequestMapping("deleteQuestion.cr")
+	public String deleteQuestion(QnA q) {
+		return "";
+	}
+	
+	@RequestMapping("insertAnswer.cr")
+	public String insertAnswer(QnA q) {
+		return "";
+	}
+	
+	@RequestMapping("updateAnswer.cr")
+	public String updateAnswer(QnA q) {
+		return "";
+	}
+	
+	@RequestMapping("deleteAnswer.cr")
+	public String deleteAnswer(QnA q) {
+		return "";
+	}
 	
 	@RequestMapping("videoList.cr")
 	public String videoList(Lesson l, Model model) {
+		
+		Lesson selectLesson = curService.selectLesson(l);
+		
+		model.addAttribute("lesson", selectLesson);
+		
 		return "user/curriculum/videoList";
 	}
 	
 	@RequestMapping("detailVideo.cr")
-	public String detailVideo(MemVideo mv) {
+	public String detailVideo(MemVideo mv, Model model) {
+		
+		Lesson selectLesson = curService.selectLesson(l);
+		
+		model.addAttribute("lesson", selectLesson);
+		
 		return "user/curriculum/detailVideo";
 	}
 	
