@@ -44,33 +44,27 @@ public class CurriculumServiceImpl implements CurriculumService{
 	}
 	@Override
 	public int insertQuestion(QnA q) {
-		// TODO Auto-generated method stub
-		return 0;
+		return curDao.insertQuestion(sqlSession, q);
 	}
 	@Override
 	public int updateQuestion(QnA q) {
-		// TODO Auto-generated method stub
-		return 0;
+		return curDao.updateQuestion(sqlSession, q);
 	}
 	@Override
 	public int deleteQuestion(QnA q) {
-		// TODO Auto-generated method stub
-		return 0;
+		return curDao.deleteQuestion(sqlSession, q);
 	}
 	@Override
 	public int insertAnswer(QnA q) {
-		// TODO Auto-generated method stub
-		return 0;
+		return curDao.insertAnswer(sqlSession, q);
 	}
 	@Override
 	public int updateAnswer(QnA q) {
-		// TODO Auto-generated method stub
-		return 0;
+		return curDao.updateAnswer(sqlSession, q);
 	}
 	@Override
 	public int deleteAnswer(QnA q) {
-		// TODO Auto-generated method stub
-		return 0;
+		return curDao.deleteAnswer(sqlSession, q);
 	}
 	@Override
 	public ArrayList<Video> videoList(Video v) {

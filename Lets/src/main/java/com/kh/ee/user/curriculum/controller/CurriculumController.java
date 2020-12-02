@@ -93,53 +93,114 @@ public class CurriculumController {
 	}
 
 	@RequestMapping("insertQuestion.cr")
-	public String insertQuestion(QnA q, HttpSession session) {
-		return "";
+	public String insertQuestion(QnA q, Model model) {
+		
+		int result = curService.insertQuestion(q);
+		
+		if(result > 0) {			
+			return "redirect:detailQNA.cr?lessonNo=" + q.getLessonNo();
+		} else {
+			model.addAttribute("errorMsg", "질문 작성에 실패했습니다.");
+			
+			return "user/common/errorPage";
+		}
+		
 	}
 	
 	@RequestMapping("updateQuestion.cr")
-	public String updateQuestion(QnA q, HttpSession session) {
-		return "";
+	public String updateQuestion(QnA q, Model model) {
+		
+		int result = curService.updateQuestion(q);
+		
+		if(result > 0) {
+			return "redirect:detailQNA.cr?lessonNo=" + q.getLessonNo();			
+		} else {
+			model.addAttribute("errorMsg", "질문 수정에 실패했습니다.");
+			
+			return "user/common/errorPage";
+		}
+		
 	}
 	
 	@RequestMapping("deleteQuestion.cr")
-	public String deleteQuestion(QnA q) {
-		return "";
+	public String deleteQuestion(QnA q, Model model) {
+		
+		int result = curService.deleteQuestion(q);
+		
+		if(result > 0) {			
+			return "redirect:detailQNA.cr?lessonNo=" + q.getLessonNo();
+		} else {
+			model.addAttribute("errorMsg", "질문 삭제에 실패했습니다.");
+			
+			return "user/common/errorPage";
+		}
 	}
 	
 	@RequestMapping("insertAnswer.cr")
-	public String insertAnswer(QnA q) {
-		return "";
+	public String insertAnswer(QnA q, Model model) {
+		
+		int result = curService.insertAnswer(q);
+		
+		if(result > 0) {
+			return "redirect:detailQNA.cr?lessonNo=" + q.getLessonNo();			
+		} else {
+			model.addAttribute("errorMsg", "답변 작성에 실패했습니다.");
+			
+			return "user/common/errorPage";
+			
+		}
 	}
 	
 	@RequestMapping("updateAnswer.cr")
-	public String updateAnswer(QnA q) {
-		return "";
+	public String updateAnswer(QnA q, Model model) {
+		
+		int result = curService.updateAnswer(q);
+		
+		if(result > 0) {
+			return "redirect:detailQNA.cr?lessonNo=" + q.getLessonNo();			
+		} else {
+			model.addAttribute("errorMsg", "답변 수정에 실패했습니다.");
+			
+			return "user/common/errorPage";
+			
+		}
+		
 	}
 	
 	@RequestMapping("deleteAnswer.cr")
-	public String deleteAnswer(QnA q) {
-		return "";
+	public String deleteAnswer(QnA q, Model model) {
+		
+		int result = curService.deleteAnswer(q);
+		
+		if(result > 0) {
+			return "redirect:detailQNA.cr?lessonNo=" + q.getLessonNo();			
+		} else {
+			model.addAttribute("errorMsg", "답변 삭제에 실패했습니다.");
+			
+			return "user/common/errorPage";
+			
+		}
+		
 	}
 	
-	@RequestMapping("videoList.cr")
-	public String videoList(Lesson l, Model model) {
-		
-		Lesson selectLesson = curService.selectLesson(l);
-		
-		model.addAttribute("lesson", selectLesson);
-		
-		return "user/curriculum/videoList";
-	}
-	
-	@RequestMapping("detailVideo.cr")
-	public String detailVideo(MemVideo mv, Model model) {
-		
-		Lesson selectLesson = curService.selectLesson(l);
-		
-		model.addAttribute("lesson", selectLesson);
-		
-		return "user/curriculum/detailVideo";
-	}
+//	@RequestMapping("videoList.cr")
+//	public String videoList(Lesson l, Model model) {
+//		
+//		Lesson selectLesson = curService.selectLesson(l);
+//		
+//		model.addAttribute("lesson", selectLesson);
+//		
+//		return "user/curriculum/videoList";
+//	}
+//	
+//	@RequestMapping("detailVideo.cr")
+//	public String detailVideo(MemVideo mv, Model model) {
+//		
+//		Lesson selectLesson = curService.selectLesson(mv);
+//		
+//		model.addAttribute("lesson", selectLesson);
+//		
+//		return "user/curriculum/detailVideo";
+//	}
 	
 }

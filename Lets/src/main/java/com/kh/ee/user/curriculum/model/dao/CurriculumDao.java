@@ -40,4 +40,28 @@ public class CurriculumDao {
 	public ArrayList<QnA> selectDetailQnA(SqlSessionTemplate sqlSession, Lesson l) {
 		return (ArrayList)sqlSession.selectList("curriculumMapper.selectDetailQnA", l);
 	}
+	
+	public int insertQuestion(SqlSessionTemplate sqlSession, QnA q) {
+		return sqlSession.insert("curriculumMapper.insertQuestion", q);
+	}
+	
+	public int updateQuestion(SqlSessionTemplate sqlSession, QnA q) {
+		return sqlSession.update("curriculumMapper.updateQuestion", q);
+	}
+	
+	public int deleteQuestion(SqlSessionTemplate sqlSession, QnA q) {
+		return sqlSession.update("curriculumMapper.deleteQuestion", q);
+	}
+	
+	public int insertAnswer(SqlSessionTemplate sqlSession, QnA q) {
+		return sqlSession.update("curriculumMapper.insertAnswer", q);
+	}
+	
+	public int updateAnswer(SqlSessionTemplate sqlSession, QnA q) {
+		return sqlSession.update("curriculumMapper.updateAnswer", q);
+	}
+	
+	public int deleteAnswer(SqlSessionTemplate sqlSession, QnA q) {
+		return sqlSession.update("curriculumMapper.deleteAnswer", q);
+	}
 }

@@ -102,7 +102,6 @@
  		    by curriculum_no asc
  	</select>
  	
- 	<!-- 일단 이거 문제 생길듯 sql문이 완벽하지 않아보임 -->
  	<select id="selectQnA" resultMap="qnaResultSet" parameterType="Lesson">
  		select
 		       q.qa_no
@@ -120,7 +119,7 @@
 		 where q.lesson_no = #{lessonNo}
 		   and q_status = 'Y'
 		 order
-		    by qa_no desc;
+		    by qa_no desc
  	</select>
  	
  	<select id="selectVideoCount" resultType="_int" parameterType="Lesson">
@@ -163,6 +162,7 @@
 		     , answer
 		     , q_enroll_date
 		     , a_enroll_date
+		     , a_status
 		     , m.mem_pic
 		     , m.nickname "mem_nick"
 		     , t.tutor_pic
@@ -174,5 +174,62 @@
 		  join member tm on(t.mem_no = tm.mem_no)
 		 where q.lesson_no = #{lessonNo}
 		   and q_status = 'Y'
+		 order
+		    by qa_no desc
  	</select>
+ 	
+ 	<insert id="insertQuestion" parameterType="QnA">
+ 		insert
+ 		  into qna
+ 		  (
+ 		  	   qa_no
+ 		  	 , mem_no
+ 		  	 , lesson_no
+ 		  	 , question
+ 		  	 , q_enroll_date
+ 		  )
+ 		values
+ 		  (
+ 		       seq_qnano.nextval
+ 		     , #{qnaNo}
+ 		     , #{memNo}
+ 		     , #{lessonNo}
+ 		     , #{question}
+ 		     , sysdate
+ 		  )  
+ 	</insert>
+ 	
+ 	<update id="updateQuestion" parameterType="QnA">
+ 		update qna
+ 		   set question = #{question}
+ 		     , q_enroll_date = sysdate
+ 		 where qa_no = #{qnaNo} 
+ 	</update>
+ 	
+ 	<update id="deleteQuestion" parameterType="QnA">
+ 		update qna
+ 		   set q_status = 'N'
+ 		 where qa_no = #{qnaNo} 
+ 	</update>
+ 	
+ 	<update id="insertAnswer" parameterType="QnA">
+ 		update qna
+ 		   set answer = #{answer}
+ 		     , a_enroll_date = sysdate
+ 		     , a_status = 'Y'
+ 		 where qa_no = #{qnaNo} 
+ 	</update>
+ 	
+ 	<update id="updateAnswer" parameterType="QnA">
+ 		update qna
+ 		   set answer = #{answer}
+ 		     , a_enroll_date = sysdate
+ 		 where qa_no = #{qnaNo} 
+ 	</update>
+ 	
+ 	<update id="deleteAnswer" parameterType="QnA">
+ 		update qna
+ 		   set a_status = 'N'
+ 		 where qa_no = #{qnaNo}
+ 	</update>
 </mapper>

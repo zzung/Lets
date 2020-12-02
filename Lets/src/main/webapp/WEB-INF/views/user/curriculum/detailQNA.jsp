@@ -262,10 +262,19 @@ div{
 
                     <textarea id="question_area" cols="30" rows="10" placeholder="질문 내용을 입력해주세요."></textarea>
 
-                    <button class="button" onclick="send('question');">제출</button>
+                    <button class="button" onclick="insertQ();">제출</button>
 
                 </div>
+                
             </div>
+            
+            <!-- 폼 -->
+	        <form action="insertQuestion.cr" method="POST" id="qnaForm">
+	        	<input type="hidden" name="lessonNo" value="${ lesson.lessonNo }">
+	        	<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+	        	<input type="hidden" name="question" value="">
+	        </form>
+            
 
             <hr>
 
@@ -295,16 +304,16 @@ div{
 	                            <span>${ qna.memNick } ${ qna.qEnrollDate }</span>
 	    
 	                            <div class="enter">
-	    
-	                                <span class="button" onclick="modify(${ status.count }${ status.index });">수정</span>
-	                                
-	                                <c:if test="${ loginUser.memNo == qna.tutorNo }">
+	    							
+	    							<c:if test="${ loginUser.memNo == qna.memNo }">
+		                                <span class="button" onclick="modify(${ status.count }${ status.index });">수정</span>
 		                                /
+		                                <span class="button" onclick="deleteQuestion(${ status.count }${ status.index });">삭제</span>
+	    	                        </c:if>
+	                                <c:if test="${ loginUser.memNo == qna.tutorNo }">
 	                                	<span class="button" onclick="reply(${ status.count }${ status.index });">답변</span>
 	                                </c:if>
-	                                /
-	                                <span class="button" onclick="deleteReply(${ status.count }${ status.index });">삭제</span>
-	    
+	                                
 	                            </div>
 	        
 	                        </div>
@@ -316,15 +325,21 @@ div{
 	    
 	                        <textarea class="answer_div" cols="20" rows="8" placeholder="답변 내용을 입력해주세요."></textarea>
 	    
-	                        <button onclick="send(${ status.count }${ status.index });" class="button send">답변</button>
+	                        <button onclick="send(${ status.count }${ status.index });" class="button send"></button>
 	                        
 	                        <button onclick="closeForm(${ status.count }${ status.index });" class="button div_close">닫기</button>
 	    
 	                    </div>
+	                    
+	                    <form action="" method="POST" id="actionQuestion${ status.count }${ status.index }">
+	                    	<input type="hidden" value="${ qna.qnaNo }" name="qnaNo">
+	                    	<input type="hidden" value="${ lesson.lessonNo }" name="lessonNo">
+	                    	<input type="hidden" value="" name="">
+	                    </form>
 	
 	                </div>
 	
-					<c:if test="${ qna.answer != null }">
+					<c:if test="${ qna.aStatus == 'Y' }">
 					
 		                <!-- 질문 박스 -->
 		                <div class="margin_box">
@@ -349,7 +364,7 @@ div{
 		    							<c:if test="${ loginUser.memNo == qna.tutorNo }">
 			                                <span class="button" onclick="modify(${ status.count }${ status.index +1 });">수정</span>
 			                                /
-			                                <span class="button" onclick="deleteReply(${ status.count }${ status.index +1 });">삭제</span>
+			                                <span class="button" onclick="deleteAnswer(${ status.count }${ status.index +1 });">삭제</span>
 		    							</c:if>
 		    							
 		                            </div>
@@ -363,11 +378,17 @@ div{
 		    
 		                        <textarea class="answer_div" cols="20" rows="8" placeholder="답변 내용을 입력해주세요."></textarea>
 		    
-		                        <button onclick="send(${ status.count }${ status.index +1 });" class="button send">답변</button>
+		                        <button onclick="updateAnswer(${ status.count }${ status.index +1 });" class="button send">수정</button>
 		                        
 		                        <button onclick="closeForm(${ status.count }${ status.index +1 });" class="button div_close">닫기</button>
 		    
 		                    </div>
+		                    
+		                    <form action="" method="POST" name="actionAnswer${ status.count }${ status.index +1 }">
+		                    	<input type="hidden" name="qnaNo" value="${ qna.qnaNo }">
+		                    	<input type="hidden" name="lessonNo" value="${ lesson.lessonNo }">
+		                    	<input type="hidden" name="answer" value="">
+		                    </form>
 		
 		                </div>
 	                
@@ -377,15 +398,6 @@ div{
 	                
             </c:forEach>
             
-	        <!-- 제출 폼 -->
-	        <form action="" method="POST" id="qnaForm">
-	        	<input type="hidden" name="qnaNo" value="">
-	        	<input type="hidden" name="lessonNo" value="${ lesson.lessonNo }">
-	        	<input type="hidden" name="memNo" value="${ loginUser.memNo }">
-	        	<input type="hidden" name="question" value="">
-	        	<input type="hidden" name="answer" value="">
-	        </form>
-
         </div>
         
 
@@ -426,22 +438,47 @@ div{
 		location.href = e + "?lessonNo=" + ${ lesson.lessonNo };
 	}
     
-    function send(v) {
+    function send(i) {
+   		var column = $("#answer" + i).children().eq(1).text();
+		var text = $("#answer" + i).children().eq(0).text();
+   		
+   		if(column == "답장") {
+   			$("#actionQuestion" + i).children().eq(2).attr("name", "answer").val(text);
+   			$("#actionQuestion" + i).attr("action", "insertAnswer.cr").submit();
+   		} else {
+   			$("#actionQuestion" + i).children().eq(2).attr("name", "question").val(text);
+   			$("#actionQuestion" + i).attr("action", "updateQuestion.cr").submit();
+   		}
+   	}
+    
+    function insertQ(){
+    	var text = $("#question_area").text();
+		
+		$("#qnaForm").children().eq(2).val(text);
+		
+		$("#qnaForm").submit();
+    }
+    
+    function deleteQuestion(i) {
+    	var result = confirm("정말로 삭제하시겠습니까?");
+    	 
+		if(result) {
+			$("#actionQuestion" + i).attr("action", "deleteQuestion.cr").submit();
+		}
+    }
+    
+    function updateAnswer(i) {
+    	var text = $("#answer" + i).children().eq(2).text();
     	
-    	if( v == 'question') {
-    		var text = $("#question_area").text();
-    		
-    		$("#qnaForm").children().eq(3).val(text);
-    		
-    		$("#qnaForm").attr("action", "insertQuestion.cr").submit();
-    	} else {
-    		var column = $("#answer" + v).children().eq(1).text();
-    		
-    		if(column == '답장') {
-    			$("#qnaForm").attr("action", "insert")
-    		} else {
-    			
-    		}
+    	$("#actionAnswer" + i).children().eq(2).val(text);
+    	$("#actionAnswer" + i).attr("action", "updateAnswer.cr").submit();
+    }
+    
+    function deleteAnswer(i) {
+    	var result = confirm("정말로 삭제하시겠습니까?");
+    	
+    	if(result) {
+    		$("#actionAnswer" + i).attr("action", "deleteAnswer.cr").submit();
     	}
     }
 </script>
