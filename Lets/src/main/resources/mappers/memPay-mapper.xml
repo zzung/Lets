@@ -17,8 +17,7 @@
 	<result column="lesson_title" property="lessonTitle" />
 	<result column="mem_id" property="memId" />
 	<result column="mem_name" property="memName" />
-	<result column="lesson_prepare" property="lessonPrepare" />
-	
+	<result column="lesson_prepare" property="lessonPrepare" />	
 </resultMap>
 
 <select id="selectPrepareList" resultMap="memPayResultSet">
@@ -52,7 +51,13 @@
 	 where mem_pay_no = #{memPayNo}
 </update>
 
-<select id="selectListCount" resultMap="memPayResultSet">
+<select id="selectListCount" parameterType="_int" resultType="_int">
+	select
+	      count(*) listcount
+	    from mem_pay
+	    join lesson l using (lesson_no)
+	    where l.mem_no = #{memNo}
 	
 </select>
+	 
 </mapper>

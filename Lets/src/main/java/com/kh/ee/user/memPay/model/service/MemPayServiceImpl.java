@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.memPay.model.dao.MemPayDao;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 
@@ -18,8 +19,8 @@ public class MemPayServiceImpl implements MemPayService{
 	private MemPayDao memPayDao;
 	
 	@Override
-	public ArrayList<MemPay> selectPrepareList(int memNo) {
-		return memPayDao.selectPrepareList(ss, memNo);
+	public ArrayList<MemPay> selectPrepareList(int memNo, PageInfo pi) {
+		return memPayDao.selectPrepareList(ss, memNo, pi);
 	}
 
 	@Override

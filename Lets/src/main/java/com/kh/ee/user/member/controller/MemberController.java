@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -22,10 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
-//import com.kh.ee.user.member.loginAPI.KakaoLoginBO;
+import com.kh.ee.user.member.loginAPI.KakaoLoginBO;
 import com.kh.ee.user.member.loginAPI.NaverLoginBO;
 import com.kh.ee.user.member.model.service.MemberService;
 import com.kh.ee.user.member.model.vo.Member;
@@ -34,12 +37,9 @@ import com.kh.ee.user.member.model.vo.Member;
 public class MemberController {
 	
 	private NaverLoginBO naverLoginBO;
-	//private KakaoLoginBO kakaoLoginBO;
 	private String apiResult = null;
 	@Autowired
-	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-	this.naverLoginBO = naverLoginBO;
-	}
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) { this.naverLoginBO = naverLoginBO; }
 	@Autowired
 	private JavaMailSender mailSender;
 	@Autowired
@@ -51,9 +51,10 @@ public class MemberController {
 	@RequestMapping("loginForm.me")
 	public String loginForm(HttpSession session, Model model) {
 		
-		// 네이버아이디로 인증 URL 생성 
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		model.addAttribute("naverUrl", naverAuthUrl);
+		String kakaoUrl = KakaoLoginBO.getAuthorizationUrl(session);
+	    model.addAttribute("kakaoUrl", kakaoUrl);
 
 		return "user/member/loginForm";
 	}
@@ -62,6 +63,7 @@ public class MemberController {
 	public String loginMember(Member m, HttpSession session, Model model) {
 		
 		Member loginUser = mService.loginMember(m);
+		loginUser.setGender(loginUser.getGender().equals("F")? "여":"남");
 		String bpw = bpe.encode(m.getMemPwd());
 		if(loginUser != null && bpe.matches(m.getMemPwd(), loginUser.getMemPwd())) {
 			session.setAttribute("loginUser", loginUser);
@@ -73,9 +75,9 @@ public class MemberController {
 		}
 	}
 	
-	//네이버 로그인 성공시 callback호출 메소드
+	// 네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "naverlogin.me", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
+	public String naverLoginCallback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
 
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
@@ -95,11 +97,14 @@ public class MemberController {
 		m.setMemName((String) response_obj.get("name"));
 		m.setNickname((String)response_obj.get("nickname"));
 		m.setGender((String)response_obj.get("gender"));
+		m.setMemPic((String) response_obj.get("profile_image"));
 		
+//		System.out.println("네이버 로그인 : "+m);
 		model.addAttribute("result", apiResult);
 		
 		if((mService.selectMember((String)response_obj.get("email")))!=null) {	// 해당 아이디의 회원이 이미 있을경우
 			Member loginUser = mService.loginMember(m);
+			loginUser.setGender(loginUser.getGender().equals("F")? "여":"남");
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "네이버 아이디로 로그인 성공 !\\n( ※ 참고 : 다른 네이버 아이디로의 로그인은 네이버에서 직접 로그아웃 한 후에 가능합니다. )");
 			return "redirect:/";
@@ -118,10 +123,59 @@ public class MemberController {
 		}
 	}
 	
-	
+	@RequestMapping(value = "kakaologin.me", method = { RequestMethod.GET, RequestMethod.POST })
+	   public String kakaoLoginCallback(@RequestParam("code") String code, HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception{
+	      
+	      JsonNode node = KakaoLoginBO.getAccessToken(code); // accessToken에 로그인한 사용자의 모든 정보 있음
+	      JsonNode accessToken = node.get("access_token"); // 사용자 토큰
+	      JsonNode userInfo = KakaoLoginBO.getKakaoUserInfo(accessToken); 
+	      
+	      JsonNode properties = userInfo.path("properties");
+	      JsonNode kakao_account = userInfo.path("kakao_account");
+	      
+	      //노드 안에 있는 access_token값을 꺼내 문자열로 변환
+	      String token = node.get("access_token").toString();
+	      session.setAttribute("token", token);
+	      
+	      Member m = new Member();
+	      m.setMemId(kakao_account.path("email").asText());
+	      m.setMemName(properties.path("nickname").asText());
+	      m.setNickname(properties.path("nickname").asText());
+	      m.setGender((kakao_account.path("gender").asText()).equals("female")? "F" : "M");
+	      m.setMemPic(properties.path("profile_image").asText());
+//	      System.out.println("카카오 로그인 : "+m);
+	      
+	      if(mService.selectMember(kakao_account.path("email").asText())!=null) {	// 해당 아이디의 회원이 이미 있을경우
+				Member loginUser = mService.loginMember(m);
+				loginUser.setGender(loginUser.getGender().equals("F")? "여":"남");
+				session.setAttribute("loginUser", loginUser);
+				session.setAttribute("alertMsg", "카카오 아이디로 로그인 성공 !\\n( ※ 참고 : 다른 카카오 아이디로의 로그인은 카카오에서 직접 로그아웃 한 후에 가능합니다. )");
+				return "redirect:/";
+				
+			}else { // 없으면 회원가입 처리 후 로그인
+				int result = mService.insertMember(m);
+				if(result > 0) {
+					Member loginUser = mService.loginMember(m);
+					session.setAttribute("accessToken", accessToken);
+					session.setAttribute("loginUser", loginUser);
+					session.setAttribute("alertMsg", "카카오 아이디로 로그인 성공 !\\\\n( ※ 참고 : 다른 카카오 아이디로의 로그인은 카카오에서 직접 로그아웃 한 후에 가능합니다. )");
+					return "redirect:/";
+				}else {
+					model.addAttribute("errorMsg","카카오 아이디로 로그인 처리에 실패했습니다. 관리자에게 문의하세요.");
+					return "user/common/errorPage";
+				}
+			}
+	   }
+	   
 	@RequestMapping("logout.me")
 	public String logout(HttpSession session) {
-		session.invalidate();
+		
+        if(session.getAttribute("token")!=null) {
+        	KakaoLoginBO.Logout((String)session.getAttribute("accessToken"));
+            session.removeAttribute("accessToken");
+        }
+        session.invalidate();
+
 		return "redirect:/";
 	}
 	
@@ -330,8 +384,23 @@ public class MemberController {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		if(bpe.matches(memPwdDelCheck, loginUser.getMemPwd())){
-			
+		if(memPwdDelCheck != null) {
+			if(bpe.matches(memPwdDelCheck, loginUser.getMemPwd())){
+				
+				int result = mService.deleteMember(loginUser.getMemId());
+				if(result > 0) {
+					session.removeAttribute("loginUser");
+					session.setAttribute("alertMsg", "성공적으로 탈퇴 완료 ! Bye !");
+					return "redirect:/";
+				}else {
+					model.addAttribute("errorMsg","회원 탈퇴에 실패했습니다. 다시 시도해주세요.");
+					return "user/common/errorPage";
+				}
+			}else {
+				session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+				return "redirect:myPage.me";
+			}
+		}else {
 			int result = mService.deleteMember(loginUser.getMemId());
 			if(result > 0) {
 				session.removeAttribute("loginUser");
@@ -341,9 +410,6 @@ public class MemberController {
 				model.addAttribute("errorMsg","회원 탈퇴에 실패했습니다. 다시 시도해주세요.");
 				return "user/common/errorPage";
 			}
-		}else {
-			session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
-			return "redirect:myPage.me";
 		}
 	}
 	

@@ -25,6 +25,6 @@
 	
 	<!-- Naver 로그인 -->
 	<beans:bean id="naverLoginBO" class="com.kh.ee.user.member.loginAPI.NaverLoginBO" />
-	
+	<beans:bean id="kakaoLoginBO" class="com.kh.ee.user.member.loginAPI.KakaoLoginBO" />
 	
 </beans:beans>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
 
 @Repository
@@ -102,6 +103,36 @@ public class AdminDao {
 		
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		return (ArrayList)ss.selectList("adminMapper.searchClassMgmtList",sc,rowBounds);
+	}
+	
+	//클래스결제 전체 list(학천)
+	public int classPaymentListCount(SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.classPaymentListCount");
+	}
+	public ArrayList<MemPay> classPaymentList(PageInfo pi, SqlSessionTemplate ss) {
+		
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit); 		
+		return (ArrayList)ss.selectList("adminMapper.classPaymentList",null,rowBounds);
+	}
+	
+	//클래스결제 결제취소(학천)ajax
+	public int cancelPay(int memPayNo, SqlSessionTemplate ss) {
+		return ss.update("adminMapper.cancelPay",memPayNo);
+	}
+	
+	//클래스 결제 검색(학천)
+	public int searchPaymentMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.searchPaymentMgmtCount",sc);
+	}
+	public ArrayList<MemPay> searchPaymentMgmtList(SearchCondition sc, PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit); 		
+		return (ArrayList)ss.selectList("adminMapper.searchPaymentMgmtList",sc,rowBounds);
 	}
 
 }

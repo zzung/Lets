@@ -29,6 +29,7 @@
 	                   		<button type="submit" class="btn btn-default">검색</button>
 						</form> 
 			        </div>
+			        
 			        <script>
 			        	$(".searchArea option[value=${condition}]").attr("selected",true); 
 			        </script>
@@ -108,7 +109,7 @@
 											$("#reject"+lessonNo).attr("disabled",false);
 											
 										} else {
-											aler("승인 실패했습니다.")
+											alert("승인 실패했습니다.")
 										}
 									},
 									error:function(){

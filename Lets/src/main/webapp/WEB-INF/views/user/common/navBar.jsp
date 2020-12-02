@@ -85,7 +85,7 @@
 			                                      <ul>    
 			                                          <li>
 			                                          	  <div class="after-login-dropdown">
-			                                                  <a href="#">튜터 센터</a>
+			                                                  <a href="tutorMain.tm">튜터 센터</a>
 			                                                  <ul class="after-login-dropdown-content-tutor">
 			                                                      <li><a href="tutorEnroll.te">튜터 등록</a></li>
 			                                                      <li style="margin-top: -10px;"><a href="tutorNotice.no?noticeType=TUTOR">튜터 공지사항</a></li>
@@ -93,7 +93,7 @@
 			                                                  </ul>
 			                                              </div>
 			                                          </li>
-			                                          <li><a href="#">내 클래스</a></li>
+			                                          <li><a href="tutorMyLesson.tm">내 클래스</a></li>
 			                                          <li>
 			                                              <div class="after-login-dropdown">
 			                                                  <img src="resources/user/assets/img/member/man.png" width="35px" height="35px">

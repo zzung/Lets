@@ -112,6 +112,7 @@
 	  from lesson
 	 where mem_no = #{memNo}
 	   and status='Y'
+	   and lesson_status != '승인'
 	 order
 	    by approve_date desc
 </select>

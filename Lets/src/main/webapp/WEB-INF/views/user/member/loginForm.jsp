@@ -29,19 +29,18 @@
 	                    <div><input type="password" placeholder="비밀번호를 입력해주세요" id="memPwd" name="memPwd" class="form-control" required></div>
 	                    <div><a href="findPwdForm.me">비밀번호를 잊으셨나요?</a></div>
 	                    <div class="login-join"><a href="enrollForm.me">회원가입 하기</a></div>
-	                    <br><br>
+	                    <br>
 	                    <div class="login-bottom">
-	                        <input type="submit" class="genric-btn primary radius" value="로그인 하기"><br><br>
+	                        <input type="submit" class="genric-btn primary radius" value="로그인 하기" style="margin-top: 20px;"><br><br>
 	                        <!-- 네이버 로그인 창으로 이동 -->
-							<div id="naver_id_login" style="text-align:center">
+							<div id="naver_id_login" style="text-align:center;">
 								<a href="${naverUrl}"><img width="300" src="resources/user/assets/img/member/naver_login.jpg"/></a>
 							</div>
 							<!-- 카카오 로그인 창으로 이동 -->
 							<div id="kakao_id_login" style="text-align: center">
-								<a href="${kakao_url}"><img width="300" src="resources/user/assets/img/member/kakao_login.png" /></a>
+								<a href="${kakaoUrl}"><img width="300" src="resources/user/assets/img/member/kakao_login.png" /></a>
 							</div>
-	                        <br>
-	                        <div style="font-size: 12px; font-weight: normal; text-align: center; margin-top: 15px;">
+	                        <div style="font-size: 12px; font-weight: normal; text-align: center; margin-top: 40px;">
 	                              	최초 로그인 시 <br> 이용약관 개인정보수집 및 이용, 개인정보 제공에 <br>동의하는 것으로 간주합니다
 	                        </div>
 	                    </div>

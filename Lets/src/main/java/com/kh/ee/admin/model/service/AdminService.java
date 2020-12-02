@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
 
 public interface AdminService {
@@ -41,6 +42,17 @@ public interface AdminService {
 	//클래스관리 검색시 나올 갯수/검색(학천)
 	int searchClassMgmtCount(SearchCondition sc);
 	ArrayList<Lesson> searchClassMgmtList(SearchCondition sc, PageInfo pi);
+
+	//클래스결제 전체 list(학천)
+	int classPaymentListCount();
+	ArrayList<MemPay> classPaymentList(PageInfo pi);
+
+	//클래스결제 결제취소(학천)ajax
+	int cancelPay(int memPayNo);
+
+	//클래스 결제 검색(학천)
+	int searchPaymentMgmtCount(SearchCondition sc);
+	ArrayList<MemPay> searchPaymentMgmtList(SearchCondition sc, PageInfo pi);
 	
 	
 

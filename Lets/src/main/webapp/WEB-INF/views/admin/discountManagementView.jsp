@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>할인 상품 관리</title>
 </head>
-<!-- 할인 미적용/적용 클릭시 페이징 처리 해야함 그리고 페이징 boardlimit 10으로 늘려야함 (학천) -->
+<!-- 할인 미적용/적용 클릭시 페이징 처리 해야함 그리고 페이징 boardlimit 10으로 늘려야함 (학천 -->
 <body>
 	<jsp:include page="adminNav.jsp" />
 	<div id="main-wrapper">
@@ -30,7 +30,7 @@
 							<form action="searchDiscount.ad">
 								<input type="hidden" name="currentPage" value="1">
 								<select name="condition" style="height: 30px;">
-									<option value="content">클래스 제목</option>
+									<option value="title">클래스 제목</option>
 									<option value="writer">튜터ID</option>
 									<option value="percentage">클래스 할인율</option>
 								</select> 
