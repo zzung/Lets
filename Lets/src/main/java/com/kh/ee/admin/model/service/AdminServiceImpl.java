@@ -10,6 +10,7 @@ import com.kh.ee.admin.model.dao.AdminDao;
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
 
 @Service
@@ -98,5 +99,32 @@ public class AdminServiceImpl implements AdminService{
 	public ArrayList<Lesson> searchClassMgmtList(SearchCondition sc, PageInfo pi) {
 		return ad.searchClassMgmtList(sc,pi,ss);
 	}
+	
+	//클래스결제 전체 list(학천)
+	@Override
+	public int classPaymentListCount() {
+		return ad.classPaymentListCount(ss);
+	}
+	@Override
+	public ArrayList<MemPay> classPaymentList(PageInfo pi) {
+		return ad.classPaymentList(pi,ss);
+	}
+
+	//클래스결제 결제취소(학천)ajax
+	@Override
+	public int cancelPay(int memPayNo) {
+		return ad.cancelPay(memPayNo,ss);
+	}
+	
+	//클래스 결제 검색(학천)
+	@Override
+	public int searchPaymentMgmtCount(SearchCondition sc) {
+		return ad.searchPaymentMgmtCount(sc,ss);
+	}
+	@Override
+	public ArrayList<MemPay> searchPaymentMgmtList(SearchCondition sc, PageInfo pi) {
+		return ad.searchPaymentMgmtList(sc,pi,ss);
+	}
+	
 
 }

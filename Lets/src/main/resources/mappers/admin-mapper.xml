@@ -41,6 +41,26 @@
 	<result column="mem_id" property="memId"/>
 </resultMap>
 
+<resultMap type="MemPay" id="memPayResultSet">
+	<id column="mem_pay_no" property="memPayNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="lesson_no" property="lessonNo" />
+	<result column="type" property="type" />
+	<result column="repayment" property="repayment" />
+	<result column="payment_date" property="paymentDate" />
+	<result column="cancel_date" property="cancelDate" />
+	<result column="status" property="status" />
+	<result column="del_name" property="delName" />
+	<result column="del_no" property="delNo" />
+	<result column="del_status" property="delStatus" />
+	<result column="lesson_title" property="lessonTitle" />
+	<result column="mem_id" property="memId" />
+	<result column="mem_name" property="memName" />
+	<result column="lesson_prepare" property="lessonPrepare" />	
+	<result column="mem_id" property="memId"/>
+	<result column="lesson_title" property="lessonTitle" />
+</resultMap>
+
 <select id="selectDiscountList" resultMap="memberResultSet">
 	 select 
 	        l.lesson_title
@@ -82,7 +102,7 @@
 	 where t.status ='Y'
 	   and l.status ='Y'
 	 <choose>
-	 	<when test="content != null">
+	 	<when test="title != null">
 	 		and lesson_title like '%' || #{title} || '%'
 	 	</when>
 	 	<when test="writer != null">
@@ -106,7 +126,7 @@
 	 where t.status = 'Y'
 	   and l.status = 'Y'
 	 <choose>
-	 	<when test="content != null">
+	 	<when test="title != null">
 	 		and lesson_title like '%' || #{title} || '%'
 	 	</when>
 	 	<when test="writer != null">
@@ -206,7 +226,7 @@
 	  join tutor t on (l.mem_no = t.mem_no)
 	 where t.status ='Y'
 	 <choose>
-	 	<when test="content != null">
+	 	<when test="title != null">
 	 		and lesson_title like '%' || #{title} || '%'
 	 	</when>
 	 	<when test="writer != null">
@@ -229,7 +249,7 @@
 	  join tutor t on (m.mem_no = t.mem_no)
 	 where t.status = 'Y'
 	 <choose>
-	 	<when test="content != null">
+	 	<when test="title != null">
 	 		and lesson_title like '%' || #{title} || '%'
 	 	</when>
 	 	<when test="writer != null">
@@ -237,6 +257,86 @@
 	 	</when>
 	 	<otherwise>
 	 		and lesson_status like '%' || #{approval} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
+
+<select id="classPaymentListCount" resultType="_int">
+	select
+	       count(*)
+	  from mem_pay
+	 where pay_status='Y'
+</select>
+
+<select id="classPaymentList" resultMap="memPayResultSet">
+	select 
+	       m.mem_id
+	     , mp.mem_no
+	     , mp.mem_pay_no
+	     , l.lesson_title
+	     , m.mem_name
+	     , mp.status
+	     , mp.type
+	     , mp.repayment
+	     , mp.payment_date
+	  from mem_pay mp
+	  join lesson l on(mp.lesson_no = l.lesson_no)
+	  join member m on (mp.mem_no = m.mem_no)
+	 where mp.pay_status='Y'
+</select>
+
+<update id="cancelPay" parameterType="_int">
+	update 
+	       mem_pay
+	   set status = '결제 취소'
+	     , pay_status = 'N'
+	 where mem_pay_no = #{memPayNo}
+</update>
+
+<select id="searchPaymentMgmtCount" parameterType="SearchCondition" resultType="_int">
+		select 
+		      count(*)
+		  from mem_pay mp
+		  join lesson l on(mp.lesson_no = l.lesson_no)
+		  join member m on (mp.mem_no = m.mem_no)
+		 where mp.pay_status='Y'
+	<choose>
+	 	<when test="title != null">
+	 		and lesson_title like '%' || #{title} || '%'
+	 	</when>
+	 	<when test="writer != null">
+	 		and mem_id like '%' || #{writer} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and mp.status like '%' || #{payment} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
+
+<select id="searchPaymentMgmtList" parameterType="SearchCondition" resultMap="memPayResultSet">
+	select 
+	       m.mem_id
+	     , mp.mem_no
+	     , mp.mem_pay_no
+	     , l.lesson_title
+	     , m.mem_name
+	     , mp.status
+	     , mp.type
+	     , mp.repayment
+	     , mp.payment_date
+	  from mem_pay mp
+	  join lesson l on(mp.lesson_no = l.lesson_no)
+	  join member m on (mp.mem_no = m.mem_no)
+	 where mp.pay_status='Y'
+	 <choose>
+	 	<when test="title != null">
+	 		and lesson_title like '%' || #{title} || '%'
+	 	</when>
+	 	<when test="writer != null">
+	 		and mem_id like '%' || #{writer} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and mp.status like '%' || #{payment} || '%'
 	 	</otherwise>
 	 </choose>
 </select>

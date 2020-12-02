@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.ee.admin.model.service.AdminService;
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.common.template.Pagination;
 import com.kh.ee.user.lesson.model.vo.Lesson;
+import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
 
 @Controller
@@ -90,8 +92,54 @@ public class AdminController {
 	}
 	
 	@RequestMapping("classPayment.ad")
-	public String classPayment(){
+	public String classPayment(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
+		int listCount = as.classPaymentListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<MemPay> mp = as.classPaymentList(pi);
+		
+		model.addAttribute("mp",mp); 
+		model.addAttribute("pi",pi);
+		
 		return "admin/classPaymentView";
+	}
+	
+	@ResponseBody
+	@RequestMapping("cancelPay.ad")
+	public String cancelPay(int memPayNo) {
+		int result = as.cancelPay(memPayNo);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@RequestMapping("searchPaymentMgmt.ad")
+	public String searchPaymentMgmt(String condition, String keyword, int currentPage, Model model) {
+		
+		SearchCondition sc = new SearchCondition(); 
+		
+		switch(condition) {
+		case "title" : sc.setTitle(keyword); break;
+		case "writer" : sc.setWriter(keyword); break;
+		case "payment" : sc.setPayment(keyword);
+		}
+		
+		int listCount = as.searchPaymentMgmtCount(sc);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<MemPay> mp = as.searchPaymentMgmtList(sc,pi); 
+		
+		model.addAttribute("pi",pi);
+		model.addAttribute("mp",mp);
+		model.addAttribute("condition",condition);
+		model.addAttribute("sc",sc);
+		model.addAttribute("keyword",keyword);
+		
+		return "admin/classPaymentView";		
 	}
 	
 	@RequestMapping("saleManagement.ad")
@@ -127,8 +175,8 @@ public class AdminController {
 		
 		switch(condition) {
 		case "writer" : sc.setWriter(keyword); break;
-		case "percentage" : sc.setTitle(keyword); break;
-		case "content" : sc.setContent(keyword);
+		case "percentage" : sc.setPercentage(keyword); break;
+		case "title" : sc.setTitle(keyword);
 		}
 		
 		int listCount = as.searchDiscountCount(sc);

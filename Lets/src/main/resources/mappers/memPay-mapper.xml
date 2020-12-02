@@ -17,8 +17,7 @@
 	<result column="lesson_title" property="lessonTitle" />
 	<result column="mem_id" property="memId" />
 	<result column="mem_name" property="memName" />
-	<result column="lesson_prepare" property="lessonPrepare" />
-	
+	<result column="lesson_prepare" property="lessonPrepare" />	
 </resultMap>
 
 <select id="selectPrepareList" resultMap="memPayResultSet">
