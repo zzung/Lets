@@ -101,12 +101,11 @@
 										<br>
 										<div>
 											<span>
-												<button onclick="noticeReset();" id="noticeResetBtn"
-												class="btn btn-default">이전</button>
+												<button type="reset" class="btn btn-default">초기화</button>
 											</span>
+											&nbsp;&nbsp;&nbsp;
 											<span>
-												<button onclick="noticeApply();" id="noticeApplyBtn"
-												class="btn btn-default">등록</button>
+												<button type="submit" class="btn btn-default">공지등록</button>
 											</span>
 										</div>
 									</form>
@@ -116,167 +115,7 @@
 					</div>
 					<!-- 공지 작성 Modal End -->
 					
-					<!-- 공지사항 등록 확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
-					<script>
-						function noticeApply() {
-							var num = 1;
-							var result = confirm("공지사항을 등록 하시겠습니까??");
-
-							if (result) {
-								var str = "등록"
-								document.getElementById("noticeApplyBtn").disabled = true;
-							} else {
-								return;
-							}
-
-							var noticeCondition = document
-									.getElementById("noticeCondition" + num)
-							blacklistCondition.innerHTML = "<p>" + str + "</p>"
-						}
-					</script>
-					<!-- 공지사항 등록 확인 끝 -->
-					
-					<!-- 공지사항 리셋 확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
-					<script>
-						function noticeReset() {
-							var num = 1;
-							var result = confirm("공지사항을 리셋 하시겠습니까??");
-
-							if (result) {
-								var str = "리셋"
-								document.getElementById("noticeResetBtn").disabled = true;
-							} else {
-								return;
-							}
-
-							var noticeCondition = document
-									.getElementById("noticeCondition" + num)
-							blacklistCondition.innerHTML = "<p>" + str + "</p>"
-						}
-					</script>
-					<!-- 공지사항 리셋 확인 끝 -->
-					
-					
 <!------------------------------------------------------ 공지 작성 모달&스크립트 끝 ------------------------------------------------------>
-					
-					
-					
-					
-<!------------------------------------------------------ 공지 내용 모달&스크립트 시작 ------------------------------------------------------>
-					<!-- 공지 내용 Modal Start -->
-					<div class="modal" id="detailNotice">
-						<div class="modal-dialog">
-
-							<!-- Modal content -->
-							<div class="modal-content" align="center" style="width: 900px; ">
-								<div class="modal-header" >
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h3 class="modal-title" style="text-align:center">공지사항 내용</h3>
-								</div>
-								
-								<div class="modal-body" align="center" style="width:800px;">
-									<!--  form start -->
-									<form action="">
-										<div style="height:36px;">
-											<select name="condition" style="width:100px; height:30px;">
-												<option>회원</option>
-												<option>튜터</option>
-											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input type="text" style="width:640px;" placeholder="제목을 입력하세요.">
-										</div>
-										<div align="left" style="width:800px; height:30px;">
-											<input type="checkbox" name="status" id="importantNotice" value="R">
-											<label for="importantNotice">중요 공지 등록</label>
-										</div>
-										<div>
-											<textarea style="resize:none; width:770px; height:500px;" placeholder="내용을 입력하세요."></textarea>
-										</div>
-										<br>
-										<div align="left" style="width:800px; height:40px;">
-											<span>첨부파일 :</span>
-											<span><input type="text"></span>
-											<button onclick="noticeApply();" id=""
-													class="btn btn-default">파일찾기</button>
-										</div>
-										<br>
-										<div>
-											<span>
-												<button onclick="noticeApply();" id="noticeApplyBtn"
-												class="btn btn-default">이전</button>
-											</span>
-											<span>
-												<button onclick="noticeModify();" id="noticeModifyBtn"
-												class="btn btn-default">수정</button>
-											</span>
-										</div>
-									</form>
-									
-								</div>	
-							</div>
-						</div>
-					</div>
-					<!-- 공지 내용 Modal End -->
-<!------------------------------------------------------ 공지 내용 모달&스크립트 종료 ------------------------------------------------------>
-					
-					
-					
-					
-<!------------------------------------------------------ 공지 수정 모달&스크립트 시작 ------------------------------------------------------>					
-					
-					<!-- 공지 수정 Modal Start -->
-					<div class="modal" id="ModifyNotice">
-						<div class="modal-dialog">
-
-							<!-- Modal content -->
-							<div class="modal-content" align="center" style="width: 900px; ">
-								<div class="modal-header" >
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h3 class="modal-title" style="text-align:center">공지사항 수정</h3>
-								</div>
-								<div class="modal-body" align="center" style="width:800px;">
-									<form action="">
-										<div style="height:36px;">
-											<select name="condition" style="width:100px; height:30px;">
-												<option>회원</option>
-												<option>튜터</option>
-											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input type="text" style="width:640px;" placeholder="제목을 입력하세요.">
-										</div>
-										<div align="left" style="width:800px; height:30px;">
-											<input type="checkbox" name="status" id="importantNotice" value="R">
-											<label for="importantNotice">중요 공지 등록</label>
-										</div>
-										<div>
-											<textarea style="resize:none; width:770px; height:500px;" placeholder="내용을 입력하세요."></textarea>
-										</div>
-										<br>
-										<div align="left" style="width:800px; height:40px;">
-											<span>첨부파일 :</span>
-											<span><input type="text"></span>
-											<button onclick="noticeApply();" id=""
-													class="btn btn-default">파일찾기</button>
-										</div>
-										<br>
-										<div>
-											<span>
-												<button onclick="noticeModify();" id="noticeModifyBtn"
-												class="btn btn-default">수정</button>
-											</span>
-										</div>
-									</form>
-								</div>	
-							</div>
-						</div>
-					</div>
-					<!-- 공지 수정 Modal End -->
-<!------------------------------------------------------ 공지 내용 모달&스크립트 종료 ------------------------------------------------------>
-					
-					
-					
-					
-					
-					
-					
 					
 					<div class="" align="center">
 						<ul class="pagination">
