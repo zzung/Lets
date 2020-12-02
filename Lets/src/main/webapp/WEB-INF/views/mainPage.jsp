@@ -7,6 +7,14 @@
 <meta charset="UTF-8">
 <title>Lets</title>
 <link rel="stylesheet" href="resources/user/assets/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+.h1-testimonial-active .testimonial-icon img {
+	border: 3px dashed transparent;
+	border-radius: 50%;
+	width: 450px;
+}
+</style>
 </head>
 <body>
 	<!--메뉴바  -->
@@ -14,66 +22,44 @@
 	
 	<main>
      <!--? 인기순/조회순 슬라이더 Start -->
-     <div class="testimonial-area fix pt-50 pb-50 section-bg" data-background="resources/user/assets/img/gallery/section_bg03.png">
+     <div class="testimonial-area fix pt-20 pb-20 section-bg" data-background="resources/user/assets/img/gallery/section_bg03.png">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-9 col-md-9">
                     <div class="h1-testimonial-active">
                         <!-- Single Testimonial -->
-                        <div class="single-testimonial pt-65">
-                            <!-- Testimonial tittle -->
-                            <div class="testimonial-icon mb-45">
-                                <img src="resources/user/assets/img/gallery/testimonial.png" class="ani-btn " alt="">
-                            </div>
-                                <!-- Testimonial Content -->
-                            <div class="testimonial-caption text-center">
-                                <p>You can’t succeed if you just do what others do and 
-                                    follow the well-worn path. You need to create a new and 
-                                    original path for yourself.</p>
-                                <!-- 별 평점 -->
-                                <div class="testimonial-ratting">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="rattiong-caption">
-                                    <span>Clifford Frazier<span> - Colorlib Themes</span> </span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Testimonial -->
-                        <div class="single-testimonial pt-65">
-                            <!-- Testimonial tittle -->
-                            <div class="testimonial-icon mb-45">
-                                <img src="resources/user/assets/img/gallery/testimonial.png" class="ani-btn " alt="">
-                            </div>
-                                <!-- Testimonial Content -->
-                            <div class="testimonial-caption text-center">
-                                <p>You can’t succeed if you just do what others do and 
-                                    follow the well-worn path. You need to create a new and 
-                                    original path for yourself. </p>
-                                <!-- Rattion -->
-                                <div class="testimonial-ratting">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="rattiong-caption">
-                                    <span>Clifford Frazier<span> - Colorlib Themes</span> </span>
-                                </div>
-                            </div>
-                        </div>
+                        <c:forEach var="list" items="${list }"> 
+                        	<input type="hidden" name="lessonNo" class="lessonNo" value="${list.lessonNo }"> 
+	                        <div class="single-testimonial pt-65">
+	                            <!-- Testimonial tittle -->
+	                            <div class="testimonial-icon mb-45">
+	                                <img src="${list.lessonCoverImg }" class="ani-btn thumbnailImg" alt="">
+	                            </div>
+	                                <!-- Testimonial Content -->
+	                            <div class="testimonial-caption text-center">
+	                                <p>${list.lessonTitle }</p>
+	                                <!-- 별 평점 -->
+	                                <div class="testimonial-ratting">
+	                                    <i class="fas fa-heart" style="color:red">${list.likeCount }</i>
+	                                </div>
+	                            </div>
+	                        </div>  
+                        </c:forEach>             
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!--? 인기순/조회순 슬라이더 end -->
+    <script>
+    	$(function(){
+    		$(".thumbnailImg").click(function(){
+    			location.href="courseDetailView.le?lessonNo="+$(this).parents(".lessonNo").val();
 
+    		});
+    	});
+    </script>
+    
     <!--? 키즈 인기 코스  -->
     <div class="popular-course section-padding30">
         <div class="container">
@@ -86,97 +72,37 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-6">
+            	<c:forEach var="k" items="${kids }" varStatus="status">
+            	<input type="hidden" name="lessonNo" value="${k.lessonNo }">
+            	 <div class="col-xl-4 col-lg-4 col-md-6">
                     <!-- Single course -->
                     <div class="single-course mb-40">
                         <div class="course-img">
-                            <img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
+                            <img src="${k.lessonCoverImg }" alt="">
                         </div>
                         <div class="course-caption">
                             <div class="course-cap-top">
-                                <h4><a href="#">Graphic Design</a></h4>
+                                <h5><a href="#">${k.lessonTitle }</a></h5>
                             </div>
                             <div class="course-cap-mid d-flex justify-content-between">
                                 <div class="course-ratting">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                	<c:forEach var="s" begin="1" end="${k.star }">
+                                    	<i class="fas fa-star"></i>
+                                    </c:forEach>
+                                    <c:forEach var="ss" begin="${k.star }" end="4">
+                                    	<i class='fas fa-star' style='color:#e6e6e6'></i>
+                                    </c:forEach>
                                 </div>
-                                <ul><li>52 Review</li></ul>
                             </div>
                             <div class="course-cap-bottom d-flex justify-content-between">
                                 <ul>
-                                    <li><i class="ti-user"></i> 562</li>
-                                    <li><i class="ti-heart"></i> 562</li>
+                                    <li><i class="ti-heart"></i> ${k.likeCount }</li>
                                 </ul>
-                                <span>Free</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--한개컬럼 end-->
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <!-- Single course -->
-                    <div class="single-course mb-40">
-                        <div class="course-img">
-                            <img src="resources/user/assets/img/gallery/popular_sub2.png" alt="">
-                        </div>
-                        <div class="course-caption">
-                            <div class="course-cap-top">
-                                <h4><a href="#">Web Development</a></h4>
-                            </div>
-                            <div class="course-cap-mid d-flex justify-content-between">
-                                <div class="course-ratting">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <ul><li>52 Review</li></ul>
-                            </div>
-                            <div class="course-cap-bottom d-flex justify-content-between">
-                                <ul>
-                                    <li><i class="ti-user"></i> 562</li>
-                                    <li><i class="ti-heart"></i> 562</li>
-                                </ul>
-                                <span>Free</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <!-- Single course -->
-                    <div class="single-course mb-40">
-                        <div class="course-img">
-                            <img src="resources/user/assets/img/gallery/popular_sub3.png" alt="">
-                        </div>
-                        <div class="course-caption">
-                            <div class="course-cap-top">
-                                <h4><a href="#">Digital Marketing</a></h4>
-                            </div>
-                            <div class="course-cap-mid d-flex justify-content-between">
-                                <div class="course-ratting">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <ul><li>52 Review</li></ul>
-                            </div>
-                            <div class="course-cap-bottom d-flex justify-content-between">
-                                <ul>
-                                    <li><i class="ti-user"></i> 562</li>
-                                    <li><i class="ti-heart"></i> 562</li>
-                                </ul>
-                                <span>Free</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               </c:forEach>
             </div>
         </div>
     </div>
@@ -193,97 +119,37 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <!-- Single course -->
-                        <div class="single-course mb-40">
-                            <div class="course-img">
-                                <img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
-                            </div>
-                            <div class="course-caption">
-                                <div class="course-cap-top">
-                                    <h4><a href="#">Graphic Design</a></h4>
-                                </div>
-                                <div class="course-cap-mid d-flex justify-content-between">
-                                    <div class="course-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <ul><li>52 Review</li></ul>
-                                </div>
-                                <div class="course-cap-bottom d-flex justify-content-between">
-                                    <ul>
-                                        <li><i class="ti-user"></i> 562</li>
-                                        <li><i class="ti-heart"></i> 562</li>
-                                    </ul>
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--한개컬럼 end-->
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <!-- Single course -->
-                        <div class="single-course mb-40">
-                            <div class="course-img">
-                                <img src="resources/user/assets/img/gallery/popular_sub2.png" alt="">
-                            </div>
-                            <div class="course-caption">
-                                <div class="course-cap-top">
-                                    <h4><a href="#">Web Development</a></h4>
-                                </div>
-                                <div class="course-cap-mid d-flex justify-content-between">
-                                    <div class="course-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <ul><li>52 Review</li></ul>
-                                </div>
-                                <div class="course-cap-bottom d-flex justify-content-between">
-                                    <ul>
-                                        <li><i class="ti-user"></i> 562</li>
-                                        <li><i class="ti-heart"></i> 562</li>
-                                    </ul>
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <!-- Single course -->
-                        <div class="single-course mb-40">
-                            <div class="course-img">
-                                <img src="resources/user/assets/img/gallery/popular_sub3.png" alt="">
-                            </div>
-                            <div class="course-caption">
-                                <div class="course-cap-top">
-                                    <h4><a href="#">Digital Marketing</a></h4>
-                                </div>
-                                <div class="course-cap-mid d-flex justify-content-between">
-                                    <div class="course-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <ul><li>52 Review</li></ul>
-                                </div>
-                                <div class="course-cap-bottom d-flex justify-content-between">
-                                    <ul>
-                                        <li><i class="ti-user"></i> 562</li>
-                                        <li><i class="ti-heart"></i> 562</li>
-                                    </ul>
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+	            	<c:forEach var="m" items="${money }" varStatus="status">
+	            	<input type="hidden" name="lessonNo" value="${m.lessonNo }">
+	            	 <div class="col-xl-4 col-lg-4 col-md-6">
+	                    <!-- Single course -->
+	                    <div class="single-course mb-40">
+	                        <div class="course-img">
+	                            <img src="${m.lessonCoverImg }" alt="">
+	                        </div>
+	                        <div class="course-caption">
+	                            <div class="course-cap-top">
+	                                <h5><a href="#">${m.lessonTitle }</a></h5>
+	                            </div>
+	                            <div class="course-cap-mid d-flex justify-content-between">
+	                                <div class="course-ratting">
+	                                	<c:forEach var="s" begin="1" end="${m.star }">
+	                                    	<i class="fas fa-star"></i>
+	                                    </c:forEach>
+	                                    <c:forEach var="ss" begin="${m.star }" end="4">
+	                                    	<i class='fas fa-star' style='color:#e6e6e6'></i>
+	                                    </c:forEach>
+	                                </div>
+	                            </div>
+	                            <div class="course-cap-bottom d-flex justify-content-between">
+	                                <ul>
+	                                    <li><i class="ti-heart"></i> ${m.likeCount }</li>
+	                                </ul>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	               </c:forEach>
                 </div>
             </div>
         </div>
@@ -300,97 +166,37 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <!-- Single course -->
-                        <div class="single-course mb-40">
-                            <div class="course-img">
-                                <img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
-                            </div>
-                            <div class="course-caption">
-                                <div class="course-cap-top">
-                                    <h4><a href="#">Graphic Design</a></h4>
-                                </div>
-                                <div class="course-cap-mid d-flex justify-content-between">
-                                    <div class="course-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <ul><li>52 Review</li></ul>
-                                </div>
-                                <div class="course-cap-bottom d-flex justify-content-between">
-                                    <ul>
-                                        <li><i class="ti-user"></i> 562</li>
-                                        <li><i class="ti-heart"></i> 562</li>
-                                    </ul>
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--한개컬럼 end-->
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <!-- Single course -->
-                        <div class="single-course mb-40">
-                            <div class="course-img">
-                                <img src="resources/user/assets/img/gallery/popular_sub2.png" alt="">
-                            </div>
-                            <div class="course-caption">
-                                <div class="course-cap-top">
-                                    <h4><a href="#">Web Development</a></h4>
-                                </div>
-                                <div class="course-cap-mid d-flex justify-content-between">
-                                    <div class="course-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <ul><li>52 Review</li></ul>
-                                </div>
-                                <div class="course-cap-bottom d-flex justify-content-between">
-                                    <ul>
-                                        <li><i class="ti-user"></i> 562</li>
-                                        <li><i class="ti-heart"></i> 562</li>
-                                    </ul>
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <!-- Single course -->
-                        <div class="single-course mb-40">
-                            <div class="course-img">
-                                <img src="resources/user/assets/img/gallery/popular_sub3.png" alt="">
-                            </div>
-                            <div class="course-caption">
-                                <div class="course-cap-top">
-                                    <h4><a href="#">Digital Marketing</a></h4>
-                                </div>
-                                <div class="course-cap-mid d-flex justify-content-between">
-                                    <div class="course-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <ul><li>52 Review</li></ul>
-                                </div>
-                                <div class="course-cap-bottom d-flex justify-content-between">
-                                    <ul>
-                                        <li><i class="ti-user"></i> 562</li>
-                                        <li><i class="ti-heart"></i> 562</li>
-                                    </ul>
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+	            	<c:forEach var="c" items="${career }" varStatus="status">
+	            	<input type="hidden" name="lessonNo" value="${c.lessonNo }">
+	            	 <div class="col-xl-4 col-lg-4 col-md-6">
+	                    <!-- Single course -->
+	                    <div class="single-course mb-40">
+	                        <div class="course-img">
+	                            <img src="${c.lessonCoverImg }" alt="">
+	                        </div>
+	                        <div class="course-caption">
+	                            <div class="course-cap-top">
+	                                <h5><a href="#">${c.lessonTitle }</a></h5>
+	                            </div>
+	                            <div class="course-cap-mid d-flex justify-content-between">
+	                                <div class="course-ratting">
+	                                	<c:forEach var="s" begin="1" end="${c.star }">
+	                                    	<i class="fas fa-star"></i>
+	                                    </c:forEach>
+	                                    <c:forEach var="ss" begin="${c.star }" end="4">
+	                                    	<i class='fas fa-star' style='color:#e6e6e6'></i>
+	                                    </c:forEach>
+	                                </div>
+	                            </div>
+	                            <div class="course-cap-bottom d-flex justify-content-between">
+	                                <ul>
+	                                    <li><i class="ti-heart"></i> ${c.likeCount }</li>
+	                                </ul>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	               </c:forEach>
                 </div>
             </div>
         </div>
@@ -407,97 +213,37 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <!-- Single course -->
-                        <div class="single-course mb-40">
-                            <div class="course-img">
-                                <img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
-                            </div>
-                            <div class="course-caption">
-                                <div class="course-cap-top">
-                                    <h4><a href="#">Graphic Design</a></h4>
-                                </div>
-                                <div class="course-cap-mid d-flex justify-content-between">
-                                    <div class="course-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <ul><li>52 Review</li></ul>
-                                </div>
-                                <div class="course-cap-bottom d-flex justify-content-between">
-                                    <ul>
-                                        <li><i class="ti-user"></i> 562</li>
-                                        <li><i class="ti-heart"></i> 562</li>
-                                    </ul>
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--한개컬럼 end-->
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <!-- Single course -->
-                        <div class="single-course mb-40">
-                            <div class="course-img">
-                                <img src="resources/user/assets/img/gallery/popular_sub2.png" alt="">
-                            </div>
-                            <div class="course-caption">
-                                <div class="course-cap-top">
-                                    <h4><a href="#">Web Development</a></h4>
-                                </div>
-                                <div class="course-cap-mid d-flex justify-content-between">
-                                    <div class="course-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <ul><li>52 Review</li></ul>
-                                </div>
-                                <div class="course-cap-bottom d-flex justify-content-between">
-                                    <ul>
-                                        <li><i class="ti-user"></i> 562</li>
-                                        <li><i class="ti-heart"></i> 562</li>
-                                    </ul>
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <!-- Single course -->
-                        <div class="single-course mb-40">
-                            <div class="course-img">
-                                <img src="resources/user/assets/img/gallery/popular_sub3.png" alt="">
-                            </div>
-                            <div class="course-caption">
-                                <div class="course-cap-top">
-                                    <h4><a href="#">Digital Marketing</a></h4>
-                                </div>
-                                <div class="course-cap-mid d-flex justify-content-between">
-                                    <div class="course-ratting">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <ul><li>52 Review</li></ul>
-                                </div>
-                                <div class="course-cap-bottom d-flex justify-content-between">
-                                    <ul>
-                                        <li><i class="ti-user"></i> 562</li>
-                                        <li><i class="ti-heart"></i> 562</li>
-                                    </ul>
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+	            	<c:forEach var="h" items="${hobby }" varStatus="status">
+	            	<input type="hidden" name="lessonNo" value="${h.lessonNo }">
+	            	 <div class="col-xl-4 col-lg-4 col-md-6">
+	                    <!-- Single course -->
+	                    <div class="single-course mb-40">
+	                        <div class="course-img">
+	                            <img src="${h.lessonCoverImg }" alt="">
+	                        </div>
+	                        <div class="course-caption">
+	                            <div class="course-cap-top">
+	                                <h5><a href="#">${h.lessonTitle }</a></h5>
+	                            </div>
+	                            <div class="course-cap-mid d-flex justify-content-between">
+	                                <div class="course-ratting">
+	                                	<c:forEach var="s" begin="1" end="${h.star }">
+	                                    	<i class="fas fa-star"></i>
+	                                    </c:forEach>
+	                                    <c:forEach var="ss" begin="${h.star }" end="4">
+	                                    	<i class='fas fa-star' style='color:#e6e6e6'></i>
+	                                    </c:forEach>
+	                                </div>
+	                            </div>
+	                            <div class="course-cap-bottom d-flex justify-content-between">
+	                                <ul>
+	                                    <li><i class="ti-heart"></i> ${h.likeCount }</li>
+	                                </ul>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	               </c:forEach>
                 </div>
             </div>
         </div>
@@ -569,97 +315,37 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <!-- Single course -->
-                    <div class="single-course mb-40">
-                        <div class="course-img">
-                            <img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
-                        </div>
-                        <div class="course-caption">
-                            <div class="course-cap-top">
-                                <h4><a href="#">Graphic Design</a></h4>
-                            </div>
-                            <div class="course-cap-mid d-flex justify-content-between">
-                                <div class="course-ratting">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <ul><li>52 Review</li></ul>
-                            </div>
-                            <div class="course-cap-bottom d-flex justify-content-between">
-                                <ul>
-                                    <li><i class="ti-user"></i> 562</li>
-                                    <li><i class="ti-heart"></i> 562</li>
-                                </ul>
-                                <span>Free</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--한개컬럼 end-->
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <!-- Single course -->
-                    <div class="single-course mb-40">
-                        <div class="course-img">
-                            <img src="resources/user/assets/img/gallery/popular_sub2.png" alt="">
-                        </div>
-                        <div class="course-caption">
-                            <div class="course-cap-top">
-                                <h4><a href="#">Web Development</a></h4>
-                            </div>
-                            <div class="course-cap-mid d-flex justify-content-between">
-                                <div class="course-ratting">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <ul><li>52 Review</li></ul>
-                            </div>
-                            <div class="course-cap-bottom d-flex justify-content-between">
-                                <ul>
-                                    <li><i class="ti-user"></i> 562</li>
-                                    <li><i class="ti-heart"></i> 562</li>
-                                </ul>
-                                <span>Free</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <!-- Single course -->
-                    <div class="single-course mb-40">
-                        <div class="course-img">
-                            <img src="resources/user/assets/img/gallery/popular_sub3.png" alt="">
-                        </div>
-                        <div class="course-caption">
-                            <div class="course-cap-top">
-                                <h4><a href="#">Digital Marketing</a></h4>
-                            </div>
-                            <div class="course-cap-mid d-flex justify-content-between">
-                                <div class="course-ratting">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <ul><li>52 Review</li></ul>
-                            </div>
-                            <div class="course-cap-bottom d-flex justify-content-between">
-                                <ul>
-                                    <li><i class="ti-user"></i> 562</li>
-                                    <li><i class="ti-heart"></i> 562</li>
-                                </ul>
-                                <span>Free</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+	            	<c:forEach var="n" items="${nl }" varStatus="status">
+	            	<input type="hidden" name="lessonNo" value="${n.lessonNo }">
+	            	 <div class="col-xl-4 col-lg-4 col-md-6">
+	                    <!-- Single course -->
+	                    <div class="single-course mb-40">
+	                        <div class="course-img">
+	                            <img src="${n.lessonCoverImg }" alt="">
+	                        </div>
+	                        <div class="course-caption">
+	                            <div class="course-cap-top">
+	                                <h5><a href="#">${n.lessonTitle }</a></h5>
+	                            </div>
+	                            <div class="course-cap-mid d-flex justify-content-between">
+	                                <div class="course-ratting">
+	                                	<c:forEach var="s" begin="1" end="${n.star }">
+	                                    	<i class="fas fa-star"></i>
+	                                    </c:forEach>
+	                                    <c:forEach var="ss" begin="${n.star }" end="4">
+	                                    	<i class='fas fa-star' style='color:#e6e6e6'></i>
+	                                    </c:forEach>
+	                                </div>
+	                            </div>
+	                            <div class="course-cap-bottom d-flex justify-content-between">
+	                                <ul>
+	                                    <li><i class="ti-heart"></i> ${n.likeCount }</li>
+	                                </ul>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	               </c:forEach>
             </div>
         </div>
     </div>

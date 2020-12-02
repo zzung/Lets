@@ -213,7 +213,7 @@
 	                 			url:"insertReply.le",
 	                 			data:{
 	                 				//totalNo == lessonNo
-	                 				totalNo:1,
+	                 				totalNo:${l.lessonNo},
 	                 				memNo:2,
 	                 				replyContent:$("#communityContent").val()
 	                 			},
@@ -235,7 +235,7 @@
 	                  		$.ajax({
 	                  			url:"selectReplyList.le",
 	                  			data:{
-	                  				lessonNo:1
+	                  				lessonNo:${l.lessonNo}
 	                  			},
 	                  			success:function(list){
 	                  				$("#replyCount").text(list.length);
@@ -412,7 +412,7 @@
 	             					memNo:2,
 	             					replyContent:replyContent,
 	             					//totalNo == lessonNo 수정해줘야함 ${lessonNo}
-	             					totalNo:1
+	             					totalNo:${l.lessonNo}
 	             				},
 	             				success:function(result){
 	             					if(result == "success"){

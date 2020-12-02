@@ -46,5 +46,6 @@ public class Lesson {
 	
 	//관리자 필요(학천)
 	private String memId;
+	private int star;
 	
 }

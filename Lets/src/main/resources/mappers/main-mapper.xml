@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mainMapper">
+
+<resultMap id="lessonResultSet" type="Lesson">
+	<id column="lesson_no" property="lessonNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="lesson_title" property="lessonTitle" />
+	<result column="lesson_cover_img" property="lessonCoverImg" />
+	<result column="like_count" property="likeCount" />
+	<result column="lesson_status" property="lessonStatus" />
+	<result column="lesson_category" property="lessonCategory" />
+	<result column="price" property="price" />
+	<result column="time" property="time" />
+	<result column="period" property="period" />
+	<result column="disc_status" property="discStatus" />
+	<result column="discount_period" property="discountPeriod" />
+	<result column="discount" property="discount" />
+	<result column="pay_total" property="payTotal" />
+	<result column="status" property="status" />
+	<result column="star" property="star"/>
+</resultMap>
+
+<select id="mainThumbnail" resultMap="lessonResultSet">
+	<![CDATA[select *
+				 from (
+				   select
+				          lesson_cover_img
+				        , lesson_no
+				        , lesson_title
+				        , like_count
+				     from lesson
+				    where status = 'Y'
+					 order
+					    by like_count desc
+				        )
+				 where rownum <5]]> 
+</select>
+
+<select id="kidsList" resultMap="lessonResultSet">
+	<![CDATA[  select *
+				 from (
+				         select 
+				                l.lesson_cover_img
+				              , l.lesson_no
+				              , l.lesson_title
+				              , l.price
+				              , r.star
+				              , l.like_count
+				          from lesson l
+				          join review r on (l.lesson_no = r.lesson_no)
+				         where l.status='Y'
+				           and l.lesson_category = '키즈'
+				        )
+				 where rownum <4
+				 order 
+				    by like_count desc]]> 
+</select>
+
+<select id="moneyList" resultMap="lessonResultSet">
+	<![CDATA[  select *
+				 from (
+				         select 
+				                l.lesson_cover_img
+				              , l.lesson_no
+				              , l.lesson_title
+				              , l.price
+				              , r.star
+				              , l.like_count
+				          from lesson l
+				          join review r on (l.lesson_no = r.lesson_no)
+				         where l.status='Y'
+				           and l.lesson_category = '머니'
+				        )
+				 where rownum <4
+				 order 
+				    by like_count desc]]> 
+</select>
+
+<select id="hobbyList" resultMap="lessonResultSet">
+	<![CDATA[  select *
+				 from (
+				         select 
+				                l.lesson_cover_img
+				              , l.lesson_no
+				              , l.lesson_title
+				              , l.price
+				              , r.star
+				              , l.like_count
+				          from lesson l
+				          join review r on (l.lesson_no = r.lesson_no)
+				         where l.status='Y'
+				           and l.lesson_category = '취미생활'
+				        )
+				 where rownum <4
+				 order 
+				    by like_count desc]]> 
+</select>
+
+<select id="careerList" resultMap="lessonResultSet">
+	<![CDATA[  select *
+				 from (
+				         select 
+				                l.lesson_cover_img
+				              , l.lesson_no
+				              , l.lesson_title
+				              , l.price
+				              , r.star
+				              , l.like_count
+				          from lesson l
+				          join review r on (l.lesson_no = r.lesson_no)
+				         where l.status='Y'
+				           and l.lesson_category = '커리어'
+				        )
+				 where rownum <4
+				 order 
+				    by like_count desc]]> 
+</select>
+
+<select id="newLessonList" resultMap="lessonResultSet">
+		<![CDATA[select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              , l.approve_date
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					          order by dbms_random.random
+					        )
+					 where rownum <4]]> 
+</select>
+</mapper>

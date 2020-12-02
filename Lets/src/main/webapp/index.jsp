@@ -9,7 +9,7 @@
 </head>
 <body>
 	
-	<jsp:forward page="WEB-INF/views/mainPage.jsp" />
+	<jsp:forward page="/mainPage.le" />
 	
 	<!-- aside_nav -->
 	<!--<jsp:forward page="WEB-INF/views/admin/memberManagementView.jsp"/>-->
