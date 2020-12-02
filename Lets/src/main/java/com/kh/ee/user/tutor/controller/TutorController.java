@@ -62,10 +62,10 @@ public class TutorController {
 		
 		int listCount = memPayService.selectListCount(loginUser.getMemNo());
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
-		ArrayList<MemPay> mpList = memPayService.selectPrepareList(loginUser.getMemNo(), currentPage);
+		ArrayList<MemPay> mpList = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
+		System.out.println(listCount);
 		
-		
-		
+		model.addAttribute("pi",pi);
 		model.addAttribute("aLlist", aLlist);
 		model.addAttribute("sLlist", sLlist);
 		model.addAttribute("mpList", mpList);

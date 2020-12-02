@@ -52,7 +52,13 @@
 	 where mem_pay_no = #{memPayNo}
 </update>
 
-<select id="selectListCount" resultMap="memPayResultSet">
+<select id="selectListCount" parameterType="_int" resultType="_int">
+	select
+	      count(*) listcount
+	    from mem_pay
+	    join lesson l using (lesson_no)
+	    where l.mem_no = #{memNo}
 	
 </select>
+	 
 </mapper>
