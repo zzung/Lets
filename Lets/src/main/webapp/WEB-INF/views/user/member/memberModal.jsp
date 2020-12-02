@@ -29,10 +29,10 @@
                             <div class="mbody-1-img">
                             	<c:choose>
                             		<c:when test="${empty loginUser.memPic}">
-                            			<c:if test="${loginUser.gender eq 'F'}">
+                            			<c:if test="${loginUser.gender eq '여'}">
 		                                	<img id="target_img" src="resources/user/assets/img/member/woman.png">
                             			</c:if>
-                            			<c:if test="${loginUser.gender eq 'M'}">
+                            			<c:if test="${loginUser.gender eq '남'}">
 		                                	<img id="target_img" src="resources/user/assets/img/member/man.png">
                             			</c:if>
                             		</c:when>
@@ -45,35 +45,45 @@
                             </div>
                         </div>
 
-						<input type="hidden" id="memId" name="memId" value="${loginUser.memId}">
-
                         <div class="mbody-2">
+                        	<div class="update-list-title">아이디</div>
+	                        <div class="update-birth-block">
+	                            <input type="text" class="form-control" id="memId" name="memId" style="font-size: 13px;" value="${loginUser.memId}" readonly>
+	                        </div>
+                        
                             <div class="update-list-title">이름</div>
                             <div class="update-name-block">
                                 <input type="text" class="form-control" id="memName" name="memName" style="font-size: 13px;" value="${loginUser.memName}"  readonly><br>
                             </div>
-	
-                            <div class="update-list-title">새로운 비밀번호</div>
-                            <div class="update-pwd-block">
-                                <input type="password" class="form-control" id="memPwd" name="memPwd" style="font-size: 13px;" minlength="8" placeholder="영문,특수문자,숫자 포함 8자리 이상">
-                            </div>
-                            <div class="update-pwd-check"></div>
-                            
-                            <br>
-                            <div class="update-list-title">새로운 비밀번호 확인</div>
-                            <div class="update-pwdCheck-block">
-                                <input type="password" class="form-control" id="memPwdCheck" name="memPwdCheck" minlength="8" style="font-size: 13px;" placeholder="비밀번호를 한번 더 입력해주세요">
-                            </div>
-                            <div class="update-pwdCheck-check"></div>
-                            
-                            <br>
+							
+							<c:if test="${loginUser.memPwd ne null}">
+	                            <div class="update-list-title">새로운 비밀번호</div>
+	                            <div class="update-pwd-block">
+	                                <input type="password" class="form-control" id="memPwd" name="memPwd" style="font-size: 13px;" minlength="8" placeholder="영문,특수문자,숫자 포함 8자리 이상">
+	                            </div>
+	                            <div class="update-pwd-check"></div>
+	                            
+	                            <br>
+	                            <div class="update-list-title">새로운 비밀번호 확인</div>
+	                            <div class="update-pwdCheck-block">
+	                                <input type="password" class="form-control" id="memPwdCheck" name="memPwdCheck" minlength="8" style="font-size: 13px;" placeholder="비밀번호를 한번 더 입력해주세요">
+	                            </div>
+	                            <div class="update-pwdCheck-check"></div>
+                            	<br>
+							</c:if>
+							
                             <div class="update-list-title">닉네임</div>
                             <div class="update-nickName-block">
                                 <input type="text" class="form-control" id="nickname" name="nickname" style="font-size: 13px;" value="${loginUser.nickname}">
                             </div>
                             <div class="update-nickName-check"></div>
 
-                            <br>
+							<br>
+                            <div class="update-list-title">성별</div>
+                            <div class="update-birth-block">
+                                <input type="text" class="form-control" id="gender" name="gender" style="font-size: 13px;" value="${loginUser.gender}" readonly>
+                            </div>
+                            
                             <div class="update-list-title">생년월일</div>
                             <div class="update-birth-block">
                                 <input type="text" class="form-control" id="birthday" name="birthday" style="font-size: 13px;" value="${loginUser.birthday}">
@@ -288,14 +298,25 @@
 	                <div class="modal-body">
 	                    <div class="m-title" style="text-align: center; color:orangered;">정말로 탈퇴하시겠습니까?</div>
 	                    <br>
-	                    <div class="m-info" style="text-align: center; font-size: 13px; font-weight: bolder;">
-				                        계정을 삭제하시면 기존의 수강권, 클래스 기록 등의 <br>
-				                        모든 회원 정보가 삭제됩니다.
-	                    </div>
-	                    <br>
-	                    <div>
-	                        <input type="password" class="form-control" id="memPwdDelCheck" name="memPwdDelCheck" required placeholder="비밀번호를 입력해주세요" style="margin-left: 130px; width: 200px; height: 35px; font-size: 14px;">                        
-	                    </div>
+	                	<c:choose>
+		                	<c:when test="${loginUser.memPwd ne null}">
+			                    <div class="m-info" style="text-align: center; font-size: 13px; font-weight: bolder;">
+						                        계정을 삭제하시면 기존의 수강권, 클래스 기록 등의 <br>
+						                        모든 회원 정보가 삭제됩니다.
+			                    </div>
+			                    <br>
+			                    <div>
+			                        <input type="password" class="form-control" id="memPwdDelCheck" name="memPwdDelCheck" required placeholder="비밀번호를 입력해주세요" style="margin-left: 130px; width: 200px; height: 35px; font-size: 14px;">                        
+			                    </div>
+		                	</c:when>
+	                		<c:otherwise>
+								<div class="m-info" style="text-align: center; font-size: 13px; font-weight: bolder;">
+						                       계정을 삭제하시면 기존의 수강권, 클래스 기록 등의 <br>
+						                        모든 회원 정보가 삭제됩니다.
+			                    </div>
+			                    <br>
+	                		</c:otherwise>
+	                	</c:choose>
 	                </div>
 	                
 	                <!-- Modal footer -->
