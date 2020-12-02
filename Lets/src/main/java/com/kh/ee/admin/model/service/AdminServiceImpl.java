@@ -85,8 +85,18 @@ public class AdminServiceImpl implements AdminService{
 	
 	//클래스관리 거절 처리 ajax(학천)
 	@Override
-	public int rejectApproval(int lessonNo) {
-		return ad.rejectApproval(lessonNo, ss);
+	public int rejectApproval(Lesson l) {
+		return ad.rejectApproval(l, ss);
+	}
+	
+	//클래스관리 검색시 나올 갯수/검색(학천)
+	@Override
+	public int searchClassMgmtCount(SearchCondition sc) {
+		return ad.searchClassMgmtCount(sc,ss);
+	}
+	@Override
+	public ArrayList<Lesson> searchClassMgmtList(SearchCondition sc, PageInfo pi) {
+		return ad.searchClassMgmtList(sc,pi,ss);
 	}
 
 }

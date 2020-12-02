@@ -36,6 +36,12 @@ public interface AdminService {
 	int lessonApproval(int lessonNo);
 	
 	//클래스관리 거절 처리 ajax(학천)
-	int rejectApproval(int lessonNo);
+	int rejectApproval(Lesson l);
+
+	//클래스관리 검색시 나올 갯수/검색(학천)
+	int searchClassMgmtCount(SearchCondition sc);
+	ArrayList<Lesson> searchClassMgmtList(SearchCondition sc, PageInfo pi);
+	
+	
 
 }

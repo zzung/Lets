@@ -12,6 +12,17 @@
 </head>
      <script>
          var chkIdx = 0;
+
+         var curriculumKeyupFunction = function(){
+           	 var curriculumIndex = $(".curriculumTextInput").index($(this))
+           	 $(".curriculumText").eq(curriculumIndex).text($(this).val())
+   	     }
+
+ 		 var titleKeyupFucntion = function(){
+        	 var titleIndex = $(".titleInput").index($(this))
+        	 $(".titleText").eq(titleIndex).text($(this).val())
+   	     }
+   	     
          var detailAddFunction = function(){
          	
          	var detailHtml = '';
@@ -29,10 +40,7 @@
          	
          	$(this).parents().eq(2).append(detailHtml);
          	
-         	$('.curriculumInput').eq($('.detailadd').index($(this))).find('.curriculumTextInput').last().keyup(function(){
-	           	 var curriculumIndex = $(".curriculumTextInput").index($(this))
-	           	 $(".curriculumText").eq(curriculumIndex).text($(this).val())
-       	    });
+         	$('.curriculumInput').eq($('.detailadd').index($(this))).find('.curriculumTextInput').last().keyup(curriculumKeyupFunction);
          	var length = $(this).parents().eq(2).children().length;
          	$(this).parents().eq(2).children().eq(length-1).children().eq(0).html('<h6 class="category_2">'+(length-1) + ")"+'</h6>');
 
@@ -78,15 +86,9 @@
 	            inputhtml += '<div class="curriculumS"><h5><span class="curriculumNum">1) </span><span class="curriculumText"></span></h5><h5><span class="curriculumNum">2) </span><span class="curriculumText"></span></h5></div><hr></div>';
 	            $('.curriculumP').append(inputhtml);
                 
-	            $('.titleInput').last().keyup(function(){
-	           	 var titleIndex = $(".titleInput").index($(this))
-	        	 $(".titleText").eq(titleIndex).text($(this).val())
-        	    });
+	            $('.titleInput').last().keyup(titleKeyupFucntion);
 	            
-	            $('.curriculumInput').last().find('.curriculumTextInput').keyup(function(){
-	           	 var curriculumIndex = $(".curriculumTextInput").index($(this))
-	           	 $(".curriculumText").eq(curriculumIndex).text($(this).val())
-           	    });
+	            $('.curriculumInput').last().find('.curriculumTextInput').keyup(curriculumKeyupFunction);
 	            
                 
 	             var categorydeleteindex=$('.categorydelete').length-1
@@ -260,16 +262,9 @@
          </div>
          
          <script>
-         $(".titleInput").keyup(function(){
-        	 var titleIndex = $(".titleInput").index($(this))
-        	 $(".titleText").eq(titleIndex).text($(this).val())
-        	    });
+         $(".titleInput").keyup(titleKeyupFucntion);
          
-         $(".curriculumTextInput").keyup(function(){
-        	 var curriculumIndex = $(".curriculumTextInput").index($(this))
-        	 $(".curriculumText").eq(curriculumIndex).text($(this).val())
-        	    });
-         
+         $(".curriculumTextInput").keyup(curriculumKeyupFunction);
          
          </script>
 

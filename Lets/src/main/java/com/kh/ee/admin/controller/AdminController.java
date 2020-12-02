@@ -54,14 +54,39 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping("rejectApproval.ad")
-	public String rejectApproval(int lessonNo) {
-		int result = as.rejectApproval(lessonNo);
+	public String rejectApproval(Lesson l) {
+		int result = as.rejectApproval(l);
 		
 		if(result>0) {
 			return "success";
 		} else {
 			return "fail";
 		}
+	}
+	
+	@RequestMapping("searchClassMgmt.ad")
+	public String searchClassMgmt(String condition, String keyword, int currentPage, Model model) {
+		
+		SearchCondition sc = new SearchCondition(); 
+		
+		switch(condition) {
+		case "title" : sc.setTitle(keyword); break;
+		case "writer" : sc.setWriter(keyword); break;
+		case "approval" : sc.setApproval(keyword);
+		}
+		
+		int listCount = as.searchClassMgmtCount(sc);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Lesson> list = as.searchClassMgmtList(sc,pi); 
+		
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
+		model.addAttribute("condition",condition);
+		model.addAttribute("sc",sc);
+		model.addAttribute("keyword",keyword);
+		
+		return "admin/classManagementView";		
 	}
 	
 	@RequestMapping("classPayment.ad")
