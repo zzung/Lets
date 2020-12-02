@@ -76,9 +76,9 @@
 								
 								<div class="modal-body" align="center" style="width:800px;">
 									<!-- 공지 등록 form start -->
-									<form action="">
+									<form action="" method="post" onsubmit="return confirm('공지를 등록 하시겠습니까?');">
 										<div style="height:36px;">
-											<select name="condition" style="width:100px; height:30px;">
+											<select name="noticeType" style="width:100px; height:30px;">
 												<option>회원</option>
 												<option>튜터</option>
 											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
