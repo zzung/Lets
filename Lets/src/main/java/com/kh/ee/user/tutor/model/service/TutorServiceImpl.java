@@ -22,8 +22,12 @@ public class TutorServiceImpl implements TutorService{
 
 	@Override
 	public int updateTutorInfo(Tutor t) {
-		// TODO Auto-generated method stub
-		return 0;
+		return tutorDao.updateTutorInfo(sqlSession, t);
+	}
+
+	@Override
+	public Tutor selectTutor(int memNo) {
+		return tutorDao.selectTutor(sqlSession, memNo);
 	}
 	
 	

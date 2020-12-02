@@ -13,7 +13,6 @@
      <script>
          var chkIdx = 0;
 
-         
          var curriculumKeyupFunction = function(){
            	 var curriculumIndex = $(".curriculumTextInput").index($(this))
            	 $(".curriculumText").eq(curriculumIndex).text($(this).val())
@@ -152,7 +151,6 @@
             });
             $('.detailadd').click(detailAddFunction)
 	        
-	        
       	});      	
       </script>
 <body>
@@ -165,7 +163,7 @@
     <div class="class1-form">
      
         <h5><b>클래스 제목</b></h5>
-        <input type="text" name="" placeholder="클래스 제목을 입력해주세요 (공백 포함 50자 이내)" onfocus="this.placeholder = ''" onblur="this.placeholder = '클래스 제목을 입력해주세요 (공백 포함 50자 이내)'" class="classTitle" required>
+        <input type="text" name="lessonTitle" placeholder="클래스 제목을 입력해주세요 (공백 포함 50자 이내)" onfocus="this.placeholder = ''" onblur="this.placeholder = '클래스 제목을 입력해주세요 (공백 포함 50자 이내)'" class="classTitle" required>
         <br><br><br><br>
 
         <h5><b>클래스 커버 이미지</b></h5>
@@ -181,7 +179,7 @@
                 </li>
             </ul>
         </div>
-        <input type="file" id="upfile" class="form-control-file border" style="width:400px;" name=""  required><br><br><br>
+        <input type="file" id="upfile" class="form-control-file border" style="width:400px;" name="lessonUpFile"  required><br><br><br>
         <div>
             <h5><b>수업 대상</b></h5>
             <div style="background-color: #f9f9ff; width: 900px; font-size: 13px;">
@@ -192,15 +190,15 @@
                 </ul>
             </div>
             <div class="mt-10">
-                <textarea class="single-textarea" placeholder="튜터님의 수업을 수강하기에 적합한 수업 대상에 대해 적어주세요." required="" name=""
+                <textarea class="single-textarea" placeholder="튜터님의 수업을 수강하기에 적합한 수업 대상에 대해 적어주세요." required name="lessonTarget"
                      onfocus="this.placeholder = ''" onblur="this.placeholder = '튜터님의 수업을 수강하기에 적합한 수업 대상에 대해 적어주세요.'"></textarea>
             </div><br>
         </div><br><br>
         <table>
             <tr>
                 <th width=210>수업형태</th>
-                <td><input type="radio" name="classForm" id="multiTime" value="multiTime"> <label for="multiTime"> 다회차 수업</label></td>
-                <td><input type="radio" name="classForm" id="oneTime" value="oneTime"> <label for="oneTime"> 원데이 클래스</label></td>
+                <td><input type="radio" name="lessonForm" id="multiTime" value="multiTime"> <label for="multiTime"> 다회차 수업</label></td>
+                <td><input type="radio" name="lessonForm" id="oneTime" value="oneTime"> <label for="oneTime"> 원데이 클래스</label></td>
             </tr>
             <tr>
                 <td></td>
@@ -211,8 +209,8 @@
 
             <tr>
                  <th>수업유형</th>
-                 <td><input type="radio" name="classType" id="online" value="online"> <label for="online"> 온라인 수업</label></td>
-                 <td><input type="radio" name="classType" id="offline" value="offline"> <label for="offline"> 대면 수업</label></td>
+                 <td><input type="radio" name="lessonType" id="online" value="online"> <label for="online"> 온라인 수업</label></td>
+                 <td><input type="radio" name="lessonType" id="offline" value="offline"> <label for="offline"> 대면 수업</label></td>
              </tr>
              <tr>
                  <td></td>
@@ -223,9 +221,9 @@
 
              <tr>
                  <th>수업 참여 희망 인원</th>
-                 <td><input type="radio" name="classGroup" id="oneClass" value="oneClass"> <label for="oneClass"> 1:1 수업</label></td>
-                 <td><input type="radio" name="classGroup" id="groupClass" value="groupClass"> <label for="groupClass"> 그룹 수업</label> 
-                     <input type="number" name="" placeholder="숫자만 입력" onfocus="this.placeholder = ''" onblur="this.placeholder = '숫자만 입력'" required="" class="classNum"></td>
+                 <td><input type="radio" name="lessonGroup" id="oneClass" value="oneClass"> <label for="oneClass"> 1:1 수업</label></td>
+                 <td><input type="radio" name="lessonGroup" id="groupClass" value="groupClass"> <label for="groupClass"> 그룹 수업</label> 
+                     <input type="number" name="lessonGroup" placeholder="숫자만 입력" onfocus="this.placeholder = ''" onblur="this.placeholder = '숫자만 입력'" class="classNum"></td>
                  </tr>
              <tr>
                  <td></td>
@@ -350,7 +348,7 @@
                </div>
            </div>
            <br><br>
-     <div align="center"><button id="lessonNext" href="enrollNext.le" class="genric-btn primary radius">저장 후 다음단계(1/2)</button></div><br>
+     <div align="center" style="margin-left:50%"><button id="lessonNext" href="enrollNext.le" class="genric-btn primary radius">다음단계(1/2)</button></div><br>
      </div>
 
 
@@ -564,7 +562,7 @@
      <div align="center">
 	     <button type="submit" id="lessonPrev" class="genric-btn primary radius">이전 페이지로</button>
 	     <button type="submit" class="genric-btn primary radius">최종 승인 요청하기</button>
-     </div><br><br>
+     </div><br><br><br>
     </form>
  </div>
     

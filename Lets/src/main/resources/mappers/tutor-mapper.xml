@@ -25,5 +25,22 @@
 		  , #{tutorInfo}
 		  )
 	</insert>
+	
+	<update id="updateTutorInfo" parameterType="Tutor">
+		update
+				tutor
+			set tutor_pic = #{tutorPic}
+			  , tutor_info = #{tutorInfo}
+		  where mem_no = #{memNo}
+	</update>
+	
+	<select id="selectTutor" resultMap="tutorResultSet">
+		select
+			   mem_no
+			 , tutor_pic
+			 , tutor_info
+		  from tutor
+		 where mem_no = #{memNo}
+	</select>
 
 </mapper>

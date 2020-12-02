@@ -11,6 +11,14 @@ public class TutorDao {
 	public int insertTutorInfo(SqlSessionTemplate sqlSession, Tutor t) {
 		return sqlSession.insert("tutorMapper.insertTutorInfo", t);
 	}
+
+	public int updateTutorInfo(SqlSessionTemplate sqlSession, Tutor t) {
+		return sqlSession.update("tutorMapper.updateTutorInfo", t);
+	}
+
+	public Tutor selectTutor(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("tutorMapper.selectTutor", memNo);
+	}
 	
 	
 	
