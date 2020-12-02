@@ -43,5 +43,6 @@ public class MemPay {
 	private String detailAddress;
 	private String extraAddress;
 	private String phone;
+	private String lessonType;
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.common.template.Pagination;
 import com.kh.ee.user.faq.model.service.FaqService;
@@ -62,8 +63,8 @@ public class TutorController {
 		
 		int listCount = memPayService.selectListCount(loginUser.getMemNo());
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		
 		ArrayList<MemPay> mpList = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
-		System.out.println(listCount);
 		
 		model.addAttribute("pi",pi);
 		model.addAttribute("aLlist", aLlist);
@@ -135,11 +136,22 @@ public class TutorController {
 	
 	@RequestMapping("delivery.tm")
 	public String updateDelivery(MemPay mp) {
-		System.out.println(mp);
 		int result = memPayService.updateDelivery(mp);
 		
 		return "redirect:tutorMyLesson.tm";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="paging.pt", produces="application/json; charset=utf-8")
+	public String pagingPrepare(@RequestParam(value="currentPage")int currentPage, HttpSession session, Model model) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int listCount = memPayService.selectListCount(loginUser.getMemNo());
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		
+		ArrayList<MemPay> list = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
+		
+		return new Gson().toJson(list);
+	}
 	
 }

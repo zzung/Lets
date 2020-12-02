@@ -18,6 +18,7 @@
 	<result column="mem_id" property="memId" />
 	<result column="mem_name" property="memName" />
 	<result column="lesson_prepare" property="lessonPrepare" />	
+	<result column="lesson_type" property="lessonType"/>
 </resultMap>
 
 <select id="selectPrepareList" resultMap="memPayResultSet">
@@ -38,7 +39,10 @@
 	  left join lesson l on(l.lesson_no = mp.lesson_no)
 	  left join member m on(m.mem_no = mp.mem_no)
 	 where l.status = 'Y'
+	   and l.lesson_type = '온라인'
 	   and l.mem_no = #{memNo}
+	 order
+	    by mp.payment_date desc
 	   
 </select>
 
@@ -57,6 +61,7 @@
 	    from mem_pay
 	    join lesson l using (lesson_no)
 	    where l.mem_no = #{memNo}
+	      and l.lesson_type='온라인'
 	
 </select>
 	 
