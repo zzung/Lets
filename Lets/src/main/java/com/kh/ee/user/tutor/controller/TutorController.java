@@ -43,6 +43,7 @@ public class TutorController {
 	@Autowired
 	private TutorService tutorService;
 	
+	// 튜터메인(수현)
 	@RequestMapping("tutorMain.tm")
 	public String tutorMain( Model model) {
 		
@@ -52,6 +53,7 @@ public class TutorController {
 		return "user/tutor/tutorMainView";
 	}
 	
+	// 내수업페이지(수현)
 	@RequestMapping("tutorMyLesson.tm")
 	public String tutorMyLesson(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1")int currentPage) {
 		
@@ -59,7 +61,7 @@ public class TutorController {
 		
 		ArrayList<Lesson> aLlist = lessonService.selectApproveLessonList(loginUser.getMemNo());
 		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList(loginUser.getMemNo());
-		//ArrayList<MemPay> msList = memPayService.selectSalaryList(loginUser.getMemNo());
+		ArrayList<MemPay> msList = memPayService.selectSalaryList(loginUser.getMemNo());
 		
 		int listCount = memPayService.selectListCount(loginUser.getMemNo());
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
@@ -69,7 +71,7 @@ public class TutorController {
 		model.addAttribute("aLlist", aLlist);
 		model.addAttribute("sLlist", sLlist);
 		model.addAttribute("mpList", mpList);
-		
+		model.addAttribute("msList", msList);
 		return "user/tutor/myClassView";
 			
 	}
@@ -173,7 +175,7 @@ public class TutorController {
 		return originName;
 	}
 	
-	
+	// 내수업 lesson삭제 (수현)
 	@ResponseBody
 	@RequestMapping("deleteLesson.tl")
 	public String deleteLesson(int lno) {
@@ -185,7 +187,7 @@ public class TutorController {
 			return "fail";
 		}
 	}
-	
+	// 내수업 택배사,번호 update(수현)
 	@RequestMapping("delivery.tm")
 	public String updateDelivery(MemPay mp) {
 		System.out.println(mp);
@@ -203,12 +205,13 @@ public class TutorController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		
 		ArrayList<MemPay> list = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
-		System.out.println(list);
+		
 		HashMap<String, Object> hmap = new HashMap<String,Object>();
 		hmap.put("pi",pi);
 		hmap.put("list", list);
 		
 		model.addAttribute("pi",pi);
+		
 		return new Gson().toJson(hmap);
 	}
 	

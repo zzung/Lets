@@ -44,5 +44,11 @@ public class MemPay {
 	private String extraAddress;
 	private String phone;
 	private String lessonType;
+	private String likeCount;		// 추천수
+	private String studentCount;	// 학생수
+	private String star;
+	private String totalFee;		// 클래스금액 * (수수료/100)
+	private String salaryTotal;		// 총월급 클래스금액 * 학생수 - fee
+	private String fee;
 
 }

@@ -28,10 +28,22 @@
     #salaryTable th {text-align: right;}
     #classTable a {text-decoration:none;}
     #lessonPreTable a {text-decoration:none;}
-    .outCome{background-color: lightgray; height: 220px; width: 600px; text-align: center;}
-    .totalSalary{background-color: rgb(45, 48, 186); margin-left:15px ; color: white;height: 220px; width: 600px;box-sizing: border-box;}  
+    .outCome{
+    	background-color: lightgray; 
+    	height: 200px; 
+    	width: 580px; 
+    	text-align: center;
+    	margin-bottom:10px}
+    .totalSalary{
+    	background-color: rgb(45, 48, 186); 
+    	margin-left:15px ; 
+    	color: white;
+    	height: 200px;
+    	width: 580px;
+    	box-sizing: border-box;
+    	margin-bottom:10px}  
     .classSalary div {float: left; text-align:center}
-    .btn-group-sm>.btn, .btn-sm {
+    .btn-group-sm >.btn, .btn-sm {
     padding: .25rem .5rem;
     line-height: 1.5;
     border-radius: .2rem;
@@ -379,8 +391,8 @@
 				        </div>
 				    </div>
 	            </c:forEach>
-	            
 	        </table>
+	        
 	        <!--페이징-->
             <div id="pagingArea" style="margin-left: 35%;">
 	        
@@ -412,7 +424,6 @@
                     	</c:otherwise>
                 	</c:choose>
                 </ul>
-                	 
             </div>
         </div>
        
@@ -532,47 +543,51 @@
 	        <!-- 정산받는 버튼 -->
 	        <span style="float: right;"><button data-toggle="modal" data-target="#account" class="genric-btn primary-border btn-sm" >정산받기</button></span>
 	        </div>
-	        
-	        
         </div>
         <br><br><br>
-
-        <!-- 정산받을 클래스들 반복문 돌릴 차례 -->
-        <!-- 년도, 월 검색 후 그에 맞춰 나와야 됨....ㅎ-->
-      
-            <div class="classSalary" >
-                <div class="outCome" style="text">
+        
+        <c:forEach var="ms" items="${ msList}">
+        	<div class="classSalary" >
+	            <div class="outCome">
                     <br>
-                    <p id="classTitle" name="classTitle" style="font-size:20px;">토익 회화! 비즈니스반입니다 오호오호 오호아하 고고갑시다</p>
+                    <p id="classTitle" name="classTitle" style="font-size:20px;">${ms.lessonTitle }</p>
                     <br>
                     <table id="outComeTable" align="center">
                     	<tr>
+                    		<th>추천수 : </th>
+                    		<td>${ms.likeCount } 명</td>
+                    	</tr>
+                    	<tr>
                     		<th>신청수 : </th>
-                    		<td>22 명</td>
+                    		<td>${ms.studentCount } 명</td>
                     	</tr>
                     	<tr>
                     		<th>평점평균 : </th>
-                    		<td>3.4</td>
+                    		<td>${ms.star } 점</td>
                     	</tr>
                     </table>
-                </div>
+	            </div>
                 <div class="totalSalary" >
                     <br><br>
                     <table id="salaryTable" align="center">
+                    	
+	                <div>
+	                	<input type="checkbox" id="confirm-checkbox" name=""  >
+	                </div>
                         <tr>
                             <td>&nbsp;</td>
                             <td style="width: 200px; height: 25px;">총 클래스 금액</td>
-                            <th>72000</th>
+                            <th>${ms.payTotal }</th>
                         </tr>
                         <tr>
                             <td>-&nbsp;</td>
-                            <td>레츠 수수료(20%)</td>
-                            <th>14,400</th>
+                            <td>레츠 수수료(${ms.fee }%)</td>
+                            <th>${ms.totalFee }</th>
                         </tr>
                         <tr>
                             <td>X&nbsp;</td>
                             <td>수강인원</td>
-                            <th>22</th>
+                            <th>${ms.studentCount }</th>
                         </tr>
                         <tr>
                             <th colspan="3">-------------------------------------------------</th>
@@ -580,18 +595,17 @@
                         <tr>
                             <th></th>
                             <td>튜터님의 총 수익</td>
-                            <th>1,267,200</th>
+                            <th>${ms.salaryTotal }</th>
                         </tr>
                     </table>
                     <br><br>
-                    <input type="hidden" value="">
                 </div>
+                <input type="hidden" value="${ms.lessonNo }">
             </div>
-     <br><br><br><br><br><br><br><br><br><br><br><br>
+        </c:forEach>
+        <br clear="both">
         <!-- 반복문 끝 -->
     </div>
-
-    
 
     <!-- 정산 시 받을 계좌입력 모달 -->
     <div class="modal fade" id="account">
@@ -627,7 +641,7 @@
             </div>
         </div>
     </div>
-    
+    <br><br>
     <!-- 정산 쪽 셀렉박스 -->
         <script>
             $(function(){

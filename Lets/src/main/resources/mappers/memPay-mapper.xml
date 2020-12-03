@@ -19,9 +19,16 @@
 	<result column="mem_name" property="memName" />
 	<result column="lesson_prepare" property="lessonPrepare" />	
 	<result column="lesson_type" property="lessonType"/>
+	<result column="like_count" property="likeCount"/>
+	<result column="student_count" property="studentCount"/>
+	<result column="star" property="star"/>
+	<result column="pay_total" property="payTotal"/>
+	<result column="total_fee" property="totalFee"/>
+	<result column="salary_total" property="salaryTotal"/>
+	<result column="fee" property="fee"/>
 </resultMap>
 
-<select id="selectPrepareList" resultMap="memPayResultSet">
+<select id="selectPrepareList" resultMap="memPayResultSet" parameterType="_int">
 	select
 	       mp.mem_pay_no
 	     , mp.lesson_no
@@ -65,5 +72,26 @@
 	
 </select>
 
+<select id="selectSalaryList" parameterType="_int" resultMap="memPayResultSet">
+	  select 
+	        m.lesson_no
+	      , l.lesson_title 
+	      , l.like_count 
+	      , count(m.lesson_no) student_count
+	      , r.star 
+	      , l.pay_total
+	      , s.fee
+	      , l.pay_total * (s.fee/100) total_fee
+	      , l.pay_total * count(m.lesson_no)-(l.pay_total * (s.fee/100)) salary_total
+	  from mem_pay m
+	  left join lesson l on (m.lesson_no = l.lesson_no)
+	  left join salary s on (l.lesson_no = s.lesson_no)
+	  left join review r on (s.lesson_no = r.lesson_no)
+	 where l.status = 'Y'
+	   and l.mem_no = #{memNo}
+	 group by m.lesson_no, l.lesson_title, l.like_count,
+	          r.star, l.pay_total, s.fee
+	 order by lesson_no desc
+</select>
 	 
 </mapper>
