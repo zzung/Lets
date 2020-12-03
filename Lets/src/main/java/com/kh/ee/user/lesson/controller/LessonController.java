@@ -14,6 +14,8 @@ import com.google.gson.Gson;
 import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.memPay.model.vo.MemPay;
+import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
@@ -26,22 +28,60 @@ public class LessonController {
 	private LessonService lService;
 
 	@RequestMapping("kids.le")
-	public String kidsCurriculum() {
+	public String kidsCurriculum(Model model) {
+		ArrayList<Lesson> pop = lService.selectKidsPop();
+		ArrayList<Lesson> nl = lService.selectKidsNew();
+		ArrayList<Lesson> disc = lService.selectKidsDisc();
+		ArrayList<Lesson> all = lService.selectKidsAll();
+		
+		model.addAttribute("pop",pop);
+		model.addAttribute("nl",nl);
+		model.addAttribute("disc",disc);
+		model.addAttribute("all",all);
+		
 		return "user/lesson/kidsCurriculumListView";
 	}
 	
 	@RequestMapping("money.le")
-	public String moneyCurriculum() {
+	public String moneyCurriculum(Model model) {
+		ArrayList<Lesson> pop = lService.selectMoneyPop();
+		ArrayList<Lesson> nl = lService.selectMoneyNew();
+		ArrayList<Lesson> disc = lService.selectMoneyDisc();
+		ArrayList<Lesson> all = lService.selectMoneyAll();
+		
+		model.addAttribute("pop",pop);
+		model.addAttribute("nl",nl);
+		model.addAttribute("disc",disc);
+		model.addAttribute("all",all);
+		
 		return "user/lesson/moneyCurriculumListView";
 	}	
 	
 	@RequestMapping("career.le")
-	public String careerCurriculum() {
+	public String careerCurriculum(Model model) {
+		ArrayList<Lesson> pop = lService.selectCareerPop();
+		ArrayList<Lesson> nl = lService.selectCareerNew();
+		ArrayList<Lesson> disc = lService.selectCareerDisc();
+		ArrayList<Lesson> all = lService.selectCareerAll();
+		
+		model.addAttribute("pop",pop);
+		model.addAttribute("nl",nl);
+		model.addAttribute("disc",disc);
+		model.addAttribute("all",all);
 		return "user/lesson/careerCurriculumListView";
 	}	
 	
 	@RequestMapping("hobby.le")
-	public String hobbyCurriculum() {
+	public String hobbyCurriculum(Model model) {
+		ArrayList<Lesson> pop = lService.selectHobbyPop();
+		ArrayList<Lesson> nl = lService.selectHobbyNew();
+		ArrayList<Lesson> disc = lService.selectHobbyDisc();
+		ArrayList<Lesson> all = lService.selectHobbyAll();
+		
+		model.addAttribute("pop",pop);
+		model.addAttribute("nl",nl);
+		model.addAttribute("disc",disc);
+		model.addAttribute("all",all);
 		return "user/lesson/hobbyCurriculumListView";
 	}	
 	
@@ -66,12 +106,14 @@ public class LessonController {
 		ArrayList<LessonFaq> faqList = lService.selectLessonFaqList(lessonNo); 
 		Tutor t = lService.selectTutorInfo(lessonNo); 
 		int listCount = lService.selectListCount(); 
+		MemPay mp = lService.selectMemPayList(lessonNo); 
 				
 		model.addAttribute("list", list); 
 		model.addAttribute("faqList",faqList);
 		model.addAttribute("t", t);
 		model.addAttribute("listCount",listCount);
 		model.addAttribute("l",lesson); 
+		model.addAttribute("mp",mp);
 		return "user/lesson/classDetailView"; 
 	}
 	
@@ -192,5 +234,11 @@ public class LessonController {
 	@RequestMapping("enrollNext.le")
 	public String enrollNextLesson() {
 		return "user/lesson/lessonEnrollNextForm";
+	}
+	
+	//결제정보 작성해서 보내기(학천)
+	@RequestMapping("paymentProcess.le")
+	public void paymentProcess() {
+		
 	}
 }

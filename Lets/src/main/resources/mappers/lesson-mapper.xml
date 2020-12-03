@@ -85,6 +85,12 @@
 	<result column="replyNickname" property="nickname"/> 
 </resultMap>
 
+<resultMap type="MemPay" id="memPayResultSet">
+	<id column="mem_pay_no" property="memPayNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="lesson_no" property="lessonNo" />
+</resultMap>
+
 <select id="selectApproveLessonList" resultMap="lessonResultSet" >
 	select
 	       lesson_no
@@ -331,4 +337,329 @@
    set like_count = like_count + 1
  where lesson_no = #{lessonNo}
 </update>
+
+<select id="selectKidsPop" resultMap="lessonResultSet">
+		<![CDATA[ select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '키즈'
+					           and approve_date is not null
+					        )
+					 where rownum <10
+					 order 
+					    by like_count desc]]> 
+</select>
+
+<select id="selectKidsNew" resultMap="lessonResultSet">
+		<![CDATA[ select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              , l.approve_date
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '키즈'
+					           and approve_date is not null
+					          order by dbms_random.random
+					        )
+					 where rownum <10]]> 
+</select>
+
+<select id="selectKidsDisc" resultMap="lessonResultSet">
+		<![CDATA[select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              ,l.discount
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '키즈'
+					           and approve_date is not null
+					           and disc_status='적용'
+					        )
+					 where rownum <10]]> 
+</select>
+
+<select id="selectKidsAll" resultMap="lessonResultSet">
+	 select
+	        l.lesson_cover_img
+	      , l.lesson_no
+	      , l.lesson_title
+	      , l.price
+	      , r.star
+	      , l.like_count
+	      ,l.discount
+	  from lesson l
+	  left join review r on (l.lesson_no = r.lesson_no)
+	 where l.status='Y'
+	   and l.lesson_category = '키즈'
+	   and approve_date is not null
+</select>
+
+<select id="selectMoneyPop" resultMap="lessonResultSet">
+		<![CDATA[ select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '머니'
+					           and approve_date is not null
+					        )
+					 where rownum <10
+					 order 
+					    by like_count desc]]> 
+</select>
+
+<select id="selectMoneyNew" resultMap="lessonResultSet">
+		<![CDATA[ select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              , l.approve_date
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '머니'
+					           and approve_date is not null
+					          order by dbms_random.random
+					        )
+					 where rownum <10]]> 
+</select>
+
+<select id="selectMoneyDisc" resultMap="lessonResultSet">
+		<![CDATA[select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              ,l.discount
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '머니'
+					           and approve_date is not null
+					           and disc_status='적용'
+					        )
+					 where rownum <10]]> 
+</select>
+
+<select id="selectMoneyAll" resultMap="lessonResultSet">
+	 select
+	        l.lesson_cover_img
+	      , l.lesson_no
+	      , l.lesson_title
+	      , l.price
+	      , r.star
+	      , l.like_count
+	      ,l.discount
+	  from lesson l
+	  left join review r on (l.lesson_no = r.lesson_no)
+	 where l.status='Y'
+	   and l.lesson_category = '머니'
+	   and approve_date is not null
+</select>
+
+<select id="selectCareerPop" resultMap="lessonResultSet">
+		<![CDATA[ select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '커리어'
+					           and approve_date is not null
+					        )
+					 where rownum <10
+					 order 
+					    by like_count desc]]> 
+</select>
+
+<select id="selectCareerNew" resultMap="lessonResultSet">
+		<![CDATA[ select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              , l.approve_date
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '커리어'
+					           and approve_date is not null
+					          order by dbms_random.random
+					        )
+					 where rownum <10]]> 
+</select>
+
+<select id="selectCareerDisc" resultMap="lessonResultSet">
+		<![CDATA[select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              ,l.discount
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '커리어'
+					           and approve_date is not null
+					           and disc_status='적용'
+					        )
+					 where rownum <10]]> 
+</select>
+
+<select id="selectCareerAll" resultMap="lessonResultSet">
+	 select
+	        l.lesson_cover_img
+	      , l.lesson_no
+	      , l.lesson_title
+	      , l.price
+	      , r.star
+	      , l.like_count
+	      ,l.discount
+	  from lesson l
+	  left join review r on (l.lesson_no = r.lesson_no)
+	 where l.status='Y'
+	   and l.lesson_category = '커리어'
+	   and approve_date is not null
+</select>
+
+<select id="selectHobbyPop" resultMap="lessonResultSet">
+		<![CDATA[ select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '취미생활'
+					           and approve_date is not null
+					        )
+					 where rownum <10
+					 order 
+					    by like_count desc]]> 
+</select>
+
+<select id="selectHobbyNew" resultMap="lessonResultSet">
+		<![CDATA[ select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              , l.approve_date
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '취미생활'
+					           and approve_date is not null
+					          order by dbms_random.random
+					        )
+					 where rownum <10]]> 
+</select>
+
+<select id="selectHobbyDisc" resultMap="lessonResultSet">
+		<![CDATA[select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              ,l.discount
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '취미생활'
+					           and approve_date is not null
+					           and disc_status='적용'
+					        )
+					 where rownum <10]]> 
+</select>
+
+<select id="selectHobbyAll" resultMap="lessonResultSet">
+	 select
+	        l.lesson_cover_img
+	      , l.lesson_no
+	      , l.lesson_title
+	      , l.price
+	      , r.star
+	      , l.like_count
+	      ,l.discount
+	  from lesson l
+	  left join review r on (l.lesson_no = r.lesson_no)
+	 where l.status='Y'
+	   and l.lesson_category = '취미생활'
+	   and approve_date is not null
+</select>
+
+<select id="selectMemPayList" parameterType="_int" resultMap="memPayResultSet">
+	select
+	       mem_no
+	     , lesson_no
+	 from mem_pay
+	where lesson_no = #{lessonNo}
+</select>
+
 </mapper>

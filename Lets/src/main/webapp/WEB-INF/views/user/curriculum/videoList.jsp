@@ -45,38 +45,26 @@
         </div>
 
         <div id="blank"></div>
+        
+        <c:forEach var="video" items="${ videoList }" varStatus="status">
 
-        <div class="show button">
-
-            <img src="resources/user/assets/img/curriculum/plus.png" alt="show" height="100%">
-
-            <span>영상 소개</span>
-
-        </div>
-
-        <div class="video button">
-
-            <img src="resources/user/assets/img/curriculum/play.png" alt="play" height="100%">
-
-            <span>영상 제목</span>
-
-        </div>
-
-        <div class="show button">
-
-            <img src="resources/user/assets/img/curriculum/plus.png" alt="show" height="100%">
-
-            <span>영상 소개</span>
-
-        </div>
-
-        <div class="video button">
-
-            <img src="resources/user/assets/img/curriculum/play.png" alt="play" height="100%">
-
-            <span>영상 제목</span>
-
-        </div>
+	        <div class="show button">
+	
+	            <img src="resources/user/assets/img/curriculum/plus.png" alt="show" height="100%">
+	
+	            <span>${ video.videoCont }</span>
+	
+	        </div>
+	
+	        <div class="video button" onclick="location.href='detailVideo.cr?videoNo=${ video.videoNo}&memNo=${ loginUser.memNo }';">
+	
+	            <img src="resources/user/assets/img/curriculum/play.png" alt="play" height="100%">
+	
+	            <span>${ video.videoName }</span>
+	
+	        </div>
+	        
+        </c:forEach>
 
     </div>
 

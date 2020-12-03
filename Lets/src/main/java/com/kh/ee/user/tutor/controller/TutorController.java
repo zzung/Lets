@@ -2,9 +2,8 @@ package com.kh.ee.user.tutor.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.common.template.Pagination;
 import com.kh.ee.user.faq.model.service.FaqService;
@@ -59,11 +59,11 @@ public class TutorController {
 		
 		ArrayList<Lesson> aLlist = lessonService.selectApproveLessonList(loginUser.getMemNo());
 		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList(loginUser.getMemNo());
+		//ArrayList<MemPay> msList = memPayService.selectSalaryList(loginUser.getMemNo());
 		
 		int listCount = memPayService.selectListCount(loginUser.getMemNo());
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		ArrayList<MemPay> mpList = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
-		System.out.println(listCount);
 		
 		model.addAttribute("pi",pi);
 		model.addAttribute("aLlist", aLlist);
@@ -192,6 +192,23 @@ public class TutorController {
 		int result = memPayService.updateDelivery(mp);
 		
 		return "redirect:tutorMyLesson.tm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="paging.pt", produces="application/json; charset=utf-8")
+	public String pagingPrepare(@RequestParam(value="currentPage")int currentPage, HttpSession session, Model model) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int listCount = memPayService.selectListCount(loginUser.getMemNo());
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		
+		ArrayList<MemPay> list = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
+		System.out.println(list);
+		HashMap<String, Object> hmap = new HashMap<String,Object>();
+		hmap.put("pi",pi);
+		hmap.put("list", list);
+		
+		return new Gson().toJson(hmap);
 	}
 	
 	

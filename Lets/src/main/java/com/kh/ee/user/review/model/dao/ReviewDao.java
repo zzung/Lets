@@ -52,6 +52,10 @@ public class ReviewDao {
 		return ss.update("reviewMapper.deleteReviewReply",reviewNo);
 	}
 
+	public Review selectNumber(int lessonNo, SqlSessionTemplate ss) {
+		return ss.selectOne("reviewMapper.selectNumber",lessonNo);
+	}
+
 
 
 

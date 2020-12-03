@@ -44,7 +44,8 @@
  		<id column="video_no" property="videoNo" />
  		<result column="lesson_no" property="lessonNo" />
  		<result column="video_url" property="videoUrl" />
- 		<result column="video_cont" property="videoCount" />
+ 		<result column="video_cont" property="videoCont" />
+ 		<result column="video_name" property="videoName" />
  	</resultMap>
  	
  	<resultMap type="Lesson" id="lessonResultSet">
@@ -232,4 +233,32 @@
  		   set a_status = 'N'
  		 where qa_no = #{qnaNo}
  	</update>
+ 	
+ 	<select id="videoList" parameterType="Lesson" resultMap="videoResultSet">
+ 		select
+ 			   video_no
+ 			 , video_url
+ 			 , video_cont
+ 			 , video_name
+ 		  from video
+ 		 where lesson_no = #{lessonNo}
+ 	</select>
+ 	
+ 	<update id="updateVideoStatus" parameterType="MemVideo">
+ 		update mem_video
+ 		   set status = 'Y'
+ 		 where video_no = #{videoNo}
+ 		   and mem_no = #{memNo}
+ 	</update>
+ 	
+ 	<select id="detailVideo" resultMap="videoResultSet" parameterType="MemVideo">
+ 		select
+ 			   video_no
+ 			 , lesson_no
+ 			 , video_url
+ 			 , video_cont
+ 			 , video_name
+ 		  from video
+ 		 where video_no = #{videoNo}
+ 	</select>
 </mapper>

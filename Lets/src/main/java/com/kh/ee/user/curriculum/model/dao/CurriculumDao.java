@@ -6,7 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
+import com.kh.ee.user.curriculum.model.vo.MemVideo;
 import com.kh.ee.user.curriculum.model.vo.QnA;
+import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 
@@ -63,5 +65,17 @@ public class CurriculumDao {
 	
 	public int deleteAnswer(SqlSessionTemplate sqlSession, QnA q) {
 		return sqlSession.update("curriculumMapper.deleteAnswer", q);
+	}
+	
+	public ArrayList videoList(SqlSessionTemplate sqlSession, Lesson l) {
+		return (ArrayList)sqlSession.selectList("curriculumMapper.videoList", l);
+	}
+	
+	public int updateVideoStatus(SqlSessionTemplate sqlSession, MemVideo mv) {
+		return sqlSession.update("curriculumMapper.updateVideoStatus", mv);
+	}
+	
+	public Video detailVideo(SqlSessionTemplate sqlSession, MemVideo mv) {
+		return sqlSession.selectOne("curriculumMapper.detailVideo", mv);
 	}
 }

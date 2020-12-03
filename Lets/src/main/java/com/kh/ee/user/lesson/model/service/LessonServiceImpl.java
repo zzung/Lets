@@ -10,6 +10,8 @@ import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.dao.LessonDao;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.memPay.model.vo.MemPay;
+import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
@@ -116,7 +118,84 @@ public class LessonServiceImpl implements LessonService{
 	public int deleteLesson(int lno) {
 		return lDao.deleteLesson(ss, lno);
 	}
+
+	//키즈 화면에 뿌려줄것(학천)
+	@Override
+	public ArrayList<Lesson> selectKidsPop() {
+		return lDao.selectKidsPop(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectKidsNew() {
+		return lDao.selectKidsNew(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectKidsDisc() {
+		return lDao.selectKidsDisc(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectKidsAll() {
+		return lDao.selectKidsAll(ss);
+	}
+
+	//머니 화면에 뿌려줄것(학천)
+	@Override
+	public ArrayList<Lesson> selectMoneyPop() {
+		return lDao.selectMoneyPop(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectMoneyNew() {
+		return lDao.selectMoneyNew(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectMoneyDisc() {
+		return lDao.selectMoneyDisc(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectMoneyAll() {
+		return lDao.selectMoneyAll(ss);
+	}
+
+	//커리어 화면에 뿌려줄것(학천)
+	@Override
+	public ArrayList<Lesson> selectCareerPop() {
+		return lDao.selectCareerPop(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectCareerNew() {
+		return lDao.selectCareerNew(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectCareerDisc() {
+		return lDao.selectCareerDisc(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectCareerAll() {
+		return lDao.selectCareerAll(ss);
+	}
 	
+	//취미 화면에 뿌려줄것(학천)
+	@Override
+	public ArrayList<Lesson> selectHobbyPop() {
+		return lDao.selectHobbyPop(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectHobbyNew() {
+		return lDao.selectHobbyNew(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectHobbyDisc() {
+		return lDao.selectHobbyDisc(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectHobbyAll() {
+		return lDao.selectHobbyAll(ss);
+	}
+
+	@Override
+	public MemPay selectMemPayList(int lessonNo) {
+		return lDao.selectMemPayList(lessonNo,ss);
+	}
+
 	/*
 	@Override
 	public int likeCount(int lessonNo) {

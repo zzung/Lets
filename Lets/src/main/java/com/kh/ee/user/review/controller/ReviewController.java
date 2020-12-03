@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,7 +21,11 @@ public class ReviewController {
 	
 	//후기 더보기 플러스 버튼 클릭시 적용
 	@RequestMapping("showMore.rev")
-	public String showMore() {
+	public String showMore(int lessonNo, Model model) {
+		Review r = revService.selectNumber(lessonNo);
+		
+		model.addAttribute("r",r);
+		
 		return "user/lesson/reviewDetail";
 	}
 	

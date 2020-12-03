@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.memPay.model.vo.MemPay;
+import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
@@ -35,6 +37,34 @@ public interface LessonService {
 	//
 	
 	int deleteLesson(int lno);
+
+	//키즈 화면에 뿌려줄것(학천)
+	ArrayList<Lesson> selectKidsPop();
+	ArrayList<Lesson> selectKidsNew();
+	ArrayList<Lesson> selectKidsDisc();
+	ArrayList<Lesson> selectKidsAll();
+
+	//머니 화면에 뿌려줄것(학천)
+	ArrayList<Lesson> selectMoneyPop();
+	ArrayList<Lesson> selectMoneyNew();
+	ArrayList<Lesson> selectMoneyDisc();
+	ArrayList<Lesson> selectMoneyAll();
+
+	//커리어 화면에 뿌려줄것(학천)
+	ArrayList<Lesson> selectCareerPop();
+	ArrayList<Lesson> selectCareerNew();
+	ArrayList<Lesson> selectCareerDisc();
+	ArrayList<Lesson> selectCareerAll();
+
+	//취미 화면에 뿌려줄것(학천)
+	ArrayList<Lesson> selectHobbyPop();
+	ArrayList<Lesson> selectHobbyNew();
+	ArrayList<Lesson> selectHobbyDisc();
+	ArrayList<Lesson> selectHobbyAll();
+	
+	//수강하기 버큰 조건 주기위해 만듬(학천)
+	MemPay selectMemPayList(int lessonNo);
+	
 
 
 

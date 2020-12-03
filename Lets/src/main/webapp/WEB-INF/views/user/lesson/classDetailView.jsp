@@ -15,6 +15,7 @@
 
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/user/assets/css/detailClassStyle.css">
+<link rel="stylesheet" href="resources/user/assets/css/style.css">
 <script src='<c:url value="resources/user/assets/js/vendor/jquery-1.12.4.min.js"/>'></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
@@ -159,6 +160,7 @@
 		                  <div class="comments-area">
 		                     <div class="text-right">
 		                        <i class="fas fa-plus" id="showMore"> 더보기</i>
+		                        <input type="hidden" name="lessonNo" value="${l.lessonNo }">
 		                     </div>
 		                     <div class="container">
 		                        <h4>리뷰 </h4>
@@ -200,7 +202,7 @@
 	                 //후기 더보기 클리시 실행
 	                  	$(function(){
 	                  		$("#showMore").click(function(){
-	                  			location.href="showMore.rev?lessonNo=1";
+	                  			location.href="showMore.rev?lessonNo="+$(this).siblings("input[name=lessonNo]").val();
 	                  		})
 	                  		
 	                  		//페이지 실행되자마자 커뮤니티 실행시키기 위해 
@@ -214,7 +216,7 @@
 	                 			data:{
 	                 				//totalNo == lessonNo
 	                 				totalNo:${l.lessonNo},
-	                 				memNo:2,
+	                 				memNo:${loginUser.memNo},
 	                 				replyContent:$("#communityContent").val()
 	                 			},
 	                 			success:function(result){
@@ -408,10 +410,8 @@
 	             				url:"reReply.le",
 	             				data:{
 	             					replyNo:replyNo2,
-	             					// 회원번호 가져와야함 ${memNo}
-	             					memNo:2,
+	             					memNo:${loginUser.memNo},
 	             					replyContent:replyContent,
-	             					//totalNo == lessonNo 수정해줘야함 ${lessonNo}
 	             					totalNo:${l.lessonNo}
 	             				},
 	             				success:function(result){
@@ -729,7 +729,20 @@
 	                           </tr>
 	                           <tr>
 	                              <td colspan="4" align="center">
-	                                 <button class="genric-btn primary discount-pay" id="pay">수강하기</button>
+	                              <button class="genric-btn primary discount-pay" id="pay">수강하기</button>
+	                              <!-- 
+	                              <c:choose>
+	                              	<c:when test="${empty loginUser }">
+	                                 	<button class="genric-btn primary discount-pay disabled">로그인 후 사용</button>
+	                              	</c:when>
+	                              	<c:when test="${loginUser.memNo eq mp.memNo }">
+	                              		<button class="genric-btn primary discount-pay" id="curr">컬리큘럼으로 이동</button>
+	                              	</c:when>
+	                              	<c:otherwise>
+	                              		<button class="genric-btn primary discount-pay" id="pay">수강하기</button>
+	                              	</c:otherwise>
+	                              </c:choose>
+	                              -->
 	                              </td>
 	                           </tr>
 	                        </table>
@@ -737,6 +750,10 @@
 	                     <script>
 	                     	$("#pay").click(function(){
 	                     		location.href="payClass.le?lessonNo="+${l.lessonNo}
+	                     	})
+	                     	
+	                     	$("#curr").click(function(){
+	                     		location.href="detailCurri.cr?lessonNo="+${l.lessonNo}
 	                     	})
 	                     </script>
 	                     <!--end of payment-->

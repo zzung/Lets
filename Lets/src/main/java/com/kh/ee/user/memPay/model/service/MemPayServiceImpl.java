@@ -33,4 +33,9 @@ public class MemPayServiceImpl implements MemPayService{
 		return memPayDao.selectListCount(ss, memNo);
 	}
 
+//	@Override
+//	public int selectSalaryList(int memNo) {
+//		return memPayDao.selectSalaryList(ss,memNo);
+//	}
+
 }

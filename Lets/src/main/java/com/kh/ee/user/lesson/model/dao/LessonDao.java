@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.memPay.model.vo.MemPay;
+import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
@@ -90,8 +92,68 @@ public class LessonDao {
 	public int reportReply(Report rpt, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.reportReply",rpt);
 	}
+
+	//키즈 화면에 뿌려줄것(학천)
+	public ArrayList<Lesson> selectKidsPop(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectKidsPop");
+	}
+	public ArrayList<Lesson> selectKidsNew(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectKidsNew");
+	}
+	public ArrayList<Lesson> selectKidsDisc(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectKidsDisc");
+	}
+	public ArrayList<Lesson> selectKidsAll(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectKidsAll");
+	}
 	
-	/*
+	//머니 화면에 뿌려줄것(학천)
+	public ArrayList<Lesson> selectMoneyPop(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectMoneyPop");
+	}
+	public ArrayList<Lesson> selectMoneyNew(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectMoneyNew");
+	}
+	public ArrayList<Lesson> selectMoneyDisc(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectMoneyDisc");
+	}
+	public ArrayList<Lesson> selectMoneyAll(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectMoneyAll");
+	}
+
+	//커리어 화면에 뿌려줄것(학천)
+	public ArrayList<Lesson> selectCareerPop(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectCareerPop");
+	}
+	public ArrayList<Lesson> selectCareerNew(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectCareerNew");
+	}
+	public ArrayList<Lesson> selectCareerDisc(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectCareerDisc");
+	}
+	public ArrayList<Lesson> selectCareerAll(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectCareerAll");
+	}
+	
+	//취미 화면에 뿌려줄것(학천)
+	public ArrayList<Lesson> selectHobbyPop(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectHobbyPop");
+	}
+	public ArrayList<Lesson> selectHobbyNew(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectHobbyNew");
+	}
+	public ArrayList<Lesson> selectHobbyDisc(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectHobbyDisc");
+	}
+	public ArrayList<Lesson> selectHobbyAll(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectHobbyAll");
+	}
+
+	public MemPay selectMemPayList(int lessonNo,SqlSessionTemplate ss) {
+		return ss.selectOne("lessonMapper.selectMemPayList",lessonNo);
+	}
+	
+	/*(학천)
 	public int likeCount(int lessonNo, SqlSessionTemplate ss) {
 		return ss.update("lessonMapper.likeCount",lessonNo);
 	}

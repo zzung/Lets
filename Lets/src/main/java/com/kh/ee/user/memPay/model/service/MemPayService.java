@@ -10,4 +10,5 @@ public interface MemPayService {
 	ArrayList<MemPay> selectPrepareList(int memNo, PageInfo pi);
 	int updateDelivery(MemPay mp);
 	int selectListCount(int memNo);
+	//int selectSalaryList(int memNo);
 }

@@ -30,4 +30,7 @@ public class MemPayDao {
 		return ss.selectOne("memPayMapper.selectListCount", memNo);
 	}
 
+//	public int selectSalaryList(SqlSessionTemplate ss, int memNo) {
+//		return ss.selectList("memPayMapper.selectSalaryList" memNo);
+//	}
 }

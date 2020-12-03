@@ -29,11 +29,11 @@
                     <div class="h1-testimonial-active">
                         <!-- Single Testimonial -->
                         <c:forEach var="list" items="${list }"> 
-                        	<input type="hidden" name="lessonNo" class="lessonNo" value="${list.lessonNo }"> 
 	                        <div class="single-testimonial pt-65">
 	                            <!-- Testimonial tittle -->
 	                            <div class="testimonial-icon mb-45">
 	                                <img src="${list.lessonCoverImg }" class="ani-btn thumbnailImg" alt="">
+                        			<input type="hidden" name="lessonNo" class="lessonNo" value="${list.lessonNo }"> 
 	                            </div>
 	                                <!-- Testimonial Content -->
 	                            <div class="testimonial-caption text-center">
@@ -54,7 +54,7 @@
     <script>
     	$(function(){
     		$(".thumbnailImg").click(function(){
-    			location.href="courseDetailView.le?lessonNo="+$(this).parents(".lessonNo").val();
+    			location.href="courseDetailView.le?lessonNo="+$(this).siblings("input[name=lessonNo]").val();
 
     		});
     	});
@@ -73,7 +73,6 @@
             </div>
             <div class="row">
             	<c:forEach var="k" items="${kids }" varStatus="status">
-            	<input type="hidden" name="lessonNo" value="${k.lessonNo }">
             	 <div class="col-xl-4 col-lg-4 col-md-6">
                     <!-- Single course -->
                     <div class="single-course mb-40">
@@ -82,7 +81,7 @@
                         </div>
                         <div class="course-caption">
                             <div class="course-cap-top">
-                                <h5><a href="#">${k.lessonTitle }</a></h5>
+                                <h5><a href="courseDetailView.le?lessonNo=${k.lessonNo }">${k.lessonTitle }</a></h5>
                             </div>
                             <div class="course-cap-mid d-flex justify-content-between">
                                 <div class="course-ratting">
@@ -98,6 +97,7 @@
                                 <ul>
                                     <li><i class="ti-heart"></i> ${k.likeCount }</li>
                                 </ul>
+                                <span>${k.price }원</span>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,6 @@
                 </div>
                 <div class="row">
 	            	<c:forEach var="m" items="${money }" varStatus="status">
-	            	<input type="hidden" name="lessonNo" value="${m.lessonNo }">
 	            	 <div class="col-xl-4 col-lg-4 col-md-6">
 	                    <!-- Single course -->
 	                    <div class="single-course mb-40">
@@ -129,7 +128,7 @@
 	                        </div>
 	                        <div class="course-caption">
 	                            <div class="course-cap-top">
-	                                <h5><a href="#">${m.lessonTitle }</a></h5>
+	                                <h5><a href="courseDetailView.le?lessonNo=${m.lessonNo }">${m.lessonTitle }</a></h5>
 	                            </div>
 	                            <div class="course-cap-mid d-flex justify-content-between">
 	                                <div class="course-ratting">
@@ -145,6 +144,7 @@
 	                                <ul>
 	                                    <li><i class="ti-heart"></i> ${m.likeCount }</li>
 	                                </ul>
+	                                <span>${m.price }원</span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -167,7 +167,6 @@
                 </div>
                 <div class="row">
 	            	<c:forEach var="c" items="${career }" varStatus="status">
-	            	<input type="hidden" name="lessonNo" value="${c.lessonNo }">
 	            	 <div class="col-xl-4 col-lg-4 col-md-6">
 	                    <!-- Single course -->
 	                    <div class="single-course mb-40">
@@ -176,7 +175,7 @@
 	                        </div>
 	                        <div class="course-caption">
 	                            <div class="course-cap-top">
-	                                <h5><a href="#">${c.lessonTitle }</a></h5>
+	                                <h5><a href="courseDetailView.le?lessonNo=${c.lessonNo }">${c.lessonTitle }</a></h5>
 	                            </div>
 	                            <div class="course-cap-mid d-flex justify-content-between">
 	                                <div class="course-ratting">
@@ -192,6 +191,7 @@
 	                                <ul>
 	                                    <li><i class="ti-heart"></i> ${c.likeCount }</li>
 	                                </ul>
+	                                <span>${c.price }원</span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -214,7 +214,6 @@
                 </div>
                 <div class="row">
 	            	<c:forEach var="h" items="${hobby }" varStatus="status">
-	            	<input type="hidden" name="lessonNo" value="${h.lessonNo }">
 	            	 <div class="col-xl-4 col-lg-4 col-md-6">
 	                    <!-- Single course -->
 	                    <div class="single-course mb-40">
@@ -223,7 +222,7 @@
 	                        </div>
 	                        <div class="course-caption">
 	                            <div class="course-cap-top">
-	                                <h5><a href="#">${h.lessonTitle }</a></h5>
+	                                <h5><a href="courseDetailView.le?lessonNo=${h.lessonNo }">${h.lessonTitle }</a></h5>
 	                            </div>
 	                            <div class="course-cap-mid d-flex justify-content-between">
 	                                <div class="course-ratting">
@@ -239,6 +238,7 @@
 	                                <ul>
 	                                    <li><i class="ti-heart"></i> ${h.likeCount }</li>
 	                                </ul>
+	                                <span>${h.price }원</span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -316,7 +316,6 @@
             </div>
             <div class="row">
 	            	<c:forEach var="n" items="${nl }" varStatus="status">
-	            	<input type="hidden" name="lessonNo" value="${n.lessonNo }">
 	            	 <div class="col-xl-4 col-lg-4 col-md-6">
 	                    <!-- Single course -->
 	                    <div class="single-course mb-40">
@@ -325,7 +324,7 @@
 	                        </div>
 	                        <div class="course-caption">
 	                            <div class="course-cap-top">
-	                                <h5><a href="#">${n.lessonTitle }</a></h5>
+	                                <h5><a href="courseDetailView.le?lessonNo=${n.lessonNo }">${n.lessonTitle }</a></h5>
 	                            </div>
 	                            <div class="course-cap-mid d-flex justify-content-between">
 	                                <div class="course-ratting">
@@ -341,6 +340,7 @@
 	                                <ul>
 	                                    <li><i class="ti-heart"></i> ${n.likeCount }</li>
 	                                </ul>
+	                                <span>${n.price }원</span>
 	                            </div>
 	                        </div>
 	                    </div>
