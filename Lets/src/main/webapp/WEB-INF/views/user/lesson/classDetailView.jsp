@@ -15,6 +15,7 @@
 
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/user/assets/css/detailClassStyle.css">
+<link rel="stylesheet" href="resources/user/assets/css/style.css">
 <script src='<c:url value="resources/user/assets/js/vendor/jquery-1.12.4.min.js"/>'></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>

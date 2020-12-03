@@ -158,7 +158,7 @@ public class MemberController {
 					Member loginUser = mService.loginMember(m);
 					session.setAttribute("accessToken", accessToken);
 					session.setAttribute("loginUser", loginUser);
-					session.setAttribute("alertMsg", "카카오 아이디로 로그인 성공 !\\\\n( ※ 참고 : 다른 카카오 아이디로의 로그인은 카카오에서 직접 로그아웃 한 후에 가능합니다. )");
+					session.setAttribute("alertMsg", "카카오 아이디로 로그인 성공 !\\n( ※ 참고 : 다른 카카오 아이디로의 로그인은 카카오에서 직접 로그아웃 한 후에 가능합니다. )");
 					return "redirect:/";
 				}else {
 					model.addAttribute("errorMsg","카카오 아이디로 로그인 처리에 실패했습니다. 관리자에게 문의하세요.");
