@@ -118,7 +118,7 @@
 </select>
 
 <select id="newLessonList" resultMap="lessonResultSet">
-		<![CDATA[select *
+		<![CDATA[ select *
 					 from (
 					         select
 					                l.lesson_cover_img
@@ -131,8 +131,9 @@
 					          from lesson l
 					          left join review r on (l.lesson_no = r.lesson_no)
 					         where l.status='Y'
-					          order by dbms_random.random
+					           and approve_date is not null
 					        )
-					 where rownum <4]]> 
+					 where rownum <4
+					  order by approve_date desc]]> 
 </select>
 </mapper>
