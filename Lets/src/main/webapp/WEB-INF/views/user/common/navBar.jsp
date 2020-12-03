@@ -87,11 +87,7 @@
 			                                          	  <div class="after-login-dropdown">
 			                                                  <a href="tutorMain.tm">튜터 센터</a>
 			                                                  <ul class="after-login-dropdown-content-tutor">
-		                                                  		<c:choose>
-		                                                  			<c:when test="${ t.status eq 'Y' }">
 		                                                  				<li><a href="tutorFormUpdate.te?memNo=${loginUser.memNo}">튜터 수정</a></li>
-			                                                      	</c:when>
-			                                                      	<c:otherwise>
 			                                                      		<li><a href="tutorEnroll.te">튜터 등록</a></li>
 			                                                      	</c:otherwise>
 		                                                      	</c:choose>
