@@ -662,4 +662,20 @@
 	where lesson_no = #{lessonNo}
 </select>
 
+<insert id="insertLessonFaq" parameterType="LessonFaq">
+	insert 
+	  into lesson_faq
+	   (
+	      lesson_no
+	    , faq_question
+	    , faq_answer
+	   )
+	   values
+	   (
+	     #{lessonNo}
+	   , #{faqQuestion}
+	   , #{faqAnswer}
+	   )
+</insert>
+
 </mapper>

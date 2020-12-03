@@ -231,9 +231,24 @@ public class LessonController {
 		return "user/lesson/lessonEnrollForm";
 	}
 		
-	@RequestMapping("enrollNext.le")
-	public String enrollNextLesson() {
-		return "user/lesson/lessonEnrollNextForm";
+	@RequestMapping("insert.le")
+	public String insertLesson(Lesson l, HttpSession sesson, Model model) {
+		
+		ArrayList<String> lessonPrepareList = l.getLessonPrepareList();
+		for(String element:lessonPrepareList) {
+			System.out.println(element);
+		}
+		
+		ArrayList<LessonFaq> lessonFaqList = l.getLessonFaqList();
+		for(LessonFaq element:lessonFaqList) {
+			element.setLessonNo(1);
+			lService.insertLessonFaq(element);
+		}
+		
+		// 비디오
+		// 커리큘럼
+		
+		return "user/tutor/tutorMainView";
 	}
 	
 	//결제정보 작성해서 보내기(학천)

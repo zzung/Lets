@@ -158,5 +158,9 @@ public class LessonDao {
 		return ss.update("lessonMapper.likeCount",lessonNo);
 	}
 	*/
+	
+	public int insertLessonFaq(LessonFaq lfaq, SqlSessionTemplate ss) {
+		return ss.insert("lessonMapper.insertLessonFaq",lfaq);
+	}
 
 }

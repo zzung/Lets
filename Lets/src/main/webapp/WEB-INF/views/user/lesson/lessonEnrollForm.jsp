@@ -169,7 +169,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <jsp:include page="../common/navBar.jsp" />
- <form>  
+ <form action="insert.le" method="post" enctype="multipart/form-data">  
     <br><h3 class="mb-30">클래스 등록</h3>
     <hr class="top-hr">
     <div class="class1-form">
@@ -366,7 +366,7 @@
      </div>
 
 
-<div class="lessonEnrollNextForm" style="display: none">
+<div class="lessonEnrollNextForm">
         <div style="margin: 4%;">
             <br>
             <h5><b>클래스 설명</b></h5>
@@ -379,7 +379,7 @@
                     <li>다른 수업에서는 얻을 수 없는 튜터님 만의 장점에 대해 설명해 주세요. </li>
                 </ul>
             </div>
-            <textarea id="summernote" name=""></textarea>
+            <textarea id="summernote" name="lessonInstr"></textarea>
             <script>
                 $(document).ready(function() {
                       $('#summernote').summernote({
@@ -404,7 +404,7 @@
                 <table id="prepareTable">
                 	<tbody>
 	                    <tr>
-	                        <td width=400px><input class="form-control" name="" id="" type="text" placeholder="준비물을 입력해 주세요"></td>
+	                        <td width=400px><input class="form-control lessonPrepareInput" name="lessonPrepareList[0]" id="" type="text" placeholder="준비물을 입력해 주세요"></td>
 	                    </tr>
                     </tbody>
                 </table>
@@ -414,12 +414,15 @@
                 <script>  
                      $('#prepareBtn').click (function () {
                          var prepareHtml = '';
-                         prepareHtml += '<tr><td><input class="form-control" name="" id="" type="text" placeholder="준비물을 입력해 주세요"></td>';
+                         prepareHtml += '<tr><td><input class="form-control lessonPrepareInput" name="lessonPrepareList['+$('.lessonPrepareInput').length+']" id="" type="text" placeholder="준비물을 입력해 주세요"></td>';
                          prepareHtml += '<td><button class="plus_btn prepareDel" type="button">-</button></td></tr>';
                          $('#prepareTable > tbody:last').append(prepareHtml);
                          
 	                     $('.prepareDel').click (function(){
-	                    	 $(this).parents().eq(1).remove()                   	 
+	                    	 $(this).parents().eq(1).remove()  
+	                    	 for(i=0; i<$('.lessonPrepareInput').length; i++){
+	                    		 $('#prepareTable').find('tr').eq(i).find('.lessonPrepareInput').attr('name','lessonPrepareList['+i+']')
+	                    	 }
 	                     });
                      }); 
                 </script>
@@ -435,15 +438,15 @@
                    </ul>
                </div>
                <div id="lessonFaq">
-	               <table>
+	               <table class="lessonFaqTable">
 	                   <tr>
 	                       <th>Q.</th>
-	                       <td width=600px><input class="form-control" name="" id="" type="text" placeholder="자주하는 질문을 입력해주세요"></td>
+	                       <td width=600px><input class="form-control faqQuestion" name="lessonFaqList[0].faqQuestion" id="" type="text" placeholder="자주하는 질문을 입력해주세요"></td>
 	                       <td></td>
 	                   </tr>
 	                   <tr>
 	                       <th>A.</th>
-	                       <td><input class="form-control" name="" id="" type="text" placeholder="답변을 작성해주세요"></td>
+	                       <td><input class="form-control faqAnswer" name="lessonFaqList[0].faqAnswer" id="" type="text" placeholder="답변을 작성해주세요"></td>
 	                   </tr>
 	               </table>
                </div>
@@ -452,13 +455,23 @@
                <script>
                		$('#faqBtn').click (function () {
                			var faqHtml = '';
-               			faqHtml += '<table><tr><th>Q.</th><td width=600px><input class="form-control" name="" id="" type="text" placeholder="자주하는 질문을 입력해주세요"></td>';
+               			faqHtml += '<table class="lessonFaqTable"><tr><th>Q.</th><td width=600px><input class="form-control faqQuestion" name="lessonFaqList['+($('.lessonFaqTable').length)+'].faqQuestion" id="" type="text" placeholder="자주하는 질문을 입력해주세요"></td>';
                			faqHtml += '<td><button class="plus_btn faqDel" type="button">-</button></td></tr>';
-               			faqHtml += '<tr><th>A.</th><td><input class="form-control" name="" id="" type="text" placeholder="답변을 작성해주세요"></td></tr></table>';
+               			faqHtml += '<tr><th>A.</th><td><input class="form-control faqAnswer" name="lessonFaqList['+($('.lessonFaqTable').length)+'].faqAnswer" id="" type="text" placeholder="답변을 작성해주세요"></td></tr></table>';
                			$('#lessonFaq').append(faqHtml);
+               				$('.lessonFaqTable').length
+               				
                			
                			$('.faqDel').click (function(){
                				$(this).parents().eq(3).remove();
+               				$('.lessonFaqTable').length
+               				
+               				for(i=0; i<$('.lessonFaqTable').length; i++){
+               					$('.lessonFaqTable').eq(i).find('.faqQuestion').attr('name','lessonFaqList['+i+'].faqQuestion')
+               					$('.lessonFaqTable').eq(i).find('.faqAnswer').attr('name','lessonFaqList['+i+'].faqAnswer')
+               				}
+               				
+               				
                			});
                			
                		});
@@ -473,7 +486,7 @@
                         <th colspan="2">시간당 가격</th>
                     </tr>
                     <tr>
-                        <td width="240"><input class="form-control" name="" id="" type="number" placeholder="시간당 가격을 입력하세요"></td>
+                        <td width="240"><input class="form-control" name="price" id="" type="number" placeholder="시간당 가격을 입력하세요"></td>
                         <th>원</th>
                     </tr>
                 </table><br>
@@ -487,24 +500,15 @@
                     <tr>
                         <td>
                             <div class="default-select" id="default-select">
-                                <select style="display: none;">
+                                <select name="time" style="display: none;">
                                     <option value="1">1회당 수업시간을 선택하세요</option>
                                     <option value="1">1시간</option>
-                                    <option value="1">2시간</option>
-                                    <option value="1">3시간</option>
-                                    <option value="1">4시간</option>
-                                    <option value="1">5시간</option>
+                                    <option value="2">2시간</option>
+                                    <option value="3">3시간</option>
+                                    <option value="4">4시간</option>
+                                    <option value="5">5시간</option>
                                 </select>
-                                <div class="nice-select" tabindex="0">
-                                    <span class="current">1회당 수업시간을 선택하세요</span>
-                                    <ul class="list">
-                                        <li data-value=" 1" class="option selected focus">1시간</li>
-                                        <li data-value="1" class="option">2시간</li>
-                                        <li data-value="1" class="option">3시간</li>
-                                        <li data-value="1" class="option">4시간</li>
-                                        <li data-value="1" class="option">5시간</li>
-                                    </ul>
-                                </div>
+ 
                             </div>
                         </td>
                     </tr>
@@ -574,7 +578,7 @@
         </div>
         
      <div align="center">
-	     <button type="submit" id="lessonPrev" class="genric-btn primary radius">이전 페이지로</button>
+	     <button id="lessonPrev" class="genric-btn primary radius">이전 페이지로</button>
 	     <button type="submit" class="genric-btn primary radius">최종 승인 요청하기</button>
      </div><br><br><br>
     </form>

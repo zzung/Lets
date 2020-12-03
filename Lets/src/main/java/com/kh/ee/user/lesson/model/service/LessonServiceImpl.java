@@ -196,6 +196,11 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.selectMemPayList(lessonNo,ss);
 	}
 
+	@Override
+	public int insertLessonFaq(LessonFaq lfaq) {
+		return lDao.insertLessonFaq(lfaq, ss);
+	}
+
 	/*
 	@Override
 	public int likeCount(int lessonNo) {

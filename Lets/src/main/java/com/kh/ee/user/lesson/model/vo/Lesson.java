@@ -1,13 +1,15 @@
 package com.kh.ee.user.lesson.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
+
+import com.kh.ee.user.curriculum.model.vo.Video;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import oracle.sql.CLOB;
 
 @Setter
 @Getter
@@ -47,5 +49,9 @@ public class Lesson {
 	//관리자 필요(학천)
 	private String memId;
 	private int star;
+	
+	private ArrayList<Video> videoList;
+	private ArrayList<LessonFaq> lessonFaqList;
+	private ArrayList<String> lessonPrepareList;
 	
 }

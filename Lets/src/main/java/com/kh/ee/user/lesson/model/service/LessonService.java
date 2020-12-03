@@ -65,6 +65,8 @@ public interface LessonService {
 	//수강하기 버큰 조건 주기위해 만듬(학천)
 	MemPay selectMemPayList(int lessonNo);
 	
+	int insertLessonFaq(LessonFaq lfaq);
+	
 
 
 
