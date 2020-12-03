@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.memPay.model.vo.MemPay;
+import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
@@ -146,7 +148,10 @@ public class LessonDao {
 	public ArrayList<Lesson> selectHobbyAll(SqlSessionTemplate ss) {
 		return (ArrayList)ss.selectList("lessonMapper.selectHobbyAll");
 	}
-	
+
+	public MemPay selectMemPayList(int lessonNo,SqlSessionTemplate ss) {
+		return ss.selectOne("lessonMapper.selectMemPayList",lessonNo);
+	}
 	
 	/*(학천)
 	public int likeCount(int lessonNo, SqlSessionTemplate ss) {

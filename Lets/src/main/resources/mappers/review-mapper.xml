@@ -25,6 +25,13 @@
 	<result column="total_no" property="totalNo" />
 </resultMap>
   
+ <select id="selectNumber" parameterType="_int" resultMap="review">
+ 	select distinct
+	       lesson_no
+	  from review
+	 where lesson_no = #{lessonNo}
+ </select>
+ 
  <select id="selectReviewList" parameterType="_int" resultMap="review">
  	select 
  	        re.review_no
@@ -42,9 +49,9 @@
 	  join member rem on(re.mem_no = rem.mem_no)
  left join reply rp on (re.review_no=rp.total_no and reply_type='후기' and rp.status='Y')
  left join member rpm on (rp.mem_no=rpm.mem_no)
-	 where lesson_no=1
+	 where lesson_no = #{lessonNo}
 	 order 
-	    by review_no asc, reply_no desc
+	    by review_no desc, reply_no desc
  </select>
 
 

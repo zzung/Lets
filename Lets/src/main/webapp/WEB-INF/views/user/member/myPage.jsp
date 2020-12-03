@@ -28,10 +28,10 @@
                     <div class="user-pic">
                     	<c:choose>
                     		<c:when test="${loginUser.memPic eq null}">
-                    			<c:if test="${loginUser.gender eq 'F'}">
+                    			<c:if test="${loginUser.gender eq '여'}">
                     				<img src="resources/user/assets/img/member/woman.png" width="130px" height="130px">
                     			</c:if>
-                    			<c:if test="${loginUser.gender eq 'M'}">
+                    			<c:if test="${loginUser.gender eq '남'}">
                     				<img src="resources/user/assets/img/member/man.png" width="130px" height="130px">
                     			</c:if>
                     		</c:when>

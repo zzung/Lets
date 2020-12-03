@@ -32,6 +32,7 @@ import com.kh.ee.user.member.loginAPI.KakaoLoginBO;
 import com.kh.ee.user.member.loginAPI.NaverLoginBO;
 import com.kh.ee.user.member.model.service.MemberService;
 import com.kh.ee.user.member.model.vo.Member;
+import com.kh.ee.user.tutor.model.service.TutorService;
 
 @Controller
 public class MemberController {
@@ -46,6 +47,8 @@ public class MemberController {
 	private MemberService mService;
 	@Autowired
 	private BCryptPasswordEncoder bpe;
+	@Autowired
+	private TutorService tutorService;
 	
 	
 	@RequestMapping("loginForm.me")
@@ -68,6 +71,14 @@ public class MemberController {
 		if(loginUser != null && bpe.matches(m.getMemPwd(), loginUser.getMemPwd())) {
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "로그인 성공 !");
+			
+			
+			if(tutorService.selectTutor(loginUser.getMemNo()) == null) {
+				session.setAttribute("isTutor", false);
+			}else {
+				session.setAttribute("isTutor", true);
+			}
+			
 			return "redirect:/";
 		}else {
 			model.addAttribute("errorMsg","로그인에 실패했습니다. 확인 후 다시 시도해주세요.");

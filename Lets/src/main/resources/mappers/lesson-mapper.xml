@@ -85,6 +85,12 @@
 	<result column="replyNickname" property="nickname"/> 
 </resultMap>
 
+<resultMap type="MemPay" id="memPayResultSet">
+	<id column="mem_pay_no" property="memPayNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="lesson_no" property="lessonNo" />
+</resultMap>
+
 <select id="selectApproveLessonList" resultMap="lessonResultSet" >
 	select
 	       lesson_no
@@ -647,4 +653,13 @@
 	   and l.lesson_category = '취미생활'
 	   and approve_date is not null
 </select>
+
+<select id="selectMemPayList" parameterType="_int" resultMap="memPayResultSet">
+	select
+	       mem_no
+	     , lesson_no
+	 from mem_pay
+	where lesson_no = #{lessonNo}
+</select>
+
 </mapper>

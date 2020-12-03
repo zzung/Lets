@@ -40,6 +40,7 @@
          	var videoCurriculumHtml = '';
          	videoCurriculumHtml+= '<div class="curriculumVideo"><h6><span class="videoCurriculumNum">'+curriculumIndex+') </span> <span class="videoCurriculumText"></span></h6><div class="mt-10">';
          	videoCurriculumHtml+= '<textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name="" onfocus="this.placeholder =\'\'" onblur="this.placeholder = \'교육 과정에 대한 간단한 소개를 입력해 주세요\'"></textarea> <br>';
+         	videoCurriculumHtml+= '<input class="form-control" name="" id="" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">';
          	videoCurriculumHtml+= '<input class="form-control" name="" id="" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;"></div></div>';
          	
          	$('.curriculumS').eq($('.detailadd').index($(this))).append(curriculumhtml);
@@ -57,7 +58,7 @@
             	var titleIndex = $('.curriculumInput').index($(this).parents().eq(4))
             	
             	var targetindex = $(this).parents().eq(2).children().index($(this).parents().eq(1))-1
-            	$('.curriculumS').eq($('.detailadd').index($(this).prev())).children().eq(targetindex).remove()
+            	$('.curriculumS').eq($('.curriculumInput').index($(this).parents().eq(4))).children().eq(targetindex).remove()
             	var tbody = $(this).parents().eq(2)
             	var length = tbody.children().length - 1
             	if ($(this).prev().length != 0) {
@@ -121,9 +122,11 @@
 	            videoHtml+= '<div class="videoTop"><h5><span class="videoTitleNum">' +($('.videoTitleNum').length+1)+'. </span> <span class="videoTitleText"></span></h5><div class="curriculum_detail">';
 	            videoHtml+= '<div class="curriculumVideo"><h6><span class="videoCurriculumNum">1) </span> <span class="videoCurriculumText"></span></h6><div class="mt-10">';
 	            videoHtml+= '<textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name="" onfocus="this.placeholder =\'\'" onblur="this.placeholder = \'교육 과정에 대한 간단한 소개를 입력해 주세요\'"></textarea> <br>';
+	            videoHtml+= '<input class="form-control" name="" id="" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">';
 	            videoHtml+= '<input class="form-control" name="" id="" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;"></div></div>';
 	            videoHtml+= '<div class="curriculumVideo"><h6><span class="videoCurriculumNum">2) </span> <span class="videoCurriculumText"></span></h6><div class="mt-10">';
 	            videoHtml+= '<textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name="" onfocus="this.placeholder = \'\'" onblur="this.placeholder = \'교육 과정에 대한 간단한 소개를 입력해 주세요\'"></textarea> <br>';
+	            videoHtml+= '<input class="form-control" name="" id="" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">';
 	            videoHtml+= '<input class="form-control" name="" id="" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;"></div></div></div><hr></div>';    
                 $('.videoAll').append(videoHtml);
 	            
@@ -331,6 +334,7 @@
                        <div class="mt-10">
                            <textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name=""
                            onfocus="this.placeholder = ''" onblur="this.placeholder = '교육 과정에 대한 간단한 소개를 입력해 주세요'"></textarea> <br>
+                           <input class="form-control" name="" id="" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">
                            <input class="form-control" name="" id="" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;">
                        </div>
                      </div>
@@ -339,6 +343,7 @@
                        <div class="mt-10">
                            <textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name=""
                            onfocus="this.placeholder = ''" onblur="this.placeholder = '교육 과정에 대한 간단한 소개를 입력해 주세요'"></textarea> <br>
+                           <input class="form-control" name="" id="" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">
                            <input class="form-control" name="" id="" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;">
                        </div>
                      </div>
