@@ -85,6 +85,15 @@
          
          $(document).ready (function () { 
         	 
+        	 $('input[name=lessonType]').change(function(){
+        		var type = $(this).val();
+        		if(type=='offline'){
+        			$('#enroll_cul').css('display', 'none')
+        		}else{
+        			$('#enroll_cul').css('display', 'block')
+        		}
+        	 });
+        	 
              $('#lessonNext').click(function(){
             	 $('.class1-form').css('display', 'none')
             	 $('.lessonEnrollNextForm').css('display', 'block')
@@ -160,7 +169,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <jsp:include page="../common/navBar.jsp" />
-    
+ <form>  
     <br><h3 class="mb-30">클래스 등록</h3>
     <hr class="top-hr">
     <div class="class1-form">
@@ -224,8 +233,8 @@
 
              <tr>
                  <th>수업 참여 희망 인원</th>
-                 <td><input type="radio" name="lessonGroup" id="oneClass" value="oneClass"> <label for="oneClass"> 1:1 수업</label></td>
-                 <td><input type="radio" name="lessonGroup" id="groupClass" value="groupClass"> <label for="groupClass"> 그룹 수업</label> 
+                 <td><input type="radio" name="lessonGroup" id="oneClass" value="1"> <label for="oneClass"> 1:1 수업</label></td>
+                 <td><input type="radio" id="groupClass"> <label for="groupClass"> 그룹 수업</label> 
                      <input type="number" name="lessonGroup" placeholder="숫자만 입력" onfocus="this.placeholder = ''" onblur="this.placeholder = '숫자만 입력'" class="classNum"></td>
                  </tr>
              <tr>
@@ -239,12 +248,12 @@
                  <th>수업 카테고리</th>
                  <td colspan="2">
                      <div class="lesson-select" id="lesson-select">
-                         <select style="display: none;">
-                             <option value=" 1">수업 카테고리를 선택해주세요.</option>
-                             <option value="1">키즈</option>
-                             <option value="1">머니</option>
-                             <option value="1">커리어</option>
-                             <option value="1">취미</option>
+                         <select name="lessonCategory" style="display: none;">
+                             <option value="" selected disabled>수업 카테고리를 선택해주세요.</option>
+                             <option value="kids">키즈</option>
+                             <option value="money">머니</option>
+                             <option value="career">커리어</option>
+                             <option value="hobby">취미</option>
                          </select>
                      </div>
                  </td>
