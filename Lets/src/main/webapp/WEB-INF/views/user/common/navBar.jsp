@@ -89,8 +89,6 @@
 			                                                  <ul class="after-login-dropdown-content-tutor">
 		                                                  				<li><a href="tutorFormUpdate.te?memNo=${loginUser.memNo}">튜터 수정</a></li>
 			                                                      		<li><a href="tutorEnroll.te">튜터 등록</a></li>
-			                                                      	</c:otherwise>
-		                                                      	</c:choose>
 			                                                      <li style="margin-top: -10px;"><a href="tutorNotice.no?noticeType=TUTOR">튜터 공지사항</a></li>
 			                                                      <li style="margin-top: -10px;"><a href="enroll.le">새로운 수업</a></li>
 			                                                  </ul>
