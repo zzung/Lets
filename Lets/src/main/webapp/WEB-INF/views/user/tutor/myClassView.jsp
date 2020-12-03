@@ -385,7 +385,6 @@
             <div id="pagingArea" style="margin-left: 35%;">
 	        
                 <ul class="pagination">
-                
                 	<c:choose>
                 		<c:when test="${pi.currentPage eq 1}">
                     		<li class="page-item disabled"><a class="page-link" >Previous</a></li>
@@ -457,6 +456,32 @@
 	  							})
   		                        	 $("#lessonPreTable").html(value);
   						
+  						$.each(hmap.pi, function(i,pageInfo){
+                            
+                            result += '<ul class="pagination">';
+                                  if(pageInfo.currentPage != 1) {
+                                     result += '<li class="page-item">' + '<a class="page-link">' + Previous + '</a>'+'</li>';
+                                  }
+                                  else{
+                                     result += '<li class="page-item">' + '<a class="page-link">' + Previous + '</a>'+'</li>' ;
+                                     
+                                  }
+                                  for(var p=pageInfo.startPage; p<pageInfo.endPage; p++) {
+                                     if(pageInfo.currentPage != p){
+                                        result += '<li class="page-item">' + '<a class="page-link">'+ p +'</a>'+'</li>'; 
+                                     }else{
+                                        result += '<li class="page-item disabled">' + '<a class="page-link">' + p +'</a>'+'</li>';
+                                     }
+                                  }
+                                    if(pageInfo.currentPage == pageInfo.maxPage){
+                                       result += '<li class="page-item disabled">' + '<a class="page-link">'+ Next  + '</a>' + '</li>';
+                                    }else{
+                                       result += '<li class="page-item">' + '<a class="page-link" >' + Next + '</a>'+'</li>';
+                                       
+                                    }
+                                   result += '</ul>';
+                                    $(".pagingArea").html(result);
+                      })
   						
   					},error:function(result){
   						console.log("통신실패")

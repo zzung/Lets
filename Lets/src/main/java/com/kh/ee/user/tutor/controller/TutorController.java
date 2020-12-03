@@ -208,6 +208,7 @@ public class TutorController {
 		hmap.put("pi",pi);
 		hmap.put("list", list);
 		
+		model.addAttribute("pi",pi);
 		return new Gson().toJson(hmap);
 	}
 	
