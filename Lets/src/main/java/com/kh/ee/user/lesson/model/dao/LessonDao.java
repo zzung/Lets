@@ -105,6 +105,48 @@ public class LessonDao {
 		return (ArrayList)ss.selectList("lessonMapper.selectKidsAll");
 	}
 	
+	//머니 화면에 뿌려줄것(학천)
+	public ArrayList<Lesson> selectMoneyPop(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectMoneyPop");
+	}
+	public ArrayList<Lesson> selectMoneyNew(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectMoneyNew");
+	}
+	public ArrayList<Lesson> selectMoneyDisc(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectMoneyDisc");
+	}
+	public ArrayList<Lesson> selectMoneyAll(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectMoneyAll");
+	}
+
+	//커리어 화면에 뿌려줄것(학천)
+	public ArrayList<Lesson> selectCareerPop(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectCareerPop");
+	}
+	public ArrayList<Lesson> selectCareerNew(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectCareerNew");
+	}
+	public ArrayList<Lesson> selectCareerDisc(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectCareerDisc");
+	}
+	public ArrayList<Lesson> selectCareerAll(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectCareerAll");
+	}
+	
+	//취미 화면에 뿌려줄것(학천)
+	public ArrayList<Lesson> selectHobbyPop(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectHobbyPop");
+	}
+	public ArrayList<Lesson> selectHobbyNew(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectHobbyNew");
+	}
+	public ArrayList<Lesson> selectHobbyDisc(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectHobbyDisc");
+	}
+	public ArrayList<Lesson> selectHobbyAll(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectHobbyAll");
+	}
+	
 	
 	/*(학천)
 	public int likeCount(int lessonNo, SqlSessionTemplate ss) {

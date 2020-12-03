@@ -42,6 +42,24 @@ public interface LessonService {
 	ArrayList<Lesson> selectKidsDisc();
 	ArrayList<Lesson> selectKidsAll();
 
+	//머니 화면에 뿌려줄것(학천)
+	ArrayList<Lesson> selectMoneyPop();
+	ArrayList<Lesson> selectMoneyNew();
+	ArrayList<Lesson> selectMoneyDisc();
+	ArrayList<Lesson> selectMoneyAll();
+
+	//커리어 화면에 뿌려줄것(학천)
+	ArrayList<Lesson> selectCareerPop();
+	ArrayList<Lesson> selectCareerNew();
+	ArrayList<Lesson> selectCareerDisc();
+	ArrayList<Lesson> selectCareerAll();
+
+	//취미 화면에 뿌려줄것(학천)
+	ArrayList<Lesson> selectHobbyPop();
+	ArrayList<Lesson> selectHobbyNew();
+	ArrayList<Lesson> selectHobbyDisc();
+	ArrayList<Lesson> selectHobbyAll();
+
 
 
 

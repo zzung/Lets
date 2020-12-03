@@ -134,6 +134,60 @@ public class LessonServiceImpl implements LessonService{
 	public ArrayList<Lesson> selectKidsAll() {
 		return lDao.selectKidsAll(ss);
 	}
+
+	//머니 화면에 뿌려줄것(학천)
+	@Override
+	public ArrayList<Lesson> selectMoneyPop() {
+		return lDao.selectMoneyPop(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectMoneyNew() {
+		return lDao.selectMoneyNew(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectMoneyDisc() {
+		return lDao.selectMoneyDisc(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectMoneyAll() {
+		return lDao.selectMoneyAll(ss);
+	}
+
+	//커리어 화면에 뿌려줄것(학천)
+	@Override
+	public ArrayList<Lesson> selectCareerPop() {
+		return lDao.selectCareerPop(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectCareerNew() {
+		return lDao.selectCareerNew(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectCareerDisc() {
+		return lDao.selectCareerDisc(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectCareerAll() {
+		return lDao.selectCareerAll(ss);
+	}
+	
+	//취미 화면에 뿌려줄것(학천)
+	@Override
+	public ArrayList<Lesson> selectHobbyPop() {
+		return lDao.selectHobbyPop(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectHobbyNew() {
+		return lDao.selectHobbyNew(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectHobbyDisc() {
+		return lDao.selectHobbyDisc(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectHobbyAll() {
+		return lDao.selectHobbyAll(ss);
+	}
 	
 	/*
 	@Override

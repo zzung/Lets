@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,9 +51,9 @@
 									</div>
 									<div class="course-caption">
 										<div class="course-cap-top">
-											<h4>
+											<h5>
 												<a href="courseDetailView.le?lessonNo=${pop.lessonNo }">${pop.lessonTitle }</a>
-											</h4>
+											</h5>
 										</div>
 										<div class="course-cap-mid d-flex justify-content-between">
 											<div class="course-ratting">
@@ -107,9 +108,9 @@
 									</div>
 									<div class="course-caption">
 										<div class="course-cap-top">
-											<h4>
+											<h5>
 												<a href="courseDetailView.le?lessonNo=${n.lessonNo }">${n.lessonTitle }</a>
-											</h4>
+											</h5>
 										</div>
 										<div class="course-cap-mid d-flex justify-content-between">
 											<div class="course-ratting">
@@ -164,9 +165,9 @@
 									</div>
 									<div class="course-caption">
 										<div class="course-cap-top">
-											<h4>
+											<h5>
 												<a href="courseDetailView.le?lessonNo=${d.lessonNo }">${d.lessonTitle }</a>
-											</h4>
+											</h5>
 										</div>
 										<div class="course-cap-mid d-flex justify-content-between">
 											<div class="course-ratting">
@@ -182,7 +183,12 @@
 											<ul>
 												<li><i class="ti-heart"></i> ${d.likeCount }</li>
 											</ul>
-											<span>${d.price*d.discount/100 }원</span>
+											<c:set var="disc" value="${d.discount }" />
+											<c:set var="divide" value="100"/>
+											<c:set var="price" value="${d.price }" />
+											<c:set var="preTotal" value="${price * (disc / divide) }"/>
+											<c:set var="total" value="${price - preTotal }" />
+											<span>${d.discount }%&nbsp;&nbsp;&nbsp;<c:out value="${total }" />원</span>
 										</div>
 									</div>
 								</div>	
@@ -214,15 +220,16 @@
 				</div>
 				<div class="row">
 				<c:forEach var="a" items="${all }">
+					 <div class="col-xl-4 col-lg-4 col-md-6">
 					<div class="slider-course mb-40 item">
 						<div class="course-img">
 							<img src="${a.lessonCoverImg }" alt="">
 						</div>
 						<div class="course-caption">
 							<div class="course-cap-top">
-								<h4>
+								<h5>
 									<a href="courseDetailView.le?lessonNo=${a.lessonNo }">${a.lessonTitle }</a>
-								</h4>
+								</h5>
 							</div>
 							<div class="course-cap-mid d-flex justify-content-between">
 								<div class="course-ratting">
@@ -242,9 +249,8 @@
 							</div>
 						</div>
 					</div>	
+				</div>
 				</c:forEach>
-
-
 				</div>
 			</div>
 		</div>

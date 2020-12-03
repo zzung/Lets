@@ -41,17 +41,45 @@ public class LessonController {
 	}
 	
 	@RequestMapping("money.le")
-	public String moneyCurriculum() {
+	public String moneyCurriculum(Model model) {
+		ArrayList<Lesson> pop = lService.selectMoneyPop();
+		ArrayList<Lesson> nl = lService.selectMoneyNew();
+		ArrayList<Lesson> disc = lService.selectMoneyDisc();
+		ArrayList<Lesson> all = lService.selectMoneyAll();
+		
+		model.addAttribute("pop",pop);
+		model.addAttribute("nl",nl);
+		model.addAttribute("disc",disc);
+		model.addAttribute("all",all);
+		
 		return "user/lesson/moneyCurriculumListView";
 	}	
 	
 	@RequestMapping("career.le")
-	public String careerCurriculum() {
+	public String careerCurriculum(Model model) {
+		ArrayList<Lesson> pop = lService.selectCareerPop();
+		ArrayList<Lesson> nl = lService.selectCareerNew();
+		ArrayList<Lesson> disc = lService.selectCareerDisc();
+		ArrayList<Lesson> all = lService.selectCareerAll();
+		
+		model.addAttribute("pop",pop);
+		model.addAttribute("nl",nl);
+		model.addAttribute("disc",disc);
+		model.addAttribute("all",all);
 		return "user/lesson/careerCurriculumListView";
 	}	
 	
 	@RequestMapping("hobby.le")
-	public String hobbyCurriculum() {
+	public String hobbyCurriculum(Model model) {
+		ArrayList<Lesson> pop = lService.selectHobbyPop();
+		ArrayList<Lesson> nl = lService.selectHobbyNew();
+		ArrayList<Lesson> disc = lService.selectHobbyDisc();
+		ArrayList<Lesson> all = lService.selectHobbyAll();
+		
+		model.addAttribute("pop",pop);
+		model.addAttribute("nl",nl);
+		model.addAttribute("disc",disc);
+		model.addAttribute("all",all);
 		return "user/lesson/hobbyCurriculumListView";
 	}	
 	
