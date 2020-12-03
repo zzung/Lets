@@ -196,7 +196,7 @@ public class TutorController {
 	
 	@ResponseBody
 	@RequestMapping(value="paging.pt", produces="application/json; charset=utf-8")
-	public String pagingPrepare(@RequestParam(value="currentPage")int currentPage, HttpSession session, Model model) {
+	public String pagingPrepare(@RequestParam(value="currentPage", defaultValue="1")int currentPage, HttpSession session, Model model) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int listCount = memPayService.selectListCount(loginUser.getMemNo());
