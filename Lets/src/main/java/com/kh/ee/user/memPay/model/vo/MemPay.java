@@ -29,6 +29,10 @@ public class MemPay {
 	private String delName;
 	private String delNo;
 	private String delStatus;
+	private String delPostcode;
+	private String delPostAdr;
+	private String delDetailAdr;
+	private String delExtraAdr;
 	
 	private String lessonTitle;
 	private String memId;

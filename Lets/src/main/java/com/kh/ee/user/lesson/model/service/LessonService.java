@@ -3,6 +3,7 @@ package com.kh.ee.user.lesson.model.service;
 import java.util.ArrayList;
 
 import com.kh.ee.common.model.vo.PageInfo;
+import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.memPay.model.vo.MemPay;
@@ -64,6 +65,13 @@ public interface LessonService {
 	
 	//수강하기 버큰 조건 주기위해 만듬(학천)
 	MemPay selectMemPayList(int lessonNo);
+	
+	//결제 내역 입력
+	int insertDelInfo(MemPay mp); 
+
+	int insertLessonFaq(LessonFaq lfaq);
+	int insertCurriculum(Curriculum element);
+
 	
 
 

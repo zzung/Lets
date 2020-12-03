@@ -261,4 +261,22 @@
  		  from video
  		 where video_no = #{videoNo}
  	</select>
+ 	
+ 	 	<insert id="insertCurriculum" parameterType="Curriculum">
+ 		insert
+ 		  into curriculum
+ 		  (
+ 		  	   curriculum_no
+ 		  	 , curriculum_cont
+ 		  	 , lesson_no
+ 		  	 , cur_level
+ 		  )
+ 		values
+ 		  (
+ 		       seq_curriculum_no.nextval
+ 		     , #{curriculumCont}
+ 		     , #{lessonNo}
+ 		     , #{curLevel}
+ 		  )  
+ 	</insert>
 </mapper>
