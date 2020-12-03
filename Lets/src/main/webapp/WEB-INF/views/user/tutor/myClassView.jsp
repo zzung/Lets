@@ -405,10 +405,10 @@
                     </c:forEach>
                     <c:choose>
                     	<c:when test="${pi.currentPage eq pi.maxPage }">
-                    		<li class="page-item disabled"><a class="page-link" >Next</a></li>
+                    		<li class="page-item disabled" ><a class="page-link">Next</a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" >Next</a></li>
+                    		<li class="page-item"><a class="page-link">Next</a></li>
                     	</c:otherwise>
                 	</c:choose>
                 </ul>
