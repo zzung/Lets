@@ -662,6 +662,7 @@
 	where lesson_no = #{lessonNo}
 </select>
 
+
 <insert id="insertLessonFaq" parameterType="LessonFaq">
 	insert 
 	  into lesson_faq
@@ -676,6 +677,32 @@
 	   , #{faqQuestion}
 	   , #{faqAnswer}
 	   )
+</insert>
+
+<insert id="insertDelInfo" parameterType="MemPay">
+	insert 
+	  into mem_pay
+	    (
+	      mem_pay_no
+	    , mem_no
+	    , lesson_no
+	    , type
+	    , del_postcode
+	    , del_post_adr
+	    , del_detail_adr
+	    , del_extra_adr
+	    )
+	values
+	    (
+	      seq_mpay_no.nextval
+	    , #{memNo}
+	    , #{lessonNo}
+	    , #{type}
+	    , #{delPostcode}
+	    , #{delPostAdr}
+	    , #{delDetailAdr}
+	    , #{delExtraAdr}
+	    )
 </insert>
 
 </mapper>

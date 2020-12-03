@@ -199,6 +199,13 @@ public class LessonServiceImpl implements LessonService{
 	@Override
 	public int insertLessonFaq(LessonFaq lfaq) {
 		return lDao.insertLessonFaq(lfaq, ss);
+
+	}
+	
+	@Override
+	public int insertDelInfo(MemPay mp) {
+		return lDao.insertDelInfo(mp,ss);
+
 	}
 
 	/*
