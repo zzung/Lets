@@ -116,6 +116,24 @@ public class LessonServiceImpl implements LessonService{
 	public int deleteLesson(int lno) {
 		return lDao.deleteLesson(ss, lno);
 	}
+
+	//키즈 화면에 뿌려줄것(학천)
+	@Override
+	public ArrayList<Lesson> selectKidsPop() {
+		return lDao.selectKidsPop(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectKidsNew() {
+		return lDao.selectKidsNew(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectKidsDisc() {
+		return lDao.selectKidsDisc(ss);
+	}
+	@Override
+	public ArrayList<Lesson> selectKidsAll() {
+		return lDao.selectKidsAll(ss);
+	}
 	
 	/*
 	@Override

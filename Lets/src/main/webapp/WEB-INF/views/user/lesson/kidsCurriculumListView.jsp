@@ -38,125 +38,41 @@
 						</div>
 					</div>
 				</div>
-				<!--?slider-->
+				<!--?인기-->
 				<div class="exampleRow">
 					<div class="col-xs-12">
 						<div id="exampleSlider-popular">
 							<div class="MS-content">
+							<c:forEach var="pop" items="${pop }">
 								<div class="slider-course mb-40 item">
 									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
+										<img src="${pop.lessonCoverImg }" alt="">
 									</div>
 									<div class="course-caption">
 										<div class="course-cap-top">
 											<h4>
-												<a href="#">Graphic Design</a>
+												<a href="courseDetailView.le?lessonNo=${pop.lessonNo }">${pop.lessonTitle }</a>
 											</h4>
 										</div>
 										<div class="course-cap-mid d-flex justify-content-between">
 											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
+												<c:forEach var="s" begin="1" end="${pop.star }">
+													<i class="fas fa-star"></i> 
+												</c:forEach>
+												<c:forEach var="ss" begin="${pop.star }" end="4">
+													<i class='fas fa-star' style='color:#e6e6e6'></i>
+												</c:forEach>
 											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
 										</div>
 										<div class="course-cap-bottom d-flex justify-content-between">
 											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
+												<li><i class="ti-heart"></i> ${pop.likeCount }</li>
 											</ul>
+											<span>${pop.price }원</span>
 										</div>
 									</div>
-								</div>
-
-								<div class="slider-course mb-40 item">
-									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/team2.png" alt="">
-									</div>
-									<div class="course-caption">
-										<div class="course-cap-top">
-											<h4>
-												<a href="#">Graphic Design</a>
-											</h4>
-										</div>
-										<div class="course-cap-mid d-flex justify-content-between">
-											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
-											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
-										</div>
-										<div class="course-cap-bottom d-flex justify-content-between">
-											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-
-								<div class="slider-course mb-40 item">
-									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/team1.png" alt="">
-									</div>
-									<div class="course-caption">
-										<div class="course-cap-top">
-											<h4>
-												<a href="#">Graphic Design</a>
-											</h4>
-										</div>
-										<div class="course-cap-mid d-flex justify-content-between">
-											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
-											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
-										</div>
-										<div class="course-cap-bottom d-flex justify-content-between">
-											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="slider-course mb-40 item">
-									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/team1.png" alt="">
-									</div>
-									<div class="course-caption">
-										<div class="course-cap-top">
-											<h4>
-												<a href="#">Graphic Design</a>
-											</h4>
-										</div>
-										<div class="course-cap-mid d-flex justify-content-between">
-											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
-											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
-										</div>
-										<div class="course-cap-bottom d-flex justify-content-between">
-											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
-											</ul>
-										</div>
-									</div>
-								</div>
+								</div>	
+							</c:forEach>		
 							</div>
 							<div class="MS-controls">
 								<button class="MS-left">&lt;</button>
@@ -168,7 +84,7 @@
 			</div>
 		</div>
 		<!--  Popular Course slider End -->
-		<!--? 머니 인기 코스  -->
+		<!--? 키즈 인기 코스  -->
 		<div class="popular-course section-padding-slider">
 			<div class="container">
 				<div class="row justify-content-sm-center">
@@ -184,120 +100,36 @@
 					<div class="col-xs-12">
 						<div id="exampleSlider-new">
 							<div class="MS-content">
+							<c:forEach var="n" items="${nl }">
 								<div class="slider-course mb-40 item">
 									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
+										<img src="${n.lessonCoverImg }" alt="">
 									</div>
 									<div class="course-caption">
 										<div class="course-cap-top">
 											<h4>
-												<a href="#">Graphic Design</a>
+												<a href="courseDetailView.le?lessonNo=${n.lessonNo }">${n.lessonTitle }</a>
 											</h4>
 										</div>
 										<div class="course-cap-mid d-flex justify-content-between">
 											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
+												<c:forEach var="s" begin="1" end="${n.star }">
+													<i class="fas fa-star"></i> 
+												</c:forEach>
+												<c:forEach var="ss" begin="${n.star }" end="4">
+													<i class='fas fa-star' style='color:#e6e6e6'></i>
+												</c:forEach>
 											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
 										</div>
 										<div class="course-cap-bottom d-flex justify-content-between">
 											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
+												<li><i class="ti-heart"></i> ${n.likeCount }</li>
 											</ul>
+											<span>${n.price }원</span>
 										</div>
 									</div>
-								</div>
-
-								<div class="slider-course mb-40 item">
-									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/team2.png" alt="">
-									</div>
-									<div class="course-caption">
-										<div class="course-cap-top">
-											<h4>
-												<a href="#">Graphic Design</a>
-											</h4>
-										</div>
-										<div class="course-cap-mid d-flex justify-content-between">
-											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
-											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
-										</div>
-										<div class="course-cap-bottom d-flex justify-content-between">
-											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-
-								<div class="slider-course mb-40 item">
-									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/team1.png" alt="">
-									</div>
-									<div class="course-caption">
-										<div class="course-cap-top">
-											<h4>
-												<a href="#">Graphic Design</a>
-											</h4>
-										</div>
-										<div class="course-cap-mid d-flex justify-content-between">
-											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
-											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
-										</div>
-										<div class="course-cap-bottom d-flex justify-content-between">
-											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="slider-course mb-40 item">
-									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/team1.png" alt="">
-									</div>
-									<div class="course-caption">
-										<div class="course-cap-top">
-											<h4>
-												<a href="#">Graphic Design</a>
-											</h4>
-										</div>
-										<div class="course-cap-mid d-flex justify-content-between">
-											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
-											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
-										</div>
-										<div class="course-cap-bottom d-flex justify-content-between">
-											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
-											</ul>
-										</div>
-									</div>
-								</div>
+								</div>	
+							</c:forEach>
 							</div>
 							<div class="MS-controls">
 								<button class="MS-left">&lt;</button>
@@ -325,120 +157,36 @@
 					<div class="col-xs-12">
 						<div id="exampleSlider-discount">
 							<div class="MS-content">
+							<c:forEach var="d" items="${disc }">
 								<div class="slider-course mb-40 item">
 									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
+										<img src="${d.lessonCoverImg }" alt="">
 									</div>
 									<div class="course-caption">
 										<div class="course-cap-top">
 											<h4>
-												<a href="#">Graphic Design</a>
+												<a href="courseDetailView.le?lessonNo=${d.lessonNo }">${d.lessonTitle }</a>
 											</h4>
 										</div>
 										<div class="course-cap-mid d-flex justify-content-between">
 											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
+												<c:forEach var="s" begin="1" end="${d.star }">
+													<i class="fas fa-star"></i> 
+												</c:forEach>
+												<c:forEach var="ss" begin="${d.star }" end="4">
+													<i class='fas fa-star' style='color:#e6e6e6'></i>
+												</c:forEach>
 											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
 										</div>
 										<div class="course-cap-bottom d-flex justify-content-between">
 											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
+												<li><i class="ti-heart"></i> ${d.likeCount }</li>
 											</ul>
+											<span>${d.price*d.discount/100 }원</span>
 										</div>
 									</div>
-								</div>
-
-								<div class="slider-course mb-40 item">
-									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/team2.png" alt="">
-									</div>
-									<div class="course-caption">
-										<div class="course-cap-top">
-											<h4>
-												<a href="#">Graphic Design</a>
-											</h4>
-										</div>
-										<div class="course-cap-mid d-flex justify-content-between">
-											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
-											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
-										</div>
-										<div class="course-cap-bottom d-flex justify-content-between">
-											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-
-								<div class="slider-course mb-40 item">
-									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/team1.png" alt="">
-									</div>
-									<div class="course-caption">
-										<div class="course-cap-top">
-											<h4>
-												<a href="#">Graphic Design</a>
-											</h4>
-										</div>
-										<div class="course-cap-mid d-flex justify-content-between">
-											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
-											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
-										</div>
-										<div class="course-cap-bottom d-flex justify-content-between">
-											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="slider-course mb-40 item">
-									<div class="course-img">
-										<img src="resources/user/assets/img/gallery/team1.png" alt="">
-									</div>
-									<div class="course-caption">
-										<div class="course-cap-top">
-											<h4>
-												<a href="#">Graphic Design</a>
-											</h4>
-										</div>
-										<div class="course-cap-mid d-flex justify-content-between">
-											<div class="course-ratting">
-												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-													class="fas fa-star"></i>
-											</div>
-											<ul>
-												<li>52 Review</li>
-											</ul>
-										</div>
-										<div class="course-cap-bottom d-flex justify-content-between">
-											<ul>
-												<li><i class="ti-user"></i> 562</li>
-												<li><i class="ti-heart"></i> 562</li>
-											</ul>
-										</div>
-									</div>
-								</div>
+								</div>	
+							</c:forEach>
 							</div>
 							<div class="MS-controls">
 								<button class="MS-left">&lt;</button>
@@ -449,11 +197,11 @@
 				</div>
 			</div>
 		</div>
-		<!-- Career Popular Course End -->
+		<!-- kids Popular Course End -->
 
 
 
-		<!--? 머니 전테 클래스   -->
+		<!--? 키즈 전테 클래스   -->
 		<div class="popular-course section-padding40">
 			<div class="container">
 				<div class="row justify-content-sm-center">
@@ -465,103 +213,38 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xl-4 col-lg-4 col-md-6">
-						<!-- Single course -->
-						<div class="single-course mb-40">
-							<div class="course-img">
-								<img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
+				<c:forEach var="a" items="${all }">
+					<div class="slider-course mb-40 item">
+						<div class="course-img">
+							<img src="${a.lessonCoverImg }" alt="">
+						</div>
+						<div class="course-caption">
+							<div class="course-cap-top">
+								<h4>
+									<a href="courseDetailView.le?lessonNo=${a.lessonNo }">${a.lessonTitle }</a>
+								</h4>
 							</div>
-							<div class="course-caption">
-								<div class="course-cap-top">
-									<h4>
-										<a href="#">Graphic Design</a>
-									</h4>
+							<div class="course-cap-mid d-flex justify-content-between">
+								<div class="course-ratting">
+									<c:forEach var="s" begin="1" end="${a.star }">
+										<i class="fas fa-star"></i> 
+									</c:forEach>
+									<c:forEach var="ss" begin="${a.star }" end="4">
+										<i class='fas fa-star' style='color:#e6e6e6'></i>
+									</c:forEach>
 								</div>
-								<div class="course-cap-mid d-flex justify-content-between">
-									<div class="course-ratting">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i>
-									</div>
-									<ul>
-										<li>52 Review</li>
-									</ul>
-								</div>
-								<div class="course-cap-bottom d-flex justify-content-between">
-									<ul>
-										<li><i class="ti-user"></i> 562</li>
-										<li><i class="ti-heart"></i> 562</li>
-									</ul>
-									<span>Free</span>
-								</div>
+							</div>
+							<div class="course-cap-bottom d-flex justify-content-between">
+								<ul>
+									<li><i class="ti-heart"></i> ${a.likeCount }</li>
+								</ul>
+								<span>${a.price }원</span>
 							</div>
 						</div>
-					</div>
-					<!--한개컬럼 end-->
-					<div class="col-xl-4 col-lg-4 col-md-6">
-						<!-- Single course -->
-						<div class="single-course mb-40">
-							<div class="course-img">
-								<img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
-							</div>
-							<div class="course-caption">
-								<div class="course-cap-top">
-									<h4>
-										<a href="#">Graphic Design</a>
-									</h4>
-								</div>
-								<div class="course-cap-mid d-flex justify-content-between">
-									<div class="course-ratting">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i>
-									</div>
-									<ul>
-										<li>52 Review</li>
-									</ul>
-								</div>
-								<div class="course-cap-bottom d-flex justify-content-between">
-									<ul>
-										<li><i class="ti-user"></i> 562</li>
-										<li><i class="ti-heart"></i> 562</li>
-									</ul>
-									<span>Free</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-lg-4 col-md-6">
-						<!-- Single course -->
-						<div class="single-course mb-40">
-							<div class="course-img">
-								<img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
-							</div>
-							<div class="course-caption">
-								<div class="course-cap-top">
-									<h4>
-										<a href="#">Graphic Design</a>
-									</h4>
-								</div>
-								<div class="course-cap-mid d-flex justify-content-between">
-									<div class="course-ratting">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i>
-									</div>
-									<ul>
-										<li>52 Review</li>
-									</ul>
-								</div>
-								<div class="course-cap-bottom d-flex justify-content-between">
-									<ul>
-										<li><i class="ti-user"></i> 562</li>
-										<li><i class="ti-heart"></i> 562</li>
-									</ul>
-									<span>Free</span>
-								</div>
-							</div>
-						</div>
-					</div>
+					</div>	
+				</c:forEach>
+
+
 				</div>
 			</div>
 		</div>

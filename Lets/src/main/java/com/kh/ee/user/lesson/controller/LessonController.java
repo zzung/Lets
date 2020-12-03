@@ -26,7 +26,17 @@ public class LessonController {
 	private LessonService lService;
 
 	@RequestMapping("kids.le")
-	public String kidsCurriculum() {
+	public String kidsCurriculum(Model model) {
+		ArrayList<Lesson> pop = lService.selectKidsPop();
+		ArrayList<Lesson> nl = lService.selectKidsNew();
+		ArrayList<Lesson> disc = lService.selectKidsDisc();
+		ArrayList<Lesson> all = lService.selectKidsAll();
+		
+		model.addAttribute("pop",pop);
+		model.addAttribute("nl",nl);
+		model.addAttribute("disc",disc);
+		model.addAttribute("all",all);
+		
 		return "user/lesson/kidsCurriculumListView";
 	}
 	

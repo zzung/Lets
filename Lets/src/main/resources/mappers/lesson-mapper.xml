@@ -331,4 +331,84 @@
    set like_count = like_count + 1
  where lesson_no = #{lessonNo}
 </update>
+
+<select id="selectKidsPop" resultMap="lessonResultSet">
+		<![CDATA[ select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '키즈'
+					           and approve_date is not null
+					        )
+					 where rownum <10
+					 order 
+					    by like_count desc]]> 
+</select>
+
+<select id="selectKidsNew" resultMap="lessonResultSet">
+		<![CDATA[ select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              , l.approve_date
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '키즈'
+					           and approve_date is not null
+					          order by dbms_random.random
+					        )
+					 where rownum <10]]> 
+</select>
+
+<select id="selectKidsDisc" resultMap="lessonResultSet">
+		<![CDATA[select *
+					 from (
+					         select
+					                l.lesson_cover_img
+					              , l.lesson_no
+					              , l.lesson_title
+					              , l.price
+					              , r.star
+					              , l.like_count
+					              ,l.discount
+					          from lesson l
+					          left join review r on (l.lesson_no = r.lesson_no)
+					         where l.status='Y'
+					           and l.lesson_category = '키즈'
+					           and approve_date is not null
+					           and disc_status='적용'
+					        )
+					 where rownum <10]]> 
+</select>
+
+<select id="selectKidsAll" resultMap="lessonResultSet">
+	 select
+	        l.lesson_cover_img
+	      , l.lesson_no
+	      , l.lesson_title
+	      , l.price
+	      , r.star
+	      , l.like_count
+	      ,l.discount
+	  from lesson l
+	  left join review r on (l.lesson_no = r.lesson_no)
+	 where l.status='Y'
+	   and l.lesson_category = '키즈'
+	   and approve_date is not null
+</select>
+
 </mapper>

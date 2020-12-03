@@ -90,8 +90,23 @@ public class LessonDao {
 	public int reportReply(Report rpt, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.reportReply",rpt);
 	}
+
+	//키즈 화면에 뿌려줄것(학천)
+	public ArrayList<Lesson> selectKidsPop(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectKidsPop");
+	}
+	public ArrayList<Lesson> selectKidsNew(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectKidsNew");
+	}
+	public ArrayList<Lesson> selectKidsDisc(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectKidsDisc");
+	}
+	public ArrayList<Lesson> selectKidsAll(SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectKidsAll");
+	}
 	
-	/*
+	
+	/*(학천)
 	public int likeCount(int lessonNo, SqlSessionTemplate ss) {
 		return ss.update("lessonMapper.likeCount",lessonNo);
 	}

@@ -36,6 +36,12 @@ public interface LessonService {
 	
 	int deleteLesson(int lno);
 
+	//키즈 화면에 뿌려줄것(학천)
+	ArrayList<Lesson> selectKidsPop();
+	ArrayList<Lesson> selectKidsNew();
+	ArrayList<Lesson> selectKidsDisc();
+	ArrayList<Lesson> selectKidsAll();
+
 
 
 

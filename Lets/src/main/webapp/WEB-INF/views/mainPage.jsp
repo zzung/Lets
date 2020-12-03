@@ -97,6 +97,7 @@
                                 <ul>
                                     <li><i class="ti-heart"></i> ${k.likeCount }</li>
                                 </ul>
+                                <span>${k.price }원</span>
                             </div>
                         </div>
                     </div>
@@ -143,6 +144,7 @@
 	                                <ul>
 	                                    <li><i class="ti-heart"></i> ${m.likeCount }</li>
 	                                </ul>
+	                                <span>${m.price }원</span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -189,6 +191,7 @@
 	                                <ul>
 	                                    <li><i class="ti-heart"></i> ${c.likeCount }</li>
 	                                </ul>
+	                                <span>${c.price }원</span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -235,6 +238,7 @@
 	                                <ul>
 	                                    <li><i class="ti-heart"></i> ${h.likeCount }</li>
 	                                </ul>
+	                                <span>${h.price }원</span>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -336,6 +340,7 @@
 	                                <ul>
 	                                    <li><i class="ti-heart"></i> ${n.likeCount }</li>
 	                                </ul>
+	                                <span>${n.price }원</span>
 	                            </div>
 	                        </div>
 	                    </div>
