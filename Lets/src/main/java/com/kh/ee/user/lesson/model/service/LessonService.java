@@ -3,6 +3,7 @@ package com.kh.ee.user.lesson.model.service;
 import java.util.ArrayList;
 
 import com.kh.ee.common.model.vo.PageInfo;
+import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.memPay.model.vo.MemPay;
@@ -69,7 +70,7 @@ public interface LessonService {
 	int insertDelInfo(MemPay mp); 
 
 	int insertLessonFaq(LessonFaq lfaq);
-
+	int insertCurriculum(Curriculum element);
 
 	
 

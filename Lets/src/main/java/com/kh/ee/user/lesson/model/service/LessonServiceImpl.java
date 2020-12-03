@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ee.common.model.vo.PageInfo;
+import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.lesson.model.dao.LessonDao;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
@@ -200,6 +201,11 @@ public class LessonServiceImpl implements LessonService{
 	public int insertLessonFaq(LessonFaq lfaq) {
 		return lDao.insertLessonFaq(lfaq, ss);
 
+	}
+	
+	@Override
+	public int insertCurriculum(Curriculum element) {
+		return lDao.insertCurriculum(element, ss);
 	}
 	
 	@Override

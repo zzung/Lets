@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
@@ -230,14 +231,22 @@ public class LessonController {
 	public String enrollLesson() {
 		return "user/lesson/lessonEnrollForm";
 	}
-		
+	
 	@RequestMapping("insert.le")
 	public String insertLesson(Lesson l, HttpSession sesson, Model model) {
 		
-		ArrayList<String> lessonPrepareList = l.getLessonPrepareList();
-		for(String element:lessonPrepareList) {
-			System.out.println(element);
+		//레슨 
+		
+		ArrayList<Curriculum> curriculumList = l.getCurriculumList();
+		for(Curriculum element:curriculumList) {
+			element.setLessonNo(1);
+			lService.insertCurriculum(element);
+			System.out.println(element.getCurLevel());
 		}
+		
+		ArrayList<String> lessonPrepareList = l.getLessonPrepareList();
+		String.join(", ", lessonPrepareList);
+		System.out.println(String.join(", ", lessonPrepareList));
 		
 		ArrayList<LessonFaq> lessonFaqList = l.getLessonFaqList();
 		for(LessonFaq element:lessonFaqList) {
@@ -246,10 +255,12 @@ public class LessonController {
 		}
 		
 		// 비디오
-		// 커리큘럼
 		
 		return "user/tutor/tutorMainView";
 	}
+
+	
+	
 	
 	//결제정보 작성해서 보내기(학천)
 	@RequestMapping("paymentProcess.le")

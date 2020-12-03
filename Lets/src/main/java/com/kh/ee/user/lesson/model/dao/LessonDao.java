@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ee.common.model.vo.PageInfo;
+import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.memPay.model.vo.MemPay;
@@ -171,4 +172,7 @@ public class LessonDao {
 		return ss.insert("lessonMapper.insertLessonFaq",lfaq);
 	}
 
+	public int insertCurriculum(Curriculum element, SqlSessionTemplate ss) {
+		return ss.insert("curriculumMapper.insertCurriculum", element);
+	}
 }
