@@ -152,6 +152,14 @@ public class LessonDao {
 	public MemPay selectMemPayList(int lessonNo,SqlSessionTemplate ss) {
 		return ss.selectOne("lessonMapper.selectMemPayList",lessonNo);
 	}
+
+	public int insertPayInfo(MemPay mp, SqlSessionTemplate ss) {
+		return ss.insert("lessonMapper.insertPayInfo",mp);
+	}
+
+	public int insertDelInfo(MemPay mp, SqlSessionTemplate ss) {
+		return ss.insert("lessonMapper.insertDelInfo",mp);
+	}
 	
 	/*(학천)
 	public int likeCount(int lessonNo, SqlSessionTemplate ss) {

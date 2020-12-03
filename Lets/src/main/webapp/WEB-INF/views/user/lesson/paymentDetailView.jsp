@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/user/assets/css/style.css">
 <link rel="stylesheet" href="resources/user/assets/css/paymentDetailView.css">
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -34,6 +35,8 @@
 							</div>
 							<form action="paymentProcess.le">
 								<div class="payment-user-info">
+								<input type="hidden" name="lessonNo" value="${l.lessonNo }">
+								<input type="hidden" name="memNo" value="${loginUser.memNo }">
 									<div>
 										<h3>연락처 정보</h3>
 									</div>
@@ -42,18 +45,25 @@
 										<h4>
 											<b>받으시는분</b>
 										</h4>
-										<div class="mt-10">
-											<input type="text" name="userName" placeholder="사용자 성함" class="user-input-primary" required>
-										</div>
+									<div class="mt-10">
+		                                 <table>
+		                                    <tr style="font-size:16px;">
+		                                       <td>${loginUser.memName }</td>
+		                                    </tr>
+		                                 </table>
+		                              </div>
 									</div>
 									<br>
 									<div id="phone">
 										<h4>
 											<b>휴대폰 전화</b>
 										</h4>
-										<div class="mt-10">
-											<input type="text" name="phone" placeholder="사용자 연락처" class="user-input-primary" required>
-										</div>
+										 <table>
+		                                    <tr style="font-size:16px;">
+		                                       <td>${loginUser.phone }</td>
+		                                    </tr>
+		                                 </table>
+
 									</div>
 									<br>
 									<div id="ad">
@@ -61,13 +71,13 @@
 											<b>주소</b>
 										</h4>
 										<div class="mt-10">
-											<input type="text" id="postcode" name="postcode" placeholder="우편번호" class="user-input" required> 
+											<input type="text" id="postcode" name="delPostcode" placeholder="우편번호" class="user-input" required> 
 											<button class="genric-btn primary" onclick="findPostCode()">우편번호찾기</button>
 
-											<input type="text" id="address" name="address" placeholder="주소" class="user-input-primary" required> 
+											<input type="text" id="address" name="delPostAdr" placeholder="주소" class="user-input-primary" required> 
 											
-											<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" class="user-input" required> 
-											<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목" class="user-input" required>					
+											<input type="text" id="detailAddress" name="delDetailAdr" placeholder="상세주소" class="user-input" required> 
+											<input type="text" id="extraAddress" name="delExtraAdr" placeholder="참고항목" class="user-input" required>					
 										</div>
 									</div>
 								</div>
@@ -97,14 +107,15 @@
 									<div id="method-title">
 										<h3>결제수단</h3>
 									</div>
-									<input type="radio" name="payMethod" value="card" id="card" checked /> 
+									<input type="radio" name="type" value="card" id="card" checked /> 
 									<label for="card" id="pay">신용카드</label> <br>
-									<input type="radio" name="payMethod" value="tranfser" id="transfer" /> 
-									<label for="transfer" id="pay">무통장입급</label>
+									<input type="radio" name="type" value="trans" id="trans" /> 
+									<label for="trans" id="pay">무통장입급</label>
 								</div>
 								<br> <br> <br>
 								<div>
-									<button type="submit" class="gen-btn primary-border custom">결제하기</button>
+									<button type="button" class="gen-btn primary-border custom" data-total="${l.payTotal }" data-phone="${loginUser.phone }"
+									data-title="${l.lessonTitle }" data-name="${loginUser.memName}" onclick="payProcess(this);">결제하기</button>
 								</div>
 							</form>
 						</div>
@@ -209,6 +220,45 @@
 						+ 'px';
 				element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height) / 2 - borderWidth)
 						+ 'px';
+			}
+			
+			function payProcess(e){
+				var name = $(e).data("name");
+				var phone = $(e).data("phone");
+				var payMethod = $("input:radio[name=type]:checked").val();
+				var total = $(e).data("total");
+				var title = $(e).data("title");
+
+				IMP.init('imp28668444'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	
+				IMP.request_pay({
+				    pg : 'html5_inicis',
+				    pay_method : payMethod,
+				    merchant_uid : 'merchant_' + new Date().getTime(),
+				    name : title,
+				    amount : 10,
+				    buyer_email : 'lets@iei.do',
+				    buyer_name : name,
+				    buyer_tel : phone,
+				    m_redirect_url : 'https://localhost:8888/ee'
+				}, function(rsp) {
+				    if ( rsp.success ) {
+				        var msg = '결제가 완료되었습니다.';
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				        
+				        $("form").submit();
+				        
+				        
+				    } else {
+				        var msg = '결제에 실패하였습니다.';
+				        msg += '에러내용 : ' + rsp.error_msg;
+				    }
+	
+				    alert(msg);
+				});
 			}
 		</script>
 		<!--================ Blog Area end =================-->

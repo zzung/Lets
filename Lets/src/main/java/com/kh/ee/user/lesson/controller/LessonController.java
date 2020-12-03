@@ -253,7 +253,18 @@ public class LessonController {
 	
 	//결제정보 작성해서 보내기(학천)
 	@RequestMapping("paymentProcess.le")
-	public void paymentProcess() {
+	public String paymentProcess(MemPay mp,HttpSession session,Model model) {
+		int result = lService.insertDelInfo(mp);
+		System.out.println(mp.getLessonNo());
+		
+		if(result>0) {
+			session.setAttribute("alertMsg","결제 완료 되었습니다.");
+			return "redirect:myPage.me";			
+		} else {
+			model.addAttribute("errorMsg","결제 실패했습니다.");
+			return "user/lesson/courseDetailView.le?lessonNo="+mp.getLessonNo();
+		}
 		
 	}
+
 }
