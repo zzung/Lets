@@ -94,8 +94,8 @@
    			$.ajax({
    				url:"insertReview.rev",
    				data:{
-   					lessonNo:1,
-   					memNo:3,
+   					lessonNo:${r.lessonNo},
+   					memNo:${loginUser.memNo},
    					reviewContent:$("#reviewContent").val(),
    					star:$("input:radio[name=star]:checked").val()	
    				},
@@ -123,7 +123,7 @@
    			$.ajax({
    				url:"showMoreReview.rev",
    				data:{
-   					lessonNo:1		
+   					lessonNo:${r.lessonNo}		
    				},
    				success:function(list){
    					$("#reviewCount").text(list.length);
@@ -212,7 +212,7 @@
    			$.ajax({
    				url:"insertReplyReview.rev",
    				data:{
-   					memNo:2,
+   					memNo:${loginUser.memNo},
    					reviewNo:revNo,
    					replyContent:$("#reviewReplyContent").val(),
    					replyType : '후기',

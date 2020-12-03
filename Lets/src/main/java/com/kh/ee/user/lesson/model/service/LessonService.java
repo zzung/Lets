@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
@@ -59,6 +60,8 @@ public interface LessonService {
 	ArrayList<Lesson> selectHobbyNew();
 	ArrayList<Lesson> selectHobbyDisc();
 	ArrayList<Lesson> selectHobbyAll();
+
+	MemPay selectMemPayList(int lessonNo);
 
 
 

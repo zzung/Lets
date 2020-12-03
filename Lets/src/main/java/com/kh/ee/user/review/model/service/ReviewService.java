@@ -28,6 +28,8 @@ public interface ReviewService {
 	
 	//후기 답장 삭제하기
 	int deleteReviewReply(int reviewNo);
+
+	Review selectNumber(int lessonNo);
 	
 
 	

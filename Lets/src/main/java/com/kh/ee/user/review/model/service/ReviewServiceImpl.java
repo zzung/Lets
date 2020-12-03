@@ -21,6 +21,12 @@ public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	private ReviewDao revDao;
 
+	
+	@Override
+	public Review selectNumber(int lessonNo) {
+		return revDao.selectNumber(lessonNo, ss);
+	}
+	
 	@Override
 	public ArrayList<Review> selectReviewList(int lessonNo) {
 	
@@ -61,6 +67,7 @@ public class ReviewServiceImpl implements ReviewService{
 	public int deleteReviewReply(int reviewNo) {
 		return revDao.deleteReviewReply(reviewNo,ss);
 	}
+
 
 
 
