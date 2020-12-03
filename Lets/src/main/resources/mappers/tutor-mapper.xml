@@ -31,6 +31,7 @@
 				tutor
 			set tutor_pic = #{tutorPic}
 			  , tutor_info = #{tutorInfo}
+			  , modify_date = TO_CHAR(SYSDATE,'YY/MM/DD')
 		  where mem_no = #{memNo}
 	</update>
 	
