@@ -67,19 +67,16 @@ public class CurriculumServiceImpl implements CurriculumService{
 		return curDao.deleteAnswer(sqlSession, q);
 	}
 	@Override
-	public ArrayList<Video> videoList(Video v) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Video> videoList(Lesson l) {
+		return curDao.videoList(sqlSession, l);
 	}
 	@Override
-	public Video detailVideo(Video v) {
-		// TODO Auto-generated method stub
-		return null;
+	public Video detailVideo(MemVideo mv) {
+		return curDao.detailVideo(sqlSession, mv);
 	}
 	@Override
 	public int updateVideoStatus(MemVideo mv) {
-		// TODO Auto-generated method stub
-		return 0;
+		return curDao.updateVideoStatus(sqlSession, mv);
 	}
 	@Override
 	public int selectVideoCount(Lesson l) {

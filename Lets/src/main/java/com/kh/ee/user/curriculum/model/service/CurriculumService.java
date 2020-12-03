@@ -29,9 +29,9 @@ public interface CurriculumService {
 	int updateAnswer(QnA q);
 	int deleteAnswer(QnA q);
 	
-	ArrayList<Video> videoList(Video v);
+	ArrayList<Video> videoList(Lesson l);
 	// 영상 시청용 서비스
-	Video detailVideo(Video v);
+	Video detailVideo(MemVideo mv);
 	// 영상 시청 시 비디오 상태값 변경
 	int updateVideoStatus(MemVideo mv);
 	// 시청한 영상수 조회

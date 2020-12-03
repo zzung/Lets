@@ -13,6 +13,7 @@ import com.kh.ee.user.curriculum.model.service.CurriculumService;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.MemVideo;
 import com.kh.ee.user.curriculum.model.vo.QnA;
+import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.member.model.vo.Member;
@@ -183,24 +184,36 @@ public class CurriculumController {
 		
 	}
 	
-//	@RequestMapping("videoList.cr")
-//	public String videoList(Lesson l, Model model) {
-//		
-//		Lesson selectLesson = curService.selectLesson(l);
-//		
-//		model.addAttribute("lesson", selectLesson);
-//		
-//		return "user/curriculum/videoList";
-//	}
-//	
-//	@RequestMapping("detailVideo.cr")
-//	public String detailVideo(MemVideo mv, Model model) {
-//		
-//		Lesson selectLesson = curService.selectLesson(mv);
-//		
-//		model.addAttribute("lesson", selectLesson);
-//		
-//		return "user/curriculum/detailVideo";
-//	}
+	@RequestMapping("videoList.cr")
+	public String videoList(Lesson l, Model model) {
+		
+		Lesson selectLesson = curService.selectLesson(l);
+		ArrayList<Video> videoList = curService.videoList(l);
+		
+		model.addAttribute("videoList", videoList);
+		model.addAttribute("lesson", selectLesson);
+		
+		return "user/curriculum/videoList";
+		
+	}
+	
+	@RequestMapping("detailVideo.cr")
+	public String detailVideo(MemVideo mv, Model model) {
+		
+		int result = curService.updateVideoStatus(mv);
+		
+		if(result > 0) {
+			Video video = curService.detailVideo(mv);
+			
+			model.addAttribute("video", video);
+			
+			return "user/curriculum/detailVideo";
+		} else {
+			model.addAttribute("errorMsg", "영상 재생에 실패했습니다.");
+			
+			return "user/common/errorPage";
+		}
+		
+	}
 	
 }
