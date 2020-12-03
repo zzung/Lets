@@ -15,6 +15,7 @@ import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.memPay.model.vo.MemPay;
+import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
@@ -92,7 +93,6 @@ public class LessonController {
 	@RequestMapping("payClass.le")
 	public String selectLessonList(int lessonNo, Model model) {
 		Lesson lesson = lService.selectLessonList(lessonNo);
-		
 		
 		model.addAttribute("l",lesson);
 		return"user/lesson/paymentDetailView";
@@ -234,5 +234,11 @@ public class LessonController {
 	@RequestMapping("enrollNext.le")
 	public String enrollNextLesson() {
 		return "user/lesson/lessonEnrollNextForm";
+	}
+	
+	//결제정보 작성해서 보내기(학천)
+	@RequestMapping("paymentProcess.le")
+	public void paymentProcess() {
+		
 	}
 }

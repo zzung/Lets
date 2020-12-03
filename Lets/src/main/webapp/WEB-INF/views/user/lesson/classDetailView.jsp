@@ -729,6 +729,8 @@
 	                           </tr>
 	                           <tr>
 	                              <td colspan="4" align="center">
+	                              <button class="genric-btn primary discount-pay" id="pay">수강하기</button>
+	                              <!-- 
 	                              <c:choose>
 	                              	<c:when test="${empty loginUser }">
 	                                 	<button class="genric-btn primary discount-pay disabled">로그인 후 사용</button>
@@ -740,6 +742,7 @@
 	                              		<button class="genric-btn primary discount-pay" id="pay">수강하기</button>
 	                              	</c:otherwise>
 	                              </c:choose>
+	                              -->
 	                              </td>
 	                           </tr>
 	                        </table>
