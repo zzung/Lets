@@ -280,16 +280,16 @@
                             <table style="width: 500px;">
                                 <tr>
                                     <td width=40px><h5 class="category_1">1.</h5></td>
-                                    <td width=400px><input class="form-control titleInput" name="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>
+                                    <td width=400px><input type="hidden" name="curriculumList[0].curLevel" value="1"><input class="form-control titleInput" name="curriculumList[0].curriculumCont" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><h6 class="category_2">1)</h6></td>
-                                    <td><input class="form-control curriculumTextInput" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
+                                    <td><input type="hidden" name="curriculumList[1].curLevel" value="2"><input class="form-control curriculumTextInput" name="curriculumList[1].curriculumCont" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
                                 </tr>
                                 <tr>
                                     <td><h6 class="category_2">2)</h6></td>
-                                    <td><input class="form-control curriculumTextInput" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
+                                    <td><input type="hidden" name="curriculumList[2].curLevel"  value="2"><input class="form-control curriculumTextInput" name="curriculumList[2].curriculumCont" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>
                                     <td><button class="plus_btn detailadd" type="button">+</button></td>
                                 </tr>
                         </table><br>
