@@ -214,12 +214,17 @@ public class LessonServiceImpl implements LessonService{
 
 	}
 
-	/*
+	
 	@Override
 	public int likeCount(int lessonNo) {
 		return lDao.likeCount(lessonNo,ss);
 	}
-	*/
+
+	@Override
+	public int dislikeCount(int lessonNo) {
+		return lDao.dislikeCount(lessonNo,ss);
+	}
+	
 
 
 

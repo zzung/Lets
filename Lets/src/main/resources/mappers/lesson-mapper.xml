@@ -334,9 +334,16 @@
 
 <update id="likeCount" parameterType="_int">
 	update
-       lesson
-   set like_count = like_count + 1
- where lesson_no = #{lessonNo}
+	       lesson
+	   set like_count = like_count + 1
+	 where lesson_no = #{lessonNo}
+</update>
+
+<update id="dislikeCount" parameterType="_int">
+	update
+	       lesson
+	   set like_count = like_count - 1
+	 where lesson_no = #{lessonNo}
 </update>
 
 <select id="selectKidsPop" resultMap="lessonResultSet">

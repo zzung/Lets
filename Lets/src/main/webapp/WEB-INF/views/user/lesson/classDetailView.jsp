@@ -746,7 +746,14 @@
 	                           </tr>
 	                           <tr> 
 	                              <td class="discount-like" colspan="2" align="center">
-	                                 <button type="button" class="like-button" onclick="likeBtn();"></button>
+		                           	<c:choose>
+		                           		<c:when test="${!empty loginUser}">
+		                                 	<input type="radio" name="heart" class="like-button">
+		                           		</c:when>
+		                           		<c:otherwise>
+		                           			<input type="radio" id="dislike" name="heart" class="like-button">
+		                           		</c:otherwise>
+		                           	</c:choose>
 	                              </td>
 	                              <td class="discount-share" colspan="2" align="center">
 	                                <a href="javascript:;" id="kakao-link-btn"> 
@@ -816,11 +823,76 @@
 	                    },
 	                }, ],
 	    });
-
+	
+        	
+			//페이지 이동
+        	$("#pay").click(function(){
+         		location.href="payClass.le?lessonNo="+${l.lessonNo}
+         	})
+         	
+         	$("#curr").click(function(){
+         		location.href="detailCurri.cr?lessonNo="+${l.lessonNo}
+         	})
+         	
+			//하트 모양 변화주기
         	document.querySelector('.like-button').addEventListener('click', e => {
-            e.currentTarget.classList.toggle('liked');
-          });
-
+           	e.currentTarget.classList.toggle('liked');
+          	});
+			
+			$(document).ready(function(){
+				$("#dislike").attr("disabled",true); 
+			});
+			
+         	//좋아요 카운트 없다운
+         	var clicks = 0; 
+			
+         	$(".like-button").click(function(){
+         		
+         		if(clicks % 2 == 0){
+	         		$(this).is(":checked")
+	         			$.ajax({
+	         				url:"likeCount.le",
+	         				data:{
+	         					lessonNo:${l.lessonNo}
+	         				},
+	         				success:function(result){
+	         					if(result == "success"){
+	         						$(".like-button").css("color","#ff3252")
+	         						console.log("like success");
+	         					} else {
+	         						console.log("like fail");
+	         					}
+	         				},
+	         				error:function(){
+	         					console.log("like ajax fail");
+	         				}
+	         			});
+	         		
+         				clicks++;
+         	} else {
+  
+     			$.ajax({
+     				url:"dislikeCount.le",
+     				data:{
+     					lessonNo:${l.lessonNo}
+     				},
+     				success:function(result){
+     					if(result == "success"){
+     						$(".like-button").css("color","#b2b2b2")
+     						console.log("dislike success");
+     					} else {
+     						console.log("dislike fail");
+     					}
+     				},
+     				error:function(){
+     					console.log("dislike ajax fail");
+     				}
+     			});
+     			
+				clicks--; 
+				
+     			}
+         	})
     </script>
 
 	</main>

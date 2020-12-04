@@ -34,7 +34,8 @@ public interface LessonService {
 	int deleteReReply(Reply r);
 	int updateReReply(Reply r);
 	int reportReply(Report rpt);
-	//int likeCount(int lessonNo);
+	int likeCount(int lessonNo);
+	int dislikeCount(int lessonNo);
 	//
 	
 	int deleteLesson(int lno);
@@ -71,6 +72,8 @@ public interface LessonService {
 
 	int insertLessonFaq(LessonFaq lfaq);
 	int insertCurriculum(Curriculum element);
+
+	
 
 	
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,18 +88,29 @@
 									</div>
 									<br>
 									<div>
+									<c:set var="disc" value="${l.discount }"/>
+			                        <c:set var="divide" value="100"/>
+			                        <c:set var="total" value="${l.payTotal }" />
+			                        <c:set var="discountAmount" value="${total*disc/100}" />
+			                        <c:set var="totalAmount" value="${total-(total*disc/100) }" />
 										<table>
 											<tr>
 												<td class="sum-title">총 상품 금액</td>
-												<td class="sum-amount">${l.payTotal }원</td>
+												<td class="sum-amount">
+													<fmt:formatNumber type="currency" value="${total }"/>
+												</td>
 											</tr>
 											<tr>
 												<td class="sum-title">할인 금액</td>
-												<td class="sum-amount">${l.discount }원</td>
+												<td class="sum-amount">
+													<fmt:formatNumber type="currency" value="${discountAmount }"/>
+												</td>
 											</tr>
 											<tr id="total-amount">
 												<td>최종 가격</td>
-												<td class="sum-amount">${l.payTotal }원</td>
+												<td class="sum-amount">
+													<fmt:formatNumber type="currency" value="${totalAmount }"/>
+												</td>
 											</tr>
 										</table>
 									</div>

@@ -1871,82 +1871,126 @@ hr {
 50
 
 
+
+
 %
 {
 -webkit-transform
 
 
+
+
 :
 
 
+
+
 translateY
+
+
 (
+
+
 
 
 -10px
 
 
+
+
 )
+
+
 ;
-
-
 transform
 
 
+
+
 :
 
 
+
+
 translateY
+
+
 (
+
+
 
 
 -10px
 
 
+
+
 )
+
+
 ;
-
-
 }
 100
 
 
+
+
 %
 {
 -webkit-transform
 
 
+
+
 :
 
 
+
+
 translateY
+
+
 (
+
+
 
 
 -20px
 
 
+
+
 )
+
+
 ;
-
-
 transform
 
 
+
+
 :
 
 
+
+
 translateY
+
+
 (
+
+
 
 
 -20px
 
 
+
+
 )
+
+
 ;
-
-
 }
 }
 .heartbeat {
@@ -2073,75 +2117,115 @@ to {
 100
 
 
+
+
 %
 {
 -webkit-transform
 
 
+
+
 :
 
 
+
+
 rotate
+
+
 (
+
+
 
 
 360deg
 
 
+
+
 )
+
+
 ;
-
-
 transform
 
 
+
+
 :
 
 
+
+
 rotate
+
+
 (
+
+
 
 
 360deg
 
 
+
+
 )
+
+
 ;
-
-
 -webkit-transition
 
 
+
+
 :
 
 
+
+
 0
+
+
 .6s
+
+
 ;
-
-
 -o-transition
 
 
+
+
 :
 
 
+
+
 0
+
+
 .6s
+
+
 ;
-
-
 transition
 
 
+
+
 :
 
 
+
+
 0
+
+
 .6s
+
+
 ;
-
-
 }
 }
 @
@@ -2156,75 +2240,115 @@ keyframes zoom { 0% {
 100
 
 
+
+
 %
 {
 -webkit-transform
 
 
+
+
 :
 
 
+
+
 rotate
+
+
 (
+
+
 
 
 360deg
 
 
+
+
 )
+
+
 ;
-
-
 transform
 
 
+
+
 :
 
 
+
+
 rotate
+
+
 (
+
+
 
 
 360deg
 
 
+
+
 )
+
+
 ;
-
-
 -webkit-transition
 
 
+
+
 :
 
 
+
+
 0
+
+
 .6s
+
+
 ;
-
-
 -o-transition
 
 
+
+
 :
 
 
+
+
 0
+
+
 .6s
+
+
 ;
-
-
 transition
 
 
+
+
 :
 
 
+
+
 0
+
+
 .6s
+
+
 ;
-
-
 }
 }
 .section-padding2 {
@@ -4262,54 +4386,74 @@ keyframes aaa { 0% {
 50
 
 
+
+
 %
 {
 left
 
 
+
+
 :
+
+
 
 
 10
+
+
 %;
-
-
 top
+
+
 
 
 :
 
 
+
+
 -30
+
+
 %;
-
-
 }
 100
 
 
+
+
 %
 {
 top
 
 
+
+
 :
 
 
+
+
 -10
+
+
 %;
-
-
 left
 
 
+
+
 :
 
 
+
+
 -10
+
+
 %;
-
-
 }
 }
 .hero-caption span {
@@ -7346,73 +7490,35 @@ b, sup, sub, u, del {
 	border-bottom: 1px solid #ddd;
 }
 
-input[type=radio] {
+
+input[name=reportType] {
 	display: none;
 }
 
-input[type=radio]+label {
+input[name=reportType]+label {
 	vertical-align: middle;
 	background-image: url("../img/comment/uncheckedImage.JPG");
 	width: 33px;
 	height: 33px;
 }
 
-input[type=radio]:checked+label {
+input[name=reportType]:checked+label {
 	background-image: url("../img/comment/checkedImage.JPG");
 }
 
-.like-button {
-	display: inline-block;
-	position: relative;
-	font-size: 32px;
+.comments-Area #showMore {
 	cursor: pointer;
-	border:transparent;
-	background:#fbf9ff;
-}
-
-.like-button::before {
-	font-size: 52px;
-	color: #ff3252;
-	content: "♡";
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-}
-
-.like-button::after {
-	font-size: 52px;
-	color: #ff3252;
-	content: "♥";
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	-webkit-transform: translate(-50%, -50%) scale(0);
-	transform: translate(-50%, -50%) scale(0);
-	-webkit-transition: -webkit-transform 0.2s;
-	transition: -webkit-transform 0.2s;
-	transition: transform 0.2s;
-	transition: transform 0.2s, -webkit-transform 0.2s;
-}
-
-.like-button.liked::after {
-	-webkit-transform: translate(-50%, -50%) scale(1.1);
-	transform: translate(-50%, -50%) scale(1.1);
-}
-.comments-Area #showMore{
-	cursor:pointer; 
 }
 
 .pagination {
-  display: inline-block;
+	display: inline-block;
 }
 
 .pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
 }
 
 .review-textarea {
@@ -7474,12 +7580,54 @@ input[type=radio]:checked+label {
 	padding: 0 20px;
 }
 
-.comments-area > .replyArea .thumb1 img{
-    width:50px;
-    padding:0 15px;
-    margin-top:10px;
-    margin-right:10px;
+.comments-area>.replyArea .thumb1 img {
+	width: 50px;
+	padding: 0 15px;
+	margin-top: 10px;
+	margin-right: 10px;
 }
-.desc{
-	margin-bottom:48px;
+
+.desc {
+	margin-bottom: 48px;
 }
+
+input[name=heart] {
+	display: inline-block;
+	position: relative;
+	font-size: 32px;
+	cursor: pointer;
+	border: transparent;
+	background: #fbf9ff;
+}
+
+.like-button::before {
+	font-size: 52px;
+	color: #b2b2b2;
+	content: "♥";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.like-button::after {
+	font-size: 52px;
+	content: "♥";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%) scale(0);
+	transform: translate(-50%, -50%) scale(0);
+	-webkit-transition: -webkit-transform 0.2s;
+	transition: -webkit-transform 0.2s;
+	transition: transform 0.2s;
+	transition: transform 0.2s, -webkit-transform 0.2s;
+}
+
+.like-button.liked::after {
+	-webkit-transform: translate(-50%, -50%) scale(1.1);
+	transform: translate(-50%, -50%) scale(1.1);
+}
+
+

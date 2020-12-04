@@ -213,20 +213,6 @@ public class LessonController {
 		}
 	}
 	
-	/*
-	@ResponseBody
-	@RequestMapping("likeCount.le")
-	public String likeCount(int lessonNo) {
-		int result = lService.likeCount(lessonNo);
-		
-		if(result > 0) {
-			return "success";
-		} else {
-			return "fail";
-		}
-	}
-	*/
-	
 	@RequestMapping("enroll.le")
 	public String enrollLesson() {
 		return "user/lesson/lessonEnrollForm";
@@ -260,8 +246,6 @@ public class LessonController {
 	}
 
 	
-	
-	
 	//결제정보 작성해서 보내기(학천)
 	@RequestMapping("paymentProcess.le")
 	public String paymentProcess(MemPay mp,HttpSession session,Model model) {
@@ -276,5 +260,31 @@ public class LessonController {
 		}
 		
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping("likeCount.le")
+	public String likeCount(int lessonNo) {
+		int result = lService.likeCount(lessonNo);
+		
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("dislikeCount.le")
+	public String dislikeCount(int lessonNo) {
+		int result = lService.dislikeCount(lessonNo);
+		
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
 
 }

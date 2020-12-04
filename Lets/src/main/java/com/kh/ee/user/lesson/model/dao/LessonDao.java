@@ -162,11 +162,11 @@ public class LessonDao {
 		return ss.insert("lessonMapper.insertDelInfo",mp);
 	}
 	
-	/*(학천)
+	//(학천)
 	public int likeCount(int lessonNo, SqlSessionTemplate ss) {
 		return ss.update("lessonMapper.likeCount",lessonNo);
 	}
-	*/
+	
 	
 	public int insertLessonFaq(LessonFaq lfaq, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.insertLessonFaq",lfaq);
@@ -174,5 +174,9 @@ public class LessonDao {
 
 	public int insertCurriculum(Curriculum element, SqlSessionTemplate ss) {
 		return ss.insert("curriculumMapper.insertCurriculum", element);
+	}
+
+	public int dislikeCount(int lessonNo, SqlSessionTemplate ss) {
+		return ss.update("lessonMapper.dislikeCount",lessonNo);
 	}
 }
