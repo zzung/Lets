@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
@@ -220,7 +221,7 @@ public class LessonController {
 	}
 	
 	@RequestMapping("insert.le")
-	public String insertLesson(Lesson l, HttpSession sesson, Model model) {
+	public String insertLesson(Lesson l, MultipartFile upfile, HttpSession sesson, Model model) {
 		
 		//레슨 
 		
@@ -228,7 +229,6 @@ public class LessonController {
 		for(Curriculum element:curriculumList) {
 			element.setLessonNo(1);
 			lService.insertCurriculum(element);
-			System.out.println(element.getCurLevel());
 		}
 		
 		ArrayList<String> lessonPrepareList = l.getLessonPrepareList();

@@ -285,4 +285,23 @@
  		     , #{curLevel}
  		  )  
  	</insert>
+ 	<insert id="insertVideo" parameterType="Video">
+ 		insert
+ 		  into video
+ 		  (
+ 		  	   video_no
+ 		  	 , lesson_no
+ 		  	 , video_name
+ 		  	 , video_cont
+ 		  	 , video_url
+ 		  )
+ 		  values
+ 		  (
+ 		  	   seq_video_no.nextval
+ 		  	 , #{lessonNo}
+ 		  	 , #{videoName}
+ 		  	 , #{videoCont}
+ 		  	 , #{videoUrl}
+ 		  )
+ 	</insert>
 </mapper>

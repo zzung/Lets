@@ -29,7 +29,7 @@
          	
          	var detailHtml = '';
          	detailHtml += '<tr><td><h6 class="category_2">2)</h6></td>';
-         	detailHtml += '<td width=400px><input class="form-control curriculumTextInput" name="" id="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
+         	detailHtml += '<td width=400px><input type="hidden" name="curriculumList[0].curLevel" value="2"><input class="form-control curriculumTextInput" name="curriculumList[0].curriculumCont" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
          	detailHtml += '<td><button class="plus_btn detailadd" type="button">+</button><button class="plus_btn detailDel" type="button">-</button></td></tr>';
 
          	var curriculumIndex = $('.curriculumS').eq($('.detailadd').index($(this))).children().length+1;
@@ -40,8 +40,8 @@
          	var videoCurriculumHtml = '';
          	videoCurriculumHtml+= '<div class="curriculumVideo"><h6><span class="videoCurriculumNum">'+curriculumIndex+') </span> <span class="videoCurriculumText"></span></h6><div class="mt-10">';
          	videoCurriculumHtml+= '<textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name="" onfocus="this.placeholder =\'\'" onblur="this.placeholder = \'교육 과정에 대한 간단한 소개를 입력해 주세요\'"></textarea> <br>';
-         	videoCurriculumHtml+= '<input class="form-control" name="" id="" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">';
-         	videoCurriculumHtml+= '<input class="form-control" name="" id="" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;"></div></div>';
+         	videoCurriculumHtml+= '<input class="form-control" name="curriculumList[0].curriculumCont" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">';
+         	videoCurriculumHtml+= '<input class="form-control" name="curriculumList[0].curriculumCont" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;"></div></div>';
          	
          	$('.curriculumS').eq($('.detailadd').index($(this))).append(curriculumhtml);
 
@@ -113,12 +113,12 @@
 	            html += '<div class="curriculumInput">';
 	            html += '<table style="width: 500px">';
 	            html += '<tr><td width=40px><h5 class="category_1">' + ($(".category_1").length + 1) + '.</h5></td>';
-	            html += '<td width=400px><input class="form-control titleInput" name="" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>';
+	            html += '<td width=400px><input type="hidden" name="curriculumList[0].curLevel" value="1"><input class="form-control titleInput" name="curriculumList[0].curriculumCont" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>';
 	            html += '<td><button class="plus_btn categorydelete" type="button" id="categorydelete" value="'+($(".category_1").length + 1)+'">-</button></td></tr>';
 	            html += '<tr><td><h6 class="category_2">1)</h6></td>';
-	            html += '<td><input class="form-control curriculumTextInput" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td></tr>';
+	            html += '<td><input type="hidden" name="curriculumList[0].curLevel" value="2"><input class="form-control curriculumTextInput" name="curriculumList[0].curriculumCont" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td></tr>';
  	            html += '<tr><td><h6 class="category_2">2)</h6></td>';
-	            html += '<td><input class="form-control curriculumTextInput" name="" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
+	            html += '<td><input type="hidden" name="curriculumList[0].curLevel" value="2"><input class="form-control curriculumTextInput" name="curriculumList[0].curriculumCont" type="text" placeholder="커리큘럼 세부 리스트를 입력해 주세요 "></td>';
 	            html += '<td><button class="plus_btn detailadd" type="button">+</button></td></tr></table><br></div>';
 	             $('#parah').append (html); 
 	             
@@ -130,13 +130,13 @@
 	            var videoHtml = '';
 	            videoHtml+= '<div class="videoTop"><h5><span class="videoTitleNum">' +($('.videoTitleNum').length+1)+'. </span> <span class="videoTitleText"></span></h5><div class="curriculum_detail">';
 	            videoHtml+= '<div class="curriculumVideo"><h6><span class="videoCurriculumNum">1) </span> <span class="videoCurriculumText"></span></h6><div class="mt-10">';
-	            videoHtml+= '<textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name="" onfocus="this.placeholder =\'\'" onblur="this.placeholder = \'교육 과정에 대한 간단한 소개를 입력해 주세요\'"></textarea> <br>';
-	            videoHtml+= '<input class="form-control" name="" id="" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">';
-	            videoHtml+= '<input class="form-control" name="" id="" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;"></div></div>';
+	            videoHtml+= '<textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required name="videoList[0].videoCont" onfocus="this.placeholder =\'\'" onblur="this.placeholder = \'교육 과정에 대한 간단한 소개를 입력해 주세요\'"></textarea> <br>';
+	            videoHtml+= '<input class="form-control" name="videoList[0].videoName" type="text" placeholder="영상 제목을 입력해 주세요" required style="width: 800px;">';
+	            videoHtml+= '<input class="form-control" name="videoList[0].videoUrl" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" required style="width: 800px;"></div></div>';
 	            videoHtml+= '<div class="curriculumVideo"><h6><span class="videoCurriculumNum">2) </span> <span class="videoCurriculumText"></span></h6><div class="mt-10">';
-	            videoHtml+= '<textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name="" onfocus="this.placeholder = \'\'" onblur="this.placeholder = \'교육 과정에 대한 간단한 소개를 입력해 주세요\'"></textarea> <br>';
-	            videoHtml+= '<input class="form-control" name="" id="" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">';
-	            videoHtml+= '<input class="form-control" name="" id="" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;"></div></div></div><hr></div>';    
+	            videoHtml+= '<textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required name="videoList[0].videoCont" onfocus="this.placeholder = \'\'" onblur="this.placeholder = \'교육 과정에 대한 간단한 소개를 입력해 주세요\'"></textarea> <br>';
+	            videoHtml+= '<input class="form-control" name="videoList[0].videoName" type="text" placeholder="영상 제목을 입력해 주세요" required style="width: 800px;">';
+	            videoHtml+= '<input class="form-control" name="videoList[0].videoUrl" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" required style="width: 800px;"></div></div></div><hr></div>';    
                 $('.videoAll').append(videoHtml);
 	            
 	            $('.titleInput').last().keyup(titleKeyupFucntion);
@@ -341,19 +341,19 @@
                    	<div class="curriculumVideo">
                        <h6><span class="videoCurriculumNum">1) </span> <span class="videoCurriculumText"></span></h6>
                        <div class="mt-10">
-                           <textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name=""
-                           onfocus="this.placeholder = ''" onblur="this.placeholder = '교육 과정에 대한 간단한 소개를 입력해 주세요'"></textarea> <br>
-                           <input class="form-control" name="" id="" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">
-                           <input class="form-control" name="" id="" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;">
+                           <textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required name="videoList[0].videoCont"
+                           		onfocus="this.placeholder = ''" onblur="this.placeholder = '교육 과정에 대한 간단한 소개를 입력해 주세요'"></textarea> <br>
+                           <input class="form-control" name="videoList[0].videoName" type="text" required placeholder="영상 제목을 입력해 주세요" style="width: 800px;">
+                           <input class="form-control" name="videoList[0].videoUrl" type="text" required placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;">
                        </div>
                      </div>
                      <div class="curriculumVideo">
                        <h6><span class="videoCurriculumNum">2) </span> <span class="videoCurriculumText"></span></h6>
                        <div class="mt-10">
-                           <textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name=""
+                           <textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required name="videoList[1].videoCont"
                            onfocus="this.placeholder = ''" onblur="this.placeholder = '교육 과정에 대한 간단한 소개를 입력해 주세요'"></textarea> <br>
-                           <input class="form-control" name="" id="" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">
-                           <input class="form-control" name="" id="" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;">
+                           <input class="form-control" name="videoList[1].videoName" type="text" required placeholder="영상 제목을 입력해 주세요" style="width: 800px;">
+                           <input class="form-control" name="videoList[1].videoUrl" type="text" required placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;">
                        </div>
                      </div>
                    </div>
@@ -405,7 +405,7 @@
                 <table id="prepareTable">
                 	<tbody>
 	                    <tr>
-	                        <td width=400px><input class="form-control lessonPrepareInput" name="lessonPrepareList[0]" id="" type="text" placeholder="준비물을 입력해 주세요"></td>
+	                        <td width=400px><input class="form-control lessonPrepareInput" name="lessonPrepareList[0]" type="text" placeholder="준비물을 입력해 주세요"></td>
 	                    </tr>
                     </tbody>
                 </table>
@@ -415,7 +415,7 @@
                 <script>  
                      $('#prepareBtn').click (function () {
                          var prepareHtml = '';
-                         prepareHtml += '<tr><td><input class="form-control lessonPrepareInput" name="lessonPrepareList['+$('.lessonPrepareInput').length+']" id="" type="text" placeholder="준비물을 입력해 주세요"></td>';
+                         prepareHtml += '<tr><td><input class="form-control lessonPrepareInput" name="lessonPrepareList['+$('.lessonPrepareInput').length+']" type="text" placeholder="준비물을 입력해 주세요"></td>';
                          prepareHtml += '<td><button class="plus_btn prepareDel" type="button">-</button></td></tr>';
                          $('#prepareTable > tbody:last').append(prepareHtml);
                          
@@ -442,12 +442,12 @@
 	               <table class="lessonFaqTable">
 	                   <tr>
 	                       <th>Q.</th>
-	                       <td width=600px><input class="form-control faqQuestion" name="lessonFaqList[0].faqQuestion" id="" type="text" placeholder="자주하는 질문을 입력해주세요"></td>
+	                       <td width=600px><input class="form-control faqQuestion" name="lessonFaqList[0].faqQuestion" type="text" placeholder="자주하는 질문을 입력해주세요"></td>
 	                       <td></td>
 	                   </tr>
 	                   <tr>
 	                       <th>A.</th>
-	                       <td><input class="form-control faqAnswer" name="lessonFaqList[0].faqAnswer" id="" type="text" placeholder="답변을 작성해주세요"></td>
+	                       <td><input class="form-control faqAnswer" name="lessonFaqList[0].faqAnswer" type="text" placeholder="답변을 작성해주세요"></td>
 	                   </tr>
 	               </table>
                </div>
@@ -456,7 +456,8 @@
                <script>
                		$('#faqBtn').click (function () {
                			var faqHtml = '';
-               			faqHtml += '<table class="lessonFaqTable"><tr><th>Q.</th><td width=600px><input class="form-control faqQuestion" name="lessonFaqList['+($('.lessonFaqTable').length)+'].faqQuestion" id="" type="text" placeholder="자주하는 질문을 입력해주세요"></td>';
+               			faqHtml += '<table class="lessonFaqTable"><tr><th>Q.</th><td width=600px>';
+               			faqHtml += '<input class="form-control faqQuestion" name="lessonFaqList['+($('.lessonFaqTable').length)+'].faqQuestion" type="text" placeholder="자주하는 질문을 입력해주세요"></td>';
                			faqHtml += '<td><button class="plus_btn faqDel" type="button">-</button></td></tr>';
                			faqHtml += '<tr><th>A.</th><td><input class="form-control faqAnswer" name="lessonFaqList['+($('.lessonFaqTable').length)+'].faqAnswer" id="" type="text" placeholder="답변을 작성해주세요"></td></tr></table>';
                			$('#lessonFaq').append(faqHtml);
