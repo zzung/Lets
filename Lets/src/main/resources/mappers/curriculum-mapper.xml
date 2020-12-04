@@ -46,6 +46,8 @@
  		<result column="video_url" property="videoUrl" />
  		<result column="video_cont" property="videoCont" />
  		<result column="video_name" property="videoName" />
+ 		<result column="pre_video_no" property="preVideoNo" />
+ 		<result column="next_video_no" property="nextVideoNo" />
  	</resultMap>
  	
  	<resultMap type="Lesson" id="lessonResultSet">
@@ -252,17 +254,20 @@
  	</update>
  	
  	<select id="detailVideo" resultMap="videoResultSet" parameterType="MemVideo">
- 		select
- 			   video_no
- 			 , lesson_no
- 			 , video_url
- 			 , video_cont
- 			 , video_name
- 		  from video
- 		 where video_no = #{videoNo}
+ 		<![CDATA[
+			select
+				   video_no
+				 , lesson_no
+				 , video_url
+				 , video_name
+				 , (select max(video_no) from video where video_no < #{videoNo} and lesson_no = #{lessonNo}) "pre_video_no"
+				 , (select min(video_no) from video where video_no > #{videoNo} and lesson_no = #{lessonNo}) "next_video_no"
+			  from video
+			 where video_no = #{videoNo}
+		 ]]> 
  	</select>
  	
- 	 	<insert id="insertCurriculum" parameterType="Curriculum">
+ 	<insert id="insertCurriculum" parameterType="Curriculum">
  		insert
  		  into curriculum
  		  (

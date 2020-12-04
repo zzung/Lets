@@ -27,9 +27,9 @@
     <h3>${ video.videoCont }</h3>
 
     <div id="video_button_box" align="center">
-        <button class="video_button" onclick="">이전 강의</button>
+        <button class="video_button" onclick="location.href='detailVideo.cr?videoNo=${video.preVideoNo}&memNo=${ loginUser.memNo }';">이전 강의</button>
         <button class="video_button" onclick="history.back();">목록으로</button>
-        <button class="video_button" onclick="">다음 강의</button>
+        <button class="video_button" onclick="location.href='detailVideo.cr?videoNo=${video.nextVideoNo}&memNo=${ loginUser.memNo }';">다음 강의</button>
     </div>
 
 </div>

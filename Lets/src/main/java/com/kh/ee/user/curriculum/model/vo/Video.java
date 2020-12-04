@@ -19,4 +19,6 @@ public class Video {
 	private String videoCont;	// 영상 간단 소개
 	private String videoName;	// 영상 제목
 	
+	private int preVideoNo;		// 이전 영상 번호
+	private int nextVideoNo;	// 다음 영상 번호
 }
