@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +69,21 @@
 											<ul>
 												<li><i class="ti-heart"></i> ${pop.likeCount }</li>
 											</ul>
-											<span>${pop.price }원</span>
+											<c:set var="disc" value="${pop.discount }"/>
+					                         <c:set var="divide" value="100"/>
+					                         <c:set var="total" value="${pop.payTotal }" />
+					                         <c:set var="totalAmount" value="${total-(total*disc/100) }" />
+											<c:choose>
+				                           		<c:when test="${!empty pop.discount }">
+				                           			<span style="color:#b2b2b2">
+				                           				${pop.discount }%&nbsp;&nbsp;&nbsp;
+				                              			<fmt:formatNumber type="currency" value="${totalAmount }"/>
+				                              		</span>
+				                           		</c:when>
+				                           		<c:otherwise>
+				                              		<span><fmt:formatNumber type="currency" value="${pop.payTotal }"/></span>
+				                           		</c:otherwise>
+				                           </c:choose>
 										</div>
 									</div>
 								</div>	
@@ -125,7 +140,21 @@
 											<ul>
 												<li><i class="ti-heart"></i> ${n.likeCount }</li>
 											</ul>
-											<span>${n.price }원</span>
+											<c:set var="disc" value="${n.discount }"/>
+					                         <c:set var="divide" value="100"/>
+					                         <c:set var="total" value="${n.payTotal }" />
+					                         <c:set var="totalAmount" value="${total-(total*disc/100) }" />
+											<c:choose>
+				                           		<c:when test="${!empty n.discount }">
+				                           			<span style="color:#b2b2b2">
+				                           				${n.discount }%&nbsp;&nbsp;&nbsp;
+				                              			<fmt:formatNumber type="currency" value="${totalAmount }"/>
+				                              		</span>
+				                           		</c:when>
+				                           		<c:otherwise>
+				                              		<span><fmt:formatNumber type="currency" value="${n.payTotal }"/></span>
+				                           		</c:otherwise>
+				                           </c:choose>
 										</div>
 									</div>
 								</div>	
@@ -182,12 +211,14 @@
 											<ul>
 												<li><i class="ti-heart"></i> ${d.likeCount }</li>
 											</ul>
-											<c:set var="disc" value="${d.discount }" />
-											<c:set var="divide" value="100"/>
-											<c:set var="price" value="${d.price }" />
-											<c:set var="preTotal" value="${price * (disc / divide) }"/>
-											<c:set var="total" value="${price - preTotal }" />
-											<span>${d.discount }%&nbsp;&nbsp;&nbsp;<c:out value="${total }" />원</span>
+											<c:set var="disc" value="${d.discount }"/>
+				                           	<c:set var="divide" value="100"/>
+				                           	<c:set var="total" value="${d.payTotal }" />
+				                           	<c:set var="totalAmount" value="${total-(total*disc/100) }" />
+											<span>
+												${d.discount }%&nbsp;&nbsp;&nbsp;
+												<fmt:formatNumber type="currency" value="${totalAmount }"/>
+											</span>
 										</div>
 									</div>
 								</div>	
@@ -244,7 +275,21 @@
 								<ul>
 									<li><i class="ti-heart"></i> ${a.likeCount }</li>
 								</ul>
-								<span>${a.price }원</span>
+								<c:set var="disc" value="${a.discount }"/>
+		                         <c:set var="divide" value="100"/>
+		                         <c:set var="total" value="${a.payTotal }" />
+		                         <c:set var="totalAmount" value="${total-(total*disc/100) }" />
+									<c:choose>
+	                           		<c:when test="${!empty a.discount }">
+	                           			<span style="color:#b2b2b2">
+	                           				${a.discount }%&nbsp;&nbsp;&nbsp;
+	                              			<fmt:formatNumber type="currency" value="${totalAmount }"/>
+	                              		</span>
+	                           		</c:when>
+	                           		<c:otherwise>
+	                              		<span><fmt:formatNumber type="currency" value="${a.payTotal }"/></span>
+	                           		</c:otherwise>
+	                           </c:choose>
 							</div>
 						</div>
 					</div>	

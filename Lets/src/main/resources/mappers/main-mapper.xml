@@ -47,6 +47,8 @@
 				              , l.price
 				              , r.star
 				              , l.like_count
+				              , l.discount
+				              , l.pay_total
 				          from lesson l
 				          join review r on (l.lesson_no = r.lesson_no)
 				         where l.status='Y'
@@ -67,6 +69,8 @@
 				              , l.price
 				              , r.star
 				              , l.like_count
+				              , l.discount
+				              , l.pay_total
 				          from lesson l
 				          join review r on (l.lesson_no = r.lesson_no)
 				         where l.status='Y'
@@ -87,6 +91,8 @@
 				              , l.price
 				              , r.star
 				              , l.like_count
+				              , l.discount
+				              , l.pay_total
 				          from lesson l
 				          join review r on (l.lesson_no = r.lesson_no)
 				         where l.status='Y'
@@ -107,6 +113,8 @@
 				              , l.price
 				              , r.star
 				              , l.like_count
+				              , l.discount
+				              , l.pay_total
 				          from lesson l
 				          join review r on (l.lesson_no = r.lesson_no)
 				         where l.status='Y'
@@ -128,6 +136,8 @@
 					              , r.star
 					              , l.like_count
 					              , l.approve_date
+					              , l.discount
+					              , l.pay_total
 					          from lesson l
 					          left join review r on (l.lesson_no = r.lesson_no)
 					         where l.status='Y'

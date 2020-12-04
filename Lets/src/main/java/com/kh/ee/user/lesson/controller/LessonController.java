@@ -266,7 +266,6 @@ public class LessonController {
 	@RequestMapping("paymentProcess.le")
 	public String paymentProcess(MemPay mp,HttpSession session,Model model) {
 		int result = lService.insertDelInfo(mp);
-		System.out.println(mp.getLessonNo());
 		
 		if(result>0) {
 			session.setAttribute("alertMsg","결제 완료 되었습니다.");

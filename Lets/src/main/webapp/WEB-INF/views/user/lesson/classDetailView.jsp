@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -709,13 +710,39 @@
 	                        <h4 class="widget_title" style="color: #2d2d2d;">${l.lessonTitle}</h4>
 	                        <table>
 	                           <tr>
-	                              <td class="discount-suggestion" colspan="2"><b>${l.discountPeriod }</b>개월할부시</td>
-	                              <td class="discount-percentage">${l.discount}</td>
-	                              <td class="discount-price">월 ${l.payTotal }원</td>
+	                           <c:choose>
+	                           	<c:when test="${!empty l.discount }">
+	                           		<td class="discount-suggestion" colspan="2"><b>${l.discountPeriod }</b>개월할부시</td>
+		                            <td class="discount-percentage">${l.discount}%</td>
+	                           	</c:when>
+	                           	<c:otherwise>
+		                           	<td class="discount-suggestion" colspan="2"><b></b></td>
+		                            <td class="discount-percentage"></td>
+	                           	</c:otherwise>
+	                           </c:choose>
+	                              <td class="discount-price">
+	                              	<fmt:formatNumber type="currency" value="${l.payTotal }"/>
+	                              </td>
 	                           </tr>
+		                           <c:set var="disc" value="${l.discount }"/>
+		                           <c:set var="divide" value="100"/>
+		                           <c:set var="total" value="${l.payTotal }" />
+		                           <c:set var="totalAmount" value="${total-(total*disc/100) }" />
 	                           <tr>
-	                              <td class="discount-suggestion" colspan="2"><b>총금액</b></td>
-	                              <td class="discount-price" colspan="2">월 ${l.payTotal }원</td>
+	                           <c:choose>
+	                           		<c:when test="${!empty l.discount }">
+	                           			<td class="discount-suggestion" colspan="2"><b>총금액</b></td>
+	                              		<td class="discount-price" colspan="2">
+	                              			<fmt:formatNumber type="currency" value="${totalAmount }"/>
+	                              		</td>
+	                           		</c:when>
+	                           		<c:otherwise>
+	                           			<td class="discount-suggestion" colspan="2"><b>총금액</b></td>
+	                              		<td class="discount-price" colspan="2">
+	                              			<fmt:formatNumber type="currency" value="${l.payTotal }"/>
+	                              		</td>
+	                           		</c:otherwise>
+	                           </c:choose>
 	                           </tr>
 	                           <tr> 
 	                              <td class="discount-like" colspan="2" align="center">
@@ -729,8 +756,6 @@
 	                           </tr>
 	                           <tr>
 	                              <td colspan="4" align="center">
-	                              <button class="genric-btn primary discount-pay" id="pay">수강하기</button>
-	                              <!-- 
 	                              <c:choose>
 	                              	<c:when test="${empty loginUser }">
 	                                 	<button class="genric-btn primary discount-pay disabled">로그인 후 사용</button>
@@ -742,7 +767,6 @@
 	                              		<button class="genric-btn primary discount-pay" id="pay">수강하기</button>
 	                              	</c:otherwise>
 	                              </c:choose>
-	                              -->
 	                              </td>
 	                           </tr>
 	                        </table>
