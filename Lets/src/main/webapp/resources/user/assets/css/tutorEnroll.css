@@ -94,6 +94,7 @@ cursor: pointer;
 .typography{
   margin-left: 20%;
   position: absolute;
+  clear: both;
 }
 
 .mb-30 {
@@ -441,3 +442,4 @@ height: 11px;
 .curriculum_detail{
   margin: 2%;
 }
+.

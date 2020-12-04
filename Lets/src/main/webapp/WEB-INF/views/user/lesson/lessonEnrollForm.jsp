@@ -362,22 +362,23 @@
                </div>
            </div>
            <br><br>
-     <div align="center" style="margin-left:50%"><button id="lessonNext" href="enrollNext.le" class="genric-btn primary radius">다음단계(1/2)</button></div><br>
      </div>
 
 
 <div class="lessonEnrollNextForm">
         <div style="margin: 4%;">
             <br>
+            <div style=" clear: both;">
             <h5><b>클래스 설명</b></h5>
-            <div style="background-color: #f9f9ff; width: 900px; font-size: 13px;">
-                <ul class="unordered-list">
-                    <font style="font-size:large;"><b>Tip</b></font>
-                    <li>튜터님이 진행할 클래스에 대해 자유롭게 소개해 주세요. (사진 첨부도 가능합니다) </li>
-                    <li>수업의 목표와 수업 진행방식에 대해 설명해 주세요.</li>
-                    <li>수업을 진행하는 동안에 얻을 수 있는 결과물 혹은 기대할 수 있는 발전에 대해 얘기해 주세요.</li>
-                    <li>다른 수업에서는 얻을 수 없는 튜터님 만의 장점에 대해 설명해 주세요. </li>
-                </ul>
+	            <div style="background-color: #f9f9ff; width: 900px; font-size: 13px;">
+	                <ul class="unordered-list">
+	                    <font style="font-size:large;"><b>Tip</b></font>
+	                    <li>튜터님이 진행할 클래스에 대해 자유롭게 소개해 주세요. (사진 첨부도 가능합니다) </li>
+	                    <li>수업의 목표와 수업 진행방식에 대해 설명해 주세요.</li>
+	                    <li>수업을 진행하는 동안에 얻을 수 있는 결과물 혹은 기대할 수 있는 발전에 대해 얘기해 주세요.</li>
+	                    <li>다른 수업에서는 얻을 수 없는 튜터님 만의 장점에 대해 설명해 주세요. </li>
+	                </ul>
+	            </div>
             </div>
             <textarea id="summernote" name="lessonInstr"></textarea>
             <script>
@@ -578,7 +579,6 @@
         </div>
         
      <div align="center">
-	     <button id="lessonPrev" class="genric-btn primary radius">이전 페이지로</button>
 	     <button type="submit" class="genric-btn primary radius">최종 승인 요청하기</button>
      </div><br><br><br>
     </form>
