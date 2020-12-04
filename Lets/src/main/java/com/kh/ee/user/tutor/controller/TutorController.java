@@ -84,11 +84,11 @@ public class TutorController {
 	
 	//튜터등록 (현선)
 	@RequestMapping("insert.tt")
-	public String insertTutor(Tutor t, HttpSession session, MultipartFile upfile, Model model) {
+	public String insertTutor(Tutor t, HttpSession session, MultipartFile tutorUpfile, Model model) {
 		
 		
-	      if(!upfile.getOriginalFilename().equals("")) {
-	          String changeName = saveFile(upfile, session);
+	      if(!tutorUpfile.getOriginalFilename().equals("")) {
+	          String changeName = saveFile(tutorUpfile, session);
 	          
 	          if(changeName != null) {
 	        	  t.setTutorPic("resources/tutor/tutorPicFiles/" + changeName);

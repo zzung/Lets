@@ -1,6 +1,10 @@
 package com.kh.ee.user.lesson.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -221,10 +225,17 @@ public class LessonController {
 	}
 	
 	@RequestMapping("insert.le")
-	public String insertLesson(Lesson l, MultipartFile upfile, HttpSession sesson, Model model) {
+	public String insertLesson(Lesson l, MultipartFile lessonUpFile, HttpSession session, Model model) {
 		
 		//레슨 
-		
+		if(!lessonUpFile.getOriginalFilename().equals("")) {			
+			String changeName = lessonCoverImg(lessonUpFile, session);
+			if(changeName != null) {
+				l.setLessonCoverImg("resources/lesson/lessonPicFiles/" + changeName);
+			}
+		}
+        
+        		
 		ArrayList<Curriculum> curriculumList = l.getCurriculumList();
 		for(Curriculum element:curriculumList) {
 			element.setLessonNo(1);
@@ -251,6 +262,28 @@ public class LessonController {
 		
 		
 		return "user/tutor/tutorMainView";
+	}
+	
+	private String lessonCoverImg(MultipartFile upfile, HttpSession sesson) {
+		
+		String originName = upfile.getOriginalFilename();
+		String lessonCoverImgPath = sesson.getServletContext().getRealPath("/resources/lesson/lessonPicFiles");
+		
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        int ranNum = (int)(Math.random()*90000+10000);
+        String ext = originName.substring(originName.lastIndexOf("."));
+        
+        String changeName = currentTime + ranNum + ext;	
+        
+        try {
+			upfile.transferTo(new File(lessonCoverImgPath + changeName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
+        return changeName;
 	}
 
 	
