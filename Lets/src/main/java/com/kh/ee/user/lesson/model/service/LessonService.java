@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
+import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.memPay.model.vo.MemPay;
@@ -72,6 +73,8 @@ public interface LessonService {
 
 	int insertLessonFaq(LessonFaq lfaq);
 	int insertCurriculum(Curriculum element);
+
+	int insertVideo(Video element);
 
 	
 

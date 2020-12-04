@@ -18,5 +18,6 @@ public class Curriculum {
 	private int lessonNo;				// 레슨 번호
 	private int refCurNo;				// 참조하는 커리큘럼 번호
 	private int curLevel;				// 커리큘럼 레벨
+	private int videoNo;				// 비디오 번호
 	
 }

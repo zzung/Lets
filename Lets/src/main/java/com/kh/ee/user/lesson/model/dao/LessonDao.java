@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
+import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
 import com.kh.ee.user.memPay.model.vo.MemPay;
@@ -178,5 +179,9 @@ public class LessonDao {
 
 	public int dislikeCount(int lessonNo, SqlSessionTemplate ss) {
 		return ss.update("lessonMapper.dislikeCount",lessonNo);
+	}
+
+	public int insertVideo(Video element, SqlSessionTemplate ss) {
+		return ss.insert("curriculumMapper.insertVideo", element);
 	}
 }

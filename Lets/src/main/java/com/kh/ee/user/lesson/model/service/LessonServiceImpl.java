@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
+import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.dao.LessonDao;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
@@ -223,6 +224,12 @@ public class LessonServiceImpl implements LessonService{
 	@Override
 	public int dislikeCount(int lessonNo) {
 		return lDao.dislikeCount(lessonNo,ss);
+	}
+
+	@Override
+	public int insertVideo(Video element) {
+		return lDao.insertVideo(element, ss);
+		
 	}
 	
 

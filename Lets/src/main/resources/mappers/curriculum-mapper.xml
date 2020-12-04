@@ -9,6 +9,7 @@
  		<result column="lesson_no" property="lessonNo" />
  		<result column="ref_cur_no" property="refCurNo" />
  		<result column="cur_level" property="curLevel" />
+ 		<result column="video_no" property="videoNo"/>
  	</resultMap>
  	
  	<resultMap type="LessonFAQ" id="lessonFAQResultSet">

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
+import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
@@ -241,6 +242,13 @@ public class LessonController {
 		}
 		
 		// 비디오
+		ArrayList<Video> videoList = l.getVideoList();
+		for(Video element:videoList) {
+			element.setLessonNo(1);
+			lService.insertVideo(element);
+			
+		}
+		
 		
 		return "user/tutor/tutorMainView";
 	}
