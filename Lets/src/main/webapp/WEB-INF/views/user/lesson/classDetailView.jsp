@@ -747,8 +747,11 @@
 	                           <tr> 
 	                              <td class="discount-like" colspan="2" align="center">
 		                           	<c:choose>
-		                           		<c:when test="${!empty loginUser}">
-		                                 	<input type="radio" name="heart" class="like-button">
+		                           		<c:when test="${!empty loginUser && isWished eq 'Y' }">
+		                           			<input type="radio" data-show="liked" id="liked" name="heart" class="like-button" style="color:#ff3252 !important;" onclick="testBtn(this);">
+		                           		</c:when>
+		                           		<c:when test="${!empty loginUser && isWished eq 'N'}">
+		                                 	<input type="radio" name="heart" data-show="unliked" id="unlike" class="like-button" style="color: #b2b2b2;" onclick="testBtn(this);;">
 		                           		</c:when>
 		                           		<c:otherwise>
 		                           			<input type="radio" id="dislike" name="heart" class="like-button">
@@ -839,60 +842,71 @@
            	e.currentTarget.classList.toggle('liked');
           	});
 			
-			$(document).ready(function(){
-				$("#dislike").attr("disabled",true); 
-			});
+			
+			function testBtn(e) {
+				console.log($(e).data("show"));
+				
+				if($(e).data("show") == "liked") {
+					dislike();
+				} else {
+					like();
+				};
+				
+			}
 			
          	//좋아요 카운트 없다운
-         	var clicks = 0; 
-			
-         	$(".like-button").click(function(){
-         		
-         		if(clicks % 2 == 0){
-	         		$(this).is(":checked")
-	         			$.ajax({
-	         				url:"likeCount.le",
-	         				data:{
-	         					lessonNo:${l.lessonNo}
-	         				},
-	         				success:function(result){
-	         					if(result == "success"){
-	         						$(".like-button").css("color","#ff3252")
-	         						console.log("like success");
-	         					} else {
-	         						console.log("like fail");
-	         					}
-	         				},
-	         				error:function(){
-	         					console.log("like ajax fail");
-	         				}
-	         			});
-	         		
-         				clicks++;
-         	} else {
-  
-     			$.ajax({
-     				url:"dislikeCount.le",
-     				data:{
-     					lessonNo:${l.lessonNo}
-     				},
-     				success:function(result){
-     					if(result == "success"){
-     						$(".like-button").css("color","#b2b2b2")
-     						console.log("dislike success");
-     					} else {
-     						console.log("dislike fail");
-     					}
-     				},
-     				error:function(){
-     					console.log("dislike ajax fail");
-     				}
-     			});
-     			
-				clicks--; 
-				
-     			}
-         	})
+         		function like(){
+         			$.ajax({
+         				url:"likeCount.le",
+         				data:{
+         					lessonNo:${l.lessonNo},
+         					memNo:${loginUser.memNo}
+         				},
+         				success:function(result){
+         					if(result == "success"){
+	     						$("input[name=heart]").data("show","liked");
+         						$("input[name=heart]").css("color","#ff3252");
+         						console.log("like success");
+         					} else {
+         						console.log("like fail");
+         					}
+         				},
+         				error:function(err){
+         					console.log(err.message);
+         					console.log("like ajax fail");
+         				}
+         			});
+        			}
+         	
+  				function dislike(){
+	     			$.ajax({
+	     				url:"dislikeCount.le",
+	     				data:{
+	     					lessonNo:${l.lessonNo},
+	     					memNo:${loginUser.memNo}
+	     				},
+	     				success:function(result){
+	     					if(result == "success"){
+	     						$("input[name=heart]").data("show","unlike");
+	     						$("input[name=heart]").css("color","#b2b2b2");
+	     						console.log("dislike success");
+	     					} else {
+	     						console.log("dislike fail");
+	     					}
+	     				},
+	     				error:function(err){
+	     					console.log(err.message);
+	     					console.log("dislike ajax fail");
+	     				}
+	     			});
+	     			
+					
+	     			}
+
+         	$(document).ready(function(){
+				$("#dislike").attr("disabled",true);
+			});
+         	
     </script>
 
 	</main>

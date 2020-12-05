@@ -23,6 +23,7 @@ import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.service.LessonService;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.lesson.model.vo.WishList;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.reply.model.vo.Reply;
@@ -110,19 +111,46 @@ public class LessonController {
 	//상세페이지에서 보여질 후기 부분 부터 작성.(학천)
 	@RequestMapping("courseDetailView.le")
 	public String courseDetailView(int lessonNo, HttpSession session, Model model) {
+
 		Lesson lesson = lService.selectLessonList(lessonNo); 
 		ArrayList<Review> list = lService.selectReview(lessonNo); 
 		ArrayList<LessonFaq> faqList = lService.selectLessonFaqList(lessonNo); 
 		Tutor t = lService.selectTutorInfo(lessonNo); 
 		int listCount = lService.selectListCount(); 
 		MemPay mp = lService.selectMemPayList(lessonNo); 
-				
+		
+		
+		Member mem = (Member)session.getAttribute("loginUser");
+		//member가 null 일때, 비회원일때
+		if(mem == null) {
+			model.addAttribute("list", list); 
+			model.addAttribute("faqList",faqList);
+			model.addAttribute("t", t);
+			model.addAttribute("listCount",listCount);
+			model.addAttribute("l",lesson); 
+			model.addAttribute("mp",mp);
+			model.addAttribute("isWished", null);
+			return "user/lesson/classDetailView";
+		}
+		
+		WishList wl = new WishList();
+		wl.setLessonNo(lessonNo);
+		wl.setMemNo(mem.getMemNo());
+		
+		int result = lService.selectWL(wl); 
+		
+		String isWished = "N";
+		if(result > 0 ) {
+			isWished = "Y";
+		} 
+
 		model.addAttribute("list", list); 
 		model.addAttribute("faqList",faqList);
 		model.addAttribute("t", t);
 		model.addAttribute("listCount",listCount);
 		model.addAttribute("l",lesson); 
 		model.addAttribute("mp",mp);
+		model.addAttribute("isWished",isWished);
 		return "user/lesson/classDetailView"; 
 	}
 	
@@ -308,8 +336,8 @@ public class LessonController {
 	
 	@ResponseBody
 	@RequestMapping("likeCount.le")
-	public String likeCount(int lessonNo) {
-		int result = lService.likeCount(lessonNo);
+	public String likeCount(int lessonNo,WishList wl) {
+		int result = lService.likeCount(lessonNo, wl);
 		
 		if(result > 0) {
 			return "success";
@@ -320,8 +348,8 @@ public class LessonController {
 	
 	@ResponseBody
 	@RequestMapping("dislikeCount.le")
-	public String dislikeCount(int lessonNo) {
-		int result = lService.dislikeCount(lessonNo);
+	public String dislikeCount(int lessonNo, WishList wl) {
+		int result = lService.dislikeCount(lessonNo, wl);
 		
 		if(result > 0) {
 			return "success";

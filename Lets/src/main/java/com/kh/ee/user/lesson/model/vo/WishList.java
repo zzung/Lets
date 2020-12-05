@@ -13,6 +13,6 @@ import lombok.ToString;
 @ToString
 public class WishList {
 
-	private int classNo;
+	private int lessonNo;
 	private int memNo;
 }

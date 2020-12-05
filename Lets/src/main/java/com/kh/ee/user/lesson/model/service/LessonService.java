@@ -2,13 +2,12 @@ package com.kh.ee.user.lesson.model.service;
 
 import java.util.ArrayList;
 
-import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.lesson.model.vo.WishList;
 import com.kh.ee.user.memPay.model.vo.MemPay;
-import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
@@ -35,8 +34,8 @@ public interface LessonService {
 	int deleteReReply(Reply r);
 	int updateReReply(Reply r);
 	int reportReply(Report rpt);
-	int likeCount(int lessonNo);
-	int dislikeCount(int lessonNo);
+	int likeCount(int lessonNo, WishList wl); 
+	int dislikeCount(int lessonNo, WishList wl);
 	//
 	
 	int deleteLesson(int lno);
@@ -74,7 +73,12 @@ public interface LessonService {
 	int insertLessonFaq(LessonFaq lfaq);
 	int insertCurriculum(Curriculum element);
 
+
 	int insertVideo(Video element);
+
+	int selectWL(WishList wl);
+
+	
 
 	
 

@@ -91,6 +91,11 @@
 	<result column="lesson_no" property="lessonNo" />
 </resultMap>
 
+<resultMap id="wishListResultSet" type="WishList">
+	<result column="lesson_no" property="lessonNo" />
+	<result column="mem_no" property="memNo" />
+</resultMap>
+
 <select id="selectApproveLessonList" resultMap="lessonResultSet" >
 	select
 	       lesson_no
@@ -339,12 +344,41 @@
 	 where lesson_no = #{lessonNo}
 </update>
 
+<insert id="insertCount" parameterType="WishList">
+	insert 
+	  into WISHLIST
+	   (
+	     lesson_no
+	   , mem_no
+	   )
+	values
+	   (
+	     #{lessonNo}
+	   , #{memNo}
+	   )
+</insert>
+
 <update id="dislikeCount" parameterType="_int">
 	update
 	       lesson
 	   set like_count = like_count - 1
 	 where lesson_no = #{lessonNo}
 </update>
+
+<delete id="deleteCount" parameterType="WishList">
+	delete 
+	  from WISHLIST
+	 where lesson_no = #{lessonNo}
+	   and mem_no = #{memNo}
+</delete>
+
+<select id="selectWL" parameterType="WishList" resultType="_int">
+	select 
+	       count(*)
+	  from wishlist
+	 where lesson_no = #{lessonNo}
+	   and mem_no = #{memNo}
+</select>
 
 <select id="selectKidsPop" resultMap="lessonResultSet">
 		<![CDATA[ select *

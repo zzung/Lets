@@ -12,6 +12,7 @@ import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.dao.LessonDao;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.lesson.model.vo.WishList;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.reply.model.vo.Reply;
@@ -215,15 +216,20 @@ public class LessonServiceImpl implements LessonService{
 
 	}
 
-	
 	@Override
-	public int likeCount(int lessonNo) {
-		return lDao.likeCount(lessonNo,ss);
+	public int dislikeCount(int lessonNo,WishList wl) {
+		int result2 = lDao.deleteCount(wl,ss);
+		int result = lDao.dislikeCount(lessonNo,ss);
+		
+		return result * result2;
 	}
 
 	@Override
-	public int dislikeCount(int lessonNo) {
-		return lDao.dislikeCount(lessonNo,ss);
+	public int likeCount(int lessonNo, WishList wl) {
+		int result2 = lDao.insertCount(wl,ss);
+		int result = lDao.likeCount(lessonNo,ss);
+		
+		return result * result2;
 	}
 
 	@Override
@@ -232,6 +238,10 @@ public class LessonServiceImpl implements LessonService{
 		
 	}
 	
+	public int selectWL(WishList wl) {
+		return lDao.selectWL(wl, ss);
+	}
+
 
 
 

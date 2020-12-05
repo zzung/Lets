@@ -2,17 +2,15 @@ package com.kh.ee.user.lesson.model.dao;
 
 import java.util.ArrayList;
 
-import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.lesson.model.vo.LessonFaq;
+import com.kh.ee.user.lesson.model.vo.WishList;
 import com.kh.ee.user.memPay.model.vo.MemPay;
-import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
@@ -163,12 +161,6 @@ public class LessonDao {
 		return ss.insert("lessonMapper.insertDelInfo",mp);
 	}
 	
-	//(학천)
-	public int likeCount(int lessonNo, SqlSessionTemplate ss) {
-		return ss.update("lessonMapper.likeCount",lessonNo);
-	}
-	
-	
 	public int insertLessonFaq(LessonFaq lfaq, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.insertLessonFaq",lfaq);
 	}
@@ -177,11 +169,30 @@ public class LessonDao {
 		return ss.insert("curriculumMapper.insertCurriculum", element);
 	}
 
+	//(학천)
+	public int likeCount(int lessonNo, SqlSessionTemplate ss) {
+		return ss.update("lessonMapper.likeCount",lessonNo);
+	}
+
+	public int insertCount(WishList wl, SqlSessionTemplate ss) {
+		return ss.insert("lessonMapper.insertCount",wl);
+	}
+
 	public int dislikeCount(int lessonNo, SqlSessionTemplate ss) {
 		return ss.update("lessonMapper.dislikeCount",lessonNo);
 	}
 
 	public int insertVideo(Video element, SqlSessionTemplate ss) {
 		return ss.insert("curriculumMapper.insertVideo", element);
+	}
+		
+	public int deleteCount(WishList wl, SqlSessionTemplate ss) {
+		return ss.delete("lessonMapper.deleteCount",wl);
+	}
+
+	public int selectWL(WishList wl, SqlSessionTemplate ss) {
+		int result = ss.selectOne("lessonMapper.selectWL",wl);
+			System.out.println("daoWl : " + result);
+		return result;
 	}
 }
