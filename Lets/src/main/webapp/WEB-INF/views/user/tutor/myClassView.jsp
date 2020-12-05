@@ -33,7 +33,8 @@
     	height: 200px; 
     	width: 580px; 
     	text-align: center;
-    	margin-bottom:10px}
+    	margin-bottom:10px;
+    	border-radius:5px}
     .totalSalary{
     	background-color: rgb(45, 48, 186); 
     	margin-left:15px ; 
@@ -41,7 +42,8 @@
     	height: 200px;
     	width: 580px;
     	box-sizing: border-box;
-    	margin-bottom:10px}  
+    	margin-bottom:10px;
+    	border-radius:5px}  
     .classSalary div {float: left; text-align:center}
     .btn-group-sm >.btn, .btn-sm {
     padding: .25rem .5rem;
@@ -56,8 +58,8 @@
     #deliveryRe tr{
         height: 35px;
     }
-    #titleName th{font-size:18px}
-    #titleName tr{background:lightgray}
+    .titleName th{font-size:18px}
+    .titleName tr{background:lightgray}
     #pagination >li a{text-decoration:none}
 </style>
 </head>
@@ -74,205 +76,230 @@
         <p id="smTitle" style="color: gray;">승인 완료된 클래스 <span style="font-size: 12px;color: rgb(45, 48, 186);float: right;">**온라인 클래스인 경우에만 클래스 종료 신청이 가능합니다.</span></p>
         <table style="text-align: center;" id="classTable" class="table table-bordered table-sm">
             <!-- for문 -->
-	            <tr id="titleName" style="background-color:rgb(243, 243, 243)">
+            <thead>
+	            <tr class="titleName" style="background-color:rgb(243, 243, 243)">
 	            	<th>수업제목</th>
 	            	<th>승인날짜</th>
 	            	<th>수업유형</th>
 	            	<th>수업종료신청</th>
 	            </tr>
-            <c:forEach var="al" items="${aLlist}" varStatus="del">
-				<!-- 삭제에 필요(인덱스) -->  
-       			<input type="hidden" id="deleteLes${del.index }" value="${al.lessonNo}">
-	            <tr>
-	                <td style="width: 550px;">${al.lessonTitle }</td>
-	                <td style="width: 150px;">${al.approveDate }</td>
-	                <td style="width: 150px;">${al.lessonType }</td>
-	                <td id="lessonTp" style="width: 150px;">
-	                <c:choose>
-	                	<c:when test="${al.lessonType eq '온라인' }">
-	                		<c:choose>
-	                		<c:when test="${al.status eq 'Y' }">
-	                    		<button class="genric-btn primary-border btn-sm" 
-	                    		id="deleteBtn${del.index }" style="font-size: 13px;">클래스 종료 신청</button>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<span style="font-size:12px">종료신청 완료</span>	                		
-	                		</c:otherwise>
-	                		</c:choose>
-	                	</c:when>
-	                	<c:when test="${al.lessonType eq '대면' }">
-	                		<span style="font-size:12px">종료신청 불가</span>
-	                	</c:when>
-	                </c:choose>
-	                </td>
-	            </tr>
-     			
-		        <script>
-		        	$(function(){
-		        		$("#deleteBtn${del.index }").click(function(){
-		        			
-		        			$.ajax({
-		        					url:"deleteLesson.tl",
-		        					data:{
-		        						lno:$("#deleteLes${del.index }").val()
-		        					},
-		        					success:function(result){
-		        						
-		        						if(result == "success"){
-		        							var result = "";
-		        							
-		        							result += '<span style="font-size:12px" id="finish">'+'종료신청 완료'+'</span>'
-			        						//console.log("ajax통신성공");
-			        						alert("삭제요청되었습니다");
-			        						$("#deleteBtn${del.index }").hide();
-			        						$("#lessonTp").html(result); 
-		        							
-		        						} else {
-		        							alert("삭제 실패")
-		        						}
-		        					},error:function(){
-		        						alert("삭제요청실패");
-		        						//console.log("ajax통신실패")
-		        					}
-		        			})
-		        		})
-		        	})
-		        </script>
-            </c:forEach>
-            
+	        </thead>
+	        <tbody>
+            <c:choose>
+            	<c:when test="${empty aLlist }">
+            		<tr>
+                		<td colspan="4" align="center">승인된 수업이 없습니다.</td>
+                	</tr>
+            	</c:when>
+            	<c:otherwise>
+		            	<c:forEach var="al" items="${aLlist}" varStatus="del">
+							<!-- 삭제에 필요(인덱스) -->  
+			       			<input type="hidden" id="deleteLes${del.index }" value="${al.lessonNo}">
+				            <tr>
+				                <td style="width: 550px;">${al.lessonTitle }</td>
+				                <td style="width: 150px;">${al.approveDate }</td>
+				                <td style="width: 150px;">${al.lessonType }</td>
+				                <td id="lessonTp${del.index }" style="width: 150px;">
+				                <c:choose>
+				                	<c:when test="${al.lessonType eq '온라인' }">
+				                		<c:choose>
+				                		<c:when test="${al.status eq 'Y' }">
+				                    		<button class="genric-btn primary-border btn-sm" 
+				                    		id="deleteBtn${del.index }" style="font-size: 13px;">클래스 종료 신청</button>
+				                		</c:when>
+				                		<c:otherwise>
+				                			<span style="font-size:12px">종료신청 완료</span>	                		
+				                		</c:otherwise>
+				                		</c:choose>
+				                	</c:when>
+				                	<c:when test="${al.lessonType eq '대면' }">
+				                		<span style="font-size:12px">종료신청 불가</span>
+				                	</c:when>
+				                </c:choose>
+				                </td>
+				            </tr>
+		     		
+				        <script>
+				        	$(function(){
+				        		$("#deleteBtn${del.index }").click(function(){
+				        			
+				        			$.ajax({
+				        					url:"deleteLesson.tl",
+				        					data:{
+				        						lno:$("#deleteLes${del.index }").val()
+				        					},
+				        					success:function(result){
+				        						
+				        						if(result == "success"){
+				        							var result = "";
+				        							
+				        							result += '<span style="font-size:12px" id="finish">'+'종료신청 완료'+'</span>'
+					        						//console.log("ajax통신성공");
+					        						alert("삭제요청되었습니다");
+					        						$("#deleteBtn${del.index }").hide();
+					        						$("#lessonTp${del.index }").html(result); 
+				        							
+				        						} else {
+				        							alert("삭제 실패")
+				        						}
+				        					},error:function(){
+				        						alert("삭제요청실패");
+				        						//console.log("ajax통신실패")
+				        					}
+				        			})
+				        		})
+				        	})
+				        </script>
+		            </c:forEach>
+	           </c:otherwise>
+     		</c:choose>
+     		</tbody>
         </table>
         
         <!------------------------ 클래스 승인 상태 --------------------------------->
         <br><br>
         <p id="smTitle" style="color: gray;">클래스 승인 상태<span style="font-size: 12px;color: rgb(45, 48, 186);float: right;">**승인 보류인 경우, 수정 후 다시 클래스 신청이 가능합니다.</span></p>
         <table style="text-align: center;" class="table table-bordered table-sm">
-        		<tr id="titleName" style="background-color:rgb(243, 243, 243)">
+	        <thead>
+	       		<tr class="titleName" style="background-color:rgb(243, 243, 243)">
 	            	<th style="width: 550px;">수업제목</th>
 	            	<th style="width: 150px;">승인날짜</th>
 	            	<th style="width: 150px;">승인유형</th>
 	            	<th style="width: 150px;">수정/삭제</th>
 	            </tr>
-            <c:forEach var="sl" items="${sLlist }" varStatus="slModal">
-            <input type="hidden" id="lno${slModal.index }" name="lno" value="${sl.lessonNo }">
-	            <tr>
-	                <td>${sl.lessonTitle}</td>
-	                <td>${sl.approveDate}</td>
-	                <td>
-	                    <c:choose>
-	                    	<c:when test="${sl.lessonStatus eq '거절'}">
-	                    		<a type="button" class="genric-btn danger-border btn-sm" data-toggle="modal" 
-                    			data-target="#R_reason" id="r_reason${slModal.index}">승인거부</a>
-	                    	</c:when>
-	                    	<c:when test="${sl.lessonStatus eq '보류'}">
-	                    		<c:choose>
-		                    		<c:when test="${empty sl.holdReason}">
-			                    		<div>검토중</div>
+		    </thead>
+		    <tbody>
+		    <c:choose>
+            	<c:when test="${empty aLlist }">
+            		<tr>
+                		<td colspan="4" align="center">등록된 수업이 없습니다.</td>
+                	</tr>
+            	</c:when>
+            	<c:otherwise>
+		            <c:forEach var="sl" items="${sLlist }" varStatus="slModal">
+		            <input type="hidden" id="lno${slModal.index }" name="lno" value="${sl.lessonNo }">
+			            <tr>
+			                <td>${sl.lessonTitle}</td>
+			                <td>${sl.approveDate}</td>
+			                <td>
+			                    <c:choose>
+			                    	<c:when test="${sl.lessonStatus eq '거절'}">
+			                    		<a type="button" class="genric-btn danger-border btn-sm" data-toggle="modal" 
+		                    			data-target="#R_reason" id="r_reason${slModal.index}">승인거부</a>
+			                    	</c:when>
+			                    	<c:when test="${sl.lessonStatus eq '보류'}">
+			                    		<c:choose>
+				                    		<c:when test="${empty sl.holdReason}">
+					                    		<div>검토중</div>
+					                    	</c:when>
+					                    	<c:otherwise>
+					                    		<a type="button" class="genric-btn primary-border btn-sm" data-toggle="modal" 
+			                    				data-target="#H_reason" id="h_reason${slModal.index}">승인보류</a>
+					                    	</c:otherwise>
+				                    	</c:choose>
+				                    </c:when>
+			                    </c:choose>
+			                </td>
+			                <td>
+			                    <c:choose>
+			                    	<c:when test="${sl.lessonStatus eq '보류' }">
+				                    	<c:if test="${!empty sl.holdReason}">
+				                    		<button class="genric-btn primary btn-sm" style="font-size: 13px;" onclick="">수정</button>
+			                    			<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }">삭제</button>
+				                    	</c:if>
+			                    	</c:when>
+			                    	<c:when test="${sl.lessonStatus eq '거절'}">
+			                    		<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }">삭제</button>
 			                    	</c:when>
 			                    	<c:otherwise>
-			                    		<a type="button" class="genric-btn primary-border btn-sm" data-toggle="modal" 
-	                    				data-target="#H_reason" id="h_reason${slModal.index}">승인보류</a>
+			                    	
 			                    	</c:otherwise>
-		                    	</c:choose>
-		                    </c:when>
-	                    </c:choose>
-	                </td>
-	                <td>
-	                    <c:choose>
-	                    	<c:when test="${sl.lessonStatus eq '보류' }">
-		                    	<c:if test="${!empty sl.holdReason}">
-		                    		<button class="genric-btn primary btn-sm" style="font-size: 13px;" onclick="">수정</button>
-	                    			<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }">삭제</button>
-		                    	</c:if>
-	                    	</c:when>
-	                    	<c:when test="${sl.lessonStatus eq '거절'}">
-	                    		<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }">삭제</button>
-	                    	</c:when>
-	                    	<c:otherwise>
-	                    	
-	                    	</c:otherwise>
-	                    </c:choose>
-	                </td> 
-	            </tr>
-	            
-	            <!-- 승인보류시 떠야할 모달 -->
-			    <div class="modal fade" id="H_reason${slModal.index }">
-			        <div class="modal-dialog ">
-			            <div class="modal-content">
-			                <div class="modal-outer" style="background-color:rgba(212, 209, 209, 0.411); padding: 20px;">
-			                    <!-- Modal Body -->
-			                    <div class="modal-body" style=" background-color: white;  height: 300px;" >
-			                        <button type="button" class="close" data-dismiss="modal" >&times;</button> 
-			                        <h4 style="text-align: center;">클래스 보류 사유</h4>
-			                        <br><br>
-			                        <p>${sl.holdReason}</p>
-			                    </div>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			
-			    <!-- 승인거부 시 뜨는 모달 -->
-			    <div class="modal fade" id="R_reason${slModal.index }">
-			        <div class="modal-dialog ">
-			            <div class="modal-content">
-			                <div class="modal-outer" style="background-color: rgba(212, 209, 209, 0.411); padding: 20px;">
-			                    <!-- Modal Body -->
-			                    <div class="modal-body" style=" background-color: white;  height: 300px;" >
-			                        
-			                        <button type="button" class="close" data-dismiss="modal">&times;</button> 
-			                        <h4 style="text-align: center;">클래스 거부 사유</h4>
-			                        <br><br>
-			                        <p>${sl.refuseReason }</p>
-			                    </div>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-            
-	            <!-- 보류, 거절 hover 시 뜰 모달  -->
-		        <script>
-		            $("#r_reason${slModal.index }").mouseover(function(){
-		            	
-		                $("#R_reason${slModal.index }").modal({
-		                    show:true
-		                })
-		            })
-		
-		            $("#h_reason${slModal.index }").mouseover(function(){
-		                $("#H_reason${slModal.index }").modal({
-		                    show:true
-		                })
-		            })
+			                    </c:choose>
+			                </td> 
+			            </tr>
+			            
+			            <!-- 승인보류시 떠야할 모달 -->
+					    <div class="modal fade" id="H_reason${slModal.index }">
+					        <div class="modal-dialog ">
+					            <div class="modal-content">
+					                <div class="modal-outer" style="background-color:rgba(212, 209, 209, 0.411); padding: 20px;">
+					                    <!-- Modal Body -->
+					                    <div class="modal-body" style=" background-color: white;  height: 300px;" >
+					                        <button type="button" class="close" data-dismiss="modal" >&times;</button> 
+					                        <h4 style="text-align: center;">클래스 보류 사유</h4>
+					                        <br><br>
+					                        <p>${sl.holdReason}</p>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+					    </div>
+					
+					    <!-- 승인거부 시 뜨는 모달 -->
+					    <div class="modal fade" id="R_reason${slModal.index }">
+					        <div class="modal-dialog ">
+					            <div class="modal-content">
+					                <div class="modal-outer" style="background-color: rgba(212, 209, 209, 0.411); padding: 20px;">
+					                    <!-- Modal Body -->
+					                    <div class="modal-body" style=" background-color: white;  height: 300px;" >
+					                        
+					                        <button type="button" class="close" data-dismiss="modal">&times;</button> 
+					                        <h4 style="text-align: center;">클래스 거부 사유</h4>
+					                        <br><br>
+					                        <p>${sl.refuseReason }</p>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+					    </div>
+		            
+			            <!-- 보류, 거절 hover 시 뜰 모달  -->
+				        <script>
+				            $("#r_reason${slModal.index }").mouseover(function(){
+				            	
+				                $("#R_reason${slModal.index }").modal({
+				                    show:true
+				                })
+				            })
 				
-		        </script>
-		        <script>
-		        	$(function(){
-		        		$("#lessonDelBtn${slModal.index }").click(function(){
-		        			
-		        			$.ajax({
-		        					url:"deleteLesson.tl",
-		        					data:{
-		        						lno:$("#lno${slModal.index }").val()
-		        					},
-		        					success:function(result){
-		        						
-		        						if(result == "success"){
-		        							console.log("성공");
-		        							$("#lessonDelBtn${slModal.index }").parents("tr").remove();
-		        							$("#R_reason${slModal.index }").remove();
-		        							$("#H_reason${slModal.index }").remove();
-		        						} else {
-		        							alert("삭제 실패")
-		        						}
-		        					},error:function(){
-		        						alert("삭제요청실패");
-		        						//console.log("ajax통신실패")
-		        					}
-		        			})
-		        		})
-		        	})
-		        </script>
-        	</c:forEach>
+				            $("#h_reason${slModal.index }").mouseover(function(){
+				                $("#H_reason${slModal.index }").modal({
+				                    show:true
+				                })
+				            })
+						
+				        </script>
+				        <script>
+				        	$(function(){
+				        		$("#lessonDelBtn${slModal.index }").click(function(){
+				        			
+				        			$.ajax({
+				        					url:"deleteLesson.tl",
+				        					data:{
+				        						lno:$("#lno${slModal.index }").val()
+				        					},
+				        					success:function(result){
+				        						
+				        						if(result == "success"){
+				        							console.log("성공");
+				        							$("#lessonDelBtn${slModal.index }").parents("tr").remove();
+				        							$("#R_reason${slModal.index }").remove();
+				        							$("#H_reason${slModal.index }").remove();
+				        						} else {
+				        							alert("삭제 실패")
+				        						}
+				        					},error:function(){
+				        						alert("삭제요청실패");
+				        						//console.log("ajax통신실패")
+				        					}
+				        			})
+				        		})
+				        	})
+				        </script>
+		        	</c:forEach>
+	        	</c:otherwise>
+	        	</c:choose>
+	        </tbody>
         </table>
 	            
 
@@ -283,126 +310,137 @@
         
         <div id="prepareTable">
 	        <table style="text-align: center;" id="lessonPreTable" class="table table-bordered table-sm">
-	        	<tr id="titleName" style="background-color:rgb(243, 243, 243)">
+	        <thead>
+	        	<tr class="titleName" style="background-color:rgb(243, 243, 243)">
 	            	<th style="width: 100px;">회원이름</th>
 	            	<th style="width: 550px;">수업제목</th>
 	            	<th style="width: 200px;">승인날짜</th>
 	            	<th style="width: 150px;">배송유형</th>
 	            </tr>
-	           
-	            <c:forEach var="mp" items="${mpList}" varStatus="mtModal">
-	            
-		            <tr>
-		                <td>${mp.memName}</td>
-		                <td><a href="">${mp.lessonTitle }</a></td>
-		                <td>신청일 ${mp.paymentDate }</td>
-		                <td>
-		                <c:choose>
-		                	<c:when test="${mp.delStatus eq '배송전'}">
-		                		<button data-toggle="modal" data-target="#deliveryR${mtModal.index }" class="genric-btn primary btn-sm" 
-	                    		style="font-size: 13px;" id="deliveryReady">준비물 보내기</button>
-		                	</c:when>
-		                	<c:when test="${mp.delStatus eq '배송중'}">
-		                    <button data-toggle="modal" class="genric-btn primary-border btn-sm" 
-		                    data-target="#deliveryF${mtModal.index }" style="font-size: 13px;" id="delStatus">배송중</button>
-		                	</c:when>
-		                	<c:otherwise>
-		                		<button data-toggle="modal" class="genric-btn primary-border btn-sm" 
-	                    		data-target="#deliveryF${mtModal.index }" style="font-size: 13px;" id="deliveryOk">배송완료</button>
-		                	</c:otherwise>
-		                </c:choose>
-		                </td>
-		            </tr>
-		            
-		            <!-- 준비물 보내기 클릭 시 뜨는 모달 -->
-				    <div class="modal fade" id="deliveryR${mtModal.index }">
-				        <div class="modal-dialog">
-				            <div class="modal-content">
-				            <!-- Modal Header -->
-				            <div class="modal-header">
-				                <h4 class="modal-title">준비물 보내기</h4>
-				                <button type="button" class="close" data-dismiss="modal">&times;</button> 
-				            </div>
-				            <form action="delivery.tm" method="post">
-				                <!-- Modal Body -->
-				                <div class="modal-body">
-				                    <label for="userId" class="mr-sm-2">${mp.memName } 회원님께 보내실 클래스의 준비물 입니다.</label><br>
-				                    
-				                    <div class="delivery_go" >
-				                    <input type="hidden" id="memPayNo" name="memPayNo" value="${mp.memPayNo }">
-				                    <dl>
-				                    	<dd>
-					                    	<c:forEach var="prePare" items="${mp.lessonPrepare }" varStatus="preList">
-					                            <li>
-					                            	&nbsp;${prePare}
-					                            </li>
-					                        </c:forEach>
-				                    	</dd>
-				                    </dl>
-				                    </div>
-				                    <hr>
-				                     <dl>
-				                    	<dd>택배사</dd>
-				                    	<dd><input type="text" id="delName${preList.index }"  name="delName" value=""></dd>
-				                    	<dd>운송장번호</dd>
-				                    	<dd><input type="text" id="delNo${preList.index }" name="delNo" value=""></dd>
-				                    </dl>
-				                </div>
-				                
-				                <!-- Modal footer -->
-				                <div class="modal-footer">
-				                    <button type="submit" class="genric-btn primary-border btn-sm" >배송완료</button>
-				                    <button type="button" class="genric-btn danger-border btn-sm" data-dismiss="modal">취소</button>
-				                </div>
-				            </form>
-				            </div>
-				        </div>
-				    </div>
-				   
-				    <!-- 배송중, 배송완료 하면 보이는 모달 -->
-				    <div class="modal fade" id="deliveryF${mtModal.index }">
-				        <div class="modal-dialog ">
-				            <div class="modal-content">
-				            <!-- Modal Header -->
-				            <div class="modal-header">
-				                <h4 class="modal-title">배송</h4>
-				                <button type="button" class="close" data-dismiss="modal">&times;</button> 
-				            </div>
-				           	<form action="" method="post">
-				                <!-- Modal Body -->
-				                <div class="modal-body">
-				                    <label for="userId" class="mr-sm-2">${mp.memName} 회원님께 보낸 클래스의 준비물</label><br>
-				                    
-				                    <div class="delivery_ing">
-				                        <ul style=" margin: 10px;" >
-				                        <c:forEach var="pre" items="${mp.lessonPrepare }">
-				                            <li  style="list-style-type:square">${pre}</li>
-				                        </c:forEach>
-				                        </ul>
-				                    </div>
-				                    <hr>
-				                     <dl>
-				                    	<dd style="width:300px; height: 30px;">택배사 : ${mp.delName }</dd>
-				                    	<dd style="width:300px; height: 30px;">운송장번호 : ${mp.delNo }</dd>
-				                    </dl>
-				                </div>
-				            </form>
-				            </div>
-				        </div>
-				    </div>
-	            </c:forEach>
+	        </thead>
+	        <tbody>
+	         	<c:choose>
+	            	<c:when test="${empty aLlist }">
+	            		<tr>
+	                		<td colspan="4" align="center">준비물 신청한 회원이 없습니다.</td>
+	                	</tr>
+	            	</c:when>
+            		<c:otherwise>   
+			            <c:forEach var="mp" items="${mpList}" varStatus="mtModal">
+			            
+				            <tr>
+				                <td>${mp.memName}</td>
+				                <td><a href="">${mp.lessonTitle }</a></td>
+				                <td>신청일 ${mp.paymentDate }</td>
+				                <td>
+				                <c:choose>
+				                	<c:when test="${mp.delStatus eq '배송전'}">
+				                		<button data-toggle="modal" data-target="#deliveryR${mtModal.index }" class="genric-btn primary btn-sm" 
+			                    		style="font-size: 13px;" id="deliveryReady">준비물 보내기</button>
+				                	</c:when>
+				                	<c:when test="${mp.delStatus eq '배송중'}">
+				                    <button data-toggle="modal" class="genric-btn primary-border btn-sm" 
+				                    data-target="#deliveryF${mtModal.index }" style="font-size: 13px;" id="delStatus">배송중</button>
+				                	</c:when>
+				                	<c:otherwise>
+				                		<button data-toggle="modal" class="genric-btn primary-border btn-sm" 
+			                    		data-target="#deliveryF${mtModal.index }" style="font-size: 13px;" id="deliveryOk">배송완료</button>
+				                	</c:otherwise>
+				                </c:choose>
+				                </td>
+				            </tr>
+				            
+				            <!-- 준비물 보내기 클릭 시 뜨는 모달 -->
+						    <div class="modal fade" id="deliveryR${mtModal.index }">
+						        <div class="modal-dialog">
+						            <div class="modal-content">
+						            <!-- Modal Header -->
+						            <div class="modal-header">
+						                <h4 class="modal-title">준비물 보내기</h4>
+						                <button type="button" class="close" data-dismiss="modal">&times;</button> 
+						            </div>
+						            <form action="delivery.tm" method="post">
+						                <!-- Modal Body -->
+						                <div class="modal-body">
+						                    <label for="userId" class="mr-sm-2">${mp.memName } 회원님께 보내실 클래스의 준비물 입니다.</label><br>
+						                    
+						                    <div class="delivery_go" >
+						                    <input type="hidden" id="memPayNo" name="memPayNo" value="${mp.memPayNo }">
+						                    <dl>
+						                    	<dd>
+							                    	<c:forEach var="prePare" items="${mp.lessonPrepare }" varStatus="preList">
+							                            <li>
+							                            	&nbsp;${prePare}
+							                            </li>
+							                        </c:forEach>
+						                    	</dd>
+						                    </dl>
+						                    </div>
+						                    <hr>
+						                     <dl>
+						                    	<dd>택배사</dd>
+						                    	<dd><input type="text" id="delName${preList.index }"  name="delName" value=""></dd>
+						                    	<dd>운송장번호</dd>
+						                    	<dd><input type="text" id="delNo${preList.index }" name="delNo" value=""></dd>
+						                    </dl>
+						                </div>
+						                
+						                <!-- Modal footer -->
+						                <div class="modal-footer">
+						                    <button type="submit" class="genric-btn primary-border btn-sm" >배송완료</button>
+						                    <button type="button" class="genric-btn danger-border btn-sm" data-dismiss="modal">취소</button>
+						                </div>
+						            </form>
+						            </div>
+						        </div>
+						    </div>
+						   
+						    <!-- 배송중, 배송완료 하면 보이는 모달 -->
+						    <div class="modal fade" id="deliveryF${mtModal.index }">
+						        <div class="modal-dialog ">
+						            <div class="modal-content">
+						            <!-- Modal Header -->
+						            <div class="modal-header">
+						                <h4 class="modal-title">배송</h4>
+						                <button type="button" class="close" data-dismiss="modal">&times;</button> 
+						            </div>
+						           	<form action="" method="post">
+						                <!-- Modal Body -->
+						                <div class="modal-body">
+						                    <label for="userId" class="mr-sm-2">${mp.memName} 회원님께 보낸 클래스의 준비물</label><br>
+						                    
+						                    <div class="delivery_ing">
+						                        <ul style=" margin: 10px;" >
+						                        <c:forEach var="pre" items="${mp.lessonPrepare }">
+						                            <li  style="list-style-type:square">${pre}</li>
+						                        </c:forEach>
+						                        </ul>
+						                    </div>
+						                    <hr>
+						                     <dl>
+						                    	<dd style="width:300px; height: 30px;">택배사 : ${mp.delName }</dd>
+						                    	<dd style="width:300px; height: 30px;">운송장번호 : ${mp.delNo }</dd>
+						                    </dl>
+						                </div>
+						            </form>
+						            </div>
+						        </div>
+						    </div>
+			            </c:forEach>
+	            	</c:otherwise>
+	            </c:choose>
+	            </tbody>
 	        </table>
 	        
 	        <!--페이징-->
             <div id="pagingArea" style="margin-left: 35%;">
-	        
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${pi.currentPage eq 1}">
-                    		<li class="page-item disabled"><a class="page-link" >Previous</a></li>
+                    		<li class="page-item"><a class="page-link">Previous</a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link">Previous</a></li>
+                    		<li class="page-item"><a class="page-link" >Previous</a></li>
                     	</c:otherwise>
                     </c:choose>
                     <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
@@ -411,7 +449,7 @@
 		                    	<li class="page-item"><a class="page-link" >${ p }</a></li>                    		
                     		</c:when>
                     		<c:otherwise>
-                    			<li class="page-item disabled"><a class="page-link">${ p }</a></li> 
+                    			<li class="page-item"><a class="page-link">${ p }</a></li> 
                     		</c:otherwise>
                     	</c:choose>
                     </c:forEach>
@@ -420,7 +458,7 @@
                     		<li class="page-item disabled" ><a class="page-link">Next</a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link">Next</a></li>
+                    		<li class="page-item"><a class="page-link" >Next</a></li>
                     	</c:otherwise>
                 	</c:choose>
                 </ul>
@@ -429,27 +467,23 @@
        
        <script>
        	$(function(){
-  			$(".page-link").click(function(){
-  				var currentPage = $(this).text();
-  				if(currentPage == 'Previous'){
-  					currentPage = ${pi.currentPage -1};
-  					} else if(currentPage == 'Next'){
-  					currentPage = ${pi.currentPage +1};
-  					} 
+       		$(document).on("click", ".page-link", function(){
+       			var currentPage = $(this).text();
+       			
   				$.ajax({
   					url:"paging.pt",
   					data:{currentPage:currentPage},
   					success:function(hmap){
-  						console.log(hmap);
   						var value = "";
   						var result = "";
-  								value +='<tr id="titleName" style="background-color:rgb(243, 243, 243)">' ; 
+  								value +='<tr class="titleName" style="background-color:rgb(243, 243, 243)">' ; 
   								value +='<th style="width: 100px;">'+'회원이름'+'</th>' ;
   								value +='<th style="width: 550px;">'+'수업제목'+'</th>';
   								value +='<th style="width: 200px;">'+'승인날짜'+'</th>';
   								value +='<th style="width: 150px;">'+'배송유형'+'</th>';
   								value +='</tr>' ;
   						$.each(hmap.list, function(i,memPay){
+  							console.log(hmap.list.memPay);
 	  							value += 
   		                          	'<tr>' +
   		                                 '<td>' + memPay.memName + '</td>' +
@@ -468,23 +502,23 @@
   		                        	 $("#lessonPreTable").html(value);
   						
   						$.each(hmap.pi, function(i,pageInfo){
-                            
+                            console.log(hmap.pi.currentPage);
                             result += '<ul class="pagination">';
-                                  if(pageInfo.currentPage != 1) {
-                                     result += '<li class="page-item">' + '<a class="page-link">' + Previous + '</a>'+'</li>';
+                                  if(hmap.pi.currentPage != 1) {
+                                     result += '<li class="page-item disabled">' + '<a class="page-link">' + Previous + '</a>'+'</li>' ;
                                   }
                                   else{
-                                     result += '<li class="page-item">' + '<a class="page-link">' + Previous + '</a>'+'</li>' ;
+                                     result += '<li class="page-item">' + '<a class="page-link">' + Previous + '</a>'+'</li>';
                                      
                                   }
-                                  for(var p=pageInfo.startPage; p<pageInfo.endPage; p++) {
-                                     if(pageInfo.currentPage != p){
+                                  for(var p=hmap.pi.startPage; p<hmap.pi.endPage; p++) {
+                                     if(hmap.pi.currentPage != p){
                                         result += '<li class="page-item">' + '<a class="page-link">'+ p +'</a>'+'</li>'; 
                                      }else{
                                         result += '<li class="page-item disabled">' + '<a class="page-link">' + p +'</a>'+'</li>';
                                      }
                                   }
-                                    if(pageInfo.currentPage == pageInfo.maxPage){
+                                    if(hmap.pi.currentPage == hmap.pi.maxPage){
                                        result += '<li class="page-item disabled">' + '<a class="page-link">'+ Next  + '</a>' + '</li>';
                                     }else{
                                        result += '<li class="page-item">' + '<a class="page-link" >' + Next + '</a>'+'</li>';
@@ -499,7 +533,7 @@
   					}
   				})
   			})
-       	})
+       	});
        </script>
       
         <!-- 수업성과 & 정산서 -->
@@ -541,14 +575,17 @@
 	            </div>
 	       
 	        <!-- 정산받는 버튼 -->
-	        <span style="float: right;"><button data-toggle="modal" data-target="#account" class="genric-btn primary-border btn-sm" >정산받기</button></span>
+	        <span style="float: right;"><button data-toggle="modal" data-target="#account" class="genric-btn primary-border btn-sm" onclick="salarySave();">정산받기</button></span>
 	        </div>
         </div>
-        <br><br><br>
-        
-        <c:forEach var="ms" items="${ msList}">
+        <br><br>
+        <c:forEach var="ms" items="${ msList}" varStatus="chk">
         	<div class="classSalary" >
 	            <div class="outCome">
+                    <div class="confirm-checkbox" style="margin-left:20px;margin-top:20px">
+	                	<input type="checkbox" id="confirm-checkbox${chk.index }" name="lno" value="${ms.lessonNo }">
+	                	<label for="confirm-checkbox${chk.index }"></label>
+	                </div>
                     <br>
                     <p id="classTitle" name="classTitle" style="font-size:20px;">${ms.lessonTitle }</p>
                     <br>
@@ -571,23 +608,21 @@
                     <br><br>
                     <table id="salaryTable" align="center">
                     	
-	                <div>
-	                	<input type="checkbox" id="confirm-checkbox" name=""  >
-	                </div>
                         <tr>
                             <td>&nbsp;</td>
                             <td style="width: 200px; height: 25px;">총 클래스 금액</td>
                             <th>${ms.payTotal }</th>
                         </tr>
                         <tr>
-                            <td>-&nbsp;</td>
-                            <td>레츠 수수료(${ms.fee }%)</td>
-                            <th>${ms.totalFee }</th>
-                        </tr>
-                        <tr>
                             <td>X&nbsp;</td>
                             <td>수강인원</td>
                             <th>${ms.studentCount }</th>
+                        </tr>
+                        
+                        <tr>
+                            <td>-&nbsp;</td>
+                            <td>레츠 수수료(${ms.fee }%)</td>
+                            <th>${ms.totalFee }</th>
                         </tr>
                         <tr>
                             <th colspan="3">-------------------------------------------------</th>
@@ -600,7 +635,7 @@
                     </table>
                     <br><br>
                 </div>
-                <input type="hidden" value="${ms.lessonNo }">
+                
             </div>
         </c:forEach>
         <br clear="both">
@@ -617,24 +652,32 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button> 
             </div>
 
-            <form action="/accountSave.tc" method="post">
+            <form action="insertSalary.ts" method="post">
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <table align="center">
+                    <input type="hidden" name="lsno" id="lsno" value="">
+                    	<tr>
+                    		<td>클래스제목</td>
+                    		<td></td>
+                    	</tr>
                         <tr>
-                            <td style="width: 80px;">은행이름</td>
-                            <td><input type="text" id="bankName" name="bankName"></td>
+                            <td style="width: 100x;">은행이름</td>
+                            <td><input type="text" id="bankName" name="salaryList[0].bankName"></td>
                         </tr>
                         <tr>
                             <td>계좌번호</td>
-                            <td><input type="text" id="accountNo" name="accountNo" placeholder="(-) 포함 해서 적어주세요"></td>
+                            <td><input type="text" id="accountNo" name="salaryList[0].accountNo" placeholder="(-) 포함 해서 적어주세요"></td>
+                        </tr>
+                        <tr>
+                            <td id="memo"style="font-size:12px;" colspan="2"></td>
                         </tr>
                     </table> 
                 </div>
                 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="genric-btn primary-border btn-sm" id="accountSa">저장</button>
+                    <button type="submit" class="genric-btn primary-border btn-sm"  >저장</button>
                     <button type="button" class="genric-btn danger-border btn-sm" data-dismiss="modal">취소</button>
                 </div>
             </form>
@@ -642,6 +685,35 @@
         </div>
     </div>
     <br><br>
+     <script>
+        	function salarySave() {
+        		var selected = new Array();
+        		$("input[name=lno]:checked").each(function(){
+        			selected.push(this.value);
+        		});
+        		
+        		console.log(selected);
+        		/*
+        		var str ="";
+        		for(var i=0; i<selected.length; i++){
+        			str += selected[i];
+        			
+        			if(i == selected.length-1){
+        				str[i] += selected[i];
+        			}else{
+        				str[i] += selected[i] + ",";
+        			}
+        		console.log(str + "이거");
+        		console.log($("#lessonNo").val(str[i]));
+        		}
+        		console.log(str);
+        		*/
+        		$("#lsno").val(selected);
+        		console.log(selected);
+        		
+        	}
+        </script>
+    
     <!-- 정산 쪽 셀렉박스 -->
         <script>
             $(function(){
@@ -656,8 +728,9 @@
                     }   
                 });
             });
+            
         </script>
-        
+       
         <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

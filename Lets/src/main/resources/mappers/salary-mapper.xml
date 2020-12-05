@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="salaryMapper">
+
+<resultMap type="Salary" id="salaryResultSet">
+	<id column="lesson_no" property="lessonNo" />
+	<result column="fee" property="fee" />
+	<result column="salary_total" property="salaryTotal"/>
+	<result column="account" property="account"/>
+	<result column="status" property="status"/>
+	<result column="salary_date" property="salaryDate"/>
+</resultMap>
+
+<insert id="insertSalary" parameterType="Salary">
+	insert
+	   into salary
+	   (
+	      lesson_no
+	    , account
+	    )
+	    values
+	    (
+	      #{lessonNo} 
+	    , #{account}
+	    )
+</insert>
+
+	
+	
+</mapper>

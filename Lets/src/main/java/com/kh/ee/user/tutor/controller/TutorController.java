@@ -26,6 +26,8 @@ import com.kh.ee.user.memPay.model.service.MemPayService;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.service.MemberService;
 import com.kh.ee.user.member.model.vo.Member;
+import com.kh.ee.user.salary.model.service.SalaryService;
+import com.kh.ee.user.salary.model.vo.Salary;
 import com.kh.ee.user.tutor.model.service.TutorService;
 import com.kh.ee.user.tutor.model.vo.Tutor;
 
@@ -39,6 +41,8 @@ public class TutorController {
 	private MemPayService memPayService;
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private SalaryService salService;
 	
 	@Autowired
 	private TutorService tutorService;
@@ -209,10 +213,25 @@ public class TutorController {
 		HashMap<String, Object> hmap = new HashMap<String,Object>();
 		hmap.put("pi",pi);
 		hmap.put("list", list);
-		
 		model.addAttribute("pi",pi);
-		
 		return new Gson().toJson(hmap);
+	}
+	
+	@RequestMapping("insertSalary.ts")
+	public String insertSalary(Salary s) {
+		ArrayList<Salary> salaryList = s.getSalaryList();
+		ArrayList<Integer> slno = s.getLsno();
+		
+		
+		for(int lessonNo :slno) {
+			s.setLessonNo(lessonNo);
+			for(Salary sal:salaryList) {
+				s.setAccount(sal.getBankName() +","+ sal.getAccountNo());
+			}
+			salService.insertSalary(s);
+		}
+		
+		return "redirect:tutorMyLesson.tm";
 	}
 	
 	
