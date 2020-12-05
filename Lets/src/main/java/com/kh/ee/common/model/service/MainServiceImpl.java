@@ -47,4 +47,14 @@ public class MainServiceImpl implements MainService{
 	public ArrayList<Lesson> newLessonList() {
 		return mDao.newLessonList(ss);
 	}
+
+	@Override
+	public ArrayList<Lesson> searchLessonList(String search) {
+		return mDao.searchLessonList(ss, search);
+	}
+
+	@Override
+	public ArrayList<Lesson> searchTutorList(String search) {
+		return mDao.searchTutorList(ss, search);
+	}
 }

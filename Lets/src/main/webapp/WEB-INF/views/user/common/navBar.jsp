@@ -152,8 +152,8 @@
 							</div>
 							<!-- Header-btn -->
 							<div class="header-search d-none d-lg-block">
-								<form action="#" class="form-box f-right ">
-									<input type="text" name="Search" placeholder="무엇을 배우고 싶으세요??">
+								<form action="search.le" method="POST" class="form-box f-right ">
+									<input type="text" name="search" placeholder="무엇을 배우고 싶으세요??">
 									<div class="search-icon">
 										<i class="fas fa-search special-tag"></i>
 									</div>

@@ -34,4 +34,11 @@ public class MainDao {
 		return (ArrayList)ss.selectList("mainMapper.newLessonList");
 	}
 
+	public ArrayList<Lesson> searchLessonList(SqlSessionTemplate ss, String search) {
+		return (ArrayList)ss.selectList("mainMapper.searchLessonList", search);
+	}
+	
+	public ArrayList<Lesson> searchTutorList(SqlSessionTemplate ss, String search) {
+		return (ArrayList)ss.selectList("mainMapper.searchTutorList", search);
+	}
 }

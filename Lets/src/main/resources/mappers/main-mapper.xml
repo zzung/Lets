@@ -146,4 +146,29 @@
 					 where rownum <4
 					  order by approve_date desc]]> 
 </select>
+
+	<select id="searchLessonList" parameterType="string" resultMap="lessonResultSet">
+		select
+			   lesson_no
+			 , lesson_title
+			 , price
+			 , (select
+				       round((sum(star) / count(star)), 2) 
+				  from review r
+				  join lesson l using(lesson_no)
+				 where r.status = 'Y'
+				   and lesson_title like '%#{search}%') star
+		     , like_count
+		     , discount
+		     , approve_date
+		     , lesson_cover_img
+		     , pay_total
+		  from lesson l
+		 where lesson_title like '%#{search}%'
+		   and l.status = 'Y'
+	</select>
+	
+	<select id="searchTutorList" parameterType="string" resultMap="lessonResultSet">
+	
+	</select>
 </mapper>

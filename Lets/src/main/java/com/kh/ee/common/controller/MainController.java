@@ -36,4 +36,16 @@ public class MainController {
 		
 		return "mainPage";
 	}
+	
+	@RequestMapping("search.le")
+	public String searchForm(String search, Model model) {
+		
+		ArrayList<Lesson> lessonList = ms.searchLessonList(search);
+		ArrayList<Lesson> tutorList = ms.searchTutorList(search);
+		
+		model.addAttribute("lessonList", lessonList);
+		model.addAttribute("tutorList", tutorList);
+		
+		return "user/coomon/searchResultView";
+	}
 }

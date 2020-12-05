@@ -19,4 +19,7 @@ public interface MainService {
 
 	ArrayList<Lesson> newLessonList();
 
+	ArrayList<Lesson> searchLessonList(String search);
+	
+	ArrayList<Lesson> searchTutorList(String search);
 }
