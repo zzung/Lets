@@ -14,6 +14,7 @@
 	    height: 100%;
 	    background-color: white;
 	}
+	#curri_info>h1:hover{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -24,13 +25,13 @@
         </div>
 
         <div id="curri_info">
-            <h1>${ lesson.lessonTitle }</h1>
+            <h1 onclick="location.href='detailCurri.cr?lessonNo=${lesson.lessonNo}';">${ lesson.lessonTitle }</h1>
 
-            <span id="info">클래스 평가${ avgStar } </span>
+            <span id="info">클래스 평가 &nbsp;${ avgStar } </span>
 			
 			<c:forEach var="v" begin="1" end="5">
 				<c:choose>
-					<c:when test="${ v < avgStar }">
+					<c:when test="${ v <= avgStar }">
 						<span class="star">★</span>
 					</c:when>
 					<c:otherwise>

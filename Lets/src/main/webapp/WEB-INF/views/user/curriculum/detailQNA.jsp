@@ -299,18 +299,17 @@ div{
 	    
 	                        <div class="question_box">
 	        
-	                            <p class="black"></p>
+	                            <p class="black">${ qna.question }</p>
 	        
-	                            <span>${ qna.memNick } ${ qna.qEnrollDate }</span>
+	                            <span>${ qna.memNick } ${ qna.questionEnrollDate }</span>
 	    
 	                            <div class="enter">
 	    							
 	    							<c:if test="${ loginUser.memNo == qna.memNo }">
 		                                <span class="button" onclick="modify(${ status.count }${ status.index });">수정</span>
-		                                /
 		                                <span class="button" onclick="deleteQuestion(${ status.count }${ status.index });">삭제</span>
 	    	                        </c:if>
-	                                <c:if test="${ loginUser.memNo == qna.tutorNo }">
+	                                <c:if test="${ loginUser.memNo == qna.tutorNo && qna.answerStatus == 'N'}">
 	                                	<span class="button" onclick="reply(${ status.count }${ status.index });">답변</span>
 	                                </c:if>
 	                                
@@ -339,7 +338,7 @@ div{
 	
 	                </div>
 	
-					<c:if test="${ qna.aStatus == 'Y' }">
+					<c:if test="${ qna.answerStatus == 'Y' }">
 					
 		                <!-- 질문 박스 -->
 		                <div class="margin_box">
@@ -357,7 +356,7 @@ div{
 		        
 		                            <p class="black">${ qna.answer }</p>
 		        
-		                            <span>${ qna.tutorNick } ${ qna.aEnrollDate }</span>
+		                            <span>${ qna.tutorNick } ${ qna.answerEnrollDate }</span>
 		    
 		                            <div class="enter">
 		    
@@ -384,7 +383,7 @@ div{
 		    
 		                    </div>
 		                    
-		                    <form action="" method="POST" name="actionAnswer${ status.count }${ status.index +1 }">
+		                    <form action="" method="POST" id="actionAnswer${ status.count }${ status.index +1 }">
 		                    	<input type="hidden" name="qnaNo" value="${ qna.qnaNo }">
 		                    	<input type="hidden" name="lessonNo" value="${ lesson.lessonNo }">
 		                    	<input type="hidden" name="answer" value="">
@@ -440,7 +439,7 @@ div{
     
     function send(i) {
    		var column = $("#answer" + i).children().eq(1).text();
-		var text = $("#answer" + i).children().eq(0).text();
+		var text = $("#answer" + i).children().eq(0).val();
    		
    		if(column == "답장") {
    			$("#actionQuestion" + i).children().eq(2).attr("name", "answer").val(text);
@@ -452,7 +451,7 @@ div{
    	}
     
     function insertQ(){
-    	var text = $("#question_area").text();
+    	var text = $("#question_area").val()
 		
 		$("#qnaForm").children().eq(2).val(text);
 		
@@ -468,7 +467,7 @@ div{
     }
     
     function updateAnswer(i) {
-    	var text = $("#answer" + i).children().eq(2).text();
+    	var text = $("#answer" + i).children().eq(0).val();
     	
     	$("#actionAnswer" + i).children().eq(2).val(text);
     	$("#actionAnswer" + i).attr("action", "updateAnswer.cr").submit();

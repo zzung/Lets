@@ -17,4 +17,6 @@ public class MemVideo {
 	private int memNo;			// 회원 번호
 	private String status;		// 영상 시청 여부
 	
+	private int lessonNo;		// 레슨 번호
+	
 }
