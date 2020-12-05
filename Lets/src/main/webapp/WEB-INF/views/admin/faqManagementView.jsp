@@ -41,92 +41,25 @@
 					<table class="list-area" style="width:1030px;">
 						<tr>
 							<th width="50px" height="40px">번호</th>
-							<th width="90px">분류</th>
 							<th width="90px">유형</th>
+							<th width="90px">공개여부</th>
 							<th width="500px">제목</th>
 							<th width="120px">작성일</th>
-							<th width="120px">삭제여부</th>
 						</tr>
+						<c:forEach var="f" items="${list }" varStatus="status">
 						<tr>
-							<td height="40px">1</td>
-							<td>회원</td>
-							<td>회원</td>
-							<td>회원가입을 하면 할수 있는 것들은 무엇인가요?</td>
-							<td>2020-10-30</td>
-							<td>N</td>
+							<td height="40px">${status.count }</td>
+							<td>${f.faqCategory }</td>
+							<td>${f.faqStatus }</td>
+							<td>
+								<a href=".fa?faqNo=${faqNo eq 1}">
+									${f.faqTitle }
+								</a>
+							
+							</td>
+							<td>${f.enrollDate }</td>
 						</tr>
-						<tr>
-							<td height="40px">2</td>
-							<td>회원</td>
-							<td>클래스</td>
-							<td>회원은 클래스를 어떻게 신청하나요?</td>
-							<td>2020-10-30</td>
-							<td>N</td>
-						</tr>
-						<tr>
-							<td height="40px">3</td>
-							<td>회원</td>
-							<td>결제</td>
-							<td>클래스 결제 방법이 어떻게 되나요?</td>
-							<td>2020-10-30</td>
-							<td>N</td>
-						</tr>
-						<tr>
-							<td height="40px">4</td>
-							<td>회원</td>
-							<td>시스템</td>
-							<td>자기소개작성은 어떻게 하나요?</td>
-							<td>2020-10-30</td>
-							<td>N</td>
-						</tr>
-						<tr>
-							<td height="40px">5</td>
-							<td>회원</td>
-							<td>기타</td>
-							<td>배송확인은 어디서 하나요?</td>
-							<td>2020-10-30</td>
-							<td>N</td>
-						</tr>
-						<tr>
-							<td height="40px">6</td>
-							<td>튜터</td>
-							<td>회원</td>
-							<td>클래스를 수강중인 회원은 어디서 확인하나요?</td>
-							<td>2020-10-30</td>
-							<td>N</td>
-						</tr>
-						<tr>
-							<td height="40px">7</td>
-							<td>튜터</td>
-							<td>클래스</td>
-							<td>클래스 생성은 어떻게 하나요?</td>
-							<td>2020-10-30</td>
-							<td>N</td>
-						</tr>
-						<tr>
-							<td height="40px">8</td>
-							<td>튜터</td>
-							<td>결제</td>
-							<td>결제취소 회원은 어떻게 처리하나요?</td>
-							<td>2020-10-30</td>
-							<td>N</td>
-						</tr>
-						<tr>
-							<td height="40px">9</td>
-							<td>튜터</td>
-							<td>시스템</td>
-							<td>정산은 진행 하나요?</td>
-							<td>2020-10-30</td>
-							<td>N</td>
-						</tr>
-						<tr>
-							<td height="40px">5</td>
-							<td>튜터</td>
-							<td>기타</td>
-							<td>관리자님과 상담하려면 어떻게 하나요?</td>
-							<td>2020-10-30</td>
-							<td>N</td>
-						</tr>
+						</c:forEach>
 					</table>
 					
 					
@@ -145,34 +78,39 @@
 								
 								<div class="modal-body" align="center" style="width:800px;">
 									<!-- 공지 등록 form start -->
-									<form action="">
+									<form action="insertFaq.ad" method="post" onsubmit="return confirm('FAQ를 등록 하시겠습니까?');">
 										<div style="height:36px;">
-											<select name="condition" style="width:100px; height:30px;">
-												<option>회원</option>
-												<option>튜터</option>
+											<select name="faqType" style="width:100px; height:30px;">
+												<option value="회원">회원</option>
+												<option value="튜터">튜터</option>
 											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input type="text" style="width:640px;" placeholder="제목을 입력하세요.">
+											<input type="text" style="width:640px;" name="faqTitle" placeholder="제목을 입력하세요.">
+										</div>
+										<div align="left" style="width:800px; height:30px;">
+											<span>공개여부: </span>
+											<label for="공개"><input type="radio" name="faqStatus" id="공개" value="공개">공개</label>&nbsp;&nbsp;&nbsp;
+											<label for="비공개"><input type="radio" name="faqStatus" id="비공개" value="비공개">비공개</label>
 										</div>
 										<div align="left" style="width:800px; height:30px;">
 											<span>유형 : </span>
-											<label for="member"><input type="radio" name="faqCategory" id="member" value="">회원</label>&nbsp;&nbsp;&nbsp;
-											<label for="tutor"><input type="radio" name="faqCategory" id="tutor" value="">튜터</label>&nbsp;&nbsp;&nbsp;
-											<label for="lesson"><input type="radio" name="faqCategory" id="lesson" value="">클래스</label>&nbsp;&nbsp;&nbsp;
-											<label for="pay"><input type="radio" name="faqCategory" id="pay" value="">결제</label>&nbsp;&nbsp;&nbsp;
-											<label for="etc"><input type="radio" name="faqCategory" id="etc" value="">기타</label>
+											<label for="member"><input type="radio" name="faqCategory" id="member" value="회원">회원</label>&nbsp;&nbsp;&nbsp;
+											<label for="tutor"><input type="radio" name="faqCategory" id="tutor" value="튜터">튜터</label>&nbsp;&nbsp;&nbsp;
+											<label for="lesson"><input type="radio" name="faqCategory" id="lesson" value="클래스">클래스</label>&nbsp;&nbsp;&nbsp;
+											<label for="pay"><input type="radio" name="faqCategory" id="pay" value="결제">결제</label>&nbsp;&nbsp;&nbsp;
+											<label for="etc"><input type="radio" name="faqCategory" id="etc" value="기타">기타</label>
+											
 										</div>
 										<div>
-											<textarea style="resize:none; width:770px; height:500px;" placeholder="내용을 입력하세요."></textarea>
+											<textarea style="resize:none; width:770px; height:500px;" name="faqContent" placeholder="내용을 입력하세요."></textarea>
 										</div>
 										<br>
 										<div>
 											<span>
-												<button onclick="noticeReset();" id="noticeResetBtn"
-												class="btn btn-default">이전</button>
+												<button type="reset" class="btn btn-default">초기화</button>
 											</span>
+											&nbsp;&nbsp;&nbsp;
 											<span>
-												<button onclick="noticeApply();" id="noticeApplyBtn"
-												class="btn btn-default">등록</button>
+												<button type="submit" class="btn btn-default">FAQ등록</button>
 											</span>
 										</div>
 									</form>
@@ -224,123 +162,6 @@
 					
 					
 <!------------------------------------------------------ 공지 작성 모달&스크립트 끝 ------------------------------------------------------>
-					
-					
-					
-					
-<!------------------------------------------------------ 공지 내용 모달&스크립트 시작 ------------------------------------------------------>
-					<!-- 공지 내용 Modal Start -->
-					<div class="modal" id="detailNotice">
-						<div class="modal-dialog">
-
-							<!-- Modal content -->
-							<div class="modal-content" align="center" style="width: 900px; ">
-								<div class="modal-header" >
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h3 class="modal-title" style="text-align:center">공지사항 내용</h3>
-								</div>
-								
-								<div class="modal-body" align="center" style="width:800px;">
-									<!--  form start -->
-									<form action="">
-										<div style="height:36px;">
-											<select name="condition" style="width:100px; height:30px;">
-												<option>회원</option>
-												<option>튜터</option>
-											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input type="text" style="width:640px;" placeholder="제목을 입력하세요.">
-										</div>
-										<div align="left" style="width:800px; height:30px;">
-											<input type="checkbox" name="status" id="importantNotice" value="R">
-											<label for="importantNotice">중요 공지 등록</label>
-										</div>
-										<div>
-											<textarea style="resize:none; width:770px; height:500px;" placeholder="내용을 입력하세요."></textarea>
-										</div>
-										<br>
-										<div align="left" style="width:800px; height:40px;">
-											<span>첨부파일 :</span>
-											<span><input type="text"></span>
-											<button onclick="noticeApply();" id=""
-													class="btn btn-default">파일찾기</button>
-										</div>
-										<br>
-										<div>
-											<span>
-												<button onclick="noticeApply();" id="noticeApplyBtn"
-												class="btn btn-default">이전</button>
-											</span>
-											<span>
-												<button onclick="noticeModify();" id="noticeModifyBtn"
-												class="btn btn-default">수정</button>
-											</span>
-										</div>
-									</form>
-									
-								</div>	
-							</div>
-						</div>
-					</div>
-					<!-- 공지 내용 Modal End -->
-<!------------------------------------------------------ 공지 내용 모달&스크립트 종료 ------------------------------------------------------>
-					
-					
-					
-					
-<!------------------------------------------------------ 공지 수정 모달&스크립트 시작 ------------------------------------------------------>					
-					
-					<!-- 공지 수정 Modal Start -->
-					<div class="modal" id="ModifyNotice">
-						<div class="modal-dialog">
-
-							<!-- Modal content -->
-							<div class="modal-content" align="center" style="width: 900px; ">
-								<div class="modal-header" >
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h3 class="modal-title" style="text-align:center">공지사항 수정</h3>
-								</div>
-								<div class="modal-body" align="center" style="width:800px;">
-									<form action="">
-										<div style="height:36px;">
-											<select name="condition" style="width:100px; height:30px;">
-												<option>회원</option>
-												<option>튜터</option>
-											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input type="text" style="width:640px;" placeholder="제목을 입력하세요.">
-										</div>
-										<div align="left" style="width:800px; height:30px;">
-											<input type="checkbox" name="status" id="importantNotice" value="R">
-											<label for="importantNotice">중요 공지 등록</label>
-										</div>
-										<div>
-											<textarea style="resize:none; width:770px; height:500px;" placeholder="내용을 입력하세요."></textarea>
-										</div>
-										<br>
-										<div align="left" style="width:800px; height:40px;">
-											<span>첨부파일 :</span>
-											<span><input type="text"></span>
-											<button onclick="noticeApply();" id=""
-													class="btn btn-default">파일찾기</button>
-										</div>
-										<br>
-										<div>
-											<span>
-												<button onclick="noticeModify();" id="noticeModifyBtn"
-												class="btn btn-default">수정</button>
-											</span>
-										</div>
-									</form>
-								</div>	
-							</div>
-						</div>
-					</div>
-					<!-- 공지 수정 Modal End -->
-<!------------------------------------------------------ 공지 내용 모달&스크립트 종료 ------------------------------------------------------>
-					
-					
-					
-					
-					
 					
 					
 					

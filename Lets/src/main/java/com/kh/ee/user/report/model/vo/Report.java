@@ -21,4 +21,9 @@ public class Report {
 	private Date reportDate;
 	private String status; 
 	
+	private String nickname;
+	private int repCount;
+	private String replyContent;
+	
+	
 }

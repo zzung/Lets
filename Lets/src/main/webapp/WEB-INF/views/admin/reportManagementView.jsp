@@ -40,25 +40,26 @@
 						<tr>
 							<th width="50px" height="40px">번호</th>
 							<th width="140px">신고자</th>
-							<th width="140px">신고대상</th>
 							<th width="90px">신고사유</th>
 							<th width="220px">댓글 내용(상세조회) </th>
 							<th width="120px">신고일</th>
 							<th width="90px">처리상태</th>
 						</tr>
+						<c:forEach var="l" items="${list }" varStatus="status">
+						<input type="hidden" value="${replyNo eq 1 }">
 						<tr>
-							<td height="40px">1</td>
-							<td>닉네임1</td>
-							<td>사용자</td>
-							<td>욕설음란</td>
+							<td height="40px">${status.count }</td>
+							<td>${l.nickname}</td>
+							<td>${l.reportType }</td>
 							<td>
 								<a href="#" data-toggle="modal" data-target="#reportContent1">
-								이 아기 멍멍아
+								${l.replyContent }test
 								</a>
 							</td>
-							<td>2020-11-19</td>
-							<td>미처리</td>
+							<td>${l.reportDate }</td>
+							<td>${l.status }</td>
 						</tr>
+						</c:forEach>
 					</table>
 					
 					<!-- Modal Start -->

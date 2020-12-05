@@ -57,9 +57,7 @@ display: flex!important;
 justify-content: center!important;
 margin-top: 80px;
     
-    
     </style>
-    
     
 </head>
 <body>
@@ -80,6 +78,7 @@ margin-top: 80px;
 		<!-- 고객센터 내용 div -->
 		<div style="width:1000px;">
 			<div>
+				
 				<a href="supportNoticeDetail.su">
 					<div style="padding:10px; border:solid 1px;">
 						<!-- 공지 대상 -->
@@ -89,23 +88,6 @@ margin-top: 80px;
 					</div>
 				</a>
 				<br>
-				<div style="border:solid 1px; padding:10px;">
-					<div><h5>튜터</h5></div>
-					<div>[튜터 모집] 커리어 관련 튜터를 모집합니다.</div>
-					<div>2020-11-22</div>
-				</div>
-				<br>
-				<div style="border:solid 1px; padding:10px;">
-					<div><h5>회원</h5></div>
-					<div>[Lets Event] Lets에서 행운을 잡아라!</div>
-					<div>2020-11-22</div>
-				</div>
-				<br>
-				<div style="border:solid 1px; padding:10px;">
-					<div><h5>* 튜터</h5></div>
-					<div>[시스템 점검] 원활한 사이트 운영을 위해 1/27일 오후 11시부터 1/28 오전 1시까지 시스템점검을 진행합니다.</div>
-					<div>2020-11-22</div>
-				</div>
 			</div>
 			
 			<div class="blog-pagination justify-content-center d-flex">

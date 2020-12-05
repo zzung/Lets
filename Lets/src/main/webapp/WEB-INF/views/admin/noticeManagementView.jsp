@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항 관리</title>
 </head>
 <body>
 	<jsp:include page="adminNav.jsp" />
@@ -46,18 +46,48 @@
 							<th width="120px">작성일</th>
 							<th width="120px">삭제여부</th>
 						</tr>
+						<c:forEach var="n" items="${list }" varStatus="status">
 						<tr>
-							<td height="40px">1</td>
-							<td>Y</td>
-							<td>회원</td>
+							<td height="40px">${status.count }</td>
+							<td>
+							<c:choose>
+			                	<c:when test="${n.status eq 'R' }">
+			                		* 중요공지
+			                	</c:when>
+			                	<c:otherwise>
+			                		일반공지
+					            </c:otherwise>
+			                </c:choose>
+							</td>
+							<td>
+							<c:choose>
+			                	<c:when test="${n.noticeType eq 'TUTOR' }">
+			                		튜터
+			                	</c:when>
+			                	<c:otherwise>
+			                		회원
+					            </c:otherwise>
+			                </c:choose>
+							</td>
 							<td><!-- 작성된 공지 페이지로 이동 / 공지내용에서 관리자 일시 수정 버튼 클릭 생성 후 수정 가능 -->
 								<a href="작성된 공지 페이지로 이동">
-								[서비스 개편 사항] 메인페이지에서 새로 생긴 클래스를 확인할 수 있습니다.
+								${n.noticeTitle }
 								</a>
 							</td>
-							<td>2020-10-30</td>
-							<td>N</td>
+							<td>${n.enrollDate }</td>
+							
+							<td>
+							<c:choose>
+			                	<c:when test="${n.status eq 'N' }">
+			                		삭제
+			                	</c:when>
+			                	<c:otherwise>
+			                		-
+					            </c:otherwise>
+			                </c:choose>
+							</td>
 						</tr>
+						</c:forEach>
 					</table>
 					
 					
@@ -76,27 +106,24 @@
 								
 								<div class="modal-body" align="center" style="width:800px;">
 									<!-- 공지 등록 form start -->
-									<form action="" method="post" onsubmit="return confirm('공지를 등록 하시겠습니까?');">
+									<form action="insertNotice.ad" method="post" onsubmit="return confirm('공지를 등록 하시겠습니까?');">
 										<div style="height:36px;">
 											<select name="noticeType" style="width:100px; height:30px;">
-												<option>회원</option>
-												<option>튜터</option>
+												<option value="MEMBER">회원</option>
+												<option value="TUTOR">튜터</option>
 											</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input type="text" style="width:640px;" placeholder="제목을 입력하세요.">
+											<input type="text" style="width:640px;" name="noticeTitle" placeholder="제목을 입력하세요.">
 										</div>
 										<div align="left" style="width:800px; height:30px;">
 											<input type="checkbox" name="status" id="importantNotice" value="R">
 											<label for="importantNotice">중요 공지 등록</label>
 										</div>
 										<div>
-											<textarea style="resize:none; width:770px; height:500px;" placeholder="내용을 입력하세요."></textarea>
+											<textarea style="resize:none; width:770px; height:500px;" name="noticeContent" placeholder="내용을 입력하세요."></textarea>
 										</div>
 										<br>
 										<div align="left" style="width:800px; height:40px;">
-											<span>첨부파일 :</span>
-											<span><input type="text"></span>
-											<button onclick="findFile();" id=""
-													class="btn btn-default">파일찾기</button>
+											<input type="file" id="upfile" class="form-control-file border" style="width:500px;" name="">
 										</div>
 										<br>
 										<div>

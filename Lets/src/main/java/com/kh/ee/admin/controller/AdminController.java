@@ -2,6 +2,8 @@ package com.kh.ee.admin.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.kh.ee.admin.model.service.AdminService;
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
-import com.kh.ee.common.template.Auth;
-import com.kh.ee.common.template.Auth.Role;
 import com.kh.ee.common.template.Pagination;
+import com.kh.ee.user.faq.model.vo.Faq;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
+import com.kh.ee.user.notice.model.vo.Notice;
+import com.kh.ee.user.report.model.vo.Report;
 
 @Controller
 public class AdminController {
@@ -26,13 +28,21 @@ public class AdminController {
 	@Autowired
 	private AdminService as; 
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("memberManagement.ad")
-	public String memberManagement(){
+	public String memberManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
+		int listCount = as.memberMgmtCountList();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Member> list = as.memberMgmtList(pi);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pi",pi); 
+		
 		return "admin/memberManagementView";
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("classManagement.ad")
 	public String classManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.classMgmtCountList();
@@ -46,7 +56,7 @@ public class AdminController {
 		return "admin/classManagementView";
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@ResponseBody
 	@RequestMapping("lessonApproval.ad")
 	public String lessonApproval(int lessonNo) {
@@ -59,7 +69,7 @@ public class AdminController {
 		}
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@ResponseBody
 	@RequestMapping("rejectApproval.ad")
 	public String rejectApproval(Lesson l) {
@@ -72,7 +82,7 @@ public class AdminController {
 		}
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("searchClassMgmt.ad")
 	public String searchClassMgmt(String condition, String keyword, int currentPage, Model model) {
 		
@@ -98,7 +108,7 @@ public class AdminController {
 		return "admin/classManagementView";		
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("classPayment.ad")
 	public String classPayment(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.classPaymentListCount();
@@ -113,7 +123,7 @@ public class AdminController {
 		return "admin/classPaymentView";
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@ResponseBody
 	@RequestMapping("cancelPay.ad")
 	public String cancelPay(int memPayNo) {
@@ -126,7 +136,7 @@ public class AdminController {
 		}
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("searchPaymentMgmt.ad")
 	public String searchPaymentMgmt(String condition, String keyword, int currentPage, Model model) {
 		
@@ -152,7 +162,7 @@ public class AdminController {
 		return "admin/classPaymentView";		
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("saleManagement.ad")
 	public String saleManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.selectListCount(); 
@@ -166,7 +176,7 @@ public class AdminController {
 		return "admin/discountManagementView"; 
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@ResponseBody
 	@RequestMapping("discountSet.ad")
 	public String discountSet(Lesson l) {
@@ -179,7 +189,7 @@ public class AdminController {
 		}
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("searchDiscount.ad")
 	public String searchDiscount(String condition, String keyword,int currentPage, Model model) {
 		
@@ -206,7 +216,7 @@ public class AdminController {
 		
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("discountUnApplied.ad")
 	public String searchDiscountUnApplied(int currentPage, Model model) {
 		int listCount = as.countDiscountUnApplied();
@@ -220,7 +230,7 @@ public class AdminController {
 		return "admin/discountManagementView";
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("discountApplied.ad")
 	public String searchDiscountApplied(int currentPage, Model model) {
 		int listCount = as.countDiscountApplied();
@@ -234,33 +244,94 @@ public class AdminController {
 		return "admin/discountManagementView";
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("blacklistManagement.ad")
-	public String blacklistManagement(){
+	public String blacklistManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
+		int listCount = as.blacklistMgmtCountList();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Member> list = as.blacklistMgmtList(pi);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pi",pi); 
+		
 		return "admin/blacklistManagementView";
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("inqueryManagement.ad")
 	public String inqueryManagement(){
 		return "admin/inqueryManagementView";
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("reportManagement.ad")
-	public String reportManagement(){
+	public String reportManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
+		int listCount = as.reportMgmtCountList();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Report> list = as.reportMgmtList(pi);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pi",pi); 
+		
 		return "admin/reportManagementView";
 	}
 	
-	@Auth(role = Role.ADMIN)
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("noticeManagement.ad")
-	public String noticeManagement(){
+	public String noticeManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
+		int listCount = as.noticeMgmtCountList();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Notice> list = as.noticeMgmtList(pi);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pi",pi); 
+		
 		return "admin/noticeManagementView";
 	}
-
-	@Auth(role = Role.ADMIN)
+	
+	@RequestMapping("insertNotice.ad")
+	public String insertNotice(Notice n, HttpSession session, Model model) {
+		
+		int result = as.insertNotice(n);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "공지 작성 완료");
+			return "redirect:/noticeManagement.ad";
+		}else {
+			model.addAttribute("errorMsg", "공지 작성 실패");
+			return "noticeManagement.ad";
+		}
+	}
+	
+	//@Auth(role = Role.ADMIN)
 	@RequestMapping("faqManagement.ad")
-	public String faqManagement(){
+	public String faqManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
+		int listCount = as.faqMgmtCountList();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Faq> list = as.faqMgmtList(pi);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pi",pi); 
+		
 		return "admin/faqManagementView";
 	}
+	
+	@RequestMapping("insertFaq.ad")
+	public String insertFaq(Faq f, HttpSession session, Model model) {
+		
+		int result = as.insertFaq(f);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "FAQ 작성 완료");
+			return "redirect:/faqManagement.ad";
+		}else {
+			model.addAttribute("errorMsg", "FAQ 작성 실패");
+			return "faqManagement.ad";
+		}
+	}
+	
 }

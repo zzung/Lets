@@ -8,9 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
+import com.kh.ee.user.faq.model.vo.Faq;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
+import com.kh.ee.user.notice.model.vo.Notice;
+import com.kh.ee.user.report.model.vo.Report;
 
 @Repository
 public class AdminDao {
@@ -134,5 +137,79 @@ public class AdminDao {
 		RowBounds rowBounds = new RowBounds(offset,limit); 		
 		return (ArrayList)ss.selectList("adminMapper.searchPaymentMgmtList",sc,rowBounds);
 	}
+	
+	///////////////
+	
+	
+	//회원 관리 페이지 select 문(성연)
+	public int memberMgmtCountList(SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.selectMemListCount");
+	}
+	public ArrayList<Member> memberMgmtList(PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.memberMgmtList",null,rowBounds);
+	}
+	
+	//블랙 관리 페이지 select 문(성연)
+	public int blacklistMgmtCountList(SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.selectBlacklistListCount");
+	}
+	public ArrayList<Member> blacklistMgmtList(PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.blacklistMgmtList",null,rowBounds);
+	}
+	
+	//신고 관리 페이지 select 문(성연)
+	public int reportMgmtCountList(SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.selectReportListCount");
+	}
+	public ArrayList<Report> reportMgmtList(PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.reportMgmtList",null,rowBounds);
+	}
+	
+	//공지사항 관리 페이지 select 문(성연)
+	public int noticeMgmtCountList(SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.selectNoticeListCount");
+	}
+	public ArrayList<Notice> noticeMgmtList(PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.noticeMgmtList",null,rowBounds);
+	}
+
+	//공지사항 작성
+	public int insertNotice(SqlSessionTemplate sqlSession, Notice n) {
+		return sqlSession.insert("adminMapper.insertNotice", n);
+	}
+		
+	//faq 관리 페이지 select 문(성연)
+	public int faqMgmtCountList(SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.selectFaqListCount");
+	}
+	public ArrayList<Faq> faqMgmtList(PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.faqMgmtList",null,rowBounds);
+	}
+	
+	//FAQ 작성
+	public int insertFaq(SqlSessionTemplate sqlSession, Faq f) {
+		return sqlSession.insert("adminMapper.insertFaq", f);
+	}
+		
 
 }

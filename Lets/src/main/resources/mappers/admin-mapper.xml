@@ -22,6 +22,7 @@
 	<result column="report_count" property="reportCount"/>
 	<result column="out_date" property="outDate"/>
 	<result column="status" property="status"/>
+	<result column="auth" property="auth" />
 	<result column="lesson_title" property="lessonTitle" />
 	<result column="lesson_no" property="lessonNo"/>
 	<result column="discount" property="discount"/>
@@ -60,6 +61,49 @@
 	<result column="mem_id" property="memId"/>
 	<result column="lesson_title" property="lessonTitle" />
 </resultMap>
+
+<resultMap type="Report" id="reportResultSet">
+	<id column="reply_no" property="replyNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="report_type" property="reportType" />
+	<result column="report_date" property="reportDate" />
+	<result column="status" property="status" />
+</resultMap>
+
+<resultMap type="Reply" id="replyResultSet">
+	<id column="reply_no" property="replyNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="reply_count" property="replyCount" />
+	<result column="enroll_date" property="enrollDate" />
+	<result column="modify_date" property="modifyDate" />
+	<result column="reply_no2" property="replyNo2" />
+	<result column="reply_level" property="replyLevel" />
+	<result column="total_no" property="totlaNo" />
+	<result column="rep_count" property="repCount" />
+	<result column="status" property="status" />
+</resultMap>
+
+<resultMap type="Faq" id="faqResultSet">
+	<id column="faq_no" property="faqNo" />
+	<result column="faq_category" property="faqCategory" />
+	<result column="faq_status" property="faqStatus" />
+	<result column="enroll_date" property="enrollDate" />
+	<result column="faq_type" property="faqType" />
+	<result column="faq_title" property="faqTitle" />
+	<result column="faq_content" property="faqContent" />
+</resultMap>
+
+<resultMap type="Notice" id="noticeResultSet">
+	<id column="notice_no" property="noticeNo" />
+	<result column="notice_type" property="noticeType" />
+	<result column="notice_title" property="noticeTitle" />
+	<result column="notice_content" property="noticeContent" />
+	<result column="enroll_date" property="enrollDate" />
+	<result column="modify_date" property="modifyDate" />
+	<result column="status" property="status" />
+	<result column="count" property="count" />
+</resultMap>
+
 
 <select id="selectDiscountList" resultMap="memberResultSet">
 	 select 
@@ -340,4 +384,148 @@
 	 	</otherwise>
 	 </choose>
 </select>
+
+<!-- //////////////////////////////////////// -->
+
+<select id="selectMemListCount" resultType="_int">
+	select 
+	       count(*)
+	  from member m
+</select>
+
+<select id="memberMgmtList" parameterType="String" resultMap="memberResultSet">
+	select
+			  m.mem_no
+	        , m.mem_id
+	        , m.mem_name
+	        , m.nickname
+	        , m.birthday
+	        , m.gender
+	        , m.phone
+	        , m.mem_pic
+	        , m.enroll_date
+	        , m.status
+	        , m.auth
+	     from member m
+	     order 
+	   		 by mem_no desc
+</select>
+
+<select id="selectBlacklistListCount" resultType="_int">
+	select 
+	       count(*)
+	  from member m
+</select>
+
+<select id="blacklistMgmtList" parameterType="String" resultMap="memberResultSet">
+	select
+			  mem_no
+	        , mem_id
+	        , nickname
+	        , report_count
+	     from member m
+	     where m.status = 'B'
+</select>
+
+<select id="selectReportListCount" resultType="_int">
+	select 
+	       count(*)
+	  from report re
+</select>
+
+<select id="reportMgmtList" parameterType="String" resultMap="reportResultSet">
+	select
+	       	m.mem_no
+	        , re.report_type
+	        , re.report_date
+	        , re.status
+	        , r.rep_count
+	        , r.reply_content
+	        , m.nickname
+	     from report re
+	     join reply r on (re.reply_no = r.reply_no)
+	     join member m on (re.mem_no = m.mem_no)
+</select>
+
+<select id="selectNoticeListCount" resultType="_int">
+	select 
+	       count(*)
+	  from notice n
+</select>
+
+<select id="noticeMgmtList" parameterType="String" resultMap="noticeResultSet">
+	select
+	     	n.notice_no
+	     ,	n.notice_type
+	     ,	n.notice_title
+	     ,	n.notice_content
+	     ,	n.enroll_date
+	     ,	n.modify_date
+	     ,	n.status
+	     ,	n.count
+	     from notice n
+</select>
+
+<insert id="insertNotice" parameterType="Notice">
+	insert
+		  into notice
+		  (
+		     notice_no
+		   , notice_type
+		   , notice_title
+		   , notice_content
+		   , modify_date
+		   , status
+		  )
+		  values
+		  (
+		     SEQ_NNO.NEXTVAL
+		   , #{noticeType}
+		   , #{noticeTitle}
+		   , #{noticeContent}
+		   , #{modifyDate}
+		   , #{status}
+		  )
+</insert>
+
+<select id="selectFaqListCount" resultType="_int">
+	select 
+	       count(*)
+	  from faq f
+</select>
+
+<select id="faqMgmtList" parameterType="String" resultMap="faqResultSet">
+	select
+	     	 f.faq_no
+	       , f.faq_category
+	       , f.faq_status
+	       , f.enroll_date
+	       , f.faq_type
+	       , f.faq_title
+	       , f.faq_content
+	     from faq f
+</select>
+
+<insert id="insertFaq" parameterType="Faq">
+	insert
+		  into faq
+		  (
+		     faq_no
+	       , faq_category
+	       , faq_status
+	       , faq_type
+	       , faq_title
+	       , faq_content
+		  )
+		  values
+		  (
+		     SEQ_FNO.NEXTVAL
+		   , #{faqCategory}
+		   , #{faqStatus}
+		   , #{faqType}
+		   , #{faqTitle}
+		   , #{faqContent}
+		  )
+</insert>
+
 </mapper>

@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
+import com.kh.ee.user.faq.model.vo.Faq;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
+import com.kh.ee.user.notice.model.vo.Notice;
+import com.kh.ee.user.report.model.vo.Report;
 
 public interface AdminService {
 	
@@ -54,6 +57,32 @@ public interface AdminService {
 	int searchPaymentMgmtCount(SearchCondition sc);
 	ArrayList<MemPay> searchPaymentMgmtList(SearchCondition sc, PageInfo pi);
 	
+	//////////////
 	
-
+	//회원 관리 페이지 select 문(성연)
+	int memberMgmtCountList();
+	ArrayList<Member> memberMgmtList(PageInfo pi);
+	
+	//블랙 관리 페이지 select 문(성연)
+	int blacklistMgmtCountList();
+	ArrayList<Member> blacklistMgmtList(PageInfo pi);
+	
+	//신고 관리 페이지 select 문(성연)
+	int reportMgmtCountList();
+	ArrayList<Report> reportMgmtList(PageInfo pi);
+	
+	//공지사항 관리 페이지 select 문(성연)
+	int noticeMgmtCountList();
+	ArrayList<Notice> noticeMgmtList(PageInfo pi);
+	
+	//공지작성
+	int insertNotice(Notice n);
+	
+	//faq 관리 페이지 select 문(성연)
+	int faqMgmtCountList();
+	ArrayList<Faq> faqMgmtList(PageInfo pi);
+	
+	//FAQ 작성
+	int insertFaq(Faq f);
+	
 }

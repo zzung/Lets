@@ -125,7 +125,7 @@ margin-top: 80px;
 												<textarea style="width:700px; height:200px; resize:none;" placeholder="내용을 입력하세요."></textarea>
 											</div>
 											<div>
-												<div><input type="file"></div>
+												<div><input type="file" id="upfile" class="form-control-file border" style="width:500px;" name="tutorUpfile"></div>
 											</div>
 										</div>
 										<br>

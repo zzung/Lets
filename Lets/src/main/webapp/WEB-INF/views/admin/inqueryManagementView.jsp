@@ -48,6 +48,7 @@
 							<th width="90px">공개여부</th>
 							<th width="90px">삭제여부</th>
 						</tr>
+						<c:forEach var="l" items="${list }" varStatus="status">
 						<tr>
 							<td height="40px">1</td>
 							<td>닉네임1</td>
@@ -61,45 +62,7 @@
 							<td>비공개</td>
 							<td>N</td>
 						</tr>
-						<tr>
-							<td height="40px">2</td>
-							<td>닉네임2</td>
-							<td>튜터</td>
-							<td>
-								<a href="#" data-toggle="modal" data-target="#inqueryContent2">제목2</a>
-							</td>
-							<td>2020-11-19</td>
-							<td>2020-11-19</td>
-							<td>완료</td>
-							<td>공개</td>
-							<td>N</td>
-						</tr>
-						<tr>
-							<td height="40px">3</td>
-							<td>닉네임3</td>
-							<td>클래스</td>
-							<td>
-								<a href="#" data-toggle="modal" data-target="#inqueryContent3">제목3</a>
-							</td>
-							<td>2020-11-19</td>
-							<td>2020-11-19</td>
-							<td>완료</td>
-							<td>비공개</td>
-							<td>N</td>
-						</tr>
-						<tr>
-							<td height="40px">4</td>
-							<td>닉네임4</td>
-							<td>기타</td>
-							<td>
-								<a href="#" data-toggle="modal" data-target="#inqueryContent4">제목4</a>
-							</td>
-							<td>2020-11-19</td>
-							<td></td>
-							<td>접수</td>
-							<td>비공개</td>
-							<td>N</td>
-						</tr>
+						</c:forEach>
 					</table>
 					
 					<!-- Modal Start -->

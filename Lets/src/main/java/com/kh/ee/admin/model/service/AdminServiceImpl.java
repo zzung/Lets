@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 import com.kh.ee.admin.model.dao.AdminDao;
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
+import com.kh.ee.user.faq.model.vo.Faq;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
+import com.kh.ee.user.notice.model.vo.Notice;
+import com.kh.ee.user.report.model.vo.Report;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -124,6 +127,72 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ArrayList<MemPay> searchPaymentMgmtList(SearchCondition sc, PageInfo pi) {
 		return ad.searchPaymentMgmtList(sc,pi,ss);
+	}
+	
+	
+	/////////
+	
+	
+	//회원 관리 페이지 select 문(성연)
+	@Override
+	public int memberMgmtCountList() {
+		return ad.memberMgmtCountList(ss);
+	}
+	@Override
+	public ArrayList<Member> memberMgmtList(PageInfo pi) {
+		return ad.memberMgmtList(pi,ss);
+	}
+	
+	//블랙 관리 페이지 select 문(성연)
+	@Override
+	public int blacklistMgmtCountList() {
+		return ad.blacklistMgmtCountList(ss);
+	}
+	@Override
+	public ArrayList<Member> blacklistMgmtList(PageInfo pi) {
+		return ad.blacklistMgmtList(pi,ss);
+	}
+	
+	//신고 관리 페이지 select 문(성연)
+	@Override
+	public int reportMgmtCountList() {
+		return ad.reportMgmtCountList(ss);
+	}
+	@Override
+	public ArrayList<Report> reportMgmtList(PageInfo pi) {
+		return ad.reportMgmtList(pi,ss);
+	}
+	
+	//공지사항 관리 페이지 select 문(성연)
+	@Override
+	public int noticeMgmtCountList() {
+		return ad.noticeMgmtCountList(ss);
+	}
+	@Override
+	public ArrayList<Notice> noticeMgmtList(PageInfo pi) {
+		return ad.noticeMgmtList(pi,ss);
+	}
+	
+	//공지 작성
+	@Override
+	public int insertNotice(Notice n) {
+		return ad.insertNotice(ss, n);
+	}
+	
+	//faq 관리 페이지 select 문(성연)
+	@Override
+	public int faqMgmtCountList() {
+		return ad.faqMgmtCountList(ss);
+	}
+	@Override
+	public ArrayList<Faq> faqMgmtList(PageInfo pi) {
+		return ad.faqMgmtList(pi,ss);
+	}
+	
+	//faq 작성
+	@Override
+	public int insertFaq(Faq f) {
+		return ad.insertFaq(ss, f);
 	}
 	
 

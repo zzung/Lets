@@ -18,4 +18,8 @@ public class SearchCondition {
 	private String payment;
 	private String percentage;
 	private String approval;
+	
+	private String memName;
+	private String nickname;
+	private String email;
 }

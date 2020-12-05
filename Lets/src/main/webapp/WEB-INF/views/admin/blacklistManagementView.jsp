@@ -42,22 +42,16 @@
 							<th width="150px">누적신고횟수</th>
 							<th width="110px">블랙해제</th>
 						</tr>
+						<c:forEach var="m" items="${list }" varStatus="status">
 						<tr>
-							<td height="40px">1</td>
-							<td>닉네임1</td>
-							<td>user01@naver.com</td>
-							<td>12</td>
+							<td height="40px">${status.count }</td>
+							<td>${m.nickname }</td>
+							<td>${m.memId }</td>
+							<td>${m.reportCount }</td>
 							<td><button onclick="cancelBlacklist();" id="blacklistCancelBtn"
 									class="btn btn-default">해제</button></td>
 						</tr>
-						<tr>
-							<td height="40px">2</td>
-							<td>닉네임2</td>
-							<td>tutor02@naver.com</td>
-							<td>5</td>
-							<td><button onclick="cancelBlacklist();" id="blacklistCancelBtn"
-									class="btn btn-default">해제</button></td>
-						</tr>
+						</c:forEach>
 					</table>
 
 					<!-- 확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
@@ -80,10 +74,6 @@
 					</script>
 					<!-- 확인 끝 -->
 
-
-
-
-					
 					<div class="" align="center">
 						<ul class="pagination">
 							<li><a href="#">&lt;</a></li>
