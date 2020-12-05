@@ -34,32 +34,32 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		// 4. @Auth가 있는 경우, 세션이 있는지 체크
 		HttpSession session = request.getSession();
 		String role = auth.role().toString();
-
-		if( session == null ) {
-			if(role.equals("ADMIN")) {
-				request.setAttribute("alertMsg", "※ 잘못된 접근 경로입니다. ※11");
-				response.sendRedirect(request.getContextPath());
-			}else if (role.equals("TUTOR")) {
-				request.setAttribute("alertMsg", "※ 튜터 회원만 이용 가능한 서비스 입니다. ※11");
-				response.sendRedirect(request.getContextPath()+"/tutorMain.tm");
-			}else if (role.equals("USER")) {
-				request.setAttribute("alertMsg", "※ 로그인 후 이용가능한 서비스 입니다. ※11");
-				response.sendRedirect(request.getContextPath() + "/loginForm.me");
-			}
-			return false;
-		}
+//
+//		if( session == null ) {
+//			if(role.equals("ADMIN")) {
+//				request.setAttribute("alertMsg", "※ 잘못된 접근 경로입니다. ※");
+//				response.sendRedirect(request.getContextPath());
+//			}else if (role.equals("TUTOR")) {
+//				request.setAttribute("alertMsg", "※ 튜터 회원만 이용 가능한 서비스 입니다. ※");
+//				response.sendRedirect(request.getContextPath()+"/tutorMain.tm");
+//			}else if (role.equals("USER")) {
+//				request.setAttribute("alertMsg", "※ 로그인 후 이용가능한 서비스 입니다. ※");
+//				response.sendRedirect(request.getContextPath() + "/loginForm.me");
+//			}
+//			return false;
+//		}
 		
 		// 4-1. 세션이 존재하면 유효한 유저인지 확인 
 		Member authUser = (Member)session.getAttribute("loginUser");
 		if ( authUser == null ) {
 			if(role.equals("ADMIN")) {
-				session.setAttribute("alertMsg", "※ 잘못된 접근 경로입니다.※22");
+				session.setAttribute("alertMsg", "※ 잘못된 접근 경로입니다.※");
 				response.sendRedirect(request.getContextPath());
 			}else if (role.equals("TUTOR")) {
-				session.setAttribute("alertMsg", "※ 튜터 회원만 이용 가능한 서비스 입니다. ※22");
+				session.setAttribute("alertMsg", "※ 튜터 회원만 이용 가능한 서비스 입니다. ※");
 				response.sendRedirect(request.getContextPath()+"/tutorMain.tm");
 			}else if (role.equals("USER")) {
-				session.setAttribute("alertMsg", "※ 로그인 후 이용가능한 서비스 입니다. ※22");
+				session.setAttribute("alertMsg", "※ 로그인 후 이용가능한 서비스 입니다.11 ※");
 				response.sendRedirect(request.getContextPath() + "/loginForm.me");
 			}
 			return false;
@@ -67,19 +67,39 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		
 		// 4-2. User/Tutor/Admin 일때
 		if(role.equals("ADMIN")) {
-			if(authUser.getAuth()==3) { // authUser가 관리자 일때
+			if(authUser.getAuth()==3) {
 				return true;
-			}else if(authUser.getAuth()==2) { //authUser가 튜터 일때
-				session.setAttribute("alertMsg", "※ 잘못된 접근 경로입니다. ※33");
+			}else if(authUser.getAuth()==2) {
+				session.setAttribute("alertMsg", "※ 잘못된 접근 경로입니다. ※");
 				response.sendRedirect(request.getContextPath());
 				return false;
 			}else if(authUser.getAuth()==1) {
-				session.setAttribute("alertMsg", "※ 튜터 회원만 이용 가능한 서비스 입니다. ※33");
+				session.setAttribute("alertMsg", "※ 튜터 회원만 이용 가능한 서비스 입니다. ※");
 				response.sendRedirect(request.getContextPath()+"/tutorMain.tm");
 				return false;
 			}
 		}
-
+		if(role.equals("TUTOR")) {
+			if(authUser.getAuth()==3) {
+				return true;
+			}else if(authUser.getAuth()==2) {
+				return true;
+			}else if(authUser.getAuth()==1) {
+				session.setAttribute("alertMsg", "※ 튜터 회원만 이용 가능한 서비스 입니다. ※");
+				response.sendRedirect(request.getContextPath()+"/tutorMain.tm");
+				return false;
+			}
+		}
+		if(role.equals("USER")) {
+			if(authUser.getAuth()==3) {
+				return true;
+			}else if(authUser.getAuth()==2) {
+				return true;
+			}else if(authUser.getAuth()==1) {
+				return true;
+			}
+		}
+		
 		
 		// 5. 접근허가, 즉 메서드를 실행하도록 함
 		return true;

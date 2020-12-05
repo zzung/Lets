@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.kh.ee.common.template.Auth;
+import com.kh.ee.common.template.Auth.Role;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.service.LessonService;
@@ -219,6 +221,7 @@ public class LessonController {
 		}
 	}
 	
+	@Auth(role = Role.TUTOR)
 	@RequestMapping("enroll.le")
 	public String enrollLesson() {
 		return "user/lesson/lessonEnrollForm";

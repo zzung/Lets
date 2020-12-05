@@ -228,6 +228,7 @@ public class TutorController {
 		return new Gson().toJson(hmap);
 	}
 	
+	@Auth(role = Role.TUTOR)
 	@RequestMapping("insertSalary.ts")
 	public String insertSalary(Salary s) {
 		ArrayList<Salary> salaryList = s.getSalaryList();
