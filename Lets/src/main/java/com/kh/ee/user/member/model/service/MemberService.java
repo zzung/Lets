@@ -24,5 +24,8 @@ public interface MemberService {
 	MemPay myDetailDelivery(int memPayNo);
 	int myUpdateDelivery(int memPayNo);
 	int myCancelDelivery(int memPayNo);
+	
+	//(학천)할인 보여줄 ajax
+	Lesson showDiscountLesson();
 
 }

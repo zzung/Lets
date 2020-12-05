@@ -85,5 +85,12 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.myCancelDelivery(sqlSession, memPayNo);
 	}
 	
+	//(학천)할인 보여줄 ajax
+	@Override
+	public Lesson showDiscountLesson() {
+		return mDao.showDiscountLesson(sqlSession);
+	}
+	
+	
 	
 }
