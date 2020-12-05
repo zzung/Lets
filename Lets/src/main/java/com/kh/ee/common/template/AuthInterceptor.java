@@ -34,20 +34,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		// 4. @Auth가 있는 경우, 세션이 있는지 체크
 		HttpSession session = request.getSession();
 		String role = auth.role().toString();
-//
-//		if( session == null ) {
-//			if(role.equals("ADMIN")) {
-//				request.setAttribute("alertMsg", "※ 잘못된 접근 경로입니다. ※");
-//				response.sendRedirect(request.getContextPath());
-//			}else if (role.equals("TUTOR")) {
-//				request.setAttribute("alertMsg", "※ 튜터 회원만 이용 가능한 서비스 입니다. ※");
-//				response.sendRedirect(request.getContextPath()+"/tutorMain.tm");
-//			}else if (role.equals("USER")) {
-//				request.setAttribute("alertMsg", "※ 로그인 후 이용가능한 서비스 입니다. ※");
-//				response.sendRedirect(request.getContextPath() + "/loginForm.me");
-//			}
-//			return false;
-//		}
 		
 		// 4-1. 세션이 존재하면 유효한 유저인지 확인 
 		Member authUser = (Member)session.getAttribute("loginUser");
@@ -59,7 +45,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 				session.setAttribute("alertMsg", "※ 튜터 회원만 이용 가능한 서비스 입니다. ※");
 				response.sendRedirect(request.getContextPath()+"/tutorMain.tm");
 			}else if (role.equals("USER")) {
-				session.setAttribute("alertMsg", "※ 로그인 후 이용가능한 서비스 입니다.11 ※");
+				session.setAttribute("alertMsg", "※ 로그인 후 이용가능한 서비스 입니다. ※");
 				response.sendRedirect(request.getContextPath() + "/loginForm.me");
 			}
 			return false;
