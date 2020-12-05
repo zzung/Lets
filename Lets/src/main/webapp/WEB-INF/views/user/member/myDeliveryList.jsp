@@ -49,21 +49,16 @@
                     </div>
                 </div>
 
-               <!-- 할인 클래스 -->
-                <div class="myPage-menu2">
-                    <div>
-                        <img src="assets/img/gallery/popular_sub2.png" alt="">
-                    </div>
-                    <div id="discount-time">할인 종료 까지 5일 남앗습니다.</div>
-                    <div class="discount-info">
-                        <div class="discount-category">카테고리</div>
-                        <div class="discount-category">튜터 아이디</div>
-                    </div>
-                    <br>
-                    <div class="discount-title">클래스 타이틀 (전인 아니더면, 꽃 보내는 천지는 사람은 끓는 기관과 약동하다. 눈에 대고)</div>
-                </div>
+               <!-- 할인 클래스(학천)ajax -->
+                <div class="myPage-menu2"></div>
           </div>
+          
           <script>
+	          $(function(){
+	      		showDiscount(); 
+					setInterval(showDiscount,10000);
+	      		});
+	          
 				function myPageIndex(num){
 					if(num==1){
 						location.href="myPage.me";
@@ -73,7 +68,36 @@
 						location.href="myDeliveryList.me";
 					}
 				}
+				
+				//(학천) ajax 할인
+				function showDiscount(){
+					$.ajax({
+						url:"showDiscountLesson.le",
+					  	success:function(disc){
+						   var result = "";
+						   
+						   result += '<div>'
+	                       result += '<img src="'+disc.lessonCoverImg+'" alt="">'
+	                       result += '</div>'
+	                       result += '<div id="discount-time">할인 종료 까지 '+disc.discountPeriod+'일 남앗습니다.</div>'
+	                       result += '<div class="discount-info">'
+	                       result += '<div class="discount-category">'+disc.lessonCategory+'</div>'
+	                       result += '<div class="discount-category"><i class="ti-heart"></i>&nbsp;'+disc.likeCount+'</div>'
+	                       result += '</div><br>' 
+	                       result += '<div class="discount-title">'+disc.lessonTitle+'</div>'
+	                       
+	                       $(".wrapper .myPage-menu2").html(result); 
+	                        
+					  },
+					  error:function(err){
+						  console.log(err);
+						  console.log("loading disc failed ajax");
+					  }
+					});
+					
+				}
 		  </script>
+		  
           <div class="myPage-content">
           <div class="my-cont-title2">주문 및 배송</div>
           <div class="my-cont-subTitle">총 ${myDlistCount}개</div>

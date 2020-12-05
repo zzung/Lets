@@ -90,7 +90,7 @@
 	                       result += '<div id="discount-time">할인 종료 까지 '+disc.discountPeriod+'일 남앗습니다.</div>'
 	                       result += '<div class="discount-info">'
 	                       result += '<div class="discount-category">'+disc.lessonCategory+'</div>'
-	                       result += '<div class="discount-category"><i class="ti-heart"></i>'+disc.likeCount+'</div>'
+	                       result += '<div class="discount-category"><i class="ti-heart"></i>&nbsp;'+disc.likeCount+'</div>'
 	                       result += '</div><br>' 
 	                       result += '<div class="discount-title">'+disc.lessonTitle+'</div>'
 	                       
