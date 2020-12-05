@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.google.gson.Gson;
 import com.kh.ee.common.template.Auth;
 import com.kh.ee.common.template.Auth.Role;
 import com.kh.ee.user.lesson.model.vo.Lesson;
@@ -493,6 +494,14 @@ public class MemberController {
 			model.addAttribute("errorMsg","결제 취소 처리에 오류가 생겼습니다. 관리자에게 문의하세요.");
 			return "user/common/errorPage";
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="showDiscountLesson.le", produces="application/json; charset=utf-8")
+	public String showDiscountLesson() {
+		Lesson l = mService.showDiscountLesson();
+		
+		return new Gson().toJson(l); 
 	}
 	
 }

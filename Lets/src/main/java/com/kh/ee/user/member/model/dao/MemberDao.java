@@ -76,4 +76,10 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.myCancelDelivery", memPayNo);
 	}
 
+	//(학천)할인 보여줄 ajax
+	public Lesson showDiscountLesson(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.showDiscountLesson");
+	}
+
+
 }

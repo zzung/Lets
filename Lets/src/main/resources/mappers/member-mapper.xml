@@ -44,6 +44,7 @@
 	<result column="discount" property="discount" />
 	<result column="pay_total" property="payTotal" />
 	<result column="status" property="status" />
+	<result column="approve_date" property="approveDate"/>
 </resultMap>
 
 <resultMap type="MemPay" id="memPayResultSet">
@@ -291,5 +292,24 @@
 	 where mem_pay_no=#{memPayNo}
 </update>
 
+<select id="showDiscountLesson" resultMap="lessonResultSet">
+	<![CDATA[select 
+			       *
+			  from (
+			        select
+			               lesson_cover_img
+			             , discount_period
+			             , lesson_category
+			             , like_count
+			             , lesson_title
+			             , approve_date 
+			          from lesson
+			         where status='Y'
+			           and discount is not null
+			         order 
+			            by dbms_random.random 
+			         )
+			  where rownum <= 1]]>
+</select>
 
 </mapper>

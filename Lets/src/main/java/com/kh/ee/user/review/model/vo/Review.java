@@ -31,14 +31,6 @@ public class Review {
 	private String nickname;
 	private String memPic; 
 	
-	/*
-	private int replyNo;
-	private String replyContent;
-	private int replyLevel; 
-	private Date replyEnrollDate; 
-	private int totalNo;
-	private String replyType;
-	*/
 	private ArrayList<Reply> replyList;
 	
 }
