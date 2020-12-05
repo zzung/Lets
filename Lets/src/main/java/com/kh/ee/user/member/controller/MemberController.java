@@ -26,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.kh.ee.common.template.Auth;
+import com.kh.ee.common.template.Auth.Role;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.loginAPI.KakaoLoginBO;
@@ -35,6 +37,7 @@ import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.tutor.model.service.TutorService;
 
 @Controller
+@Auth(role = Role.ADMIN)
 public class MemberController {
 	
 	private NaverLoginBO naverLoginBO;
@@ -134,6 +137,7 @@ public class MemberController {
 		}
 	}
 	
+	// 카카오 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "kakaologin.me", method = { RequestMethod.GET, RequestMethod.POST })
 	   public String kakaoLoginCallback(@RequestParam("code") String code, HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception{
 	      
@@ -236,6 +240,7 @@ public class MemberController {
 		}
 	}
 	
+	@Auth(role = Role.USER)
 	@RequestMapping("myPage.me")
 	public String myPage() {
 		return "user/member/myPage";
@@ -351,6 +356,7 @@ public class MemberController {
 		}
 	}
 	
+	@Auth(role = Role.USER)
 	@RequestMapping("update.me")
 	public String updateMember(Member m, MultipartFile changeMemPic, HttpSession session, Model model) throws IOException {
 		
@@ -389,7 +395,8 @@ public class MemberController {
 		}
 		return originName;
 	}
-			
+		
+	@Auth(role = Role.USER)
 	@RequestMapping("delete.me")
 	public String deleteMember(String memPwdDelCheck, HttpSession session, Model model) {
 		
@@ -424,6 +431,7 @@ public class MemberController {
 		}
 	}
 	
+	@Auth(role = Role.USER)
 	@RequestMapping("myWishList.me")
 	public String myWishList(HttpSession session) {
 		
@@ -436,6 +444,7 @@ public class MemberController {
 		return "user/member/myWishList";
 	}
 	
+	@Auth(role = Role.USER)
 	@RequestMapping("myDeliveryList.me")
 	public String myDeliveryList(HttpSession session) {
 		
@@ -448,6 +457,7 @@ public class MemberController {
 		return "user/member/myDeliveryList";
 	}
 	
+	@Auth(role = Role.USER)
 	@RequestMapping("myDetailDel.me")
 	public String myDetailDelivery(int memPayNo, HttpSession session) {
 		
@@ -457,6 +467,7 @@ public class MemberController {
 		return "user/member/myDetailViewDelivery";
 	}
 	
+	@Auth(role = Role.USER)
 	@RequestMapping("myUpdateDel.me")
 	public String myUpdateDelivery(int memPayNo, HttpSession session, Model model) {
 		
@@ -470,6 +481,7 @@ public class MemberController {
 		}
 	}
 	
+	@Auth(role = Role.USER)
 	@RequestMapping("myCancelDel.me")
 	public String myCancelDelivery(int memPayNo, HttpSession session, Model model) {
 		

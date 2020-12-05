@@ -23,8 +23,18 @@
 	
 	<context:component-scan base-package="com.kh.ee" />
 	
-	<!-- Naver 로그인 -->
+	<!-- Naver/Kakao 로그인 -->
 	<beans:bean id="naverLoginBO" class="com.kh.ee.user.member.loginAPI.NaverLoginBO" />
 	<beans:bean id="kakaoLoginBO" class="com.kh.ee.user.member.loginAPI.KakaoLoginBO" />
+	
+	<!-- Interceptors -->
+	<interceptors>
+	    <interceptor>
+		    <mapping path="/**" /> 
+		    <exclude-mapping path="/loginForm.me"/>
+            <exclude-mapping path="/assets/**"/>
+		    <beans:bean class="com.kh.ee.common.template.AuthInterceptor" />
+	    </interceptor>
+	</interceptors>
 	
 </beans:beans>
