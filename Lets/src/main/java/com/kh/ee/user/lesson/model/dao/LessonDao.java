@@ -195,4 +195,8 @@ public class LessonDao {
 			System.out.println("daoWl : " + result);
 		return result;
 	}
+
+	public int insertLesson(Lesson l, SqlSessionTemplate ss) {
+		return ss.insert("lessonMapper.insertLesson", l);
+	}
 }

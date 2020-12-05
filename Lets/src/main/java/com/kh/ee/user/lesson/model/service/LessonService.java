@@ -71,12 +71,14 @@ public interface LessonService {
 	int insertDelInfo(MemPay mp); 
 
 	int insertLessonFaq(LessonFaq lfaq);
+	
 	int insertCurriculum(Curriculum element);
-
 
 	int insertVideo(Video element);
 
 	int selectWL(WishList wl);
+
+	int insertLesson(Lesson l);
 
 	
 

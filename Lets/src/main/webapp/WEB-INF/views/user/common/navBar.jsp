@@ -86,18 +86,21 @@
 			                                          <li>
 			                                          	  <div class="after-login-dropdown">
 			                                                  <a href="tutorMain.tm">튜터 센터</a>
-			                                                  <ul class="after-login-dropdown-content-tutor">
 			                                                  	<c:choose>
 			                                                  		<c:when test="${ isTutor }">
-		                                                  				<li><a href="tutorFormUpdate.te?memNo=${loginUser.memNo}">튜터 수정</a></li>
+				                                                  		<ul class="after-login-dropdown-content-tutor">
+		                                                  					<li><a href="tutorFormUpdate.te?memNo=${loginUser.memNo}">튜터 수정</a></li>
+		                                                  					<li style="margin-top: -10px;"><a href="tutorNotice.no?noticeType=TUTOR">튜터 공지사항</a></li>
+			                                                      			<li style="margin-top: -10px;"><a href="enroll.le">새로운 수업</a></li>
+		                                                      			</ul>
 		                                                      		</c:when>
 		                                                      		<c:otherwise>
-			                                                      		<li><a href="tutorEnroll.te">튜터 등록</a></li>
+		                                                      			<ul class="after-login-dropdown-content">
+			                                                      			<li><a href="tutorEnroll.te">튜터 등록</a></li>
+			                                                      			<li style="margin-top: -20px;"><a href="tutorNotice.no?noticeType=TUTOR">튜터 공지사항</a></li>
+		                                                      			</ul>
 			                                                      	</c:otherwise>
 	                                                      		</c:choose>
-			                                                      <li style="margin-top: -10px;"><a href="tutorNotice.no?noticeType=TUTOR">튜터 공지사항</a></li>
-			                                                      <li style="margin-top: -10px;"><a href="enroll.le">새로운 수업</a></li>
-			                                                  </ul>
 			                                              </div>
 			                                          </li>
 			                                          <li><a href="tutorMyLesson.tm">내 클래스</a></li>

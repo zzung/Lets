@@ -763,4 +763,38 @@
 	    )
 </insert>
 
+<insert id="insertLesson" parameterType="Lesson">
+	insert 
+	  into lesson
+	    (
+	      lesson_no
+	    , mem_no
+	    , lesson_form
+	    , lesson_type
+	    , lesson_group
+	    , lesson_category
+	    , lesson_title
+	    , lesson_cover_img
+	    , lesson_instr
+	    , lesson_prepare
+	    , lesson_target
+	    )
+	values
+	    (
+	      seq_lesson_no.nextval
+	    , #{memNo}
+	    , #{lessonForm}
+	    , #{lessonType}
+	    , #{lessonGroup}
+	    , #{lessonCategory}
+	    , #{lessonTitle}
+	    , #{lessonCoverImg}
+	    , #{lessonInstr}
+	    , #{lessonPrepare}
+	    , #{lessonTarget}
+	    
+	    )
+
+</insert>
+
 </mapper>

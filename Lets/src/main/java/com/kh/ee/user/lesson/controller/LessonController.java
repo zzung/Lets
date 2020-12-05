@@ -258,42 +258,53 @@ public class LessonController {
 	@RequestMapping("insert.le")
 	public String insertLesson(Lesson l, MultipartFile lessonUpFile, HttpSession session, Model model) {
 		
-		//레슨 
-		if(!lessonUpFile.getOriginalFilename().equals("")) {			
-			String changeName = lessonCoverImg(lessonUpFile, session);
-			if(changeName != null) {
-				l.setLessonCoverImg("resources/lesson/lessonPicFiles/" + changeName);
-			}
-		}
-        
-        		
-		ArrayList<Curriculum> curriculumList = l.getCurriculumList();
-		for(Curriculum element:curriculumList) {
-			element.setLessonNo(1);
-			lService.insertCurriculum(element);
-		}
-		
-		ArrayList<String> lessonPrepareList = l.getLessonPrepareList();
-		String.join(", ", lessonPrepareList);
-		System.out.println(String.join(", ", lessonPrepareList));
-		
-		ArrayList<LessonFaq> lessonFaqList = l.getLessonFaqList();
-		for(LessonFaq element:lessonFaqList) {
-			element.setLessonNo(1);
-			lService.insertLessonFaq(element);
-		}
-		
-		// 비디오
-		ArrayList<Video> videoList = l.getVideoList();
-		for(Video element:videoList) {
-			element.setLessonNo(1);
-			lService.insertVideo(element);
-			
-		}
-		
-		
-		return "user/tutor/tutorMainView";
-	}
+	      
+	      //커리큘럼
+	      ArrayList<Curriculum> curriculumList = l.getCurriculumList();
+	      for(Curriculum element:curriculumList) {
+	         element.setLessonNo(1);
+	         lService.insertCurriculum(element);
+	      }
+	      
+	      //준비물
+	      ArrayList<String> lessonPrepareList = l.getLessonPrepareList();
+	      String.join(", ", lessonPrepareList);
+	      System.out.println(String.join(", ", lessonPrepareList));
+	      
+	      //레슨faq
+	      ArrayList<LessonFaq> lessonFaqList = l.getLessonFaqList();
+	      for(LessonFaq element:lessonFaqList) {
+	         element.setLessonNo(1);
+	         lService.insertLessonFaq(element);
+	      }
+	      
+	      // 비디오
+	      ArrayList<Video> videoList = l.getVideoList();
+	      for(Video element:videoList) {
+	         element.setLessonNo(1);
+	         lService.insertVideo(element);
+	         
+	      }
+	      
+	      //레슨 
+	      if(!lessonUpFile.getOriginalFilename().equals("")) {         
+	         String changeName = lessonCoverImg(lessonUpFile, session);
+	         if(changeName != null) {
+	            l.setLessonCoverImg("resources/lesson/lessonPicFiles/" + changeName);
+	         }
+	      }
+	      
+	      int result = lService.insertLesson(l);
+	      
+	      if(result > 0) { // 
+	         session.setAttribute("alertMsg", "클래스 등록 요청되었습니다!");
+	         return "user/tutor/tutorMainView";
+	         
+	      }else { // 실패 => 에러문구 담아서 에러페이지로 포워딩
+	         model.addAttribute("errorMsg", "클래스 등록 실패");
+	         return "common/errorPage";
+	      }
+	   }
 	
 	private String lessonCoverImg(MultipartFile upfile, HttpSession sesson) {
 		

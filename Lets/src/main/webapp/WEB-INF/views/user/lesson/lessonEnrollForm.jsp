@@ -39,7 +39,7 @@
          	
          	var videoCurriculumHtml = '';
          	videoCurriculumHtml+= '<div class="curriculumVideo"><h6><span class="videoCurriculumNum">'+curriculumIndex+') </span> <span class="videoCurriculumText"></span></h6><div class="mt-10">';
-         	videoCurriculumHtml+= '<textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name="" onfocus="this.placeholder =\'\'" onblur="this.placeholder = \'교육 과정에 대한 간단한 소개를 입력해 주세요\'"></textarea> <br>';
+         	videoCurriculumHtml+= '<textarea class="single-textarea" placeholder="교육 과정에 대한 간단한 소개를 입력해 주세요" required="" name="videoList[0].videoCont" onfocus="this.placeholder =\'\'" onblur="this.placeholder = \'교육 과정에 대한 간단한 소개를 입력해 주세요\'"></textarea> <br>';
          	videoCurriculumHtml+= '<input class="form-control" name="curriculumList[0].curriculumCont" type="text" placeholder="영상 제목을 입력해 주세요" style="width: 800px;">';
          	videoCurriculumHtml+= '<input class="form-control" name="curriculumList[0].curriculumCont" type="text" placeholder="교육 과정에 맞는 영상 url 입력해 주세요" style="width: 800px;"></div></div>';
          	
@@ -94,17 +94,6 @@
         		}
         	 });
         	 
-             $('#lessonNext').click(function(){
-            	 $('.class1-form').css('display', 'none')
-            	 $('.lessonEnrollNextForm').css('display', 'block')
-            	 $('html').scrollTop(0)
-             });
-             
-             $('#lessonPrev').click(function(){
-            	 $('.lessonEnrollNextForm').css('display', 'none')
-            	 $('.class1-form').css('display', 'block')
-            	 $('html').scrollTop(0)
-             });
              
             $('#curriculumBtn').click (function () {   
 	           	console.log( $(".category_1").length)
@@ -222,7 +211,7 @@
             <tr>
                  <th>수업유형</th>
                  <td><input type="radio" name="lessonType" id="online" value="online"> <label for="online"> 온라인 수업</label></td>
-                 <td><input type="radio" name="lessonType" id="offline" value="offline"> <label for="offline"> 대면 수업</label></td>
+                 <td><input type="radio" name="lessonType" id="offline" value="offline"> <label for="offline"> 오프라인 수업</label></td>
              </tr>
              <tr>
                  <td></td>
@@ -368,7 +357,7 @@
 <div class="lessonEnrollNextForm">
         <div style="margin: 4%;">
             <br>
-            <div style=" clear: both;">
+            <div style="clear: both;">
             <h5><b>클래스 설명</b></h5>
 	            <div style="background-color: #f9f9ff; width: 900px; font-size: 13px;">
 	                <ul class="unordered-list">

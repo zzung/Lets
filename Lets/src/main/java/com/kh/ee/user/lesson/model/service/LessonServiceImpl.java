@@ -242,6 +242,11 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.selectWL(wl, ss);
 	}
 
+	@Override
+	public int insertLesson(Lesson l) {
+		return lDao.insertLesson(l, ss);
+	}
+
 
 
 
