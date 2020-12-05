@@ -63,8 +63,15 @@ public class CurriculumController {
 	public String detailLessonInfo(Lesson l, Model model) {
 		
 		Lesson selectLesson = curService.selectLesson(l);
+		// 시청한 영상 수
+		int videoCount = curService.selectVideoCount(l);
+		
+		// 별점 가져오기
+		int avgStar = curService.selectAverageStar(l);
 		
 		model.addAttribute("lesson", selectLesson);
+		model.addAttribute("videoCount", videoCount);
+		model.addAttribute("avgStar", avgStar);
 		
 		return "user/curriculum/lessonInfo";
 	}
@@ -74,8 +81,15 @@ public class CurriculumController {
 		
 		ArrayList<LessonFaq> faqList = curService.detailFAQ(l);
 		Lesson selectLesson = curService.selectLesson(l);
+		// 시청한 영상 수
+		int videoCount = curService.selectVideoCount(l);
+		
+		// 별점 가져오기
+		int avgStar = curService.selectAverageStar(l);
 		
 		model.addAttribute("lesson", selectLesson);
+		model.addAttribute("videoCount", videoCount);
+		model.addAttribute("avgStar", avgStar);
 		model.addAttribute("faqList", faqList);
 		
 		return "user/curriculum/detailFAQ";
@@ -86,8 +100,15 @@ public class CurriculumController {
 		
 		ArrayList<QnA> qnaList = curService.detailQnA(l);
 		Lesson selectLesson = curService.selectLesson(l);
+		// 시청한 영상 수
+		int videoCount = curService.selectVideoCount(l);
+		
+		// 별점 가져오기
+		int avgStar = curService.selectAverageStar(l);
 		
 		model.addAttribute("lesson", selectLesson);
+		model.addAttribute("videoCount", videoCount);
+		model.addAttribute("avgStar", avgStar);
 		model.addAttribute("qnaList", qnaList);
 		
 		return "user/curriculum/detailQNA";
@@ -188,10 +209,18 @@ public class CurriculumController {
 	public String videoList(Lesson l, Model model) {
 		
 		Lesson selectLesson = curService.selectLesson(l);
+		// 시청한 영상 수
+		int videoCount = curService.selectVideoCount(l);
+		
+		// 별점 가져오기
+		int avgStar = curService.selectAverageStar(l);
+		
 		ArrayList<Video> videoList = curService.videoList(l);
 		
-		model.addAttribute("videoList", videoList);
 		model.addAttribute("lesson", selectLesson);
+		model.addAttribute("videoCount", videoCount);
+		model.addAttribute("avgStar", avgStar);
+		model.addAttribute("videoList", videoList);
 		
 		return "user/curriculum/videoList";
 		

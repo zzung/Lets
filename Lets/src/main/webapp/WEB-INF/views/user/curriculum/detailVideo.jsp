@@ -27,9 +27,24 @@
     <h3>${ video.videoCont }</h3>
 
     <div id="video_button_box" align="center">
-        <button class="video_button" onclick="location.href='detailVideo.cr?videoNo=${video.preVideoNo}&memNo=${ loginUser.memNo }';">이전 강의</button>
-        <button class="video_button" onclick="history.back();">목록으로</button>
-        <button class="video_button" onclick="location.href='detailVideo.cr?videoNo=${video.nextVideoNo}&memNo=${ loginUser.memNo }';">다음 강의</button>
+    	<c:choose>
+	    	<c:when test="${ video.preVideoNo != null }">
+	        	<button class="video_button" onclick="location.href='detailVideo.cr?videoNo=${video.preVideoNo}&memNo=${ loginUser.memNo }&lessonNo=${ video.lessonNo }';">이전 강의</button>
+	        </c:when>
+	        <c:otherwise>
+	        	<button class="video_button" onclick="location.href='detailVideo.cr?videoNo=${video.preVideoNo}&memNo=${ loginUser.memNo }&lessonNo=${ video.lessonNo }';" disabled>이전 강의</button>
+	        </c:otherwise>
+        </c:choose>
+        <button class="video_button" onclick="location.href='videoList.cr?lessonNo=${video.lessonNo}';">목록으로</button>
+        <c:choose>
+	    	<c:when test="${ video.preVideoNo != null }">
+	        	<button class="video_button" onclick="location.href='detailVideo.cr?videoNo=${video.nextVideoNo}&memNo=${ loginUser.memNo }&lessonNo=${ video.lessonNo }';">다음 강의</button>
+	        </c:when>
+	        <c:otherwise>
+	        	<button class="video_button" onclick="location.href='detailVideo.cr?videoNo=${video.nextVideoNo}&memNo=${ loginUser.memNo }&lessonNo=${ video.lessonNo }';" disabled>다음 강의</button>
+	        </c:otherwise>
+        </c:choose>
+        
     </div>
 
 </div>

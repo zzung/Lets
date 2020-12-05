@@ -21,12 +21,12 @@
 <!-- 본문 -->
 <div class="main">
 
-    <span class="button">
-        	클래스 소개
+    <span class="button" onclick="moving('lessonInfo.cr');">
+       	 클래스 소개
     </span>
 
-    <span class="button">
-       		FAQ
+    <span class="button" onclick="moving('detailFAQ.cr');">
+        FAQ
     </span>
 
     <hr>
@@ -40,7 +40,7 @@
 
             <span class="button" id="all_open">모두 펼치기</span>
         
-            <span id="point" style="margin-left: 20px;">9강의</span>
+            <span id="point" style="margin-left: 20px;">${ lesson.lessonContNo }강의</span>
 
         </div>
 
@@ -56,7 +56,7 @@
 	
 	        </div>
 	
-	        <div class="video button" onclick="location.href='detailVideo.cr?videoNo=${ video.videoNo}&memNo=${ loginUser.memNo }';">
+	        <div class="video button" onclick="location.href='detailVideo.cr?videoNo=${ video.videoNo }&memNo=${ loginUser.memNo }&lessonNo=${ lesson.lessonNo }';">
 	
 	            <img src="resources/user/assets/img/curriculum/play.png" alt="play" height="100%">
 	
@@ -72,6 +72,10 @@
 
 
 <script>
+	function moving(e){
+		location.href = e + "?lessonNo=" + ${ lesson.lessonNo };
+	}
+	
     $(function() {
         // 비디오 창 show/hide
         $(".show").click(function() {
