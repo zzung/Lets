@@ -13,6 +13,8 @@ import com.google.gson.Gson;
 import com.kh.ee.admin.model.service.AdminService;
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
+import com.kh.ee.common.template.Auth;
+import com.kh.ee.common.template.Auth.Role;
 import com.kh.ee.common.template.Pagination;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
@@ -24,11 +26,13 @@ public class AdminController {
 	@Autowired
 	private AdminService as; 
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("memberManagement.ad")
 	public String memberManagement(){
 		return "admin/memberManagementView";
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("classManagement.ad")
 	public String classManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.classMgmtCountList();
@@ -42,6 +46,7 @@ public class AdminController {
 		return "admin/classManagementView";
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@ResponseBody
 	@RequestMapping("lessonApproval.ad")
 	public String lessonApproval(int lessonNo) {
@@ -54,6 +59,7 @@ public class AdminController {
 		}
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@ResponseBody
 	@RequestMapping("rejectApproval.ad")
 	public String rejectApproval(Lesson l) {
@@ -66,6 +72,7 @@ public class AdminController {
 		}
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("searchClassMgmt.ad")
 	public String searchClassMgmt(String condition, String keyword, int currentPage, Model model) {
 		
@@ -91,6 +98,7 @@ public class AdminController {
 		return "admin/classManagementView";		
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("classPayment.ad")
 	public String classPayment(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.classPaymentListCount();
@@ -105,6 +113,7 @@ public class AdminController {
 		return "admin/classPaymentView";
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@ResponseBody
 	@RequestMapping("cancelPay.ad")
 	public String cancelPay(int memPayNo) {
@@ -117,6 +126,7 @@ public class AdminController {
 		}
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("searchPaymentMgmt.ad")
 	public String searchPaymentMgmt(String condition, String keyword, int currentPage, Model model) {
 		
@@ -142,6 +152,7 @@ public class AdminController {
 		return "admin/classPaymentView";		
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("saleManagement.ad")
 	public String saleManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.selectListCount(); 
@@ -155,7 +166,7 @@ public class AdminController {
 		return "admin/discountManagementView"; 
 	}
 	
-	
+	@Auth(role = Role.ADMIN)
 	@ResponseBody
 	@RequestMapping("discountSet.ad")
 	public String discountSet(Lesson l) {
@@ -168,6 +179,7 @@ public class AdminController {
 		}
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("searchDiscount.ad")
 	public String searchDiscount(String condition, String keyword,int currentPage, Model model) {
 		
@@ -194,6 +206,7 @@ public class AdminController {
 		
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("discountUnApplied.ad")
 	public String searchDiscountUnApplied(int currentPage, Model model) {
 		int listCount = as.countDiscountUnApplied();
@@ -207,6 +220,7 @@ public class AdminController {
 		return "admin/discountManagementView";
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("discountApplied.ad")
 	public String searchDiscountApplied(int currentPage, Model model) {
 		int listCount = as.countDiscountApplied();
@@ -220,26 +234,31 @@ public class AdminController {
 		return "admin/discountManagementView";
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("blacklistManagement.ad")
 	public String blacklistManagement(){
 		return "admin/blacklistManagementView";
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("inqueryManagement.ad")
 	public String inqueryManagement(){
 		return "admin/inqueryManagementView";
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("reportManagement.ad")
 	public String reportManagement(){
 		return "admin/reportManagementView";
 	}
 	
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("noticeManagement.ad")
 	public String noticeManagement(){
 		return "admin/noticeManagementView";
 	}
 
+	@Auth(role = Role.ADMIN)
 	@RequestMapping("faqManagement.ad")
 	public String faqManagement(){
 		return "admin/faqManagementView";

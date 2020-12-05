@@ -17,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.kh.ee.common.model.vo.PageInfo;
+import com.kh.ee.common.template.Auth;
 import com.kh.ee.common.template.Pagination;
+import com.kh.ee.common.template.Auth.Role;
 import com.kh.ee.user.faq.model.service.FaqService;
 import com.kh.ee.user.faq.model.vo.Faq;
 import com.kh.ee.user.lesson.model.service.LessonService;
@@ -44,6 +46,7 @@ public class TutorController {
 	private TutorService tutorService;
 	
 	// 튜터메인(수현)
+	@Auth(role = Role.USER)
 	@RequestMapping("tutorMain.tm")
 	public String tutorMain( Model model) {
 		
@@ -54,6 +57,7 @@ public class TutorController {
 	}
 	
 	// 내수업페이지(수현)
+	@Auth(role = Role.TUTOR)
 	@RequestMapping("tutorMyLesson.tm")
 	public String tutorMyLesson(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1")int currentPage) {
 		
@@ -77,12 +81,14 @@ public class TutorController {
 	}
 	
 	//튜터등록페이지 (현선)
+	@Auth(role = Role.USER)
 	@RequestMapping("tutorEnroll.te")
 	public String insertFormTutor() {
 		return "user/tutor/tutorEnrollForm";
 	}
 	
 	//튜터등록 (현선)
+	@Auth(role = Role.USER)
 	@RequestMapping("insert.tt")
 	public String insertTutor(Tutor t, HttpSession session, MultipartFile tutorUpfile, Model model) {
 		
@@ -111,6 +117,7 @@ public class TutorController {
 	}
 	
 	// 튜터정보 수정페이지 (현선)
+	@Auth(role = Role.TUTOR)
 	@RequestMapping("tutorFormUpdate.te")
 	public String updateFormTutor(int memNo, Model model) {
 		
@@ -121,6 +128,7 @@ public class TutorController {
 	}
 	
 	// 튜터정보 수정 (현선)
+	@Auth(role = Role.TUTOR)
 	@RequestMapping("tutorUpdate.te")
 	public String updateTutor(Tutor t, MultipartFile reupfile, HttpSession session, Model model) {
 		
@@ -176,6 +184,7 @@ public class TutorController {
 	}
 	
 	// 내수업 lesson삭제 (수현)
+	@Auth(role = Role.TUTOR)
 	@ResponseBody
 	@RequestMapping("deleteLesson.tl")
 	public String deleteLesson(int lno) {
@@ -188,6 +197,7 @@ public class TutorController {
 		}
 	}
 	// 내수업 택배사,번호 update(수현)
+	@Auth(role = Role.TUTOR)
 	@RequestMapping("delivery.tm")
 	public String updateDelivery(MemPay mp) {
 		System.out.println(mp);
@@ -196,6 +206,7 @@ public class TutorController {
 		return "redirect:tutorMyLesson.tm";
 	}
 	
+	@Auth(role = Role.TUTOR)
 	@ResponseBody
 	@RequestMapping(value="paging.pt", produces="application/json; charset=utf-8")
 	public String pagingPrepare(@RequestParam(value="currentPage", defaultValue="1")int currentPage, HttpSession session, Model model) {
