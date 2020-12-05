@@ -3,7 +3,6 @@ package com.kh.ee.user.tutor.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.common.template.Auth;
-import com.kh.ee.common.template.Pagination;
 import com.kh.ee.common.template.Auth.Role;
+import com.kh.ee.common.template.Pagination;
 import com.kh.ee.user.faq.model.service.FaqService;
 import com.kh.ee.user.faq.model.vo.Faq;
 import com.kh.ee.user.lesson.model.service.LessonService;
@@ -74,6 +72,7 @@ public class TutorController {
 		int listCount = memPayService.selectListCount(loginUser.getMemNo());
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		ArrayList<MemPay> mpList = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
+		
 		
 		model.addAttribute("pi",pi);
 		model.addAttribute("aLlist", aLlist);
@@ -189,27 +188,61 @@ public class TutorController {
 	
 	// 내수업 lesson삭제 (수현)
 	@Auth(role = Role.TUTOR)
-	@ResponseBody
+	//@ResponseBody
 	@RequestMapping("deleteLesson.tl")
-	public String deleteLesson(int lno) {
+	public String deleteLesson(int lno, Model model, HttpSession session) {
 		int result = lessonService.deleteLesson(lno);
-		
+		System.out.println(lno);
+		/*
 		if(result > 0) {
 			return "success";
 		}else {
 			return "fail";
 		}
+		*/
+		if(result>0) {
+			session.setAttribute("alertMsg", "성공적으로 삭제신청 되었습니다.");
+			return "redirect:tutorMyLesson.tm";
+		}else {
+			model.addAttribute("errorMsg", "수업 삭제 실패");
+			return "redirect:tutorMyLesson.tm";
+		}
 	}
+	
+	// 내수업 lesson삭제 (수현)
+		@Auth(role = Role.TUTOR)
+		@ResponseBody
+		@RequestMapping("deleteLes.tl")
+		public String deleteLesson(int lno) {
+			int result = lessonService.deleteLesson(lno);
+			System.out.println(lno);
+			
+			if(result > 0) {
+				return "success";
+			}else {
+				return "fail";
+			}
+			
+		}
+		
 	// 내수업 택배사,번호 update(수현)
 	@Auth(role = Role.TUTOR)
 	@RequestMapping("delivery.tm")
-	public String updateDelivery(MemPay mp) {
-		System.out.println(mp);
+	public String updateDelivery(MemPay mp, Model model) {
 		int result = memPayService.updateDelivery(mp);
+		System.out.println(mp);
 		
-		return "redirect:tutorMyLesson.tm";
+		if(result > 0) {
+			return "redirect:tutorMyLesson.tm";			
+		}
+		else {
+			model.addAttribute("errorMsg","택배사 입력 실패");
+			return "redirect:tutorMyLesson.tm";
+		}
+		
 	}
 	
+	/* 페이징(수현) 아직 수정중
 	@Auth(role = Role.TUTOR)
 	@ResponseBody
 	@RequestMapping(value="paging.pt", produces="application/json; charset=utf-8")
@@ -218,22 +251,23 @@ public class TutorController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int listCount = memPayService.selectListCount(loginUser.getMemNo());
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
-		
+	
 		ArrayList<MemPay> list = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
-		
 		HashMap<String, Object> hmap = new HashMap<String,Object>();
 		hmap.put("pi",pi);
 		hmap.put("list", list);
-		model.addAttribute("pi",pi);
+		
 		return new Gson().toJson(hmap);
 	}
-	
+	*/
+
+	// 튜터계좌번호insert (수현)
+
 	@Auth(role = Role.TUTOR)
 	@RequestMapping("insertSalary.ts")
 	public String insertSalary(Salary s) {
 		ArrayList<Salary> salaryList = s.getSalaryList();
 		ArrayList<Integer> slno = s.getLsno();
-		
 		
 		for(int lessonNo :slno) {
 			s.setLessonNo(lessonNo);
@@ -242,9 +276,9 @@ public class TutorController {
 			}
 			salService.insertSalary(s);
 		}
-		
 		return "redirect:tutorMyLesson.tm";
 	}
+	
 	
 	
 }

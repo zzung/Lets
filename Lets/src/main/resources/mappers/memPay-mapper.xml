@@ -26,6 +26,7 @@
 	<result column="total_fee" property="totalFee"/>
 	<result column="salary_total" property="salaryTotal"/>
 	<result column="fee" property="fee"/>
+	<result column="account" property="account"/>
 </resultMap>
 
 <select id="selectPrepareList" resultMap="memPayResultSet" parameterType="_int">
@@ -59,7 +60,8 @@
 	   set del_name = #{delName},
 	       del_no = #{delNo},
 	       del_status = '배송중'
-	 where mem_pay_no = #{memPayNo}
+	 where mem_no = #{memNo}
+	   and lesson_no= = #{lessonNo}
 </update>
 
 <select id="selectListCount" parameterType="_int" resultType="_int">
@@ -69,6 +71,7 @@
 	    join lesson l using (lesson_no)
 	    where l.mem_no = #{memNo}
 	      and l.lesson_type='온라인'
+	      and l.status = 'Y'
 	
 </select>
 
@@ -83,6 +86,7 @@
 	      , s.fee
 	      , l.pay_total * (s.fee/100) total_fee
 	      , l.pay_total * count(m.lesson_no)-(l.pay_total * (s.fee/100)) salary_total
+	      , s.account
 	  from mem_pay m
 	  left join lesson l on (m.lesson_no = l.lesson_no)
 	  left join salary s on (l.lesson_no = s.lesson_no)
@@ -90,7 +94,7 @@
 	 where l.status = 'Y'
 	   and l.mem_no = #{memNo}
 	 group by m.lesson_no, l.lesson_title, l.like_count,
-	          r.star, l.pay_total, s.fee
+	          r.star, l.pay_total, s.fee, s.account
 	 order by lesson_no desc
 </select>
 	 

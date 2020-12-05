@@ -54,5 +54,6 @@ public class MemPay {
 	private String totalFee;		// 클래스금액 * (수수료/100)
 	private String salaryTotal;		// 총월급 클래스금액 * 학생수 - fee
 	private String fee;
+	private String account;
 
 }

@@ -74,8 +74,9 @@
         <br><br>
         <!-- 승인 완료된 클래스 -->
         <p id="smTitle" style="color: gray;">승인 완료된 클래스 <span style="font-size: 12px;color: rgb(45, 48, 186);float: right;">**온라인 클래스인 경우에만 클래스 종료 신청이 가능합니다.</span></p>
+        
         <table style="text-align: center;" id="classTable" class="table table-bordered table-sm">
-            <!-- for문 -->
+            
             <thead>
 	            <tr class="titleName" style="background-color:rgb(243, 243, 243)">
 	            	<th>수업제목</th>
@@ -94,9 +95,11 @@
             	<c:otherwise>
 		            	<c:forEach var="al" items="${aLlist}" varStatus="del">
 							<!-- 삭제에 필요(인덱스) -->  
-			       			<input type="hidden" id="deleteLes${del.index }" value="${al.lessonNo}">
+							<form action="" method="post" id="delLesson${del.index }">
+			       				<input type="hidden" id="deleteLes${del.index }" value="${al.lessonNo}" name="lno">
+				            </form>
 				            <tr>
-				                <td style="width: 550px;">${al.lessonTitle }</td>
+				                <td style="width: 550px;"><a href="">${al.lessonTitle }</a></td>
 				                <td style="width: 150px;">${al.approveDate }</td>
 				                <td style="width: 150px;">${al.lessonType }</td>
 				                <td id="lessonTp${del.index }" style="width: 150px;">
@@ -105,7 +108,7 @@
 				                		<c:choose>
 				                		<c:when test="${al.status eq 'Y' }">
 				                    		<button class="genric-btn primary-border btn-sm" 
-				                    		id="deleteBtn${del.index }" style="font-size: 13px;">클래스 종료 신청</button>
+				                    		id="deleteBtn${del.index }" style="font-size: 13px;" onclick="deleteBtn${del.index }();">클래스 종료 신청</button>
 				                		</c:when>
 				                		<c:otherwise>
 				                			<span style="font-size:12px">종료신청 완료</span>	                		
@@ -118,7 +121,12 @@
 				                </c:choose>
 				                </td>
 				            </tr>
-		     		
+			       	<script>
+			       		function deleteBtn${del.index }(){
+			       			$("#delLesson${del.index }").attr("action","deleteLesson.tl").submit();
+			       		}
+			       	</script>
+		     		<!-- 
 				        <script>
 				        	$(function(){
 				        		$("#deleteBtn${del.index }").click(function(){
@@ -150,12 +158,12 @@
 				        		})
 				        	})
 				        </script>
+				        -->
 		            </c:forEach>
 	           </c:otherwise>
      		</c:choose>
      		</tbody>
         </table>
-        
         <!------------------------ 클래스 승인 상태 --------------------------------->
         <br><br>
         <p id="smTitle" style="color: gray;">클래스 승인 상태<span style="font-size: 12px;color: rgb(45, 48, 186);float: right;">**승인 보류인 경우, 수정 후 다시 클래스 신청이 가능합니다.</span></p>
@@ -163,7 +171,6 @@
 	        <thead>
 	       		<tr class="titleName" style="background-color:rgb(243, 243, 243)">
 	            	<th style="width: 550px;">수업제목</th>
-	            	<th style="width: 150px;">승인날짜</th>
 	            	<th style="width: 150px;">승인유형</th>
 	            	<th style="width: 150px;">수정/삭제</th>
 	            </tr>
@@ -177,10 +184,11 @@
             	</c:when>
             	<c:otherwise>
 		            <c:forEach var="sl" items="${sLlist }" varStatus="slModal">
-		            <input type="hidden" id="lno${slModal.index }" name="lno" value="${sl.lessonNo }">
+		            <form action="" method="post" id="del${slModal.index }">
+		            	<input type="hidden" id="lno${slModal.index }" name="lno" value="${sl.lessonNo }">
+			        </form> 
 			            <tr>
-			                <td>${sl.lessonTitle}</td>
-			                <td>${sl.approveDate}</td>
+			                <td><a href="">${sl.lessonTitle}</a></td>
 			                <td>
 			                    <c:choose>
 			                    	<c:when test="${sl.lessonStatus eq '거절'}">
@@ -205,11 +213,11 @@
 			                    	<c:when test="${sl.lessonStatus eq '보류' }">
 				                    	<c:if test="${!empty sl.holdReason}">
 				                    		<button class="genric-btn primary btn-sm" style="font-size: 13px;" onclick="">수정</button>
-			                    			<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }">삭제</button>
+			                    			<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }" >삭제</button>
 				                    	</c:if>
 			                    	</c:when>
 			                    	<c:when test="${sl.lessonStatus eq '거절'}">
-			                    		<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }">삭제</button>
+			                    		<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }" onclick="delBtn${slModal.index}();">삭제</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	
@@ -269,12 +277,19 @@
 				            })
 						
 				        </script>
+				        <!-- 
+				       <script>
+			       		function delBtn${slModal.index }(){
+			       			$("#del${slModal.index  }").attr("action","deleteLesson.tl").submit();
+			       		}
+			       		</script>
+			       		 -->
 				        <script>
 				        	$(function(){
 				        		$("#lessonDelBtn${slModal.index }").click(function(){
 				        			
 				        			$.ajax({
-				        					url:"deleteLesson.tl",
+				        					url:"deleteLes.tl",
 				        					data:{
 				        						lno:$("#lno${slModal.index }").val()
 				        					},
@@ -296,6 +311,7 @@
 				        		})
 				        	})
 				        </script>
+				       
 		        	</c:forEach>
 	        	</c:otherwise>
 	        	</c:choose>
@@ -320,14 +336,14 @@
 	        </thead>
 	        <tbody>
 	         	<c:choose>
-	            	<c:when test="${empty aLlist }">
+	            	<c:when test="${empty mpList }">
 	            		<tr>
 	                		<td colspan="4" align="center">준비물 신청한 회원이 없습니다.</td>
 	                	</tr>
 	            	</c:when>
             		<c:otherwise>   
 			            <c:forEach var="mp" items="${mpList}" varStatus="mtModal">
-			            
+			            <input type="hidden" name="memNo"                                                                                                                                                                                                                                                                                                                                                                                                                                                       value="${mp.memNo }">
 				            <tr>
 				                <td>${mp.memName}</td>
 				                <td><a href="">${mp.lessonTitle }</a></td>
@@ -369,7 +385,7 @@
 						                    <dl>
 						                    	<dd>
 							                    	<c:forEach var="prePare" items="${mp.lessonPrepare }" varStatus="preList">
-							                            <li>
+							                            <li style="list-style-type:square">
 							                            	&nbsp;${prePare}
 							                            </li>
 							                        </c:forEach>
@@ -437,19 +453,19 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${pi.currentPage eq 1}">
-                    		<li class="page-item"><a class="page-link">Previous</a></li>
+                    		<li class="page-item disabled" ><a class="page-link" >Previous</a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" >Previous</a></li>
+                    		<li class="page-item"><a class="page-link" href="tutorMyLesson.tm?currentPage=${pi.currentPage-1 }">Previous</a></li>
                     	</c:otherwise>
                     </c:choose>
                     <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
                     	<c:choose>
                     		<c:when test="${p ne pi.currentPage }">
-		                    	<li class="page-item"><a class="page-link" >${ p }</a></li>                    		
+		                    	<li class="page-item"><a class="page-link" href="tutorMyLesson.tm?currentPage=${p}">${ p }</a></li>                    		
                     		</c:when>
                     		<c:otherwise>
-                    			<li class="page-item"><a class="page-link">${ p }</a></li> 
+                    			<li class="page-item disabled"><a class="page-link" href="tutorMyLesson.tm?currentPage=${p}">${ p }</a></li> 
                     		</c:otherwise>
                     	</c:choose>
                     </c:forEach>
@@ -458,13 +474,13 @@
                     		<li class="page-item disabled" ><a class="page-link">Next</a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" >Next</a></li>
+                    		<li class="page-item"><a class="page-link" href="tutorMyLesson.tm?currentPage=${pi.currentPage+1 }">Next</a></li>
                     	</c:otherwise>
                 	</c:choose>
                 </ul>
             </div>
         </div>
-       
+       <!-- 
        <script>
        	$(function(){
        		$(document).on("click", ".page-link", function(){
@@ -535,7 +551,7 @@
   			})
        	});
        </script>
-      
+       -->
         <!-- 수업성과 & 정산서 -->
         <br><hr>
         <div style="color: gray; font-size: 20px; font-weight: bold; ">수업성과 & 정산서
@@ -544,20 +560,20 @@
 	        <!-- 튜터 등록 날짜로 ? 조건처리 할 수 있나 -->
 	        
 	        <div class="single-element-widget mt-30" >
-	            <div class="default-select" id="salary" style="float:left">
+	            <div class="default-select" id="salary" name="salary"style="float:left">
 	                <select>
 	                <option value="total_pay">전체수익</option>
 	                <option value="month_pay">월별로보기</option>
 	                </select>
 	            </div>
-	            <div class="default-select" id="year" style="display: none;float:left">
+	            <div class="default-select" id="year" name="year" style="display: none;float:left">
 	                <select>
 	                    <option value="2018">2018</option>
 	                    <option value="2019">2019</option>
 	                    <option value="2020">2020</option>
 	                </select>
 	            </div>
-	            <div class="default-select" id="month" style="display: none;float:left">
+	            <div class="default-select" id="month" name="month"style="display: none;float:left">
 	                <select>
 	                    <option value="1">1월</option>
 	                    <option value="2">2월</option>
@@ -582,10 +598,16 @@
         <c:forEach var="ms" items="${ msList}" varStatus="chk">
         	<div class="classSalary" >
 	            <div class="outCome">
-                    <div class="confirm-checkbox" style="margin-left:20px;margin-top:20px">
-	                	<input type="checkbox" id="confirm-checkbox${chk.index }" name="lno" value="${ms.lessonNo }">
-	                	<label for="confirm-checkbox${chk.index }"></label>
-	                </div>
+	            	<c:choose>
+		            	<c:when test="${empty ms.account }">
+		                    <div class="confirm-checkbox" style="margin-left:20px;margin-top:20px">
+			                	<input type="checkbox" id="confirm-checkbox${chk.index }" name="lno" value="${ms.lessonNo }">
+			                	<label for="confirm-checkbox${chk.index }"></label>
+			                </div>
+		                </c:when>
+		                <c:otherwise>
+		                </c:otherwise>
+	                </c:choose>
                     <br>
                     <p id="classTitle" name="classTitle" style="font-size:20px;">${ms.lessonTitle }</p>
                     <br>
@@ -655,18 +677,14 @@
             <form action="insertSalary.ts" method="post">
                 <!-- Modal Body -->
                 <div class="modal-body">
-                    <table align="center">
+                    <table align="center" class="modalTable">
                     <input type="hidden" name="lsno" id="lsno" value="">
-                    	<tr>
-                    		<td>클래스제목</td>
-                    		<td></td>
-                    	</tr>
                         <tr>
-                            <td style="width: 100x;">은행이름</td>
+                            <td style="width: 120x;">은행이름&nbsp;&nbsp;</td>
                             <td><input type="text" id="bankName" name="salaryList[0].bankName"></td>
                         </tr>
                         <tr>
-                            <td>계좌번호</td>
+                            <td>계좌번호&nbsp;&nbsp;</td>
                             <td><input type="text" id="accountNo" name="salaryList[0].accountNo" placeholder="(-) 포함 해서 적어주세요"></td>
                         </tr>
                         <tr>
@@ -692,25 +710,8 @@
         			selected.push(this.value);
         		});
         		
-        		console.log(selected);
-        		/*
-        		var str ="";
-        		for(var i=0; i<selected.length; i++){
-        			str += selected[i];
-        			
-        			if(i == selected.length-1){
-        				str[i] += selected[i];
-        			}else{
-        				str[i] += selected[i] + ",";
-        			}
-        		console.log(str + "이거");
-        		console.log($("#lessonNo").val(str[i]));
-        		}
-        		console.log(str);
-        		*/
         		$("#lsno").val(selected);
         		console.log(selected);
-        		
         	}
         </script>
     
