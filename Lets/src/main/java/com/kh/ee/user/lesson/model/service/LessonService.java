@@ -80,6 +80,8 @@ public interface LessonService {
 
 	int insertLesson(Lesson l);
 
+	int CurriculumListNo();
+
 	
 
 	

@@ -247,6 +247,11 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.insertLesson(l, ss);
 	}
 
+	@Override
+	public int CurriculumListNo() {
+		return lDao.CurriculumListNo(ss);
+	}
+
 
 
 

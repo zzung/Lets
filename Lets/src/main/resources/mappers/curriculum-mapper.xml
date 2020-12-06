@@ -311,4 +311,10 @@
  		  	 , #{videoUrl}
  		  )
  	</insert>
+ 	<select id="CurriculumListNo" resultType="_int">
+		select
+		       count(*)
+		  from curriculum
+ 			
+ 	</select>
 </mapper>
