@@ -169,6 +169,26 @@
 	</select>
 	
 	<select id="searchTutorList" parameterType="string" resultMap="lessonResultSet">
-	
+		select
+			   lesson_no
+			 , lesson_title
+			 , price
+			 , (select
+				       round((sum(star) / count(star)), 2) 
+				  from review r
+				  join lesson l using(lesson_no)
+				 where r.status = 'Y'
+				   and lesson_title like '%#{search}%') star
+		     , like_count
+		     , discount
+		     , approve_date
+		     , lesson_cover_img
+		     , pay_total
+		  from lesson l
+		  join tutor using (mem_no)
+		  join member m using (mem_no)
+		 where nickname like '%#{search}%'
+		   and m.status = 'Y'
+		   and l.status = 'Y'
 	</select>
 </mapper>
