@@ -79,24 +79,16 @@
 		<div style="width:1240px;">
 			<div> 
 				<div style="padding:10px;">
+				<input type="hidden" value=${f.faqNo }>
 					<!-- 공지 대상 -->
-					<div><h5>* 튜터</h5></div>
-					<div>[서비스 개편 사항] 메인페이지에서 새로 생긴 클래스를 확인할 수 있습니다!</div>
-					<div>2020-11-22</div>
+					<div><h5>${f.faqType}</h5></div>
+					<div>${f.faqTitle }</div>
+					<div>${f.enrollDate }</div>
 					<hr>
 					
 					<div style="padding:0px 40px 40px;">
 						<div>
-							환불은 이렇게 이렇게 진행됩니다.
-							<br>
-							환불은 이렇게 이렇게 진행됩니다.
-							<br>
-							환불은 이렇게 이렇게 진행됩니다.
-							<br>
-							환불은 이렇게 이렇게 진행됩니다.
-							<br>
-							환불은 이렇게 이렇게 진행됩니다.
-							<br>			
+							${f.faqContent }
 						</div>
 					</div>
 				</div>

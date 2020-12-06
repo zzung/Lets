@@ -14,7 +14,7 @@ import com.kh.ee.user.notice.model.vo.Notice;
 @Repository
 public class SupportDao {
 	
-	//faq 페이지 select 문(성연)
+	//notice 페이지 list 문(성연)
 	public int noticeCountList(SqlSessionTemplate ss) {
 		return ss.selectOne("supportMapper.selectNoticeListCount");
 	}
@@ -25,6 +25,18 @@ public class SupportDao {
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		return (ArrayList)ss.selectList("supportMapper.noticeList",null,rowBounds);
 	}
+	
+	
+	/*
+	 * // notice 페이지 public int increaseCount(SqlSessionTemplate sqlSession, int
+	 * bno) { return sqlSession.update("boardMapper.increaseCount", bno); }
+	 * 
+	 * public Board selectBoard(SqlSessionTemplate sqlSession, int bno) { return
+	 * sqlSession.selectOne("boardMapper.selectBoard", bno); }
+	 */
+	
+	
+	
 	
 	//faq 페이지 select 문(성연)
 	public int faqCountList(SqlSessionTemplate ss) {
@@ -55,16 +67,6 @@ public class SupportDao {
 		return sqlSession.insert("supportMapper.insertInq", i);
 	}
 
-	
-	
-	public Inquiry selectInq(SqlSessionTemplate sqlSession, int ino) {
-		return sqlSession.selectOne("supportMapper.selectInq", ino);
-	}
-	
-	public int increaseCount(SqlSessionTemplate sqlSession, int ino) {
-		return sqlSession.update("supportMapper.increaseCount", ino);
-	}
-	
 	
 	
 	

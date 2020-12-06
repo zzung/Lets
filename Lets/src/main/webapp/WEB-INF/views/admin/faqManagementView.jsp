@@ -52,7 +52,7 @@
 							<td>${f.faqCategory }</td>
 							<td>${f.faqStatus }</td>
 							<td>
-								<a href=".fa?faqNo=${faqNo eq 1}">
+								<a href="supportFaqDetail.su?faqNo=1">
 									${f.faqTitle }
 								</a>
 							

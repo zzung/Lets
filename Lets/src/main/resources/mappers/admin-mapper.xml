@@ -404,6 +404,7 @@
 	        , m.phone
 	        , m.mem_pic
 	        , m.enroll_date
+	        , m.out_date
 	        , m.status
 	        , m.auth
 	     from member m
