@@ -134,21 +134,18 @@
 				
 				<div style="padding:10px; border:solid 1px;">
 					<!-- 공지 대상 -->
-					<div>공개</div>
-					<div>[클래스] 더욱 다양한 클래스가 있었으면 좋겠어요.</div>
+					<div>${i.typeStatus }</div>
+					<div>${i.inqTitle }</div>
 					<div>
-						<span style="width:100px; float:left;">2020-11-22</span>
-						<span style="width:150px;">튜터01</span>
+						<span style="width:100px; float:left;">${i.enrollDate }</span>
+						<span style="width:150px;">${m.nickname }</span>
 					</div>
 					<hr>
 					<div style="margin:-10px 0px;"><span>첨부파일 : </span></div>
 					<hr>
 					<div>
 						<div>
-							다양한 카테고리에 다양한 클래스가 있었으면 좋겠어요~
-							<br>
-							뜨개질 같은거나 만드는거 배워보고 싶어요~
-							<br><br>
+							${i.inqContent }
 						</div>
 					</div>
 				</div>

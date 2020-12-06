@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.common.template.Pagination;
@@ -73,10 +74,12 @@ public class SupportController {
 		return "user/support/supportInq";
 	}
 	
+	/*
 	@RequestMapping("supportInqDetail.su")
 	public String supportInqDetail() {
 		return "user/support/supportInqDetail";
 	}
+	*/
 	
 	@RequestMapping("insertInq.su")
 	public String insertInq(Inquiry i, HttpSession session, Model model) {
@@ -91,6 +94,40 @@ public class SupportController {
 			return "supportInq.su";
 		}
 	}
+	
+	
+	
+	@RequestMapping("supportInqDetail.su")
+	public ModelAndView selectInq(int ino, ModelAndView mv) {
+		
+		int result = su.increaseCount(ino);
+		
+		if(result > 0) { 
+			
+			mv.addObject("i", su.selectInq(ino))
+			  .setViewName("user/support/supportInqDetail");
+			
+		}else { 
+			
+			mv.addObject("errorMsg", "유효한 게시글이 아니거나 삭제된 게시글입니다.")
+			  .setViewName("common/errorPage");
+		}
+		
+		return mv;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

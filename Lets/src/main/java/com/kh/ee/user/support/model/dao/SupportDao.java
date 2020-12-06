@@ -55,4 +55,23 @@ public class SupportDao {
 		return sqlSession.insert("supportMapper.insertInq", i);
 	}
 
+	
+	
+	public Inquiry selectInq(SqlSessionTemplate sqlSession, int ino) {
+		return sqlSession.selectOne("supportMapper.selectInq", ino);
+	}
+	
+	public int increaseCount(SqlSessionTemplate sqlSession, int ino) {
+		return sqlSession.update("supportMapper.increaseCount", ino);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

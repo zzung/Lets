@@ -159,4 +159,31 @@
 		  )
 </insert>
 
+<update id="increaseCount" parameterType="_int">
+		update 
+		       inquiry
+		   set count = count+1
+		 where inq_no = #{ino}
+	</update>
+
+<select id="selectInq" resultMap="inquiryResultSet" parameterType="_int">
+	select
+       	  i.inq_no
+        , i.inq_title
+        , i.inq_content
+        , i.inq_type
+        , i.enroll_date
+        , i.answer_date
+        , i.answer_content
+        , i.inq_file
+        , i.origin_file
+        , i.type_status
+        , i.status
+        , i.re_status
+        , m.nickname
+     from inquiry i
+     join member m on (i.mem_no = m.mem_no)
+	 where i.inq_no = #{iNo}
+</select>
+
 </mapper>

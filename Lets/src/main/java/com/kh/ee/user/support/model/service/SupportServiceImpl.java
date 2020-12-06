@@ -51,11 +51,34 @@ public class SupportServiceImpl implements SupportService {
 		return sd.inqList(pi,ss);
 	}
 	
-	//공지 작성
+	//inq 작성
 	@Override
 	public int insertInq(Inquiry i) {
 		return sd.insertInq(ss, i);
 	}
 		
+	
+	@Override
+	public Inquiry selectInq(int ino) {
+		return sd.selectInq(ss, ino);
+	}
+	
+	@Override
+	public int increaseCount(int ino) {
+		return sd.increaseCount(ss, ino);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

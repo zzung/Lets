@@ -25,4 +25,19 @@ public interface SupportService {
 	int insertInq(Inquiry i);
 	
 	
+	
+	
+	//게시판 상세조회용 서비스
+	Inquiry selectInq(int ino);
+	int increaseCount(int ino);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
