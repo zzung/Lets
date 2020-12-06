@@ -277,11 +277,7 @@ public class LessonController {
 	      //준비물
 	      ArrayList<String> lessonPrepareList = l.getLessonPrepareList();
 	      l.setLessonPrepare(String.join(", ", lessonPrepareList));
-	      l.setPrice("5000");
-	      l.setTime("5");
 	      l.setPayTotal("5000");
-	      l.setPeriod("5000");
-	      l.setTotalCount("5000");
 	      System.out.println((Member)session.getAttribute("loginUser"));
 	      l.setMemNo(((Member)session.getAttribute("loginUser")).getMemNo());
 //	      System.out.println(l.getMemNo());

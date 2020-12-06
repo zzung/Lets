@@ -117,7 +117,7 @@
         	 $('#weekCount').change(function(){
         		 if($('#weekCount').val() != "" && $('#totalPeriod').val() != ""){        			 
         		 	$('#totalCount').val($('#weekCount').val()*$('#totalPeriod').val())
-        		 	$('#totalCountResult').text($('#totalCount').val()); 
+        		 	$('#totalCountResult').keyup($('#totalCount').val()); 
         		 	console.log($('#weekCount').val()*$('#totalPeriod').val());
         		 }        		 
         	 });
@@ -125,7 +125,7 @@
         	 $('#totalPeriod').change(function(){
         		 if($('#weekCount').val() != "" && $('#totalPeriod').val() != ""){        			 
         		 	$('#totalCount').val($('#weekCount').val()*$('#totalPeriod').val())
-        		 	$('#totalCountResult').text($('#totalCount').val()) ;
+        		 	$('#totalCountResult').keyup($('#totalCount').val()) ;
         		 	console.log($('#weekCount').val()*$('#totalPeriod').val());
         		 }        		 
         	 });
@@ -279,7 +279,7 @@
                              <option value="키즈">키즈</option>
                              <option value="머니">머니</option>
                              <option value="커리어">커리어</option>
-                             <option value="취미">취미</option>
+                             <option value="취미생활">취미생활</option>
                          </select>
                      </div>
                  </td>
@@ -412,7 +412,7 @@
                       $('#summernote').summernote({
                           width : 900,
                           height : 500,
-                          focus : true
+                          focus : false
                       });
                     });
             </script>
@@ -568,7 +568,7 @@
             <div>
                 <h5><b>총 수업 가격</b></h5><br>
                 <div style="background-color: #f9f9ff; width: 600px; font-size: 20px; padding: 20px;">
-                    12,000원 X 1시간 X <span id="totalCountResult">0</span>번 <br>
+                    12,000원 X 1시간 X <span id="totalCountResult">0</span>번<br>
                     <hr>
                     <table align="right" style="width: 200px;">
                         <tr>
