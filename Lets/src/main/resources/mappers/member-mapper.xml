@@ -46,6 +46,8 @@
 	<result column="pay_total" property="payTotal" />
 	<result column="status" property="status" />
 	<result column="approve_date" property="approveDate"/>
+	<result column="payment_date" property="paymentDate"/>
+	<result column="pay_status" property="payStatus"/>
 </resultMap>
 
 <resultMap type="MemPay" id="memPayResultSet">
@@ -315,4 +317,17 @@
 			  where rownum <= 1]]>
 </select>
 
-</mapper>
+<select id="selectOnlineLesson" parameterType="_int" resultMap="lessonResultSet">
+	select distinct
+	       l.lesson_cover_img
+	     , l.lesson_title
+	     , l.period
+	     , mp.pay_status
+	     , mp.payment_date
+	 from lesson l
+	 join mem_pay mp on (l.mem_no = mp.mem_no)
+	where l.status = 'Y'
+	  and mp.mem_no = #{memNo}
+	  and l.lesson_type='온라인'
+</select>
+ </mapper>

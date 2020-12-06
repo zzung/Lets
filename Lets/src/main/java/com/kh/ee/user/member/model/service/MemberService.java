@@ -27,5 +27,8 @@ public interface MemberService {
 	
 	//(학천)할인 보여줄 ajax
 	Lesson showDiscountLesson();
+	
+	//마이페이지 온라이 레슨 보여주기(학천)
+	ArrayList<Lesson> selectOnlineLesson(int memNo);
 
 }

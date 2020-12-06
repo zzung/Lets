@@ -2,7 +2,9 @@ package com.kh.ee.user.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -243,7 +245,21 @@ public class MemberController {
 	
 	@Auth(role = Role.USER)
 	@RequestMapping("myPage.me")
-	public String myPage() {
+	public String myPage(HttpSession session, Model model) {
+		
+		Member memNo = (Member)session.getAttribute("loginUser"); 
+		ArrayList<Lesson> onlist = mService.selectOnlineLesson(memNo.getMemNo());
+		
+		for(Lesson l : onlist) {
+			LocalDate endDate = LocalDate.parse(l.getPaymentDate().toString());
+			System.out.println("localdate before -> " + endDate);
+			endDate = endDate.plusWeeks(Integer.parseInt(l.getPeriod()));
+			System.out.println("localdate after -> " + endDate);
+			
+			l.setEndDate(endDate.toString());
+		}
+		
+		model.addAttribute("onlist",onlist); 
 		return "user/member/myPage";
 	}
 	
@@ -281,7 +297,7 @@ public class MemberController {
 			return "fail";
 		}
 	}
-	
+
 	@RequestMapping("findPwdSecond.me")
 	public String findPwdSecond(HttpSession session) {
 		

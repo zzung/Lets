@@ -81,5 +81,10 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.showDiscountLesson");
 	}
 
+	//마이페이지 온라이 레슨 보여주기(학천)
+	public ArrayList<Lesson> selectOnlineLesson(int memNo, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectOnlineLesson",memNo);
+	}
+
 
 }

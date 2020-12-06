@@ -50,6 +50,9 @@ public class Lesson {
 	//관리자 필요(학천)
 	private String memId;
 	private int star;
+	private Date paymentDate;
+	private String payStatus;
+	private String endDate; 
 	
 	private ArrayList<Video> videoList;
 	private ArrayList<LessonFaq> lessonFaqList;
