@@ -21,6 +21,7 @@
 	<result column="report_count" property="reportCount"/>
 	<result column="out_date" property="outDate"/>
 	<result column="status" property="status"/>
+	<result column="auth" property="auth" />
 </resultMap>
 
 <resultMap id="wishListResultSet" type="WishList">
@@ -91,6 +92,7 @@
 	        , mem_pic
 	        , enroll_date
 	        , status
+	        , auth
 	     from member
 	    where status='Y'
 	      and mem_id like #{memId}
@@ -171,6 +173,7 @@
 	        , mem_pic
 	        , enroll_date
 	        , status
+	        , auth
 	     from member
 	    where status='Y'
 	      and mem_id like #{memId}

@@ -29,6 +29,11 @@ public class TutorServiceImpl implements TutorService{
 	public Tutor selectTutor(int memNo) {
 		return tutorDao.selectTutor(sqlSession, memNo);
 	}
+
+	@Override
+	public int getTutorAuth(int memNo) {
+		return tutorDao.getTutorAuth(sqlSession, memNo);
+	}
 	
 	
 }

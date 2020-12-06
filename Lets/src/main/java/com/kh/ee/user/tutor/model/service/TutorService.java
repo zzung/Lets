@@ -10,6 +10,8 @@ public interface TutorService {
 	// 튜터정보 수정용 서비스(현선)
 	Tutor selectTutor(int memNo);
 	int updateTutorInfo(Tutor t);
+
+	int getTutorAuth(int memNo);
 	
 
 }

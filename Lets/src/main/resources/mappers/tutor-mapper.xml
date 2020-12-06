@@ -9,6 +9,11 @@
 		<result column="modify_date" property="modifyDate"/>
 		<result column="status" property="status"/>
 	</resultMap>
+	
+	<resultMap type="Member" id="memberResultSet">
+		<result column="mem_no" property="memNo" />
+		<result column="auth" property="auth" />
+	</resultMap>
 
 	<insert id="insertTutorInfo" parameterType="Tutor">
 		insert
@@ -43,5 +48,12 @@
 		  from tutor
 		 where mem_no = #{memNo}
 	</select>
+
+	<update id="getTutorAuth" parameterType="_int">
+		update 
+		       member
+		   set auth=2
+		 where mem_no=#{memNo}
+	</update>
 
 </mapper>

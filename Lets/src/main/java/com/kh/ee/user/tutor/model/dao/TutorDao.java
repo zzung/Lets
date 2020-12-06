@@ -19,6 +19,10 @@ public class TutorDao {
 	public Tutor selectTutor(SqlSessionTemplate sqlSession, int memNo) {
 		return sqlSession.selectOne("tutorMapper.selectTutor", memNo);
 	}
+
+	public int getTutorAuth(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.update("tutorMapper.getTutorAuth", memNo);
+	}
 	
 	
 	

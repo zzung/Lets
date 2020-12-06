@@ -108,8 +108,9 @@ public class TutorController {
 		t.setMemNo(memNo);
 
 		int result = tutorService.insertTutorInfo(t);
+		int result2 = tutorService.getTutorAuth(t.getMemNo()); // 튜터 권한 주기(승희)
 		
-		if(result > 0) {
+		if(result*result2 != 0) {
 			session.setAttribute("alertMsg", "성공적으로 튜터 등록되었습니다!");
 			return "redirect:tutorMain.tm";
 		}else {
