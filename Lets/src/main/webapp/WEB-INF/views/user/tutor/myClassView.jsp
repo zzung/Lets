@@ -115,7 +115,7 @@
 				                		</c:otherwise>
 				                		</c:choose>
 				                	</c:when>
-				                	<c:when test="${al.lessonType eq '대면' }">
+				                	<c:when test="${al.lessonType eq '오프라인' }">
 				                		<span style="font-size:12px">종료신청 불가</span>
 				                	</c:when>
 				                </c:choose>
@@ -172,7 +172,7 @@
 	       		<tr class="titleName" style="background-color:rgb(243, 243, 243)">
 	            	<th style="width: 550px;">수업제목</th>
 	            	<th style="width: 150px;">승인유형</th>
-	            	<th style="width: 150px;">수정/삭제</th>
+	            	<th style="width: 100px;">삭제</th>
 	            </tr>
 		    </thead>
 		    <tbody>
@@ -212,7 +212,6 @@
 			                    <c:choose>
 			                    	<c:when test="${sl.lessonStatus eq '보류' }">
 				                    	<c:if test="${!empty sl.holdReason}">
-				                    		<button class="genric-btn primary btn-sm" style="font-size: 13px;" onclick="">수정</button>
 			                    			<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }" >삭제</button>
 				                    	</c:if>
 			                    	</c:when>
@@ -324,148 +323,127 @@
         <br><br>
         <p id="smTitle" style="color: gray;">클래스 준비물 관리</p>
         
-        <div id="prepareTable">
-	        <table style="text-align: center;" id="lessonPreTable" class="table table-bordered table-sm">
-	        <thead>
-	        	<tr class="titleName" style="background-color:rgb(243, 243, 243)">
-	            	<th style="width: 100px;">회원이름</th>
-	            	<th style="width: 550px;">수업제목</th>
-	            	<th style="width: 200px;">승인날짜</th>
-	            	<th style="width: 150px;">배송유형</th>
-	            </tr>
-	        </thead>
-	        <tbody>
-	         	<c:choose>
-	            	<c:when test="${empty mpList }">
-	            		<tr>
-	                		<td colspan="4" align="center">준비물 신청한 회원이 없습니다.</td>
-	                	</tr>
-	            	</c:when>
-            		<c:otherwise>   
-			            <c:forEach var="mp" items="${mpList}" varStatus="mtModal">
-			            <input type="hidden" name="memNo"                                                                                                                                                                                                                                                                                                                                                                                                                                                       value="${mp.memNo }">
-				            <tr>
-				                <td>${mp.memName}</td>
-				                <td><a href="">${mp.lessonTitle }</a></td>
-				                <td>신청일 ${mp.paymentDate }</td>
-				                <td>
-				                <c:choose>
-				                	<c:when test="${mp.delStatus eq '배송전'}">
-				                		<button data-toggle="modal" data-target="#deliveryR${mtModal.index }" class="genric-btn primary btn-sm" 
-			                    		style="font-size: 13px;" id="deliveryReady">준비물 보내기</button>
-				                	</c:when>
-				                	<c:when test="${mp.delStatus eq '배송중'}">
-				                    <button data-toggle="modal" class="genric-btn primary-border btn-sm" 
-				                    data-target="#deliveryF${mtModal.index }" style="font-size: 13px;" id="delStatus">배송중</button>
-				                	</c:when>
-				                	<c:otherwise>
-				                		<button data-toggle="modal" class="genric-btn primary-border btn-sm" 
-			                    		data-target="#deliveryF${mtModal.index }" style="font-size: 13px;" id="deliveryOk">배송완료</button>
-				                	</c:otherwise>
-				                </c:choose>
-				                </td>
-				            </tr>
-				            
-				            <!-- 준비물 보내기 클릭 시 뜨는 모달 -->
-						    <div class="modal fade" id="deliveryR${mtModal.index }">
-						        <div class="modal-dialog">
-						            <div class="modal-content">
-						            <!-- Modal Header -->
-						            <div class="modal-header">
-						                <h4 class="modal-title">준비물 보내기</h4>
-						                <button type="button" class="close" data-dismiss="modal">&times;</button> 
-						            </div>
-						            <form action="delivery.tm" method="post">
-						                <!-- Modal Body -->
-						                <div class="modal-body">
-						                    <label for="userId" class="mr-sm-2">${mp.memName } 회원님께 보내실 클래스의 준비물 입니다.</label><br>
-						                    
-						                    <div class="delivery_go" >
-						                    <input type="hidden" id="memPayNo" name="memPayNo" value="${mp.memPayNo }">
-						                    <dl>
-						                    	<dd>
-							                    	<c:forEach var="prePare" items="${mp.lessonPrepare }" varStatus="preList">
-							                            <li style="list-style-type:square">
-							                            	&nbsp;${prePare}
-							                            </li>
-							                        </c:forEach>
-						                    	</dd>
-						                    </dl>
-						                    </div>
-						                    <hr>
-						                     <dl>
-						                    	<dd>택배사</dd>
-						                    	<dd><input type="text" id="delName${preList.index }"  name="delName" value=""></dd>
-						                    	<dd>운송장번호</dd>
-						                    	<dd><input type="text" id="delNo${preList.index }" name="delNo" value=""></dd>
-						                    </dl>
-						                </div>
-						                
-						                <!-- Modal footer -->
-						                <div class="modal-footer">
-						                    <button type="submit" class="genric-btn primary-border btn-sm" >배송완료</button>
-						                    <button type="button" class="genric-btn danger-border btn-sm" data-dismiss="modal">취소</button>
-						                </div>
-						            </form>
-						            </div>
-						        </div>
-						    </div>
-						   
-						    <!-- 배송중, 배송완료 하면 보이는 모달 -->
-						    <div class="modal fade" id="deliveryF${mtModal.index }">
-						        <div class="modal-dialog ">
-						            <div class="modal-content">
-						            <!-- Modal Header -->
-						            <div class="modal-header">
-						                <h4 class="modal-title">배송</h4>
-						                <button type="button" class="close" data-dismiss="modal">&times;</button> 
-						            </div>
-						           	<form action="" method="post">
-						                <!-- Modal Body -->
-						                <div class="modal-body">
-						                    <label for="userId" class="mr-sm-2">${mp.memName} 회원님께 보낸 클래스의 준비물</label><br>
-						                    
-						                    <div class="delivery_ing">
-						                        <ul style=" margin: 10px;" >
-						                        <c:forEach var="pre" items="${mp.lessonPrepare }">
-						                            <li  style="list-style-type:square">${pre}</li>
-						                        </c:forEach>
-						                        </ul>
-						                    </div>
-						                    <hr>
-						                     <dl>
-						                    	<dd style="width:300px; height: 30px;">택배사 : ${mp.delName }</dd>
-						                    	<dd style="width:300px; height: 30px;">운송장번호 : ${mp.delNo }</dd>
-						                    </dl>
-						                </div>
-						            </form>
-						            </div>
-						        </div>
-						    </div>
-			            </c:forEach>
-	            	</c:otherwise>
-	            </c:choose>
-	            </tbody>
-	        </table>
+        <div class="prepareTable">
+        <table style="text-align: center;" id="lessonPreTable" class="table table-bordered table-sm"></table>
+	    </div>
+	    <script>
+	    	function deliveryReady(e){
+	    		var content = $(e).data("list");
+
+	    		console.log(content); 
+	    		console.log($(e).data("list"));
+	    		$(".listContent").text(content); 
+	    		
+	    	}
+	    	function deliveryGo(e){
+	    		var memnum = $(e).data("memNo");
+	    		var lessonNum = $(e).data("lessonNo");
+	    		var delNo = $(e).data("delNo");
+	    		var delName = $(e).data("delName");
+	    		
+	    		console.log($(e).data("memNo"));
+	    		
+	    		$("#lno").val(lessonNum);
+	    		$("#mno").val(memnum);
+	    		$("#delNo").val(delNo);
+	    		$("#delName").val(delName);
+	    	}
+	    	
+	    </script>
+	    
+        <!-- 준비물 보내기 클릭 시 뜨는 모달 -->
+	    <div class="modal fade" id="deliveryR">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	            <!-- Modal Header -->
+	            <div class="modal-header">
+	                <h4 class="modal-title">준비물 보내기</h4>
+	                <button type="button" class="close" data-dismiss="modal">&times;</button> 
+	            </div>
+	            <form action="delivery.tm" method="post">
+	            <input type="hidden" name="memNo" id="mno"value="">
+	            <input type="hidden" name="lessonNo" id="lno" value="">    
+				   
+				   <!-- Modal Body -->
+	                <div class="modal-body">
+	                    <label for="userId" class="mr-sm-2">${mp.memName } 회원님께 보내실 클래스의 준비물 입니다.</label><br>
+	                    
+	                    <div class="delivery_go" >
+	                    <dl>
+	                    	<dd>
+	                            <li class="listContent" style="list-style-type:square"></li>
+	                    	</dd>
+	                    </dl>
+	                    </div>
+	                    <hr>
+	                     <dl>
+	                    	<dd>택배사</dd>
+	                    	<dd><input type="text" id="delName"  name="delName" value=""></dd>
+	                    	<dd>운송장번호</dd>
+	                    	<dd><input type="text" id="delNo" name="delNo" value=""></dd>
+	                    </dl>
+	                </div>
+	                
+	                <!-- Modal footer -->
+	                <div class="modal-footer">
+	                    <button type="submit" class="genric-btn primary-border btn-sm" >배송완료</button>
+	                    <button type="button" class="genric-btn danger-border btn-sm" data-dismiss="modal">취소</button>
+	                </div>
+	            </form>
+	            </div>
+	        </div>
+	    </div>
+					
+	    <!-- 배송중, 배송완료 하면 보이는 모달 -->
+	    <div class="modal fade" id="deliveryF">
+	        <div class="modal-dialog ">
+	            <div class="modal-content">
+		            <!-- Modal Header -->
+		            <div class="modal-header">
+		                <h4 class="modal-title">배송</h4>
+		                <button type="button" class="close" data-dismiss="modal">&times;</button> 
+		            </div>
+		           	<form action="" method="post">
+		                <!-- Modal Body -->
+		                <div class="modal-body">
+		                    <label for="userId" class="mr-sm-2">${mp.memName} 회원님께 보낸 클래스의 준비물</label><br>
+		                    
+		                    <div class="delivery_ing">
+		                      <dl>
+		                    	<dd>
+		                            <li class="listContent" style="list-style-type:square"></li>
+		                    	</dd>
+		                      </dl>
+		                    </div>
+		                    <hr>
+		                     <dl>
+		                    	<dd style="width:300px; height: 30px;" id="delname">택배사 : ${mp.delName }</dd>
+		                    	<dd style="width:300px; height: 30px;" id="delnum">운송장번호 : ${mp.delNo }</dd>
+		                    </dl>
+		                </div>
+		            </form>
+	            </div>
+	        </div>
+	    </div>
 	        
 	        <!--페이징-->
             <div id="pagingArea" style="margin-left: 35%;">
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${pi.currentPage eq 1}">
-                    		<li class="page-item disabled" ><a class="page-link" >Previous</a></li>
+                    		<li class="page-item " ><a class="page-link" >Previous</a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" href="tutorMyLesson.tm?currentPage=${pi.currentPage-1 }">Previous</a></li>
+                    		<li class="page-item"><a class="page-link" >Previous</a></li>
                     	</c:otherwise>
                     </c:choose>
                     <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
                     	<c:choose>
                     		<c:when test="${p ne pi.currentPage }">
-		                    	<li class="page-item"><a class="page-link" href="tutorMyLesson.tm?currentPage=${p}">${ p }</a></li>                    		
+		                    	<li class="page-item"><a class="page-link" >${ p }</a></li>                    		
                     		</c:when>
                     		<c:otherwise>
-                    			<li class="page-item disabled"><a class="page-link" href="tutorMyLesson.tm?currentPage=${p}">${ p }</a></li> 
+                    			<li class="page-item"><a class="page-link" >${ p }</a></li> 
                     		</c:otherwise>
                     	</c:choose>
                     </c:forEach>
@@ -474,91 +452,155 @@
                     		<li class="page-item disabled" ><a class="page-link">Next</a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" href="tutorMyLesson.tm?currentPage=${pi.currentPage+1 }">Next</a></li>
+                    		<li class="page-item"><a class="page-link">Next</a></li>
                     	</c:otherwise>
                 	</c:choose>
                 </ul>
             </div>
-        </div>
-       <!-- 
-       <script>
-       	$(function(){
-       		$(document).on("click", ".page-link", function(){
-       			var currentPage = $(this).text();
-       			
-  				$.ajax({
-  					url:"paging.pt",
-  					data:{currentPage:currentPage},
-  					success:function(hmap){
-  						var value = "";
-  						var result = "";
-  								value +='<tr class="titleName" style="background-color:rgb(243, 243, 243)">' ; 
-  								value +='<th style="width: 100px;">'+'회원이름'+'</th>' ;
-  								value +='<th style="width: 550px;">'+'수업제목'+'</th>';
-  								value +='<th style="width: 200px;">'+'승인날짜'+'</th>';
-  								value +='<th style="width: 150px;">'+'배송유형'+'</th>';
-  								value +='</tr>' ;
-  						$.each(hmap.list, function(i,memPay){
-  							console.log(hmap.list.memPay);
-	  							value += 
-  		                          	'<tr>' +
-  		                                 '<td>' + memPay.memName + '</td>' +
-  		                                 '<td>' + '<a href="">' + memPay.lessonTitle + '</a>' + '</td>' +
-  		                                 '<td>' + '신청일' + memPay.paymentDate + '</td>' + 
-  		                                 '<td>';
-	  		                           if(memPay.delStatus == '배송전'){
-	  		                        	value += '<button data-toggle="modal" data-target="#deliveryR' + i + '" class="genric-btn primary btn-sm" style="font-size: 13px;" id="deliveryReady">' + '준비물 보내기' + '</button>';
-	  		                           }else if(memPay.delStatus == '배송중'){
-	  		                        	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF' + i + '" style="font-size: 13px;" id="delStatus">' + '배송중' + '</button>';
-	  		                           }else{
-	  		                        	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF' + i + '" style="font-size: 13px;" id="deliveryOk">' + '배송완료' + '</button>';  
-	  		                           }
-		  								value += '</td>' + '</tr>';
-	  							})
-  		                        	 $("#lessonPreTable").html(value);
-  						
-  						$.each(hmap.pi, function(i,pageInfo){
-                            console.log(hmap.pi.currentPage);
-                            result += '<ul class="pagination">';
-                                  if(hmap.pi.currentPage != 1) {
-                                     result += '<li class="page-item disabled">' + '<a class="page-link">' + Previous + '</a>'+'</li>' ;
-                                  }
-                                  else{
-                                     result += '<li class="page-item">' + '<a class="page-link">' + Previous + '</a>'+'</li>';
-                                     
-                                  }
-                                  for(var p=hmap.pi.startPage; p<hmap.pi.endPage; p++) {
-                                     if(hmap.pi.currentPage != p){
-                                        result += '<li class="page-item">' + '<a class="page-link">'+ p +'</a>'+'</li>'; 
-                                     }else{
-                                        result += '<li class="page-item disabled">' + '<a class="page-link">' + p +'</a>'+'</li>';
-                                     }
-                                  }
-                                    if(hmap.pi.currentPage == hmap.pi.maxPage){
-                                       result += '<li class="page-item disabled">' + '<a class="page-link">'+ Next  + '</a>' + '</li>';
-                                    }else{
-                                       result += '<li class="page-item">' + '<a class="page-link" >' + Next + '</a>'+'</li>';
-                                       
-                                    }
-                                   result += '</ul>';
-                                    $(".pagingArea").html(result);
-                      })
-  						
-  					},error:function(result){
-  						console.log("통신실패")
-  					}
-  				})
-  			})
-       	});
-       </script>
-       -->
+
+	       <script>
+	       	$(function(){
+	       		prepareList(); 
+	    	});
+	       	
+	       	//내클래스 -> 준비물보내기 ajax
+	       	function prepareList(){
+	       		$.ajax({
+	       			url:"prepareList.tm",
+	       			data:{
+	       				memNo: ${loginUser.memNo}
+	       			},
+	       			success:function(list){
+	       				var value="";
+	       				
+	       				value +='<thead>'
+	       				value +='<tr class="titleName" style="background-color:rgb(243, 243, 243)">'
+						value +='<th style="width: 100px;">'+'회원이름'+'</th>'
+						value +='<th style="width: 550px;">'+'수업제목'+'</th>'
+						value +='<th style="width: 200px;">'+'승인날짜'+'</th>'
+						value +='<th style="width: 150px;">'+'배송유형'+'</th>'
+						value +='</tr>' 
+						value += '</thead>'
+	       				for(var i in list){
+						value += '<tbody><tr>' 
+				        value += '<td>' + list[i].memName + '</td>'
+				        value += '<td><a href="">' + list[i].lessonTitle + '</a></td>'
+				        value += '<td>신청일' + list[i].paymentDate + '</td>' 
+				        value += '<td>'
+		                  		if(list[i].delStatus == "배송전"){
+		               	value += '<button data-toggle="modal" data-target="#deliveryR" class="genric-btn primary btn-sm" style="font-size: 13px;" data-list='+list[i].lessonPrepare+'data-memNo='+list[i].memNo+' onclick="deliveryReady(this);">준비물 보내기</button>'
+		                 		 }else if(list[i].delStatus == "배송중"){
+		               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-list='+list[i].lessonPrepare+'data-memNo='+list[i].memNo+'data-delNo='+list[i].delNo+'data-delName='+list[i].delName+' onclick="deliveryGo(this);">배송중</button>'
+		                  		}else{
+		               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-list='+list[i].lessonPrepare+'data-memNo='+list[i].memNo+'data-delNo='+list[i].delNo+'data-delName='+list[i].delName+' onclick="deliveryGo(this);">배송완료</button>' 
+		                 		 }
+						value += '</td></tr>'
+	       				value += '</tbody>'
+	       				
+	       				}
+						$(".prepareTable > #lessonPreTable").html(value);
+						console.log(value); 
+	       			},
+	       			error:function(err){
+	       				console.log(err);
+	       				console.log("preparelist ajax fail")
+	       			}
+	       			
+	       		})
+	       	}
+	       	/*
+	       		$(document).on("click", ".page-link", function(){
+	       			var currentPage = $(this).text();
+	       		
+	  				$.ajax({
+	  					url:"paging.pt",
+	  					data:{currentPage:currentPage},
+	  					success:function(hmap){
+	  						var value = "";
+	  						var result = "";
+	  								value +='<tr class="titleName" style="background-color:rgb(243, 243, 243)">' ; 
+	  								value +='<th style="width: 100px;">'+'회원이름'+'</th>' ;
+	  								value +='<th style="width: 550px;">'+'수업제목'+'</th>';
+	  								value +='<th style="width: 200px;">'+'승인날짜'+'</th>';
+	  								value +='<th style="width: 150px;">'+'배송유형'+'</th>';
+	  								value +='</tr>' ;
+	  								value += '<tr>' +
+		                                 '<td>' + memPay.memName + '</td>' +
+		                                 '<td>' + '<a href="">' + memPay.lessonTitle + '</a>' + '</td>' +
+		                                 '<td>' + '신청일' + memPay.paymentDate + '</td>' + 
+		                                 '<td>';
+			                           if(memPay.delStatus eq '배송전'){
+			                        	value += '<button data-toggle="modal" data-target="#deliveryR' + mem + '" class="genric-btn primary btn-sm" style="font-size: 13px;" id="deliveryReady">' + '준비물 보내기' + '</button>';
+			                           }else if(memPay.delStatus eq '배송중'){
+			                        	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF' + i + '" style="font-size: 13px;" id="delStatus">' + '배송중' + '</button>';
+			                           }else{
+			                        	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF' + i + '" style="font-size: 13px;" id="deliveryOk">' + '배송완료' + '</button>';  
+			                           }
+	 								value += '</td>' + '</tr>';
+	  						$.each(hmap.list, function(i,memPay){
+	  							console.log(memPay.lessonTitle);
+		  							value += 
+	  		                          	'<tr>' +
+	  		                                 '<td>' + memPay.memName + '</td>' +
+	  		                                 '<td>' + '<a href="">' + memPay.lessonTitle + '</a>' + '</td>' +
+	  		                                 '<td>' + '신청일' + memPay.paymentDate + '</td>' + 
+	  		                                 '<td>';
+		  		                           if(memPay.delStatus eq '배송전'){
+		  		                        	value += '<button data-toggle="modal" data-target="#deliveryR' + mem + '" class="genric-btn primary btn-sm" style="font-size: 13px;" id="deliveryReady">' + '준비물 보내기' + '</button>';
+		  		                           }else if(memPay.delStatus eq '배송중'){
+		  		                        	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF' + i + '" style="font-size: 13px;" id="delStatus">' + '배송중' + '</button>';
+		  		                           }else{
+		  		                        	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF' + i + '" style="font-size: 13px;" id="deliveryOk">' + '배송완료' + '</button>';  
+		  		                           }
+			  								value += '</td>' + '</tr>';
+		  							})
+	  		                        	 $("#lessonPreTable").html(value);
+	  						
+	  						$.each(hmap.pi, function(i,pageInfo){
+	  							$("#pagination").empty();
+	  							var Previous = hmap.pi.currentPage-1;
+	  							var Next = hmap.pi.currentPage+1;
+	  							console.log(pageInfo.currentPage);
+	                            console.log(hmap.pi.currentPage);
+	                            
+	                                  if(pageInfo.currentPage != 1) {
+	                                     result += '<li class="page-item">' + '<a class="page-link" href="hmap.pi.currentPage-1">' + Previous + '</a>'+'</li>' ;
+	                                  }
+	                                  else{
+	                                     result += '<li class="page-item">' + '<a class="page-link">' + Previous + '</a>'+'</li>';
+	                                     
+	                                  }
+	                                  for(var p=pageInfo.startPage; p<pageInfo.endPage; p++) {
+	                                     if(hmap.pi.currentPage != p){
+	                                        result += '<li class="page-item">' + '<a class="page-link">'+ p +'</a>'+'</li>'; 
+	                                     }else{
+	                                        result += '<li class="page-item disabled">' + '<a class="page-link">' + p +'</a>'+'</li>';
+	                                     }
+	                                  }
+	                                   if(pageInfo.currentPage == pageInfo.maxPage){
+	                                      result += '<li class="page-item disabled">' + '<a class="page-link">'+ Next  + '</a>' + '</li>';
+	                                   }else{
+	                                      result += '<li class="page-item">' + '<a class="page-link" >' + Next + '</a>'+'</li>';
+	                                      
+	                                   }
+	                                  
+	                      })
+	                                    $("#pagination").html(result);
+	  						
+	  					},error:function(result){
+	  						console.log("통신실패")
+	  					}
+	  				})
+	  			})
+	  			*/
+	       </script>
+        
         <!-- 수업성과 & 정산서 -->
         <br><hr>
         <div style="color: gray; font-size: 20px; font-weight: bold; ">수업성과 & 정산서
 	        <br>
-	       
 	        <!-- 튜터 등록 날짜로 ? 조건처리 할 수 있나 -->
-	        
+	       <!-- 
 	        <div class="single-element-widget mt-30" >
 	            <div class="default-select" id="salary" name="salary"style="float:left">
 	                <select>
@@ -589,14 +631,14 @@
 	                    <option value="12">12월</option>
 	                </select>
 	            </div>
-	       
+	        </div>
+	        -->
 	        <!-- 정산받는 버튼 -->
 	        <span style="float: right;"><button data-toggle="modal" data-target="#account" class="genric-btn primary-border btn-sm" onclick="salarySave();">정산받기</button></span>
-	        </div>
         </div>
         <br><br>
-        <c:forEach var="ms" items="${ msList}" varStatus="chk">
         	<div class="classSalary" >
+        <c:forEach var="ms" items="${ msList}" varStatus="chk">
 	            <div class="outCome">
 	            	<c:choose>
 		            	<c:when test="${empty ms.account }">
@@ -620,10 +662,6 @@
                     		<th>신청수 : </th>
                     		<td>${ms.studentCount } 명</td>
                     	</tr>
-                    	<tr>
-                    		<th>평점평균 : </th>
-                    		<td>${ms.star } 점</td>
-                    	</tr>
                     </table>
 	            </div>
                 <div class="totalSalary" >
@@ -643,9 +681,10 @@
                         
                         <tr>
                             <td>-&nbsp;</td>
-                            <td>레츠 수수료(${ms.fee }%)</td>
-                            <th>${ms.totalFee }</th>
+                            <td>레츠 수수료</td>
+                            <td>${ms.fee }</td>
                         </tr>
+                         
                         <tr>
                             <th colspan="3">-------------------------------------------------</th>
                         </tr>
@@ -657,12 +696,10 @@
                     </table>
                     <br><br>
                 </div>
-                
-            </div>
         </c:forEach>
+            </div>
         <br clear="both">
         <!-- 반복문 끝 -->
-    </div>
 
     <!-- 정산 시 받을 계좌입력 모달 -->
     <div class="modal fade" id="account">

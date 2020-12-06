@@ -25,7 +25,7 @@
             <img src="resources/user/assets/img/detailClassPage/9814.jpg" alt="" style="width: 900px; height: 550px; margin-top: -20px;"> <br><br>
             <p style="font-size: 18px;font-weight: bold;">여러분이 경험한 모든 것들, <br> 함께 공유하면 <br> 더욱 큰 경험이 될 거에요.</p> <br>
             <p style="font-size: 23px;font-weight: bold;">레츠에서 당신의 재능을 보여주세요 !</p> <br>
-            <p style="font-size: 18px;"><a href="#" class="genric-btn primary e-large" style="text-decoration:none";>튜터 도전하기</a></p>
+            <p style="font-size: 18px;"><a href="tutorEnroll.te" class="genric-btn primary e-large" style="text-decoration:none";>튜터 도전하기</a></p>
             <br><br><br>
             <p style="font-size: 25px;font-weight: bold;">레츠 튜터, 어떻게 될 수 있나요 ?</p>
             <div class="stepImg" style="height: 250px;">

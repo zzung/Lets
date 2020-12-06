@@ -31,27 +31,23 @@
 
 <select id="selectPrepareList" resultMap="memPayResultSet" parameterType="_int">
 	select
-	       mp.mem_pay_no
-	     , mp.lesson_no
-	     , m.mem_id
-	     , m.mem_name
+		   mp.mem_pay_no
+	     , mp.mem_no 
+	     , l.lesson_no 
 	     , l.lesson_title
 	     , mp.payment_date
 	     , mp.del_status
+	     , m.mem_name
 	     , l.lesson_prepare
-	     , mp.status
-	     , l.mem_no
-	     , mp.del_name
 	     , mp.del_no
+	     , mp.del_name
 	  from mem_pay mp
-	  left join lesson l on(l.lesson_no = mp.lesson_no)
-	  left join member m on(m.mem_no = mp.mem_no)
-	 where l.status = 'Y'
-	   and l.lesson_type = '온라인'
-	   and l.mem_no = #{memNo}
+	  join lesson l on (l.mem_no = mp.mem_no)
+	  join member m on (mp.mem_no = m.mem_no)
+	 where l.mem_no = #{memNo}
+	   and l.status = 'Y'
 	 order
-	    by mp.payment_date desc
-	   
+	    by mp.mem_pay_no desc
 </select>
 
 <update id="updateDelivery" parameterType="MemPay">
@@ -61,40 +57,36 @@
 	       del_no = #{delNo},
 	       del_status = '배송중'
 	 where mem_no = #{memNo}
-	   and lesson_no= = #{lessonNo}
+	   and lesson_no = #{lessonNo}
 </update>
 
 <select id="selectListCount" parameterType="_int" resultType="_int">
 	select
-	      count(*) listcount
-	    from mem_pay
-	    join lesson l using (lesson_no)
-	    where l.mem_no = #{memNo}
-	      and l.lesson_type='온라인'
-	      and l.status = 'Y'
+	       count(*) listcount
+      from mem_pay
+      join lesson l using (lesson_no)
+     where l.mem_no = #{memNo}
+       and l.lesson_type='온라인'
+       and l.status = 'Y'
 	
 </select>
 
 <select id="selectSalaryList" parameterType="_int" resultMap="memPayResultSet">
-	  select 
-	        m.lesson_no
-	      , l.lesson_title 
-	      , l.like_count 
-	      , count(m.lesson_no) student_count
-	      , r.star 
-	      , l.pay_total
+	 select 
+	        l.lesson_no
+	      , l.lesson_title
+	      , count(l.lesson_title) student_count
+          , l.like_count
+	      , m.mem_no
 	      , s.fee
-	      , l.pay_total * (s.fee/100) total_fee
-	      , l.pay_total * count(m.lesson_no)-(l.pay_total * (s.fee/100)) salary_total
-	      , s.account
-	  from mem_pay m
-	  left join lesson l on (m.lesson_no = l.lesson_no)
-	  left join salary s on (l.lesson_no = s.lesson_no)
-	  left join review r on (s.lesson_no = r.lesson_no)
-	 where l.status = 'Y'
-	   and l.mem_no = #{memNo}
-	 group by m.lesson_no, l.lesson_title, l.like_count,
-	          r.star, l.pay_total, s.fee, s.account
+	      , l.pay_total
+	      , l.pay_total * (s.fee/100) fee
+	   from lesson l
+	   join member m on (l.mem_no = m.mem_no)
+	   join salary s on (l.lesson_no = s.lesson_no)
+	   where l.status = 'Y'
+	   group by l.lesson_no, l.lesson_title,l.like_count,s.fee, m.mem_no, l.pay_total, l.pay_total * (s.fee/100)
+	   having m.mem_no = #{memNo}
 	 order by lesson_no desc
 </select>
 	 
