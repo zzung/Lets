@@ -83,6 +83,7 @@
 	<result column="reEnrollDate" property="replyEnrollDate"/>
 	<result column="modify_date" property="replyModifyDate" />
 	<result column="replyNickname" property="nickname"/> 
+	<result column="mem_pic" property="memPic" />
 </resultMap>
 
 <resultMap type="MemPay" id="memPayResultSet">

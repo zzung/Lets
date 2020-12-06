@@ -100,6 +100,7 @@ public class LessonController {
 		return "user/lesson/previewLesson";
 	}
 	
+	@Auth(role = Role.USER)
 	@RequestMapping("payClass.le")
 	public String selectLessonList(int lessonNo, Model model) {
 		Lesson lesson = lService.selectLessonList(lessonNo);
