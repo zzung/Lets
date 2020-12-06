@@ -57,18 +57,13 @@ public class SupportServiceImpl implements SupportService {
 		return sd.insertInq(ss, i);
 	}
 		
-	
-	@Override
-	public Inquiry selectInq(int ino) {
-		return sd.selectInq(ss, ino);
-	}
-	
-	@Override
-	public int increaseCount(int ino) {
-		return sd.increaseCount(ss, ino);
-	}
-
-	
+	/*
+	 * @Override public int insertBoard(Board b) { return
+	 * bDao.insertBoard(sqlSession, b); }
+	 * 
+	 * @Override public int increaseCount(int bno) { return
+	 * bDao.increaseCount(sqlSession, bno); }
+	 */
 	
 	
 	

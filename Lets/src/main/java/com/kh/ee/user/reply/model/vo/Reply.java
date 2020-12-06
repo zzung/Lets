@@ -30,7 +30,7 @@ public class Reply {
 	
 	//닉네임 뿌려주기 위해 필드 값 가져옴(학천)
 	private String nickname; 
-	private String mem_pic; 
+	private String memPic; 
 	
 	ArrayList<Reply> reList; 
 }

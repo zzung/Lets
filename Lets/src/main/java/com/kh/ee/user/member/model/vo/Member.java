@@ -40,4 +40,7 @@ public class Member {
 	private int lessonNo;
 	private String discount;
 	private String discStatus; 
+	
+	//성연 admin에서 사용
+	private String lessonCategory;
 }

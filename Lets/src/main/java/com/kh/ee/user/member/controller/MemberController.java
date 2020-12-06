@@ -72,19 +72,21 @@ public class MemberController {
 	public String loginMember(Member m, HttpSession session, Model model) {
 		
 		Member loginUser = mService.loginMember(m);
-		loginUser.setGender(loginUser.getGender().equals("F")? "여":"남");
 		String bpw = bpe.encode(m.getMemPwd());
 		if(loginUser != null && bpe.matches(m.getMemPwd(), loginUser.getMemPwd())) {
+			loginUser.setGender(loginUser.getGender().equals("F")? "여":"남");
+			
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "로그인 성공 !");
 			
-			
+			if(loginUser.getAuth()==3) { // 관리자일 경우
+				return "redirect:memberManagement.ad";
+			}
 			if(tutorService.selectTutor(loginUser.getMemNo()) == null) {
 				session.setAttribute("isTutor", false);
 			}else {
 				session.setAttribute("isTutor", true);
 			}
-			
 			return "redirect:/";
 		}else {
 			model.addAttribute("errorMsg","로그인에 실패했습니다. 확인 후 다시 시도해주세요.");
@@ -209,6 +211,14 @@ public class MemberController {
 			String encPwd = bpe.encode(m.getMemPwd());
 			m.setMemPwd(encPwd);
 		}
+		if(m.getMemPic()==null) {
+			if(m.getGender().equals("F")) {
+				m.setMemPic("resources/user/assets/img/member/woman.png");
+			}else if(m.getGender().equals("M")) {
+				m.setMemPic("resources/user/assets/img/member/woman.png");
+			}
+		}
+		
 		int result = mService.insertMember(m);
 		
 		if(result > 0) {

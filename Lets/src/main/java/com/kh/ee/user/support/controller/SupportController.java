@@ -42,6 +42,47 @@ public class SupportController {
 		return "user/support/supportNoticeDetail";
 	}
 	
+	
+
+	/*
+	 * @RequestMapping("detail.bo") public ModelAndView selectBoard(int bno,
+	 * ModelAndView mv) {
+	 * 
+	 * int result = su.increaseCount(bno);
+	 * 
+	 * if(result > 0) {
+	 * 
+	 * mv.addObject("b", bService.selectBoard(bno))
+	 * .setViewName("board/boardDetailView");
+	 * 
+	 * }else {
+	 * 
+	 * mv.addObject("errorMsg", "유효한 게시글이 아니거나 삭제된 게시글입니다.")
+	 * .setViewName("common/errorPage"); }
+	 * 
+	 * return mv;
+	 * 
+	 * }
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("supportFaq.su")
 	public String supportFaq(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = su.faqCountList();
@@ -94,30 +135,6 @@ public class SupportController {
 			return "supportInq.su";
 		}
 	}
-	
-	
-	
-	@RequestMapping("supportInqDetail.su")
-	public ModelAndView selectInq(int ino, ModelAndView mv) {
-		
-		int result = su.increaseCount(ino);
-		
-		if(result > 0) { 
-			
-			mv.addObject("i", su.selectInq(ino))
-			  .setViewName("user/support/supportInqDetail");
-			
-		}else { 
-			
-			mv.addObject("errorMsg", "유효한 게시글이 아니거나 삭제된 게시글입니다.")
-			  .setViewName("common/errorPage");
-		}
-		
-		return mv;
-		
-	}
-	
-	
 	
 	
 	

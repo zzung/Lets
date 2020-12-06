@@ -39,7 +39,6 @@
 							<th width="110px">회원 상세조회</th>
 						</tr>
 						<c:forEach var="m" items="${list}" varStatus="status">
-						<input type="hidden" value="${m.memNo}">
 						<tr>
 							<td height="40px">${status.count }</td>
 							<td>
@@ -62,14 +61,18 @@
 							<td>${m.nickname }</td>
 							<td>${m.memId }</td>
 							<td>
-							<button type="button" data-no="${m.memNo }" data-toggle="modal"
-									data-target="#memberInfo" class="btn btn-default">상세 조회</button>
+							<button onclick="memberArrayList(this);" data-toggle="modal" 
+							data-memNo="${m.memNo }" data-memId="${m.memId }" data-memName="${m.memName }" 
+							data-nickname="${m.nickname }" data-birthday="${m.birthday }" data-gender="${m.gender }"
+							data-phone="${m.phone }" data-memNo="${m.memNo }" data-enrollDate="${m.enrollDate }"
+							data-outDate="${m.outDate }" data-status="${m.status }" data-auth="${m.auth }" 
+							data-lessonTitle="${m.lessonTitle }" data-lessonCategory="${m.lessonCategory }" 
+							data-target="#memberInfo" class="btn btn-default">상세 조회</button>
 							</td>
 						</tr>
 						</c:forEach>
 					</table>
 					
-			            
 					<!-- Modal Start -->
 					<div class="modal" id="memberInfo">
 						<div class="modal-dialog">
@@ -80,11 +83,14 @@
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<h3 class="modal-title" style="text-align:center">회원 상세조회</h3>
 								</div>
+								 
 								<div class="modal-body" align=center>
 									<span><h4>회원정보</h4></span>
+									<p id="modalMemName"></p>
+									<p id="modalMemId"></p>
 									<table class="list-area">
 										<tr>
-											<th width="80px">회원 분류</th>
+											<th width=80>회원 분류</th>
 											<th width=80>이름</th>
 											<th width=140>닉네임</th>
 											<th width=220>이메일</th>
@@ -93,32 +99,13 @@
 											<th width=50>성별</th>											
 										</tr>
 										<tr>
-											<c:choose>
-								               	<c:when test="${m.auth eq 1 }">
-									                <td>회원</td>
-								                </c:when>
-									            <c:when test="${m.auth eq 2 }">
-											        <td>튜터</td>
-									            </c:when>
-									            <c:when test="${m.auth eq 3 }">
-											        <td>관리자</td>
-									            </c:when>
-							                </c:choose>
-											<td>${m.memName }</td>
-											<td>${m.nickname }</td>
-											<td>${m.memId }</td>
-											<td>${m.phone }</td>
-											<td>${m.birthday }</td>
-											<td>
-												<c:choose>
-									               	<c:when test="${m.gender eq 'M' }">
-										                	남
-									                </c:when>
-										            <c:when test="${m.gender eq 'F' }">
-										               	 여
-									                </c:when>
-								                </c:choose>
-							                </td>
+											<td><p id="modalAuth"></p></td>
+									        <td><p id="mMemName"></p></td>
+									        <td><p id="modalNickname"></p></td>
+									        <td><p id="modalMemId"></p></td>
+									        <td><p id="modalPhone"></p></td>
+									        <td><p id="modalBirthday"></p></td>
+											<td><p id="modalGender"></p></td>
 										</tr>
 									</table>
 									<br>
@@ -129,21 +116,9 @@
 											<th width=80>회원상태</th>
 										</tr>
 										<tr>
-										<td>${m.enrollDate }</td>
-										<td>${m.outDate }</td>
-										<td>
-											<c:choose>
-												<c:when test="${m.status eq 'Y' }">
-									               	정상
-								                </c:when>
-								                <c:when test="${m.status eq 'B' }">
-									               	블랙
-								                </c:when>
-									             <c:when test="${m.status eq 'N' }">
-									               	탈퇴
-								                </c:when>
-									        </c:choose>
-								        </td>
+										<td><p id="modalEnrollDate"></p></td>
+										<td><p id="modalOutDate"></p></td>
+										<td><p id="modalStatus"></p></td>
 										</tr>
 									</table>
 									<hr>
@@ -155,8 +130,8 @@
 											<th width=140>클래스 카테고리</th>
 										</tr>
 										<tr>
-											<td>${l.lessonTitle}</td>
-											<td>${l.lessonCategory}</td>
+											<td><p id="modalLessonTitle"></p></td>
+											<td><p id="modalLessonCategory"></p></td>
 										</tr>
 									</table>
 									<br>
@@ -168,8 +143,8 @@
 											<th width=140>클레스 카테고리</th>
 										</tr>
 										<tr>
-											<td>-</td>
-											<td>-</td>
+											<td><p id="modalLessonTitle"></p></td>
+											<td><p id="modalLessonCategory"></p></td>
 										</tr>
 									</table>
 									
@@ -182,6 +157,46 @@
 						</div>
 					</div>
 					<!--Modal End-->
+					<script>
+						$(function(){
+							memberArrayList(); 
+						})
+					
+						function memberArrayList(e){
+							var memNo = $(e).data("memNo");
+							
+							var memId = $(e).data("memId");
+							var memName = $(e).data("memName");
+							var nickname = $(e).data("nickname");
+							var birthday = $(e).data("birthday");
+							var gender = $(e).data("gender");
+							var phone = $(e).data("phone");
+							var enrollDate = $(e).data("enrollDate");
+							var outDate = $(e).data("outDate");
+							var auth = $(e).data("auth");
+							var status = $(e).data("status");
+							
+							var lessonTitle = $(e).data("lessonTitle");
+							var lessonCategory = $(e).data("lessonCategory");
+							
+							
+							 $("#modalMemNo").text(memNo);
+							 $("#modalMemId").text(memId);
+							 $("#mMemName").text(memName);
+							 $("#modalNickname").text(nickname);
+							 $("#modalBirthday").text(birthday);
+							 $("#modalGender").text(gender);
+							 $("#modalPhone").text(phone);
+							 $("#modalEnrollDate").text(enrollDate);
+							 $("#modalOutDate").text(outDate);
+							 $("#modalStatus").text(status);
+							 $("#modalAuth").text(auth);
+							 
+							 $("#modalLessonTitle").text(lessonTitle);
+							 $("#modalLessonCategory").text(lessonCategory);
+							 
+						}
+					</script>
 					
 					
 					<div class="" align="center">
