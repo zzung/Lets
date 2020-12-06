@@ -72,9 +72,9 @@ public class MemberController {
 	public String loginMember(Member m, HttpSession session, Model model) {
 		
 		Member loginUser = mService.loginMember(m);
-		loginUser.setGender(loginUser.getGender().equals("F")? "여":"남");
 		String bpw = bpe.encode(m.getMemPwd());
 		if(loginUser != null && bpe.matches(m.getMemPwd(), loginUser.getMemPwd())) {
+			loginUser.setGender(loginUser.getGender().equals("F")? "여":"남");
 			
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "로그인 성공 !");
