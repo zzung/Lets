@@ -79,16 +79,17 @@ margin-top: 80px;
 		
 		<!-- 고객센터 내용 div -->
 		<div style="width:1240px;">
-			<div>
-				<a href="supportFaqDetail.su">
-					<div style="border:solid 1px; padding:10px;">
-						<div>[환불 문제]결제 후 환불을 받고 싶어요.</div>
-						<div>2020-11-22</div>
-					</div>
-				</a>
-				<br>
-			</div>
-			
+			<c:forEach var="f" items="${list}" varStatus="status">
+				<div>
+					<a href="supportFaqDetail.su">
+						<div style="border:solid 1px; padding:10px;">
+							<div>${f.faqTitle }</div>
+							<div>${f.enrollDate }</div>
+						</div>
+					</a>
+					<br>
+				</div>
+			</c:forEach>
 			<div class="blog-pagination justify-content-center d-flex">
 			    <ul class="pagination">
 			        <li class="page-item">

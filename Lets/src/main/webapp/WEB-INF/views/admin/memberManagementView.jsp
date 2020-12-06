@@ -39,6 +39,7 @@
 							<th width="110px">회원 상세조회</th>
 						</tr>
 						<c:forEach var="m" items="${list}" varStatus="status">
+						<input type="hidden" value="${m.memNo}">
 						<tr>
 							<td height="40px">${status.count }</td>
 							<td>
@@ -68,6 +69,7 @@
 						</c:forEach>
 					</table>
 					
+			            
 					<!-- Modal Start -->
 					<div class="modal" id="memberInfo">
 						<div class="modal-dialog">

@@ -23,6 +23,7 @@
 		<typeAlias type="com.kh.ee.user.report.model.vo.Report" alias="Report" />
 		<typeAlias type="com.kh.ee.admin.model.vo.SearchCondition" alias="SearchCondition" />
 		<typeAlias type="com.kh.ee.user.salary.model.vo.Salary" alias="Salary"/>
+		<typeAlias type="com.kh.ee.user.inquiry.model.vo.Inquiry" alias="Inquiry"/>
 	</typeAliases>
 	
 	<mappers>
@@ -37,5 +38,6 @@
 		<mapper resource="/mappers/admin-mapper.xml"/>
 		<mapper resource="/mappers/main-mapper.xml"/>
 		<mapper resource="/mappers/salary-mapper.xml"/>
+		<mapper resource="/mappers/support-mapper.xml" />
 	</mappers>
 </configuration>

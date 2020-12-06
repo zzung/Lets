@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="supportMapper">
+
+
+<resultMap id="memberResultSet" type="Member">
+	<id column="mem_no" property="memNo" />
+	<result column="mem_id" property="memId" />
+	<result column="mem_pwd" property="memPwd" />
+	<result column="mem_name" property="memName" />
+	<result column="nickname" property="nickname" />
+	<result column="birthday" property="birthday"/>
+	<result column="gender" property="gender"/>
+	<result column="postcode" property="postcode"/>
+	<result column="post_address" property="postAddress"/>
+	<result column="detail_address" property="detailAddress"/>
+	<result column="extra_address" property="extraAddress"/>
+	<result column="phone" property="phone"/>
+	<result column="mem_pic" property="memPic"/>
+	<result column="enroll_date" property="enrollDate"/>
+	<result column="modify_date" property="modifyDate"/>
+	<result column="report_count" property="reportCount"/>
+	<result column="out_date" property="outDate"/>
+	<result column="status" property="status"/>
+	<result column="auth" property="auth" />
+	<result column="lesson_title" property="lessonTitle" />
+	<result column="lesson_no" property="lessonNo"/>
+	<result column="discount" property="discount"/>
+	<result column="disc_status" property="discStatus" />
+</resultMap>
+
+<resultMap id="inquiryResultSet" type="Inquiry">
+	<id column="inq_no" property="inqNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="inq_title" property="inqTitle" />
+	<result column="inq_Content" property="inqContent" />
+	<result column="inq_type" property="inqType" />
+	<result column="enroll_date" property="enrollDate" />
+	<result column="answer_date" property="answerDate" />
+	<result column="answer_content" property="answerContent" />
+	<result column="inq_file" property="inqFile" />
+	<result column="origin_file" property="originFile" />
+	<result column="type_status" property="typeStatus" />
+	<result column="status" property="status" />
+	<result column="re_status" property="reStatus" />
+</resultMap>
+
+<resultMap type="Faq" id="faqResultSet">
+	<id column="faq_no" property="faqNo" />
+	<result column="faq_category" property="faqCategory" />
+	<result column="faq_status" property="faqStatus" />
+	<result column="enroll_date" property="enrollDate" />
+	<result column="faq_type" property="faqType" />
+	<result column="faq_title" property="faqTitle" />
+	<result column="faq_content" property="faqContent" />
+</resultMap>
+
+<resultMap type="Notice" id="noticeResultSet">
+	<id column="notice_no" property="noticeNo" />
+	<result column="notice_type" property="noticeType" />
+	<result column="notice_title" property="noticeTitle" />
+	<result column="notice_content" property="noticeContent" />
+	<result column="enroll_date" property="enrollDate" />
+	<result column="modify_date" property="modifyDate" />
+	<result column="status" property="status" />
+	<result column="count" property="count" />
+</resultMap>
+
+<select id="selectNoticeListCount" resultType="_int">
+	select 
+	       count(*)
+	  from notice n
+</select>
+
+<select id="noticeList" parameterType="String" resultMap="noticeResultSet">
+	select
+	     	n.notice_no
+	     ,	n.notice_type
+	     ,	n.notice_title
+	     ,	n.notice_content
+	     ,	n.enroll_date
+	     ,	n.modify_date
+	     ,	n.status
+	     ,	n.count
+	     from notice n
+</select>
+
+
+<select id="selectFaqListCount" resultType="_int">
+	select 
+	       count(*)
+	  from faq f
+</select>
+
+<select id="faqList" parameterType="String" resultMap="faqResultSet">
+	select
+	     	 f.faq_no
+	       , f.faq_category
+	       , f.faq_status
+	       , f.enroll_date
+	       , f.faq_type
+	       , f.faq_title
+	       , f.faq_content
+	     from faq f
+</select>
+
+<select id="selectInqListCount" resultType="_int">
+	select 
+	       count(*)
+	  from inquiry i
+</select>
+
+<select id="inqList" parameterType="String" resultMap="inquiryResultSet">
+	select
+	       	  i.inq_no
+	        , i.inq_title
+	        , i.inq_content
+	        , i.inq_type
+	        , i.enroll_date
+	        , i.answer_date
+	        , i.answer_content
+	        , i.inq_file
+	        , i.origin_file
+	        , i.type_status
+	        , i.status
+	        , i.re_status
+	        , m.nickname
+	     from inquiry i
+	     join member m on (i.mem_no = m.mem_no)
+</select>
+
+<insert id="insertInq" parameterType="Inquiry">
+	insert
+		  into inquiry
+		  (
+		      inq_no
+		    , mem_no
+	        , inq_title
+	        , inq_content
+	        , inq_type
+	        , answer_date
+	        , answer_content
+	        , inq_file
+	        , origin_file
+	        , type_status
+		  )
+		  values
+		  (
+		     SEQ_INQNO.NEXTVAL
+		   , #{memNo}
+		   , #{inqTitle}
+		   , #{inqContent}
+		   , #{inqType}
+		   , #{answerDate}
+		   , #{answerContent}
+		   , #{inqFile}
+		   , #{originFile}
+		   , #{typeStatus}
+		  )
+</insert>
+
+</mapper>

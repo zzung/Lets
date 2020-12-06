@@ -77,18 +77,21 @@ margin-top: 80px;
 		
 		<!-- 고객센터 내용 div -->
 		<div style="width:1000px;">
+			<c:forEach var="n" items="${list}" varStatus="status">
 			<div>
-				
-				<a href="supportNoticeDetail.su">
+				<a href="supportNoticeDetail.su?noticeNo=${n.noticeNo }">
 					<div style="padding:10px; border:solid 1px;">
 						<!-- 공지 대상 -->
-						<div><h5>* 튜터</h5></div>
-						<div>[서비스 개편 사항] 메인페이지에서 새로 생긴 클래스를 확인할 수 있습니다!</div>
-						<div>2020-11-22</div>
+						<div><h5>${n.noticeType }</h5></div>
+						<div>${n.noticeTitle }</div>
+						<div>${n.enrollDate }</div>
 					</div>
 				</a>
 				<br>
 			</div>
+			</c:forEach>
+			
+			
 			
 			<div class="blog-pagination justify-content-center d-flex">
 			    <ul class="pagination">

@@ -96,36 +96,36 @@ margin-top: 80px;
 							<hr>
 							<div class="modal-body" style="padding:0px 50px;">
 							
-								<form action="">
+								<form action="insertInq.su" method="post" onsubmit="return confirm('공지를 등록 하시겠습니까?');">
 									<div align="left">
-										<div>
+										<div style="width:300px;">
 											<label><input type="radio" name="typeStatus" checked>&nbsp;&nbsp;공개</label>
 											<label><input type="radio" name="typeStatus">&nbsp;&nbsp;비공개</label>
 										</div>
 										<div style="height:60px;">
-											<div>문의 유형</div>
-											<div>
-												<select>
-													<option>사용자</option>
-													<option>튜터</option>
-													<option>클래스</option>
-													<option>기타</option>
+											
+											<div><div>문의 유형</div>
+												<select name="inqType">
+													<option value="사용자">사용자</option>
+													<option value="튜터">튜터</option>
+													<option value="클래스">클래스</option>
+													<option value="기타">기타</option>
 												</select>
 											</div>
 										</div>
 										<br>										
 										<div>
 											<div>문의 제목</div>
-											<input type="text" style="width:700px;" value="" placeholder="제목을 입력하세요.">
+											<input type="text" style="width:700px;" name="inqTitle" placeholder="제목을 입력하세요.">
 										</div>
 										<br>
 										<div>
 											<div>문의 내용</div>
 											<div>
-												<textarea style="width:700px; height:200px; resize:none;" placeholder="내용을 입력하세요."></textarea>
+												<textarea style="width:700px; height:200px; resize:none;" name="inqContent" placeholder="내용을 입력하세요."></textarea>
 											</div>
 											<div>
-												<div><input type="file" id="upfile" class="form-control-file border" style="width:500px;" name="tutorUpfile"></div>
+												<div><input type="file" id="upfile" class="form-control-file border" style="width:500px;" name="inqFile"></div>
 											</div>
 										</div>
 										<br>
@@ -144,38 +144,16 @@ margin-top: 80px;
 				<!-- 문의 작성 Modal End -->
 				
 				<br>
+				<c:forEach var="i" items="${list}" varStatus="status">
 				<a href="supportInqDetail.su">
 					<div style="border:solid 1px; padding:10px;">
-						<div>공개</div>
-						<div>[클래스] 더욱 다양한 클래스가 있었으면 좋겠어요.</div>
-						<div><span style="margin-right:20px;">2020-11-22</span><span>튜터01</span></div>
+						<div>${i.typeStatus }</div>
+						<div>${i.inqTitle }</div>
+						<div><span style="margin-right:20px;">${i.enrollDate }</span><span>${i.nickname }</span></div>
 					</div>
 				</a>
 				<br>
-				<a href="supportInqDetail.su">
-					<div style="border:solid 1px; padding:10px;">
-						<div>공개</div>
-						<div>[사용자] 결제 한 클래스를 환불을 받고 싶어요.</div>
-						<div><span style="margin-right:20px;">2020-11-22</span><span>유저01</span></div>
-					</div>
-				</a>
-				<br>
-				<a href="supportInqDetail.su">
-					<div style="border:solid 1px; padding:10px;">
-						<div>비공개</div>
-						<div>[기타] 기타를 잘치고 싶어요.</div>
-						<div><span style="margin-right:20px;">2020-11-22</span><span>유저07</span></div>
-					</div>
-				</a>
-				<br>
-				<a href="supportInqDetail.su">
-					<div style="border:solid 1px; padding:10px;">
-						<div>비공개</div>
-						<div>[튜터]환불은 어떻게 진행하나요?</div>
-						<div><span style="margin-right:20px;">2020-11-22</span><span>튜터01</span></div>
-					</div>
-				</a>
-				<br>
+				</c:forEach>
 			</div>
 			
 			<div class="blog-pagination justify-content-center d-flex">
