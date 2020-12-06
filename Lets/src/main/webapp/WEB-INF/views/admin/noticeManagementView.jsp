@@ -122,10 +122,6 @@
 											<textarea style="resize:none; width:770px; height:500px;" name="noticeContent" placeholder="내용을 입력하세요."></textarea>
 										</div>
 										<br>
-										<div align="left" style="width:800px; height:40px;">
-											<input type="file" id="upfile" class="form-control-file border" style="width:500px;" name="">
-										</div>
-										<br>
 										<div>
 											<span>
 												<button type="reset" class="btn btn-default">초기화</button>

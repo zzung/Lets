@@ -31,6 +31,25 @@ public class SupportServiceImpl implements SupportService {
 		return sd.noticeList(pi,ss);
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//faq 페이지 select 문(성연)
 	@Override
 	public int faqCountList() {

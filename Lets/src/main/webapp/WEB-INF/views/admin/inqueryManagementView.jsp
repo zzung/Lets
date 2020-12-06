@@ -54,7 +54,9 @@
 							<td>닉네임1</td>
 							<td>사용자</td>
 							<td>
-								<a href="#" data-toggle="modal" data-target="#inqueryContent1">제목1</a>
+								<a href="#" data-toggle="modal" data-target="#inqueryContent1">
+								제목1
+								</a>
 							</td>
 							<td>2020-11-19</td>
 							<td></td>
