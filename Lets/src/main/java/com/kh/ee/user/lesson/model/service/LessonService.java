@@ -64,9 +64,6 @@ public interface LessonService {
 	ArrayList<Lesson> selectHobbyDisc();
 	ArrayList<Lesson> selectHobbyAll();
 	
-	//수강하기 버큰 조건 주기위해 만듬(학천)
-	MemPay selectMemPayList(int lessonNo);
-	
 	//결제 내역 입력
 	int insertDelInfo(MemPay mp); 
 
@@ -77,7 +74,11 @@ public interface LessonService {
 	int selectWL(WishList wl);
 	int insertLesson(Lesson l);
 
+
 	int CurriculumListNo();
+	
+	int selectMemPayList(MemPay mp);
+
 
 	
 

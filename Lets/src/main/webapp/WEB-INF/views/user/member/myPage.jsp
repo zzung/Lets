@@ -134,12 +134,13 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="nav-online" role="tabpanel">
                             <c:forEach var="on" items="${onlist }" >
+                            	<input type="hidden" name="lessonNo" value="${on.lessonNo }">
                                 <div class="online-list">
                                     <div class="online-thumbnail" style="width:33.3%;">
                                         <img src="${on.lessonCoverImg }" alt="">
                                     </div>
                                     <div class="online-thumbnail"style="width:50%; margin-top:30px;">
-                                        <p style="color:grey;">${on.endDate }까지 수강 완료</p>
+                                        <p style="color:grey;">${on.endDate }까지 수강 가능</p>
                                         <p style="font-weight:bold; font-size:16px;">${on.lessonTitle }</p>
                                         <p>커피 부르잉이 만드드느</p>
                                         <div class="w3-light-grey">
@@ -148,20 +149,22 @@
                                     </div>
                                     <div class="online-thumbnail" style="width:16.7%;">
                                         <button class="genric-btn primary-border" onclick="postCurri();">play</button>
+                                        <!-- detailCurri.cr?lessonNo= -->
                                     </div>
                                 </div>
 							</c:forEach>
                             </div>
                             <!--two-->
                             <div class="tab-pane fade" id="nav-offline" role="tabpanel">
+                            <c:forEach var="off" items="${off }">
+                            <input type="hidden" name="lessonNo" value="${off.lessonNo }">
                                 <div class="online-list">
                                     <div class="online-thumbnail" style="width:33.3%;">
-                                        <img src="assets/img/gallery/popular_sub2.png" alt="">
+                                        <img src="${off.lessonCoverImg }" alt="">
                                     </div>
                                     <div class="online-thumbnail"style="width:50%; margin-top:30px;">
-                                        <p style="color:grey;">2020.11.14까지 수강 완료</p>
-                                        <p style="font-weight:bold; font-size:16px;">커피 빵이 몽글몽글(클래스 제목)</p>
-                                        <p>커피 부르잉이 만드드느</p>
+                                        <p style="color:grey;">${off.endDate }까지 수강 가능</p>
+                                        <p style="font-weight:bold; font-size:16px;">${off.lessonTitle }</p>
                                         <div class="w3-light-grey">
                                             <div class="w3-container w3-indigo" style="width:35%">35%</div>
                                         </div>
@@ -170,6 +173,7 @@
                                         <button class="genric-btn primary-border">play</button>
                                     </div>
                                 </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

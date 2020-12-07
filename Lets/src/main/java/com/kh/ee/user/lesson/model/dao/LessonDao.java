@@ -149,10 +149,6 @@ public class LessonDao {
 		return (ArrayList)ss.selectList("lessonMapper.selectHobbyAll");
 	}
 
-	public MemPay selectMemPayList(int lessonNo,SqlSessionTemplate ss) {
-		return ss.selectOne("lessonMapper.selectMemPayList",lessonNo);
-	}
-
 	public int insertPayInfo(MemPay mp, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.insertPayInfo",mp);
 	}
@@ -192,7 +188,6 @@ public class LessonDao {
 
 	public int selectWL(WishList wl, SqlSessionTemplate ss) {
 		int result = ss.selectOne("lessonMapper.selectWL",wl);
-			System.out.println("daoWl : " + result);
 		return result;
 	}
 
@@ -200,8 +195,18 @@ public class LessonDao {
 		return ss.insert("lessonMapper.insertLesson", l);
 	}
 
+
 	public int CurriculumListNo(SqlSessionTemplate ss) {
 		int result = ss.selectOne("curriculumMapper.CurriculumListNo");
+		return result; 
+	}
+	
+	
+	public int selectMemPayList(MemPay mp, SqlSessionTemplate ss) {
+		int result = ss.selectOne("lessonMapper.selectMemPayList",mp);
+		System.out.println("mempaylist: " + result);
 		return result;
 	}
+	
+
 }

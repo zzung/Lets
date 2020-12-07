@@ -320,6 +320,7 @@
 <select id="selectOnlineLesson" parameterType="_int" resultMap="lessonResultSet">
 	select distinct
 	       l.lesson_cover_img
+	     , l.lesson_no
 	     , l.lesson_title
 	     , l.period
 	     , mp.pay_status
@@ -329,5 +330,20 @@
 	where l.status = 'Y'
 	  and mp.mem_no = #{memNo}
 	  and l.lesson_type='온라인'
+</select>
+
+<select id="selectOffLesson" parameterType="_int" resultMap="lessonResultSet">
+		select distinct
+	       l.lesson_cover_img
+	     , l.lesson_no
+	     , l.lesson_title
+	     , l.period
+	     , mp.pay_status
+	     , mp.payment_date
+	 from lesson l
+	 join mem_pay mp on (l.mem_no = mp.mem_no)
+	where l.status = 'Y'
+	  and mp.mem_no = #{memNo}
+	  and l.lesson_type='오프라인'
 </select>
  </mapper>

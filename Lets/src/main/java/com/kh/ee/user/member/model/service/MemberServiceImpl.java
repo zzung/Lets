@@ -96,7 +96,10 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<Lesson> selectOnlineLesson(int memNo) {
 		return mDao.selectOnlineLesson(memNo, sqlSession);
 	}
-	
-	
+	//마이페이지 오프라인 레슨 보여주기(학천)
+	@Override
+	public ArrayList<Lesson> selectOffLesson(int memNo) {
+		return mDao.selectOffLesson(memNo, sqlSession);
+	}
 	
 }
