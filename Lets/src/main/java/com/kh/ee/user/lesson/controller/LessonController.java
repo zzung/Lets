@@ -278,7 +278,8 @@ public class LessonController {
 	
 	@RequestMapping("insert.le")
 	public String insertLesson(Lesson l, MultipartFile lessonUpFile, HttpSession session, Model model) {
-		
+		 
+		int lessonNo = lService.insertlessonNo();
 		
 	      //레슨 
 	      if(!lessonUpFile.getOriginalFilename().equals("")) {         
@@ -291,23 +292,25 @@ public class LessonController {
 	      //준비물
 	      ArrayList<String> lessonPrepareList = l.getLessonPrepareList();
 	      l.setLessonPrepare(String.join(", ", lessonPrepareList));
-	      l.setPayTotal("5000");
 	      System.out.println((Member)session.getAttribute("loginUser"));
 	      l.setMemNo(((Member)session.getAttribute("loginUser")).getMemNo());
 //	      System.out.println(l.getMemNo());
+	      l.setLessonNo(lessonNo);
 	      
+	      System.out.println(l);
 	      int result = lService.insertLesson(l);
+	      
 	      
 	         
     	 if(result == 0) { // 실패 => 에러문구 담아서 에러페이지로 포워딩
 	         model.addAttribute("errorMsg", "클래스 등록 실패");
 	         return "common/errorPage";
 	      }
-	      
+
 	      //커리큘럼
 	      ArrayList<Curriculum> curriculumList = l.getCurriculumList();
 	      for(Curriculum element:curriculumList) {
-	         element.setLessonNo(l.getMemNo());
+	         element.setLessonNo(l.getLessonNo());
 	         result = lService.insertCurriculum(element);
 	         
 	    	 if(result == 0) { // 실패 => 에러문구 담아서 에러페이지로 포워딩
@@ -320,7 +323,7 @@ public class LessonController {
 	      //레슨faq
 	      ArrayList<LessonFaq> lessonFaqList = l.getLessonFaqList();
 	      for(LessonFaq element:lessonFaqList) {
-	    	  element.setLessonNo(l.getMemNo());
+	    	  element.setLessonNo(l.getLessonNo());
 	         result = lService.insertLessonFaq(element);
 	         
 	    	 if(result == 0) { // 실패 => 에러문구 담아서 에러페이지로 포워딩
@@ -332,7 +335,7 @@ public class LessonController {
 	      // 비디오
 	      ArrayList<Video> videoList = l.getVideoList();
 	      for(Video element:videoList) {
-	    	  element.setLessonNo(l.getMemNo());
+	    	  element.setLessonNo(l.getLessonNo());
 	         result = lService.insertVideo(element);
 	         
 	    	 if(result == 0) { // 실패 => 에러문구 담아서 에러페이지로 포워딩

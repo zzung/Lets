@@ -806,7 +806,7 @@
 	    )
 	values
 	    (
-	      seq_lesno.nextval
+	      #{lessonNo}
 	    , #{memNo}
 	    , #{lessonForm}
 	    , #{lessonType}
@@ -824,7 +824,10 @@
 	    , #{totalCount}
 	    
 	    )
-
 </insert>
+<select id="insertlessonNo" resultType="_int">
+select seq_lesno.nextval
+  from dual
+</select>
 
 </mapper>

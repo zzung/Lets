@@ -212,6 +212,10 @@ public class LessonDao {
 		return result;
 	}
 
+	public int insertlessonNo(SqlSessionTemplate ss) {
+		return ss.selectOne("lessonMapper.insertlessonNo");
+	}
+
 	
 
 }
