@@ -148,7 +148,7 @@
                                         </div>
                                     </div>
                                     <div class="online-thumbnail" style="width:16.7%;">
-                                        <button class="genric-btn primary-border" onclick="postCurri();">play</button>
+                                        <button class="genric-btn primary-border" data-no="${on.lessonNo }" onclick="postCurri(this);">play</button>
                                         <!-- detailCurri.cr?lessonNo= -->
                                     </div>
                                 </div>
@@ -190,6 +190,13 @@
 			<script>
 				function postCurri(){
 					$("#postCurriForm").attr("action", "detailCurri.cr").submit();
+				}
+				
+				function postCurri(e){
+					var lessonNo = $(e).data('no');
+					console.log(lessonNo);
+					
+					location.href="detailCurri.cr?lessonNo="+lessonNo;
 				}
 			</script>
 			

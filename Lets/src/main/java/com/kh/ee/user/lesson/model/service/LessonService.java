@@ -36,6 +36,7 @@ public interface LessonService {
 	int reportReply(Report rpt);
 	int likeCount(int lessonNo, WishList wl); 
 	int dislikeCount(int lessonNo, WishList wl);
+	ArrayList<Curriculum> selectCurrList(int lessonNo);
 	//
 	
 	int deleteLesson(int lno);
@@ -78,6 +79,7 @@ public interface LessonService {
 	int CurriculumListNo();
 	
 	int selectMemPayList(MemPay mp);
+
 
 
 	

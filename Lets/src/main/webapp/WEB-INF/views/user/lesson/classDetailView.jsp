@@ -103,24 +103,18 @@
 	                              </div> 
 	                              <br>
 	                              <div class="ordered-list">
-	                                 <h6>1. 간단한 컬리튤럼 설명회</h6>
-	                                 <ol type="a" >
-	                                    <li>리스트 항목</li>
-	                                    <li>리스트 항목</li>
-	                                    <li>리스트 항목</li>
-	                                 </ol>
-	                                 <h6>2. 간단한 컬리튤럼 설명회</h6>
-	                                 <ol type="a">
-	                                    <li>리스트 항목</li>
-	                                    <li>리스트 항목</li>
-	                                    <li>리스트 항목</li>
-	                                 </ol>
-	                                 <h6>3. 간단한 컬리튤럼 설명회</h6>
-	                                 <ol type="a">
-	                                    <li>리스트 항목</li>
-	                                    <li>리스트 항목</li>
-	                                    <li>리스트 항목</li>
-	                                 </ol>
+	                              <c:forEach var="c" items="${c }" varStatus="status">
+	                              	<c:choose>
+	                              		<c:when test="${c.curLevel eq 1}">
+	                              			<h6>${c.curriculumCont }</h6>
+	                              		</c:when>
+	                              		<c:otherwise>
+			                                 <ol type="a" >
+			                                    <li>${c.curriculumCont }</li>
+			                                 </ol>
+	                              		</c:otherwise>
+	                              	</c:choose>
+	                               </c:forEach>
 	                              </div>  
 	                              <br><br>
 	                           </div>

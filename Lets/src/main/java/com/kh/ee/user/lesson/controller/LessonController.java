@@ -118,7 +118,7 @@ public class LessonController {
 		ArrayList<LessonFaq> faqList = lService.selectLessonFaqList(lessonNo); 
 		Tutor t = lService.selectTutorInfo(lessonNo); 
 		int listCount = lService.selectListCount();
-		
+		ArrayList<Curriculum> cList = lService.selectCurrList(lessonNo); 
 		
 		Member mem = (Member)session.getAttribute("loginUser");
 		//member가 null 일때, 비회원일때
@@ -128,6 +128,7 @@ public class LessonController {
 			model.addAttribute("t", t);
 			model.addAttribute("listCount",listCount);
 			model.addAttribute("l",lesson); 
+			model.addAttribute("c",cList); 
 			model.addAttribute("isWatching",null);
 			model.addAttribute("isWished", null);
 			return "user/lesson/classDetailView";
@@ -150,10 +151,7 @@ public class LessonController {
 		mp.setLessonNo(lessonNo);
 		mp.setMemNo(mem.getMemNo());
 		
-		System.out.println(mp);
-		
-		int result2 = lService.selectMemPayList(mp); 
-		System.out.println("result2:" + result2);
+		int result2 = lService.selectMemPayList(mp);
 		
 		String isWatching = "N";
 		if(result2>0) {
@@ -165,6 +163,7 @@ public class LessonController {
 		model.addAttribute("t", t);
 		model.addAttribute("listCount",listCount);
 		model.addAttribute("l",lesson); 
+		model.addAttribute("c",cList); 
 		model.addAttribute("isWatching",isWatching);
 		model.addAttribute("isWished",isWished);
 		return "user/lesson/classDetailView"; 

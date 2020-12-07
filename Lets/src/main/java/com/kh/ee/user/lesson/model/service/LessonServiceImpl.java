@@ -59,6 +59,12 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.selectLessonFaqList(lessonNo, ss);
 	}
 	
+	@Override
+	public ArrayList<Curriculum> selectCurrList(int lessonNo) {
+		return lDao.selectCurrList(lessonNo, ss);
+	}
+	
+	
 	// 커뮤니티 총 갯수 (학천)
 	@Override
 	public int selectListCount() {
@@ -252,7 +258,7 @@ public class LessonServiceImpl implements LessonService{
 	public int selectMemPayList(MemPay mp) {
 		return lDao.selectMemPayList(mp, ss);
 	}
-	
+
 
 
 

@@ -97,6 +97,15 @@
 	<result column="mem_no" property="memNo" />
 </resultMap>
 
+<resultMap type="Curriculum" id="curriculumResultSet">
+	<id column="curriculum_no" property="curriculumNo" />
+	<result column="curriculum_cont" property="curriculumCont" />
+	<result column="lesson_no" property="lessonNo" />
+	<result column="ref_cur_no" property="refCurNo" />
+	<result column="cur_level" property="curLevel" />
+	<result column="video_no" property="videoNo"/>
+</resultMap>
+
 <select id="selectApproveLessonList" resultMap="lessonResultSet" >
 	select
 	       lesson_no
@@ -175,6 +184,16 @@
 	select *
 	  from lesson_faq
 	 where lesson_no = #{lessonNo}
+</select>
+
+<select id="selectCurrList" parameterType="_int" resultMap="curriculumResultSet">
+	select
+	       curriculum_cont
+	     , curriculum_no
+	     , ref_cur_no
+	     , cur_level
+	 from curriculum
+	where lesson_no = #{lessonNo}
 </select>
 
 <select id="selectTutorInfo" parameterType="_int" resultMap="tutorResultSet">

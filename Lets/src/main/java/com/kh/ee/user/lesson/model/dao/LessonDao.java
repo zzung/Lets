@@ -52,6 +52,11 @@ public class LessonDao {
 		
 		return (ArrayList)ss.selectList("lessonMapper.selectReply", lessonNo);
 	}
+	
+	public ArrayList<Curriculum> selectCurrList(int lessonNo, SqlSessionTemplate ss) {
+		ArrayList<Curriculum> cList = (ArrayList)ss.selectList("lessonMapper.selectCurrList", lessonNo); 
+		return cList;
+	}
 
 	// 커뮤니티 댓글 작성 (학천)
 	public int insertReply(Reply r, SqlSessionTemplate ss) {
@@ -204,9 +209,9 @@ public class LessonDao {
 	
 	public int selectMemPayList(MemPay mp, SqlSessionTemplate ss) {
 		int result = ss.selectOne("lessonMapper.selectMemPayList",mp);
-		System.out.println("mempaylist: " + result);
 		return result;
 	}
+
 	
 
 }
