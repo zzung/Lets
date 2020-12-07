@@ -250,23 +250,28 @@ div{
 
         <div id="detail_qna_box">
 
-            <div id="reply_box">
 
-                <div class="user_img">
-                    <img src="${ loginUser.memPic }" height="100%">
-                </div>
-
-                <div class="blank"></div>
-
-                <div class="question_box">
-
-                    <textarea id="question_area" cols="30" rows="10" placeholder="질문 내용을 입력해주세요."></textarea>
-
-                    <button class="button" onclick="insertQ();">제출</button>
-
-                </div>
-                
-            </div>
+			<c:if test="${ loginUser.memNo != 2 and loginUser.memNo != 3 and loginUser.memNo != 4 and loginUser.memNo != 5 }">
+			
+	            <div id="reply_box">
+	
+	                <div class="user_img">
+	                    <img src="${ loginUser.memPic }" height="100%">
+	                </div>
+	
+	                <div class="blank"></div>
+	
+	                <div class="question_box">
+	
+	                    <textarea id="question_area" cols="30" rows="10" placeholder="질문 내용을 입력해주세요."></textarea>
+	
+	                    <button class="button" onclick="insertQ();">제출</button>
+	
+	                </div>
+	                
+	            </div>
+            
+            </c:if>
             
             <!-- 폼 -->
 	        <form action="insertQuestion.cr" method="POST" id="qnaForm">
