@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +34,7 @@
             </div><br>
        			<c:if test="${ !empty t.tutorPic }">	
                      	현재 업로드된 파일 : 
-					<p>${ t.tutorPic.split('/')[3] }</p>
+					<p>${ t.tutorPic.split('/')[fn:length(t.tutorPic.split('/'))-1] }</p>
                  </c:if>
             <h5><b>프로필 이미지 첨부</b></h5>
             
