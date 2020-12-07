@@ -105,6 +105,35 @@
          
          $(document).ready (function () { 
         	 
+	    	 
+         	$('#timePrice').change(function(){
+        		$('#timePriceResult').html($('#timePrice').val()); 
+        	});
+        	
+	       	 $('#weekCount').change(function(){
+	    		 if($('#weekCount').val() != "" && $('#totalPeriod').val() != ""){ 
+	    			 
+	    		 	$('#totalCount').val($('#weekCount').val()*$('#totalPeriod').val())
+	    		 	$('#totalCountResult').html($('#totalCount').val()); 
+	    		 }        		 
+	    	 });
+	    	 
+	    	 $('#totalPeriod').change(function(){
+	    		 if($('#weekCount').val() != "" && $('#totalPeriod').val() != ""){        			 
+	    		 	$('#totalCount').val($('#weekCount').val()*$('#totalPeriod').val())
+	    		 	$('#totalCountResult').html($('#totalCount').val()) ;
+	    		 }        		 
+	    	 });
+	    	 
+	    	 $('#lessonPricePayResult').click(function(){
+	    		 $('#ontimeResult').html($("#oneLessonTime option:selected").val());
+	    		 $('#originPrice').html(($('#weekCount').val()*$('#totalPeriod').val())*($("#oneLessonTime option:selected").val())*($('#timePrice').val()))
+	    		 $('#payTotal').val(($('#weekCount').val()*$('#totalPeriod').val())*($("#oneLessonTime option:selected").val())*($('#timePrice').val()))
+ 	    		 $('#connectFees').html((($('#weekCount').val()*$('#totalPeriod').val())*($("#oneLessonTime option:selected").val())*($('#timePrice').val()))*0.2)
+ 	    		 $('#resultPay').html(($('#weekCount').val()*$('#totalPeriod').val())*($("#oneLessonTime option:selected").val())*($('#timePrice').val())-((($('#weekCount').val()*$('#totalPeriod').val())*($("#oneLessonTime option:selected").val())*($('#timePrice').val()))*0.2))
+	    	 });
+	    	 
+        	 
         	 $('input[name=lessonType]').change(function(){
         		var type = $(this).val();
         		if(type=='offline'){
@@ -113,23 +142,7 @@
         			$('#enroll_cul').css('display', 'block')
         		}
         	 });
-        	 
-        	 $('#weekCount').change(function(){
-        		 if($('#weekCount').val() != "" && $('#totalPeriod').val() != ""){        			 
-        		 	$('#totalCount').val($('#weekCount').val()*$('#totalPeriod').val())
-        		 	$('#totalCountResult').keyup($('#totalCount').val()); 
-        		 	console.log($('#weekCount').val()*$('#totalPeriod').val());
-        		 }        		 
-        	 });
-        	 
-        	 $('#totalPeriod').change(function(){
-        		 if($('#weekCount').val() != "" && $('#totalPeriod').val() != ""){        			 
-        		 	$('#totalCount').val($('#weekCount').val()*$('#totalPeriod').val())
-        		 	$('#totalCountResult').keyup($('#totalCount').val()) ;
-        		 	console.log($('#weekCount').val()*$('#totalPeriod').val());
-        		 }        		 
-        	 });
-             
+        	             
         	 
             $('#curriculumBtn').click (function () {   
 
@@ -514,7 +527,7 @@
                         <th colspan="2">시간당 가격</th>
                     </tr>
                     <tr>
-                        <td width="240"><input class="form-control" name="price" type="number" placeholder="시간당 가격을 입력하세요"></td>
+                        <td width="240"><input class="form-control" id="timePrice" name="price" type="number" placeholder="시간당 가격을 입력하세요"></td>
                         <th>원</th>
                     </tr>
                 </table><br>
@@ -527,9 +540,9 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="default-select" id="default-select">
-                                <select name="time" style="display: none;">
-                                    <option value="1">1회당 수업시간을 선택하세요</option>
+                            <div class="default-select">
+                                <select name="time" id="oneLessonTime" style="display: none;">
+                                    <option value="" selected disabled>1회당 수업시간을 선택하세요</option>
                                     <option value="1">1시간</option>
                                     <option value="2">2시간</option>
                                     <option value="3">3시간</option>
@@ -564,21 +577,21 @@
                     </tr>
                 </table>
             </div>
-            <br><br><br>
+			<br><button type="button" class="genric-btn primary radius" id="lessonPricePayResult">총 수업 가격 확인하기</button><br><br>
             <div>
                 <h5><b>총 수업 가격</b></h5><br>
                 <div style="background-color: #f9f9ff; width: 600px; font-size: 20px; padding: 20px;">
-                    12,000원 X 1시간 X <span id="totalCountResult">0</span>번<br>
+                    <span id="timePriceResult">0</span>원 X <span id="ontimeResult">0</span>시간 X <span id="totalCountResult">0</span>번<br>
                     <hr>
                     <table align="right" style="width: 200px;">
                         <tr>
                             <th>원수업료</th>
-                            <th>72,000</th>
+                            <th><input type="hidden" id="payTotal" name="payTotal"><span id="originPrice">0</span></th>
                             <th>원</th>
                         </tr>
                         <tr>
                             <th>연결 수수료</th>
-                            <th>14,400</th>
+                            <th><span id="connectFees">0</span></th>
                             <th>원</th>
                         </tr>
                     </table><br><br><br>
@@ -586,7 +599,7 @@
                     <table align="right" style="color: red; width: 200px;">
                         <tr>
                             <th>총 수업료</th>
-                            <th>57,600</th>
+                            <th><span id="resultPay">0</span></th>
                             <th>원</th>
                         </tr>
                     </table><br>
