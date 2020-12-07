@@ -160,9 +160,7 @@ public class TutorController {
 		}else {
 			model.addAttribute("errorMsg", "게시글 등록 실패");
 			return "common/errorPage";
-		}
-		
-		
+		}	
 		
 	}
 	

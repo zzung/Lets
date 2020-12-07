@@ -34,10 +34,11 @@
 	<update id="updateTutorInfo" parameterType="Tutor">
 		update
 				tutor
-			set tutor_pic = #{tutorPic}
-			  , tutor_info = #{tutorInfo}
+			set tutor_info = #{tutorInfo}
 			  , modify_date = TO_CHAR(SYSDATE,'YY/MM/DD')
+			  <if test="tutorPic!=null" >,tutor_pic = #{tutorPic}</if>
 		  where mem_no = #{memNo}
+		  
 	</update>
 	
 	<select id="selectTutor" resultMap="tutorResultSet">

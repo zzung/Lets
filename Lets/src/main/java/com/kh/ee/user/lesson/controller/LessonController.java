@@ -294,12 +294,9 @@ public class LessonController {
 	      //준비물
 	      ArrayList<String> lessonPrepareList = l.getLessonPrepareList();
 	      l.setLessonPrepare(String.join(", ", lessonPrepareList));
-	      System.out.println((Member)session.getAttribute("loginUser"));
 	      l.setMemNo(((Member)session.getAttribute("loginUser")).getMemNo());
-//	      System.out.println(l.getMemNo());
 	      l.setLessonNo(lessonNo);
 	      
-	      System.out.println(l);
 	      int result = lService.insertLesson(l);
 	      
 	      
@@ -335,16 +332,20 @@ public class LessonController {
 	      }
 	      
 	      // 비디오
-	      ArrayList<Video> videoList = l.getVideoList();
-	      for(Video element:videoList) {
-	    	  element.setLessonNo(l.getLessonNo());
-	         result = lService.insertVideo(element);
-	         
-	    	 if(result == 0) { // 실패 => 에러문구 담아서 에러페이지로 포워딩
-		         model.addAttribute("errorMsg", "클래스 등록 실패(비디오 등록에 문제가 있습니다.)");
-		         return "common/errorPage";
+	      if(l.getLessonType().equals("온라인")) {
+
+		      ArrayList<Video> videoList = l.getVideoList();
+		      for(Video element:videoList) {
+		    	  System.out.println(element);
+		    	  element.setLessonNo(l.getLessonNo());
+		         result = lService.insertVideo(element);
+		         
+		    	 if(result == 0) { // 실패 => 에러문구 담아서 에러페이지로 포워딩
+			         model.addAttribute("errorMsg", "클래스 등록 실패(비디오 등록에 문제가 있습니다.)");
+			         return "common/errorPage";
+			      }
+		         
 		      }
-	         
 	      }
 	      
          session.setAttribute("alertMsg", "클래스 등록 요청되었습니다!");
