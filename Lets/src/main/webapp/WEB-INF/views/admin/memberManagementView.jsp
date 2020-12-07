@@ -18,16 +18,22 @@
 				
 				<div class="welcome" align="center" style="width:1030px;">
 					<div align="right">
-						<form action="searchMemberMgmt.ad">
+						<form action="searchClassMgmt.ad">
+							<input type="hidden" name="currentPage" value="1"> 
 							<select name="condition" style="height: 30px;">
 								<option value="memName">이름</option>
 								<option value="nickname">닉네임</option>
-								<option value="email">아이디(이메일)</option>
+								<option value="memId">아이디</option>
 							</select>
-							<input type="text" name="keyword">
-							<button type="submit" class="btn btn-default">검색</button>
-						</form>
+	                       	<input type="text" name="keyword" value="${keyword}">
+	                   		<button type="submit" class="btn btn-default">검색</button>
+						</form> 
 					</div>
+					
+					 <script>
+			        	$(".searchArea option[value=${condition}]").attr("selected",true); 
+			        </script>
+			        
 					<br>
 					<table class="list-area" style="width:1030px;">
 						<tr>

@@ -21,5 +21,5 @@ public class SearchCondition {
 	
 	private String memName;
 	private String nickname;
-	private String email;
+	private String memId;
 }

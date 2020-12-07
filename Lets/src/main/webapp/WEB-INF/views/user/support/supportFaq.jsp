@@ -91,34 +91,72 @@ margin-top: 80px;
 					<br>
 				</div>
 			</c:forEach>
-			<div class="blog-pagination justify-content-center d-flex">
-			    <ul class="pagination">
-			        <li class="page-item">
+			
+			
+			
+			
+			
+			<div class="blog-pagination justify-content-center d-flex" align="center">
+				<ul class="pagination">
+				<c:choose>
+					<c:when test="${pi.startPage eq 1 }">
+					 <li class="page-item">
 			            <a href="#" class="page-link" aria-label="Previous">
 			                <i class="ti-angle-left"></i>
 			            </a>
 			        </li>
-			        <li class="page-item">
-			            <a href="#" class="page-link">1</a>
-			        </li>
-			        <li class="page-item active">
-			            <a href="#" class="page-link">2</a>
-			        </li>
-			        <li class="page-item active">
-			            <a href="#" class="page-link">3</a>
-			        </li>
-			        <li class="page-item active">
-			            <a href="#" class="page-link">4</a>
-			        </li>
-			        <li class="page-item active">
-			            <a href="#" class="page-link">5</a>
-			        </li>
-			        <li class="page-item">
-			            <a href="#" class="page-link" aria-label="Next">
-			                <i class="ti-angle-right"></i>
-			            </a>
-			        </li>
-			    </ul>
+					</c:when>
+					
+					<c:otherwise>
+						<li class="page-item">
+				            <a href="supportFaq.su?currentPage=${pi.currentPage -1 }" class="page-link" aria-label="Previous">
+				                <i class="ti-angle-left"></i>
+				            </a>
+				        </li>
+					</c:otherwise>
+				</c:choose>
+				
+				
+				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+					<c:choose>
+						<c:when test="${pi.currentPage ne p }">
+							<c:choose>
+								<c:when test="${empty sc }">
+								<li class="page-item active">
+						            <a href="supportFaq.su?currentPage=${p}" class="page-link">${p}</a>
+						        </li>
+								</c:when>
+								<c:otherwise>
+									<c:url var="searchUrl" value="searchClassMgmt.ad">
+										<c:param name="currentPage" value="${p }"/>
+										<c:param name="condition" value="${condition }" />
+										<c:param name="keyword" value="${keyword }" />
+									</c:url>
+									
+									<li><a href="${searchUrl }">${p }</a></li>
+								</c:otherwise>
+							</c:choose>	
+						</c:when>
+					</c:choose>
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${pi.currentPage eq pi.maxPage }">
+						 <li class="page-item">
+				            <a href="#" class="page-link" aria-label="Next">
+				                <i class="ti-angle-right"></i>
+				            </a>
+				        </li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item">
+							<a href="supportFaq.su?currentPage=${pi.currentPage +1 }" class="page-link" aria-label="Next">
+				                <i class="ti-angle-right"></i>
+				            </a>
+						</li>
+					</c:otherwise>
+				</c:choose>	
+				</ul>
 			</div>
 			
 		</div>

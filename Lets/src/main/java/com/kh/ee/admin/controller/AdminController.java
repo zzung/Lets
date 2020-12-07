@@ -43,6 +43,60 @@ public class AdminController {
 		return "admin/memberManagementView";
 	}
 	
+	
+	//@Auth(role = Role.ADMIN)
+	@RequestMapping("searchMemberMgmt.ad")
+	public String searchMemberMgmt(String condition, String keyword, int currentPage, Model model) {
+		
+		SearchCondition sc = new SearchCondition(); 
+		
+		switch(condition) {
+		case "memName" : sc.setMemName(keyword); break;
+		case "nickname" : sc.setNickname(keyword); break;
+		case "memId" : sc.setMemId(keyword);
+		}
+		
+		int listCount = as.searchMemberMgmtCount(sc);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Member> list = as.searchMemberMgmtList(sc,pi); 
+		
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
+		model.addAttribute("condition",condition);
+		model.addAttribute("sc",sc);
+		model.addAttribute("keyword",keyword);
+		
+		return "admin/memberManagementView";		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//@Auth(role = Role.ADMIN)
 	@RequestMapping("classManagement.ad")
 	public String classManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
@@ -287,31 +341,6 @@ public class AdminController {
 			return "common/errorPage";
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

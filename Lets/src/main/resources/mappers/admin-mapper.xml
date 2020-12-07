@@ -427,6 +427,24 @@
 	   		 by mem_no desc
 </select>
 
+<select id="searchMemberMgmtCount" parameterType="SearchCondition" resultType="_int">
+	select 
+	       count(*)
+	  from member m 
+	 <choose>
+	 	<when test="memName != null">
+	 		and mem_name like '%' || #{memName} || '%'
+	 	</when>
+	 	<when test="nickname != null">
+	 		and nickname like '%' || #{nickname} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and mem_id like '%' || #{memId} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
+
+
 <select id="selectBlacklistListCount" resultType="_int">
 	select 
 	       count(*)
