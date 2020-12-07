@@ -346,4 +346,5 @@
 		  and mp.mem_no = #{memNo}
 		  and l.lesson_type='오프라인'
 </select>
+
  </mapper>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,23 +43,31 @@
 	        
             <br><br>
 			
-			<c:set var="videoStep" value="${ (videoCount + 0.0)/(lesson.lessonContNo + 0.0) }" />
+			<c:if test="${ loginUser.memNo != 2 and loginUser.memNo != 3 and loginUser.memNo != 4 and loginUser.memNo != 5 }">
 			
-            <p class="white">진도율 : ${ videoCount }강/${ lesson.lessonContNo }강 (${ videoStep }%)</p>
-
-            <div id="curri_bar">
-
-                <div id="curri_status" style="width: ${videoStep}%"></div>
-
-            </div>
-
-        </div>
-
-        <div id="curri_btn">
+			<c:set var="videoStep" value="${ videoCount/lesson.lessonContNo }" />			
+			
+	            <p class="white">진도율 : ${ videoCount }강/${ lesson.lessonContNo }강 (<fmt:formatNumber value="${ videoStep }" type="percent" />)</p>
+	
+	            <div id="curri_bar">
+	
+	                <div id="curri_status" style="width: <fmt:formatNumber value="${ videoStep }" type="percent" />"></div>
+	
+	            </div>
             
-            <button class="button" onclick="location.href='videoList.cr?lessonNo=${ lesson.lessonNo }';">학습하기</button>
+            </c:if>
 
         </div>
+
+		<c:if test="${ loginUser.memNo != 2 and loginUser.memNo != 3 and loginUser.memNo != 4 and loginUser.memNo != 5 }">
+		
+	        <div id="curri_btn">
+	            
+	            <button class="button" onclick="location.href='videoList.cr?lessonNo=${ lesson.lessonNo }';">학습하기</button>
+	
+	        </div>
+        
+        </c:if>
 
     </div>
 

@@ -58,9 +58,17 @@
 	
 	        <div class="video button" onclick="location.href='detailVideo.cr?videoNo=${ video.videoNo }&memNo=${ loginUser.memNo }&lessonNo=${ lesson.lessonNo }';">
 	
-	            <img src="resources/user/assets/img/curriculum/play.png" alt="play" height="100%">
-	
-	            <span>${ video.videoName }</span>
+				<c:choose>
+					<c:when test="${ video.status == 'N' }">		
+		            	<img src="resources/user/assets/img/curriculum/play.png" alt="play" height="100%">
+		            </c:when>
+		            <c:otherwise>
+						<img src="resources/user/assets/img/curriculum/check.png" alt="done" height="100%">
+					</c:otherwise>
+	            
+	            </c:choose>
+	            
+		            <span>${ video.videoName }</span>
 	
 	        </div>
 	        

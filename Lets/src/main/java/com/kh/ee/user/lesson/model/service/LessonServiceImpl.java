@@ -1,6 +1,7 @@
 package com.kh.ee.user.lesson.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -260,10 +261,25 @@ public class LessonServiceImpl implements LessonService{
 	}
 
 	@Override
+	public ArrayList<Video> selectVideoList(MemPay mp) {
+		return lDao.selectVideoList(mp,ss);
+	}
+
+	@Override
+	public int insertMemVideo(Map<String, Object> map) {
+		return lDao.insertMemVideo(map,ss);
+	}
+	
+	/*
+	@Override
+	public int insertMemVideo(ArrayList<Video> vList) {
+		return lDao.insertMemVideo(vList,ss);
+	}
+	*/
+
 	public int insertlessonNo() {
 		return lDao.insertlessonNo(ss);
 	}
-
 
 
 

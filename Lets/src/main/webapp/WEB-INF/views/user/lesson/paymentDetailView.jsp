@@ -34,6 +34,7 @@
 									<img src="${l.lessonCoverImg }" alt="post">
 								</div>
 							</div>
+							
 							<form action="paymentProcess.le">
 								<div class="payment-user-info">
 								<input type="hidden" name="lessonNo" value="${l.lessonNo }">

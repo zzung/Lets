@@ -63,7 +63,7 @@
             
             <script>
             	$(function(){
-            		showDiscount(); 
+            		showDiscount();
 					setInterval(showDiscount,10000);
             	});
             
@@ -194,8 +194,6 @@
 				
 				function postCurri(e){
 					var lessonNo = $(e).data('no');
-					console.log(lessonNo);
-					
 					location.href="detailCurri.cr?lessonNo="+lessonNo;
 				}
 			</script>

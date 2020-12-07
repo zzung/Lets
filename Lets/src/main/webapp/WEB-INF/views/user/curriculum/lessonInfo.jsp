@@ -39,7 +39,7 @@
 
         <img src="resources/user/assets/img/curriculum/calendar.png" alt="calendar" height="40px" style="margin-left: 5%;">
 
-        <span class="hold">${ lesson.period } 수강 가능</span>
+        <span class="hold">${ lesson.period } 주 수강 가능</span>
 
         <img src="resources/user/assets/img/curriculum/media.png" alt="calendar" height="40px">
 

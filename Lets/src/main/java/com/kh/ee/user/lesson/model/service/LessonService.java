@@ -1,6 +1,7 @@
 package com.kh.ee.user.lesson.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.Video;
@@ -79,6 +80,12 @@ public interface LessonService {
 	int CurriculumListNo();
 	
 	int selectMemPayList(MemPay mp);
+
+	ArrayList<Video> selectVideoList(MemPay mp);
+
+	//int insertMemVideo(ArrayList<Video> vList);
+
+	int insertMemVideo(Map<String, Object> map);
 
 
 

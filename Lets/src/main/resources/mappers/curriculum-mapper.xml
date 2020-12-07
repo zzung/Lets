@@ -50,6 +50,7 @@
  		<result column="video_name" property="videoName" />
  		<result column="pre_video_no" property="preVideoNo" />
  		<result column="next_video_no" property="nextVideoNo" />
+ 		<result column="status" property="status" />
  	</resultMap>
  	
  	<resultMap type="Lesson" id="lessonResultSet">
@@ -145,7 +146,8 @@
  		 	   	 from video 
  		 	   	where lesson_no = #{lessonNo}
  		 	 )
- 		    and status='Y'  
+ 		  and status='Y'
+ 		  and mem_no=#{memNo} 
  	</select>
  	
  	<select id="selectAverageStar" resultType="_int" parameterType="Lesson">
@@ -250,8 +252,11 @@
  			 , video_url
  			 , video_cont
  			 , video_name
- 		  from video
+ 			 , mv.status
+ 		  from video v
+ 		  join mem_video mv using(video_no)
  		 where lesson_no = #{lessonNo}
+ 		   and mem_no = #{memNo}
  	</select>
  	
  	<update id="updateVideoStatus" parameterType="MemVideo">
