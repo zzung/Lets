@@ -31,5 +31,6 @@ public interface MemberService {
 	//마이페이지 온라이 레슨 보여주기(학천)
 	ArrayList<Lesson> selectOnlineLesson(int memNo);
 	ArrayList<Lesson> selectOffLesson(int memNo);
+	double calPercentage(Lesson l);
 
 }

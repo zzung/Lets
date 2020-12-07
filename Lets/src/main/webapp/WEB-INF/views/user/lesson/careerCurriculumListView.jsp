@@ -70,7 +70,6 @@
 												<li><i class="ti-heart"></i> ${pop.likeCount }</li>
 											</ul>
 											<c:set var="disc" value="${pop.discount }"/>
-					                         <c:set var="divide" value="100"/>
 					                         <c:set var="total" value="${pop.payTotal }" />
 					                         <c:set var="totalAmount" value="${total-(total*disc/100) }" />
 												<c:choose>

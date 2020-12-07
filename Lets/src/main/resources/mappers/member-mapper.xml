@@ -326,7 +326,7 @@
 	     , mp.pay_status
 	     , mp.payment_date
 	 from lesson l
-	 join mem_pay mp on (l.mem_no = mp.mem_no)
+	 join mem_pay mp on (l.lesson_no = mp.lesson_no)
 	where l.status = 'Y'
 	  and mp.mem_no = #{memNo}
 	  and l.lesson_type='온라인'
@@ -334,16 +334,35 @@
 
 <select id="selectOffLesson" parameterType="_int" resultMap="lessonResultSet">
 		select distinct
-	       l.lesson_cover_img
-	     , l.lesson_no
-	     , l.lesson_title
-	     , l.period
-	     , mp.pay_status
-	     , mp.payment_date
-	 from lesson l
-	 join mem_pay mp on (l.mem_no = mp.mem_no)
-	where l.status = 'Y'
-	  and mp.mem_no = #{memNo}
-	  and l.lesson_type='오프라인'
+		       l.lesson_cover_img
+		     , l.lesson_no
+		     , l.lesson_title
+		     , l.period
+		     , mp.pay_status
+		     , mp.payment_date
+		 from lesson l
+		 join mem_pay mp on (l.lesson_no = mp.lesson_no)
+		where l.status = 'Y'
+		  and mp.mem_no = #{memNo}
+		  and l.lesson_type='오프라인'
+</select>
+
+<select id="totalVideo" parameterType="Lesson" resultType="_int">
+	select 
+	       count(*)
+	  from video v
+	  join mem_video mv on (mv.video_no = v.video_no)
+	 where mv.mem_no = #{memNo}
+	   and v.lesson_no = #{lessonNo}
+</select>
+
+<select id="watchedVideo" parameterType="Lesson" resultType="_int">
+	select
+	       count(*)
+	  from mem_video mv
+	  join video v on (mv.video_no = v.video_no) 
+	 where mem_no = #{memNo}
+	   and lesson_no = #{lessonNo}
+	   and status = 'Y'
 </select>
  </mapper>

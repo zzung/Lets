@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -118,7 +120,7 @@ public class LessonController {
 		ArrayList<LessonFaq> faqList = lService.selectLessonFaqList(lessonNo); 
 		Tutor t = lService.selectTutorInfo(lessonNo); 
 		int listCount = lService.selectListCount();
-		
+		ArrayList<Curriculum> cList = lService.selectCurrList(lessonNo); 
 		
 		Member mem = (Member)session.getAttribute("loginUser");
 		//member가 null 일때, 비회원일때
@@ -128,6 +130,7 @@ public class LessonController {
 			model.addAttribute("t", t);
 			model.addAttribute("listCount",listCount);
 			model.addAttribute("l",lesson); 
+			model.addAttribute("c",cList); 
 			model.addAttribute("isWatching",null);
 			model.addAttribute("isWished", null);
 			return "user/lesson/classDetailView";
@@ -150,10 +153,7 @@ public class LessonController {
 		mp.setLessonNo(lessonNo);
 		mp.setMemNo(mem.getMemNo());
 		
-		System.out.println(mp);
-		
-		int result2 = lService.selectMemPayList(mp); 
-		System.out.println("result2:" + result2);
+		int result2 = lService.selectMemPayList(mp);
 		
 		String isWatching = "N";
 		if(result2>0) {
@@ -165,6 +165,7 @@ public class LessonController {
 		model.addAttribute("t", t);
 		model.addAttribute("listCount",listCount);
 		model.addAttribute("l",lesson); 
+		model.addAttribute("c",cList); 
 		model.addAttribute("isWatching",isWatching);
 		model.addAttribute("isWished",isWished);
 		return "user/lesson/classDetailView"; 
@@ -279,7 +280,8 @@ public class LessonController {
 	
 	@RequestMapping("insert.le")
 	public String insertLesson(Lesson l, MultipartFile lessonUpFile, HttpSession session, Model model) {
-		
+		 
+		int lessonNo = lService.insertlessonNo();
 		
 	      //레슨 
 	      if(!lessonUpFile.getOriginalFilename().equals("")) {         
@@ -292,23 +294,25 @@ public class LessonController {
 	      //준비물
 	      ArrayList<String> lessonPrepareList = l.getLessonPrepareList();
 	      l.setLessonPrepare(String.join(", ", lessonPrepareList));
-	      l.setPayTotal("5000");
 	      System.out.println((Member)session.getAttribute("loginUser"));
 	      l.setMemNo(((Member)session.getAttribute("loginUser")).getMemNo());
 //	      System.out.println(l.getMemNo());
+	      l.setLessonNo(lessonNo);
 	      
+	      System.out.println(l);
 	      int result = lService.insertLesson(l);
+	      
 	      
 	         
     	 if(result == 0) { // 실패 => 에러문구 담아서 에러페이지로 포워딩
 	         model.addAttribute("errorMsg", "클래스 등록 실패");
 	         return "common/errorPage";
 	      }
-	      
+
 	      //커리큘럼
 	      ArrayList<Curriculum> curriculumList = l.getCurriculumList();
 	      for(Curriculum element:curriculumList) {
-	         element.setLessonNo(l.getMemNo());
+	         element.setLessonNo(l.getLessonNo());
 	         result = lService.insertCurriculum(element);
 	         
 	    	 if(result == 0) { // 실패 => 에러문구 담아서 에러페이지로 포워딩
@@ -321,7 +325,7 @@ public class LessonController {
 	      //레슨faq
 	      ArrayList<LessonFaq> lessonFaqList = l.getLessonFaqList();
 	      for(LessonFaq element:lessonFaqList) {
-	    	  element.setLessonNo(l.getMemNo());
+	    	  element.setLessonNo(l.getLessonNo());
 	         result = lService.insertLessonFaq(element);
 	         
 	    	 if(result == 0) { // 실패 => 에러문구 담아서 에러페이지로 포워딩
@@ -333,7 +337,7 @@ public class LessonController {
 	      // 비디오
 	      ArrayList<Video> videoList = l.getVideoList();
 	      for(Video element:videoList) {
-	    	  element.setLessonNo(l.getMemNo());
+	    	  element.setLessonNo(l.getLessonNo());
 	         result = lService.insertVideo(element);
 	         
 	    	 if(result == 0) { // 실패 => 에러문구 담아서 에러페이지로 포워딩
@@ -375,10 +379,18 @@ public class LessonController {
 	@RequestMapping("paymentProcess.le")
 	public String paymentProcess(MemPay mp,HttpSession session,Model model) {
 		int result = lService.insertDelInfo(mp);
+		ArrayList<Video> list = lService.selectVideoList(mp);
+		System.out.println("list:" + list);
+		
+		Map<String, Object> map = new HashMap<String,Object>(); 
+		map.put("list",list); 
+		
+		int result2 = lService.insertMemVideo(map); 
+		System.out.println(result2);
 		
 		//mp에서 맴버 번호만 빼서 mem_video에서 관련 lesson 번호빼와서 mem_video에 insert
 		
-		if(result>0) {
+		if(result*result2>0) {
 			session.setAttribute("alertMsg","결제 완료 되었습니다.");
 			return "redirect:myPage.me";			
 		} else {

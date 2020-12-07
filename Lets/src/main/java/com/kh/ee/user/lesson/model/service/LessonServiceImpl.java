@@ -1,6 +1,7 @@
 package com.kh.ee.user.lesson.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,12 @@ public class LessonServiceImpl implements LessonService{
 	public ArrayList<LessonFaq> selectLessonFaqList(int lessonNo) {
 		return lDao.selectLessonFaqList(lessonNo, ss);
 	}
+	
+	@Override
+	public ArrayList<Curriculum> selectCurrList(int lessonNo) {
+		return lDao.selectCurrList(lessonNo, ss);
+	}
+	
 	
 	// 커뮤니티 총 갯수 (학천)
 	@Override
@@ -252,7 +259,27 @@ public class LessonServiceImpl implements LessonService{
 	public int selectMemPayList(MemPay mp) {
 		return lDao.selectMemPayList(mp, ss);
 	}
+
+	@Override
+	public ArrayList<Video> selectVideoList(MemPay mp) {
+		return lDao.selectVideoList(mp,ss);
+	}
+
+	@Override
+	public int insertMemVideo(Map<String, Object> map) {
+		return lDao.insertMemVideo(map,ss);
+	}
 	
+	/*
+	@Override
+	public int insertMemVideo(ArrayList<Video> vList) {
+		return lDao.insertMemVideo(vList,ss);
+	}
+	*/
+
+	public int insertlessonNo() {
+		return lDao.insertlessonNo(ss);
+	}
 
 
 

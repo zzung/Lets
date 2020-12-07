@@ -101,5 +101,17 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<Lesson> selectOffLesson(int memNo) {
 		return mDao.selectOffLesson(memNo, sqlSession);
 	}
+	@Override
+	public double calPercentage(Lesson l) {
+		int calTotal = mDao.totalVideo(l,sqlSession);
+		int calWatch = mDao.watchedVideo(l,sqlSession); 
+		
+		if(calWatch == 0) {
+			return 0;
+		} else {
+			double calPercentage = Math.ceil((double)calWatch/calTotal*100); 
+			return calPercentage; 
+		}	
+	}
 	
 }

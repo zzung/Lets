@@ -40,12 +40,18 @@ public class MainController {
 	@RequestMapping("search.le")
 	public String searchForm(String search, Model model) {
 		
+		// 검색 결과 값 넘기기
+		String text = search + " 검색 결과";
+		
+		search = "%" + search + "%";
+		
 		ArrayList<Lesson> lessonList = ms.searchLessonList(search);
 		ArrayList<Lesson> tutorList = ms.searchTutorList(search);
 		
 		model.addAttribute("lessonList", lessonList);
 		model.addAttribute("tutorList", tutorList);
+		model.addAttribute("text", text);
 		
-		return "user/coomon/searchResultView";
+		return "user/common/searchResultView";
 	}
 }

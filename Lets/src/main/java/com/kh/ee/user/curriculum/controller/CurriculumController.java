@@ -60,7 +60,9 @@ public class CurriculumController {
 	}
 	
 	@RequestMapping("lessonInfo.cr")
-	public String detailLessonInfo(Lesson l, Model model) {
+	public String detailLessonInfo(Lesson l, HttpSession session, Model model) {
+		
+		l.setMemNo(((Member)session.getAttribute("loginUser")).getMemNo());
 		
 		Lesson selectLesson = curService.selectLesson(l);
 		// 시청한 영상 수
@@ -77,7 +79,9 @@ public class CurriculumController {
 	}
 	
 	@RequestMapping("detailFAQ.cr")
-	public String detailFaq(Lesson l, Model model) {
+	public String detailFaq(Lesson l, HttpSession session, Model model) {
+		
+		l.setMemNo(((Member)session.getAttribute("loginUser")).getMemNo());
 		
 		ArrayList<LessonFaq> faqList = curService.detailFAQ(l);
 		Lesson selectLesson = curService.selectLesson(l);
@@ -96,7 +100,9 @@ public class CurriculumController {
 	}
 	
 	@RequestMapping("detailQNA.cr")
-	public String detailQna(Lesson l, Model model) {
+	public String detailQna(Lesson l, HttpSession session, Model model) {
+		
+		l.setMemNo(((Member)session.getAttribute("loginUser")).getMemNo());
 		
 		ArrayList<QnA> qnaList = curService.detailQnA(l);
 		Lesson selectLesson = curService.selectLesson(l);
@@ -206,7 +212,9 @@ public class CurriculumController {
 	}
 	
 	@RequestMapping("videoList.cr")
-	public String videoList(Lesson l, Model model) {
+	public String videoList(Lesson l, HttpSession session, Model model) {
+		
+		l.setMemNo(((Member)session.getAttribute("loginUser")).getMemNo());
 		
 		Lesson selectLesson = curService.selectLesson(l);
 		// 시청한 영상 수

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +30,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.Gson;
 import com.kh.ee.common.template.Auth;
 import com.kh.ee.common.template.Auth.Role;
+import com.kh.ee.user.curriculum.model.vo.MemVideo;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.loginAPI.KakaoLoginBO;
@@ -38,7 +38,6 @@ import com.kh.ee.user.member.loginAPI.NaverLoginBO;
 import com.kh.ee.user.member.model.service.MemberService;
 import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.tutor.model.service.TutorService;
-import com.sun.org.apache.bcel.internal.generic.LLOAD;
 
 @Controller
 @Auth(role = Role.ADMIN)
@@ -260,13 +259,18 @@ public class MemberController {
 		
 		Member memNo = (Member)session.getAttribute("loginUser"); 
 		ArrayList<Lesson> onlist = mService.selectOnlineLesson(memNo.getMemNo());
-		ArrayList<Lesson> off = mService.selectOffLesson(memNo.getMemNo());
+		ArrayList<Lesson> off = mService.selectOffLesson(memNo.getMemNo());		
 		
 		for(Lesson l : onlist) {
+			//몇일까지 볼수 있다 불러오기 위한 코드
 			LocalDate endDate = LocalDate.parse(l.getPaymentDate().toString());
 			endDate = endDate.plusWeeks(Integer.parseInt(l.getPeriod()));
-			
 			l.setEndDate(endDate.toString());
+			l.setMemNo(memNo.getMemNo());
+			
+			//진도율 불러오기 위한 코드
+			double calPercentage = mService.calPercentage(l); 
+			l.setCalPercentage(calPercentage); 
 		}
 		
 		for(Lesson lo : off) {

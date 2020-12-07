@@ -21,4 +21,9 @@ public class Video {
 	
 	private int preVideoNo;		// 이전 영상 번호
 	private int nextVideoNo;	// 다음 영상 번호
+
+	private String status;		// 영상 시청 여부
+
+	private int memNo;
+
 }

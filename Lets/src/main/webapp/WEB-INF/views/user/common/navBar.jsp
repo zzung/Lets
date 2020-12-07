@@ -11,6 +11,9 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="shortcut icon" type="image/x-icon"
 	href="assets/img/favicon.ico">
+	
+<!-- jQuery 이용 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- CSS here -->
 <link rel="stylesheet" href="resources/user/assets/css/bootstrap.min.css"/>
@@ -155,12 +158,18 @@
 							</div>
 							<!-- Header-btn -->
 							<div class="header-search d-none d-lg-block">
-								<form action="search.le" method="POST" class="form-box f-right ">
+								<form action="search.le" method="POST" class="form-box f-right " id="searchForm">
 									<input type="text" name="search" placeholder="무엇을 배우고 싶으세요??">
 									<div class="search-icon">
-										<i class="fas fa-search special-tag"></i>
-									</div>
+										<i class="fas fa-search special-tag" onclick="submitSearchForm();"></i>
+									</div>									
 								</form>
+								
+								<script>
+									function submitSearchForm() {
+										$("#searchForm").submit();
+									}
+								</script>
 							</div>
 						</div>
 						<!-- Mobile Menu -->

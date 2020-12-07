@@ -97,6 +97,26 @@
 	<result column="mem_no" property="memNo" />
 </resultMap>
 
+<resultMap type="Curriculum" id="curriculumResultSet">
+	<id column="curriculum_no" property="curriculumNo" />
+	<result column="curriculum_cont" property="curriculumCont" />
+	<result column="lesson_no" property="lessonNo" />
+	<result column="ref_cur_no" property="refCurNo" />
+	<result column="cur_level" property="curLevel" />
+	<result column="video_no" property="videoNo"/>
+</resultMap>
+
+<resultMap type="Video" id="videoResultSet">
+	<id column="video_no" property="videoNo" />
+	<result column="lesson_no" property="lessonNo" />
+	<result column="video_url" property="videoUrl" />
+	<result column="video_cont" property="videoCont" />
+	<result column="video_name" property="videoName" />
+	<result column="pre_video_no" property="preVideoNo" />
+	<result column="next_video_no" property="nextVideoNo" />
+	<result column="mem_no" property="memNo"/>
+</resultMap>
+
 <select id="selectApproveLessonList" resultMap="lessonResultSet" >
 	select
 	       lesson_no
@@ -175,6 +195,16 @@
 	select *
 	  from lesson_faq
 	 where lesson_no = #{lessonNo}
+</select>
+
+<select id="selectCurrList" parameterType="_int" resultMap="curriculumResultSet">
+	select
+	       curriculum_cont
+	     , curriculum_no
+	     , ref_cur_no
+	     , cur_level
+	 from curriculum
+	where lesson_no = #{lessonNo}
 </select>
 
 <select id="selectTutorInfo" parameterType="_int" resultMap="tutorResultSet">
@@ -787,7 +817,7 @@
 	    )
 	values
 	    (
-	      seq_lesno.nextval
+	      #{lessonNo}
 	    , #{memNo}
 	    , #{lessonForm}
 	    , #{lessonType}
@@ -805,7 +835,36 @@
 	    , #{totalCount}
 	    
 	    )
+</insert>
+<select id="insertlessonNo" resultType="_int">
+select seq_lesno.nextval
+  from dual
+</select>
 
+<select id="selectVideoList" parameterType="MemPay" resultMap="videoResultSet">
+	select 
+	       v.video_no
+	     , v.lesson_no
+	     , mv.mem_no
+	  from video v
+	  join mem_video mv on(v.video_no = mv.video_no)
+	 where lesson_no  = #{lessonNo}
+	   and mem_no = #{memNo}
+</select>
+
+<insert id="insertMemVideo" parameterType="java.util.Map">
+<foreach item="v" collection="list" index="index" open="INSERT ALL" close="SELECT * FROM DUAL">
+	   into mem_video
+	      (
+	        video_no
+	      , mem_no
+	       )
+	  values
+	       ( 
+	         #{v.videoNo}
+	       , #{v.memNo}
+	       )
+</foreach>
 </insert>
 
 </mapper>

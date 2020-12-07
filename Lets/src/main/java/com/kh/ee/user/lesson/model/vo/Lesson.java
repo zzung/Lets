@@ -52,7 +52,8 @@ public class Lesson {
 	private int star;
 	private Date paymentDate;
 	private String payStatus;
-	private String endDate; 
+	private String endDate;
+	private double calPercentage; 
 	
 	private ArrayList<Video> videoList;
 	private ArrayList<LessonFaq> lessonFaqList;

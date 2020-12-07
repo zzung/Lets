@@ -1,6 +1,7 @@
 package com.kh.ee.user.lesson.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.Video;
@@ -36,6 +37,7 @@ public interface LessonService {
 	int reportReply(Report rpt);
 	int likeCount(int lessonNo, WishList wl); 
 	int dislikeCount(int lessonNo, WishList wl);
+	ArrayList<Curriculum> selectCurrList(int lessonNo);
 	//
 	
 	int deleteLesson(int lno);
@@ -66,18 +68,25 @@ public interface LessonService {
 	
 	//결제 내역 입력
 	int insertDelInfo(MemPay mp); 
+	int selectWL(WishList wl);
 
 	// 클래스 등록(현선)
 	int insertLessonFaq(LessonFaq lfaq);	
 	int insertCurriculum(Curriculum element);
 	int insertVideo(Video element);
-	int selectWL(WishList wl);
 	int insertLesson(Lesson l);
-
+	int insertlessonNo();
 
 	int CurriculumListNo();
 	
 	int selectMemPayList(MemPay mp);
+
+	ArrayList<Video> selectVideoList(MemPay mp);
+
+	//int insertMemVideo(ArrayList<Video> vList);
+
+	int insertMemVideo(Map<String, Object> map);
+
 
 
 	

@@ -90,5 +90,15 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectOffLesson",memNo);
 	}
 
+	public int totalVideo(Lesson l, SqlSessionTemplate sqlSession) {
+		int result = sqlSession.selectOne("memberMapper.totalVideo",l);
+		return result;
+	}
+
+	public int watchedVideo(Lesson l, SqlSessionTemplate sqlSession) {
+		int result = sqlSession.selectOne("memberMapper.watchedVideo",l);
+		return result;
+	}
+
 
 }
