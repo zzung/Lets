@@ -329,25 +329,28 @@
 	    <script>
 	    	function deliveryReady(e){
 	    		var content = $(e).data("list");
+	    		var memName = $(e).data("memname");
 
-	    		console.log(content); 
-	    		console.log($(e).data("list"));
+	    		console.log(memName); 
+	    		console.log($(e).data("memName"));
 	    		$(".listContent").text(content); 
+	    		$(".memName").text(memName);
 	    		
 	    	}
+	    	/*
 	    	function deliveryGo(e){
 	    		var memnum = $(e).data("memNo");
 	    		var lessonNum = $(e).data("lessonNo");
 	    		var delNo = $(e).data("delNo");
 	    		var delName = $(e).data("delName");
-	    		
 	    		console.log($(e).data("memNo"));
 	    		
-	    		$("#lno").val(lessonNum);
-	    		$("#mno").val(memnum);
-	    		$("#delNo").val(delNo);
-	    		$("#delName").val(delName);
-	    	}
+	    		$(".lno").val(lessonNum);
+	    		$(".mno").val(memnum);
+	    		$(".delnum").text(delNo);
+	    		$(".delname").text(delName);
+	    		$(".memName").text(memName);
+	    	}*/
 	    	
 	    </script>
 	    
@@ -366,7 +369,8 @@
 				   
 				   <!-- Modal Body -->
 	                <div class="modal-body">
-	                    <label for="userId" class="mr-sm-2">${mp.memName } 회원님께 보내실 클래스의 준비물 입니다.</label><br>
+	                	<span class="memName"></span>
+	                    <label for="userId" class="mr-sm-2">회원님께 보내실 클래스의 준비물 입니다.</label><br>
 	                    
 	                    <div class="delivery_go" >
 	                    <dl>
@@ -386,7 +390,7 @@
 	                
 	                <!-- Modal footer -->
 	                <div class="modal-footer">
-	                    <button type="submit" class="genric-btn primary-border btn-sm" >배송완료</button>
+	                    <button type="submit" class="genric-btn primary-border btn-sm" >입력</button>
 	                    <button type="button" class="genric-btn danger-border btn-sm" data-dismiss="modal">취소</button>
 	                </div>
 	            </form>
@@ -406,7 +410,8 @@
 		           	<form action="" method="post">
 		                <!-- Modal Body -->
 		                <div class="modal-body">
-		                    <label for="userId" class="mr-sm-2">${mp.memName} 회원님께 보낸 클래스의 준비물</label><br>
+		                	<span class="memName"></span>
+		                    <label for="userId" class="mr-sm-2">회원님께 보낸 클래스의 준비물</label><br>
 		                    
 		                    <div class="delivery_ing">
 		                      <dl>
@@ -417,8 +422,8 @@
 		                    </div>
 		                    <hr>
 		                     <dl>
-		                    	<dd style="width:300px; height: 30px;" id="delname">택배사 : ${mp.delName }</dd>
-		                    	<dd style="width:300px; height: 30px;" id="delnum">운송장번호 : ${mp.delNo }</dd>
+		                    	<dd style="width:300px; height: 30px;" >택배사 : <span class="delname"></span></dd>
+		                    	<dd style="width:300px; height: 30px;" >운송장번호 : <span class="delnum"></span></dd>
 		                    </dl>
 		                </div>
 		            </form>
@@ -471,13 +476,14 @@
 	       				memNo: ${loginUser.memNo}
 	       			},
 	       			success:function(list){
+	       				console.log(list)
 	       				var value="";
 	       				
 	       				value +='<thead>'
 	       				value +='<tr class="titleName" style="background-color:rgb(243, 243, 243)">'
 						value +='<th style="width: 100px;">'+'회원이름'+'</th>'
 						value +='<th style="width: 550px;">'+'수업제목'+'</th>'
-						value +='<th style="width: 200px;">'+'승인날짜'+'</th>'
+						value +='<th style="width: 200px;">'+'결제날짜'+'</th>'
 						value +='<th style="width: 150px;">'+'배송유형'+'</th>'
 						value +='</tr>' 
 						value += '</thead>'
@@ -488,11 +494,11 @@
 				        value += '<td>신청일' + list[i].paymentDate + '</td>' 
 				        value += '<td>'
 		                  		if(list[i].delStatus == "배송전"){
-		               	value += '<button data-toggle="modal" data-target="#deliveryR" class="genric-btn primary btn-sm" style="font-size: 13px;" data-list='+list[i].lessonPrepare+'data-memNo='+list[i].memNo+' onclick="deliveryReady(this);">준비물 보내기</button>'
+		               	value += '<button data-toggle="modal" data-target="#deliveryR" class="genric-btn primary btn-sm" style="font-size: 13px;" data-list='+list[i].lessonPrepare+' data-memname='+list[i].memName+' data-mno=' +list[i].memNo+' data-lno='+list[i].lessonNo+ ' onclick="deliveryReady(this);">준비물 보내기</button>'
 		                 		 }else if(list[i].delStatus == "배송중"){
-		               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-list='+list[i].lessonPrepare+'data-memNo='+list[i].memNo+'data-delNo='+list[i].delNo+'data-delName='+list[i].delName+' onclick="deliveryGo(this);">배송중</button>'
+		               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-list='+list[i].lessonPrepare+' data-memNo='+list[i].memNo+' data-memName='+list[i].memName+' data-delNo='+list[i].delNo+' data-delName='+list[i].delName+' onclick="deliveryGo(this);">배송중</button>'
 		                  		}else{
-		               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-list='+list[i].lessonPrepare+'data-memNo='+list[i].memNo+'data-delNo='+list[i].delNo+'data-delName='+list[i].delName+' onclick="deliveryGo(this);">배송완료</button>' 
+		               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-list='+list[i].lessonPrepare+' data-memNo='+list[i].memNo+' data-memName='+list[i].memName+' data-delNo='+list[i].delNo+' data-delName='+list[i].delName+' onclick="deliveryGo(this);">배송완료</button>' 
 		                 		 }
 						value += '</td></tr>'
 	       				value += '</tbody>'
@@ -600,7 +606,7 @@
         <div style="color: gray; font-size: 20px; font-weight: bold; ">수업성과 & 정산서
 	        <br>
 	        <!-- 튜터 등록 날짜로 ? 조건처리 할 수 있나 -->
-	       <!-- 
+	       
 	        <div class="single-element-widget mt-30" >
 	            <div class="default-select" id="salary" name="salary"style="float:left">
 	                <select>
@@ -632,7 +638,7 @@
 	                </select>
 	            </div>
 	        </div>
-	        -->
+	        
 	        <!-- 정산받는 버튼 -->
 	        <span style="float: right;"><button data-toggle="modal" data-target="#account" class="genric-btn primary-border btn-sm" onclick="salarySave();">정산받기</button></span>
         </div>
@@ -678,21 +684,22 @@
                             <td>수강인원</td>
                             <th>${ms.studentCount }</th>
                         </tr>
-                        
+                        <!-- 
                         <tr>
                             <td>-&nbsp;</td>
                             <td>레츠 수수료</td>
                             <td>${ms.fee }</td>
                         </tr>
-                         
+                         -->
                         <tr>
                             <th colspan="3">-------------------------------------------------</th>
                         </tr>
                         <tr>
                             <th></th>
-                            <td>튜터님의 총 수익</td>
+                            <td>튜터님의 수익</td>
                             <th>${ms.salaryTotal }</th>
                         </tr>
+                        
                     </table>
                     <br><br>
                 </div>

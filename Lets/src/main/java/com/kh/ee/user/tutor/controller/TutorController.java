@@ -195,7 +195,6 @@ public class TutorController {
 	@RequestMapping("deleteLesson.tl")
 	public String deleteLesson(int lno, Model model, HttpSession session) {
 		int result = lessonService.deleteLesson(lno);
-		System.out.println(lno);
 		/*
 		if(result > 0) {
 			return "success";
@@ -218,7 +217,6 @@ public class TutorController {
 		@RequestMapping("deleteLes.tl")
 		public String deleteLesson(int lno) {
 			int result = lessonService.deleteLesson(lno);
-			System.out.println(lno);
 			
 			if(result > 0) {
 				return "success";
@@ -286,7 +284,6 @@ public class TutorController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 	
 		ArrayList<MemPay> list = memPayService.selectPrepareList(memNo, pi);
-		
 		return new Gson().toJson(list); 
 	}
 	

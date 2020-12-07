@@ -30,24 +30,23 @@
 </resultMap>
 
 <select id="selectPrepareList" resultMap="memPayResultSet" parameterType="_int">
-	select
-		   mp.mem_pay_no
-	     , mp.mem_no 
-	     , l.lesson_no 
-	     , l.lesson_title
-	     , mp.payment_date
-	     , mp.del_status
+	select 
+	       l.lesson_title
 	     , m.mem_name
-	     , l.lesson_prepare
-	     , mp.del_no
 	     , mp.del_name
+	     , mp.del_no
+	     , mp.del_status
+	     , to_char(mp.payment_date, 'YYYY-MM-DD') payment_date
+	     , l.lesson_prepare
+	     , m.mem_no
+     	 , l.lesson_no
 	  from mem_pay mp
-	  join lesson l on (l.mem_no = mp.mem_no)
-	  join member m on (mp.mem_no = m.mem_no)
-	 where l.mem_no = #{memNo}
-	   and l.status = 'Y'
-	 order
-	    by mp.mem_pay_no desc
+	  left join member m on (mp.mem_no = m.mem_no)
+	  left join lesson l on (mp.lesson_no = l.lesson_no)
+	where l.mem_no = #{memNo}
+	  and l.lesson_type = '온라인'
+	order
+	   by mp.payment_date desc
 </select>
 
 <update id="updateDelivery" parameterType="MemPay">
@@ -75,17 +74,18 @@
 	 select 
 	        l.lesson_no
 	      , l.lesson_title
-	      , count(l.lesson_title) student_count
+	      , count(mp.mem_no) student_count
           , l.like_count
 	      , m.mem_no
-	      , s.fee
 	      , l.pay_total
-	      , l.pay_total * (s.fee/100) fee
+          , l.pay_total * count(mp.mem_no) salary_total
+	      , s.account
 	   from lesson l
-	   join member m on (l.mem_no = m.mem_no)
-	   join salary s on (l.lesson_no = s.lesson_no)
-	   where l.status = 'Y'
-	   group by l.lesson_no, l.lesson_title,l.like_count,s.fee, m.mem_no, l.pay_total, l.pay_total * (s.fee/100)
+       left join member m on (l.mem_no = m.mem_no)
+	   left join salary s on (l.lesson_no = s.lesson_no)
+       left join mem_pay mp on (l.lesson_no = mp.lesson_no)
+	   where l.lesson_status = '승인'
+	   group by l.lesson_no, l.lesson_title,l.like_count,s.fee,s.account, m.mem_no, l.pay_total, l.pay_total * (s.fee/100)
 	   having m.mem_no = #{memNo}
 	 order by lesson_no desc
 </select>
