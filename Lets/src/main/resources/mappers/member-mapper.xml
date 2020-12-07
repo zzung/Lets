@@ -161,7 +161,8 @@
 
 <select id="selectMember" parameterType="String" resultMap="memberResultSet">
 	select
-	          mem_id
+			  mem_no
+	        , mem_id
 	        , mem_pwd
 	        , mem_name
 	        , nickname

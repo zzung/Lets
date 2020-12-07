@@ -502,7 +502,6 @@ public class MemberController {
 		
 		MemPay mp = mService.myDetailDelivery(memPayNo);
 		session.setAttribute("mp", mp);
-		System.out.println(mp);
 		return "user/member/myDetailViewDelivery";
 	}
 	
