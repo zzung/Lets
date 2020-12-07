@@ -177,7 +177,7 @@
 		    </thead>
 		    <tbody>
 		    <c:choose>
-            	<c:when test="${empty aLlist }">
+            	<c:when test="${empty sLlist }">
             		<tr>
                 		<td colspan="4" align="center">등록된 수업이 없습니다.</td>
                 	</tr>

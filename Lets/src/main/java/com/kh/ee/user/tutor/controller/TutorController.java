@@ -71,6 +71,7 @@ public class TutorController {
 		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList(loginUser.getMemNo());
 		ArrayList<MemPay> msList = memPayService.selectSalaryList(loginUser.getMemNo());
 		
+		
 		int listCount = memPayService.selectListCount(loginUser.getMemNo());
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		ArrayList<MemPay> mpList = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
