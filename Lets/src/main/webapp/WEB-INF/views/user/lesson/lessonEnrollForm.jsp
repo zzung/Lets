@@ -286,7 +286,7 @@
                     </div>
                 </div>
 
-                <br><button href="#" type="button" class="genric-btn primary-border radius" id="curriculumBtn">주제 추가</button><br><br><br><br>
+                <br><button type="button" class="genric-btn primary-border radius" id="curriculumBtn">주제 추가</button><br><br><br><br>
 
 
             </div>

@@ -29,105 +29,60 @@
 
 		<!--? 키즈 인기 코스  -->
 		<div class="popular-course section-padding30">
+		
 			<div class="container">
+			
 				<div class="row">
+				
+					<!-- 한 개 박스 -->
 					<div class="col-xl-4 col-lg-4 col-md-6">
+					
 						<!-- Single course -->
 						<div class="single-course mb-40">
+						
 							<div class="course-img">
 								<img src="resources/user/assets/img/gallery/popular_sub1.png" alt="">
 							</div>
+							
 							<div class="course-caption">
+							
 								<div class="course-cap-top">
-									<h4>
-										<a href="#">Graphic Design</a>
-									</h4>
+									<h4><a href="#">Graphic Design</a></h4>
 								</div>
+								
 								<div class="course-cap-mid d-flex justify-content-between">
+								
+									<!-- 평균 별점 계산 -->
 									<div class="course-ratting">
 										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
 											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
 											class="fas fa-star"></i>
 									</div>
+									
+									<!-- 리뷰 갯수 -->
 									<ul>
 										<li>52 Review</li>
 									</ul>
+									
 								</div>
+								
 								<div class="course-cap-bottom d-flex justify-content-between">
+								
+									<!-- 좋아요 수 -->
 									<ul>
-										<li><i class="ti-user"></i> 562</li>
 										<li><i class="ti-heart"></i> 562</li>
 									</ul>
+									
+									<!-- 가격 -->
 									<span>Free</span>
+									
 								</div>
+								
 							</div>
+							
 						</div>
 					</div>
-					<!--한개컬럼 end-->
-					<div class="col-xl-4 col-lg-4 col-md-6">
-						<!-- Single course -->
-						<div class="single-course mb-40">
-							<div class="course-img">
-								<img src="resources/user/assets/img/gallery/popular_sub2.png" alt="">
-							</div>
-							<div class="course-caption">
-								<div class="course-cap-top">
-									<h4>
-										<a href="#">Web Development</a>
-									</h4>
-								</div>
-								<div class="course-cap-mid d-flex justify-content-between">
-									<div class="course-ratting">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i>
-									</div>
-									<ul>
-										<li>52 Review</li>
-									</ul>
-								</div>
-								<div class="course-cap-bottom d-flex justify-content-between">
-									<ul>
-										<li><i class="ti-user"></i> 562</li>
-										<li><i class="ti-heart"></i> 562</li>
-									</ul>
-									<span>Free</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-lg-4 col-md-6">
-						<!-- Single course -->
-						<div class="single-course mb-40">
-							<div class="course-img">
-								<img src="resources/user/assets/img/gallery/popular_sub3.png" alt="">
-							</div>
-							<div class="course-caption">
-								<div class="course-cap-top">
-									<h4>
-										<a href="#">Digital Marketing</a>
-									</h4>
-								</div>
-								<div class="course-cap-mid d-flex justify-content-between">
-									<div class="course-ratting">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i>
-									</div>
-									<ul>
-										<li>52 Review</li>
-									</ul>
-								</div>
-								<div class="course-cap-bottom d-flex justify-content-between">
-									<ul>
-										<li><i class="ti-user"></i> 562</li>
-										<li><i class="ti-heart"></i> 562</li>
-									</ul>
-									<span>Free</span>
-								</div>
-							</div>
-						</div>
-					</div>
+	
 				</div>
 			</div>
 		</div>
