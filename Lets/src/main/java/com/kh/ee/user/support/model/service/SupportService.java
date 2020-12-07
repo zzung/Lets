@@ -13,22 +13,30 @@ public interface SupportService {
 	int noticeCountList();
 	ArrayList<Notice> noticeList(PageInfo pi);
 	
+	//공지사항 상세페이지
+	Notice supportNoticeDetail(Notice n);
+		
 	//faq 페이지 select 문(성연)
 	int faqCountList();
 	ArrayList<Faq> faqList(PageInfo pi);
+	
+	//FAQ 상세페이지
+	Faq supportFaqDetail(Faq f);
 	
 	//inq 페이지 select 문(성연)
 	int inqCountList();
 	ArrayList<Inquiry> inqList(PageInfo pi);
 	
-	//공지작성
-	int insertInq(Inquiry i);
 	
-	/*
-	 * //notice 상세조회용 서비스 int increaseCount(int bno); Board selectBoard(int bno);
-	 * 
-	 * 
-	 */
+	int inqDetailCountList();
+	ArrayList<Inquiry> supportInqDetail(PageInfo pi);
+	
+	
+	
+	
+	
+	//문의글 작성
+	int insertInq(Inquiry i);
 	
 	
 	

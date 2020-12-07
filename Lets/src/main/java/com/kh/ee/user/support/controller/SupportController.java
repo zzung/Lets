@@ -38,50 +38,14 @@ public class SupportController {
 	}
 	
 	@RequestMapping("supportNoticeDetail.su")
-	public String supportNoticeDetail() {
+	public String supportNoticeDetail(Notice n, Model model) {
+		
+		Notice notice = su.supportNoticeDetail(n);
+		
+		model.addAttribute("notice", notice);
+		
 		return "user/support/supportNoticeDetail";
 	}
-	
-	
-
-	/*
-	 * @RequestMapping("detail.bo") public ModelAndView selectBoard(int bno,
-	 * ModelAndView mv) {
-	 * 
-	 * int result = su.increaseCount(bno);
-	 * 
-	 * if(result > 0) {
-	 * 
-	 * mv.addObject("b", bService.selectBoard(bno))
-	 * .setViewName("board/boardDetailView");
-	 * 
-	 * }else {
-	 * 
-	 * mv.addObject("errorMsg", "유효한 게시글이 아니거나 삭제된 게시글입니다.")
-	 * .setViewName("common/errorPage"); }
-	 * 
-	 * return mv;
-	 * 
-	 * }
-	 */
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@RequestMapping("supportFaq.su")
 	public String supportFaq(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
@@ -97,10 +61,14 @@ public class SupportController {
 	}
 	
 	@RequestMapping("supportFaqDetail.su")
-	public String supportFaqDetail() {
+	public String supportFaqDetail(Faq f, Model model) {
+		
+		Faq faq = su.supportFaqDetail(f);
+		
+		model.addAttribute("faq", faq);
+		
 		return "user/support/supportFaqDetail";
 	}
-	
 	
 	@RequestMapping("supportInq.su")
 	public String supportInq(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
@@ -115,12 +83,20 @@ public class SupportController {
 		return "user/support/supportInq";
 	}
 	
-	/*
 	@RequestMapping("supportInqDetail.su")
-	public String supportInqDetail() {
+	public String supportInqDetail(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
+		int listCount = su.inqDetailCountList();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Inquiry> list = su.supportInqDetail(pi);
+		
+		model.addAttribute("inq",list);
+		model.addAttribute("pi",pi); 
+		
 		return "user/support/supportInqDetail";
 	}
-	*/
+	
+	
 	
 	@RequestMapping("insertInq.su")
 	public String insertInq(Inquiry i, HttpSession session, Model model) {

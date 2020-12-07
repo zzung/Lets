@@ -108,44 +108,23 @@
 					
 					<button onclick="inqDelete();" id="inqDeleteBtn" 
 					class="genric-btn primary-border radius">삭제</button>
-									
-					<!-- 문의 삭제 확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
-					<script>
-						function inqDelete() {
-							var num = 1;
-							var result = confirm("문의를 삭제 하시겠습니까??");
-
-							if (result) {
-								var str = "삭제"
-								document.getElementById("inqDeleteBtn").disabled = true;
-							} else {
-								return;
-							}
-
-							var inqCondition = document
-									.getElementById("inqCondition" + num)
-							inqCondition.innerHTML = "<p>" + str + "</p>"
-						}
-					</script>
-					<!-- 문의 삭제 확인 끝 -->
-					
-					
+						
 				</div>
 				
 				<div style="padding:10px; border:solid 1px;">
 					<!-- 공지 대상 -->
-					<div>${i.typeStatus }</div>
-					<div>${i.inqTitle }</div>
+					<div>${inq.typeStatus }</div>
+					<div>${inq.inqTitle }</div>
 					<div>
-						<span style="width:100px; float:left;">${i.enrollDate }</span>
-						<span style="width:150px;">${m.nickname }</span>
+						<span style="width:100px; float:left;">${inq.enrollDate }</span>
+						<span style="width:150px;">${inq.nickname }</span>
 					</div>
 					<hr>
 					<div style="margin:-10px 0px;"><span>첨부파일 : </span></div>
 					<hr>
 					<div>
 						<div>
-							${i.inqContent }
+							${inq.inqContent }
 						</div>
 					</div>
 				</div>

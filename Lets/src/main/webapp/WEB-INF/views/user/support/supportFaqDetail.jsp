@@ -79,16 +79,16 @@
 		<div style="width:1240px;">
 			<div> 
 				<div style="padding:10px;">
-				<input type="hidden" value=${f.faqNo }>
+				<input type="hidden" value=${faq.faqNo }>
 					<!-- 공지 대상 -->
-					<div><h5>${f.faqType}</h5></div>
-					<div>${f.faqTitle }</div>
-					<div>${f.enrollDate }</div>
+					<div><h5>${faq.faqType}</h5></div>
+					<div>${faq.faqTitle }</div>
+					<div>${faq.enrollDate }</div>
 					<hr>
 					
-					<div style="padding:0px 40px 40px;">
+					<div style="padding:0px 10px 40px;">
 						<div>
-							${f.faqContent }
+							${faq.faqContent }
 						</div>
 					</div>
 				</div>

@@ -146,31 +146,19 @@ margin-top: 80px;
 				<br>
 				<c:forEach var="i" items="${list}" varStatus="status">
 				<div id="boardList">
+					<a href="supportInqDetail.su?inqNo=${i.inqNo }" >
 						<div class="ino" style="border:solid 1px; padding:10px;">
-							<input type="hidden" value=""${i.inqNo }>
+							<input type="hidden" value="${i.inqNo }">
 							<div>${i.typeStatus }</div>
 							<div>${i.inqTitle }</div>
 							<div><span style="margin-right:20px;">${i.enrollDate }</span><span>${i.nickname }</span></div>
 						</div>
-					
+					</a>
 					<br>
 				</div>
 				</c:forEach>
 				
-				<script>
-	            	$(function(){
-	            		$("#boardList").click(function(){
-	            			location.href="supportInqDetail.su?inqNo=" + $(this).children(".ino").text();
-	            		})
-	            	});
-	            </script>
-	            
 			</div>
-			
-			
-			
-			
-			
 			
 			<div class="blog-pagination justify-content-center d-flex">
 			    <ul class="pagination">

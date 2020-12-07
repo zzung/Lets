@@ -30,5 +30,5 @@ public class Inquiry {
 	private String reStatus;
 	
 	private String nickname;
-
+	
 }

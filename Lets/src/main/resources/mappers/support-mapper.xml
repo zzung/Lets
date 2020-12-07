@@ -85,6 +85,18 @@
 	     from notice n
 </select>
 
+<select id="supportNoticeDetail" parameterType="Notice" resultMap="noticeResultSet">
+	select
+		   notice_no
+		 , notice_type
+		 , notice_title
+		 , notice_content
+		 , enroll_date
+		 , status
+	  from notice
+	 where notice_no = #{noticeNo}
+</select>
+
 
 <select id="selectFaqListCount" resultType="_int">
 	select 
@@ -94,20 +106,33 @@
 
 <select id="faqList" parameterType="String" resultMap="faqResultSet">
 	select
-	     	 f.faq_no
-	       , f.faq_category
-	       , f.faq_status
-	       , f.enroll_date
-	       , f.faq_type
-	       , f.faq_title
-	       , f.faq_content
-	     from faq f
+	     	 faq_no
+	       , faq_category
+	       , faq_status
+	       , enroll_date
+	       , faq_type
+	       , faq_title
+	       , faq_content
+	     from faq
+</select>
+
+<select id="supportFaqDetail" parameterType="Faq" resultMap="faqResultSet">
+	select
+		   faq_no
+		 , faq_category
+	     , faq_status
+	     , enroll_date
+	     , faq_type
+	     , faq_title
+	     , faq_content
+	  from faq
+	 where faq_no = #{faqNo}
 </select>
 
 <select id="selectInqListCount" resultType="_int">
 	select 
 	       count(*)
-	  from inquiry i
+	  from inquiry
 </select>
 
 <select id="inqList" parameterType="String" resultMap="inquiryResultSet">
@@ -128,6 +153,51 @@
 	     from inquiry i
 	     join member m on (i.mem_no = m.mem_no)
 </select>
+
+
+<select id="selectInqDetailListCount" resultType="_int">
+	select 
+	       count(*)
+	  from inquiry
+</select>
+
+<select id="supportInqDetail" parameterType="String" resultMap="inquiryResultSet">
+	select
+	       	  i.inq_no
+	        , i.inq_title
+	        , i.inq_content
+	        , i.inq_type
+	        , i.enroll_date
+	        , i.answer_date
+	        , i.answer_content
+	        , i.inq_file
+	        , i.origin_file
+	        , i.type_status
+	        , i.status
+	        , i.re_status
+	        , m.nickname
+	     from inquiry i
+	     join member m on (i.mem_no = m.mem_no)
+	     where i.inq_no = #{inqNo}
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <insert id="insertInq" parameterType="Inquiry">
 	insert
@@ -185,5 +255,7 @@
      join member m on (i.mem_no = m.mem_no)
 	 where i.inq_no = #{iNo}
 </select>
+
+
 
 </mapper>

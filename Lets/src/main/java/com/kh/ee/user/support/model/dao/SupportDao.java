@@ -26,22 +26,15 @@ public class SupportDao {
 		return (ArrayList)ss.selectList("supportMapper.noticeList",null,rowBounds);
 	}
 	
-	
-	/*
-	 * // notice 페이지 public int increaseCount(SqlSessionTemplate sqlSession, int
-	 * bno) { return sqlSession.update("boardMapper.increaseCount", bno); }
-	 * 
-	 * public Board selectBoard(SqlSessionTemplate sqlSession, int bno) { return
-	 * sqlSession.selectOne("boardMapper.selectBoard", bno); }
-	 */
-	
-	
-	
+	public Notice supportNoticeDetail(SqlSessionTemplate ss, Notice n) {
+		return ss.selectOne("supportMapper.supportNoticeDetail", n);
+	}
 	
 	//faq 페이지 select 문(성연)
 	public int faqCountList(SqlSessionTemplate ss) {
 		return ss.selectOne("supportMapper.selectFaqListCount");
 	}
+	
 	public ArrayList<Faq> faqList(PageInfo pi, SqlSessionTemplate ss) {
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
 		int limit = pi.getBoardLimit();
@@ -50,10 +43,15 @@ public class SupportDao {
 		return (ArrayList)ss.selectList("supportMapper.faqList",null,rowBounds);
 	}
 	
+	public Faq supportFaqDetail(SqlSessionTemplate ss, Faq f) {
+		return ss.selectOne("supportMapper.supportFaqDetail", f);
+	}
+	
 	//inq 페이지 select 문(성연)
 	public int inqCountList(SqlSessionTemplate ss) {
 		return ss.selectOne("supportMapper.selectInqListCount");
 	}
+	
 	public ArrayList<Inquiry> inqList(PageInfo pi, SqlSessionTemplate ss) {
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
 		int limit = pi.getBoardLimit();
@@ -61,13 +59,41 @@ public class SupportDao {
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		return (ArrayList)ss.selectList("supportMapper.inqList",null,rowBounds);
 	}
+
+	//inq 상세페이지 select 문(성연)
+	public int inqDetailCountList(SqlSessionTemplate ss) {
+		return ss.selectOne("supportMapper.selectInqDetailListCount");
+	}
+	
+	public ArrayList<Inquiry> supportInqDetail(PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("supportMapper.supportInqDetail",null,rowBounds);
+	}
+
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//inq 작성
 	public int insertInq(SqlSessionTemplate sqlSession, Inquiry i) {
 		return sqlSession.insert("supportMapper.insertInq", i);
 	}
-
-	
 	
 	
 	

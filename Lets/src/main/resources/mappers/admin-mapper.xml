@@ -104,6 +104,21 @@
 	<result column="count" property="count" />
 </resultMap>
 
+<resultMap type="Inquiry" id="inquiryResultSet">
+	<id column="inq_no" property="inqNo" />
+	<result column="mem_no" property="memNo" />
+	<result column="inq_title" property="inqTitle" />
+	<result column="inq_content" property="inqContent" />
+	<result column="inq_type" property="inqType" />
+	<result column="enroll_date" property="enrollDate" />
+	<result column="answer_date" property="answerDate" />
+	<result column="answer_content" property="answerContent" />
+	<result column="inq_file" property="inqFile" />
+	<result column="origin_file" property="originFile" />
+	<result column="type_status" property="typeStatus" />
+	<result column="status" property="status" />
+	<result column="re_status" property="reStatus" />
+</resultMap>
 
 <select id="selectDiscountList" resultMap="memberResultSet">
 	 select 
@@ -424,9 +439,70 @@
 	        , mem_id
 	        , nickname
 	        , report_count
-	     from member m
+	     from member
 	     where m.status = 'B'
 </select>
+
+
+
+
+<select id="selectInquiryListCount" resultType="_int">
+	select 
+	       count(*)
+	  from inquiry
+</select>
+
+<select id="inquiryMgmtList" parameterType="String" resultMap="inquiryResultSet">
+	select
+			  i.inq_no
+	        , i.inq_type
+	        , i.inq_title
+	        , m.nickname
+			  m.mem_no
+	        , m.mem_id
+	     from inquiry i
+	     join member m on (m.mem_no = i.mem_no)
+</select>
+
+
+INQ_NO
+MEM_NO
+
+INQ_TITLE
+INQ_CONTENT
+INQ_TYPE
+ENROLL_DATE
+ANSWER_DATE
+ANSWER_CONTENT
+INQ_FILE
+ORIGIN_FILE
+TYPE_STATUS
+STATUS
+RE_STATUS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <select id="selectReportListCount" resultType="_int">
 	select 

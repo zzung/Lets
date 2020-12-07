@@ -136,17 +136,50 @@
 					</div>
 					<!--Modal End-->
 					
-					<div class="" align="center">
-						<ul class="pagination">
-							<li><a href="#">&lt;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
-						</ul>
-					</div>
+				</div>
+				<div class="container" align="center">
+					<ul class="pagination">
+					<c:choose>
+						<c:when test="${pi.startPage eq 1 }">
+							<li class="disabled"><a href="">&lt;</a></li>
+						</c:when>
+						
+						<c:otherwise>
+							<li><a href="inquiryManagement.ad?currentPage=${pi.currentPage -1 }">&lt;</a></li>
+						</c:otherwise>
+					</c:choose>
+					
+					
+					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+						<c:choose>
+							<c:when test="${pi.currentPage ne p }">
+								<c:choose>
+									<c:when test="${empty sc }">
+										<li><a href="inquiryManagement.ad?currentPage=${p}">${p}</a></li>
+									</c:when>
+									<c:otherwise>
+										<c:url var="searchUrl" value="searchClassMgmt.ad">
+											<c:param name="currentPage" value="${p }"/>
+											<c:param name="condition" value="${condition }" />
+											<c:param name="keyword" value="${keyword }" />
+										</c:url>
+										
+										<li><a href="${searchUrl }">${p }</a></li>
+									</c:otherwise>
+								</c:choose>	
+							</c:when>
+						</c:choose>
+					</c:forEach>
+					
+					<c:choose>
+						<c:when test="${pi.currentPage eq pi.maxPage }">
+							<li class="disabled"><a href="#">&gt;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="inquiryManagement.ad?currentPage=${pi.currentPage +1 }">&gt;</a></li>
+						</c:otherwise>
+					</c:choose>	
+					</ul>
 				</div>
 			</section>
 		</div>

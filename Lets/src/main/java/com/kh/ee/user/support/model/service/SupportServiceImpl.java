@@ -21,34 +21,21 @@ public class SupportServiceImpl implements SupportService {
 	@Autowired
 	private SupportDao sd;
 	
-	//공지사항 관리 페이지 select 문(성연)
+	//공지사항  페이지 select 문(성연)
 	@Override
 	public int noticeCountList() {
 		return sd.noticeCountList(ss);
 	}
+	
 	@Override
 	public ArrayList<Notice> noticeList(PageInfo pi) {
 		return sd.noticeList(pi,ss);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public Notice supportNoticeDetail(Notice n) {
+		return sd.supportNoticeDetail(ss, n);
+	}
 	
 	//faq 페이지 select 문(성연)
 	@Override
@@ -60,6 +47,13 @@ public class SupportServiceImpl implements SupportService {
 		return sd.faqList(pi,ss);
 	}
 	
+	// FAQ 상세 페이지
+	@Override
+	public Faq supportFaqDetail(Faq f) {
+		return sd.supportFaqDetail(ss, f);
+	}
+		
+	
 	//inq 페이지 select 문(성연)
 	@Override
 	public int inqCountList() {
@@ -70,20 +64,29 @@ public class SupportServiceImpl implements SupportService {
 		return sd.inqList(pi,ss);
 	}
 	
+	//inq 상세페이지 
+	@Override
+	public int inqDetailCountList() {
+		return sd.inqDetailCountList(ss);
+	}
+	@Override
+	public ArrayList<Inquiry> supportInqDetail(PageInfo pi) {
+		return sd.supportInqDetail(pi,ss);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	//inq 작성
 	@Override
 	public int insertInq(Inquiry i) {
 		return sd.insertInq(ss, i);
 	}
 		
-	/*
-	 * @Override public int insertBoard(Board b) { return
-	 * bDao.insertBoard(sqlSession, b); }
-	 * 
-	 * @Override public int increaseCount(int bno) { return
-	 * bDao.increaseCount(sqlSession, bno); }
-	 */
-	
 	
 	
 	

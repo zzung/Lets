@@ -74,28 +74,27 @@
 			<span style="margin:20px;">문의사항</span></a>
 			<hr>
 		</div>
-		<c:set var="n" value="${list }" />
 		<!-- 고객센터 내용 div -->
 		<div style="width:1000px;">
 			<div> 
+			
 				<div style="padding:10px;">
 					<!-- 공지 대상 -->
 					<c:choose>
-	                	<c:when test="${n.noticeType eq 'TUTOR'}">
+	                	<c:when test="${notice.noticeType eq 'TUTOR'}">
 	                		<div><h5>튜터</h5></div>
 	                	</c:when>
-	                	<c:when test="${n.noticeType eq 'MEMBER'}">
+	                	<c:when test="${notice.noticeType eq 'MEMBER'}">
 	                		<div><h5>회원</h5></div>
 	                	</c:when>
 	                </c:choose>
-					<div><h5>${n.noticeType }</h5></div>
-					<div>${n.noticeTitle }</div>
-					<div>${n.enrolldate }</div>
+					<div>${notice.noticeTitle }</div>
+					<div>${notice.enrollDate }</div>
 					<hr>
 					
-					<div style="padding:0px 40px 40px;">
+					<div style="padding:0px 10px 40px;">
 						<div>
-							${n.noticeContent }
+							${notice.noticeContent }
 						</div>
 					</div>
 				</div>

@@ -81,7 +81,8 @@ margin-top: 80px;
 		<div style="width:1240px;">
 			<c:forEach var="f" items="${list}" varStatus="status">
 				<div>
-					<a href="supportFaqDetail.su">
+					<input type="hidden" value="${f.faqNo }">
+					<a href="supportFaqDetail.su?faqNo=${f.faqNo }">
 						<div style="border:solid 1px; padding:10px;">
 							<div>${f.faqTitle }</div>
 							<div>${f.enrollDate }</div>
