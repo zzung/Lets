@@ -754,7 +754,7 @@
 	                              	<c:when test="${empty loginUser }">
 	                                 	<button class="genric-btn primary discount-pay disabled">로그인 후 사용</button>
 	                              	</c:when>
-	                              	<c:when test="${loginUser.memNo eq mp.memNo }">
+	                              	<c:when test="${!empty loginUser && isWatching eq 'Y' }">
 	                              		<button class="genric-btn primary discount-pay" id="curr">컬리큘럼으로 이동</button>
 	                              	</c:when>
 	                              	<c:otherwise>

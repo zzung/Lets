@@ -38,6 +38,7 @@ import com.kh.ee.user.member.loginAPI.NaverLoginBO;
 import com.kh.ee.user.member.model.service.MemberService;
 import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.tutor.model.service.TutorService;
+import com.sun.org.apache.bcel.internal.generic.LLOAD;
 
 @Controller
 @Auth(role = Role.ADMIN)
@@ -259,16 +260,23 @@ public class MemberController {
 		
 		Member memNo = (Member)session.getAttribute("loginUser"); 
 		ArrayList<Lesson> onlist = mService.selectOnlineLesson(memNo.getMemNo());
+		ArrayList<Lesson> off = mService.selectOffLesson(memNo.getMemNo());
 		
 		for(Lesson l : onlist) {
 			LocalDate endDate = LocalDate.parse(l.getPaymentDate().toString());
-			System.out.println("localdate before -> " + endDate);
 			endDate = endDate.plusWeeks(Integer.parseInt(l.getPeriod()));
-			System.out.println("localdate after -> " + endDate);
 			
 			l.setEndDate(endDate.toString());
 		}
 		
+		for(Lesson lo : off) {
+			LocalDate endDate = LocalDate.parse(lo.getPaymentDate().toString());
+			endDate = endDate.plusWeeks(Integer.parseInt(lo.getPeriod()));
+			
+			lo.setEndDate(endDate.toString());
+		}
+		
+		model.addAttribute("off", off);
 		model.addAttribute("onlist",onlist); 
 		return "user/member/myPage";
 	}

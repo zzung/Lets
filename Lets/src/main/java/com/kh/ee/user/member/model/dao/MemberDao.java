@@ -86,5 +86,9 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectOnlineLesson",memNo);
 	}
 
+	public ArrayList<Lesson> selectOffLesson(int memNo, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectOffLesson",memNo);
+	}
+
 
 }

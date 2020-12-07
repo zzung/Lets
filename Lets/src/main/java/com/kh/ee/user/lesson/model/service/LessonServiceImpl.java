@@ -195,11 +195,6 @@ public class LessonServiceImpl implements LessonService{
 	}
 
 	@Override
-	public MemPay selectMemPayList(int lessonNo) {
-		return lDao.selectMemPayList(lessonNo,ss);
-	}
-
-	@Override
 	public int insertLessonFaq(LessonFaq lfaq) {
 		return lDao.insertLessonFaq(lfaq, ss);
 
@@ -252,6 +247,12 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.CurriculumListNo(ss);
 	}
 
+	
+	@Override
+	public int selectMemPayList(MemPay mp) {
+		return lDao.selectMemPayList(mp, ss);
+	}
+	
 
 
 

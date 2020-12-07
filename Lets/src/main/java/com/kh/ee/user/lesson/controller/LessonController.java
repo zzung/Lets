@@ -117,8 +117,7 @@ public class LessonController {
 		ArrayList<Review> list = lService.selectReview(lessonNo); 
 		ArrayList<LessonFaq> faqList = lService.selectLessonFaqList(lessonNo); 
 		Tutor t = lService.selectTutorInfo(lessonNo); 
-		int listCount = lService.selectListCount(); 
-		MemPay mp = lService.selectMemPayList(lessonNo); 
+		int listCount = lService.selectListCount();
 		
 		
 		Member mem = (Member)session.getAttribute("loginUser");
@@ -129,10 +128,11 @@ public class LessonController {
 			model.addAttribute("t", t);
 			model.addAttribute("listCount",listCount);
 			model.addAttribute("l",lesson); 
-			model.addAttribute("mp",mp);
+			model.addAttribute("isWatching",null);
 			model.addAttribute("isWished", null);
 			return "user/lesson/classDetailView";
 		}
+		
 		
 		WishList wl = new WishList();
 		wl.setLessonNo(lessonNo);
@@ -145,12 +145,27 @@ public class LessonController {
 			isWished = "Y";
 		} 
 
+		
+		MemPay mp = new MemPay();
+		mp.setLessonNo(lessonNo);
+		mp.setMemNo(mem.getMemNo());
+		
+		System.out.println(mp);
+		
+		int result2 = lService.selectMemPayList(mp); 
+		System.out.println("result2:" + result2);
+		
+		String isWatching = "N";
+		if(result2>0) {
+			isWatching = "Y"; 
+		}
+		
 		model.addAttribute("list", list); 
 		model.addAttribute("faqList",faqList);
 		model.addAttribute("t", t);
 		model.addAttribute("listCount",listCount);
 		model.addAttribute("l",lesson); 
-		model.addAttribute("mp",mp);
+		model.addAttribute("isWatching",isWatching);
 		model.addAttribute("isWished",isWished);
 		return "user/lesson/classDetailView"; 
 	}
@@ -360,6 +375,8 @@ public class LessonController {
 	@RequestMapping("paymentProcess.le")
 	public String paymentProcess(MemPay mp,HttpSession session,Model model) {
 		int result = lService.insertDelInfo(mp);
+		
+		//mp에서 맴버 번호만 빼서 mem_video에서 관련 lesson 번호빼와서 mem_video에 insert
 		
 		if(result>0) {
 			session.setAttribute("alertMsg","결제 완료 되었습니다.");

@@ -713,12 +713,12 @@
 	   and approve_date is not null
 </select>
 
-<select id="selectMemPayList" parameterType="_int" resultMap="memPayResultSet">
-	select
-	       mem_no
-	     , lesson_no
+<select id="selectMemPayList" parameterType="MemPay" resultType="_int">
+	 select
+	       count(*)
 	 from mem_pay
 	where lesson_no = #{lessonNo}
+	  and mem_no = #{memNo}
 </select>
 
 
