@@ -439,7 +439,7 @@
 	        , mem_id
 	        , nickname
 	        , report_count
-	     from member
+	     from member m
 	     where m.status = 'B'
 </select>
 
@@ -457,42 +457,31 @@
 			  i.inq_no
 	        , i.inq_type
 	        , i.inq_title
+	        , i.inq_content
+	        , i.enroll_date
+	        , i.answer_date
+	        , i.answer_content
+	        , i.inq_file
+	        , i.origin_file
+	        , i.type_status
+	        , i.status
+	        , i.re_status	        
 	        , m.nickname
-			  m.mem_no
+			, m.mem_no
 	        , m.mem_id
 	     from inquiry i
 	     join member m on (m.mem_no = i.mem_no)
 </select>
 
 
-INQ_NO
-MEM_NO
 
-INQ_TITLE
-INQ_CONTENT
-INQ_TYPE
-ENROLL_DATE
-ANSWER_DATE
-ANSWER_CONTENT
-INQ_FILE
-ORIGIN_FILE
-TYPE_STATUS
-STATUS
-RE_STATUS
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<update id="inqAnswer" parameterType="Inquiry">
+	update
+	       inquiry
+	   set answer_content = #{answerContent}
+	     , re_status = '완료'
+	 where inq_no = #{inqNo}
+</update>
 
 
 

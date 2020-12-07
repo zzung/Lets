@@ -90,7 +90,7 @@ public class SupportController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<Inquiry> list = su.supportInqDetail(pi);
 		
-		model.addAttribute("inq",list);
+		model.addAttribute("list",list);
 		model.addAttribute("pi",pi); 
 		
 		return "user/support/supportInqDetail";

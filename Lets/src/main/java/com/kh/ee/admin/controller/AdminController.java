@@ -16,6 +16,7 @@ import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.common.template.Pagination;
 import com.kh.ee.user.faq.model.vo.Faq;
+import com.kh.ee.user.inquiry.model.vo.Inquiry;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
@@ -259,10 +260,60 @@ public class AdminController {
 	}
 	
 	//@Auth(role = Role.ADMIN)
-	@RequestMapping("inqueryManagement.ad")
-	public String inqueryManagement(){
-		return "admin/inqueryManagementView";
+	@RequestMapping("inquiryManagement.ad")
+	public String inqManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
+		int listCount = as.inquiryMgmtCountList();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Inquiry> list = as.inquiryMgmtList(pi);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pi",pi); 
+		
+		return "admin/inquiryManagementView";
 	}
+	
+	
+	@RequestMapping("inqAnswer.ad")
+	public String inqAnswer(Inquiry i) {
+		
+		int result = as.inqAnswer(i);
+		
+		if(result > 0) {
+			
+			return "redirect:inquiryManagement.ad";
+		}else {
+		
+			return "common/errorPage";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//@Auth(role = Role.ADMIN)
 	@RequestMapping("reportManagement.ad")
@@ -333,5 +384,7 @@ public class AdminController {
 			return "faqManagement.ad";
 		}
 	}
+	
+	
 	
 }

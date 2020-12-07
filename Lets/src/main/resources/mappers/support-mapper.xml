@@ -185,20 +185,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <insert id="insertInq" parameterType="Inquiry">
 	insert
 		  into inquiry

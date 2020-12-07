@@ -10,6 +10,7 @@ import com.kh.ee.admin.model.dao.AdminDao;
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.faq.model.vo.Faq;
+import com.kh.ee.user.inquiry.model.vo.Inquiry;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
@@ -152,6 +153,27 @@ public class AdminServiceImpl implements AdminService{
 	public ArrayList<Member> blacklistMgmtList(PageInfo pi) {
 		return ad.blacklistMgmtList(pi,ss);
 	}
+	
+	//문의 관리 페이지 select 문(성연)
+	@Override
+	public int inquiryMgmtCountList() {
+		return ad.inquiryMgmtCountList(ss);
+	}
+	@Override
+	public ArrayList<Inquiry> inquiryMgmtList(PageInfo pi) {
+		return ad.inquiryMgmtList(pi,ss);
+	}
+	
+	//inq답변 작성
+	@Override
+	public int inqAnswer(Inquiry i) {
+		return ad.inqAnswer(i, ss);
+	}
+	
+	
+	
+	
+	
 	
 	//신고 관리 페이지 select 문(성연)
 	@Override

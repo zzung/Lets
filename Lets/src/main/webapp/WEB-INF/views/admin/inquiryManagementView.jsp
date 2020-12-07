@@ -41,34 +41,40 @@
 							<th width="50px" height="40px">번호</th>
 							<th width="150px">닉네임</th>
 							<th width="70px">분류</th>
-							<th width="220px">문의 제목</th>
-							<th width="120px">문의일</th>
-							<th width="120px">단변일</th>
-							<th width="90px">답변여부</th>
-							<th width="90px">공개여부</th>
-							<th width="90px">삭제여부</th>
+							<th width="320px">문의 제목</th>
+							<th width="100px">문의일</th>
+							<th width="100px">답변일</th>
+							<th width="70px">답변여부</th>
+							<th width="70px">공개여부</th>
 						</tr>
 						<c:forEach var="l" items="${list }" varStatus="status">
 						<tr>
-							<td height="40px">1</td>
-							<td>닉네임1</td>
-							<td>사용자</td>
+							<td height="40px">${status.count }</td>
+							<td>${l.nickname }</td>
+							<td>${l.inqType }</td>
 							<td>
-								<a href="#" data-toggle="modal" data-target="#inqueryContent1">
-								제목1
-								</a>
+								<span onclick="inqArrayList(this);" data-toggle="modal" 
+								data-inqno="${l.inqNo}" data-inqtype="${l.inqType}" data-inqtitle="${l.inqTitle}"
+								data-inqcontent="${l.inqContent}" data-enrolldate="${l.enrollDate}" data-answerdate="${l.answerDate}"
+								data-answercontent="${l.answerContent}" data-inqfile="${l.inqFile}" data-originfile="${l.originFile}"
+								data-typestatus="${l.typeStatus}" data-status="${l.status}" data-restatus="${l.reStatus}"
+								data-nickname="${l.nickname}" data-memno="${l.memNo}" data-memid="${l.memId}"
+								data-target="#inquiryContent">${l.inqTitle }</span>
 							</td>
-							<td>2020-11-19</td>
-							<td></td>
-							<td>접수</td>
-							<td>비공개</td>
-							<td>N</td>
+							<td>${l.enrollDate }</td>
+							<td>${l.answerDate }</td>
+							<td>${l.reStatus }</td>
+							<td>${l.typeStatus }</td>
 						</tr>
+						
+						
+						
+						
 						</c:forEach>
 					</table>
 					
 					<!-- Modal Start -->
-					<div class="modal" id="inqueryContent1">
+					<div class="modal" id="inquiryContent">
 						<div class="modal-dialog">
 
 							<!-- Modal content -->
@@ -82,30 +88,21 @@
 									<!-- 문의 내용 시작 -->
 									<table>
 										<tr>
-											<td style="border-bottom:solid 1px;">[클래스]더욱 다양한 클래스가 있었으면 좋겠어요</td>
+											<td style="border-bottom:solid 1px;"><p id="modalTitle"></p></td>
 										</tr>
 										<tr>
-											<td style="border-bottom:solid 1px;"><span style="margin-right:20px;">닉네임1</span><span>2020-09-29</span></td>
+											<td style="border-bottom:solid 1px;"><span style="margin-right:20px;" id="modalNickname"></span><span id="modalEnrollDate"></span></td>
 										</tr>
 										<tr>
-											<td>
-											다양한 카테고리에 다양한 클래스가 있었으면 좋겠어요~
-											뜨개질 같은거나 만드는거 배워보고 싶어요
-											
-											다양한 카테고리에 다양한 클래스가 있었으면 좋겠어요~
-											뜨개질 같은거나 만드는거 배워보고 싶어요 다양한
-											
-											다양한 카테고리에 다양한 클래스가 있었으면 좋겠어요~
-											뜨개질 같은거나 만드는거 배워보고 싶어요
-											
-											다양한 카테고리에 다양한 클래스가 있었으면 좋겠어요~
-											뜨개질 같은거나 만드는거 배워보고 싶어요
+											<td style="width:780px;">
+											<div id="modalInqContent">
+											</div>
 											</td>
 										</tr>
 										<tr>
 											<td style="border-bottom:solid 1px;">
+												<br>
 												<div>
-													<br>
 													첨부파일:
 												</div>
 											</td>
@@ -117,13 +114,14 @@
 									
 									<!-- 답변입력 시작 -->
 									<div align="center">
-										<form action="" onsubmit="return confirm('답변을 발송하시겠습니까?')">
+										<form action="inqAnswer.ad" method="post" onsubmit="return confirm('답변을 발송하시겠습니까?')">
 											<div style="text-align:left">답변 입력</div>
 											<div>
-												<textarea name="" id="" style="resize:none; width: 720px; height: 80px;"></textarea>
+											<p id="modalInqNo"></p>
+												<textarea name="answerContent" style="resize:none; width: 720px; height: 80px;"></textarea>
 											</div>
 											<br>
-											<div class="">
+											<div>
 												<button type="submit">답변발송</button>
 											</div>
 										</form>
@@ -135,6 +133,51 @@
 						</div>
 					</div>
 					<!--Modal End-->
+					
+					<script>
+						$(function(){
+							inqArrayList(); 
+						})
+					
+						function inqArrayList(e){
+
+							var inqNo = $(e).data("inqno");
+							var inqType = $(e).data("inqtype");
+							var inqTitle = $(e).data("inqtitle");
+							var inqContent = $(e).data("inqcontent");
+							var enrollDate = $(e).data("enrolldate");
+							var answerDate = $(e).data("answerdate");
+							var answerContent = $(e).data("answercontent");
+							var inqFile = $(e).data("inqfile");
+							var originFile = $(e).data("originfile");
+							var typeStatus = $(e).data("typestatus");
+							var status = $(e).data("status");
+							var reStatus = $(e).data("restatus");
+							var nickname = $(e).data("nickname");
+							var memNo = $(e).data("memno");
+							var memid = $(e).data("memid");
+							
+							
+							
+							$("#modalInqNo").text(inqNo);
+							$("#modalType").text(inqType);
+							$("#modalTitle").text(inqTitle);
+							$("#modalInqContent").text(inqContent);
+							$("#modalEnrollDate").text(enrollDate);
+							$("#modalAnswerDate").text(answerDate);
+							$("#modalAnswerContent").text(answerContent);
+							$("#modalInqFile").text(inqFile);
+							$("#modaloriginFile").text(originFile);
+							$("#modaltypeStatus").text(typeStatus);
+							$("#modalStatus").text(status);
+							$("#modalReStatus").text(reStatus);
+							$("#modalNickname").text(nickname);
+							$("#modalMemNo").text(memNo);
+							$("#modalMemId").text(memId);
+						}
+					</script>
+					
+					
 					
 				</div>
 				<div class="container" align="center">

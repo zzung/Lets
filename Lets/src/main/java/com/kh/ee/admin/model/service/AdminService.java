@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.faq.model.vo.Faq;
+import com.kh.ee.user.inquiry.model.vo.Inquiry;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
@@ -67,6 +68,13 @@ public interface AdminService {
 	int blacklistMgmtCountList();
 	ArrayList<Member> blacklistMgmtList(PageInfo pi);
 	
+	//문의 관리 페이지 select 문(성연)
+	int inquiryMgmtCountList();
+	ArrayList<Inquiry> inquiryMgmtList(PageInfo pi);
+	
+	//문의 답변 작성
+	int inqAnswer(Inquiry i);
+		
 	//신고 관리 페이지 select 문(성연)
 	int reportMgmtCountList();
 	ArrayList<Report> reportMgmtList(PageInfo pi);

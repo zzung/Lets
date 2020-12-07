@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.ee.admin.model.vo.SearchCondition;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.faq.model.vo.Faq;
+import com.kh.ee.user.inquiry.model.vo.Inquiry;
 import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.memPay.model.vo.MemPay;
 import com.kh.ee.user.member.model.vo.Member;
@@ -165,6 +166,37 @@ public class AdminDao {
 		return (ArrayList)ss.selectList("adminMapper.blacklistMgmtList",null,rowBounds);
 	}
 	
+	//1:1 문의 관리 페이지 (성연)
+	public int inquiryMgmtCountList(SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.selectInquiryListCount");
+	}
+	public ArrayList<Inquiry> inquiryMgmtList(PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.inquiryMgmtList",null,rowBounds);
+	}
+	
+	
+	
+
+	//문의 답변 작성
+	public int inqAnswer(Inquiry i, SqlSessionTemplate ss) {
+		return ss.update("adminMapper.inqAnswer", i);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 	//신고 관리 페이지 select 문(성연)
 	public int reportMgmtCountList(SqlSessionTemplate ss) {
 		return ss.selectOne("adminMapper.selectReportListCount");
@@ -210,6 +242,6 @@ public class AdminDao {
 	public int insertFaq(SqlSessionTemplate sqlSession, Faq f) {
 		return sqlSession.insert("adminMapper.insertFaq", f);
 	}
-		
+	
 
 }

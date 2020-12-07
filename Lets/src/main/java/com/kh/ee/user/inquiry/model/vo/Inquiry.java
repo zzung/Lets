@@ -16,7 +16,6 @@ import lombok.ToString;
 public class Inquiry {
 
 	private int inqNo;
-	private int memNo;
 	private String inqTitle;
 	private String inqContent;
 	private String inqType;
@@ -29,6 +28,7 @@ public class Inquiry {
 	private String status;
 	private String reStatus;
 	
+	private int memNo;
 	private String nickname;
-	
+	private String memId;
 }

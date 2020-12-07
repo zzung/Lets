@@ -41,7 +41,7 @@
 			<li><a href="classPayment.ad">클래스 결제관리</a></li>
 			<li><a href="saleManagement.ad">할인 상품 관리</a></li>
 			<li><a href="blacklistManagement.ad">블랙리스트관리</a></li>
-			<li><a href="inqueryManagement.ad">1:1 문의</a></li>
+			<li><a href="inquiryManagement.ad">1:1 문의</a></li>
 			<li><a href="reportManagement.ad">신고관리</a></li>
 			<li><a href="noticeManagement.ad">공지사항</a></li>
 			<li><a href="faqManagement.ad">FAQ</a></li>

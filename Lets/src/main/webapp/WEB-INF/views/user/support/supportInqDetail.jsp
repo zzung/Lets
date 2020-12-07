@@ -113,18 +113,18 @@
 				
 				<div style="padding:10px; border:solid 1px;">
 					<!-- 공지 대상 -->
-					<div>${inq.typeStatus }</div>
-					<div>${inq.inqTitle }</div>
+					<div>타입스테이터스</div>
+					<div>${list.inqTitle }</div>
 					<div>
-						<span style="width:100px; float:left;">${inq.enrollDate }</span>
-						<span style="width:150px;">${inq.nickname }</span>
+						<span style="width:100px; float:left;">날짜</span>
+						<span style="width:150px;">닉네임</span>
 					</div>
 					<hr>
 					<div style="margin:-10px 0px;"><span>첨부파일 : </span></div>
 					<hr>
 					<div>
 						<div>
-							${inq.inqContent }
+							내용
 						</div>
 					</div>
 				</div>
@@ -136,9 +136,7 @@
 							<span>관리자</span>
 						</td>
 						<td style="border:solid 1px; width:900px; padding:10px;">
-							불편을 드려서 죄송합니다.
-							<br>
-							빠른 시일 내로 카테고리 추가에 대한 회의를 진행 후 다양한 클래스로 찾아뵙겠습니다. 감사합니다.
+							 ${answerContent }
 						</td>
 					</tr>
 				</table>
