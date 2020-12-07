@@ -26,8 +26,6 @@
     .myClass{width: 1250px;margin-left: 5%;}
     #smTitle{font-size: 20px;font-weight: bold;}
     #salaryTable th {text-align: right;}
-    #classTable >tr>td a {text-decoration:none;}
-    #lessonPreTable a {text-decoration:none;}
     .outCome{
     	background-color: lightgray; 
     	height: 200px; 
@@ -60,8 +58,7 @@
     }
     .titleName th{font-size:18px}
     .titleName tr{background:lightgray}
-    #pagination >li a{text-decoration:none}
-    .myClass table tr a{text-decoration:none; font-color:black}
+    .pagination >li a{text-decoration:none}
 </style>
 </head>
 <body>
@@ -101,8 +98,8 @@
 			       				<input type="hidden" id="deleteLes${del.index }" value="${al.lessonNo}" name="lno">
 				            </form>
 				            <tr>
-				                <td style="width: 550px;"><a href="">${al.lessonTitle }</a></td>
-				                <td style="width: 150px;"><a href="">답변달기</a></td>
+				                <td style="width: 550px;"><a href="courseDetailView.le?lessonNo=${al.lessonNo }" style="color:black">${al.lessonTitle }</a></td>
+				                <td style="width: 150px;"><a href="" style="color:black">답변달기</a></td>
 				                <td style="width: 150px;">${al.approveDate }</td>
 				                <td style="width: 150px;">${al.lessonType }</td>
 				                <td id="lessonTp${del.index }" style="width: 150px;">
@@ -191,7 +188,7 @@
 		            	<input type="hidden" id="lno${slModal.index }" name="lno" value="${sl.lessonNo }">
 			        </form> 
 			            <tr>
-			                <td><a href="">${sl.lessonTitle}</a></td>
+			                <td><a href="courseDetailView.le?lessonNo=${sl.lessonNo }" style="color:black">${sl.lessonTitle}</a></td>
 			                <td>
 			                    <c:choose>
 			                    	<c:when test="${sl.lessonStatus eq '거절'}">
@@ -442,38 +439,7 @@
 	    </div>
 	        
 	        <!--페이징-->
-            <div id="pagingArea" style="margin-left: 35%;">
-            <!--  
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${pi.currentPage eq 1}">
-                    		<li class="page-item " ><a class="page-link" id="previous">Previous</a></li>
-                    	</c:when>
-                    	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" id="previous">Previous</a></li>
-                    	</c:otherwise>
-                    </c:choose>
-                    <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-                    	<c:choose>
-                    		<c:when test="${p ne pi.currentPage }">
-		                    	<li class="page-item"><a class="page-link" >${ p }</a></li>                    		
-                    		</c:when>
-                    		<c:otherwise>
-                    			<li class="page-item"><a class="page-link" >${ p }</a></li> 
-                    		</c:otherwise>
-                    	</c:choose>
-                    </c:forEach>
-                    <c:choose>
-                    	<c:when test="${pi.currentPage eq pi.maxPage }">
-                    		<li class="page-item disabled" ><a class="page-link" id="next">Next</a></li>
-                    	</c:when>
-                    	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" id="next">Next</a></li>
-                    	</c:otherwise>
-                	</c:choose>
-                </ul>
-                -->
-            </div>
+            <div id="pagingArea" style="margin-left: 35%;"></div>
 
 	       <script>
 	       	$(function(){
@@ -504,7 +470,7 @@
 	       				$.each(hmap.list, function(i,memPay){
 							value += '<tbody><tr>' 
 					        value += '<td>' + memPay.memName + '</td>'
-					        value += '<td><a href="">' + memPay.lessonTitle + '</a></td>'
+					        value += '<td><a href="courseDetailView.le?lessonNo='+memPay.lessonNo+'" style="color:black">' + memPay.lessonTitle + '</a></td>'
 					        value += '<td>신청일 ' + memPay.paymentDay + '</td>' 
 					        value += '<td>'
 			                  		if(memPay.delStatus == "배송전"){
@@ -563,24 +529,23 @@
         <br><hr>
         <div style="color: gray; font-size: 20px; font-weight: bold; ">수업성과 & 정산서
 	        <br>
-	        <!-- 튜터 등록 날짜로 ? 조건처리 할 수 있나 -->
 	       
 	        <div class="single-element-widget mt-30" >
-	            <div class="default-select" id="salary" name="salary"style="float:left">
-	                <select>
+	            <div class="default-select"style="float:left">
+	                <select id="salary" name="salary">
 	                <option value="total_pay">전체수익</option>
 	                <option value="month_pay">월별로보기</option>
 	                </select>
 	            </div>
-	            <div class="default-select" id="year" name="year" style="display: none;float:left">
-	                <select>
+	            <div class="default-select" style="display: none;float:left">
+	                <select id="year" name="year" >
 	                    <option value="2018">2018</option>
 	                    <option value="2019">2019</option>
 	                    <option value="2020">2020</option>
 	                </select>
 	            </div>
-	            <div class="default-select" id="month" name="month"style="display: none;float:left">
-	                <select>
+	            <div class="default-select" style="display: none;float:left">
+	                <select id="month" name="month">
 	                    <option value="1">1월</option>
 	                    <option value="2">2월</option>
 	                    <option value="3">3월</option>
@@ -642,13 +607,6 @@
                             <td>수강인원</td>
                             <th>${ms.studentCount }</th>
                         </tr>
-                        <!-- 
-                        <tr>
-                            <td>-&nbsp;</td>
-                            <td>레츠 수수료</td>
-                            <td>${ms.fee }</td>
-                        </tr>
-                         -->
                         <tr>
                             <th colspan="3">-------------------------------------------------</th>
                         </tr>
