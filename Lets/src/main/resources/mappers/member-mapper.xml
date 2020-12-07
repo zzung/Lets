@@ -347,4 +347,22 @@
 		  and l.lesson_type='오프라인'
 </select>
 
+<select id="totalVideo" parameterType="Lesson" resultType="_int">
+	select 
+	       count(*)
+	  from video v
+	  join mem_video mv on (mv.video_no = v.video_no)
+	 where mv.mem_no = #{memNo}
+	   and v.lesson_no = #{lessonNo}
+</select>
+
+<select id="watchedVideo" parameterType="Lesson" resultType="_int">
+	select
+	       count(*)
+	  from mem_video mv
+	  join video v on (mv.video_no = v.video_no) 
+	 where mem_no = #{memNo}
+	   and lesson_no = #{lessonNo}
+	   and status = 'Y'
+</select>
  </mapper>

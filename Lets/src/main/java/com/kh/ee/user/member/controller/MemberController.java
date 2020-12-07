@@ -259,30 +259,25 @@ public class MemberController {
 		
 		Member memNo = (Member)session.getAttribute("loginUser"); 
 		ArrayList<Lesson> onlist = mService.selectOnlineLesson(memNo.getMemNo());
-		ArrayList<Lesson> off = mService.selectOffLesson(memNo.getMemNo());
-		
-		MemVideo mv = new MemVideo();
-		ArrayList<MemVideo> mlist = new ArrayList<>();
-		
+		ArrayList<Lesson> off = mService.selectOffLesson(memNo.getMemNo());		
 		
 		for(Lesson l : onlist) {
+			//몇일까지 볼수 있다 불러오기 위한 코드
 			LocalDate endDate = LocalDate.parse(l.getPaymentDate().toString());
 			endDate = endDate.plusWeeks(Integer.parseInt(l.getPeriod()));
-			
 			l.setEndDate(endDate.toString());
+			l.setMemNo(memNo.getMemNo());
 			
-			mv.setLessonNo(l.getLessonNo());
-			mv.setMemNo(l.getMemNo());
-			
+			//진도율 불러오기 위한 코드
+			double calPercentage = mService.calPercentage(l); 
+			l.setCalPercentage(calPercentage); 
 		}
-		System.out.println("mvLessonNo:" + mv.getLessonNo());
 		
 		for(Lesson lo : off) {
 			LocalDate endDate = LocalDate.parse(lo.getPaymentDate().toString());
 			endDate = endDate.plusWeeks(Integer.parseInt(lo.getPeriod()));
 			
 			lo.setEndDate(endDate.toString());
-			
 		}
 		
 		model.addAttribute("off", off);

@@ -144,7 +144,7 @@
                                         <p style="font-weight:bold; font-size:16px;">${on.lessonTitle }</p>
                                         <p>커피 부르잉이 만드드느</p>
                                         <div class="w3-light-grey">
-                                            <div class="w3-container w3-indigo" style="width:35%">35%</div>
+                                            <div class="w3-container w3-indigo" style="width:${on.calPercentage }%">${on.calPercentage }%</div>
                                         </div>
                                     </div>
                                     <div class="online-thumbnail" style="width:16.7%;">
