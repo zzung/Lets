@@ -215,8 +215,6 @@ public class LessonDao {
 		return result;
 	}
 
-	public int insertlessonNo(SqlSessionTemplate ss) {
-		return ss.selectOne("lessonMapper.insertlessonNo");
 	public ArrayList<Video> selectVideoList(MemPay mp, SqlSessionTemplate ss) {
 		return (ArrayList)ss.selectList("lessonMapper.selectVideoList",mp);
 	}
