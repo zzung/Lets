@@ -33,8 +33,8 @@
                     onfocus="this.placeholder = ''" onblur="this.placeholder = '튜터소개를 입력해주세요. (공백포함 1000자 이내)'">${ t.tutorInfo }</textarea>
             </div><br>
        			<c:if test="${ !empty t.tutorPic }">	
-                     	현재 업로드된 파일 : 
-					<p>${ t.tutorPic.split('/')[fn:length(t.tutorPic.split('/'))-1] }</p>
+                     	
+					<p>현재 업로드된 파일 : ${ t.tutorPic.split('/')[fn:length(t.tutorPic.split('/'))-1] }</p>
                  </c:if>
             <h5><b>프로필 이미지 첨부</b></h5>
             
