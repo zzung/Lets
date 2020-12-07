@@ -287,7 +287,7 @@
  		  )
  		values
  		  (
- 		       seq_curriculum_no.nextval
+ 		       seq_cur_no.nextval
  		     , #{curriculumCont}
  		     , #{lessonNo}
  		     , #{curLevel}
@@ -305,11 +305,17 @@
  		  )
  		  values
  		  (
- 		  	   seq_video_no.nextval
+ 		  	   seq_vno.nextval
  		  	 , #{lessonNo}
  		  	 , #{videoName}
  		  	 , #{videoCont}
  		  	 , #{videoUrl}
  		  )
  	</insert>
+ 	<select id="CurriculumListNo" resultType="_int">
+		select
+		       count(*)
+		  from curriculum
+ 			
+ 	</select>
 </mapper>

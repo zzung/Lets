@@ -199,4 +199,9 @@ public class LessonDao {
 	public int insertLesson(Lesson l, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.insertLesson", l);
 	}
+
+	public int CurriculumListNo(SqlSessionTemplate ss) {
+		int result = ss.selectOne("curriculumMapper.CurriculumListNo");
+		return result;
+	}
 }

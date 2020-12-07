@@ -31,6 +31,25 @@ public class SupportServiceImpl implements SupportService {
 		return sd.noticeList(pi,ss);
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//faq 페이지 select 문(성연)
 	@Override
 	public int faqCountList() {
@@ -57,18 +76,13 @@ public class SupportServiceImpl implements SupportService {
 		return sd.insertInq(ss, i);
 	}
 		
-	
-	@Override
-	public Inquiry selectInq(int ino) {
-		return sd.selectInq(ss, ino);
-	}
-	
-	@Override
-	public int increaseCount(int ino) {
-		return sd.increaseCount(ss, ino);
-	}
-
-	
+	/*
+	 * @Override public int insertBoard(Board b) { return
+	 * bDao.insertBoard(sqlSession, b); }
+	 * 
+	 * @Override public int increaseCount(int bno) { return
+	 * bDao.increaseCount(sqlSession, bno); }
+	 */
 	
 	
 	

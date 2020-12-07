@@ -24,7 +24,7 @@
 		<!--? 컬리큘럼 상세 이미지 -->
 		<div class="curriculum-area ">
 			<div class="curriculum-header d-flex align-items-center"
-				data-background="resources/user/assets/img/gallery/career.png"></div>
+				data-background="resources/user/assets/img/detailClassPage/10827.jpg"></div>
 		</div>
 		<!--? end 컬리큘럽 상세 이미지 -->
 

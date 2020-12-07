@@ -3,6 +3,7 @@ package com.kh.ee.user.tutor.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.common.template.Auth;
 import com.kh.ee.common.template.Auth.Role;
@@ -226,24 +228,21 @@ public class TutorController {
 			
 		}
 		
+	/*
 	// 내수업 택배사,번호 update(수현)
 	@Auth(role = Role.TUTOR)
 	@RequestMapping("delivery.tm")
 	public String updateDelivery(MemPay mp, Model model) {
+		
 		int result = memPayService.updateDelivery(mp);
-		System.out.println(mp);
 		
 		if(result > 0) {
-			return "redirect:tutorMyLesson.tm";			
-		}
-		else {
-			model.addAttribute("errorMsg","택배사 입력 실패");
-			return "redirect:tutorMyLesson.tm";
+			return "user/tutor/myClassView";			
 		}
 		
-	}
+	}*/
 	
-	/* 페이징(수현) 아직 수정중
+	// 페이징(수현) 아직 수정중
 	@Auth(role = Role.TUTOR)
 	@ResponseBody
 	@RequestMapping(value="paging.pt", produces="application/json; charset=utf-8")
@@ -258,13 +257,13 @@ public class TutorController {
 		hmap.put("pi",pi);
 		hmap.put("list", list);
 		
+		model.addAttribute("pi",pi);
 		return new Gson().toJson(hmap);
 	}
-	*/
+	
 
 	// 튜터계좌번호insert (수현)
 
-	@Auth(role = Role.TUTOR)
 	@RequestMapping("insertSalary.ts")
 	public String insertSalary(Salary s) {
 		ArrayList<Salary> salaryList = s.getSalaryList();
@@ -280,6 +279,15 @@ public class TutorController {
 		return "redirect:tutorMyLesson.tm";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="prepareList.tm", produces="application/json; charset=utf-8")
+	public String prepareList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, int memNo) {
+		int listCount = memPayService.selectListCount(memNo);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 	
+		ArrayList<MemPay> list = memPayService.selectPrepareList(memNo, pi);
+		
+		return new Gson().toJson(list); 
+	}
 	
 }

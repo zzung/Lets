@@ -24,15 +24,11 @@ public interface SupportService {
 	//공지작성
 	int insertInq(Inquiry i);
 	
-	
-	
-	
-	//게시판 상세조회용 서비스
-	Inquiry selectInq(int ino);
-	int increaseCount(int ino);
-	
-	
-	
+	/*
+	 * //notice 상세조회용 서비스 int increaseCount(int bno); Board selectBoard(int bno);
+	 * 
+	 * 
+	 */
 	
 	
 	

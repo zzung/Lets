@@ -164,47 +164,47 @@
 		        <!--end of 승인여부-->
 		        <br><br>
 		        <div class="container" align="center">
-						<ul class="pagination">
+					<ul class="pagination">
+					<c:choose>
+						<c:when test="${pi.currentPage eq 1 }">
+							<li class="disabled"><a href="">&lt;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="classManagement.ad?currentPage=${pi.currentPage -1 }">&lt;</a></li>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
 						<c:choose>
-							<c:when test="${pi.currentPage eq 1 }">
-								<li class="disabled"><a href="">&lt;</a></li>
+							<c:when test="${pi.currentPage ne p }">
+								<c:choose>
+									<c:when test="${empty sc }">
+										<li><a href="classManagement.ad?currentPage=${p}">${p}</a></li>
+									</c:when>
+									<c:otherwise>
+										<c:url var="searchUrl" value="searchClassMgmt.ad">
+											<c:param name="currentPage" value="${p }"/>
+											<c:param name="condition" value="${condition }" />
+											<c:param name="keyword" value="${keyword }" />
+										</c:url>
+										
+										<li><a href="${searchUrl }">${p }</a></li>
+									</c:otherwise>
+								</c:choose>	
 							</c:when>
-							<c:otherwise>
-								<li><a href="classManagement.ad?currentPage=${pi.currentPage -1 }">&lt;</a></li>
-							</c:otherwise>
 						</c:choose>
-						
-						<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-							<c:choose>
-								<c:when test="${pi.currentPage ne p }">
-									<c:choose>
-										<c:when test="${empty sc }">
-											<li><a href="classManagement.ad?currentPage=${p}">${p}</a></li>
-										</c:when>
-										<c:otherwise>
-											<c:url var="searchUrl" value="searchClassMgmt.ad">
-												<c:param name="currentPage" value="${p }"/>
-												<c:param name="condition" value="${condition }" />
-												<c:param name="keyword" value="${keyword }" />
-											</c:url>
-											
-											<li><a href="${searchUrl }">${p }</a></li>
-										</c:otherwise>
-									</c:choose>	
-								</c:when>
-							</c:choose>
-						</c:forEach>
-						
-						<c:choose>
-							<c:when test="${pi.currentPage eq pi.maxPage }">
-								<li class="disabled"><a href="#">&gt;</a></li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="classManagement.ad?currentPage=${pi.currentPage +1 }">&gt;</a></li>
-							</c:otherwise>
-						</c:choose>	
-						</ul>
-					</div>
+					</c:forEach>
+					
+					<c:choose>
+						<c:when test="${pi.currentPage eq pi.maxPage }">
+							<li class="disabled"><a href="#">&gt;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="classManagement.ad?currentPage=${pi.currentPage +1 }">&gt;</a></li>
+						</c:otherwise>
+					</c:choose>	
+					</ul>
+				</div>
 		    </div>
 	    </section>
     </div>

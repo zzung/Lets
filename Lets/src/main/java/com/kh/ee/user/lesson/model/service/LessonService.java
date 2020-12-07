@@ -70,15 +70,14 @@ public interface LessonService {
 	//결제 내역 입력
 	int insertDelInfo(MemPay mp); 
 
-	int insertLessonFaq(LessonFaq lfaq);
-	
+	// 클래스 등록(현선)
+	int insertLessonFaq(LessonFaq lfaq);	
 	int insertCurriculum(Curriculum element);
-
 	int insertVideo(Video element);
-
 	int selectWL(WishList wl);
-
 	int insertLesson(Lesson l);
+
+	int CurriculumListNo();
 
 	
 

@@ -779,10 +779,15 @@
 	    , lesson_instr
 	    , lesson_prepare
 	    , lesson_target
+	    , price
+	    , time
+	    , period
+	    , pay_total
+	    , total_count
 	    )
 	values
 	    (
-	      seq_lesson_no.nextval
+	      seq_lesno.nextval
 	    , #{memNo}
 	    , #{lessonForm}
 	    , #{lessonType}
@@ -793,6 +798,11 @@
 	    , #{lessonInstr}
 	    , #{lessonPrepare}
 	    , #{lessonTarget}
+	    , #{price}
+	    , #{time}
+	    , #{period}
+	    , #{payTotal}
+	    , #{totalCount}
 	    
 	    )
 

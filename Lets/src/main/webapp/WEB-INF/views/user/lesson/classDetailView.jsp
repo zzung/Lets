@@ -86,26 +86,10 @@
 	                              </table>
 	                              <br><br>
 	                              <!--첫번째 소개 글과 이미지-->
-	                              <img class="img-fluid" src="resources/user/assets/img/blog/single_blog_2.png" alt="">
-	                              <p>
-	                                 MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-	                                 should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-	                                 fraction of the camp price. However, who has the willpower
-	                              </p>
-	                              <!--두번째 소개 글과 이미지-->
-	                              <img class="img-fluid" src="resources/user/assets/img/blog/single_blog_3.png" alt="">
-	                              <p>
-	                                 MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-	                                 should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-	                                 fraction of the camp price. However, who has the willpower
-	                              </p>
-	                              <!--세번째 소개 글과 이미지-->
-	                              <img class="img-fluid" src="resources/user/assets/img/blog/single_blog_4.png" alt="">
-	                              <p>
-	                                 MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-	                                 should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-	                                 fraction of the camp price. However, who has the willpower
-	                              </p>
+	                             <div style="width:100%;">
+	                             <p>
+	                             ${l.lessonInstr }</p>
+	                             </div>
 	                           </div>
 	                        </div>
 	                        

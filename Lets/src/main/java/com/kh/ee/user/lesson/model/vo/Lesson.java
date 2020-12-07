@@ -58,4 +58,5 @@ public class Lesson {
 	private ArrayList<LessonFaq> lessonFaqList;
 	private ArrayList<String> lessonPrepareList;
 	private ArrayList<Curriculum> curriculumList;
+	private String CurriculumListNo;
 }
