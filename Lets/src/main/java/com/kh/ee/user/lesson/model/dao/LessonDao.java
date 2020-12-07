@@ -1,6 +1,7 @@
 package com.kh.ee.user.lesson.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,8 @@ import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
 import com.kh.ee.user.tutor.model.vo.Tutor;
+
+import oracle.net.aso.s;
 
 @Repository
 public class LessonDao {
@@ -210,6 +213,21 @@ public class LessonDao {
 	public int selectMemPayList(MemPay mp, SqlSessionTemplate ss) {
 		int result = ss.selectOne("lessonMapper.selectMemPayList",mp);
 		return result;
+	}
+
+	public ArrayList<Video> selectVideoList(MemPay mp, SqlSessionTemplate ss) {
+		return (ArrayList)ss.selectList("lessonMapper.selectVideoList",mp);
+	}
+
+	/*
+	public int insertMemVideo(ArrayList<Video> vList, SqlSessionTemplate ss) {
+		int result2 = ss.update("lessonMapper.insertMemVideo",vList);
+		return result2;
+	}
+	*/
+	
+	public int insertMemVideo(Map<String, Object> map, SqlSessionTemplate ss) {
+		return ss.insert("lessonMapper.insertMemVideo",map);
 	}
 
 	

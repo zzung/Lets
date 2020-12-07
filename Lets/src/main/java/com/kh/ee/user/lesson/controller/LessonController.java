@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -374,10 +376,18 @@ public class LessonController {
 	@RequestMapping("paymentProcess.le")
 	public String paymentProcess(MemPay mp,HttpSession session,Model model) {
 		int result = lService.insertDelInfo(mp);
+		ArrayList<Video> list = lService.selectVideoList(mp);
+		System.out.println("list:" + list);
+		
+		Map<String, Object> map = new HashMap<String,Object>(); 
+		map.put("list",list); 
+		
+		int result2 = lService.insertMemVideo(map); 
+		System.out.println(result2);
 		
 		//mp에서 맴버 번호만 빼서 mem_video에서 관련 lesson 번호빼와서 mem_video에 insert
 		
-		if(result>0) {
+		if(result*result2>0) {
 			session.setAttribute("alertMsg","결제 완료 되었습니다.");
 			return "redirect:myPage.me";			
 		} else {

@@ -261,9 +261,9 @@ public class MemberController {
 		ArrayList<Lesson> onlist = mService.selectOnlineLesson(memNo.getMemNo());
 		ArrayList<Lesson> off = mService.selectOffLesson(memNo.getMemNo());
 		
-		MemVideo mv = new MemVideo(); 
+		MemVideo mv = new MemVideo();
+		ArrayList<MemVideo> mlist = new ArrayList<>();
 		
-		System.out.println("mv:"+mv);
 		
 		for(Lesson l : onlist) {
 			LocalDate endDate = LocalDate.parse(l.getPaymentDate().toString());
@@ -273,7 +273,9 @@ public class MemberController {
 			
 			mv.setLessonNo(l.getLessonNo());
 			mv.setMemNo(l.getMemNo());
+			
 		}
+		System.out.println("mvLessonNo:" + mv.getLessonNo());
 		
 		for(Lesson lo : off) {
 			LocalDate endDate = LocalDate.parse(lo.getPaymentDate().toString());
