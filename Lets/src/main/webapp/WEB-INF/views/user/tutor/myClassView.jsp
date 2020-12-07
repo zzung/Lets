@@ -26,7 +26,7 @@
     .myClass{width: 1250px;margin-left: 5%;}
     #smTitle{font-size: 20px;font-weight: bold;}
     #salaryTable th {text-align: right;}
-    #classTable a {text-decoration:none;}
+    #classTable >tr>td a {text-decoration:none;}
     #lessonPreTable a {text-decoration:none;}
     .outCome{
     	background-color: lightgray; 
@@ -61,6 +61,7 @@
     .titleName th{font-size:18px}
     .titleName tr{background:lightgray}
     #pagination >li a{text-decoration:none}
+    .myClass table tr a{text-decoration:none; font-color:black}
 </style>
 </head>
 <body>
@@ -80,6 +81,7 @@
             <thead>
 	            <tr class="titleName" style="background-color:rgb(243, 243, 243)">
 	            	<th>수업제목</th>
+	            	<th>QNA게시판</th>
 	            	<th>승인날짜</th>
 	            	<th>수업유형</th>
 	            	<th>수업종료신청</th>
@@ -100,6 +102,7 @@
 				            </form>
 				            <tr>
 				                <td style="width: 550px;"><a href="">${al.lessonTitle }</a></td>
+				                <td style="width: 150px;"><a href="">답변달기</a></td>
 				                <td style="width: 150px;">${al.approveDate }</td>
 				                <td style="width: 150px;">${al.lessonType }</td>
 				                <td id="lessonTp${del.index }" style="width: 150px;">
@@ -166,7 +169,7 @@
         </table>
         <!------------------------ 클래스 승인 상태 --------------------------------->
         <br><br>
-        <p id="smTitle" style="color: gray;">클래스 승인 상태<span style="font-size: 12px;color: rgb(45, 48, 186);float: right;">**승인 보류인 경우, 수정 후 다시 클래스 신청이 가능합니다.</span></p>
+        <p id="smTitle" style="color: gray;">클래스 승인 상태<span style="font-size: 12px;color: rgb(45, 48, 186);float: right;">**승인보류, 거부는 삭제 후 다시 신청해주세요.</span></p>
         <table style="text-align: center;" class="table table-bordered table-sm">
 	        <thead>
 	       		<tr class="titleName" style="background-color:rgb(243, 243, 243)">
@@ -330,27 +333,34 @@
 	    	function deliveryReady(e){
 	    		var content = $(e).data("list");
 	    		var memName = $(e).data("memname");
+	    		var lno = $(e).data("lno");
+	    		var mno = $(e).data("mno");
 
+	    		console.log($(e).data("mno"));
+	    		console.log(mno);
+	    		/*
 	    		console.log(memName); 
 	    		console.log($(e).data("memName"));
+	    		*/
 	    		$(".listContent").text(content); 
 	    		$(".memName").text(memName);
+	    		$("#lno").val(lno);
+	    		$("#mno").val(mno);
 	    		
 	    	}
-	    	/*
+	    	
 	    	function deliveryGo(e){
-	    		var memnum = $(e).data("memNo");
-	    		var lessonNum = $(e).data("lessonNo");
-	    		var delNo = $(e).data("delNo");
-	    		var delName = $(e).data("delName");
-	    		console.log($(e).data("memNo"));
+	    		var delNo = $(e).data("delno");
+	    		var delName = $(e).data("delname");
+	    		var name = $(e).data("name");
+	    		var content = $(e).data("prelist");
 	    		
-	    		$(".lno").val(lessonNum);
-	    		$(".mno").val(memnum);
-	    		$(".delnum").text(delNo);
+	    		$(".prelist").text(content); 
+	    		$(".name").text(name);
 	    		$(".delname").text(delName);
-	    		$(".memName").text(memName);
-	    	}*/
+	    		$(".delnum").text(delNo);
+	    	}
+	    	
 	    	
 	    </script>
 	    
@@ -410,13 +420,13 @@
 		           	<form action="" method="post">
 		                <!-- Modal Body -->
 		                <div class="modal-body">
-		                	<span class="memName"></span>
+		                	<span class="name"></span>
 		                    <label for="userId" class="mr-sm-2">회원님께 보낸 클래스의 준비물</label><br>
 		                    
 		                    <div class="delivery_ing">
 		                      <dl>
 		                    	<dd>
-		                            <li class="listContent" style="list-style-type:square"></li>
+		                            <li class="prelist" style="list-style-type:square"></li>
 		                    	</dd>
 		                      </dl>
 		                    </div>
@@ -433,13 +443,14 @@
 	        
 	        <!--페이징-->
             <div id="pagingArea" style="margin-left: 35%;">
+            <!--  
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${pi.currentPage eq 1}">
-                    		<li class="page-item " ><a class="page-link" >Previous</a></li>
+                    		<li class="page-item " ><a class="page-link" id="previous">Previous</a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" >Previous</a></li>
+                    		<li class="page-item"><a class="page-link" id="previous">Previous</a></li>
                     	</c:otherwise>
                     </c:choose>
                     <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
@@ -454,58 +465,90 @@
                     </c:forEach>
                     <c:choose>
                     	<c:when test="${pi.currentPage eq pi.maxPage }">
-                    		<li class="page-item disabled" ><a class="page-link">Next</a></li>
+                    		<li class="page-item disabled" ><a class="page-link" id="next">Next</a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link">Next</a></li>
+                    		<li class="page-item"><a class="page-link" id="next">Next</a></li>
                     	</c:otherwise>
                 	</c:choose>
                 </ul>
+                -->
             </div>
 
 	       <script>
 	       	$(function(){
-	       		prepareList(); 
-	    	});
-	       	
+	       		prepareList();
+	       		
+	    	})
 	       	//내클래스 -> 준비물보내기 ajax
-	       	function prepareList(){
+	       	function prepareList(currentP){
 	       		$.ajax({
 	       			url:"prepareList.tm",
 	       			data:{
-	       				memNo: ${loginUser.memNo}
+	       				memNo: ${loginUser.memNo},
+	       				currentPage:currentP
 	       			},
-	       			success:function(list){
-	       				console.log(list)
-	       				var value="";
+	       			success:function(hmap){
 	       				
-	       				value +='<thead>'
-	       				value +='<tr class="titleName" style="background-color:rgb(243, 243, 243)">'
-						value +='<th style="width: 100px;">'+'회원이름'+'</th>'
-						value +='<th style="width: 550px;">'+'수업제목'+'</th>'
-						value +='<th style="width: 200px;">'+'결제날짜'+'</th>'
-						value +='<th style="width: 150px;">'+'배송유형'+'</th>'
-						value +='</tr>' 
-						value += '</thead>'
-	       				for(var i in list){
-						value += '<tbody><tr>' 
-				        value += '<td>' + list[i].memName + '</td>'
-				        value += '<td><a href="">' + list[i].lessonTitle + '</a></td>'
-				        value += '<td>신청일' + list[i].paymentDate + '</td>' 
-				        value += '<td>'
-		                  		if(list[i].delStatus == "배송전"){
-		               	value += '<button data-toggle="modal" data-target="#deliveryR" class="genric-btn primary btn-sm" style="font-size: 13px;" data-list='+list[i].lessonPrepare+' data-memname='+list[i].memName+' data-mno=' +list[i].memNo+' data-lno='+list[i].lessonNo+ ' onclick="deliveryReady(this);">준비물 보내기</button>'
-		                 		 }else if(list[i].delStatus == "배송중"){
-		               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-list='+list[i].lessonPrepare+' data-memNo='+list[i].memNo+' data-memName='+list[i].memName+' data-delNo='+list[i].delNo+' data-delName='+list[i].delName+' onclick="deliveryGo(this);">배송중</button>'
-		                  		}else{
-		               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-list='+list[i].lessonPrepare+' data-memNo='+list[i].memNo+' data-memName='+list[i].memName+' data-delNo='+list[i].delNo+' data-delName='+list[i].delName+' onclick="deliveryGo(this);">배송완료</button>' 
-		                 		 }
-						value += '</td></tr>'
-	       				value += '</tbody>'
+	       				var value = "";
+	       				var result ="";
 	       				
-	       				}
+		       				value +='<thead>'
+		       				value +='<tr class="titleName" style="background-color:rgb(243, 243, 243)">'
+							value +='<th style="width: 100px;">'+'회원이름'+'</th>'
+							value +='<th style="width: 550px;">'+'수업제목'+'</th>'
+							value +='<th style="width: 200px;">'+'결제날짜'+'</th>'
+							value +='<th style="width: 150px;">'+'배송유형'+'</th>'
+							value +='</tr>' 
+							value += '</thead>'
+	       				$.each(hmap.list, function(i,memPay){
+							value += '<tbody><tr>' 
+					        value += '<td>' + memPay.memName + '</td>'
+					        value += '<td><a href="">' + memPay.lessonTitle + '</a></td>'
+					        value += '<td>신청일 ' + memPay.paymentDay + '</td>' 
+					        value += '<td>'
+			                  		if(memPay.delStatus == "배송전"){
+			               	value += '<button data-toggle="modal" data-target="#deliveryR" class="genric-btn primary btn-sm" style="font-size: 13px;" data-list='+memPay.lessonPrepare+' data-memname='+memPay.memName+' data-mno=' +memPay.memNo+' data-lno='+memPay.lessonNo+ ' onclick="deliveryReady(this);">준비물 보내기</button>'
+			                 		 }else if(memPay.delStatus == "배송중"){
+			               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-prelist='+memPay.lessonPrepare+' data-name='+memPay.memName+' data-delno='+memPay.delNo+' data-delname='+memPay.delName+' onclick="deliveryGo(this);">배송중</button>'
+			                  		}else{
+			               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-prelist='+memPay.lessonPrepare+' data-name='+memPay.memName+' data-delno='+memPay.delNo+' data-delname='+memPay.delName+' onclick="deliveryGo(this);">배송완료</button>' 
+			                 		 }
+							value += '</td></tr>'
+		       				value += '</tbody>';
+	       				
+	       				})
 						$(".prepareTable > #lessonPreTable").html(value);
-						console.log(value); 
+						
+						var listCount = hmap.pi.listCount;
+					    var currentPage = hmap.pi.currentPage;
+					    var startPage = hmap.pi.startPage;
+					    var endPage = hmap.pi.endPage;
+					    var maxPage = hmap.pi.maxPage;
+					    var Previous = hmap.pi.currentPage-1;
+			
+						 result += '<ul class="pagination">'
+					  if(currentP != 1) {
+                              result += '<li class="page-item"><a class="page-link" onclick="prepareList( '+ (currentPage-1) +')">Previous</a></li>'
+                           }else{
+                              result += '<li class="page-item disabled"><a class="page-link" onclick="prepareList( '+ (currentPage-1) +')">Previous</a></li>'
+                           }
+						for(var p=startPage; p<=endPage; p++){
+                              if(currentP != p){
+                                 result += '<li class="page-item"><a class="page-link" onclick="prepareList( '+ p +')">'+ p+ '</a></li>'
+                              }else{
+                                 result += '<li class="page-item disabled"><a class="page-link" onclick="prepareList( '+ p +')">'+p+'</a></li>'
+                              }
+						}
+                            if(currentP == maxPage){
+                               result += '<li class="page-item disabled"><a class="page-link" onclick="prepareList( '+ (currentPage+1) +')">Next</a></li>'
+                            }else{
+                               result += '<li class="page-item"><a class="page-link" onclick="prepareList( '+ (currentPage+1) +')">Next</a></li>'
+                               
+                            }
+				
+                            $("#pagingArea").html(result);
+						
 	       			},
 	       			error:function(err){
 	       				console.log(err);
@@ -514,91 +557,6 @@
 	       			
 	       		})
 	       	}
-	       	/*
-	       		$(document).on("click", ".page-link", function(){
-	       			var currentPage = $(this).text();
-	       		
-	  				$.ajax({
-	  					url:"paging.pt",
-	  					data:{currentPage:currentPage},
-	  					success:function(hmap){
-	  						var value = "";
-	  						var result = "";
-	  								value +='<tr class="titleName" style="background-color:rgb(243, 243, 243)">' ; 
-	  								value +='<th style="width: 100px;">'+'회원이름'+'</th>' ;
-	  								value +='<th style="width: 550px;">'+'수업제목'+'</th>';
-	  								value +='<th style="width: 200px;">'+'승인날짜'+'</th>';
-	  								value +='<th style="width: 150px;">'+'배송유형'+'</th>';
-	  								value +='</tr>' ;
-	  								value += '<tr>' +
-		                                 '<td>' + memPay.memName + '</td>' +
-		                                 '<td>' + '<a href="">' + memPay.lessonTitle + '</a>' + '</td>' +
-		                                 '<td>' + '신청일' + memPay.paymentDate + '</td>' + 
-		                                 '<td>';
-			                           if(memPay.delStatus eq '배송전'){
-			                        	value += '<button data-toggle="modal" data-target="#deliveryR' + mem + '" class="genric-btn primary btn-sm" style="font-size: 13px;" id="deliveryReady">' + '준비물 보내기' + '</button>';
-			                           }else if(memPay.delStatus eq '배송중'){
-			                        	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF' + i + '" style="font-size: 13px;" id="delStatus">' + '배송중' + '</button>';
-			                           }else{
-			                        	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF' + i + '" style="font-size: 13px;" id="deliveryOk">' + '배송완료' + '</button>';  
-			                           }
-	 								value += '</td>' + '</tr>';
-	  						$.each(hmap.list, function(i,memPay){
-	  							console.log(memPay.lessonTitle);
-		  							value += 
-	  		                          	'<tr>' +
-	  		                                 '<td>' + memPay.memName + '</td>' +
-	  		                                 '<td>' + '<a href="">' + memPay.lessonTitle + '</a>' + '</td>' +
-	  		                                 '<td>' + '신청일' + memPay.paymentDate + '</td>' + 
-	  		                                 '<td>';
-		  		                           if(memPay.delStatus eq '배송전'){
-		  		                        	value += '<button data-toggle="modal" data-target="#deliveryR' + mem + '" class="genric-btn primary btn-sm" style="font-size: 13px;" id="deliveryReady">' + '준비물 보내기' + '</button>';
-		  		                           }else if(memPay.delStatus eq '배송중'){
-		  		                        	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF' + i + '" style="font-size: 13px;" id="delStatus">' + '배송중' + '</button>';
-		  		                           }else{
-		  		                        	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF' + i + '" style="font-size: 13px;" id="deliveryOk">' + '배송완료' + '</button>';  
-		  		                           }
-			  								value += '</td>' + '</tr>';
-		  							})
-	  		                        	 $("#lessonPreTable").html(value);
-	  						
-	  						$.each(hmap.pi, function(i,pageInfo){
-	  							$("#pagination").empty();
-	  							var Previous = hmap.pi.currentPage-1;
-	  							var Next = hmap.pi.currentPage+1;
-	  							console.log(pageInfo.currentPage);
-	                            console.log(hmap.pi.currentPage);
-	                            
-	                                  if(pageInfo.currentPage != 1) {
-	                                     result += '<li class="page-item">' + '<a class="page-link" href="hmap.pi.currentPage-1">' + Previous + '</a>'+'</li>' ;
-	                                  }
-	                                  else{
-	                                     result += '<li class="page-item">' + '<a class="page-link">' + Previous + '</a>'+'</li>';
-	                                     
-	                                  }
-	                                  for(var p=pageInfo.startPage; p<pageInfo.endPage; p++) {
-	                                     if(hmap.pi.currentPage != p){
-	                                        result += '<li class="page-item">' + '<a class="page-link">'+ p +'</a>'+'</li>'; 
-	                                     }else{
-	                                        result += '<li class="page-item disabled">' + '<a class="page-link">' + p +'</a>'+'</li>';
-	                                     }
-	                                  }
-	                                   if(pageInfo.currentPage == pageInfo.maxPage){
-	                                      result += '<li class="page-item disabled">' + '<a class="page-link">'+ Next  + '</a>' + '</li>';
-	                                   }else{
-	                                      result += '<li class="page-item">' + '<a class="page-link" >' + Next + '</a>'+'</li>';
-	                                      
-	                                   }
-	                                  
-	                      })
-	                                    $("#pagination").html(result);
-	  						
-	  					},error:function(result){
-	  						console.log("통신실패")
-	  					}
-	  				})
-	  			})
-	  			*/
 	       </script>
         
         <!-- 수업성과 & 정산서 -->
@@ -640,7 +598,7 @@
 	        </div>
 	        
 	        <!-- 정산받는 버튼 -->
-	        <span style="float: right;"><button data-toggle="modal" data-target="#account" class="genric-btn primary-border btn-sm" onclick="salarySave();">정산받기</button></span>
+	        <span style="float: right; margin-right:80px;"><button data-toggle="modal" data-target="#account" class="genric-btn primary-border btn-sm" onclick="salarySave();">정산받기</button></span>
         </div>
         <br><br>
         	<div class="classSalary" >
@@ -696,7 +654,7 @@
                         </tr>
                         <tr>
                             <th></th>
-                            <td>튜터님의 수익</td>
+                            <td>튜터님의 수익<span style="font-size:12px">(수수료 포함X)</span></td>
                             <th>${ms.salaryTotal }</th>
                         </tr>
                         

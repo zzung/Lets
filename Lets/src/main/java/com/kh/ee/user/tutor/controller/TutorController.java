@@ -63,7 +63,7 @@ public class TutorController {
 	// 내수업페이지(수현)
 	@Auth(role = Role.TUTOR)
 	@RequestMapping("tutorMyLesson.tm")
-	public String tutorMyLesson(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1")int currentPage) {
+	public String tutorMyLesson(Model model, HttpSession session) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
@@ -71,16 +71,8 @@ public class TutorController {
 		ArrayList<Lesson> sLlist = lessonService.selectApproveStatusList(loginUser.getMemNo());
 		ArrayList<MemPay> msList = memPayService.selectSalaryList(loginUser.getMemNo());
 		
-		
-		int listCount = memPayService.selectListCount(loginUser.getMemNo());
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
-		ArrayList<MemPay> mpList = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
-		
-		
-		model.addAttribute("pi",pi);
 		model.addAttribute("aLlist", aLlist);
 		model.addAttribute("sLlist", sLlist);
-		model.addAttribute("mpList", mpList);
 		model.addAttribute("msList", msList);
 		return "user/tutor/myClassView";
 			
@@ -196,13 +188,7 @@ public class TutorController {
 	@RequestMapping("deleteLesson.tl")
 	public String deleteLesson(int lno, Model model, HttpSession session) {
 		int result = lessonService.deleteLesson(lno);
-		/*
-		if(result > 0) {
-			return "success";
-		}else {
-			return "fail";
-		}
-		*/
+	
 		if(result>0) {
 			session.setAttribute("alertMsg", "성공적으로 삭제신청 되었습니다.");
 			return "redirect:tutorMyLesson.tm";
@@ -227,7 +213,7 @@ public class TutorController {
 			
 		}
 		
-	/*
+	
 	// 내수업 택배사,번호 update(수현)
 	@Auth(role = Role.TUTOR)
 	@RequestMapping("delivery.tm")
@@ -236,33 +222,15 @@ public class TutorController {
 		int result = memPayService.updateDelivery(mp);
 		
 		if(result > 0) {
-			return "user/tutor/myClassView";			
+			return "redirect:tutorMyLesson.tm";			
+		}else {
+			model.addAttribute("errorMsg", "배송 사항 입력 실패");
+			return "redirect:tutorMyLesson.tm";
 		}
 		
-	}*/
-	
-	// 페이징(수현) 아직 수정중
-	@Auth(role = Role.TUTOR)
-	@ResponseBody
-	@RequestMapping(value="paging.pt", produces="application/json; charset=utf-8")
-	public String pagingPrepare(@RequestParam(value="currentPage", defaultValue="1")int currentPage, HttpSession session, Model model) {
-		
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		int listCount = memPayService.selectListCount(loginUser.getMemNo());
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
-	
-		ArrayList<MemPay> list = memPayService.selectPrepareList(loginUser.getMemNo(), pi);
-		HashMap<String, Object> hmap = new HashMap<String,Object>();
-		hmap.put("pi",pi);
-		hmap.put("list", list);
-		
-		model.addAttribute("pi",pi);
-		return new Gson().toJson(hmap);
 	}
 	
-
 	// 튜터계좌번호insert (수현)
-
 	@RequestMapping("insertSalary.ts")
 	public String insertSalary(Salary s) {
 		ArrayList<Salary> salaryList = s.getSalaryList();
@@ -277,15 +245,19 @@ public class TutorController {
 		}
 		return "redirect:tutorMyLesson.tm";
 	}
-	
+	// 준비물 테이블, 페이징(수현)
 	@ResponseBody
 	@RequestMapping(value="prepareList.tm", produces="application/json; charset=utf-8")
 	public String prepareList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, int memNo) {
+		
 		int listCount = memPayService.selectListCount(memNo);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
-	
 		ArrayList<MemPay> list = memPayService.selectPrepareList(memNo, pi);
-		return new Gson().toJson(list); 
+		
+		HashMap<String,Object> hmap = new HashMap<String,Object>();
+		hmap.put("pi", pi);
+		hmap.put("list",list);
+		return new Gson().toJson(hmap); 
 	}
 	
 }

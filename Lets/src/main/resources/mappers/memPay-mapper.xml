@@ -27,6 +27,7 @@
 	<result column="salary_total" property="salaryTotal"/>
 	<result column="fee" property="fee"/>
 	<result column="account" property="account"/>
+	<result column="payment_date" property="paymentDay"/>
 </resultMap>
 
 <select id="selectPrepareList" resultMap="memPayResultSet" parameterType="_int">
@@ -45,6 +46,7 @@
 	  left join lesson l on (mp.lesson_no = l.lesson_no)
 	where l.mem_no = #{memNo}
 	  and l.lesson_type = '온라인'
+	  and mp.status = '결제승인'
 	order
 	   by mp.payment_date desc
 </select>
@@ -62,10 +64,11 @@
 <select id="selectListCount" parameterType="_int" resultType="_int">
 	select
 	       count(*) listcount
-      from mem_pay
+      from mem_pay mp
       join lesson l using (lesson_no)
      where l.mem_no = #{memNo}
        and l.lesson_type='온라인'
+       and mp.status = '결제승인'
        and l.status = 'Y'
 	
 </select>
