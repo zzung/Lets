@@ -106,6 +106,13 @@ public class TutorController {
 		int result2 = tutorService.getTutorAuth(t.getMemNo()); // 튜터 권한 주기(승희)
 		
 		if(result*result2 != 0) {
+			// 튜터 등록시 세션 리업로드
+	         String memId = ((Member)session.getAttribute("loginUser")).getMemId();
+	         session.removeAttribute("loginUser");
+	         session.removeAttribute("isTutor");
+	         session.setAttribute("loginUser", mService.selectMember(memId));
+	         session.setAttribute("isTutor", true);
+			
 			session.setAttribute("alertMsg", "성공적으로 튜터 등록되었습니다!");
 			return "redirect:tutorMain.tm";
 		}else {
