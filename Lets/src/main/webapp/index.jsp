@@ -10,7 +10,6 @@
 <body>
 
 	<jsp:forward page="/mainPage.le" />
-	<jsp:forward page="WEB-INF/views/admin/memberManagementView.jsp"/>
 	
 	
 	

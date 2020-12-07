@@ -221,7 +221,14 @@
 	                  			success:function(list){
 	                  				$("#replyCount").text(list.length);
 	                  				
+	                  				var pi = list.pi;
+	                  				var list = list.list;
+	                  				
+	                  				console.log(pi); 
+	                  				console.log(list);
+	                  				
 	                  				result ="";
+           							var page = "";
            							
 	                  				for(var i in list){
 	                  					result += '<div class="comment-list">'
@@ -251,7 +258,7 @@
 	     	                            result += '</div>'
 	     	                            result += "<div class='reviewReplyArea'></div>"
 	     	                            result += '</div>'
-	     	                            
+	     	                           
 	     	                            if(list[i].reList.length != 0){
 	     	                            	for(var r=0; r<list[i].reList.length; r++){
 			             					result += "<div class='comment-list reReply'>" 
@@ -281,7 +288,26 @@
 	     	                              	}
 	     	                            }
 	                  				}
+	                  				
+	                  				if (pi.currentPage == 1) {
+	                  	            	 page += '<a href="#" style="display:none">&laquo;</a>'
+	                  	             } else {
+	                  	                 page += '<a href="selectReplyList.le?currentPage='+ pi.currentPage-1 +'" style="display:none">'+"&laquo;"+'</a>'
+	                  	             }
+	                  	             
+	                  	             for(var p=pi.startPage; p<=pi.endPage; p++){
+	                  	            	page += '<a href="selectReplyList.le?currentPage='+ p +'">'+ p +'</a>'
+	                  	            	console.log(p);
+	                  	             }
+	                  	             
+	                  	             if (pi.endPage == pi.maxPage){
+	                  	            	page += '<a href="#" style="display:none">&laquo;</a>'
+	                  	             } else {
+	                  	            	page += '<a href="selectReplyList.le?currentPage='+ pi.currentPage+1 +'">'+"&raquo;"+'</a>'
+	                  	             }
+	                  	             
 	                  				$(".comments-area > .replyArea").html(result); 
+	                  				$(".comments-area > .pagination").html(page);
 	                  				
 	                  			},
 	                  			error:function(){
@@ -533,6 +559,8 @@
 							</div>
 							<br>
 							<div class="replyArea"></div>
+							<br>
+							<div class="pagination"></div>
 						</div>
 						<!--? end 리뷰 area-->
 						

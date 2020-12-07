@@ -14,12 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.common.template.Auth;
 import com.kh.ee.common.template.Auth.Role;
+import com.kh.ee.common.template.Pagination;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.service.LessonService;
@@ -171,6 +174,7 @@ public class LessonController {
 		return "user/lesson/classDetailView"; 
 	}
 	
+	/*
 	//상세페이지 커뮤니니티(학천)
 	@ResponseBody
 	@RequestMapping(value="selectReplyList.le", produces="application/json; charset=utf-8")
@@ -179,6 +183,26 @@ public class LessonController {
 
 		return new Gson().toJson(list);
 	}
+	*/
+	
+	@ResponseBody
+	@RequestMapping(value="selectReplyList.le", produces="application/json; charset=utf-8")
+	public String selectReplyList(@RequestParam(value="currentPage",defaultValue="1") int currentPage, int lessonNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int pageLimit = 5; 
+		int boardLimit = 2;
+		int listCount = lService.selectListCount(); 
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		ArrayList<Reply> list = lService.selectReply(lessonNo,pi);
+		
+		map.put("pi",pi);
+		map.put("list",list); 
+		
+		return new Gson().toJson(map);
+	}
+	
 	
 	//상세페이지 커뮤니니티(학천)
 	@ResponseBody

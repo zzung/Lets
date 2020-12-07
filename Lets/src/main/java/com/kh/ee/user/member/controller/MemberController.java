@@ -87,6 +87,9 @@ public class MemberController {
 			}else {
 				session.setAttribute("isTutor", true);
 			}
+			if(loginUser.getMemId() == "admin") {
+				return "admin/memberManagementView";
+			}
 			return "redirect:/";
 		}else {
 			model.addAttribute("errorMsg","로그인에 실패했습니다. 확인 후 다시 시도해주세요.");
