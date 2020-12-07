@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,15 +32,14 @@
                 <textarea class="tutor-textarea" placeholder="튜터소개를 입력해주세요. (공백포함 1000자 이내)" required name="tutorInfo"
                     onfocus="this.placeholder = ''" onblur="this.placeholder = '튜터소개를 입력해주세요. (공백포함 1000자 이내)'">${ t.tutorInfo }</textarea>
             </div><br>
-
+       			<c:if test="${ !empty t.tutorPic }">	
+                     	
+					<p>현재 업로드된 파일 : ${ t.tutorPic.split('/')[fn:length(t.tutorPic.split('/'))-1] }</p>
+                 </c:if>
             <h5><b>프로필 이미지 첨부</b></h5>
             
             <input type="file" id="upfile" class="form-control-file border" style="width:500px;" name="reupfile"><br><br><br>
-            			<c:if test="${ !empty t.tutorPic }">	
-                            	현재 업로드된 파일 : 
-								<img src="${ t.tutorPic }">
-								<p>${ t.tutorPic }</p>
-                            </c:if>
+
             <div align="center">
                 <button type="submit" class="genric-btn primary radius">수정하기</button><br><br><br>
            </div>

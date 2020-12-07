@@ -3,9 +3,11 @@ package com.kh.ee.user.lesson.model.dao;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.vo.Lesson;
@@ -16,8 +18,6 @@ import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.report.model.vo.Report;
 import com.kh.ee.user.review.model.vo.Review;
 import com.kh.ee.user.tutor.model.vo.Tutor;
-
-import oracle.net.aso.s;
 
 @Repository
 public class LessonDao {
@@ -49,12 +49,23 @@ public class LessonDao {
 	public int selectListCount(SqlSessionTemplate ss) {
 		return ss.selectOne("lessonMapper.selectListCount");
 	}
-
+	
+	/*
 	//상세페이지에서 보여질 커뮤니티 리스트(학천)
 	public ArrayList<Reply> selectReply(int lessonNo, SqlSessionTemplate ss) {
 		
 		return (ArrayList)ss.selectList("lessonMapper.selectReply", lessonNo);
 	}
+	*/
+	public ArrayList<Reply> selectReply(int lessonNo, PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit); 
+		
+		return (ArrayList)ss.selectList("lessonMapper.selectReply",lessonNo,rowBounds);
+	}
+
 	
 	public ArrayList<Curriculum> selectCurrList(int lessonNo, SqlSessionTemplate ss) {
 		ArrayList<Curriculum> cList = (ArrayList)ss.selectList("lessonMapper.selectCurrList", lessonNo); 

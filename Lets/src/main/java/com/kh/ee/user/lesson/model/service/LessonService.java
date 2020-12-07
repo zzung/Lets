@@ -3,6 +3,7 @@ package com.kh.ee.user.lesson.model.service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.kh.ee.common.model.vo.PageInfo;
 import com.kh.ee.user.curriculum.model.vo.Curriculum;
 import com.kh.ee.user.curriculum.model.vo.Video;
 import com.kh.ee.user.lesson.model.vo.Lesson;
@@ -27,7 +28,8 @@ public interface LessonService {
 	Tutor selectTutorInfo(int lessonNo); 
 	int selectListCount();
 	//ajax(학천)
-	ArrayList<Reply> selectReply(int lessonNo); 
+	//ArrayList<Reply> selectReply(int lessonNo); 
+	ArrayList<Reply> selectReply(int lessonNo, PageInfo pi);
 	int insertReply(Reply r);
 	int deleteReply(int replyNo);
 	int updateReply(Reply r);
@@ -86,6 +88,7 @@ public interface LessonService {
 	//int insertMemVideo(ArrayList<Video> vList);
 
 	int insertMemVideo(Map<String, Object> map);
+
 
 
 
