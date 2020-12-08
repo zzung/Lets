@@ -117,7 +117,7 @@
 	<result column="mem_no" property="memNo"/>
 </resultMap>
 
-<select id="selectApproveLessonList" resultMap="lessonResultSet" >
+<select id="selectApproveLessonList" resultMap="lessonResultSet" parameterType="_int">
 	select
 	       lesson_no
 	     , lesson_title
@@ -132,7 +132,7 @@
 	    
 </select>
 
-<select id="selectApproveStatusList" resultMap="lessonResultSet" >
+<select id="selectApproveStatusList" resultMap="lessonResultSet" parameterType="_int">
 	select
 	       lesson_no
 	     , lesson_title
