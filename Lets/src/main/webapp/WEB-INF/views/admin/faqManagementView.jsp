@@ -53,7 +53,7 @@
 							<td>${f.faqCategory }</td>
 							<td>${f.faqStatus }</td>
 							<td>
-								<a href="supportFaqDetail.su?faqNo=${f.faqNo}">
+								<a href="supportFaqDetail.su?faqNo=${f.faqNo}" target="_blank">
 									${f.faqTitle }
 								</a>
 							
