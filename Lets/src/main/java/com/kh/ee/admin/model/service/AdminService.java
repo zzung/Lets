@@ -72,7 +72,7 @@ public interface AdminService {
 	int blacklistMgmtCountList();
 	ArrayList<Member> blacklistMgmtList(PageInfo pi);
 	
-	//회원관리 검색시 나올 갯수/검색
+	//블랙 관리 검색시 나올 갯수/검색
 	int searchBlacklistMgmtCount(SearchCondition sc);
 	ArrayList<Member> searchBlacklistMgmtList(SearchCondition sc, PageInfo pi);
 	
@@ -80,7 +80,7 @@ public interface AdminService {
 	int inquiryMgmtCountList();
 	ArrayList<Inquiry> inquiryMgmtList(PageInfo pi);
 	
-	//회원관리 검색시 나올 갯수/검색
+	//문의 검색시 나올 갯수/검색
 	int searchInquiryMgmtCount(SearchCondition sc);
 	ArrayList<Inquiry> searchInquiryMgmtList(SearchCondition sc, PageInfo pi);
 	
@@ -90,6 +90,10 @@ public interface AdminService {
 	//신고 관리 페이지 select 문(성연)
 	int reportMgmtCountList();
 	ArrayList<Report> reportMgmtList(PageInfo pi);
+	
+	//문의 검색시 나올 갯수/검색
+	int searchReportMgmtCount(SearchCondition sc);
+	ArrayList<Report> searchReportMgmtList(SearchCondition sc, PageInfo pi);
 	
 	//공지사항 관리 페이지 select 문(성연)
 	int noticeMgmtCountList();

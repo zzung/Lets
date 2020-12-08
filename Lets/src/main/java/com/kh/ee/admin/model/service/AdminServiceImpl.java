@@ -174,15 +174,6 @@ public class AdminServiceImpl implements AdminService{
 		return ad.searchBlacklistMgmtList(sc,pi,ss);
 	}
 	
-	//블랙리스트 관리 검색시 나올 갯수/검색
-	@Override
-	public int searchInquiryMgmtCount(SearchCondition sc) {
-		return ad.searchInquiryMgmtCount(sc,ss);
-	}
-	@Override
-	public ArrayList<Inquiry> searchInquiryMgmtList(SearchCondition sc, PageInfo pi) {
-		return ad.searchInquiryMgmtList(sc,pi,ss);
-	}
 	
 	//문의 관리 페이지 select 문(성연)
 	@Override
@@ -194,16 +185,21 @@ public class AdminServiceImpl implements AdminService{
 		return ad.inquiryMgmtList(pi,ss);
 	}
 	
+	//문의 관리 검색시 나올 갯수/검색
+	@Override
+	public int searchInquiryMgmtCount(SearchCondition sc) {
+		return ad.searchInquiryMgmtCount(sc,ss);
+	}
+	@Override
+	public ArrayList<Inquiry> searchInquiryMgmtList(SearchCondition sc, PageInfo pi) {
+		return ad.searchInquiryMgmtList(sc,pi,ss);
+	}
+	
 	//inq답변 작성
 	@Override
 	public int inqAnswer(Inquiry i) {
 		return ad.inqAnswer(i, ss);
 	}
-	
-	
-	
-	
-	
 	
 	//신고 관리 페이지 select 문(성연)
 	@Override
@@ -213,6 +209,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ArrayList<Report> reportMgmtList(PageInfo pi) {
 		return ad.reportMgmtList(pi,ss);
+	}
+	
+	//신고 관리 검색시 나올 갯수/검색
+	@Override
+	public int searchReportMgmtCount(SearchCondition sc) {
+		return ad.searchReportMgmtCount(sc,ss);
+	}
+	@Override
+	public ArrayList<Report> searchReportMgmtList(SearchCondition sc, PageInfo pi) {
+		return ad.searchReportMgmtList(sc,pi,ss);
 	}
 	
 	//공지사항 관리 페이지 select 문(성연)

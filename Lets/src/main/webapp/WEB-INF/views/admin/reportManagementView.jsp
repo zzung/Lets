@@ -23,12 +23,12 @@
 							<!-- 분류 버튼 추가 자리 -->
 						</div>
 						<div align="right">
-							<form action="searchInquiryMgmt.ad">
+							<form action="searchReportMgmt.ad">
 								<input type="hidden" name="currentPage" value="1"> 
 								<select name="condition" style="height: 30px;">
 									<option value="nickname">신고자</option>
 									<option value="reportType">신고사유</option>
-									<option value="inqTitle">처리상태</option>
+									<option value="status">처리상태</option>
 								</select>
 		                       	<input type="text" name="keyword" value="${keyword}">
 		                   		<button type="submit" class="btn btn-default">검색</button>
@@ -41,7 +41,7 @@
 						<tr>
 							<th width="50px" height="40px">번호</th>
 							<th width="140px">신고자</th>
-							<th width="90px">신고사유</th>
+							<th width="200px">신고사유</th>
 							<th width="220px">댓글 내용(상세조회) </th>
 							<th width="120px">신고일</th>
 							<th width="90px">처리상태</th>
