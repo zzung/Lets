@@ -23,11 +23,7 @@ public class MemPayDao {
 	}
 	
 	public int updateDelivery(SqlSessionTemplate ss, MemPay mp) {
-		System.out.println(mp);
-		int result = ss.update("memPayMapper.updateDelivery", mp);
-		
-		System.out.println("result결과값: " + result);
-		return result;
+		return ss.update("memPayMapper.updateDelivery", mp);
 	}
 	
 	public int selectListCount(SqlSessionTemplate ss, int memNo) {
