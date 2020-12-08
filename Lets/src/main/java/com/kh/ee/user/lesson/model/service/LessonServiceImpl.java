@@ -277,6 +277,11 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.insertlessonNo(ss);
 	}
 
+	@Override
+	public int selectSeqNo() {
+		return lDao.selectSeqNo(ss);
+	}
+
 
 
 

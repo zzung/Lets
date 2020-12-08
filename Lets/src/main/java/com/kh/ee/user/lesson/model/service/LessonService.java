@@ -88,6 +88,8 @@ public interface LessonService {
 	//int insertMemVideo(ArrayList<Video> vList);
 
 	int insertMemVideo(Map<String, Object> map);
+	
+	int selectSeqNo();
 
 
 

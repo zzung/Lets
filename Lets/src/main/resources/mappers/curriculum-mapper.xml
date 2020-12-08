@@ -281,23 +281,32 @@
 		 ]]> 
  	</select>
  	
+ 	<select id="selectSeqNo" resultType="_int">
+ 		select seq_cur_no.nextval from dual
+ 	</select>
+ 	
  	<insert id="insertCurriculum" parameterType="Curriculum">
  		insert
- 		  into curriculum
- 		  (
- 		  	   curriculum_no
- 		  	 , curriculum_cont
- 		  	 , lesson_no
- 		  	 , cur_level
- 		  )
- 		values
- 		  (
- 		       seq_cur_no.nextval
- 		     , #{curriculumCont}
- 		     , #{lessonNo}
- 		     , #{curLevel}
- 		  )  
+		  into curriculum
+		     (
+		       curriculum_no
+		     , curriculum_cont
+		     , lesson_no
+		     , ref_cur_no
+		     , cur_level
+		     , status
+		     )
+		values
+		     (
+		       #{curriculumNo}
+		     , #{curriculumCont}
+		     , #{lessonNo}
+		     , #{refCurNo}
+		     , #{curLevel}
+		     , 'Y'
+		     )
  	</insert>
+ 	
  	<insert id="insertVideo" parameterType="Video">
  		insert
  		  into video

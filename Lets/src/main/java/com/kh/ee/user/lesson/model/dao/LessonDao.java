@@ -241,5 +241,9 @@ public class LessonDao {
 	public int insertlessonNo(SqlSessionTemplate ss) {
 		return ss.selectOne("lessonMapper.insertlessonNo");
 	}
+	
+	public int selectSeqNo(SqlSessionTemplate ss) {
+		return ss.selectOne("curriculumMapper.selectSeqNo");
+	}
 
 }
