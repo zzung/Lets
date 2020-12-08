@@ -144,6 +144,20 @@ public class AdminServiceImpl implements AdminService{
 		return ad.memberMgmtList(pi,ss);
 	}
 	
+	//회원관리 검색시 나올 갯수/검색
+	@Override
+	public int searchMemberMgmtCount(SearchCondition sc) {
+		return ad.searchMemberMgmtCount(sc,ss);
+	}
+	@Override
+	public ArrayList<Member> searchMemberMgmtList(SearchCondition sc, PageInfo pi) {
+		return ad.searchMemberMgmtList(sc,pi,ss);
+	}
+	
+	
+	
+	
+	
 	//블랙 관리 페이지 select 문(성연)
 	@Override
 	public int blacklistMgmtCountList() {

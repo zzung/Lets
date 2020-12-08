@@ -18,7 +18,7 @@
 				
 				<div class="welcome" align="center" style="width:1030px;">
 					<div align="right">
-						<form action="searchClassMgmt.ad">
+						<form action="searchMemberMgmt.ad">
 							<input type="hidden" name="currentPage" value="1"> 
 							<select name="condition" style="height: 30px;">
 								<option value="memName">이름</option>
@@ -41,7 +41,7 @@
 							<th width="80px">회원 분류</th>
 							<th width="80px">이름</th>
 							<th width="150px">닉네임</th>
-							<th width="220px">이메일</th>
+							<th width="220px">아이디</th>
 							<th width="110px">회원 상세조회</th>
 						</tr>
 						<c:forEach var="m" items="${list}" varStatus="status">
@@ -216,7 +216,7 @@
 											<li><a href="memberManagement.ad?currentPage=${p}">${p}</a></li>
 										</c:when>
 										<c:otherwise>
-											<c:url var="searchUrl" value="searchClassMgmt.ad">
+											<c:url var="searchUrl" value="searchMemberMgmt.ad">
 												<c:param name="currentPage" value="${p }"/>
 												<c:param name="condition" value="${condition }" />
 												<c:param name="keyword" value="${keyword }" />

@@ -64,6 +64,11 @@ public interface AdminService {
 	int memberMgmtCountList();
 	ArrayList<Member> memberMgmtList(PageInfo pi);
 	
+	//회원관리 검색시 나올 갯수/검색
+	int searchMemberMgmtCount(SearchCondition sc);
+	ArrayList<Member> searchMemberMgmtList(SearchCondition sc, PageInfo pi);
+
+
 	//블랙 관리 페이지 select 문(성연)
 	int blacklistMgmtCountList();
 	ArrayList<Member> blacklistMgmtList(PageInfo pi);
