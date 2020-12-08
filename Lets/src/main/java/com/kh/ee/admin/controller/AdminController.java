@@ -74,7 +74,7 @@ public class AdminController {
 	public String classManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.classMgmtCountList();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		ArrayList<Lesson> list = as.classMgmtList(pi);
 		
 		model.addAttribute("list",list);
@@ -123,7 +123,7 @@ public class AdminController {
 		
 		int listCount = as.searchClassMgmtCount(sc);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		ArrayList<Lesson> list = as.searchClassMgmtList(sc,pi); 
 		
 		model.addAttribute("pi",pi);
@@ -140,10 +140,9 @@ public class AdminController {
 	public String classPayment(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.classPaymentListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);		
 		ArrayList<MemPay> mp = as.classPaymentList(pi);
-		
+
 		model.addAttribute("mp",mp); 
 		model.addAttribute("pi",pi);
 		
@@ -177,7 +176,7 @@ public class AdminController {
 		
 		int listCount = as.searchPaymentMgmtCount(sc);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		ArrayList<MemPay> mp = as.searchPaymentMgmtList(sc,pi); 
 		
 		model.addAttribute("pi",pi);
@@ -194,7 +193,7 @@ public class AdminController {
 	public String saleManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.selectListCount(); 
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Member> m = as.selectDiscountList(pi);
 		
@@ -230,7 +229,7 @@ public class AdminController {
 		
 		int listCount = as.searchDiscountCount(sc);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		ArrayList<Member> m = as.searchDiscountList(sc,pi); 
 		
 		model.addAttribute("pi",pi);
@@ -311,49 +310,6 @@ public class AdminController {
 		return "admin/blacklistManagementView";		
 	}
 	
-	//@Auth(role = Role.ADMIN)
-	@RequestMapping("searchInquiryMgmt.ad")
-	public String searchInquiryMgmt(String condition, String keyword, int currentPage, Model model) {
-		
-		SearchCondition sc = new SearchCondition(); 
-		
-		switch(condition) {
-		case "nickname" : sc.setNickname(keyword); break;
-		case "inqType" : sc.setInqType(keyword); break;
-		case "inqTitle" : sc.setInqTitle(keyword);
-		
-		}
-		
-		int listCount = as.searchInquiryMgmtCount(sc);
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		ArrayList<Inquiry> list = as.searchInquiryMgmtList(sc,pi); 
-		
-		model.addAttribute("pi",pi);
-		model.addAttribute("list",list);
-		model.addAttribute("condition",condition);
-		model.addAttribute("sc",sc);
-		model.addAttribute("keyword",keyword);
-		
-		return "admin/inquiryManagementView";		
-	}
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -390,7 +346,34 @@ public class AdminController {
 	}
 	
 	
-	
+
+	//@Auth(role = Role.ADMIN)
+	@RequestMapping("searchInquiryMgmt.ad")
+	public String searchInquiryMgmt(String condition, String keyword, int currentPage, Model model) {
+		
+		SearchCondition sc = new SearchCondition(); 
+		
+		switch(condition) {
+		case "nickname" : sc.setNickname(keyword); break;
+		case "inqType" : sc.setInqType(keyword); break;
+		case "inqTitle" : sc.setInqTitle(keyword);
+		
+		}
+		
+		int listCount = as.searchInquiryMgmtCount(sc);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Inquiry> list = as.searchInquiryMgmtList(sc,pi); 
+		
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
+		model.addAttribute("condition",condition);
+		model.addAttribute("sc",sc);
+		model.addAttribute("keyword",keyword);
+		
+		return "admin/inquiryManagementView";		
+	}
+
 	//@Auth(role = Role.ADMIN)
 	@RequestMapping("reportManagement.ad")
 	public String reportManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
@@ -404,6 +387,38 @@ public class AdminController {
 		
 		return "admin/reportManagementView";
 	}
+	
+	//@Auth(role = Role.ADMIN)
+		@RequestMapping("searchReportMgmt.ad")
+		public String searchReportMgmt(String condition, String keyword, int currentPage, Model model) {
+			
+			SearchCondition sc = new SearchCondition(); 
+			
+			switch(condition) {
+			case "nickname" : sc.setNickname(keyword); break;
+			case "reportType" : sc.setReportType(keyword); break;
+			case "status" : sc.setStatus(keyword);
+			
+			}
+			
+			int listCount = as.searchReportMgmtCount(sc);
+			
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+			ArrayList<Report> list = as.searchReportMgmtList(sc,pi); 
+			
+			model.addAttribute("pi",pi);
+			model.addAttribute("list",list);
+			model.addAttribute("condition",condition);
+			model.addAttribute("sc",sc);
+			model.addAttribute("keyword",keyword);
+			
+			return "admin/reportManagementView";		
+		}
+
+	
+	
+	
+	
 	
 	//@Auth(role = Role.ADMIN)
 	@RequestMapping("noticeManagement.ad")

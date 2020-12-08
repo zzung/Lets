@@ -26,5 +26,6 @@ public class SearchCondition {
 	private String inqType;
 	private String inqTitle;
 	
-	
+	private String reportType;
+	private String status;
 }

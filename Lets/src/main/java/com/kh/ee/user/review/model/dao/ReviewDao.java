@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.review.model.vo.Review;
 
@@ -52,7 +53,7 @@ public class ReviewDao {
 		return ss.update("reviewMapper.deleteReviewReply",reviewNo);
 	}
 
-	public Review selectNumber(int lessonNo, SqlSessionTemplate ss) {
+	public Lesson selectNumber(int lessonNo, SqlSessionTemplate ss) {
 		return ss.selectOne("reviewMapper.selectNumber",lessonNo);
 	}
 

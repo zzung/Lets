@@ -145,7 +145,8 @@
 <update id="discountSet" parameterType="Lesson">
 	update
 	       lesson
-	   set lesson_no = #{lessonNo}
+	   set 
+	   	   discount_period = #{discountPeriod}
 	     , discount = #{discount}
 	     , disc_status = '적용'
 	 where lesson_no = #{lessonNo}
@@ -578,27 +579,46 @@
 </select>
 
 
+<select id="searchReportMgmtCount" parameterType="SearchCondition" resultType="_int">
+	select 
+	       count(*)
+	  from report re
+	  join member m on (re.mem_no = m.mem_no)
+	 where m.report_count > 1
+	 <choose>
+	 	<when test="nickname != null">
+	 		and m.nickname like '%' || #{nickname} || '%'
+	 	</when>
+	 	<when test="reportType != null">
+	 		and re.report_type like '%' || #{reportType} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and re.status like '%' || #{status} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<select id="searchReportMgmtList" parameterType="SearchCondition" resultMap="reportResultSet">
+	select 
+          	m.mem_no
+	        , re.report_type
+	        , re.status
+	        , m.nickname
+	     from report re
+	     join member m on (re.mem_no = m.mem_no)
+	 	where 
+	 <choose>
+	 	<when test="nickname != null">
+	 		 m.nickname like '%' || #{nickname} || '%'
+	 	</when>
+	 	<when test="reportType != null">
+	 		 re.report_type like '%' || #{reportType} || '%'
+	 	</when>
+	 	<otherwise>
+	 		 re.status like '%' || #{status} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
 
 
 
@@ -661,15 +681,6 @@
 	     , re_status = '완료'
 	 where inq_no = #{inqNo}
 </update>
-
-
-
-
-
-
-
-
-
 
 
 <select id="selectReportListCount" resultType="_int">

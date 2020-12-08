@@ -24,11 +24,15 @@
 	<result column="reply_type" property="replyType"/>
 	<result column="total_no" property="totalNo" />
 </resultMap>
-  
- <select id="selectNumber" parameterType="_int" resultMap="review">
+ 
+<resultMap id="lessonResultSet" type="Lesson">
+	<result column="lesson_no" property="lessonNo" />
+</resultMap>
+
+ <select id="selectNumber" parameterType="_int" resultMap="lessonResultSet">
  	select distinct
 	       lesson_no
-	  from review
+	  from lesson
 	 where lesson_no = #{lessonNo}
  </select>
  

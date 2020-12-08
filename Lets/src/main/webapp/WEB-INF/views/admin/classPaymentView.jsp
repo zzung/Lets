@@ -92,7 +92,7 @@
 						function paymentInquiry(e){
 							var name = $(e).data("name");
 							var type = $(e).data("type");
-							var rePayment = $(e).data("payment");
+							var rePayment = $(e).data("repayment");
 							var date = $(e).data("date");
 							
 							 $("#modalName").text(name);

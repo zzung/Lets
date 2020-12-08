@@ -174,28 +174,17 @@ public class LessonController {
 		return "user/lesson/classDetailView"; 
 	}
 	
-	/*
-	//상세페이지 커뮤니니티(학천)
 	@ResponseBody
 	@RequestMapping(value="selectReplyList.le", produces="application/json; charset=utf-8")
-	public String selectReplyList(int lessonNo) {
-		ArrayList<Reply> list = lService.selectReply(lessonNo); 
-
-		return new Gson().toJson(list);
-	}
-	*/
-	
-	@ResponseBody
-	@RequestMapping(value="selectReplyList.le", produces="application/json; charset=utf-8")
-	public String selectReplyList(@RequestParam(value="currentPage",defaultValue="1") int currentPage, int lessonNo) {
+	public String selectReplyList(@RequestParam(value="currentPage",defaultValue="1") int currentPage, int totalNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int pageLimit = 5; 
 		int boardLimit = 5;
-		int listCount = lService.selectReplyCount(lessonNo); 
+		int listCount = lService.selectReplyCount(totalNo); 
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
-		ArrayList<Reply> list = lService.selectReply(lessonNo,pi);
+		ArrayList<Reply> list = lService.selectReply(totalNo,pi);
 		
 		map.put("pi",pi);
 		map.put("list",list); 

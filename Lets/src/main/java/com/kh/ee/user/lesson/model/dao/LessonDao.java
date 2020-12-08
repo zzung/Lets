@@ -49,21 +49,18 @@ public class LessonDao {
 	public int selectListCount(SqlSessionTemplate ss) {
 		return ss.selectOne("lessonMapper.selectListCount");
 	}
-	
-	/*
-	//상세페이지에서 보여질 커뮤니티 리스트(학천)
-	public ArrayList<Reply> selectReply(int lessonNo, SqlSessionTemplate ss) {
-		
-		return (ArrayList)ss.selectList("lessonMapper.selectReply", lessonNo);
-	}
-	*/
-	public ArrayList<Reply> selectReply(int lessonNo, PageInfo pi, SqlSessionTemplate ss) {
+
+	public ArrayList<Reply> selectReply(int totalNo, PageInfo pi, SqlSessionTemplate ss) {
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset,limit); 
 		
-		return (ArrayList)ss.selectList("lessonMapper.selectReply",lessonNo,rowBounds);
+		return (ArrayList)ss.selectList("lessonMapper.selectReply",totalNo,rowBounds);
+	}
+
+	public int selectReplyCount(int totalNo, SqlSessionTemplate ss) {
+		return ss.selectOne("lessonMapper.selectReplyCount",totalNo);
 	}
 
 	
@@ -243,10 +240,6 @@ public class LessonDao {
 
 	public int insertlessonNo(SqlSessionTemplate ss) {
 		return ss.selectOne("lessonMapper.insertlessonNo");
-	}
-
-	public int selectReplyCount(int lessonNo, SqlSessionTemplate ss) {
-		return ss.selectOne("lessonMapper.selectReplyCount",lessonNo);
 	}
 
 }

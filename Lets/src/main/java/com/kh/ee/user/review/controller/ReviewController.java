@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.review.model.service.ReviewService;
 import com.kh.ee.user.review.model.vo.Review;
@@ -22,9 +23,11 @@ public class ReviewController {
 	//후기 더보기 플러스 버튼 클릭시 적용
 	@RequestMapping("showMore.rev")
 	public String showMore(int lessonNo, Model model) {
-		Review r = revService.selectNumber(lessonNo);
+		Lesson l = revService.selectNumber(lessonNo);
 		
-		model.addAttribute("r",r);
+		System.out.println("l:" + l.getLessonNo());
+		
+		model.addAttribute("l",l);
 		
 		return "user/lesson/reviewDetail";
 	}

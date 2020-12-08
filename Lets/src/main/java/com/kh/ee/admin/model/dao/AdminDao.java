@@ -203,7 +203,7 @@ public class AdminDao {
 		return (ArrayList)ss.selectList("adminMapper.inquiryMgmtList",null,rowBounds);
 	}
 	
-	//블랙리스트 관리 검색시 나올 갯수/검색
+	//문의 관리 검색시 나올 갯수/검색
 	public int searchInquiryMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
 		return ss.selectOne("adminMapper.searchInquiryMgmtCount",sc);
 	}
@@ -232,6 +232,18 @@ public class AdminDao {
 		return (ArrayList)ss.selectList("adminMapper.reportMgmtList",null,rowBounds);
 	}
 	
+	//신고 관리 검색시 나올 갯수/검색
+		public int searchReportMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
+			return ss.selectOne("adminMapper.searchReportMgmtCount",sc);
+		}
+		public ArrayList<Report> searchReportMgmtList(SearchCondition sc, PageInfo pi, SqlSessionTemplate ss) {
+			int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+			int limit = pi.getBoardLimit();
+			
+			RowBounds rowBounds = new RowBounds(offset,limit);
+			return (ArrayList)ss.selectList("adminMapper.searchReportMgmtList",sc,rowBounds);
+		}
+		
 	//공지사항 관리 페이지 select 문(성연)
 	public int noticeMgmtCountList(SqlSessionTemplate ss) {
 		return ss.selectOne("adminMapper.selectNoticeListCount");

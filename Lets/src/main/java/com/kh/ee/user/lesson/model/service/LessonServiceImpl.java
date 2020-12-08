@@ -73,17 +73,14 @@ public class LessonServiceImpl implements LessonService{
 	}
 	
 	@Override
-	public ArrayList<Reply> selectReply(int lessonNo, PageInfo pi) {
-		return lDao.selectReply(lessonNo,pi,ss);
+	public ArrayList<Reply> selectReply(int totalNo, PageInfo pi) {
+		return lDao.selectReply(totalNo,pi,ss);
 	}
-	/*
-	//ajax 커뮤니트 list 불러오기 (학천)
 	@Override
-	public ArrayList<Reply> selectReply(int lessonNo) {
-		
-		return lDao.selectReply(lessonNo,ss);
+	public int selectReplyCount(int totalNo) {
+		return lDao.selectReplyCount(totalNo,ss);
 	}
-	*/
+
 	//ajax 커뮤니티 댓글 작성(학천)
 	@Override
 	public int insertReply(Reply r) {
@@ -276,21 +273,10 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.insertMemVideo(map,ss);
 	}
 	
-	/*
-	@Override
-	public int insertMemVideo(ArrayList<Video> vList) {
-		return lDao.insertMemVideo(vList,ss);
-	}
-	*/
-
 	public int insertlessonNo() {
 		return lDao.insertlessonNo(ss);
 	}
 
-	@Override
-	public int selectReplyCount(int lessonNo) {
-		return lDao.selectReplyCount(lessonNo,ss);
-	}
 
 
 

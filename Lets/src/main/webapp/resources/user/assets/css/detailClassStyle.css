@@ -5859,8 +5859,8 @@ left
 .comments-area .btn-reply {
 	background-color: transparent;
 	color: #888888;
-	padding: 2px 2px;
-	font-size: 12px;
+	padding: 2px 2px !important;
+	font-size: 12px !important;
 	font-weight: 400;
 	display: block;
 }
@@ -7576,14 +7576,14 @@ input[name=reportType]:checked+label {
 
 .desc1 {
 	background: #eee;
-	margin-top: -20px;
+	margin-top: -40px;
 	padding: 0 20px;
 }
 
 .comments-area>.replyArea .thumb1 img {
 	width: 50px;
 	padding: 0 15px;
-	margin-top: 10px;
+	margin-top: -40px;
 	margin-right: 10px;
 }
 

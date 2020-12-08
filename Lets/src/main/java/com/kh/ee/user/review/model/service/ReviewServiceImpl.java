@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.review.model.dao.ReviewDao;
 import com.kh.ee.user.review.model.vo.Review;
@@ -23,7 +24,7 @@ public class ReviewServiceImpl implements ReviewService{
 
 	
 	@Override
-	public Review selectNumber(int lessonNo) {
+	public Lesson selectNumber(int lessonNo) {
 		return revDao.selectNumber(lessonNo, ss);
 	}
 	

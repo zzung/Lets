@@ -28,8 +28,8 @@ public interface LessonService {
 	Tutor selectTutorInfo(int lessonNo); 
 	int selectListCount();
 	//ajax(학천)
-	//ArrayList<Reply> selectReply(int lessonNo); 
-	ArrayList<Reply> selectReply(int lessonNo, PageInfo pi);
+	ArrayList<Reply> selectReply(int totalNo, PageInfo pi);
+	int selectReplyCount(int totalNo);
 	int insertReply(Reply r);
 	int deleteReply(int replyNo);
 	int updateReply(Reply r);
@@ -89,7 +89,6 @@ public interface LessonService {
 
 	int insertMemVideo(Map<String, Object> map);
 
-	int selectReplyCount(int lessonNo);
 
 
 
