@@ -84,12 +84,14 @@
 	      , l.pay_total
           , l.pay_total * count(mp.mem_no) salary_total
 	      , s.account
+	      , r.star
 	   from lesson l
        left join member m on (l.mem_no = m.mem_no)
 	   left join salary s on (l.lesson_no = s.lesson_no)
        left join mem_pay mp on (l.lesson_no = mp.lesson_no)
+       left join review r on (l.lesson_no = r.lesson_no)
 	   where l.lesson_status = '승인'
-	   group by l.lesson_no, l.lesson_title,l.like_count,s.fee,s.account, m.mem_no, l.pay_total, l.pay_total * (s.fee/100)
+	   group by l.lesson_no, l.lesson_title,l.like_count,s.fee,s.account, m.mem_no,r.star, l.pay_total, l.pay_total * (s.fee/100)
 	   having m.mem_no = #{memNo}
 	 order by lesson_no desc
 </select>

@@ -58,6 +58,7 @@
     }
     .titleName th{font-size:18px}
     .titleName tr{background:lightgray}
+    #outComeTable tr {height:20px}
 </style>
 </head>
 <body>
@@ -214,11 +215,8 @@
 			                    			<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }" >삭제</button>
 				                    	</c:if>
 			                    	</c:when>
-			                    	<c:when test="${sl.lessonStatus eq '거절'}">
-			                    		<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }" onclick="delBtn${slModal.index}();">삭제</button>
-			                    	</c:when>
 			                    	<c:otherwise>
-			                    	
+			                    		<button class="genric-btn primary-border btn-sm" style="font-size: 13px;" id="lessonDelBtn${slModal.index }" onclick="delBtn${slModal.index}();">삭제</button>
 			                    	</c:otherwise>
 			                    </c:choose>
 			                </td> 
@@ -527,12 +525,6 @@
 	       	}
 	       </script>
         
-        <script>
-        	$(".page-link").on("click",function(){
-        		var page = $(".page-link");
-        		page.css("hover:")
-        	})
-        </script>
         <!-- 수업성과 & 정산서 -->
         <br><hr>
         <div style="color: gray; font-size: 20px; font-weight: bold; ">수업성과 & 정산서
@@ -596,6 +588,10 @@
                     	<tr>
                     		<th>신청수 : </th>
                     		<td>${ms.studentCount } 명</td>
+                    	</tr>
+                    	<tr>
+                    		<th>별점평균 : </th>
+                    		<td>${ms.star } 점</td>
                     	</tr>
                     </table>
 	            </div>
