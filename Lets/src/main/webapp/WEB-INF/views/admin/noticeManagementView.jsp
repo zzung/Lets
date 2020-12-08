@@ -24,14 +24,15 @@
 									data-target="#writeNotice" class="btn btn-default">공지 작성</button>
 						</div>
 						<div align="right">
-							<form action="">
+							<form action="searchNoticeMgmt.ad">
+								<input type="hidden" name="currentPage" value="1"> 
 								<select name="condition" style="height: 30px;">
-									<option value="title">제목</option>
-									<option value="type">분류</option>
+									<option value="noticeType">분류</option>
+									<option value="noticeTitle">공지제목</option>
 								</select>
-								<input type="text" name="keyword">
-								<button type="submit" class="btn btn-default">검색</button>
-							</form>
+		                       	<input type="text" name="keyword" value="${keyword}">
+		                   		<button type="submit" class="btn btn-default">검색</button>
+							</form> 
 						</div>
 					</div>
 					<!-- 검색 div end -->

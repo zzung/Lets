@@ -28,4 +28,12 @@ public class SearchCondition {
 	
 	private String reportType;
 	private String status;
+	
+	private String noticeType;
+	private String noticeTitle;
+	
+	private String faqCategory;
+	private String faqStatus;
+	private String faqTitle;
+	
 }

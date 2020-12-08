@@ -401,7 +401,9 @@
 	 </choose>
 </select>
 
-<!-- //////////////////////////////////////// -->
+<!-- 
+			/////////////////////////   회원관리      /////////////////////////////
+ -->
 
 <select id="selectMemListCount" resultType="_int">
 	select 
@@ -427,7 +429,6 @@
 	     order 
 	   		 by mem_no desc
 </select>
-
 
 <select id="searchMemberMgmtCount" parameterType="SearchCondition" resultType="_int">
 	select 
@@ -476,24 +477,24 @@
 	 </choose>
 </select>
 
+<!-- 
+			/////////////////////////   블랙리스트      /////////////////////////////
+ -->
 
-
-<select id="searchBlacklistMgmtCount" parameterType="SearchCondition" resultType="_int">
+<select id="selectBlacklistListCount" resultType="_int">
 	select 
 	       count(*)
-	  from member
-	  where status='Y'
-	 <choose>
-	 	<when test="memName != null">
-	 		and mem_name like '%' || #{memName} || '%'
-	 	</when>
-	 	<when test="nickname != null">
-	 		and nickname like '%' || #{nickname} || '%'
-	 	</when>
-	 	<otherwise>
-	 		and mem_id like '%' || #{memId} || '%'
-	 	</otherwise>
-	 </choose>
+	  from member m
+</select>
+
+<select id="blacklistMgmtList" parameterType="String" resultMap="memberResultSet">
+	select
+			  mem_no
+	        , mem_id
+	        , nickname
+	        , report_count
+	     from member m
+	     where m.status = 'B'
 </select>
 
 <select id="searchBlacklistMgmtList" parameterType="SearchCondition" resultMap="memberResultSet">
@@ -525,25 +526,27 @@
 	 </choose>
 </select>
 
-
-<select id="searchInquiryMgmtCount" parameterType="SearchCondition" resultType="_int">
+<select id="searchBlacklistMgmtCount" parameterType="SearchCondition" resultType="_int">
 	select 
 	       count(*)
-	  from inquiry i
-	  join member m on (m.mem_no = i.mem_no)
-	  where i.status='N'
+	  from member
+	  where status='Y'
 	 <choose>
-	 	<when test="inqType != null">
-	 		and i.inq_type like '%' || #{inqType} || '%'
+	 	<when test="memName != null">
+	 		and mem_name like '%' || #{memName} || '%'
 	 	</when>
 	 	<when test="nickname != null">
-	 		and m.nickname like '%' || #{nickname} || '%'
+	 		and nickname like '%' || #{nickname} || '%'
 	 	</when>
 	 	<otherwise>
-	 		and i.inq_title like '%' || #{inqTitle} || '%'
+	 		and mem_id like '%' || #{memId} || '%'
 	 	</otherwise>
 	 </choose>
 </select>
+
+<!-- 
+			/////////////////////////   문의관리      /////////////////////////////
+ -->
 
 <select id="searchInquiryMgmtList" parameterType="SearchCondition" resultMap="inquiryResultSet">
 	select 
@@ -578,72 +581,24 @@
 	 </choose>
 </select>
 
-
-<select id="searchReportMgmtCount" parameterType="SearchCondition" resultType="_int">
+<select id="searchInquiryMgmtCount" parameterType="SearchCondition" resultType="_int">
 	select 
 	       count(*)
-	  from report re
-	  join member m on (re.mem_no = m.mem_no)
-	 where m.report_count > 1
+	  from inquiry i
+	  join member m on (m.mem_no = i.mem_no)
+	  where i.status='N'
 	 <choose>
+	 	<when test="inqType != null">
+	 		and i.inq_type like '%' || #{inqType} || '%'
+	 	</when>
 	 	<when test="nickname != null">
 	 		and m.nickname like '%' || #{nickname} || '%'
 	 	</when>
-	 	<when test="reportType != null">
-	 		and re.report_type like '%' || #{reportType} || '%'
-	 	</when>
 	 	<otherwise>
-	 		and re.status like '%' || #{status} || '%'
+	 		and i.inq_title like '%' || #{inqTitle} || '%'
 	 	</otherwise>
 	 </choose>
 </select>
-
-<select id="searchReportMgmtList" parameterType="SearchCondition" resultMap="reportResultSet">
-	select 
-          	m.mem_no
-	        , re.report_type
-	        , re.status
-	        , m.nickname
-	     from report re
-	     join member m on (re.mem_no = m.mem_no)
-	 	where 
-	 <choose>
-	 	<when test="nickname != null">
-	 		 m.nickname like '%' || #{nickname} || '%'
-	 	</when>
-	 	<when test="reportType != null">
-	 		 re.report_type like '%' || #{reportType} || '%'
-	 	</when>
-	 	<otherwise>
-	 		 re.status like '%' || #{status} || '%'
-	 	</otherwise>
-	 </choose>
-</select>
-
-
-
-
-
-
-
-<select id="selectBlacklistListCount" resultType="_int">
-	select 
-	       count(*)
-	  from member m
-</select>
-
-<select id="blacklistMgmtList" parameterType="String" resultMap="memberResultSet">
-	select
-			  mem_no
-	        , mem_id
-	        , nickname
-	        , report_count
-	     from member m
-	     where m.status = 'B'
-</select>
-
-
-
 
 <select id="selectInquiryListCount" resultType="_int">
 	select 
@@ -683,6 +638,51 @@
 </update>
 
 
+<!-- 
+			/////////////////////////   신고 관리      /////////////////////////////
+ -->
+ 
+<select id="searchReportMgmtList" parameterType="SearchCondition" resultMap="reportResultSet">
+	select 
+          	m.mem_no
+	        , re.report_type
+	        , re.status
+	        , m.nickname
+	     from report re
+	     join member m on (re.mem_no = m.mem_no)
+	 	where 
+	 <choose>
+	 	<when test="nickname != null">
+	 		 m.nickname like '%' || #{nickname} || '%'
+	 	</when>
+	 	<when test="reportType != null">
+	 		 re.report_type like '%' || #{reportType} || '%'
+	 	</when>
+	 	<otherwise>
+	 		 re.status like '%' || #{status} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
+
+<select id="searchReportMgmtCount" parameterType="SearchCondition" resultType="_int">
+	select 
+	       count(*)
+	  from report re
+	  join member m on (re.mem_no = m.mem_no)
+	 where m.report_count > 1
+	 <choose>
+	 	<when test="nickname != null">
+	 		and m.nickname like '%' || #{nickname} || '%'
+	 	</when>
+	 	<when test="reportType != null">
+	 		and re.report_type like '%' || #{reportType} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and re.status like '%' || #{status} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
+
 <select id="selectReportListCount" resultType="_int">
 	select 
 	       count(*)
@@ -698,10 +698,16 @@
 	        , r.rep_count
 	        , r.reply_content
 	        , m.nickname
+	        , r.enroll_date
+	        , m.report_count
 	     from report re
 	     join reply r on (re.reply_no = r.reply_no)
 	     join member m on (re.mem_no = m.mem_no)
 </select>
+
+<!-- 
+			/////////////////////////   공지사항 관리      /////////////////////////////
+ -->
 
 <select id="selectNoticeListCount" resultType="_int">
 	select 
@@ -743,6 +749,10 @@
 		   , #{status}
 		  )
 </insert>
+
+<!-- 
+			/////////////////////////   FAQ 관리      /////////////////////////////
+ -->
 
 <select id="selectFaqListCount" resultType="_int">
 	select 

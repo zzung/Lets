@@ -233,16 +233,16 @@ public class AdminDao {
 	}
 	
 	//신고 관리 검색시 나올 갯수/검색
-		public int searchReportMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
-			return ss.selectOne("adminMapper.searchReportMgmtCount",sc);
-		}
-		public ArrayList<Report> searchReportMgmtList(SearchCondition sc, PageInfo pi, SqlSessionTemplate ss) {
-			int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
-			int limit = pi.getBoardLimit();
-			
-			RowBounds rowBounds = new RowBounds(offset,limit);
-			return (ArrayList)ss.selectList("adminMapper.searchReportMgmtList",sc,rowBounds);
-		}
+	public int searchReportMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.searchReportMgmtCount",sc);
+	}
+	public ArrayList<Report> searchReportMgmtList(SearchCondition sc, PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.searchReportMgmtList",sc,rowBounds);
+	}
 		
 	//공지사항 관리 페이지 select 문(성연)
 	public int noticeMgmtCountList(SqlSessionTemplate ss) {
@@ -256,6 +256,18 @@ public class AdminDao {
 		return (ArrayList)ss.selectList("adminMapper.noticeMgmtList",null,rowBounds);
 	}
 
+	//신고 관리 검색시 나올 갯수/검색
+	public int searchNoticeMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.searchNoticeMgmtCount",sc);
+	}
+	public ArrayList<Notice> searchNoticeMgmtList(SearchCondition sc, PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.searchNoticeMgmtList",sc,rowBounds);
+	}
+	
 	//공지사항 작성
 	public int insertNotice(SqlSessionTemplate sqlSession, Notice n) {
 		return sqlSession.insert("adminMapper.insertNotice", n);

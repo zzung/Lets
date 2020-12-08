@@ -103,9 +103,9 @@
 										<tr>
 											<td style="border-bottom:solid 1px;">
 												<br>
-												<div>
+												<!-- <div>
 													첨부파일:
-												</div>
+												</div> -->
 											</td>
 										</tr>
 									</table>
@@ -118,7 +118,6 @@
 										<form action="inqAnswer.ad" method="post" onsubmit="return confirm('답변을 발송하시겠습니까?')">
 											<div style="text-align:left">답변 입력</div>
 											<div>
-											<p id="modalInqNo"></p>
 												<textarea name="answerContent" style="resize:none; width: 720px; height: 80px;"></textarea>
 											</div>
 											<br>

@@ -84,6 +84,7 @@ public interface AdminService {
 	int searchInquiryMgmtCount(SearchCondition sc);
 	ArrayList<Inquiry> searchInquiryMgmtList(SearchCondition sc, PageInfo pi);
 	
+
 	//문의 답변 작성
 	int inqAnswer(Inquiry i);
 		
@@ -99,6 +100,10 @@ public interface AdminService {
 	int noticeMgmtCountList();
 	ArrayList<Notice> noticeMgmtList(PageInfo pi);
 	
+	//문의 검색시 나올 갯수/검색
+	int searchNoticeMgmtCount(SearchCondition sc);
+	ArrayList<Notice> searchNoticeMgmtList(SearchCondition sc, PageInfo pi);
+
 	//공지작성
 	int insertNotice(Notice n);
 	

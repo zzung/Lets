@@ -47,15 +47,18 @@
 							<th width="90px">처리상태</th>
 						</tr>
 						<c:forEach var="l" items="${list }" varStatus="status">
-						<input type="hidden" value="${replyNo eq 1 }">
+						<input type="hidden" name="replyNo" value="">
 						<tr>
 							<td height="40px">${status.count }</td>
 							<td>${l.nickname}</td>
 							<td>${l.reportType }</td>
 							<td>
-								<a href="#" data-toggle="modal" data-target="#reportContent1">
-								${l.replyContent }test
-								</a>
+								<span onclick="reArr(this);" data-toggle="modal" 
+								data-memno="${l.memNo}" data-nickname="${l.nickname }" data-reportcount="${l.reportCount }"
+								data-replyno="${l.replyNo}" data-enrolldate="${l.enrollDate}" data-replycontent="${l.replyContent}" 
+								data-reportno="${l.reportNo}" data-reportdate="${l.reportDate}" data-reporttype="${l.reportType}"
+								data-target="#reportContent">${l.replyContent }test</span>
+								
 							</td>
 							<td>${l.reportDate }</td>
 							<td>${l.status }</td>
@@ -64,7 +67,7 @@
 					</table>
 					
 					<!-- Modal Start -->
-					<div class="modal" id="reportContent1">
+					<div class="modal" id="reportContent">
 						<div class="modal-dialog">
 
 							<!-- Modal content -->
@@ -78,19 +81,20 @@
 									<table class="list-area" width=500px;>
 										<tr>
 											<th>작성자</th>
-											<th>신고횟수</th>
+											<th>누적신고횟수</th>
 										</tr>
 										<tr>
-											<td>닉네임1</td>
-											<td>5</td>
+										
+											<td><p id="신고된 댓글 작성자 닉네임">winter</p></td>
+											<td><p id="신고된 댓글 작성자의 누적 신고 카운트">1</p></td>
 										</tr>
 									</table>
 									<br>
 									
 									<div align="center" style="width:500px">
-										<div style="text-align:left">작성일:2020-09-30</div>
+										<div style="text-align:left">작성일:<p id="modalEnrollDate"></p></div>
 										<div style="width:500px; height: 80px; border:solid 1px; text-align:left;">
-										이 아기 멍멍아
+										<p id="modalReplyContent"></p>
 										</div>
 									</div>
 									<hr>
@@ -103,62 +107,130 @@
 											
 										</tr>
 										<tr>
-											<td>닉네임07</td>
-											<td>2020-10-02</td>
-											<td>욕설</td>
+											<td></td>
+											<td><p id="modalReportDate"></p></td>
+											<td><p id="modalReportType"></p></td>
 										</tr>
 									</table>
 									<br>
+									<button class="btn btn-default" id="approval${l.reportNo }" 
+									data-no="${l.lessonNo}" onclick="approvalClass(this);">블랙등록</button>
 									
-									<button onclick="applyBlacklist();" id="blacklistApplyBtn"
-									class="btn btn-default">블랙등록</button>
-									<button onclick="deleteReply();" id="deleteReplyBtn"
-									class="btn btn-default">댓글 삭제</button>
+									<button class="btn btn-default" id="reject${l.reportNo }" data-toggle="modal" data-target="#rejectApproval" 
+									data-no="${l.lessonNo}" onclick="rejectApprovalSet(this)">댓글삭제</button>
 									
+							
 								</div>	
 							</div>
 						</div>
 					</div>
 					<!--Modal End-->
 					
+					<script>
+						$(function(){
+							reArr(); 
+						})
+						
+						function reArr(e){
+							var memNo = $(e).data("memno");
+							var nickname = $(e).data("nickname"); 
+							var reportCount = $(e).data("reportcount");
+							var replyNo = $(e).data("replyno");
+							var enrollDate = $(e).data("enrolldate");
+							var replyContent = $(e).data("replycontent");
+							var reportNo = $(e).data("reportno");
+							var reportDate = $(e).data("reportdate");
+							var reportType = $(e).data("reporttype");
+							
+							$("#modalMemNo").text(memNo);
+							$("#modalNickname").text(nickname);
+							$("#modalReportCount").text(reportCount);
+							$("#modalReplyNo").text(replyNo);
+							$("#modalEnrollDate").text(enrollDate);
+							$("#modalReplyContent").text(replyContent);
+							$("#modalReportNo").text(reportNo);
+							$("#modalReportDate").text(reportDate);
+							$("#modalReportType").text(reportType);
+					</script>
 					<!-- 블랙등록 확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
 					<script>
-						function applyBlacklist() {
-							var num = 1;
-							var result = confirm("블랙상태로 등록 하시겠습니까??");
+						function approvalClass(e) {
+							var accept = confirm("블랙리스트로 변경하시겠습니까?");
+							var lessonNo = $(e).data("memno");
+							var str = "승인";
+							
+							console.log(lessonNo); 
+							
+							if (accept) {
+								$.ajax({
+									url:"lessonApproval.ad",
+									data:{
+										lessonNo:lessonNo
+									},
+									success:function(result){
+										if(result == "success" ){
+											alert("승인 완료되었습니다.")
+											$("#approvalArea"+lessonNo).text(str);
+											$("#approval"+lessonNo).attr("disabled",true); 
+											$("#reject"+lessonNo).attr("disabled",false);
+											
+										} else {
+											alert("승인 실패했습니다.")
+										}
+									},
+									error:function(){
+										console.log("approval class ajax fail");
+									}
+								});
 
-							if (result) {
-								var str = "등록"
-								document.getElementById("blacklistApplyBtn").disabled = true;
 							} else {
+								
 								return;
 							}
 
-							var blacklistCondition = document
-									.getElementById("blacklistCondition" + num)
-							blacklistCondition.innerHTML = "<p>" + str + "</p>"
+						}
+						
+						function rejectApprovalSet(e){
+							 $("#rejectNo").val($(e).data("no"));
+						}
+						
+						function sendRejectReason(){
+							var accept = confirm("거절 사유 작성 완료 하시겠습니까?")
+							var lessonNo = $("#rejectNo").val();
+							var rReason = $("#reportReasonArea").val();
+							var str = '거절'; 
+							
+							console.log(rReason); 
+							if(accept){
+								$.ajax({
+									url:"rejectApproval.ad",
+									data:{
+										lessonNo:lessonNo,
+										refuseReason: rReason
+									},
+									success:function(result){
+										if(result == "success"){
+											alert("거절 완료되었습니다.");
+											$("#reportReasonArea").val("");
+											$("#approvalArea"+lessonNo).text(str);
+											$("#reject"+lessonNo).attr("disabled",true);
+											$("#approval"+lessonNo).attr("disabled",false); 
+										}
+									},
+									error:function(){
+										console.log("reject approval ajax fail");
+									}
+								});
+								
+							}else{
+								return;
+							}
 						}
 					</script>
-					<!-- 블랙등록 확인 끝 -->
 					
-					<!--  확인 alert ** 컬럼별로 번호 매겨서야 한다(Condition 변경하기 위해) -->
-					<script>
-						function deleteReply() {
-							var num = 1;
-							var result = confirm("신고 댓글을 삭제하시겠습니까??");
-
-							if (result) {
-								var str = "삭제"
-								document.getElementById("deleteReply").disabled = true;
-							} else {
-								return;
-							}
-
-							var replyCondition = document
-									.getElementById("replyCondition" + num)
-							replyCondition.innerHTML = "<p>" + str + "</p>"
-						}
-					</script>
+					
+					
+					
 					<!-- 확인 끝 -->
 					
 					</div>

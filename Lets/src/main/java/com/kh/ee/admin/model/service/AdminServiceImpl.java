@@ -231,6 +231,16 @@ public class AdminServiceImpl implements AdminService{
 		return ad.noticeMgmtList(pi,ss);
 	}
 	
+	//신고 관리 검색시 나올 갯수/검색
+	@Override
+	public int searchNoticeMgmtCount(SearchCondition sc) {
+		return ad.searchNoticeMgmtCount(sc,ss);
+	}
+	@Override
+	public ArrayList<Notice> searchNoticeMgmtList(SearchCondition sc, PageInfo pi) {
+		return ad.searchNoticeMgmtList(sc,pi,ss);
+	}
+	
 	//공지 작성
 	@Override
 	public int insertNotice(Notice n) {
