@@ -67,7 +67,7 @@
     <!-- 메뉴바 넣을 공간-->
     
   <div class="myClass">
-        <p style="font-size: 25px; font-weight: bold;color: rgb(45, 48, 186);">내 수업
+        <p style="font-size: 25px; font-weight: bold;color: rgb(45, 48, 186);">내 클래스
         <hr style="border-color: rgb(73, 73, 73);">
         <br><br>
         <!-- 승인 완료된 클래스 -->
@@ -88,7 +88,7 @@
             <c:choose>
             	<c:when test="${empty aLlist }">
             		<tr>
-                		<td colspan="4" align="center">승인된 수업이 없습니다.</td>
+                		<td colspan="4" align="center">승인된 클래스가 없습니다.</td>
                 	</tr>
             	</c:when>
             	<c:otherwise>
@@ -179,7 +179,7 @@
 		    <c:choose>
             	<c:when test="${empty sLlist }">
             		<tr>
-                		<td colspan="4" align="center">등록된 수업이 없습니다.</td>
+                		<td colspan="4" align="center">등록된 클래스가 없습니다.</td>
                 	</tr>
             	</c:when>
             	<c:otherwise>
@@ -367,7 +367,7 @@
 	                <h4 class="modal-title">준비물 보내기</h4>
 	                <button type="button" class="close" data-dismiss="modal">&times;</button> 
 	            </div>
-	            <form action="delivery.tm" method="post">
+	            <form action="delivery.tm" method="post" autocomplete="off">
 	            <input type="hidden" name="memNo" id="mno"value="">
 	            <input type="hidden" name="lessonNo" id="lno" value="">    
 				   
@@ -447,12 +447,12 @@
 	       		
 	    	})
 	       	//내클래스 -> 준비물보내기 ajax
-	       	function prepareList(currentP){
+	       	function prepareList(currentPg){
 	       		$.ajax({
 	       			url:"prepareList.tm",
 	       			data:{
 	       				memNo: ${loginUser.memNo},
-	       				currentPage:currentP
+	       				currentPage:currentPg
 	       			},
 	       			success:function(hmap){
 	       				
@@ -474,11 +474,14 @@
 					        value += '<td>신청일 ' + memPay.paymentDay + '</td>' 
 					        value += '<td>'
 			                  		if(memPay.delStatus == "배송전"){
-			               	value += '<button data-toggle="modal" data-target="#deliveryR" class="genric-btn primary btn-sm" style="font-size: 13px;" data-list='+memPay.lessonPrepare+' data-memname='+memPay.memName+' data-mno=' +memPay.memNo+' data-lno='+memPay.lessonNo+ ' onclick="deliveryReady(this);">준비물 보내기</button>'
+			               	value += '<button data-toggle="modal" data-target="#deliveryR" class="genric-btn primary btn-sm" style="font-size: 13px;" data-list='+memPay.lessonPrepare+
+			               			' data-memname='+memPay.memName+' data-mno=' +memPay.memNo+' data-lno='+memPay.lessonNo+ ' onclick="deliveryReady(this);">준비물 보내기</button>'
 			                 		 }else if(memPay.delStatus == "배송중"){
-			               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-prelist='+memPay.lessonPrepare+' data-name='+memPay.memName+' data-delno='+memPay.delNo+' data-delname='+memPay.delName+' onclick="deliveryGo(this);">배송중</button>'
+			               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-prelist='+memPay.lessonPrepare+
+			               			' data-name='+memPay.memName+' data-delno='+memPay.delNo+' data-delname='+memPay.delName+' onclick="deliveryGo(this);">배송중</button>'
 			                  		}else{
-			               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-prelist='+memPay.lessonPrepare+' data-name='+memPay.memName+' data-delno='+memPay.delNo+' data-delname='+memPay.delName+' onclick="deliveryGo(this);">배송완료</button>' 
+			               	value += '<button data-toggle="modal" class="genric-btn primary-border btn-sm" data-target="#deliveryF" style="font-size: 13px;" data-prelist='+memPay.lessonPrepare+
+			               			' data-name='+memPay.memName+' data-delno='+memPay.delNo+' data-delname='+memPay.delName+' onclick="deliveryGo(this);">배송완료</button>' 
 			                 		 }
 							value += '</td></tr>'
 		       				value += '</tbody>';
@@ -486,30 +489,29 @@
 	       				})
 						$(".prepareTable > #lessonPreTable").html(value);
 						
-						var listCount = hmap.pi.listCount;
-					    var currentPage = hmap.pi.currentPage;
-					    var startPage = hmap.pi.startPage;
-					    var endPage = hmap.pi.endPage;
-					    var maxPage = hmap.pi.maxPage;
-					    var Previous = hmap.pi.currentPage-1;
+						//var listCnt = hmap.pi.listCount;
+					    var current = hmap.pi.currentPage;
+					    var start = hmap.pi.startPage;
+					    var end = hmap.pi.endPage;
+					    var max = hmap.pi.maxPage;
 			
 						 	  result += '<ul class="pagination">'
-					  	   if(currentP != 1) {
-                              result += '<li class="page-item"><a class="page-link" onclick="prepareList( '+ (currentPage-1) +')">Previous</a></li>'
+					  	   if(current != 1) {
+                              result += '<li class="page-item"><a class="page-link" onclick="prepareList( '+ (current-1) +')">Previous</a></li>'
                            }else{
-                              result += '<li class="page-item disabled"><a class="page-link" onclick="prepareList( '+ (currentPage-1) +')">Previous</a></li>'
+                              result += '<li class="page-item disabled"><a class="page-link" onclick="prepareList( '+ (current-1) +')">Previous</a></li>'
                            }
-						for(var p=startPage; p<=endPage; p++){
-                              if(currentP != p){
+						for(var p=start; p<=end; p++){
+                              if(current != p){
                                  result += '<li class="page-item"><a class="page-link" onclick="prepareList( '+ p +')">'+ p+ '</a></li>'
                               }else{
                                  result += '<li class="page-item disabled"><a class="page-link" onclick="prepareList( '+ p +')">'+p+'</a></li>'
                               }
 						}
-                            if(currentP == maxPage){
-                               result += '<li class="page-item disabled"><a class="page-link" onclick="prepareList( '+ (currentPage+1) +')">Next</a></li>'
+                            if(current == max){
+                               result += '<li class="page-item disabled"><a class="page-link" onclick="prepareList( '+ (current+1) +')">Next</a></li>'
                             }else{
-                               result += '<li class="page-item"><a class="page-link" onclick="prepareList( '+ (currentPage+1) +')">Next</a></li>'
+                               result += '<li class="page-item"><a class="page-link" onclick="prepareList( '+ (current+1) +')">Next</a></li>'
                                
                             }
 				
@@ -527,7 +529,7 @@
         
         <!-- 수업성과 & 정산서 -->
         <br><hr>
-        <div style="color: gray; font-size: 20px; font-weight: bold; ">수업성과 & 정산서
+        <div style="color: gray; font-size: 20px; font-weight: bold; ">클래스성과 & 정산서
 	        <br>
 	       <!-- 
 	        <div class="single-element-widget mt-30" >
@@ -590,8 +592,8 @@
                     		<td>${ms.studentCount } 명</td>
                     	</tr>
                     	<tr>
-                    		<th>별점평균 : </th>
-                    		<td>${ms.star } 점</td>
+                    		<th>수업유형 : </th>
+                    		<td>${ms.lessonType }</td>
                     	</tr>
                     </table>
 	            </div>
@@ -636,7 +638,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button> 
             </div>
 
-            <form action="insertSalary.ts" method="post">
+            <form action="insertSalary.ts" method="post" autocomplete="off">
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <table align="center" class="modalTable">

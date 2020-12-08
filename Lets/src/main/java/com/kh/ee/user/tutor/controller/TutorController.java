@@ -196,6 +196,7 @@ public class TutorController {
 	
 		if(result>0) {
 			session.setAttribute("alertMsg", "성공적으로 삭제신청 되었습니다.");
+			session.removeAttribute("alertMsg");
 			return "redirect:tutorMyLesson.tm";
 		}else {
 			model.addAttribute("errorMsg", "수업 삭제 실패");
@@ -250,6 +251,7 @@ public class TutorController {
 		}
 		return "redirect:tutorMyLesson.tm";
 	}
+	
 	// 준비물 테이블, 페이징(수현)
 	@ResponseBody
 	@RequestMapping(value="prepareList.tm", produces="application/json; charset=utf-8")
