@@ -287,6 +287,11 @@ public class LessonServiceImpl implements LessonService{
 		return lDao.insertlessonNo(ss);
 	}
 
+	@Override
+	public int selectReplyCount(int lessonNo) {
+		return lDao.selectReplyCount(lessonNo,ss);
+	}
+
 
 
 

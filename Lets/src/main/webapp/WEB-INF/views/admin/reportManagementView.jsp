@@ -23,15 +23,16 @@
 							<!-- 분류 버튼 추가 자리 -->
 						</div>
 						<div align="right">
-							<form action="">
+							<form action="searchInquiryMgmt.ad">
+								<input type="hidden" name="currentPage" value="1"> 
 								<select name="condition" style="height: 30px;">
-									<option value="writer">이름</option>
-									<option value="title">닉네임</option>
-									<option value="content">이메일</option>
+									<option value="nickname">신고자</option>
+									<option value="reportType">신고사유</option>
+									<option value="inqTitle">처리상태</option>
 								</select>
-								<input type="text" name="keyword">
-								<button type="submit" class="btn btn-default">검색</button>
-							</form>
+		                       	<input type="text" name="keyword" value="${keyword}">
+		                   		<button type="submit" class="btn btn-default">검색</button>
+							</form> 
 						</div>
 					</div>
 					<!-- 검색 div end -->

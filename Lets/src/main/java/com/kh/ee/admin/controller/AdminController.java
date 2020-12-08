@@ -43,7 +43,6 @@ public class AdminController {
 		return "admin/memberManagementView";
 	}
 	
-	
 	//@Auth(role = Role.ADMIN)
 	@RequestMapping("searchMemberMgmt.ad")
 	public String searchMemberMgmt(String condition, String keyword, int currentPage, Model model) {
@@ -70,33 +69,6 @@ public class AdminController {
 		return "admin/memberManagementView";		
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//@Auth(role = Role.ADMIN)
 	@RequestMapping("classManagement.ad")
 	public String classManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
@@ -311,7 +283,82 @@ public class AdminController {
 		model.addAttribute("pi",pi); 
 		
 		return "admin/blacklistManagementView";
+		
 	}
+	
+	//@Auth(role = Role.ADMIN)
+	@RequestMapping("searchBlacklistMgmt.ad")
+	public String searchBlacklistMgmt(String condition, String keyword, int currentPage, Model model) {
+		
+		SearchCondition sc = new SearchCondition(); 
+		
+		switch(condition) {
+		case "nickname" : sc.setNickname(keyword); break;
+		case "memId" : sc.setMemId(keyword);
+		}
+		
+		int listCount = as.searchBlacklistMgmtCount(sc);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Member> list = as.searchBlacklistMgmtList(sc,pi); 
+		
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
+		model.addAttribute("condition",condition);
+		model.addAttribute("sc",sc);
+		model.addAttribute("keyword",keyword);
+		
+		return "admin/blacklistManagementView";		
+	}
+	
+	//@Auth(role = Role.ADMIN)
+	@RequestMapping("searchInquiryMgmt.ad")
+	public String searchInquiryMgmt(String condition, String keyword, int currentPage, Model model) {
+		
+		SearchCondition sc = new SearchCondition(); 
+		
+		switch(condition) {
+		case "nickname" : sc.setNickname(keyword); break;
+		case "inqType" : sc.setInqType(keyword); break;
+		case "inqTitle" : sc.setInqTitle(keyword);
+		
+		}
+		
+		int listCount = as.searchInquiryMgmtCount(sc);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Inquiry> list = as.searchInquiryMgmtList(sc,pi); 
+		
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
+		model.addAttribute("condition",condition);
+		model.addAttribute("sc",sc);
+		model.addAttribute("keyword",keyword);
+		
+		return "admin/inquiryManagementView";		
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//@Auth(role = Role.ADMIN)
 	@RequestMapping("inquiryManagement.ad")

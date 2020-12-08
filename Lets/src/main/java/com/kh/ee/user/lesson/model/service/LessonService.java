@@ -89,6 +89,8 @@ public interface LessonService {
 
 	int insertMemVideo(Map<String, Object> map);
 
+	int selectReplyCount(int lessonNo);
+
 
 
 

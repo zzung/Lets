@@ -245,4 +245,8 @@ public class LessonDao {
 		return ss.selectOne("lessonMapper.insertlessonNo");
 	}
 
+	public int selectReplyCount(int lessonNo, SqlSessionTemplate ss) {
+		return ss.selectOne("lessonMapper.selectReplyCount",lessonNo);
+	}
+
 }
