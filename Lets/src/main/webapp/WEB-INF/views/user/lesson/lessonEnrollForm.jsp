@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 	<link rel="stylesheet" href="resources/user/assets/css/style.css">
 	<link rel="stylesheet" href="resources/user/assets/css/tutorEnroll.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 </head>
      <script>
@@ -334,7 +334,6 @@
                                 <tr>
                                     <td width=40px><input type="hidden" name="CurriculumListNo"><h5 class="category_1">1.</h5></td>
                                     <td width=400px><input type="hidden" name="curriculumList[0].curLevel" value="1"><input class="form-control titleInput totalInput" name="curriculumList[0].curriculumCont" type="text" placeholder="커리큘럼 주제를 입력해주세요"></td>
-                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td><h6 class="category_2">1)</h6></td>
