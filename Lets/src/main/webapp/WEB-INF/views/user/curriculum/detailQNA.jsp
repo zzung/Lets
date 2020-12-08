@@ -271,14 +271,15 @@ div{
 	                
 	            </div>
             
+	           <!-- 폼 -->
+		        <form action="insertQuestion.cr" method="POST" id="qnaForm">
+		        	<input type="hidden" name="lessonNo" value="${ lesson.lessonNo }">
+		        	<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+		        	<input type="hidden" name="question" value="">
+		        </form>
+		        
             </c:if>
             
-            <!-- 폼 -->
-	        <form action="insertQuestion.cr" method="POST" id="qnaForm">
-	        	<input type="hidden" name="lessonNo" value="${ lesson.lessonNo }">
-	        	<input type="hidden" name="memNo" value="${ loginUser.memNo }">
-	        	<input type="hidden" name="question" value="">
-	        </form>
             
 
             <hr>
@@ -399,6 +400,8 @@ div{
 	                </c:if>
 	
 	            </div>
+	            
+	            <hr>
 	                
             </c:forEach>
             

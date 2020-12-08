@@ -99,7 +99,7 @@
 				            </form>
 				            <tr>
 				                <td style="width: 550px;"><a href="courseDetailView.le?lessonNo=${al.lessonNo }" style="color:black">${al.lessonTitle }</a></td>
-				                <td style="width: 150px;"><a href="" style="color:black">답변달기</a></td>
+				                <td style="width: 150px;"><a href="detailQNA.cr?lessonNo=${al.lessonNo }" style="color:black">답변달기</a></td>
 				                <td style="width: 150px;">${al.approveDate }</td>
 				                <td style="width: 150px;">${al.lessonType }</td>
 				                <td id="lessonTp${del.index }" style="width: 150px;">
