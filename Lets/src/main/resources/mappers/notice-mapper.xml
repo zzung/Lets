@@ -84,6 +84,8 @@
 		  from notice
 		 where notice_type=#{noticeType}
 		   and status!='N'
+		 order
+		    by status, enroll_date desc
 	</select>
 	
 	<select id="tutorDetailNotice" parameterType="Notice" resultMap="noticeResultSet">
