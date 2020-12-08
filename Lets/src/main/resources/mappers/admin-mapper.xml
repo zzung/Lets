@@ -410,19 +410,19 @@
 
 <select id="memberMgmtList" parameterType="String" resultMap="memberResultSet">
 	select
-			  m.mem_no
-	        , m.mem_id
-	        , m.mem_name
-	        , m.nickname
-	        , m.birthday
-	        , m.gender
-	        , m.phone
-	        , m.mem_pic
-	        , m.enroll_date
-	        , m.out_date
-	        , m.status
-	        , m.auth
-	     from member m
+			  mem_no
+	        , mem_id
+	        , mem_name
+	        , nickname
+	        , birthday
+	        , gender
+	        , phone
+	        , mem_pic
+	        , enroll_date
+	        , out_date
+	        , status
+	        , auth
+	     from member
 	     order 
 	   		 by mem_no desc
 </select>
@@ -477,7 +477,105 @@
 
 
 
+<select id="searchBlacklistMgmtCount" parameterType="SearchCondition" resultType="_int">
+	select 
+	       count(*)
+	  from member
+	  where status='Y'
+	 <choose>
+	 	<when test="memName != null">
+	 		and mem_name like '%' || #{memName} || '%'
+	 	</when>
+	 	<when test="nickname != null">
+	 		and nickname like '%' || #{nickname} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and mem_id like '%' || #{memId} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
 
+<select id="searchBlacklistMgmtList" parameterType="SearchCondition" resultMap="memberResultSet">
+	select 
+           mem_no
+         , mem_id
+         , mem_name
+         , nickname
+         , birthday
+         , gender
+         , phone
+         , mem_pic
+         , enroll_date
+         , out_date
+         , status
+         , auth
+	  from member
+	 where status='Y'
+	 <choose>
+	 	<when test="memName != null">
+	 		and mem_name like '%' || #{memName} || '%'
+	 	</when>
+	 	<when test="nickname != null">
+	 		and nickname like '%' || #{nickname} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and mem_id like '%' || #{memId} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
+
+
+<select id="searchInquiryMgmtCount" parameterType="SearchCondition" resultType="_int">
+	select 
+	       count(*)
+	  from inquiry i
+	  join member m on (m.mem_no = i.mem_no)
+	  where i.status='N'
+	 <choose>
+	 	<when test="inqType != null">
+	 		and i.inq_type like '%' || #{inqType} || '%'
+	 	</when>
+	 	<when test="nickname != null">
+	 		and m.nickname like '%' || #{nickname} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and i.inq_title like '%' || #{inqTitle} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
+
+<select id="searchInquiryMgmtList" parameterType="SearchCondition" resultMap="inquiryResultSet">
+	select 
+          i.inq_no
+        , i.inq_type
+        , i.inq_title
+        , i.inq_content
+        , i.enroll_date
+        , i.answer_date
+        , i.answer_content
+        , i.inq_file
+        , i.origin_file
+        , i.type_status
+        , i.status
+        , i.re_status	        
+        , m.nickname
+		, m.mem_no
+        , m.mem_id
+     from inquiry i
+     join member m on (m.mem_no = i.mem_no)
+	 where i.status='N'
+	 <choose>
+	 	<when test="inqType != null">
+	 		and i.inq_type like '%' || #{inqType} || '%'
+	 	</when>
+	 	<when test="nickname != null">
+	 		and m.nickname like '%' || #{nickname} || '%'
+	 	</when>
+	 	<otherwise>
+	 		and i.inq_title like '%' || #{inqTitle} || '%'
+	 	</otherwise>
+	 </choose>
+</select>
 
 
 

@@ -154,10 +154,6 @@ public class AdminServiceImpl implements AdminService{
 		return ad.searchMemberMgmtList(sc,pi,ss);
 	}
 	
-	
-	
-	
-	
 	//블랙 관리 페이지 select 문(성연)
 	@Override
 	public int blacklistMgmtCountList() {
@@ -166,6 +162,26 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ArrayList<Member> blacklistMgmtList(PageInfo pi) {
 		return ad.blacklistMgmtList(pi,ss);
+	}
+	
+	//블랙리스트 관리 검색시 나올 갯수/검색
+	@Override
+	public int searchBlacklistMgmtCount(SearchCondition sc) {
+		return ad.searchBlacklistMgmtCount(sc,ss);
+	}
+	@Override
+	public ArrayList<Member> searchBlacklistMgmtList(SearchCondition sc, PageInfo pi) {
+		return ad.searchBlacklistMgmtList(sc,pi,ss);
+	}
+	
+	//블랙리스트 관리 검색시 나올 갯수/검색
+	@Override
+	public int searchInquiryMgmtCount(SearchCondition sc) {
+		return ad.searchInquiryMgmtCount(sc,ss);
+	}
+	@Override
+	public ArrayList<Inquiry> searchInquiryMgmtList(SearchCondition sc, PageInfo pi) {
+		return ad.searchInquiryMgmtList(sc,pi,ss);
 	}
 	
 	//문의 관리 페이지 select 문(성연)

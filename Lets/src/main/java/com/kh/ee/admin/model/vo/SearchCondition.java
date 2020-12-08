@@ -22,4 +22,9 @@ public class SearchCondition {
 	private String memName;
 	private String nickname;
 	private String memId;
+	
+	private String inqType;
+	private String inqTitle;
+	
+	
 }
