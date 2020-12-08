@@ -243,7 +243,7 @@
 	  from reply
 	 where reply_type = '클래스'
 	   and reply_level = 1
-	   and total_no = #{lessonNo}
+	   and total_no = #{totalNo}
 	   and status = 'Y'
 </select>
 
@@ -252,6 +252,7 @@
 	       r.reply_no
 	     , r.mem_no
 	     , m.nickname
+	     , r.total_no
 	     , m.mem_pic
 	     , r.reply_content 
 	     , r.enroll_date replyDate
@@ -265,7 +266,7 @@
 	  join member m on (r.mem_no = m.mem_no and r.status='Y' and r.reply_level =1)
  left join reply re on (r.reply_no = re.reply_no2 and re.status='Y')
  left join member rm on (re.mem_no = rm.mem_no)
-	 where r.total_no = #{lessonNo}
+	 where r.total_no = #{totalNo}
 	   and r.reply_type='클래스'
 	 order 
 	    by r.reply_no desc, re.reply_no2 desc 

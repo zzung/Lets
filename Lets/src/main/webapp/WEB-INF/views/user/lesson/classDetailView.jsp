@@ -193,7 +193,6 @@
 	                 		$.ajax({
 	                 			url:"insertReply.le",
 	                 			data:{
-	                 				//totalNo == lessonNo
 	                 				totalNo:${l.lessonNo},
 	                 				memNo:${loginUser.memNo},
 	                 				replyContent:$("#communityContent").val()
@@ -216,16 +215,13 @@
 	                  		$.ajax({
 	                  			url:"selectReplyList.le",
 	                  			data:{
-	                  				lessonNo:${l.lessonNo}
+	                  				totalNo:${l.lessonNo}
 	                  			},
 	                  			success:function(list){
 	                  				$("#replyCount").text(list.list.length);
 	                  				
 	                  				var pi = list.pi;
 	                  				var list = list.list;
-	                  				
-	                  				console.log(pi); 
-	                  				console.log(list);
 	                  				
 	                  				result ="";
            							var page = "";
@@ -258,9 +254,11 @@
 	     	                            result += '</div>'
 	     	                            result += "<div class='reviewReplyArea'></div>"
 	     	                            result += '</div>'
+	     	                            console.log(list.length)
 	     	                           
-	     	                            if(list[i].reList.length != 0){
 	     	                            	for(var r=0; r<list[i].reList.length; r++){
+	     	                            		if(list[i].reList[r].replyNo2 != 0){
+	     	                            		
 			             					result += "<div class='comment-list reReply'>" 
 			             					result += "<input type='hidden' id='reReplyNo' data-num='"+list[i].reList[r].replyNo+"'>"
 		                              		result += "<div class='single-comment justify-content-between d-flex'>"
@@ -276,16 +274,17 @@
 		                              		result += "<p class='date'>" + list[i].reList[r].replyEnrollDate + "</p>"
 		                              		result += "</div>"
 		                              		result += "<div class='reply-btn'>"
-		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply()'>" + '답장' + "</a></div>"
-		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReReplySet(this); return false' data-no='" + list[i].reList[r].replyNo2 + "'>" + '수정' + "</a></div>"
-		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reList[r].replyNo2 + "' onclick='deleteReReplySet(this)'>" + '삭제' + "</a></div>"
+		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply() return false'>" + '답장' + "</a></div>"
+		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReReplySet(this) return false; return false' data-no='" + list[i].reList[r].replyNo2 + "'>" + '수정' + "</a></div>"
+		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reList[r].replyNo2 + "' onclick='deleteReReplySet(this) return false'>" + '삭제' + "</a></div>"
 		                              		result += "</div>"        
 		                              		result += "</div>"
 		                              		result += "</div>"
 		                              		result += "</div>"
 		                              		result += "</div>"
 		                              		result += "</div>"
-	     	                              	}
+		                              		
+	     	                              		}
 	     	                            }
 	                  				}
 	                  				
@@ -293,25 +292,25 @@
 	                  				if (pi.currentPage == 1) {
 	                  	            	 page += '<li class="disabled"><a href="">&laquo;</a></li>'
 	                  	             } else {
-	                  	                 page += '<li><a href="selectReplyList.le?currentPage='+ pi.currentPage-1 +'">&laquo;</a></li>'
+	                  	                 page += '<li><a href="selectReplyList.le?currentPage=('+ (pi.currentPage-1) +')">&laquo;</a></li>'
 	                  	             }
 	                  	             
 	                  	             for(var p=pi.startPage; p<=pi.endPage; p++){
 	                  	            	 if(p != pi.currentPage){
 	                  	            		page += '<li><a href="selectReplyList.le?currentPage='+ p +'">'+ p +'</a></li>' 
 	                  	            	 } else {
-	                  	            		 page += '<li><a>'+ p +'</a></li>'
+	                  	            		 page += '<li class="disabled"><a href="">'+ p +'</a></li>'
 	                  	            	 }
 	                  	             }
 	                  	             
 	                  	             if (pi.endPage == pi.maxPage){
 	                  	            	page += '<li class="disabled"><a href="#">&raquo</a></li>'
 	                  	             } else {
-	                  	            	page += '<li><a href="selectReplyList.le?currentPage='+ pi.currentPage+1 +'">&raquo</a></li>'
+	                  	            	page += '<li><a href="selectReplyList.le?currentPage=('+ (pi.currentPage+1) +')">&raquo</a></li>'
 	                  	             }
 	                  	             page += '</ul>'
 	                  				$(".comments-area > .replyArea").html(result); 
-	                  				$(".comments-area > .container").html(page);
+	                  				$(".comments-area > .container1").html(page);
 	                  				
 	                  			},
 	                  			error:function(){
@@ -478,7 +477,7 @@
 	                        repEditForm += "<textarea class='review-textarea' id='repContent' required>" + replyContent + "</textarea>"
 	                        repEditForm += '</div>'
 	                        repEditForm += '<div align="right">'
-	                        repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="updateReReply();">'+ "등록" + '</button>'
+	                        repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="updateReReply(); return false">'+ "등록" + '</button>'
 	                		repEditForm += '<button class="genric-btn1 primary-border extrasmall" onclick="cancelUpdateReview(this); return false">'+ "취소" + '</button>'
 	                		repEditForm += '</div>'
 
@@ -566,7 +565,7 @@
 							<br>
 							<div class="replyArea"></div>
 							<br>
-							<div class="container" align="center"></div>
+							<div class="container1" align="center"></div>
 						</div>
 						<!--? end 리뷰 area-->
 	                  	</c:when>

@@ -74,7 +74,7 @@ public class AdminController {
 	public String classManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.classMgmtCountList();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		ArrayList<Lesson> list = as.classMgmtList(pi);
 		
 		model.addAttribute("list",list);
@@ -123,7 +123,7 @@ public class AdminController {
 		
 		int listCount = as.searchClassMgmtCount(sc);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		ArrayList<Lesson> list = as.searchClassMgmtList(sc,pi); 
 		
 		model.addAttribute("pi",pi);
@@ -140,10 +140,9 @@ public class AdminController {
 	public String classPayment(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.classPaymentListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);		
 		ArrayList<MemPay> mp = as.classPaymentList(pi);
-		
+
 		model.addAttribute("mp",mp); 
 		model.addAttribute("pi",pi);
 		
@@ -177,7 +176,7 @@ public class AdminController {
 		
 		int listCount = as.searchPaymentMgmtCount(sc);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		ArrayList<MemPay> mp = as.searchPaymentMgmtList(sc,pi); 
 		
 		model.addAttribute("pi",pi);
@@ -194,7 +193,7 @@ public class AdminController {
 	public String saleManagement(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model){
 		int listCount = as.selectListCount(); 
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Member> m = as.selectDiscountList(pi);
 		
@@ -230,7 +229,7 @@ public class AdminController {
 		
 		int listCount = as.searchDiscountCount(sc);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		ArrayList<Member> m = as.searchDiscountList(sc,pi); 
 		
 		model.addAttribute("pi",pi);

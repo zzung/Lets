@@ -145,7 +145,8 @@
 <update id="discountSet" parameterType="Lesson">
 	update
 	       lesson
-	   set lesson_no = #{lessonNo}
+	   set 
+	   	   discount_period = #{discountPeriod}
 	     , discount = #{discount}
 	     , disc_status = '적용'
 	 where lesson_no = #{lessonNo}

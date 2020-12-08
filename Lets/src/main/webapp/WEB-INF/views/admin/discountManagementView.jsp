@@ -97,6 +97,8 @@
 										<option value="30">30%</option>
 										<option value="50">50%</option>
 									</select>
+									<br>
+									<input type="text" name="discountPeriod" id="discountPeriod" style="width:180px;">주
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -115,13 +117,17 @@
 						function apply() {
 							var discount = $("#discounts").val();
 							var lessonNo = $("#discountSet").val(); 
+							var discountPeriod = $("#discountPeriod").val();
 							var per = discount + "%";
+							
+							console.log(discountPeriod); 
 							
 							$.ajax({
 								url:"discountSet.ad",
 								data:{
 									lessonNo:lessonNo,
-									discount:discount
+									discount:discount,
+									discountPeriod : discountPeriod
 								},
 								success:function(result){
 									if(result == "success"){

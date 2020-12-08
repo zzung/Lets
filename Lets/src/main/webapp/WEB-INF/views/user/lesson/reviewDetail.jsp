@@ -47,6 +47,7 @@
                     <!--?리뷰 작성하기 클릭시 보여지게 할 창-->
                     <br><br>
                     <div id="writeReviewArea" style="display:none">
+                    <input type="hidden" name="lessonNo" value="${l.lessonNo }">
 	                    <div class="mt-10">
 	                        <textarea class="review-textarea" placeholder="후기 작성해주세요" onfocus="this.placeholder = ''"
 	                        onblur="this.placeholder = '후기 작성해주세요'" id="reviewContent" required></textarea>
@@ -64,7 +65,9 @@
 	                            <input type="radio" id="star1" name="star" value="1" />
 	                            <label for="star1">1 star</label>
                         	</div>
-	                        <div id="submitReview" align="right"><button class="genric-btn1 primary-border extrasmall" onclick="addReview();">등록</button></div>
+	                        <div id="submitReview" align="right">
+	                        	<button type="button" class="genric-btn1 primary-border extrasmall" data-no="${l.lessonNo }" onclick="addReview(this);">등록</button>
+	                        </div>
 	                    </div>
                     </div>
                     <!--end of 리뷰 작성하기-->
@@ -89,12 +92,13 @@
    		});
    		
    		//후기 작성 ajax
-   		function addReview(){
+   		function addReview(e){
+   			var lessonNo = $(e).data('no');
    			if($("#reviewContent").val().trim().length !=0){
    			$.ajax({
    				url:"insertReview.rev",
    				data:{
-   					lessonNo:${r.lessonNo},
+   					lessonNo:lessonNo,
    					memNo:${loginUser.memNo},
    					reviewContent:$("#reviewContent").val(),
    					star:$("input:radio[name=star]:checked").val()	
@@ -123,7 +127,7 @@
    			$.ajax({
    				url:"showMoreReview.rev",
    				data:{
-   					lessonNo:${r.lessonNo}		
+   					lessonNo:${l.lessonNo}		
    				},
    				success:function(list){
    					$("#reviewCount").text(list.length);

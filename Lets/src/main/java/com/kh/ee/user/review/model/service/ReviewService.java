@@ -2,6 +2,7 @@ package com.kh.ee.user.review.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.ee.user.lesson.model.vo.Lesson;
 import com.kh.ee.user.reply.model.vo.Reply;
 import com.kh.ee.user.review.model.vo.Review;
 
@@ -29,7 +30,7 @@ public interface ReviewService {
 	//후기 답장 삭제하기
 	int deleteReviewReply(int reviewNo);
 
-	Review selectNumber(int lessonNo);
+	Lesson selectNumber(int lessonNo);
 	
 
 	

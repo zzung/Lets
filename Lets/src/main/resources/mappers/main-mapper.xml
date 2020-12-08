@@ -38,20 +38,23 @@
 </select>
 
 <select id="kidsList" resultMap="lessonResultSet">
-	<![CDATA[  select *
+	<![CDATA[ select *
 				 from (
 				         select 
 				                l.lesson_cover_img
 				              , l.lesson_no
 				              , l.lesson_title
 				              , l.price
-				              , r.star
 				              , l.like_count
 				              , l.discount
 				              , l.pay_total
-				          from lesson l
-				          join review r on (l.lesson_no = r.lesson_no)
-				         where l.status='Y'
+				              , (select
+								       round((sum(star) / count(star))) 
+								  from review r
+								  join lesson l using(lesson_no)
+								 where r.status = 'Y') star
+				         from lesson l
+				         where l.lesson_status='승인'
 				           and l.lesson_category = '키즈'
 				        )
 				 where rownum <4
@@ -67,13 +70,16 @@
 				              , l.lesson_no
 				              , l.lesson_title
 				              , l.price
-				              , r.star
 				              , l.like_count
 				              , l.discount
 				              , l.pay_total
-				          from lesson l
-				          join review r on (l.lesson_no = r.lesson_no)
-				         where l.status='Y'
+				              , (select
+								       round((sum(star) / count(star))) 
+								  from review r
+								  join lesson l using(lesson_no)
+								 where r.status = 'Y') star
+				         from lesson l
+				         where l.lesson_status='승인'
 				           and l.lesson_category = '머니'
 				        )
 				 where rownum <4
@@ -89,13 +95,16 @@
 				              , l.lesson_no
 				              , l.lesson_title
 				              , l.price
-				              , r.star
 				              , l.like_count
 				              , l.discount
 				              , l.pay_total
-				          from lesson l
-				          join review r on (l.lesson_no = r.lesson_no)
-				         where l.status='Y'
+				              , (select
+								       round((sum(star) / count(star))) 
+								  from review r
+								  join lesson l using(lesson_no)
+								 where r.status = 'Y') star
+				         from lesson l
+				         where l.lesson_status='승인'
 				           and l.lesson_category = '취미생활'
 				        )
 				 where rownum <4
@@ -111,13 +120,16 @@
 				              , l.lesson_no
 				              , l.lesson_title
 				              , l.price
-				              , r.star
 				              , l.like_count
 				              , l.discount
 				              , l.pay_total
-				          from lesson l
-				          join review r on (l.lesson_no = r.lesson_no)
-				         where l.status='Y'
+				              , (select
+								       round((sum(star) / count(star))) 
+								  from review r
+								  join lesson l using(lesson_no)
+								 where r.status = 'Y') star
+				         from lesson l
+				         where l.lesson_status='승인'
 				           and l.lesson_category = '커리어'
 				        )
 				 where rownum <4
@@ -133,14 +145,17 @@
 					              , l.lesson_no
 					              , l.lesson_title
 					              , l.price
-					              , r.star
 					              , l.like_count
 					              , l.approve_date
 					              , l.discount
 					              , l.pay_total
+					              , (select
+								       round((sum(star) / count(star))) 
+								  from review r
+								  join lesson l using(lesson_no)
+								 where r.status = 'Y') star
 					          from lesson l
-					          left join review r on (l.lesson_no = r.lesson_no)
-					         where l.status='Y'
+					         where l.lesson_status='승인'
 					           and approve_date is not null
 					        )
 					 where rownum <4
