@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Lets</title>
 <link rel="stylesheet" href="resources/user/assets/css/member.css">
+<link rel="stylesheet" href="resources/user/assets/css/style.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>

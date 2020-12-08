@@ -40,7 +40,6 @@ import com.kh.ee.user.member.model.vo.Member;
 import com.kh.ee.user.tutor.model.service.TutorService;
 
 @Controller
-@Auth(role = Role.ADMIN)
 public class MemberController {
 	
 	private NaverLoginBO naverLoginBO;
@@ -166,7 +165,6 @@ public class MemberController {
 	      m.setNickname(properties.path("nickname").asText());
 	      m.setGender((kakao_account.path("gender").asText()).equals("female")? "F" : "M");
 	      m.setMemPic(properties.path("profile_image").asText());
-//	      System.out.println("카카오 로그인 : "+m);
 	      
 	      if(mService.selectMember(kakao_account.path("email").asText())!=null) {	// 해당 아이디의 회원이 이미 있을경우
 				Member loginUser = mService.loginMember(m);
@@ -423,20 +421,6 @@ public class MemberController {
 		}
 	}
 
-	public String saveFileManager(MultipartFile upfile, HttpSession session) {
-
-		String originName = upfile.getOriginalFilename();
-		String savePath = session.getServletContext().getRealPath("/resources/user/assets/img/member/");
-		
-		try {
-			upfile.transferTo(new File(savePath + originName));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return originName;
-	}
 		
 	@Auth(role = Role.USER)
 	@RequestMapping("delete.me")
@@ -512,9 +496,14 @@ public class MemberController {
 	@RequestMapping("myUpdateDel.me")
 	public String myUpdateDelivery(int memPayNo, HttpSession session, Model model) {
 		
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		int result = mService.myUpdateDelivery(memPayNo);
 		if(result > 0) {
+			System.out.println(memPayNo);
 			session.setAttribute("alertMsg", "배송 확정 처리 되었습니다.");
+			session.removeAttribute("myDlist");
+			ArrayList<MemPay> myDlist = mService.myDeliveryList(loginUser.getMemNo());
+			session.setAttribute("myDlist", myDlist);
 			return "redirect:myDeliveryList.me";
 		}else {
 			model.addAttribute("errorMsg", "배송 확정 처리에 실패했습니다. 관리자에게 문의하세요.");
@@ -526,9 +515,13 @@ public class MemberController {
 	@RequestMapping("myCancelDel.me")
 	public String myCancelDelivery(int memPayNo, HttpSession session, Model model) {
 		
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		int result = mService.myCancelDelivery(memPayNo);
 		if(result > 0) {
 			session.setAttribute("alertMsg", "결제 취소 처리 되었습니다.");
+			session.removeAttribute("myDlist");
+			ArrayList<MemPay> myDlist = mService.myDeliveryList(loginUser.getMemNo());
+			session.setAttribute("myDlist", myDlist);
 			return "redirect:myDeliveryList.me";
 		}else {
 			model.addAttribute("errorMsg","결제 취소 처리에 오류가 생겼습니다. 관리자에게 문의하세요.");
@@ -542,6 +535,21 @@ public class MemberController {
 		Lesson l = mService.showDiscountLesson();
 		
 		return new Gson().toJson(l); 
+	}
+
+	public String saveFileManager(MultipartFile upfile, HttpSession session) {
+
+		String originName = upfile.getOriginalFilename();
+		String savePath = session.getServletContext().getRealPath("/resources/user/assets/img/member/");
+		
+		try {
+			upfile.transferTo(new File(savePath + originName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return originName;
 	}
 	
 }

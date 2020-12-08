@@ -293,7 +293,7 @@
 
 <update id="myCancelDelivery" parameterType="_int">
 	update mem_pay
-	   set status='결제 취소',
+	   set status='결제취소',
 	       cancel_date=sysdate
 	 where mem_pay_no=#{memPayNo}
 </update>

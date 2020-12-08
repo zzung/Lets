@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Lets</title>
 <link rel="stylesheet" href="resources/user/assets/css/member.css">
+<link rel="stylesheet" href="resources/user/assets/css/style.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
@@ -122,22 +123,22 @@
 		                          <div class="d-lecture-info">
 		                              <div class="d-payment-date">${d.paymentDate}</div>
 		                              <div class="d-lecture-title">${d.lessonTitle}</div>
-		                              <div class="d-lecture-end-date">2021.04.23 수강만료</div>
+		                              <div class="d-lecture-end-date">${d.cancelDate} 수강만료</div>
 		                          </div>
 		                          <div class="d-delivery-status">
-		                          	  <c:if test="${d.status eq '결제 취소'}">
+		                          	  <c:if test="${d.status eq '결제취소'}">
 			                              <div class="d-lecture-status">결제 취소완료</div>
 		                          	  </c:if>
-		                          	  <c:if test="${d.status ne '결제 취소'}">
+		                          	  <c:if test="${d.status ne '결제취소'}">
 			                              <div class="d-lecture-status">${d.delStatus}</div>
 		                          	  </c:if>
 		                              <div class="d-lecture-btn">
 		                                  <c:choose>
-		                                      <c:when test="${(d.delStatus eq '배송전')&&(d.status ne '결제 취소')}">
-		                                          <button type="button"id="cancelPayment" class="genric-btn primary small radius" onclick="event.stopPropagation();" style="font-size: 4px;">결제취소</button>
+		                                      <c:when test="${(d.delStatus eq '배송전')&&(d.status ne '결제취소')}">
+		                                          <button type="button" class="cancelPayment genric-btn primary small radius" onclick="event.stopPropagation();" style="font-size: 4px;">결제취소</button>
 		                                      </c:when>
-		                                      <c:when test="${(d.delStatus eq '배송완료')&&(d.status ne '결제 취소')}">
-		                                          <button type="button" id="confirmDelivery" class="genric-btn primary small radius" onclick="event.stopPropagation();" style="font-size: 4px;">배송확정</button>
+		                                      <c:when test="${(d.delStatus eq '배송완료')&&(d.status ne '결제취소')}">
+		                                          <button type="button" class="confirmDelivery genric-btn primary small radius" onclick="event.stopPropagation();" style="font-size: 4px;">배송확정</button>
 		                                      </c:when>
 		                                      <c:when test="${d.delStatus eq '배송확정'}"> </c:when>
 		                                  </c:choose>
@@ -159,22 +160,25 @@
       		  $("#myDelivery").attr("action","myDetailDel.me").submit();
       	  }
 
-      	  $('#cancelPayment').click(function(){
+      	  $('.cancelPayment').click(function(){
 	       	  if(confirm('클래스 결제를 취소하시겠습니까?')){
-	              $("#myDelivery").attr("action","myCancelDel.me").submit();
+	       		  console.log(this.parentNode.parentNode.parentNode.children[0].value);
+	       		$("#memPayNo").val(this.parentNode.parentNode.parentNode.children[0].value);
+	       		$("#myDelivery").attr("action","myCancelDel.me").submit();
 	          }else{
 	              return false;
 	          }
       	  });
-      	  
-      	  $('#confirmDelivery').click(function(){
+      	  $('.confirmDelivery').click(function(){
 	    	  if(confirm('클래스 배송 확정하시겠습니까?')){
-	              $("#myDelivery").attr("action","myUpdateDel.me").submit();
+	    		  console.log(this.parentNode.parentNode.parentNode.children[0].value);
+	    		  $("#memPayNo").val(this.parentNode.parentNode.parentNode.children[0].value);
+	    		  $("#myDelivery").attr("action","myUpdateDel.me").submit();
 	          }else{
 	              return false;
 	          }
       	  })
-      	  
+
       </script>
 
       <div style="clear:both"></div>
