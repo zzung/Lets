@@ -219,7 +219,7 @@
 	                  				lessonNo:${l.lessonNo}
 	                  			},
 	                  			success:function(list){
-	                  				$("#replyCount").text(list.length);
+	                  				$("#replyCount").text(list.list.length);
 	                  				
 	                  				var pi = list.pi;
 	                  				var list = list.list;
@@ -289,25 +289,29 @@
 	     	                            }
 	                  				}
 	                  				
+	                  				page += '<ul class="pagination">'
 	                  				if (pi.currentPage == 1) {
-	                  	            	 page += '<a href="#" style="display:none">&laquo;</a>'
+	                  	            	 page += '<li class="disabled"><a href="">&laquo;</a></li>'
 	                  	             } else {
-	                  	                 page += '<a href="selectReplyList.le?currentPage='+ pi.currentPage-1 +'" style="display:none">'+"&laquo;"+'</a>'
+	                  	                 page += '<li><a href="selectReplyList.le?currentPage='+ pi.currentPage-1 +'">&laquo;</a></li>'
 	                  	             }
 	                  	             
 	                  	             for(var p=pi.startPage; p<=pi.endPage; p++){
-	                  	            	page += '<a href="selectReplyList.le?currentPage='+ p +'">'+ p +'</a>'
-	                  	            	console.log(p);
+	                  	            	 if(p != pi.currentPage){
+	                  	            		page += '<li><a href="selectReplyList.le?currentPage='+ p +'">'+ p +'</a></li>' 
+	                  	            	 } else {
+	                  	            		 page += '<li><a>'+ p +'</a></li>'
+	                  	            	 }
 	                  	             }
 	                  	             
 	                  	             if (pi.endPage == pi.maxPage){
-	                  	            	page += '<a href="#" style="display:none">&laquo;</a>'
+	                  	            	page += '<li class="disabled"><a href="#">&raquo</a></li>'
 	                  	             } else {
-	                  	            	page += '<a href="selectReplyList.le?currentPage='+ pi.currentPage+1 +'">'+"&raquo;"+'</a>'
+	                  	            	page += '<li><a href="selectReplyList.le?currentPage='+ pi.currentPage+1 +'">&raquo</a></li>'
 	                  	             }
-	                  	             
+	                  	             page += '</ul>'
 	                  				$(".comments-area > .replyArea").html(result); 
-	                  				$(".comments-area > .pagination").html(page);
+	                  				$(".comments-area > .container").html(page);
 	                  				
 	                  			},
 	                  			error:function(){
@@ -541,7 +545,9 @@
 	                  	
 	                  </script>
 	                  <!--?댓글area-->
-						<div class="comments-area">
+	                  <c:choose>
+	                  	<c:when test="${!empty loginUser }">
+	                  		<div class="comments-area">
 							<div>
 								<h4>커뮤니티 (<span id="replyCount"></span>)</h4>
 							</div>
@@ -560,9 +566,12 @@
 							<br>
 							<div class="replyArea"></div>
 							<br>
-							<div class="pagination"></div>
+							<div class="container" align="center"></div>
 						</div>
 						<!--? end 리뷰 area-->
+	                  	</c:when>
+	                  </c:choose>
+					
 						
 						<!--댓글 신고 모달-->
 						<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -191,8 +191,8 @@ public class LessonController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int pageLimit = 5; 
-		int boardLimit = 2;
-		int listCount = lService.selectListCount(); 
+		int boardLimit = 5;
+		int listCount = lService.selectReplyCount(lessonNo); 
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		ArrayList<Reply> list = lService.selectReply(lessonNo,pi);
