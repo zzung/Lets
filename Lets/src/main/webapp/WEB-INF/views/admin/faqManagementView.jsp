@@ -24,15 +24,16 @@
 									data-target="#writeFaq" class="btn btn-default">FAQ 작성</button>
 						</div>
 						<div align="right">
-							<form action="">
+							<form action="searchFaqMgmt.ad">
+								<input type="hidden" name="currentPage" value="1"> 
 								<select name="condition" style="height: 30px;">
-									<option value="title">제목</option>
-									<option value="type">분류</option>
-									<option value="type">유형</option>
+									<option value="faqTitle">제목</option>
+									<option value="faqCategory">유형</option>
+									<option value="faqStatus">공개여부</option>
 								</select>
-								<input type="text" name="keyword">
-								<button type="submit" class="btn btn-default">검색</button>
-							</form>
+		                       	<input type="text" name="keyword" value="${keyword}">
+		                   		<button type="submit" class="btn btn-default">검색</button>
+							</form> 
 						</div>
 					</div>
 					<!-- 검색 div end -->
@@ -52,7 +53,7 @@
 							<td>${f.faqCategory }</td>
 							<td>${f.faqStatus }</td>
 							<td>
-								<a href="supportFaqDetail.su?faqNo=1">
+								<a href="supportFaqDetail.su?faqNo=${f.faqNo}">
 									${f.faqTitle }
 								</a>
 							

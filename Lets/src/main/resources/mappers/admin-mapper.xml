@@ -484,7 +484,7 @@
 <select id="selectBlacklistListCount" resultType="_int">
 	select 
 	       count(*)
-	  from member m
+	  from member
 </select>
 
 <select id="blacklistMgmtList" parameterType="String" resultMap="memberResultSet">
@@ -493,8 +493,8 @@
 	        , mem_id
 	        , nickname
 	        , report_count
-	     from member m
-	     where m.status = 'B'
+	     from member
+	     where status = 'B'
 </select>
 
 <select id="searchBlacklistMgmtList" parameterType="SearchCondition" resultMap="memberResultSet">
@@ -641,7 +641,29 @@
 <!-- 
 			/////////////////////////   신고 관리      /////////////////////////////
  -->
- 
+
+<select id="selectReportListCount" resultType="_int">
+	select 
+	       count(*)
+	  from report re
+</select>
+
+<select id="reportMgmtList" parameterType="String" resultMap="reportResultSet">
+	select
+	       	m.mem_no
+	        , re.report_type
+	        , re.report_date
+	        , re.status
+	        , r.rep_count
+	        , r.reply_content
+	        , m.nickname
+	        , r.enroll_date
+	        , m.report_count
+	     from report re
+	     join reply r on (re.reply_no = r.reply_no)
+	     join member m on (re.mem_no = m.mem_no)
+</select>
+
 <select id="searchReportMgmtList" parameterType="SearchCondition" resultMap="reportResultSet">
 	select 
           	m.mem_no
@@ -669,7 +691,7 @@
 	       count(*)
 	  from report re
 	  join member m on (re.mem_no = m.mem_no)
-	 where m.report_count > 1
+	 where 
 	 <choose>
 	 	<when test="nickname != null">
 	 		and m.nickname like '%' || #{nickname} || '%'
@@ -683,28 +705,6 @@
 	 </choose>
 </select>
 
-<select id="selectReportListCount" resultType="_int">
-	select 
-	       count(*)
-	  from report re
-</select>
-
-<select id="reportMgmtList" parameterType="String" resultMap="reportResultSet">
-	select
-	       	m.mem_no
-	        , re.report_type
-	        , re.report_date
-	        , re.status
-	        , r.rep_count
-	        , r.reply_content
-	        , m.nickname
-	        , r.enroll_date
-	        , m.report_count
-	     from report re
-	     join reply r on (re.reply_no = r.reply_no)
-	     join member m on (re.mem_no = m.mem_no)
-</select>
-
 <!-- 
 			/////////////////////////   공지사항 관리      /////////////////////////////
  -->
@@ -712,20 +712,20 @@
 <select id="selectNoticeListCount" resultType="_int">
 	select 
 	       count(*)
-	  from notice n
+	  from notice
 </select>
 
 <select id="noticeMgmtList" parameterType="String" resultMap="noticeResultSet">
 	select
-	     	n.notice_no
-	     ,	n.notice_type
-	     ,	n.notice_title
-	     ,	n.notice_content
-	     ,	n.enroll_date
-	     ,	n.modify_date
-	     ,	n.status
-	     ,	n.count
-	     from notice n
+	     	notice_no
+	     ,	notice_type
+	     ,	notice_title
+	     ,	notice_content
+	     ,	enroll_date
+	     ,	modify_date
+	     ,	status
+	     ,	count
+	     from notice
 </select>
 
 <insert id="insertNotice" parameterType="Notice">
@@ -750,6 +750,25 @@
 		  )
 </insert>
 
+<select id="searchNoticeMgmtCount" parameterType="SearchCondition" resultType="_int">
+	select 
+	       count(*)
+	  from notice
+	 where notice_title like '%' || #{noticeTitle} || '%'
+	 	
+</select>
+
+<select id="searchNoticeMgmtList" parameterType="SearchCondition" resultMap="noticeResultSet">
+	select 
+          	  notice_no
+	        , notice_type
+	        , notice_title
+	        , enroll_date
+	     from notice
+	 	where notice_title like '%' || #{noticeTitle} || '%'
+	 	
+</select>
+
 <!-- 
 			/////////////////////////   FAQ 관리      /////////////////////////////
  -->
@@ -757,19 +776,59 @@
 <select id="selectFaqListCount" resultType="_int">
 	select 
 	       count(*)
-	  from faq f
+	  from faq
 </select>
 
 <select id="faqMgmtList" parameterType="String" resultMap="faqResultSet">
 	select
-	     	 f.faq_no
-	       , f.faq_category
-	       , f.faq_status
-	       , f.enroll_date
-	       , f.faq_type
-	       , f.faq_title
-	       , f.faq_content
-	     from faq f
+	     	 faq_no
+	       , faq_category
+	       , faq_status
+	       , enroll_date
+	       , faq_type
+	       , faq_title
+	       , faq_content
+	     from faq
+</select>
+
+<select id="searchFaqMgmtCount" parameterType="SearchCondition" resultType="_int">
+	select 
+	       count(*)
+	  from faq
+	 where 
+	  <choose>
+		 	<when test="faqStatus != null">
+		 		faq_status like '%' || #{faqStatus} || '%'
+		 	</when>
+		 	<when test="faqCategory != null">
+		 		faq_category like '%' || #{faqCategory} || '%'
+		 	</when>
+		 	<otherwise>
+		 		faq_title like '%' || #{faqTitle} || '%'
+		 	</otherwise>
+		 </choose>
+</select>
+
+<select id="searchFaqMgmtList" parameterType="SearchCondition" resultMap="faqResultSet">
+	select 
+          	  faq_category
+	        , faq_status
+	        , enroll_date
+	        , faq_title
+	     from faq
+	     where
+	     <choose>
+		 	<when test="faqStatus != null">
+		 		faq_status like '%' || #{faqStatus} || '%'
+		 	</when>
+		 	<when test="faqCategory != null">
+		 		faq_category like '%' || #{faqCategory} || '%'
+		 	</when>
+		 	<otherwise>
+		 		faq_title like '%' || #{faqTitle} || '%'
+		 	</otherwise>
+		 </choose>
+	     
 </select>
 
 <insert id="insertFaq" parameterType="Faq">

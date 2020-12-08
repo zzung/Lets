@@ -100,7 +100,7 @@ public interface AdminService {
 	int noticeMgmtCountList();
 	ArrayList<Notice> noticeMgmtList(PageInfo pi);
 	
-	//문의 검색시 나올 갯수/검색
+	//공지 검색시 나올 갯수/검색
 	int searchNoticeMgmtCount(SearchCondition sc);
 	ArrayList<Notice> searchNoticeMgmtList(SearchCondition sc, PageInfo pi);
 
@@ -110,6 +110,11 @@ public interface AdminService {
 	//faq 관리 페이지 select 문(성연)
 	int faqMgmtCountList();
 	ArrayList<Faq> faqMgmtList(PageInfo pi);
+	
+	//Faq 검색시 나올 갯수/검색
+	int searchFaqMgmtCount(SearchCondition sc);
+	ArrayList<Faq> searchFaqMgmtList(SearchCondition sc, PageInfo pi);
+
 	
 	//FAQ 작성
 	int insertFaq(Faq f);

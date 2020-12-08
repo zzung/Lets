@@ -324,7 +324,6 @@ public class AdminController {
 		return "admin/inquiryManagementView";
 	}
 	
-	
 	@RequestMapping("inqAnswer.ad")
 	public String inqAnswer(Inquiry i) {
 		
@@ -338,8 +337,6 @@ public class AdminController {
 			return "common/errorPage";
 		}
 	}
-	
-	
 
 	//@Auth(role = Role.ADMIN)
 	@RequestMapping("searchInquiryMgmt.ad")
@@ -383,31 +380,31 @@ public class AdminController {
 	}
 	
 	//@Auth(role = Role.ADMIN)
-		@RequestMapping("searchReportMgmt.ad")
-		public String searchReportMgmt(String condition, String keyword, int currentPage, Model model) {
-			
-			SearchCondition sc = new SearchCondition(); 
-			
-			switch(condition) {
-			case "nickname" : sc.setNickname(keyword); break;
-			case "reportType" : sc.setReportType(keyword); break;
-			case "status" : sc.setStatus(keyword);
-			
-			}
-			
-			int listCount = as.searchReportMgmtCount(sc);
-			
-			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-			ArrayList<Report> list = as.searchReportMgmtList(sc,pi); 
-			
-			model.addAttribute("pi",pi);
-			model.addAttribute("list",list);
-			model.addAttribute("condition",condition);
-			model.addAttribute("sc",sc);
-			model.addAttribute("keyword",keyword);
-			
-			return "admin/reportManagementView";		
+	@RequestMapping("searchReportMgmt.ad")
+	public String searchReportMgmt(String condition, String keyword, int currentPage, Model model) {
+		
+		SearchCondition sc = new SearchCondition(); 
+		
+		switch(condition) {
+		case "nickname" : sc.setNickname(keyword); break;
+		case "reportType" : sc.setReportType(keyword); break;
+		case "status" : sc.setStatus(keyword);
+		
 		}
+		
+		int listCount = as.searchReportMgmtCount(sc);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		ArrayList<Report> list = as.searchReportMgmtList(sc,pi); 
+		
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
+		model.addAttribute("condition",condition);
+		model.addAttribute("sc",sc);
+		model.addAttribute("keyword",keyword);
+		
+		return "admin/reportManagementView";		
+	}
 
 	//@Auth(role = Role.ADMIN)
 	@RequestMapping("noticeManagement.ad")
@@ -438,7 +435,7 @@ public class AdminController {
 	}
 	
 	//@Auth(role = Role.ADMIN)
-	@RequestMapping("searchNoticetMgmt.ad")
+	@RequestMapping("searchNoticeMgmt.ad")
 	public String searchNoticeMgmt(String condition, String keyword, int currentPage, Model model) {
 		
 		SearchCondition sc = new SearchCondition(); 
@@ -475,6 +472,33 @@ public class AdminController {
 		model.addAttribute("pi",pi); 
 		
 		return "admin/faqManagementView";
+	}
+	
+	//@Auth(role = Role.ADMIN)
+	@RequestMapping("searchFaqMgmt.ad")
+	public String searchFaqMgmt(String condition, String keyword, int currentPage, Model model) {
+		
+		SearchCondition sc = new SearchCondition(); 
+		
+		switch(condition) {
+		case "faqCategory" : sc.setFaqCategory(keyword); break;
+		case "faqTitle" : sc.setFaqTitle(keyword); break;
+		case "faqStatus" : sc.setFaqStatus(keyword);
+		
+		}
+		
+		int listCount = as.searchFaqMgmtCount(sc);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		ArrayList<Faq> list = as.searchFaqMgmtList(sc,pi); 
+		
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
+		model.addAttribute("condition",condition);
+		model.addAttribute("sc",sc);
+		model.addAttribute("keyword",keyword);
+		
+		return "admin/faqManagementView";		
 	}
 	
 	@RequestMapping("insertFaq.ad")

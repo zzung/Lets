@@ -231,7 +231,7 @@ public class AdminServiceImpl implements AdminService{
 		return ad.noticeMgmtList(pi,ss);
 	}
 	
-	//신고 관리 검색시 나올 갯수/검색
+	//공지 관리 검색시 나올 갯수/검색
 	@Override
 	public int searchNoticeMgmtCount(SearchCondition sc) {
 		return ad.searchNoticeMgmtCount(sc,ss);
@@ -255,6 +255,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ArrayList<Faq> faqMgmtList(PageInfo pi) {
 		return ad.faqMgmtList(pi,ss);
+	}
+	
+	//공지 관리 검색시 나올 갯수/검색
+	@Override
+	public int searchFaqMgmtCount(SearchCondition sc) {
+		return ad.searchFaqMgmtCount(sc,ss);
+	}
+	@Override
+	public ArrayList<Faq> searchFaqMgmtList(SearchCondition sc, PageInfo pi) {
+		return ad.searchFaqMgmtList(sc,pi,ss);
 	}
 	
 	//faq 작성

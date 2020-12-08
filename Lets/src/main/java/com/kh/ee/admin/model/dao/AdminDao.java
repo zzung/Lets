@@ -256,7 +256,7 @@ public class AdminDao {
 		return (ArrayList)ss.selectList("adminMapper.noticeMgmtList",null,rowBounds);
 	}
 
-	//신고 관리 검색시 나올 갯수/검색
+	//공지 관리 검색시 나올 갯수/검색
 	public int searchNoticeMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
 		return ss.selectOne("adminMapper.searchNoticeMgmtCount",sc);
 	}
@@ -283,6 +283,18 @@ public class AdminDao {
 		
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		return (ArrayList)ss.selectList("adminMapper.faqMgmtList",null,rowBounds);
+	}
+	
+	//faq 관리 검색시 나올 갯수/검색
+	public int searchFaqMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.searchNoticeMgmtCount",sc);
+	}
+	public ArrayList<Faq> searchFaqMgmtList(SearchCondition sc, PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.searchFaqMgmtList",sc,rowBounds);
 	}
 	
 	//FAQ 작성

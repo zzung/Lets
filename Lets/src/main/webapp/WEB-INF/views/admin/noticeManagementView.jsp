@@ -27,7 +27,6 @@
 							<form action="searchNoticeMgmt.ad">
 								<input type="hidden" name="currentPage" value="1"> 
 								<select name="condition" style="height: 30px;">
-									<option value="noticeType">분류</option>
 									<option value="noticeTitle">공지제목</option>
 								</select>
 		                       	<input type="text" name="keyword" value="${keyword}">
