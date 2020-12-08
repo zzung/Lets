@@ -581,18 +581,18 @@
 <select id="searchReportMgmtCount" parameterType="SearchCondition" resultType="_int">
 	select 
 	       count(*)
-	  from report r
-	  join member m on (m.mem_no = i.mem_no)
-	  where i.status='N'
+	  from report re
+	  join member m on (re.mem_no = m.mem_no)
+	 where m.report_count > 1
 	 <choose>
-	 	<when test="inqType != null">
-	 		and i.inq_type like '%' || #{inqType} || '%'
-	 	</when>
 	 	<when test="nickname != null">
 	 		and m.nickname like '%' || #{nickname} || '%'
 	 	</when>
+	 	<when test="reportType != null">
+	 		and re.report_type like '%' || #{reportType} || '%'
+	 	</when>
 	 	<otherwise>
-	 		and i.inq_title like '%' || #{inqTitle} || '%'
+	 		and re.status like '%' || #{status} || '%'
 	 	</otherwise>
 	 </choose>
 </select>
@@ -601,24 +601,20 @@
 	select 
           	m.mem_no
 	        , re.report_type
-	        , re.report_date
 	        , re.status
-	        , r.rep_count
-	        , r.reply_content
 	        , m.nickname
 	     from report re
-	     join reply r on (re.reply_no = r.reply_no)
 	     join member m on (re.mem_no = m.mem_no)
-	 	where i.status='N'
+	 	where 
 	 <choose>
 	 	<when test="nickname != null">
-	 		and r.nickname like '%' || #{nickname} || '%'
+	 		 m.nickname like '%' || #{nickname} || '%'
 	 	</when>
 	 	<when test="reportType != null">
-	 		and r.reportType like '%' || #{reportType} || '%'
+	 		 re.report_type like '%' || #{reportType} || '%'
 	 	</when>
 	 	<otherwise>
-	 		and r.status like '%' || #{status} || '%'
+	 		 re.status like '%' || #{status} || '%'
 	 	</otherwise>
 	 </choose>
 </select>
