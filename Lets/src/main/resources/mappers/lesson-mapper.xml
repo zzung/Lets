@@ -489,7 +489,7 @@
 </select>
 
 <select id="selectKidsAll" resultMap="lessonResultSet">
-	 select
+	 select distinct
 	        l.lesson_cover_img
 	      , l.lesson_no
 	      , l.lesson_title
@@ -572,7 +572,7 @@
 </select>
 
 <select id="selectMoneyAll" resultMap="lessonResultSet">
-	 select
+	 select distinct
 	        l.lesson_cover_img
 	      , l.lesson_no
 	      , l.lesson_title
@@ -655,7 +655,7 @@
 </select>
 
 <select id="selectCareerAll" resultMap="lessonResultSet">
-	 select
+	 select distinct
 	        l.lesson_cover_img
 	      , l.lesson_no
 	      , l.lesson_title
@@ -738,7 +738,7 @@
 </select>
 
 <select id="selectHobbyAll" resultMap="lessonResultSet">
-	 select
+	 select distinct
 	        l.lesson_cover_img
 	      , l.lesson_no
 	      , l.lesson_title

@@ -177,7 +177,7 @@
 					<div class="cl-xl-7 col-lg-8 col-md-10">
 						<!-- Section Tittle -->
 						<div class="section-tittle text-center mb-70">
-							<h2>Money Discount Course</h2>
+							<h2></h2>
 						</div>
 					</div>
 				</div>

@@ -140,7 +140,7 @@
 						})
 					
 						function inqArrayList(e){
-
+				
 							var inqNo = $(e).data("inqno");
 							var inqType = $(e).data("inqtype");
 							var inqTitle = $(e).data("inqtitle");

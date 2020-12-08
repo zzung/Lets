@@ -63,7 +63,7 @@ public class LessonController {
 		ArrayList<Lesson> nl = lService.selectMoneyNew();
 		ArrayList<Lesson> disc = lService.selectMoneyDisc();
 		ArrayList<Lesson> all = lService.selectMoneyAll();
-		
+
 		model.addAttribute("pop",pop);
 		model.addAttribute("nl",nl);
 		model.addAttribute("disc",disc);
@@ -412,16 +412,19 @@ public class LessonController {
 	@RequestMapping("paymentProcess.le")
 	public String paymentProcess(MemPay mp,HttpSession session,Model model) {
 		int result = lService.insertDelInfo(mp);
+		System.out.println(mp);
+		
 		ArrayList<Video> list = lService.selectVideoList(mp);
-		System.out.println("list:" + list);
+		for(Video v : list) {
+			System.out.println(v);
+		}
+		System.out.println(list);
 		
 		Map<String, Object> map = new HashMap<String,Object>(); 
 		map.put("list",list); 
 		
 		int result2 = lService.insertMemVideo(map); 
 		System.out.println(result2);
-		
-		//mp에서 맴버 번호만 빼서 mem_video에서 관련 lesson 번호빼와서 mem_video에 insert
 		
 		if(result*result2>0) {
 			session.setAttribute("alertMsg","결제 완료 되었습니다.");

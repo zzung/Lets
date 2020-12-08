@@ -54,6 +54,7 @@
  left join reply rp on (re.review_no=rp.total_no and reply_type='후기' and rp.status='Y')
  left join member rpm on (rp.mem_no=rpm.mem_no)
 	 where lesson_no = #{lessonNo}
+	   and re.status='Y'
 	 order 
 	    by review_no desc, reply_no desc
  </select>

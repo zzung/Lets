@@ -254,7 +254,6 @@
 	     	                            result += '</div>'
 	     	                            result += "<div class='reviewReplyArea'></div>"
 	     	                            result += '</div>'
-	     	                            console.log(list.length)
 	     	                           
 	     	                            	for(var r=0; r<list[i].reList.length; r++){
 	     	                            		if(list[i].reList[r].replyNo2 != 0){
@@ -275,7 +274,7 @@
 		                              		result += "</div>"
 		                              		result += "<div class='reply-btn'>"
 		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='reply() return false'>" + '답장' + "</a></div>"
-		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReReplySet(this) return false; return false' data-no='" + list[i].reList[r].replyNo2 + "'>" + '수정' + "</a></div>"
+		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' onclick='updateReReplySet(this); return false' data-no='" + list[i].reList[r].replyNo2 + "'>" + '수정' + "</a></div>"
 		                              		result += "<div class='communityBtn'><a href='#' class='btn-reply text-uppercase' data-toggle='modal' data-target='#deleteReplyModal' data-no='"+ list[i].reList[r].replyNo2 + "' onclick='deleteReReplySet(this) return false'>" + '삭제' + "</a></div>"
 		                              		result += "</div>"        
 		                              		result += "</div>"
@@ -707,12 +706,15 @@
 								<div class="media-body">
 									<c:forEach var="faq" items="${faqList }">
 										<div class="faqQuestion">Q. ${faq.faqQuestion }</div>
-										<p class="faqAnswer">A. ${faq.faqAnswer }</p>
+										<p class="faqAnswer" style="display:hide;">A. ${faq.faqAnswer }</p>
 										<br>
 									</c:forEach>
 								</div>
 							</div>
 	                  </div>
+	                  <script>
+	                  	$(".faqAnswer").hide(); 
+	                  </script>
 					<!--end of FAQ-->
 	               </div>
 	               <!--?right-side-blog-->
@@ -864,10 +866,8 @@
 					dislike();
 				} else {
 					like();
-				};
-				
+				};	
 			}
-			
          	//좋아요 카운트 없다운
          		function like(){
          			$.ajax({

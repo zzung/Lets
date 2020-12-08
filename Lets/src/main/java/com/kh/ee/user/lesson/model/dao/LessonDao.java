@@ -227,12 +227,6 @@ public class LessonDao {
 		return (ArrayList)ss.selectList("lessonMapper.selectVideoList",mp);
 	}
 
-	/*
-	public int insertMemVideo(ArrayList<Video> vList, SqlSessionTemplate ss) {
-		int result2 = ss.update("lessonMapper.insertMemVideo",vList);
-		return result2;
-	}
-	*/
 	
 	public int insertMemVideo(Map<String, Object> map, SqlSessionTemplate ss) {
 		return ss.insert("lessonMapper.insertMemVideo",map);
