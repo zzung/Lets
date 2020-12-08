@@ -68,14 +68,21 @@ public interface AdminService {
 	int searchMemberMgmtCount(SearchCondition sc);
 	ArrayList<Member> searchMemberMgmtList(SearchCondition sc, PageInfo pi);
 
-
 	//블랙 관리 페이지 select 문(성연)
 	int blacklistMgmtCountList();
 	ArrayList<Member> blacklistMgmtList(PageInfo pi);
 	
+	//회원관리 검색시 나올 갯수/검색
+	int searchBlacklistMgmtCount(SearchCondition sc);
+	ArrayList<Member> searchBlacklistMgmtList(SearchCondition sc, PageInfo pi);
+	
 	//문의 관리 페이지 select 문(성연)
 	int inquiryMgmtCountList();
 	ArrayList<Inquiry> inquiryMgmtList(PageInfo pi);
+	
+	//회원관리 검색시 나올 갯수/검색
+	int searchInquiryMgmtCount(SearchCondition sc);
+	ArrayList<Inquiry> searchInquiryMgmtList(SearchCondition sc, PageInfo pi);
 	
 	//문의 답변 작성
 	int inqAnswer(Inquiry i);

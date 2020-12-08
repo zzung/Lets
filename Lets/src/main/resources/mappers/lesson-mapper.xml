@@ -237,6 +237,16 @@
 	   and status = 'Y'
 </select>
 
+<select id="selectReplyCount" resultType="_int">
+	select
+	       count(*)
+	  from reply
+	 where reply_type = '클래스'
+	   and reply_level = 1
+	   and total_no = #{lessonNo}
+	   and status = 'Y'
+</select>
+
 <select id="selectReply" parameterType="_int" resultMap="replyResultSet">
 	select 
 	       r.reply_no

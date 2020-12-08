@@ -166,11 +166,6 @@ public class AdminDao {
 		return (ArrayList)ss.selectList("adminMapper.searchMemberMgmtList",sc,rowBounds);
 	}
 	
-	
-	
-	
-	
-	
 	//블랙 관리 페이지 select 문(성연)
 	public int blacklistMgmtCountList(SqlSessionTemplate ss) {
 		return ss.selectOne("adminMapper.selectBlacklistListCount");
@@ -182,6 +177,19 @@ public class AdminDao {
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		return (ArrayList)ss.selectList("adminMapper.blacklistMgmtList",null,rowBounds);
 	}
+	
+	//블랙리스트 관리 검색시 나올 갯수/검색
+	public int searchBlacklistMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.searchBlacklistMgmtCount",sc);
+	}
+	public ArrayList<Member> searchBlacklistMgmtList(SearchCondition sc, PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.searchBlacklistMgmtList",sc,rowBounds);
+	}
+		
 	
 	//1:1 문의 관리 페이지 (성연)
 	public int inquiryMgmtCountList(SqlSessionTemplate ss) {
@@ -195,18 +203,22 @@ public class AdminDao {
 		return (ArrayList)ss.selectList("adminMapper.inquiryMgmtList",null,rowBounds);
 	}
 	
+	//블랙리스트 관리 검색시 나올 갯수/검색
+	public int searchInquiryMgmtCount(SearchCondition sc, SqlSessionTemplate ss) {
+		return ss.selectOne("adminMapper.searchInquiryMgmtCount",sc);
+	}
+	public ArrayList<Inquiry> searchInquiryMgmtList(SearchCondition sc, PageInfo pi, SqlSessionTemplate ss) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit(); 
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)ss.selectList("adminMapper.searchInquiryMgmtList",sc,rowBounds);
+	}
 	
-	
-
 	//문의 답변 작성
 	public int inqAnswer(Inquiry i, SqlSessionTemplate ss) {
 		return ss.update("adminMapper.inqAnswer", i);
 	}
-	
-	
-	
-	
-
 	
 	//신고 관리 페이지 select 문(성연)
 	public int reportMgmtCountList(SqlSessionTemplate ss) {

@@ -58,7 +58,6 @@
     }
     .titleName th{font-size:18px}
     .titleName tr{background:lightgray}
-    .pagination >li a{text-decoration:none}
 </style>
 </head>
 <body>
@@ -383,6 +382,9 @@
 	                    <dl>
 	                    	<dd>
 	                            <li class="listContent" style="list-style-type:square"></li>
+	                            <c:forEach var="l" items=".listContent">
+	                            	
+	                            </c:forEach>
 	                    	</dd>
 	                    </dl>
 	                    </div>
@@ -493,8 +495,8 @@
 					    var maxPage = hmap.pi.maxPage;
 					    var Previous = hmap.pi.currentPage-1;
 			
-						 result += '<ul class="pagination">'
-					  if(currentP != 1) {
+						 	  result += '<ul class="pagination">'
+					  	   if(currentP != 1) {
                               result += '<li class="page-item"><a class="page-link" onclick="prepareList( '+ (currentPage-1) +')">Previous</a></li>'
                            }else{
                               result += '<li class="page-item disabled"><a class="page-link" onclick="prepareList( '+ (currentPage-1) +')">Previous</a></li>'
@@ -525,27 +527,33 @@
 	       	}
 	       </script>
         
+        <script>
+        	$(".page-link").on("click",function(){
+        		var page = $(".page-link");
+        		page.css("hover:")
+        	})
+        </script>
         <!-- 수업성과 & 정산서 -->
         <br><hr>
         <div style="color: gray; font-size: 20px; font-weight: bold; ">수업성과 & 정산서
 	        <br>
-	       
+	       <!-- 
 	        <div class="single-element-widget mt-30" >
-	            <div class="default-select"style="float:left">
-	                <select id="salary" name="salary">
+	            <div class="default-select" id="salary" style="float:left">
+	                <select name="salary">
 	                <option value="total_pay">전체수익</option>
 	                <option value="month_pay">월별로보기</option>
 	                </select>
 	            </div>
-	            <div class="default-select" style="display: none;float:left">
-	                <select id="year" name="year" >
+	            <div class="default-select" id="year"style="display: none;float:left">
+	                <select name="year" >
 	                    <option value="2018">2018</option>
 	                    <option value="2019">2019</option>
 	                    <option value="2020">2020</option>
 	                </select>
 	            </div>
-	            <div class="default-select" style="display: none;float:left">
-	                <select id="month" name="month">
+	            <div class="default-select" id="month" style="display: none;float:left">
+	                <select name="month">
 	                    <option value="1">1월</option>
 	                    <option value="2">2월</option>
 	                    <option value="3">3월</option>
@@ -561,7 +569,7 @@
 	                </select>
 	            </div>
 	        </div>
-	        
+	         -->
 	        <!-- 정산받는 버튼 -->
 	        <span style="float: right; margin-right:80px;"><button data-toggle="modal" data-target="#account" class="genric-btn primary-border btn-sm" onclick="salarySave();">정산받기</button></span>
         </div>
@@ -576,8 +584,6 @@
 			                	<label for="confirm-checkbox${chk.index }"></label>
 			                </div>
 		                </c:when>
-		                <c:otherwise>
-		                </c:otherwise>
 	                </c:choose>
                     <br>
                     <p id="classTitle" name="classTitle" style="font-size:20px;">${ms.lessonTitle }</p>
@@ -675,7 +681,7 @@
         	}
         </script>
     
-    <!-- 정산 쪽 셀렉박스 -->
+    <!-- 정산 쪽 셀렉박스
         <script>
             $(function(){
                 $("#salary").change(function(){
@@ -691,7 +697,7 @@
             });
             
         </script>
-       
+        -->
         <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

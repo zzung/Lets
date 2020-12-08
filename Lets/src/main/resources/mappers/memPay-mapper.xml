@@ -47,7 +47,7 @@
 	where l.mem_no = #{memNo}
 	  and l.lesson_type = '온라인'
 	  and mp.status = '결제승인'
-	  and l.status = 'Y'
+	  and mp.del_status != '배송확정'
 	order
 	   by mp.payment_date desc
 </select>
