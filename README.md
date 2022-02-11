@@ -23,13 +23,15 @@ gh repo clone zzung/Lets
 https://www.youtube.com/watch?v=KdZz77qAYqM&feature=youtu.be
 <br><br>
 
-## Development Environment
-### 운영체제
+## Tech
+* Java, Spring Framework, MyBatis, Java Script, JSON
+* Github, Eclipse, Oracle 18c, Visual Studio Code
+<br><br>
 
-
-## Template
-이 프로젝트는 이 템플릿을 사용하였습니다. <br>
-https://github.com/StartBootstrap/startbootstrap-creative.git
+## External Resources
+* Summernote API, SMTP
+* Naver Login API, KAKAO Login API, KAKAO MAP
+* IMPORT API
 <br><br>
 
 ## License
