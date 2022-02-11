@@ -21,7 +21,9 @@ gh repo clone zzung/Lets
 
 ## Preview
 프로젝트 시연 영상입니다. <br>
-https://www.youtube.com/watch?v=KdZz77qAYqM&feature=youtu.be
+https://www.youtube.com/watch?v=KdZz77qAYqM&feature=youtu.be <br>
+프로젝트 Report 입니다.<br>
+[lets_team_project.pdf](https://github.com/zzung/BetterNow-StudyCafe/files/8045711/lets_team_project.pdf)
 <br><br>
 
 ## Tech
