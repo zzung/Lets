@@ -34,7 +34,7 @@ https://www.youtube.com/watch?v=KdZz77qAYqM&feature=youtu.be <br>
 ## External Resources
 * Summernote API, SMTP
 * Naver Login API, KAKAO Login API, KAKAO MAP
-* IMPORT API
+* IMPORT API, Bootstrap
 <br><br>
 
 ## License
